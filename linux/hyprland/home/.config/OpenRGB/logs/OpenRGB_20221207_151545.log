@@ -1,0 +1,19 @@
+    OpenRGB v0.81
+    Commit: cf610fa559fcde6f2d49ee8b9c1a53f7b3694642 from 2022-12-06 21:43:50 +0100
+    Launched: 20221207_151545
+====================================================================================================
+
+0     |Info:    Found file: Default.orp attempting to validate header
+0     |Info:    Valid v3 profile found for Default
+880   |Info:    Saving detector settings
+881   |Info:    Profile loading: FAILED! for Corsair Dominator Platinum RGB @ I2C: /dev/i2c-0, address 0x58
+881   |Info:    Profile loading: FAILED! for Corsair Dominator Platinum RGB @ I2C: /dev/i2c-0, address 0x59
+881   |Info:    Profile loading: FAILED! for Corsair Dominator Platinum RGB @ I2C: /dev/i2c-0, address 0x5A
+881   |Info:    Profile loading: FAILED! for Corsair Dominator Platinum RGB @ I2C: /dev/i2c-0, address 0x5B
+881   |Info:    Profile loading: FAILED! for Gaming Mouse G900 @ HID: /dev/hidraw8 (Receiver) 
+Wireless Index: 255
+881   |Info:    Profile loading: FAILED! for ASUS ROG CROSSHAIR VIII HERO @ HID: /dev/hidraw9
+881   |Info:    Profile loading: FAILED! for Corsair LS100 Lighting Kit @ HID: /dev/hidraw11
+881   |Info:    Profile loading: FAILED! for Corsair Commander Core @ HID: /dev/hidraw3
+51718 |Info:    Found file: Default.orp attempting to validate header
+51718 |Info:    Valid v3 profile found for Default

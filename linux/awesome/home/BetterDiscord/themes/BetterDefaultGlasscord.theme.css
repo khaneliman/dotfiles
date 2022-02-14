@@ -1,0 +1,168 @@
+/**
+ * @name BetterDefaultGlasscord
+ * @description Updated Version To AryToNeX's Glasscord Example Theme.
+ * @author Leeprky#2063
+ * @version 2.1.0
+ * @source https://github.com/leeprky/BetterDefaultGlasscord
+ * @updateUrl https://github.com/leeprky/BetterDefaultGlasscord/blob/main/BetterDefaultGlasscord.theme.css
+ * @authorId 224524143482241035
+ * @invite Ff3rqAYB89
+ * @donate https://www.paypal.com/paypalme/leeparkinson22
+ * @website https://leeprky.github.io/
+*/
+
+/* 
+██████╗░███████╗████████╗████████╗███████╗██████╗░
+██╔══██╗██╔════╝╚══██╔══╝╚══██╔══╝██╔════╝██╔══██╗
+██████╦╝█████╗░░░░░██║░░░░░░██║░░░█████╗░░██████╔╝
+██╔══██╗██╔══╝░░░░░██║░░░░░░██║░░░██╔══╝░░██╔══██╗
+██████╦╝███████╗░░░██║░░░░░░██║░░░███████╗██║░░██║
+╚═════╝░╚══════╝░░░╚═╝░░░░░░╚═╝░░░╚══════╝╚═╝░░╚═╝
+
+██████╗░███████╗███████╗░█████╗░██╗░░░██╗██╗░░░░░████████╗
+██╔══██╗██╔════╝██╔════╝██╔══██╗██║░░░██║██║░░░░░╚══██╔══╝
+██║░░██║█████╗░░█████╗░░███████║██║░░░██║██║░░░░░░░░██║░░░
+██║░░██║██╔══╝░░██╔══╝░░██╔══██║██║░░░██║██║░░░░░░░░██║░░░
+██████╔╝███████╗██║░░░░░██║░░██║╚██████╔╝███████╗░░░██║░░░
+╚═════╝░╚══════╝╚═╝░░░░░╚═╝░░╚═╝░╚═════╝░╚══════╝░░░╚═╝░░░
+
+░██████╗░██╗░░░░░░█████╗░░██████╗░██████╗░█████╗░░█████╗░██████╗░██████╗░
+██╔════╝░██║░░░░░██╔══██╗██╔════╝██╔════╝██╔══██╗██╔══██╗██╔══██╗██╔══██╗
+██║░░██╗░██║░░░░░███████║╚█████╗░╚█████╗░██║░░╚═╝██║░░██║██████╔╝██║░░██║
+██║░░╚██╗██║░░░░░██╔══██║░╚═══██╗░╚═══██╗██║░░██╗██║░░██║██╔══██╗██║░░██║
+╚██████╔╝███████╗██║░░██║██████╔╝██████╔╝╚█████╔╝╚█████╔╝██║░░██║██████╔╝
+░╚═════╝░╚══════╝╚═╝░░╚═╝╚═════╝░╚═════╝░░╚════╝░░╚════╝░╚═╝░░╚═╝╚═════╝░
+
+█▀▀ █▀█ █▄░█ █▀▀ █ █▀▀  █▀▀ █ █░░ █▀▀
+█▄▄ █▄█ █░▀█ █▀░ █ █▄█  █▀░ █ █▄▄ ██▄
+*/
+
+/*
+█ █▀▄▀█ █▀█ █▀█ █▀█ ▀█▀
+█ █░▀░█ █▀▀ █▄█ █▀▄ ░█░
+*/
+
+@import "https://leeprky.github.io/themes/FullyThemedDiscord/FullyThemedDiscord.css";
+@import "https://leeprky.github.io/themes/BaseStuff/alt-color.css"; 
+@import "https://leeprky.github.io/snippits/coolsniipitsforthemes.css"; 
+@import "https://leeprky.github.io/themes/lode/default/support/gradients/luckfiregradientbuttons.css";
+@import "https://leeprky.github.io/themes/GreenBeGo/greenple-replacer.css";
+@import "https://leeprky.github.io/themes/BetterDefaultGlasscord/version.css";
+@import url(https://leeprky.github.io/themes/BetterDefaultGlasscord/BetterDefaultGlasscord.css);
+
+/*
+█▀▀ █▀█ █▄░█ █▀▀ █ █▀▀
+█▄▄ █▄█ █░▀█ █▀░ █ █▄█
+*/
+
+:root{ 
+   --background-accent: var(--glasscord-accent); 
+   --background-floating: var(--glasscord-floating); 
+}
+
+body{background-color: transparent;}
+#app-mount{border-radius: 12px;} /* Default "12px" - Higher = More Round */
+
+:root {
+   --default-gradient: 315deg, rgba(var(--alt-color), 0.4) 0%, rgba(var(--alt-color), 0.8) 74%;
+   --special-gradient: 315deg, rgba(var(--alt-color), 0.4) 0%, #c987b8 74%;
+   --red-gradient: 315deg, #AA3738 0%, #F04747 74%;
+   --red-hsl: hsl(359, 63%, 53%);
+   --yellow-gradient: 315deg, #c29b1b 0%, #ffa640 74%;
+   --yellow-hsl: hsl(46, 72%, 52%);
+   --green-gradient: 315deg, #507a73 0%, #4b7c72  74%;
+   --grey-gradient: 315deg, rgba(var(--alt-color), 0.5) 0%, rgba(var(--alt-color), 1.1) 74%;
+   --white-gradient: 315deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.342) 74%;
+   --font-normal: 500;
+   --font-hover: bold;
+   --font-size-hover: 15px;
+   --hover-transition: 0.1s linear;
+   --transform-normal: scale(1);
+   --hover-transform: scale(1.15);
+   --setting-hover-transform: scale(1.025);
+   --button-hover-transform: scale(1.03);
+
+   
+/* █▀▀ █░█ █▀ ▀█▀ █▀█ █▀▄▀█ █ █▀ ▄▀█ ▀█▀ █ █▀█ █▄░█
+   █▄▄ █▄█ ▄█ ░█░ █▄█ █░▀░█ █ ▄█ █▀█ ░█░ █ █▄█ █░▀█ */
+
+   --alt-color: 57, 131, 210; /* Blurple Colour */
+   --alt-color2: rgba(var(--alt-color), 0.6); 
+   --alt-color3: 211;
+   --spotify-color: rgba(var(--alt-color), 0.6); 
+
+   --version-display: flex;
+
+   --green-color: var(--alt-color2);
+   --green-color2: var(--alt-color);
+   --green-bar-on: #1e294e6b;
+   --green-bar-bg: var(--green-color);
+   --green-slider-on: var(--green-color);
+   --green-slider-off: #1e294e6b;
+   --green-slider-dot: #fff;
+
+   --background-modifier-hover: rgba(var(--alt-color), 0.1); 
+   --background-modifier-active: rgba(var(--alt-color), 0.4); 
+   --background-modifier-selected: rgba(var(--alt-color), 0.2);  
+   --background-modifier-accent: rgba(var(--alt-color), 0.1);   
+
+   --background-mentioned: rgba(var(--alt-color), 0.1); 
+   --background-mentioned-hover: rgba(var(--alt-color), 0.2); 
+}
+
+.theme-dark {
+   --glasscord-primary: #1a1c1fa2 !important;
+   --glasscord-secondary: #15161ac7 !important;
+   --glasscord-secondary-alt: #16171a75 !important;
+   --glasscord-accent: var(--alt-color2) !important;
+   --glasscord-tertiary: #10111380 !important;
+   --glasscord-floating: #101214e8 !important;
+   --glasscord-backdrop: 0.55 !important;
+
+   --scrollbar-thin-thumb: transparent;
+   --scrollbar-thin-track: transparent;
+   --scrollbar-auto-thumb: transparent;
+   --scrollbar-auto-track: transparent;
+   --scrollbar-auto-scrollbar-color-thumb: transparent;
+   --scrollbar-auto-scrollbar-color-track: transparent;
+}
+
+.theme-light {
+   --glasscord-primary: #a9a9bd7f !important;
+   --glasscord-secondary: #a9a9bd7f !important;
+   --glasscord-secondary-alt: #63636e !important;
+   --glasscord-accent: var(--alt-color2) !important;
+   --glasscord-tertiary: #16162b !important;
+   --glasscord-floating: #16162b !important;
+
+   --scrollbar-thin-thumb: transparent;
+   --scrollbar-thin-track: transparent;
+   --scrollbar-auto-thumb: transparent;
+   --scrollbar-auto-track: transparent;
+   --scrollbar-auto-scrollbar-color-thumb: transparent;
+   --scrollbar-auto-scrollbar-color-track: transparent;
+}
+  
+
+ /* █ █▀▀ █▄░█ █▀█ █▀█ █▀▀
+    █ █▄█ █░▀█ █▄█ █▀▄ ██▄ */
+
+:root {--version: "v2.1.0" !important; --build: "46" !important; --outdated_betterdefaultglasscord-046: none !important}
+
+   /* ---------------------------------------------
+   
+                ███████╗███╗░░██╗██████╗░
+                ██╔════╝████╗░██║██╔══██╗
+                █████╗░░██╔██╗██║██║░░██║
+                ██╔══╝░░██║╚████║██║░░██║
+                ███████╗██║░╚███║██████╔╝
+                ╚══════╝╚═╝░░╚══╝╚═════╝░
+                ╚══════╝╚═╝░░╚══╝╚═════╝░
+                     Version 2.1.0
+   
+      --------------------------------------------- */
+
+      .powercord-toast {
+         border-radius: 18px;
+         background-color: transparent;
+     }

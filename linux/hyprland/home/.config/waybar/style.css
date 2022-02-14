@@ -1,0 +1,161 @@
+@import "mocha.css";
+* {
+    /* `otf-font-awesome` is required to be installed for icons */
+    font-family: FiraCode;
+    font-size: 14px;
+}
+
+window#waybar {
+    background-color: #1E1E2E;
+    color: #ffffff;
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+window#waybar.termite {
+    background-color: #3F3F3F;
+}
+
+window#waybar.firefox {
+    background-color: #000000;
+    border: none;
+}
+
+button {
+    /* Use box-shadow instead of border so the text isn't offset */
+    box-shadow: inset 0 -3px transparent;
+    /* Avoid rounded borders under each button name */
+    border: none;
+    border-radius: 0;
+}
+
+/* Remove border from parent waybar */
+box {
+	border: none;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+#workspaces button {
+    padding: 0 5px; 
+    border-radius: 5em / 5em;
+    background-color: @surface0;
+    color: @peach;
+    margin: 2px;
+    font-weight: bold;
+}
+
+/* Background for modules */
+window.DP-2 .modules-center,
+.modules-right,
+.modules-left {
+	padding: 0 1em;
+	color: @peach;
+	background-color: @surface0; 
+	font-weight: bold;
+	border-top-right-radius: 5em 5em; 
+	border-bottom-right-radius: 5em 5em;
+	border-top-left-radius: 5em 5em;
+	border-bottom-left-radius: 5em 5em;
+}
+
+/* Add spacing for right side modules */
+#tray,
+#custom-pipewire,
+#user,
+#custom-wlogout,
+#clock,
+#battery,
+#cpu,
+#memory,
+#temperature,
+#network,
+#pulseaudio,
+#keyboard-state,
+#mpd {
+    padding: 0 1em;
+}
+
+/* Unique colors for modules */
+#cpu {
+	color: @red;
+}
+#memory {
+   color: @yellow;
+}
+#user {
+	color: @blue;
+}
+#custom-pipewire {
+	color: @green;
+}
+#temperature {
+   color: @green;
+}
+
+#window,
+#workspaces {
+    margin: 0 4px;
+    background-color: transparent;
+    font-weight:bold;
+    border-radius: 5em / 5em;
+    padding: 0 1em;
+    color: @peach;
+}
+
+window.DP-1 #workspaces {
+	padding: 0;
+	margin: 0;
+}
+
+/* If workspaces is the leftmost module, omit left margin */
+.modules-left > widget:first-child > #workspaces {
+    margin-left: 0;
+}
+
+/* If workspaces is the rightmost module, omit right margin */
+.modules-right > widget:last-child > #workspaces {
+    margin-right: 0;
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: #000000;
+    }
+}
+
+label:focus {
+    background-color: #000000;
+}
+
+#network.disconnected {
+    background-color: #f53c3c;
+}
+
+#custom-pipewire.muted,
+#pulseaudio.muted {
+    background-color: #90b1b1;
+    color: #2a5c45;
+}
+
+#temperature.critical {
+    background-color: #eb4d4b;
+}
+
+#keyboard-state {
+    padding: 0 0px;
+    min-width: 16px;
+    color: @mauve;
+}
+
+#keyboard-state > label {
+    padding: 0 5px;
+}
+
+#keyboard-state > label.locked {
+    background: rgba(0, 0, 0, 0.2);
+}

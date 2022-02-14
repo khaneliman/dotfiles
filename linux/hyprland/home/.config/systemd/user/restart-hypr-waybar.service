@@ -1,0 +1,5 @@
+[Unit] 
+Description="Restart hypr-waybar service"
+
+[Service]
+ExecStart=systemctl --user restart hypr-waybar.service

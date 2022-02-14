@@ -1,0 +1,55 @@
+    OpenRGB v0.71
+    Commit: e4bb5788019bd84470d277b6513862eab79aa428 from 2022-05-25 00:04:28 -0500
+    Launched: 20220605_212846
+====================================================================================================
+
+0     |Info:    Found file: Default.orp attempting to validate header
+0     |Info:    Valid v3 profile found for Default
+1001  |Info:    ------------------------------------------------------
+1001  |Info:    |               Start device detection               |
+1001  |Info:    ------------------------------------------------------
+1001  |Info:    Initializing HID interfaces: Success
+1006  |Info:    ------------------------------------------------------
+1006  |Info:    |             Detecting I2C interfaces               |
+1006  |Info:    ------------------------------------------------------
+1006  |Info:    Registering I2C interface: /dev/i2c-3 Device 10DE:2206 Subsystem: 10DE:1467
+1006  |Info:    Registering I2C interface: /dev/i2c-1 Device 1022:790B Subsystem: 1043:87C0
+1006  |Info:    Registering I2C interface: /dev/i2c-6 Device 10DE:2206 Subsystem: 10DE:1467
+1006  |Info:    Registering I2C interface: /dev/i2c-4 Device 10DE:2206 Subsystem: 10DE:1467
+1006  |Info:    Registering I2C interface: /dev/i2c-2 Device 1022:790B Subsystem: 1043:87C0
+1006  |Info:    Registering I2C interface: /dev/i2c-0 Device 1022:790B Subsystem: 1043:87C0
+1006  |Info:    Registering I2C interface: /dev/i2c-7 Device 10DE:2206 Subsystem: 10DE:1467
+1006  |Info:    Registering I2C interface: /dev/i2c-5 Device 10DE:2206 Subsystem: 10DE:1467
+1006  |Info:    ------------------------------------------------------
+1006  |Info:    |               Detecting I2C devices                |
+1006  |Info:    ------------------------------------------------------
+1657  |Info:    [Corsair Dominator Platinum RGB] Registering RGB controller
+1668  |Info:    [Corsair Dominator Platinum RGB] Registering RGB controller
+1680  |Info:    [Corsair Dominator Platinum RGB] Registering RGB controller
+1691  |Info:    [Corsair Dominator Platinum RGB] Registering RGB controller
+1742  |Info:    ------------------------------------------------------
+1742  |Info:    |               Detecting I2C PCI devices            |
+1742  |Info:    ------------------------------------------------------
+1743  |Info:    ------------------------------------------------------
+1743  |Info:    |               Detecting HID devices                |
+1743  |Info:    ------------------------------------------------------
+2165  |Info:    [Gaming Mouse G900] Registering RGB controller
+2242  |Info:    [ASUS ROG CROSSHAIR VIII HERO] Registering RGB controller
+2297  |Info:    [Corsair LS100 Lighting Kit] Registering RGB controller
+2430  |Info:    [Corsair Commander Core] Registering RGB controller
+2430  |Info:    ------------------------------------------------------
+2430  |Info:    |              Detecting other devices               |
+2430  |Info:    ------------------------------------------------------
+2437  |Info:    ------------------------------------------------------
+2437  |Info:    |                Detection completed                 |
+2437  |Info:    ------------------------------------------------------
+2437  |Info:    Profile loading: Succeeded for Corsair Dominator Platinum RGB @ I2C: /dev/i2c-0, address 0x58
+2437  |Info:    Profile loading: Succeeded for Corsair Dominator Platinum RGB @ I2C: /dev/i2c-0, address 0x59
+2437  |Info:    Profile loading: Succeeded for Corsair Dominator Platinum RGB @ I2C: /dev/i2c-0, address 0x5A
+2437  |Info:    Profile loading: Succeeded for Corsair Dominator Platinum RGB @ I2C: /dev/i2c-0, address 0x5B
+2437  |Info:    Profile loading: Succeeded for Gaming Mouse G900 @ HID: /dev/hidraw1 (Receiver) 
+Wireless Index: 255
+2437  |Info:    Profile loading: Succeeded for ASUS ROG CROSSHAIR VIII HERO @ HID: /dev/hidraw11
+2437  |Info:    Profile loading: Succeeded for Corsair LS100 Lighting Kit @ HID: /dev/hidraw10
+2437  |Info:    Profile loading: Succeeded for Corsair Commander Core @ HID: /dev/hidraw2
+3785  |Info:    Loading plugins

@@ -1,0 +1,116 @@
+    OpenRGB v0.8
+    Commit: fb88964b8e514cdf4eb22da314e13f8db06a3636 from 2022-11-27 21:44:33 -0600
+    Launched: 20221207_160733
+====================================================================================================
+
+0     |Info:    Found file: Default.orp attempting to validate header
+0     |Info:    Valid v3 profile found for Default
+1001  |Info:    ------------------------------------------------------
+1001  |Info:    |               Start device detection               |
+1001  |Info:    ------------------------------------------------------
+1001  |Info:    Initializing HID interfaces: Success
+1005  |Info:    ------------------------------------------------------
+1005  |Info:    |             Detecting I2C interfaces               |
+1005  |Info:    ------------------------------------------------------
+1005  |Info:    Registering I2C interface: /dev/i2c-3 Device 10DE:2206 Subsystem: 10DE:1467
+1005  |Info:    Registering I2C interface: /dev/i2c-6 Device 10DE:2206 Subsystem: 10DE:1467
+1005  |Info:    Registering I2C interface: /dev/i2c-2 Device 1022:790B Subsystem: 1043:87C0
+1005  |Info:    Registering I2C interface: /dev/i2c-7 Device 10DE:2206 Subsystem: 10DE:1467
+1005  |Info:    ------------------------------------------------------
+1005  |Info:    |               Detecting I2C devices                |
+1005  |Info:    ------------------------------------------------------
+1204  |Info:    ------------------------------------------------------
+1204  |Info:    |               Detecting I2C PCI devices            |
+1204  |Info:    ------------------------------------------------------
+1204  |Info:    ------------------------------------------------------
+1204  |Info:    |               Detecting HID devices                |
+1204  |Info:    ------------------------------------------------------
+1626  |Info:    [Gaming Mouse G900] Registering RGB controller
+2048  |Info:    [Gaming Mouse G900] Registering RGB controller
+2470  |Info:    [Gaming Mouse G900] Registering RGB controller
+2892  |Info:    [Gaming Mouse G900] Registering RGB controller
+3314  |Info:    [Gaming Mouse G900] Registering RGB controller
+3390  |Info:    [ASUS ROG CROSSHAIR VIII HERO] Registering RGB controller
+3444  |Info:    [Corsair LS100 Lighting Kit] Registering RGB controller
+3547  |Info:    [Corsair Commander Core] Registering RGB controller
+3547  |Info:    ------------------------------------------------------
+3548  |Info:    |              Detecting other devices               |
+3548  |Info:    ------------------------------------------------------
+3559  |Info:    ------------------------------------------------------
+3559  |Info:    |                Detection completed                 |
+3559  |Info:    ------------------------------------------------------
+3559  |Dialog:  <h2>WARNING:</h2><p>One or more I2C/SMBus interfaces failed to initialize.</p><p>RGB DRAM modules and some motherboards' onboard RGB lighting will not be available without I2C/SMBus.</p><p>On Linux, this is usually because the i2c-dev module is not loaded.  You must load the i2c-dev module along with the correct i2c driver for your motherboard.  This is usually i2c-piix4 for AMD systems and i2c-i801 for Intel systems.</p><p>See <a href='https://help.openrgb.org/'>help.openrgb.org</a> for additional troubleshooting steps if you keep seeing this message.<br></p>
+3559  |Info:    Profile loading: FAILED! for Gaming Mouse G900 @ HID: /dev/hidraw6 (Receiver) 
+Wireless Index: 255
+3559  |Info:    Profile loading: FAILED! for Gaming Mouse G900 @ HID: /dev/hidraw6 (Receiver) 
+Wireless Index: 255
+3559  |Info:    Profile loading: FAILED! for Gaming Mouse G900 @ HID: /dev/hidraw6 (Receiver) 
+Wireless Index: 255
+3559  |Info:    Profile loading: FAILED! for Gaming Mouse G900 @ HID: /dev/hidraw6 (Receiver) 
+Wireless Index: 255
+3559  |Info:    Profile loading: FAILED! for Gaming Mouse G900 @ HID: /dev/hidraw6 (Receiver) 
+Wireless Index: 255
+3559  |Info:    Profile loading: FAILED! for ASUS ROG CROSSHAIR VIII HERO @ HID: /dev/hidraw8
+3559  |Info:    Profile loading: FAILED! for Corsair LS100 Lighting Kit @ HID: /dev/hidraw10
+3559  |Info:    Profile loading: FAILED! for Corsair Commander Core @ HID: /dev/hidraw3
+10184 |Info:    Profile loading: Succeeded for Gaming Mouse G900 @ HID: /dev/hidraw6 (Receiver) 
+Wireless Index: 255
+10184 |Info:    Profile loading: FAILED! for Gaming Mouse G900 @ HID: /dev/hidraw6 (Receiver) 
+Wireless Index: 255
+10184 |Info:    Profile loading: FAILED! for Gaming Mouse G900 @ HID: /dev/hidraw6 (Receiver) 
+Wireless Index: 255
+10184 |Info:    Profile loading: FAILED! for Gaming Mouse G900 @ HID: /dev/hidraw6 (Receiver) 
+Wireless Index: 255
+10184 |Info:    Profile loading: FAILED! for Gaming Mouse G900 @ HID: /dev/hidraw6 (Receiver) 
+Wireless Index: 255
+10184 |Info:    Profile loading: Succeeded for ASUS ROG CROSSHAIR VIII HERO @ HID: /dev/hidraw8
+10184 |Info:    Profile loading: Succeeded for Corsair LS100 Lighting Kit @ HID: /dev/hidraw10
+10184 |Info:    Profile loading: Succeeded for Corsair Commander Core @ HID: /dev/hidraw3
+29554 |Info:    ------------------------------------------------------
+29554 |Info:    |               Start device detection               |
+29554 |Info:    ------------------------------------------------------
+29554 |Info:    Initializing HID interfaces: Success
+29559 |Info:    ------------------------------------------------------
+29559 |Info:    |             Detecting I2C interfaces               |
+29559 |Info:    ------------------------------------------------------
+29559 |Info:    Registering I2C interface: /dev/i2c-3 Device 10DE:2206 Subsystem: 10DE:1467
+29559 |Info:    Registering I2C interface: /dev/i2c-6 Device 10DE:2206 Subsystem: 10DE:1467
+29559 |Info:    Registering I2C interface: /dev/i2c-2 Device 1022:790B Subsystem: 1043:87C0
+29559 |Info:    Registering I2C interface: /dev/i2c-7 Device 10DE:2206 Subsystem: 10DE:1467
+29559 |Info:    ------------------------------------------------------
+29559 |Info:    |               Detecting I2C devices                |
+29559 |Info:    ------------------------------------------------------
+29757 |Info:    ------------------------------------------------------
+29757 |Info:    |               Detecting I2C PCI devices            |
+29757 |Info:    ------------------------------------------------------
+29758 |Info:    ------------------------------------------------------
+29758 |Info:    |               Detecting HID devices                |
+29758 |Info:    ------------------------------------------------------
+30180 |Info:    [Gaming Mouse G900] Registering RGB controller
+30602 |Info:    [Gaming Mouse G900] Registering RGB controller
+31024 |Info:    [Gaming Mouse G900] Registering RGB controller
+31446 |Info:    [Gaming Mouse G900] Registering RGB controller
+31868 |Info:    [Gaming Mouse G900] Registering RGB controller
+31943 |Info:    [ASUS ROG CROSSHAIR VIII HERO] Registering RGB controller
+31996 |Info:    [Corsair LS100 Lighting Kit] Registering RGB controller
+32099 |Info:    [Corsair Commander Core] Registering RGB controller
+32099 |Info:    ------------------------------------------------------
+32099 |Info:    |              Detecting other devices               |
+32099 |Info:    ------------------------------------------------------
+32100 |Info:    ------------------------------------------------------
+32100 |Info:    |                Detection completed                 |
+32100 |Info:    ------------------------------------------------------
+32100 |Dialog:  <h2>WARNING:</h2><p>One or more I2C/SMBus interfaces failed to initialize.</p><p>RGB DRAM modules and some motherboards' onboard RGB lighting will not be available without I2C/SMBus.</p><p>On Linux, this is usually because the i2c-dev module is not loaded.  You must load the i2c-dev module along with the correct i2c driver for your motherboard.  This is usually i2c-piix4 for AMD systems and i2c-i801 for Intel systems.</p><p>See <a href='https://help.openrgb.org/'>help.openrgb.org</a> for additional troubleshooting steps if you keep seeing this message.<br></p>
+56240 |Info:    Profile loading: Succeeded for Gaming Mouse G900 @ HID: /dev/hidraw6 (Receiver) 
+Wireless Index: 255
+56240 |Info:    Profile loading: FAILED! for Gaming Mouse G900 @ HID: /dev/hidraw6 (Receiver) 
+Wireless Index: 255
+56240 |Info:    Profile loading: FAILED! for Gaming Mouse G900 @ HID: /dev/hidraw6 (Receiver) 
+Wireless Index: 255
+56241 |Info:    Profile loading: FAILED! for Gaming Mouse G900 @ HID: /dev/hidraw6 (Receiver) 
+Wireless Index: 255
+56241 |Info:    Profile loading: FAILED! for Gaming Mouse G900 @ HID: /dev/hidraw6 (Receiver) 
+Wireless Index: 255
+56241 |Info:    Profile loading: Succeeded for ASUS ROG CROSSHAIR VIII HERO @ HID: /dev/hidraw8
+56241 |Info:    Profile loading: Succeeded for Corsair LS100 Lighting Kit @ HID: /dev/hidraw10
+56241 |Info:    Profile loading: Succeeded for Corsair Commander Core @ HID: /dev/hidraw3

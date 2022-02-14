@@ -1,0 +1,9 @@
+[Unit]
+Description="Monitor the /etc/passwd file for changes"
+
+[Path]
+PathModified=/home/khaneliman/.config/waybar
+Unit=restart-hypr-waybar.service
+
+[Install]
+WantedBy=hypr-waybar.service

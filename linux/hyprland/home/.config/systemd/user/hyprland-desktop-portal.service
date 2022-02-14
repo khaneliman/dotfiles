@@ -1,0 +1,11 @@
+[Unit]
+Description=xdg-desktop-portal backend for hyprland
+Documentation=https://wiki.hyprland.org/Useful-Utilities/Hyprland-desktop-portal/
+PartOf=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=/home/khaneliman/bin/xdg-desktop-portal.sh
+
+[Install]
+WantedBy=hyprland-session.target

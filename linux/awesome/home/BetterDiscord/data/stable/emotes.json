@@ -1,0 +1,15 @@
+{
+    "general": {
+        "download": true,
+        "emoteMenu": true,
+        "hideEmojiMenu": false,
+        "modifiers": true,
+        "animateOnHover": false
+    },
+    "categories": {
+        "twitchglobal": true,
+        "twitchsubscriber": true,
+        "frankerfacez": true,
+        "bttv": true
+    }
+}

@@ -1,0 +1,9 @@
+#!/bin/sh
+TOGGLE=$HOME/.config/.toggle
+if [ ! -e $TOGGLE ]; then
+    touch $TOGGLE
+    yabai -m query --windows | jq '.[].id' | xargs -I{} yabai -m window {} --opacity 1.0
+else
+    rm $TOGGLE
+    yabai -m query --windows | jq '.[].id' | xargs -I{} yabai -m window {} --opacity 0.90
+fi

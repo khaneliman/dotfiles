@@ -1,0 +1,47 @@
+    OpenRGB v0.7
+    Commit:  from 
+    Launched: 20220623_231229
+====================================================================================================
+
+0     |Info:    Found file: Default.orp attempting to validate header
+0     |Info:    Valid v3 profile found for Default
+1001  |Info:    ------------------------------------------------------
+1001  |Info:    |               Start device detection               |
+1001  |Info:    ------------------------------------------------------
+1001  |Info:    Initializing HID interfaces: Success
+1005  |Info:    ------------------------------------------------------
+1005  |Info:    |             Detecting I2C interfaces               |
+1005  |Info:    ------------------------------------------------------
+1005  |Info:    Registering I2C interface: /dev/i2c-3 Device 10DE:2206 Subsystem: 10DE:1467
+1005  |Info:    Registering I2C interface: /dev/i2c-1 Device 1022:790B Subsystem: 1043:87C0
+1005  |Info:    Registering I2C interface: /dev/i2c-6 Device 10DE:2206 Subsystem: 10DE:1467
+1005  |Info:    Registering I2C interface: /dev/i2c-4 Device 10DE:2206 Subsystem: 10DE:1467
+1005  |Info:    Registering I2C interface: /dev/i2c-2 Device 1022:790B Subsystem: 1043:87C0
+1005  |Info:    Registering I2C interface: /dev/i2c-0 Device 1022:790B Subsystem: 1043:87C0
+1005  |Info:    Registering I2C interface: /dev/i2c-7 Device 10DE:2206 Subsystem: 10DE:1467
+1005  |Info:    Registering I2C interface: /dev/i2c-5 Device 10DE:2206 Subsystem: 10DE:1467
+1005  |Info:    ------------------------------------------------------
+1005  |Info:    |               Detecting I2C devices                |
+1005  |Info:    ------------------------------------------------------
+1683  |Info:    [Corsair Dominator Platinum RGB] Registering RGB controller
+1694  |Info:    [Corsair Dominator Platinum RGB] Registering RGB controller
+1706  |Info:    [Corsair Dominator Platinum RGB] Registering RGB controller
+1717  |Info:    [Corsair Dominator Platinum RGB] Registering RGB controller
+1768  |Info:    ------------------------------------------------------
+1768  |Info:    |               Detecting HID devices                |
+1768  |Info:    ------------------------------------------------------
+1768  |Info:    [Logitech G900 Wireless Gaming Mouse (wired)] is not initialized
+1768  |Info:    [Logitech G900 Wireless Gaming Mouse] is not initialized
+1768  |Info:    [ASUS Aura Motherboard] is not initialized
+1768  |Info:    [Corsair LS100 Lighting Kit] is not initialized
+1768  |Info:    [Corsair Commander Core] is not initialized
+1768  |Info:    ------------------------------------------------------
+1768  |Info:    |              Detecting other devices               |
+1768  |Info:    ------------------------------------------------------
+1780  |Info:    ------------------------------------------------------
+1780  |Info:    |                Detection completed                 |
+1780  |Info:    ------------------------------------------------------
+1780  |Info:    Profile loading: Succeeded for Corsair Dominator Platinum RGB @ I2C: /dev/i2c-0, address 0x58
+1780  |Info:    Profile loading: Succeeded for Corsair Dominator Platinum RGB @ I2C: /dev/i2c-0, address 0x59
+1780  |Info:    Profile loading: Succeeded for Corsair Dominator Platinum RGB @ I2C: /dev/i2c-0, address 0x5A
+1780  |Info:    Profile loading: Succeeded for Corsair Dominator Platinum RGB @ I2C: /dev/i2c-0, address 0x5B

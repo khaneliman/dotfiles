@@ -1,0 +1,100 @@
+#!/bin/bash
+
+## Copyright (C) 2020-2021 Aditya Shakya <adi1090x@gmail.com>
+## Everyone is permitted to copy and distribute copies of this file under GNU-GPL3
+
+# Avoid unnecessary reboots: don't notify if an updated package is
+# - not currently running (e.g. alternative kernel)
+# - not in use (e.g. alternative driver)
+
+## Colors ----------------------------
+
+# Reset
+Color_Off='\033[0m'       # Text Reset
+
+# Regular Colors
+Black='\033[0;30m'  Red='\033[0;31m'     Green='\033[0;32m'  Yellow='\033[0;33m'
+Blue='\033[0;34m'   Purple='\033[0;35m'  Cyan='\033[0;36m'   White='\033[0;37m'
+
+# Bold
+BBlack='\033[1;30m' BRed='\033[1;31m'    BGreen='\033[1;32m' BYellow='\033[1;33m'
+BBlue='\033[1;34m'  BPurple='\033[1;35m' BCyan='\033[1;36m'  BWhite='\033[1;37m'
+
+## -----------------------------------
+
+_notify_reboot_required() {
+    local xx
+
+    for xx in "$DESKTOP_SESSION" "$XDG_CURRENT_DESKTOP" ; do
+        if [[ -n "$xx" ]] ; then
+            break
+        fi
+    done
+
+    if [[ -n "$xx" ]] ; then
+        local user userid cmd
+
+        for user in $(/usr/bin/users) ; do
+            userid=$(/usr/bin/id -u $user)
+            cmd=(DISPLAY=:0 DBUS_SESSION_ADDRESS=unix:path=/run/user/$userid/bus /usr/bin/notify-send)
+            cmd+=(--icon=system-reboot --urgency=critical)
+            cmd+=("\"Core system package upgraded, You need to reboot the machine.\"")
+            /usr/bin/su $user -c "${cmd[*]}"
+        done
+    else
+        # at TTY
+		echo -e ${BRed}"\n[*] Core system package upgraded, You need to reboot the machine.\n"${Color_Off} >&2
+    fi
+}
+
+RunningKernel() {
+    cat /proc/cmdline | sed 's|.*/vmlinuz-\(linux[a-z0-9-]*\) .*|\1|'
+}
+
+main() {
+    local targets=$(tee /dev/null)  # targets from the hook (stdin)
+    local target
+    local notify=no
+    local runningKernel="$(RunningKernel)"
+
+    for target in $targets ; do
+        case "$target" in
+            linux | linux-lts | linux-zen | linux-hardened | linux-lts?? | linux-lts???)
+                # Note: only official and older LTS kernels are checked.
+                if [[ "$target" = "$runningKernel" ]] ; then
+                    notify=yes
+                    break
+                fi
+                ;;
+            nvidia)
+                if [[ "$runningKernel" = "linux" ]] ; then
+                    notify=yes
+                    break
+                fi
+                ;;
+            nvidia-lts)
+                if [[ "$runningKernel" = "linux-lts" ]] ; then
+                    notify=yes
+                    break
+                fi
+                ;;
+            btrfs-progs)
+                if [[ -n "$(/usr/bin/df -hT | awk '{print $2}' | grep -w btrfs)" ]] ; then
+                    notify=yes
+                    break
+                fi
+                ;;
+            *)
+                notify=yes
+                break
+                ;;
+        esac
+    done
+
+    if [[ "$notify" = "yes" ]] ; then
+		_notify_reboot_required
+		unset -f _notify_reboot_required
+    fi
+}
+
+main "$@"

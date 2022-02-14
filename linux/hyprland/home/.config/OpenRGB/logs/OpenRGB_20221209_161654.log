@@ -1,0 +1,73 @@
+    OpenRGB v0.81
+    Commit: f8d7eb8bb8f297e86b9af7a0e68796cc058005eb from 2022-12-08 04:39:17 +0000
+    Launched: 20221209_161654
+====================================================================================================
+
+0     |Info:    Found file: Default.orp attempting to validate header
+0     |Info:    Valid v3 profile found for Default
+1002  |Info:    ------------------------------------------------------
+1002  |Info:    |               Start device detection               |
+1002  |Info:    ------------------------------------------------------
+1002  |Info:    Initializing HID interfaces: Success
+1007  |Info:    ------------------------------------------------------
+1007  |Info:    |             Detecting I2C interfaces               |
+1007  |Info:    ------------------------------------------------------
+1007  |Info:    Registering I2C interface: /dev/i2c-3 Device 10DE:2206 Subsystem: 10DE:1467
+1007  |Info:    Registering I2C interface: /dev/i2c-6 Device 1022:790B Subsystem: 1043:87C0
+1007  |Info:    Registering I2C interface: /dev/i2c-2 Device 10DE:2206 Subsystem: 10DE:1467
+1007  |Info:    Registering I2C interface: /dev/i2c-7 Device 1022:790B Subsystem: 1043:87C0
+1007  |Info:    ------------------------------------------------------
+1007  |Info:    |               Detecting I2C devices                |
+1007  |Info:    ------------------------------------------------------
+1405  |Info:    ------------------------------------------------------
+1405  |Info:    |               Detecting I2C PCI devices            |
+1405  |Info:    ------------------------------------------------------
+1406  |Info:    ------------------------------------------------------
+1406  |Info:    |               Detecting HID devices                |
+1406  |Info:    ------------------------------------------------------
+1406  |Info:    [Logitech G900 Wireless Gaming Mouse (wired)] is not initialized
+1406  |Info:    [Corsair K95 RGB] is not initialized
+1406  |Info:    [ASUS Aura Motherboard] is not initialized
+1406  |Info:    [Corsair LS100 Lighting Kit] is not initialized
+1406  |Info:    [Corsair Commander Core] is not initialized
+1406  |Info:    [Logitech G900 Wireless Gaming Mouse] is not initialized
+1406  |Info:    [Corsair MM800 RGB Polaris] is not initialized
+1406  |Info:    ------------------------------------------------------
+1406  |Info:    |              Detecting other devices               |
+1406  |Info:    ------------------------------------------------------
+1419  |Info:    ------------------------------------------------------
+1419  |Info:    |                Detection completed                 |
+1419  |Info:    ------------------------------------------------------
+1419  |Dialog:  <h2>WARNING:</h2><p>One or more I2C/SMBus interfaces failed to initialize.</p><p>RGB DRAM modules and some motherboards' onboard RGB lighting will not be available without I2C/SMBus.</p><p>On Linux, this is usually because the i2c-dev module is not loaded.  You must load the i2c-dev module along with the correct i2c driver for your motherboard.  This is usually i2c-piix4 for AMD systems and i2c-i801 for Intel systems.</p><p>See <a href='https://help.openrgb.org/'>help.openrgb.org</a> for additional troubleshooting steps if you keep seeing this message.<br></p>
+34513 |Info:    ------------------------------------------------------
+34513 |Info:    |               Start device detection               |
+34513 |Info:    ------------------------------------------------------
+34513 |Info:    Initializing HID interfaces: Success
+34517 |Info:    ------------------------------------------------------
+34517 |Info:    |             Detecting I2C interfaces               |
+34517 |Info:    ------------------------------------------------------
+34517 |Info:    Registering I2C interface: /dev/i2c-3 Device 10DE:2206 Subsystem: 10DE:1467
+34517 |Info:    Registering I2C interface: /dev/i2c-6 Device 1022:790B Subsystem: 1043:87C0
+34517 |Info:    Registering I2C interface: /dev/i2c-2 Device 10DE:2206 Subsystem: 10DE:1467
+34517 |Info:    Registering I2C interface: /dev/i2c-7 Device 1022:790B Subsystem: 1043:87C0
+34517 |Info:    ------------------------------------------------------
+34517 |Info:    |               Detecting I2C devices                |
+34517 |Info:    ------------------------------------------------------
+34914 |Info:    ------------------------------------------------------
+34914 |Info:    |               Detecting I2C PCI devices            |
+34914 |Info:    ------------------------------------------------------
+34915 |Info:    ------------------------------------------------------
+34915 |Info:    |               Detecting HID devices                |
+34915 |Info:    ------------------------------------------------------
+34915 |Info:    [Logitech G900 Wireless Gaming Mouse (wired)] is not initialized
+34915 |Info:    [ASUS Aura Motherboard] is not initialized
+34915 |Info:    [Corsair LS100 Lighting Kit] is not initialized
+34915 |Info:    [Corsair Commander Core] is not initialized
+34915 |Info:    [Logitech G900 Wireless Gaming Mouse] is not initialized
+34915 |Info:    ------------------------------------------------------
+34915 |Info:    |              Detecting other devices               |
+34915 |Info:    ------------------------------------------------------
+34916 |Info:    ------------------------------------------------------
+34916 |Info:    |                Detection completed                 |
+34916 |Info:    ------------------------------------------------------
+34916 |Dialog:  <h2>WARNING:</h2><p>One or more I2C/SMBus interfaces failed to initialize.</p><p>RGB DRAM modules and some motherboards' onboard RGB lighting will not be available without I2C/SMBus.</p><p>On Linux, this is usually because the i2c-dev module is not loaded.  You must load the i2c-dev module along with the correct i2c driver for your motherboard.  This is usually i2c-piix4 for AMD systems and i2c-i801 for Intel systems.</p><p>See <a href='https://help.openrgb.org/'>help.openrgb.org</a> for additional troubleshooting steps if you keep seeing this message.<br></p>

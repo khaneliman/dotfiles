@@ -1,0 +1,5 @@
+# Set your plymouth configuration here.
+[Daemon]
+Theme=arch-glow
+ShowDelay=0
+DeviceTimeout=8

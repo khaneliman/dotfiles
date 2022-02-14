@@ -1,0 +1,40 @@
+[ options ]
+
+# Read text from system clipboard or from the standard input
+# only when using Gitflow keybindings
+clipboard = false
+
+[ keybindings ]
+
+# Alt + S
+state = \es
+
+# Alt + E
+stage = \ee
+
+# Ctrl + E
+unstage = \ce
+
+# Alt + M
+show = \em
+
+# Alt + C
+commit-all = \ec
+
+# Alt + D
+pull = \ed
+
+# Alt + P
+push = \ep
+
+# Alt + U
+upstream = \eu
+
+# Alt + L
+logs = \el
+
+# Alt + F
+feature = \ef
+
+# Alt + H
+hotfix = \eh

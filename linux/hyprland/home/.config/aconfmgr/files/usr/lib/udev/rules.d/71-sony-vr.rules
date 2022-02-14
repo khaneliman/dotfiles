@@ -1,0 +1,2 @@
+# PlayStation VR; USB
+SUBSYSTEM=="usb", ATTR{idVendor}=="054c", ATTR{idProduct}=="09af", MODE="0660", TAG+="uaccess"

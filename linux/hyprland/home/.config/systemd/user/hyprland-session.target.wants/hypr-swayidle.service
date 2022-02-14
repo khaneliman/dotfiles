@@ -1,0 +1,16 @@
+[Unit]
+Description=Idle manager for Wayland
+Documentation=man:swayidle(1)
+PartOf=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/swayidle -w \
+            timeout 300 'swaylock -f' \
+            timeout 600 'hyprctrl dispatch dpms off' \
+            resume 'hyprctrl dispatch dpms on' \
+            before-sleep 'swaylock -f -c 000000'
+Restart=always
+
+[Install]
+WantedBy=hyprland-session.target

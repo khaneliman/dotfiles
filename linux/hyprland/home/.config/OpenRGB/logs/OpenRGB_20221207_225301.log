@@ -1,0 +1,66 @@
+    OpenRGB v0.8
+    Commit: fb88964b8e514cdf4eb22da314e13f8db06a3636 from 2022-11-27 21:44:33 -0600
+    Launched: 20221207_225301
+====================================================================================================
+
+7     |Info:    Found file: Default.orp attempting to validate header
+7     |Info:    Valid v3 profile found for Default
+1008  |Info:    ------------------------------------------------------
+1009  |Info:    |               Start device detection               |
+1009  |Info:    ------------------------------------------------------
+1009  |Info:    Initializing HID interfaces: Success
+1013  |Info:    ------------------------------------------------------
+1013  |Info:    |             Detecting I2C interfaces               |
+1013  |Info:    ------------------------------------------------------
+1013  |Info:    Registering I2C interface: /dev/i2c-3 Device 10DE:2206 Subsystem: 10DE:1467
+1013  |Info:    Registering I2C interface: /dev/i2c-1 Device 1022:790B Subsystem: 1043:87C0
+1013  |Info:    Registering I2C interface: /dev/i2c-6 Device 10DE:2206 Subsystem: 10DE:1467
+1013  |Info:    Registering I2C interface: /dev/i2c-4 Device 10DE:2206 Subsystem: 10DE:1467
+1013  |Info:    Registering I2C interface: /dev/i2c-2 Device 1022:790B Subsystem: 1043:87C0
+1013  |Info:    Registering I2C interface: /dev/i2c-0 Device 1022:790B Subsystem: 1043:87C0
+1013  |Info:    Registering I2C interface: /dev/i2c-7 Device 10DE:2206 Subsystem: 10DE:1467
+1013  |Info:    Registering I2C interface: /dev/i2c-5 Device 10DE:2206 Subsystem: 10DE:1467
+1013  |Info:    ------------------------------------------------------
+1013  |Info:    |               Detecting I2C devices                |
+1013  |Info:    ------------------------------------------------------
+1180  |Info:    [Corsair Dominator Platinum RGB] Registering RGB controller
+1192  |Info:    [Corsair Dominator Platinum RGB] Registering RGB controller
+1203  |Info:    [Corsair Dominator Platinum RGB] Registering RGB controller
+1214  |Info:    [Corsair Dominator Platinum RGB] Registering RGB controller
+1783  |Info:    ------------------------------------------------------
+1783  |Info:    |               Detecting I2C PCI devices            |
+1783  |Info:    ------------------------------------------------------
+1784  |Info:    ------------------------------------------------------
+1784  |Info:    |               Detecting HID devices                |
+1784  |Info:    ------------------------------------------------------
+2206  |Info:    [Gaming Mouse G900] Registering RGB controller
+2628  |Info:    [Gaming Mouse G900] Registering RGB controller
+3050  |Info:    [Gaming Mouse G900] Registering RGB controller
+3472  |Info:    [Gaming Mouse G900] Registering RGB controller
+3894  |Info:    [Gaming Mouse G900] Registering RGB controller
+3969  |Info:    [ASUS ROG CROSSHAIR VIII HERO] Registering RGB controller
+4022  |Info:    [Corsair LS100 Lighting Kit] Registering RGB controller
+4126  |Info:    [Corsair Commander Core] Registering RGB controller
+4126  |Info:    ------------------------------------------------------
+4126  |Info:    |              Detecting other devices               |
+4126  |Info:    ------------------------------------------------------
+4136  |Info:    ------------------------------------------------------
+4136  |Info:    |                Detection completed                 |
+4136  |Info:    ------------------------------------------------------
+4136  |Info:    Profile loading: FAILED! for Corsair Dominator Platinum RGB @ I2C: /dev/i2c-0, address 0x58
+4136  |Info:    Profile loading: FAILED! for Corsair Dominator Platinum RGB @ I2C: /dev/i2c-0, address 0x59
+4136  |Info:    Profile loading: FAILED! for Corsair Dominator Platinum RGB @ I2C: /dev/i2c-0, address 0x5A
+4136  |Info:    Profile loading: FAILED! for Corsair Dominator Platinum RGB @ I2C: /dev/i2c-0, address 0x5B
+4136  |Info:    Profile loading: FAILED! for Gaming Mouse G900 @ HID: /dev/hidraw12 (Receiver) 
+Wireless Index: 255
+4136  |Info:    Profile loading: FAILED! for Gaming Mouse G900 @ HID: /dev/hidraw12 (Receiver) 
+Wireless Index: 255
+4136  |Info:    Profile loading: FAILED! for Gaming Mouse G900 @ HID: /dev/hidraw12 (Receiver) 
+Wireless Index: 255
+4136  |Info:    Profile loading: FAILED! for Gaming Mouse G900 @ HID: /dev/hidraw12 (Receiver) 
+Wireless Index: 255
+4136  |Info:    Profile loading: FAILED! for Gaming Mouse G900 @ HID: /dev/hidraw12 (Receiver) 
+Wireless Index: 255
+4136  |Info:    Profile loading: FAILED! for ASUS ROG CROSSHAIR VIII HERO @ HID: /dev/hidraw7
+4136  |Info:    Profile loading: FAILED! for Corsair LS100 Lighting Kit @ HID: /dev/hidraw2
+4136  |Info:    Profile loading: FAILED! for Corsair Commander Core @ HID: /dev/hidraw4

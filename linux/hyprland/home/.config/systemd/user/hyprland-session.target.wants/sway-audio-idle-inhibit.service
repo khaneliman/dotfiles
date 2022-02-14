@@ -1,0 +1,13 @@
+[Unit]
+Description=Prevents swayidle from sleeping while any application is outputting or receiving audio.
+Documentation=https://github.com/ErikReider/SwayAudioIdleInhibit
+PartOf=graphical-session.target
+After=hypr-waybar.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/sway-audio-idle-inhibit
+Restart=on-failure
+
+[Install]
+WantedBy=hyprland-session.target
