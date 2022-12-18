@@ -1,5 +1,0 @@
-[Desktop Entry]
-Name=Hyprland (NVIDIA)
-Comment=An intelligent dynamic tiling Wayland compositor (NVIDIA fixes)
-Exec=hyprland-nvidia
-Type=Application

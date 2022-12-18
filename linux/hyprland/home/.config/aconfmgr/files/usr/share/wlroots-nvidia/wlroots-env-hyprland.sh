@@ -1,5 +1,0 @@
-export XDG_SESSION_DESKTOP=Hyprland
-export XDG_CURRENT_DESKTOP=Hyprland
-
-#export XDG_CURRENT_DESKTOP=Sway
-# export XDG_SESSION_DESKTOP=Sway

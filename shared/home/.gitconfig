@@ -7,14 +7,14 @@
 [alias]
 	# Shortening aliases
 ### Add file, add and commit all, add patch
-    a = add
+	a = add
 	ap = add -p
 ### Commit, checkout, and push
-    c = commit --verbose
+  c = commit --verbose
 	co = checkout
-    p = push
+  p = push
 ### Status
-    s = status -sb
+  s = status -sb
 ### Stash and list stashes
 	st = stash
 	stl = stash list
@@ -73,7 +73,7 @@
 	mergetest = "!f(){ git merge --no-commit --no-ff \"$1\"; git merge --abort; echo \"Merge aborted\"; };f "
 ### Rebase interactive against master and dev
 	ria = !git rebase -i $(git merge-base HEAD master)
-    rid = !git rebase -i $(git merge-base HEAD develop)
+  rid = !git rebase -i $(git merge-base HEAD develop)
 
 ## History / Listing
 

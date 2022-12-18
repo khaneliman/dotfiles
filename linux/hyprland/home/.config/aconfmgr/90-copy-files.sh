@@ -115,11 +115,10 @@ CopyFile /usr/share/libalpm/hooks/zzx-orphans.hook
 CopyFile /usr/share/libalpm/hooks/zzz-archcraft-reboot-required.hook
 CopyFile /usr/share/libalpm/hooks/zzz-needrestart-pacman.hook
 
-CopyFile /usr/bin/hyprland-nvidia 755
-CopyFile /usr/share/wayland-sessions/hyprland-nvidia.desktop
-CopyFile /usr/share/wlroots-nvidia/wlroots-env-hyprland.sh
-CopyFile /usr/share/wlroots-nvidia/wlroots-env-nvidia.sh
-CopyFile /usr/share/wlroots-nvidia/wlroots-env.sh
+CreateLink ~/.local/bin/Hyprland-custom /usr/local/bin/Hyprland-custom 755
+CreateLink ~/.local/bin/xdg-desktop-portal.sh /usr/local/bin/xdg-desktop-portal.sh
+CreateLink ~/.local/share/wlroots-env/ /usr/share/
+CopyFile /usr/share/wayland-sessions/hyprland-custom.desktop
 
 CopyFile /etc/vconsole.conf
 CopyFile /etc/X11/xorg.conf
