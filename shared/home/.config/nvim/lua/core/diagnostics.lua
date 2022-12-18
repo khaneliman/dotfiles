@@ -1,61 +1,43 @@
--- global config
-vim.diagnostic.config({
-  signs = true,
-  update_in_insert = true,
-  severity_sort = true,
-})
-
--- have one icon in sign column
--- Create a custom namespace. This will aggregate signs from all other
--- namespaces and only show the one with the highest severity on a
--- given line
-local ns = vim.api.nvim_create_namespace("my_namespace")
-
--- Get a reference to the original signs handler
-local orig_signs_handler = vim.diagnostic.handlers.signs
-
--- Override the built-in signs handler
-vim.diagnostic.handlers.signs = {
-
-  show = function(_, bufnr, _, opts)
-    -- Get all diagnostics from the whole buffer rather than just the
-    -- diagnostics passed to the handler
-    local diagnostics = vim.diagnostic.get(bufnr)
-
-    -- Find the "worst" diagnostic per line
-    local max_severity_per_line = {}
-    for _, d in pairs(diagnostics) do
-      local m = max_severity_per_line[d.lnum]
-      if not m or d.severity < m.severity then
-        max_severity_per_line[d.lnum] = d
-
-      end
-    end
-
-    -- Pass the filtered diagnostics (with our custom namespace) to
-    -- the original handler
-
-    local filtered_diagnostics = vim.tbl_values(max_severity_per_line)
-
-    orig_signs_handler.show(ns, bufnr, filtered_diagnostics, opts)
-  end,
-
-  hide = function(_, bufnr)
-    orig_signs_handler.hide(ns, bufnr)
-
-  end,
-}
-
--- set diagnostics icons
-local global_icons = require("core.globals").icons
 local signs = {
-  Error = global_icons.error,
-  Warn = global_icons.warning,
-  Hint = global_icons.hint,
-  Info = global_icons.info
+  { name = "DiagnosticSignError", text = astronvim.get_icon "DiagnosticError" },
+  { name = "DiagnosticSignWarn", text = astronvim.get_icon "DiagnosticWarn" },
+  { name = "DiagnosticSignHint", text = astronvim.get_icon "DiagnosticHint" },
+  { name = "DiagnosticSignInfo", text = astronvim.get_icon "DiagnosticInfo" },
+  { name = "DiagnosticSignError", text = astronvim.get_icon "DiagnosticError" },
+  { name = "DapStopped", text = astronvim.get_icon "DapStopped", texthl = "DiagnosticWarn" },
+  { name = "DapBreakpoint", text = astronvim.get_icon "DapBreakpoint", texthl = "DiagnosticInfo" },
+  { name = "DapBreakpointRejected", text = astronvim.get_icon "DapBreakpointRejected", texthl = "DiagnosticError" },
+  { name = "DapBreakpointCondition", text = astronvim.get_icon "DapBreakpointCondition", texthl = "DiagnosticInfo" },
+  { name = "DapLogPoint", text = astronvim.get_icon "DapLogPoint", texthl = "DiagnosticInfo" },
 }
 
-for type, icon in pairs(signs) do
-  local hl = "DiagnosticSign" .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl })
+for _, sign in ipairs(signs) do
+  if not sign.texthl then sign.texthl = sign.name end
+  vim.fn.sign_define(sign.name, sign)
 end
+
+astronvim.lsp.diagnostics = {
+  off = {
+    underline = false,
+    virtual_text = false,
+    signs = false,
+    update_in_insert = false,
+  },
+  on = astronvim.user_plugin_opts("diagnostics", {
+    virtual_text = true,
+    signs = { active = signs },
+    update_in_insert = true,
+    underline = true,
+    severity_sort = true,
+    float = {
+      focused = false,
+      style = "minimal",
+      border = "rounded",
+      source = "always",
+      header = "",
+      prefix = "",
+    },
+  }),
+}
+
+vim.diagnostic.config(astronvim.lsp.diagnostics[vim.g.diagnostics_enabled and "on" or "off"])
