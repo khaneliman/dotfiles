@@ -1,5 +1,5 @@
 cmd - return  : env WAYLAND_DISPLAY= alacritty #open over top
-ctrl + lalt - return : alacritty msg create-window 
+cmd + shift - return : /Applications/kitty.app/Contents/MacOS/kitty --single-instance -d ~
 
 ## Navigation (lalt - ...)
 # Space Navigation (four spaces per display): lalt - {1, 2, 3, 4}
