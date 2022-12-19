@@ -1,18 +1,15 @@
-# khaneliman dotfiles
+<h3 align="center">
+ <img src="https://avatars.githubusercontent.com/u/1778670?v=4" width="100" alt="Logo"/><br/>
+ <img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/misc/transparent.png" height="30" width="0px"/>
+ Dotfiles for <a href="https://github.com/khaneliman">Khaneliman</a>
+ <img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/misc/transparent.png" height="30" width="0px"/>
+</h3>
 
-<!--toc:start-->
-
-- [khaneliman dotfiles](#khaneliman-dotfiles)
-  - [Install](#install)
-  - [Linux](#linux)
-    - [Awesome](#awesome)
-    - [Hyprland](#hyprland)
-    - [Gnome](#gnome)
-  - [MacOS](#macos)
-    - [Yabai](#yabai)
-  - [Windows](#windows)
-  - [Shared](#shared)
-  <!--toc:end-->
+<p align="center">
+ <a href="https://github.com/khaneliman/dotfiles/stargazers"><img src="https://img.shields.io/github/stars/khaneliman/dotfiles?colorA=363a4f&colorB=b7bdf8&style=for-the-badge"></a>
+ <a href="https://github.com/khaneliman/dotfiles/commits"><img src="https://img.shields.io/github/last-commit/khaneliman/dotfiles?colorA=363a4f&colorB=f5a97f&style=for-the-badge"></a>
+ <a href="https://github.com/khaneliman/dotfiles/contributors"><img src="https://img.shields.io/github/contributors/khaneliman/dotfiles?colorA=363a4f&colorB=a6da95&style=for-the-badge"></a>
+</p>
 
 Personal dotfiles for each of the platforms I own or have customized. Personal information either redacted or encrypted with [Git-Crypt](https://github.com/AGWA/git-crypt).
 
@@ -55,6 +52,11 @@ I currently use [yabai](https://github.com/koekeishiya/yabai) with my daily driv
 ### Yabai
 
 Current window manager used on my laptop. Uses [sketchybar](https://github.com/FelixKratz/SketchyBar) for UI and [skhd](https://github.com/koekeishiya/skhd) for keybinds.
+
+<div>
+    <img src="https://github.com/khaneliman/dotfiles/blob/main/assets/macos-yabai-nvim.png">
+    <img src="https://github.com/khaneliman/dotfiles/blob/main/assets/macos-yabai-tiling.png">
+</div>
 
 ## Windows
 
