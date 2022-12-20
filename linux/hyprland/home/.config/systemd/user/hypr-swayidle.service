@@ -6,9 +6,9 @@ PartOf=graphical-session.target
 [Service]
 Type=simple
 ExecStart=/usr/bin/swayidle -w \
-            timeout 900 'swaylock -f' \
-            timeout 600 'hyprctrl dispatch dpms off' \
-            resume 'hyprctrl dispatch dpms on' \
+            timeout 300 'swaylock -f' \
+            timeout 600 'hyprctl dispatch dpms off' \
+            resume 'hyprctl dispatch dpms on' \
             before-sleep 'swaylock -f -c 000000'
 Restart=always
 
