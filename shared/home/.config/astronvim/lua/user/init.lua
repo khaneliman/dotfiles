@@ -16,7 +16,7 @@ local config = {
                 skip_prompts = false, -- skip prompts about breaking changes
                 show_changelog = true, -- show the changelog after performing an update
                 auto_reload = true, -- automatically reload and sync packer after a successful update
-                auto_quit = false, -- automatically quit the current session after a successful update
+                auto_quit = false -- automatically quit the current session after a successful update
                 -- remotes = { -- easily add new remotes to track
                 --   ["remote_name"] = "https://remote_url.come/repo.git", -- full remote url
                 --   ["remote2"] = "github_user/repo", -- GitHub user/repo shortcut,
@@ -35,7 +35,7 @@ local config = {
                         number = true, -- sets vim.opt.number
                         spell = false, -- sets vim.opt.spell
                         signcolumn = "auto", -- sets vim.opt.signcolumn to auto
-                        wrap = true, -- sets vim.opt.wrap
+                        wrap = true -- sets vim.opt.wrap
                 },
                 g = {
                         mapleader = " ", -- sets vim.g.mapleader
@@ -45,8 +45,8 @@ local config = {
                         diagnostics_enabled = true, -- enable diagnostics at start
                         status_diagnostics_enabled = true, -- enable diagnostics in statusline
                         icons_enabled = true, -- disable icons in the UI (disable if no nerd font is available, requires :PackerSync after changing)
-                        ui_notifications_enabled = true, -- disable notifications when toggling UI elements
-                },
+                        ui_notifications_enabled = true -- disable notifications when toggling UI elements
+                }
         },
         -- If you need more control, you can use the function()...end notation
         -- options = function(local_vim)
@@ -72,7 +72,7 @@ local config = {
                 "                                                       ",
                 "                                                       ",
                 "                                                       ",
-                "                                                       ",
+                "                                                       "
         },
 
         -- Default theme configuration
@@ -97,8 +97,8 @@ local config = {
                         telescope = true,
                         treesitter = true,
                         vimwiki = false,
-                        ["which-key"] = true,
-                },
+                        ["which-key"] = true
+                }
         },
 
         -- Diagnostics configuration (for vim.diagnostics.config({...})) when diagnostics are on
@@ -113,7 +113,7 @@ local config = {
                 formatting = {
                         -- control auto formatting on save
                         format_on_save = {
-                                enabled = true, -- enable or disable format on save globally
+                                enabled = true -- enable or disable format on save globally
                                 -- allow_filetypes = { -- enable format on save for specified filetypes only
                                 --   -- "go",
                                 -- },
@@ -124,11 +124,11 @@ local config = {
                         -- disabled = { -- disable formatting capabilities for the listed language servers
                         --   -- "sumneko_lua",
                         -- },
-                        timeout_ms = 1000, -- default format timeout
+                        timeout_ms = 1000 -- default format timeout
                         -- filter = function(client) -- fully override the default formatting function
                         --   return true
                         -- end
-                },
+                }
         },
 
         -- Configure plugins
@@ -140,13 +140,11 @@ local config = {
                                 as = "catppuccin",
                                 config = function()
                                         require("catppuccin").setup({})
-                                end,
+                                end
                         }, -- Theme
                         {
                                 "ellisonleao/glow.nvim",
-                                config = function()
-                                        require("glow").setup({})
-                                end,
+                                config = function() require("glow").setup({}) end
                         }, -- Markdown preview
                         -- { "romgrk/fzy-lua-native" }, -- Fuzzy search
                         -- ["gelguy/wilder.nvim"] = {
@@ -155,11 +153,13 @@ local config = {
                         -- You can disable default plugins as follows:
                         -- ["goolord/alpha-nvim"] = { disable = true },
                         {
-                                "ahmedkhalf/project.nvim",
-                                config = function()
-                                        require("project_nvim").setup({ show_hidden = true })
+                                "iamcco/markdown-preview.nvim",
+                                run = "cd app && npm install",
+                                setup = function()
+                                        vim.g.mkdp_filetypes = { "markdown" }
                                 end,
-                        },
+                                ft = { "markdown" }
+                        }
                 },
                 -- All other entries override the require("<key>").setup({...}) call for default plugins
                 ["neo-tree"] = {
@@ -167,58 +167,25 @@ local config = {
                                 filtered_items = {
                                         visible = true, -- This is what you want: If you set this to `true`, all "hide" just mean "dimmed out"
                                         hide_dotfiles = false,
-                                        hide_gitignored = true,
-                                },
-                        },
+                                        hide_gitignored = true
+                                }
+                        }
                 },
                 ["mason-lspconfig"] = {
                         ensure_installed = {
-                                "sumneko_lua",
-                                "bashls",
-                                "angularls",
-                                "clangd",
-                                "csharp_ls",
-                                "cmake",
-                                "cssls",
-                                "dockerls",
-                                "dotls",
-                                "eslint",
-                                "html",
-                                "jsonls",
-                                "tsserver",
-                                "sumneko_lua",
-                                "marksman",
-                                "pylsp",
-                                "sqlls",
-                                "lemminx",
-                        },
+                                "sumneko_lua", "bashls", "angularls", "clangd", "csharp_ls",
+                                "cmake", "cssls", "dockerls", "dotls", "eslint", "html",
+                                "jsonls", "tsserver", "sumneko_lua", "marksman", "pylsp",
+                                "sqlls", "lemminx"
+                        }
                 },
                 treesitter = { -- overrides `require("treesitter").setup(...)`
                         ensure_installed = {
-                                "lua",
-                                "bash",
-                                "markdown",
-                                "cpp",
-                                "vim",
-                                "python",
-                                "typescript",
-                                "rust",
-                                "sql",
-                                "rasi",
-                                "html",
-                                "json",
-                                "c_sharp",
-                                "gitignore",
-                                "gitcommit",
-                                "gitattributes",
-                                "git_rebase",
-                                "fish",
-                                "dot",
-                                "diff",
-                                "dockerfile",
-                                "css",
-                                "bash",
-                        },
+                                "lua", "bash", "markdown", "cpp", "vim", "python", "typescript",
+                                "rust", "sql", "rasi", "html", "json", "c_sharp", "gitignore",
+                                "gitcommit", "gitattributes", "git_rebase", "fish", "dot",
+                                "diff", "dockerfile", "css", "bash"
+                        }
                 },
                 ["null-ls"] = function(config) -- overrides `require("null-ls").setup(config)`
                         -- config variable is the default configuration table for the setup function call
@@ -230,14 +197,14 @@ local config = {
                         config.sources = {
                                 -- Set a formatter
                                 null_ls.builtins.formatting.lua_format,
-                                null_ls.builtins.formatting.prettier,
+                                null_ls.builtins.formatting.prettier
                         }
                         return config -- return final config table
                 end,
                 ["telescope"] = {
                         after = { "ahmedkhalf/project.nvim" },
-                        require("telescope").load_extension("projects"),
-                },
+                        require("telescope").load_extension("projects")
+                }
         },
 
         -- Modify which-key registration (Use this with mappings table in the above.)
@@ -252,12 +219,12 @@ local config = {
                                         -- group name in which-key top level menu
                                         ["f"] = {
                                                 name = "File",
-                                                p = { "<cmd>Telescope projects<cr>", "Projects" },
-                                        },
-                                },
-                        },
-                },
-        },
+                                                p = { "<cmd>Telescope projects<cr>", "Projects" }
+                                        }
+                                }
+                        }
+                }
+        }
 }
 
 return config

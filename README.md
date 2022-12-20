@@ -41,6 +41,10 @@ This configuration is a glass effect [AwesomeWM](https://github.com/awesomeWM/aw
 
 [Catppuccin](https://github.com/catppuccin/catppuccin) themed [Hyprland](https://github.com/hyprwm/Hyprland) configuration with a lot more time spent on it since it's my current daily driver. There's basic dotfiles and then some [aconfmgr](https://github.com/CyberShadow/aconfmgr) config thrown in for deploying a system. (WIP and not tested thoroughly)
 
+<div>
+    <img src="https://github.com/khaneliman/dotfiles/blob/main/assets/linux-hyprland-tiling.png">
+</div>
+
 ### Gnome
 
 Dotfiles from my brief usage of Fedora with Gnome. Currently sparse and only contains the [dconf](https://github.com/GNOME/dconf) files that can be imported using dconf.
