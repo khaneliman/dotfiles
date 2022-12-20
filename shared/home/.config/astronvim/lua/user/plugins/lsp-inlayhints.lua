@@ -1,0 +1,1 @@
+require("lsp-inlayhints").setup()

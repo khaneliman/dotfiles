@@ -1,0 +1,1 @@
+require("indent-tools").config {}
