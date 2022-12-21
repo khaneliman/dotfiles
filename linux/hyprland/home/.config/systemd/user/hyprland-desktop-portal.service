@@ -5,7 +5,7 @@ PartOf=graphical-session.target
 
 [Service]
 Type=simple
-ExecStart=/home/khaneliman/bin/xdg-desktop-portal.sh
+ExecStart=/usr/local/bin/xdg-desktop-portal.sh
 
 [Install]
 WantedBy=hyprland-session.target

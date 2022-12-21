@@ -2,7 +2,7 @@
 Description="Monitor the /etc/passwd file for changes"
 
 [Path]
-PathModified=/home/khaneliman/.config/waybar
+PathModified=/usr/local/share/waybar
 Unit=restart-hypr-waybar.service
 
 [Install]

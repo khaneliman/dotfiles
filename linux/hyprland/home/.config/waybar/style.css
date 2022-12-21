@@ -1,7 +1,7 @@
 @import "mocha.css";
 * {
     /* `otf-font-awesome` is required to be installed for icons */
-    font-family: FiraCode;
+    font-family: FiraCode Nerd Font;
     font-size: 14px;
 }
 

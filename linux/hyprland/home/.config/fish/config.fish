@@ -174,3 +174,7 @@ export "MICRO_TRUECOLOR=1"
 set -gx PNPM_HOME "/home/khaneliman/.local/share/pnpm"
 set -gx PATH "$PNPM_HOME" $PATH
 # pnpm end
+
+fish_ssh_agent
+
+if [ -n "$RANGER_LEVEL" ]; then export PS1="[ranger]$PS1"; end
