@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-backup_location="$HOME/.dotfiles-backup/$(date -d "today" +"%Y%m%d%H%M%S")/"
+current_time=$(date "+%Y.%m.%d-%H.%M.%S")
+backup_location="$HOME/.dotfiles-backup/$current_time/"
 
 shared_copy_configuration() {
 	# copy home folder dotfiles
