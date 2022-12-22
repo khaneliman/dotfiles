@@ -4,6 +4,10 @@
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 
+; [user]
+; 	name = Austin Horstman
+; 	email = khaneliman12@gmail.com
+
 [alias]
 	# Shortening aliases
 ### Add file, add and commit all, add patch
@@ -138,12 +142,14 @@
 # Random
 ### Random dad joke if typo on git add
 	dad = !curl https://icanhazdadjoke.com/ && echo
-[credential "https://github.com"]
-	helper = 
-	helper = !/usr/bin/gh auth git-credential
-[credential "https://gist.github.com"]
-	helper = 
-	helper = !/usr/bin/gh auth git-credential
+
+; [credential "https://github.com"]
+; 	helper = 
+; 	helper = !/usr/bin/gh auth git-credential
+; [credential "https://gist.github.com"]
+; 	helper = 
+; 	helper = !/usr/bin/gh auth git-credential
+
 [url "https://invent.kde.org/"]
 	insteadOf = kde:
 [url "ssh://git@invent.kde.org/"]
