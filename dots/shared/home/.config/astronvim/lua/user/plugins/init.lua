@@ -89,14 +89,13 @@ return {
                         require("user.plugins.telescope-media-files")
                 end,
         },
-        ["nvim-telescope/telescope-project.nvim"] = {
-                after = "telescope.nvim",
-                config = function()
-                        require("user.plugins.telescope-project")
-                end,
-        },
         ["nvim-treesitter/nvim-treesitter-textobjects"] = { after = "nvim-treesitter" },
         { "romgrk/fzy-lua-native" }, -- Fuzzy search
+        ["ahmedkhalf/project.nvim"] = {
+                config = function()
+                        require("user.plugins.project_nvim")
+                end,
+        },
         ["ziontee113/syntax-tree-surfer"] = {
                 module = "syntax-tree-surfer",
                 config = function()

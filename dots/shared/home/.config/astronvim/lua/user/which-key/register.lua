@@ -52,7 +52,7 @@ return {
         m = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
         M = { "<cmd>Telescope media_files<cr>", "Media" },
         n = { "<cmd>Telescope notify<cr>", "Notifications" },
-        p = { "<cmd>Telescope project<cr>", "Projects" },
+        p = { "<cmd>Telescope projects<cr>", "Projects" },
         r = { "<cmd>Telescope registers<cr>", "Registers" },
         t = { "<cmd>Telescope colorscheme<cr>", "Themes" },
       },
