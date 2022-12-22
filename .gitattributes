@@ -1,9 +1,9 @@
-linux/hyprland/home/.config/aconfmgr/files/etc/pug.bkp filter=git-crypt diff=git-crypt
-linux/hyprland/home/.config/aconfmgr/files/etc/davmail.properties filter=git-crypt diff=git-crypt
-linux/hyprland/home/.config/aconfmgr/files/etc/NetworkManager/system-connections/* filter=git-crypt diff=git-crypt
-shared/home/.wakatime.cfg filter=git-crypt diff=git-crypt
-shared/home/.ssh/** filter=git-crypt diff=git-crypt
-shared/home/.gnupg/** filter=git-crypt diff=git-crypt
-shared/home/.config/davmail/** filter=git-crypt diff=git-crypt
+dots/linux/hyprland/home/.config/aconfmgr/files/etc/pug.bkp filter=git-crypt diff=git-crypt
+dots/linux/hyprland/home/.config/aconfmgr/files/etc/davmail.properties filter=git-crypt diff=git-crypt
+dots/linux/hyprland/home/.config/aconfmgr/files/etc/NetworkManager/system-connections/* filter=git-crypt diff=git-crypt
+dots/shared/home/.wakatime.cfg filter=git-crypt diff=git-crypt
+dots/shared/home/.ssh/** filter=git-crypt diff=git-crypt
+dots/shared/home/.gnupg/** filter=git-crypt diff=git-crypt
+dots/shared/home/.config/davmail/** filter=git-crypt diff=git-crypt
 
 .gitattributes !filter !diff
