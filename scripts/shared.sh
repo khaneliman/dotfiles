@@ -7,6 +7,10 @@ shared_copy_configuration() {
 	cp -r "$DOTS_DIR"/shared/home/. ~
 }
 
+initialize_submodules() {
+  cd "$DOTS_DIR"/shared/home/.config/nvim/ && git submodule update --init
+}
+
 backup_existing() {
   mkdir -p "$backup_location"
 
@@ -28,5 +32,6 @@ backup_existing() {
 
 shared_install() {
   backup_existing
+  initialize_submodules
   shared_copy_configuration
 }
