@@ -1,3 +1,15 @@
 [submodule "dots/shared/home/.config/nvim"]
 	path = dots/shared/home/.config/nvim
 	url = https://github.com/AstroNvim/AstroNvim
+[submodule "dots/linux/awesome/home/.config/awesome/awesome-wm-widgets"]
+	path = dots/linux/awesome/home/.config/awesome/awesome-wm-widgets
+	url = https://github.com/streetturtle/awesome-wm-widgets
+[submodule "dots/linux/awesome/home/.config/awesome/bling"]
+	path = dots/linux/awesome/home/.config/awesome/bling
+	url = https://github.com/BlingCorp/bling
+[submodule "dots/linux/awesome/home/.config/awesome/dots/linux/awesome/home/.config/awesome/smart_borders"]
+	path = dots/linux/awesome/home/.config/awesome/dots/linux/awesome/home/.config/awesome/smart_borders
+	url = https://github.com/intrntbrn/smart_borders
+[submodule "dots/linux/awesome/home/.config/awesome/smart_borders"]
+	path = dots/linux/awesome/home/.config/awesome/smart_borders
+	url = https://github.com/intrntbrn/smart_borders
