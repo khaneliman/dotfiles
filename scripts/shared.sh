@@ -11,6 +11,11 @@ initialize_submodules() {
   cd "$DOTS_DIR"/shared/home/.config/nvim/ && git submodule update --init
 }
 
+correct_ssh_permissions() {
+  chmod 700 ~/.ssh
+  chmod 600 ~/.ssh/*
+}
+
 backup_existing() {
   mkdir -p "$backup_location"
 
@@ -34,4 +39,5 @@ shared_install() {
   backup_existing
   initialize_submodules
   shared_copy_configuration
+  correct_ssh_permissions
 }
