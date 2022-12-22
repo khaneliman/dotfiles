@@ -12,6 +12,9 @@ hypr_create_symlink() {
 	sudo ln -s ~/.config/waybar/ /usr/local/share/waybar
 	sudo ln -s ~/.local/bin/Hyprland-custom /usr/local/bin/
 	sudo ln -s ~/.local/bin/xdg-desktop-portal.sh /usr/local/bin/
+	sudo ln -s ~/.local/bin/hyprland_setup_dual_monitors.sh /usr/local/bin
+	sudo ln -s ~/.local/bin/hyprland_cleanup_after_startup.s /usr/local/binh
+	sudo ln -s ~/.local/bin/hyprland_handle_monitor_connect.sh /usr/local/bin
 }
 
 hypr_enable_systemd_services() {

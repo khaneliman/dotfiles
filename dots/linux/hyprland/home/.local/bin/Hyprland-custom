@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 # Source profile (lifted from some gnome stuff)
 if [ "x$XDG_SESSION_TYPE" = "xwayland" ] &&
