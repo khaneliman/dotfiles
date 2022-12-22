@@ -4,9 +4,9 @@
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 
-; [user]
-; 	name = Austin Horstman
-; 	email = khaneliman12@gmail.com
+# [user]
+# 	name = Austin Horstman
+# 	email = khaneliman12@gmail.com
 
 [alias]
 	# Shortening aliases
@@ -14,11 +14,11 @@
 	a = add
 	ap = add -p
 ### Commit, checkout, and push
-  c = commit --verbose
+	c = commit --verbose
 	co = checkout
-  p = push
+	p = push
 ### Status
-  s = status -sb
+	s = status -sb
 ### Stash and list stashes
 	st = stash
 	stl = stash list
@@ -61,14 +61,11 @@
 	rdone = "!f() { git ac \"$1\"; git done; };f"
 ### Branch Delete:
 #>This checks out your local master branch and deletes all local branches that have already been merged to master
-
 	brd = !sh -c \"git checkout master && git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d\"
 
 ### Branch Delete Here:
 #> Deletes all local branches that have already been merged to the branch that you're currently on
-
 	brdhere = !sh -c \"git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d\"
-
 ### Push everything to remote
 	pushitgood = push -u origin --all
 ### Push current to remote
@@ -77,7 +74,7 @@
 	mergetest = "!f(){ git merge --no-commit --no-ff \"$1\"; git merge --abort; echo \"Merge aborted\"; };f "
 ### Rebase interactive against master and dev
 	ria = !git rebase -i $(git merge-base HEAD master)
-  rid = !git rebase -i $(git merge-base HEAD develop)
+	rid = !git rebase -i $(git merge-base HEAD develop)
 
 ## History / Listing
 
@@ -98,8 +95,8 @@
 
 ### Forced Pull:
 #> You have a local branch (e.g. for reviewing), but someone else did a forced push update on the remote branch. A regular git pull will fail, but this will just set the local branch to match the remote branch. BEWARE: this will overwrite any local commits you have made on this branch that haven't been pushed.
-
 	pullf = !sh -c \"git reset --hard origin/$(git rev-parse --abbrev-ref HEAD)\"
+
 # Complex aliases
 ### Pull only the current branch and dont update refs of all remotes
 	pullhead = "!f() { \
@@ -139,18 +136,19 @@
 	git checkout $b; \
 	git rebase develop; \
 	}; f"
+
 # Random
 ### Random dad joke if typo on git add
 	dad = !curl https://icanhazdadjoke.com/ && echo
 
-; [credential "https://github.com"]
-; 	helper = 
-; 	helper = !/usr/bin/gh auth git-credential
-; [credential "https://gist.github.com"]
-; 	helper = 
-; 	helper = !/usr/bin/gh auth git-credential
+# [credential "https://github.com"]
+# 	helper =
+# 	helper = !/usr/bin/gh auth git-credential
+# [credential "https://gist.github.com"]
+# 	helper =
+# 	helper = !/usr/bin/gh auth git-credential
 
-[url "https://invent.kde.org/"]
-	insteadOf = kde:
-[url "ssh://git@invent.kde.org/"]
-	pushInsteadOf = kde:
+# [url "https://invent.kde.org/"]
+# 	insteadOf = kde:
+# [url "ssh://git@invent.kde.org/"]
+# 	pushInsteadOf = kde:
