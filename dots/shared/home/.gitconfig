@@ -158,3 +158,11 @@
 # [credential "https://gist.github.com"]
 # 	helper =
 # 	helper = !/opt/homebrew/bin/gh auth git-credential
+
+[gpg]
+	format = ssh
+# Uncomment if 1password ssh agent set up
+#[gpg "ssh"]
+#	program = /opt/1Password/op-ssh-sign
+[commit]
+	gpgsign = true
