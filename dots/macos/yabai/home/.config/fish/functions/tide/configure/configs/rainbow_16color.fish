@@ -14,6 +14,8 @@ tide_crystal_bg_color brwhite
 tide_crystal_color black
 tide_docker_bg_color blue
 tide_docker_color black
+tide_distrobox_bg_color brmagenta
+tide_distrobox_color black
 tide_git_bg_color green
 tide_git_bg_color_unstable yellow
 tide_git_bg_color_urgent red
@@ -45,6 +47,8 @@ tide_private_mode_bg_color brwhite
 tide_private_mode_color black
 tide_prompt_color_frame_and_connection brblack
 tide_prompt_color_separator_same_color brblack
+tide_pulumi_bg_color yellow
+tide_pulumi_color black
 tide_pwd_bg_color blue
 tide_pwd_color_anchors brwhite
 tide_pwd_color_dirs brwhite
