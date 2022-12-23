@@ -4,9 +4,11 @@
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 
+# Set up user commit info
 # [user]
 # 	name = Austin Horstman
 # 	email = khaneliman12@gmail.com
+# 	signingkey = ssh-ed25519 
 
 [alias]
 	# Shortening aliases
@@ -141,6 +143,7 @@
 ### Random dad joke if typo on git add
 	dad = !curl https://icanhazdadjoke.com/ && echo
 
+# Uncomment on linux with github desktop cli
 # [credential "https://github.com"]
 # 	helper =
 # 	helper = !/usr/bin/gh auth git-credential
@@ -148,7 +151,10 @@
 # 	helper =
 # 	helper = !/usr/bin/gh auth git-credential
 
-# [url "https://invent.kde.org/"]
-# 	insteadOf = kde:
-# [url "ssh://git@invent.kde.org/"]
-# 	pushInsteadOf = kde:
+# Uncomment on mac with github desktop cli
+# [credential "https://github.com"]
+# 	helper =
+# 	helper = !/opt/homebrew/bin/gh auth git-credential
+# [credential "https://gist.github.com"]
+# 	helper =
+# 	helper = !/opt/homebrew/bin/gh auth git-credential
