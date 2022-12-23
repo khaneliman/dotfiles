@@ -1,0 +1,49 @@
+#!/usr/bin/ruby
+# frozen_string_literal: true
+
+require 'json'
+require 'sqlite3'
+
+Dir_only = ARGV[0] == 'dir_only' ? 'isdir = 1 AND' : ''
+Query = ARGV[1].split(' ').map { |w| "%#{w.unicode_normalize}%" }
+Limit = ENV['result_limit'].to_i <= 0 ? 50 : ENV['result_limit'].to_i
+Tmp_file = File.join(ENV['alfred_workflow_cache'], 'tmp.db')
+Cache_file = File.join(ENV['alfred_workflow_cache'], 'cache.db')
+
+# If cache file does not exist
+unless File.exist?(Cache_file)
+  # Check if cache is being built
+  require 'open3'
+
+  if Open3.capture2('ps', 'A').first.split("\n").any? { |l| l.match(/ruby.*Alfred.*rebuild_cache/) }
+    puts({ items: [{ title: 'Cache is being built…', subtitle: 'Please be patient. Depending on how many files you have, it can take a while.', 'valid': false }] }.to_json)
+    exit 0
+  end
+
+  puts({ items: [{ title: 'Build cache', subtitle: 'It will take a few minutes to finish, depending on how many files you have.', 'arg': 'build_cache' }] }.to_json)
+  exit 0
+end
+
+# Filter paths
+db = SQLite3::Database.new(Cache_file)
+Results = db.execute("SELECT fullpath FROM main WHERE #{Dir_only} #{Array.new(Query.length, 'basename LIKE ?').join(' AND ')} ORDER BY accesstime DESC LIMIT ?;", Query, Limit).flatten
+
+Script_filter_items = Results.each_with_object([]) { |path, array|
+  short_path = path.sub(%r{^/Users/.+?/}, '~/').sub(%r{^~/Library/CloudStorage/}, '')
+
+  array.push(
+    uid: path,
+    type: 'file',
+    title: File.basename(path),
+    subtitle: short_path,
+    icon: { path: path, type: 'fileicon' },
+    arg: path
+  )
+}
+
+if Script_filter_items.empty?
+  puts({ items: [{ title: 'Nothing found', subtitle: 'Try searching something else' }] }.to_json)
+  exit 0
+end
+
+puts({ items: Script_filter_items }.to_json)

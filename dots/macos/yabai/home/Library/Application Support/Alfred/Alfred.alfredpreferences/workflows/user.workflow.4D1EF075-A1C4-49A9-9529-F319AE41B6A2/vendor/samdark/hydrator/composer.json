@@ -1,0 +1,25 @@
+{
+    "name": "samdark/hydrator",
+    "type": "library",
+    "description": "Allows to extract data from an object or create a new object based on data for the purpose of persisting state. Works with private and protected properties.",
+    "keywords": ["hydrator", "extract", "hydrate"],
+    "require-dev": {
+        "phpunit/phpunit": "^4.8"
+    },
+    "license": "MIT",
+    "support": {
+        "issues": "https://github.com/samdark/hydrator/issues",
+        "source": "https://github.com/samdark/hydrator"
+    },
+    "authors": [
+        {
+            "name": "Alexander Makarov",
+            "email": "sam@rmcreative.ru"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "samdark\\hydrator\\": ""
+        }
+    }
+}

@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>neigh.alfred.icon_generator</string>
+	<key>category</key>
+	<string>Tools</string>
+	<key>connections</key>
+	<dict>
+		<key>0C193D95-D63C-4AE9-A23C-6A05088FAB65</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>C4B6F70E-2BF5-47E8-9116-FA95E71931AA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>26D2696E-1778-488C-A6C6-F359D94F221E</key>
+		<array/>
+		<key>4E50EE8A-A0B7-4FEE-93FE-5F0EF7532709</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A6E73533-57E0-4781-8F3C-E21CB458E4C5</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>5C5DFAFA-B4E7-4A90-990D-B9DB9703F9B8</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>0C193D95-D63C-4AE9-A23C-6A05088FAB65</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>73352DE3-1237-455E-86DD-10F058887148</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>5C5DFAFA-B4E7-4A90-990D-B9DB9703F9B8</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>A6E73533-57E0-4781-8F3C-E21CB458E4C5</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>0C193D95-D63C-4AE9-A23C-6A05088FAB65</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>C4B6F70E-2BF5-47E8-9116-FA95E71931AA</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>26D2696E-1778-488C-A6C6-F359D94F221E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Nathan</string>
+	<key>description</key>
+	<string>Generate icon from a SF Symbol</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Icon Generator</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>icon generator</string>
+				<key>subtext</key>
+				<string>Ensure a symbol is on your clipboard</string>
+				<key>text</key>
+				<string>Generate icon from SF Symbol</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>73352DE3-1237-455E-86DD-10F058887148</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>{clipboard}</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>output</key>
+					<string>{var:location}/{random:UUID}.png</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>5C5DFAFA-B4E7-4A90-990D-B9DB9703F9B8</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>set output to (system attribute "output")
+set the clipboard to (read (POSIX file output) as  {«class PNGf»})</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>6</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>26D2696E-1778-488C-A6C6-F359D94F221E</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>query="$1"
+
+convert -background none -font /Library/Fonts/SF-Pro-Display-Bold.otf -fill $colour -gravity "center" -size "512x512"  caption:"$query" +repage -depth 8 "$output"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>0C193D95-D63C-4AE9-A23C-6A05088FAB65</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>seconds</key>
+				<string>.25</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.delay</string>
+			<key>uid</key>
+			<string>C4B6F70E-2BF5-47E8-9116-FA95E71931AA</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsfiles</key>
+				<false/>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>acceptstext</key>
+				<true/>
+				<key>acceptsurls</key>
+				<false/>
+				<key>name</key>
+				<string>Icon Generator</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.universalaction</string>
+			<key>uid</key>
+			<string>4E50EE8A-A0B7-4FEE-93FE-5F0EF7532709</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<true/>
+				<key>variables</key>
+				<dict>
+					<key>output</key>
+					<string>{var:location}/{random:UUID}.png</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>A6E73533-57E0-4781-8F3C-E21CB458E4C5</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string>This workflow will convert a single SF Symbol to an icon (png file) and place it on the clipboard. Handy for adding icons in your workflows. 
+
+Dependencies: 
+Must install ImageMagick first - brew install imagemagick
+Must install SF-Pro-Display-Bold.otf from Apple - https://devimages-cdn.apple.com/design/resources/download/SF-Pro.dmg
+
+You can configure the icon colour as well as the location on disk where icons are generated (defaults to /tmp) 
+
+There's 2 ways to run the workflow: Through the clipboard or through Alfred's Universal Actions.
+
+1. Clipboard method
+Copy a single symbol to the clipboard then run the trigger. tada, your clipboard now has your new icon on it.
+
+2. Universal Action method
+Select a single symbol and execute the workflow through Alfred's univeral action feature. Again, tada.
+
+This workflow was adapted from work by Mark Gavin - https://labs.appligent.com/pdfblog/convert-sf-symbols-to-images/</string>
+	<key>uidata</key>
+	<dict>
+		<key>0C193D95-D63C-4AE9-A23C-6A05088FAB65</key>
+		<dict>
+			<key>xpos</key>
+			<real>435</real>
+			<key>ypos</key>
+			<real>340</real>
+		</dict>
+		<key>26D2696E-1778-488C-A6C6-F359D94F221E</key>
+		<dict>
+			<key>xpos</key>
+			<real>780</real>
+			<key>ypos</key>
+			<real>340</real>
+		</dict>
+		<key>4E50EE8A-A0B7-4FEE-93FE-5F0EF7532709</key>
+		<dict>
+			<key>xpos</key>
+			<real>75</real>
+			<key>ypos</key>
+			<real>445</real>
+		</dict>
+		<key>5C5DFAFA-B4E7-4A90-990D-B9DB9703F9B8</key>
+		<dict>
+			<key>xpos</key>
+			<real>285</real>
+			<key>ypos</key>
+			<real>310</real>
+		</dict>
+		<key>73352DE3-1237-455E-86DD-10F058887148</key>
+		<dict>
+			<key>xpos</key>
+			<real>70</real>
+			<key>ypos</key>
+			<real>280</real>
+		</dict>
+		<key>A6E73533-57E0-4781-8F3C-E21CB458E4C5</key>
+		<dict>
+			<key>xpos</key>
+			<real>290</real>
+			<key>ypos</key>
+			<real>475</real>
+		</dict>
+		<key>C4B6F70E-2BF5-47E8-9116-FA95E71931AA</key>
+		<dict>
+			<key>xpos</key>
+			<real>655</real>
+			<key>ypos</key>
+			<real>370</real>
+		</dict>
+	</dict>
+	<key>userconfigurationconfig</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>#00aeee</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Choose colour for icons. Accepts hex: #52f97b or RGB: rgb(82, 249, 123)</string>
+			<key>label</key>
+			<string>Colour</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>colour</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>/tmp</string>
+				<key>filtermode</key>
+				<integer>1</integer>
+				<key>required</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>By default, generated icons are saved to temporary storage. If you would prefer to keep them somewhere, choose a location.</string>
+			<key>label</key>
+			<string>Location for saving</string>
+			<key>type</key>
+			<string>filepicker</string>
+			<key>variable</key>
+			<string>location</string>
+		</dict>
+	</array>
+	<key>variablesdontexport</key>
+	<array/>
+	<key>version</key>
+	<string>0.1.1</string>
+	<key>webaddress</key>
+	<string>https://github.com/NeighNeighNeigh/Alfred_IconGenerator</string>
+</dict>
+</plist>

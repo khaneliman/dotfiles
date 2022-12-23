@@ -1,0 +1,57 @@
+#!/usr/bin/ruby
+# frozen_string_literal: true
+
+require 'json'
+require 'open3'
+require 'pathname'
+require 'sqlite3'
+
+Gdrive_paths = ENV['google_drive_path'].split(',').map { |p| Pathname.new(p.strip).expand_path }
+
+unless Gdrive_paths.all?(&:directory?)
+  print 'PATH_ERROR' # For Alfred's conditional
+  abort 'Google Drive path does not exist!' # For Alfred's debugger
+end
+
+Ignores = ENV['ignore_list'].split("\n").map(&:strip).reject(&:empty?) rescue []
+Tmp_file = Pathname.new(ENV['alfred_workflow_cache']).join('tmp.db')
+Cache_file = Pathname.new(ENV['alfred_workflow_cache']).join('cache.db')
+Cache_file.dirname.mkpath
+
+# If cache is being built
+if Open3.capture2('ps', 'A').first.split("\n")
+    .reject { |l| l.start_with?(/\s*#{Process.pid}/) } # Ignore self
+    .any? { |l| l.match(/ruby.*Alfred.*rebuild_cache/) }
+  # Ignore scheduled rebuild if another rebuild is in progress
+  exit 0 if ENV['scheduled_run'] == 'true'
+
+  # If here, an unnecessary manual rebuild was triggered
+  print 'ONGOING_REBUILD' # For Alfred's conditional
+  abort 'Cache creation already in progress' # For Alfred's debugger
+end
+
+Tmp_file.delete if Tmp_file.exist? # Cleanup aborted cache rebuilds
+
+db = SQLite3::Database.new(Tmp_file.to_path)
+db.execute('CREATE TABLE main (fullpath TEXT, basename TINYTEXT, isdir BOOLEAN, accesstime INTEGER);')
+
+Gdrive_paths.each do |gdrive_path|
+  gdrive_path.find.lazy.each do |path|
+    basename = path.basename.to_path.unicode_normalize
+
+    next if path.symlink?
+    next if basename == '.shortcut-targets-by-id' # Special Google Drive directory with the real files
+
+    Find.prune unless path.readable?
+    Find.prune if Ignores.any? { |p| path.fnmatch?("*#{p}*") }
+    Find.prune if basename.start_with?('.')
+
+    accesstime = path.atime.to_i rescue 0
+    fullpath = path.to_path
+    isdir = path.directory? ? 1 : 0
+
+    db.execute('INSERT INTO main (fullpath, basename, isdir, accesstime) VALUES (?, ?, ?, ?);', [fullpath, basename, isdir, accesstime])
+  end
+end
+
+Tmp_file.rename(Cache_file)

@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>com.alfredapp.vitor.lowpowermode</string>
+	<key>category</key>
+	<string>Tools</string>
+	<key>connections</key>
+	<dict>
+		<key>09F16EEE-6DBF-4559-87E0-EBCF59F92293</key>
+		<array/>
+		<key>5F671FDE-E06C-42F6-A4A0-EB735D77DDB3</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>09F16EEE-6DBF-4559-87E0-EBCF59F92293</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Vítor Galvão</string>
+	<key>description</key>
+	<string>Toggle Low Power Mode for Battery or Power Adapter</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Low Power Mode</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>ObjC.import("AppKit")
+
+function launchSettingsPaneInBackground(pane) {
+  const url = "x-apple.systempreferences:" + pane
+  const task = $.NSTask.alloc.init
+  task.executableURL = $.NSURL.alloc.initFileURLWithPath("/usr/bin/open")
+  task.arguments = ["-gj", url]
+  task.launchAndReturnError(false)
+}
+
+function run(argv) {
+  const lpmOptionIndex = argv[0]
+  const systemSettings = Application("System Settings")
+  const settingsRunning = systemSettings.running()
+
+  launchSettingsPaneInBackground("com.apple.preference.battery")
+  delay(1) // Give the pane time to load
+
+  const popoverButton = Application("System Events")
+    .applicationProcesses
+    .byName("System Settings")
+    .windows[0]
+    .groups[0]
+    .splitterGroups[0]
+    .groups[1]
+    .groups[0]
+    .scrollAreas[0]
+    .groups[0]
+    .popUpButtons[0]
+
+  popoverButton.click()
+  delay(0.5) // Give the popover time to open
+  popoverButton.menus[0].menuItems[lpmOptionIndex].click()
+
+  if (!settingsRunning) systemSettings.quit()
+}</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>7</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>09F16EEE-6DBF-4559-87E0-EBCF59F92293</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>{var:status_keyword}</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Querying Low Power Mode status…</string>
+				<key>script</key>
+				<string>function runCommand(...arguments) {
+  const task = $.NSTask.alloc.init
+  const stdout = $.NSPipe.pipe
+
+  task.executableURL = $.NSURL.alloc.initFileURLWithPath(arguments[0])
+  task.arguments = arguments.slice(1)
+  task.standardOutput = stdout
+  task.launchAndReturnError(false)
+
+  const dataOut = stdout.fileHandleForReading.readDataToEndOfFile
+  const stringOut = $.NSString.alloc.initWithDataEncoding(dataOut, $.NSUTF8StringEncoding).js
+
+  return stringOut
+}
+
+function lpmOptionIndex(batteryLowPowerOn, adapterLowPowerOn) {
+  if (!batteryLowPowerOn &amp;&amp; !adapterLowPowerOn) { return 0 } // Never
+  else if (batteryLowPowerOn &amp;&amp; adapterLowPowerOn) { return 1 } // Always
+  else if (batteryLowPowerOn &amp;&amp; !adapterLowPowerOn) { return 2 } // Only on Battery
+  else { return 3 } // Only on Power Adapter
+}
+
+const power = runCommand("/usr/bin/pmset", "-g", "custom")
+const batteryMatch = power.match(/(Battery) Power:.*?lowpowermode\s*(\d)\n/s)
+const adapterMatch = power.match(/(AC) Power:.*?lowpowermode\s*(\d)\n/s)
+const batteryName = batteryMatch[1]
+const adapterName = adapterMatch[1]
+const batteryLowPowerOn = batteryMatch[2] === "1"
+const adapterLowPowerOn = adapterMatch[2] === "1"
+const batteryLowPowerState = batteryLowPowerOn ? "On" : "Off"
+const adapterLowPowerState = adapterLowPowerOn ? "On" : "Off"
+const batteryIcon = batteryLowPowerOn ? "images/icon_battery_on.png" : "images/icon_battery_off.png"
+const adapterIcon = adapterLowPowerOn ? "images/icon_adapter_on.png" : "images/icon_adapter_off.png"
+
+const batteryItem = {
+  title: batteryName + "’s Low Power Mode is " + batteryLowPowerState,
+  subtitle: "Action to turn it " + batteryLowPowerState.toLowerCase(),
+  arg: lpmOptionIndex(!batteryLowPowerOn, adapterLowPowerOn),
+  icon: { path: batteryIcon }
+}
+
+const adapterItem = {
+  title: adapterName + "’s Low Power Mode is " + adapterLowPowerState,
+  subtitle: "Action to turn it " + adapterLowPowerState.toLowerCase(),
+  arg: lpmOptionIndex(batteryLowPowerOn, !adapterLowPowerOn),
+  icon: { path: adapterIcon }
+}
+
+JSON.stringify({ items: [batteryItem, adapterItem] })</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Toggle Low Power Mode</string>
+				<key>type</key>
+				<integer>7</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>5F671FDE-E06C-42F6-A4A0-EB735D77DDB3</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string>## Usage
+
+Toggle Low Power Mode for your battery or power adapter via the Status Keyword (default: `lpm`).
+
+![Alfred results for lpm](images/about/lpm.png)</string>
+	<key>uidata</key>
+	<dict>
+		<key>09F16EEE-6DBF-4559-87E0-EBCF59F92293</key>
+		<dict>
+			<key>xpos</key>
+			<real>250</real>
+			<key>ypos</key>
+			<real>40</real>
+		</dict>
+		<key>5F671FDE-E06C-42F6-A4A0-EB735D77DDB3</key>
+		<dict>
+			<key>note</key>
+			<string>Interactive toggle</string>
+			<key>xpos</key>
+			<real>45</real>
+			<key>ypos</key>
+			<real>40</real>
+		</dict>
+	</dict>
+	<key>userconfigurationconfig</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>lpm</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Status Keyword</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>status_keyword</string>
+		</dict>
+	</array>
+	<key>version</key>
+	<string>2022.8</string>
+	<key>webaddress</key>
+	<string>https://github.com/alfredapp/low-power-mode-workflow/</string>
+</dict>
+</plist>

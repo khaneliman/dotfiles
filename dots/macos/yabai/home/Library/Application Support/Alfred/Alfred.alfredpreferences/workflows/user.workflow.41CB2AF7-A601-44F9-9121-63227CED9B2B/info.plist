@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>com.alfred.acidham.airpod</string>
+	<key>category</key>
+	<string>Tools</string>
+	<key>connections</key>
+	<dict>
+		<key>2378081C-843E-45C6-B549-1B0FFD46EF7C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>F7B4ECCA-A12E-43D0-9793-514BAB692AF2</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>F7B4ECCA-A12E-43D0-9793-514BAB692AF2</key>
+		<array/>
+	</dict>
+	<key>createdby</key>
+	<string>Acidham</string>
+	<key>description</key>
+	<string>Connect/ Disconnect your AirPods</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>AirPods Connector</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>airpd</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string>./py3.sh airp.py "$1"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>airp.py</string>
+				<key>subtext</key>
+				<string>Connects/Disconnects Apple Airpods</string>
+				<key>title</key>
+				<string>Airpods Connector</string>
+				<key>type</key>
+				<integer>5</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>2378081C-843E-45C6-B549-1B0FFD46EF7C</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>PATH=$PATH:/opt/bin/homebrew/
+./py3.sh con_manager.py "$1"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>con_manager.py</string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>F7B4ECCA-A12E-43D0-9793-514BAB692AF2</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string>Another AirPod Connector requires no configuration
+
+TIP: To show connection status on Desktop use Uebersicht, check it out: 
+
+Uebersicht: https://github.com/felixhageloh/uebersicht
+Uebersicht-Widget: https://github.com/Acidham/uebersicht-airpod-status
+
+## Supported headphones
+
+- AirPod 1/2/3
+- AirPod Pro 1/2
+- AirPod Max
+- Powerbeats Pro</string>
+	<key>uidata</key>
+	<dict>
+		<key>2378081C-843E-45C6-B549-1B0FFD46EF7C</key>
+		<dict>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>35</real>
+		</dict>
+		<key>F7B4ECCA-A12E-43D0-9793-514BAB692AF2</key>
+		<dict>
+			<key>xpos</key>
+			<real>220</real>
+			<key>ypos</key>
+			<real>35</real>
+		</dict>
+	</dict>
+	<key>userconfigurationconfig</key>
+	<array/>
+	<key>variablesdontexport</key>
+	<array/>
+	<key>version</key>
+	<string>1.3.3</string>
+	<key>webaddress</key>
+	<string>https://github.com/Acidham/alfred-airpod-connector</string>
+</dict>
+</plist>
