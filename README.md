@@ -56,6 +56,7 @@ See the install steps in Hyrpland config's [README](/dots/linux/hyprland/README.
 
 <div>
     <img src="https://github.com/khaneliman/dotfiles/blob/main/assets/linux-hyprland-tiling.png">
+    <img src="https://github.com/khaneliman/dotfiles/blob/main/assets/linux-hyprland-wlogout.png">
 </div>
 
 #### Gnome
