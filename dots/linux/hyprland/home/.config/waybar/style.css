@@ -16,7 +16,7 @@
 }
 
 window#waybar {
-    background-color: #1E1E2E;
+    background-color: transparent;
     color: #ffffff;
     transition-property: background-color;
     transition-duration: .5s;
@@ -50,6 +50,15 @@ button {
 /* Remove border from parent waybar */
 box {
 	border: none;
+}
+
+/* Match gaps_out of hyprland.conf */
+.modules-left {
+    margin-left: 20px;
+}
+
+.modules-right {
+    margin-right: 20px;
 }
 
 /* Primary monitor configuration */
