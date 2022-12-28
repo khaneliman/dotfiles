@@ -1,4 +1,14 @@
-@import "mocha.css";
+@import "macchiato.css";
+
+/**
+* Custom styling for a catppuccin style waybar
+* Config settings listed in order from left -> right on bar
+* */
+
+
+/**
+* Global configuration for theme 
+* */
 * {
     /* `otf-font-awesome` is required to be installed for icons */
     font-family: Caskaydia Code Nerd Font;
@@ -25,6 +35,10 @@ window#waybar.firefox {
     border: none;
 }
 
+label:focus {
+    background-color: #000000;
+}
+
 button {
     /* Use box-shadow instead of border so the text isn't offset */
     box-shadow: inset 0 -3px transparent;
@@ -38,17 +52,7 @@ box {
 	border: none;
 }
 
-/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
-#workspaces button {
-    padding: 0 5px; 
-    border-radius: 5em / 5em;
-    background-color: @surface0;
-    color: @peach;
-    margin: 2px;
-    font-weight: bold;
-}
-
-/* Background for modules */
+/* Primary monitor configuration */
 window.DP-2 .modules-center,
 .modules-right,
 .modules-left {
@@ -60,7 +64,35 @@ window.DP-2 .modules-center,
 	border-bottom-right-radius: 5em 5em;
 	border-top-left-radius: 5em 5em;
 	border-bottom-left-radius: 5em 5em;
+    margin-top: 5px;
 }
+
+/* Secondary monitor configuration */
+window.DP-1 #workspaces {
+	padding: 0;
+	margin: 0;
+}
+
+/* Wlr/workspaces configuration  */
+
+#window,
+#workspaces {
+    border-radius: 5em / 5em;
+    color: @peach;
+}
+
+#workspaces label {
+   font-size:1.5em; 
+}
+
+#workspaces button {
+    padding: 0 0.25em; 
+    border-radius: 5em / 5em;
+    background-color: @surface0;
+    color: @peach;
+    margin: 0.25em;
+}
+
 
 /* Add spacing for right side modules */
 #tray,
@@ -83,53 +115,21 @@ window.DP-2 .modules-center,
 #cpu {
 	color: @red;
 }
+
 #memory {
    color: @yellow;
 }
+
 #user {
 	color: @blue;
 }
+
 #custom-pipewire {
 	color: @green;
 }
+
 #temperature {
    color: @green;
-}
-
-#window,
-#workspaces {
-    margin: 0 4px;
-    background-color: transparent;
-    font-weight:bold;
-    border-radius: 5em / 5em;
-    padding: 0 1em;
-    color: @peach;
-}
-
-window.DP-1 #workspaces {
-	padding: 0;
-	margin: 0;
-}
-
-/* If workspaces is the leftmost module, omit left margin */
-.modules-left > widget:first-child > #workspaces {
-    margin-left: 0;
-}
-
-/* If workspaces is the rightmost module, omit right margin */
-.modules-right > widget:last-child > #workspaces {
-    margin-right: 0;
-}
-
-@keyframes blink {
-    to {
-        background-color: #ffffff;
-        color: #000000;
-    }
-}
-
-label:focus {
-    background-color: #000000;
 }
 
 #network.disconnected {
@@ -159,3 +159,20 @@ label:focus {
 #keyboard-state > label.locked {
     background: rgba(0, 0, 0, 0.2);
 }
+/* Custom styling for the logout icon on end */
+#custom-wlogout {
+    font-size: 1.75em;
+    padding-right: .25em;
+    padding-left: 0em;
+    color: @red;
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: #000000;
+    }
+}
+
+
+
