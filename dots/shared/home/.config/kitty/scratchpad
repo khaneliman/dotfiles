@@ -1,0 +1,5 @@
+layout tall
+cd ~
+launch fish
+
+os_window_class scratchpad
