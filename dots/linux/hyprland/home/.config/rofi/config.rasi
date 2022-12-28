@@ -1,9 +1,9 @@
 configuration{
     modi: "run,drun";
     lines: 6;
-    font: "FiraCode Nerd Font 12";
+    font: "Caskaydia Code Nerd Font 14";
     show-icons: true;
-    icon-theme: "Oranchelo";
+    icon-theme: "Papirus-Dark";
     terminal: "st";
     drun-display-format: "{icon} {name}";
     location: 0;
