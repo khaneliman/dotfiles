@@ -1,18 +1,16 @@
 ignore-empty-password
-
-font=FiraCode Nerd Font Mono
+disable-caps-lock-text
+font=FiraCode Nerd Font
 
 clock
 timestr=%R
 datestr=%a, %e of %B
 
-screenshots
+image=~/.local/share/wallpapers/catppuccin/tetris.png
 
-fade-in=0.5
-grace=10
+fade-in=0.2
 
-effect-blur=30x2
-#effect-greyscale
+effect-blur=10x2
 effect-scale=0.1
 
 indicator
@@ -20,35 +18,33 @@ indicator-radius=240
 indicator-thickness=20
 indicator-caps-lock
 
-key-hl-color=880033
+key-hl-color=#8aadf4
+bs-hl-color=#ed8796
+caps-lock-key-hl-color=#f5a97f
+caps-lock-bs-hl-color=#ed8796
 
-separator-color=00000000
+separator-color=#181926
 
-inside-color=00000099
-inside-clear-color=cad3f500
-inside-caps-lock-color=009ddc00
-inside-ver-color=d9d8d800
-inside-wrong-color=ee2e2400
+inside-color=#24273a
+inside-clear-color=#24273a
+inside-caps-lock-color=#24273a
+inside-ver-color=#24273a
+inside-wrong-color=#24273a
 
-ring-color=24273aD9
-ring-clear-color=231f20D9
+ring-color=#1e2030
+ring-clear-color=#8aadf4
 ring-caps-lock-color=231f20D9
-ring-ver-color=231f20D9
-ring-wrong-color=231f20D9
+ring-ver-color=#1e2030
+ring-wrong-color=#ed8796
 
-line-color=939ab7D9
-line-clear-color=ffd204FF
-line-caps-lock-color=009ddcFF
-line-ver-color=d9d8d8FF
-line-wrong-color=ee2e24FF
+line-color=#8aadf4
+line-clear-color=#8aadf4
+line-caps-lock-color=#f5a97f
+line-ver-color=#181926
+line-wrong-color=#ed8796
 
-text-clear-color=ffd20400
-text-ver-color=d9d8d800
-text-wrong-color=ee2e2400
-
-bs-hl-color=ed8796FF
-caps-lock-key-hl-color=ffd204FF
-caps-lock-bs-hl-color=ee2e24FF
-disable-caps-lock-text
-text-caps-lock-color=009ddc
-
+text-color=#8aadf4
+text-clear-color=#24273a
+text-caps-lock-color=#f5a97f
+text-ver-color=#24273a
+text-wrong-color=#24273a
