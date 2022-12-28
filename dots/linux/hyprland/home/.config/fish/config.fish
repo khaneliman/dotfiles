@@ -177,4 +177,6 @@ set -gx PATH "$PNPM_HOME" $PATH
 
 fish_ssh_agent
 
-if [ -n "$RANGER_LEVEL" ]; then export PS1="[ranger]$PS1"; end
+if [ -n "$RANGER_LEVEL" ]
+	export PS1="[ranger]$PS1"
+end

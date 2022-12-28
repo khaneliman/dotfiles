@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/usr/bin/env bash
 
 function handle {
   if [[ ${1:0:12} == "monitoradded" ]]; then
