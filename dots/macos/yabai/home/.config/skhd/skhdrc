@@ -1,6 +1,9 @@
 cmd - return  : env WAYLAND_DISPLAY= alacritty #open over top
 cmd + shift - return : /Applications/kitty.app/Contents/MacOS/kitty --single-instance -d ~
 
+# Reload yabai 
+ctrl + lalt + cmd - r : bash -c 'launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"'
+
 ## Navigation (lalt - ...)
 # Space Navigation (four spaces per display): lalt - {1, 2, 3, 4}
 lalt - 1 : DISPLAY="$(yabai -m query --displays --display | jq '.index')"; yabai -m space --focus $((1+4*($DISPLAY - 1)))
@@ -125,7 +128,7 @@ shift + lalt - t : yabai -m window --toggle float;\
 
 # toggle sticky, float and resize to picture-in-picture size
  lalt - p : yabai -m window --toggle sticky; \
-           yabai -m window --grid 4:1:2:4:4:0; \
+           yabai -m window --grid 4:4:2:4:4:0; \
           # ~/bin/opacity
 
 # toggle back from picture in picture mode
