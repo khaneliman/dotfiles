@@ -27,5 +27,6 @@
 
 <div>
     <img src="https://github.com/khaneliman/dotfiles/blob/main/assets/linux-hyprland-tiling.png">
+    <img src="https://github.com/khaneliman/dotfiles/blob/main/assets/linux-hyprland-wlogout.png">
 </div>
 
