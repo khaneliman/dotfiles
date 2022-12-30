@@ -27,6 +27,11 @@ correct_ssh_permissions() {
   chmod 600 ~/.ssh/*
 }
 
+install_bat_themes() {
+  # bat requires cache to be rebuilt to detect themes in config directory
+  bat cache --build
+}
+
 install_spicetify() {
   if [[ $(command -v spicetify) ]]; then
 
@@ -117,4 +122,5 @@ shared_install() {
   shared_copy_configuration
   correct_ssh_permissions
   install_spicetify
+  install_bat_themes
 }
