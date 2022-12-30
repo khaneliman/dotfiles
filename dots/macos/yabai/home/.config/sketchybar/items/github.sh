@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+POPUP_CLICK_SCRIPT="sketchybar --set \$NAME popup.drawing=toggle"
+
 sketchybar --add       item            github.bell right                  \
            --set       github.bell     update_freq=180                    \
                                        icon.font="$FONT:Bold:15.0"        \
@@ -19,7 +21,5 @@ sketchybar --add       item            github.bell right                  \
                                        background.corner_radius=12        \
                                        background.padding_left=7          \
                                        background.padding_right=7         \
-                                       background.color=$BLACK            \
-                                       background.drawing=off             \
                                        icon.background.height=2           \
                                        icon.background.y_offset=-12

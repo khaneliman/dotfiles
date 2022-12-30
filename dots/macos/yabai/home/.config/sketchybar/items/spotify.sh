@@ -1,3 +1,5 @@
+#!/usr/bin/env sh
+
 SPOTIFY_EVENT="com.spotify.client.PlaybackStateChanged"
 POPUP_SCRIPT="sketchybar -m --set spotify.anchor popup.drawing=toggle"
 
@@ -5,23 +7,16 @@ sketchybar --add       event           spotify_change $SPOTIFY_EVENT        \
            --add       item            spotify.anchor center                \
            --set       spotify.anchor  script="$PLUGIN_DIR/spotify.sh"      \
                                        click_script="$POPUP_SCRIPT"         \
-                                       width=170                            \
-                                       align=left                           \
-                                       icon.background.drawing=on           \
-                                       icon.background.color=$GREEN         \
-                                       icon.background.height=3             \
-                                       icon.background.corner_radius=2      \
-                                       background.padding_left=1            \
-                                       background.drawing=on                \
                                        popup.horizontal=on                  \
                                        popup.align=center                   \
                                        popup.height=120                     \
-                                       label=􁁒                              \
-                                       label.font="$FONT:Regular:19.0"      \
+                                       icon=􁁒                               \
+                                       icon.font="$FONT:Regular:25.0"       \
                                        label.drawing=off                    \
                                        drawing=off                          \
+                                       y_offset=2                           \
            --subscribe spotify.anchor  mouse.entered mouse.exited           \
-                                       mouse.exited.global volume_change    \
+                                       mouse.exited.global                  \
                                                                             \
            --add       item            spotify.cover popup.spotify.anchor   \
            --set       spotify.cover   script="$PLUGIN_DIR/spotify.sh"      \
@@ -98,7 +93,7 @@ sketchybar --add       event           spotify_change $SPOTIFY_EVENT        \
            --add       item            spotify.next popup.spotify.anchor    \
            --set       spotify.next    icon=􀊐                               \
                                        icon.padding_left=5                  \
-                                       icon.padding_right=10                \
+                                       icon.padding_right=5                 \
                                        icon.color=$BLACK                    \
                                        label.drawing=off                    \
                                        script="$PLUGIN_DIR/spotify.sh"      \

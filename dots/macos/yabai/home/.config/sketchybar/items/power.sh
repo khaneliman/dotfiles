@@ -1,4 +1,5 @@
-sketchybar -m --add item battery right \
+#!/usr/bin/env sh
+sketchybar -m --add item    battery right \
               --set battery update_freq=3 \
-              --set battery script="~/.config/sketchybar/plugins/power.sh" \
-              --set battery icon=
+                            script="~/.config/sketchybar/plugins/power.sh" \
+                            icon.font="CaskaydiaCove NF:Bold:15.0"       

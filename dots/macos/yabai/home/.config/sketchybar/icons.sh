@@ -1,5 +1,4 @@
 #!/usr/bin/env sh
-#                          ﱦ 齃     ﮂ  ﵁ 爵        ﭵ     ﱦ  ﰊ 異 ﴱ אַ  'Y⃣'
 
 # General Icons
 LOADING=􀖇
@@ -7,8 +6,6 @@ APPLE=􀣺
 PREFERENCES=􀺽
 ACTIVITY=􀒓
 LOCK=􀒳
-MAIL=􀍜
-MAIL_OPEN=􀍜
 BELL=􀋚
 BELL_DOT=􀝗
 

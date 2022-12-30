@@ -1,4 +1,4 @@
-case "$1" in
+case $@ in
 "Brave Browser")
   icon_result=":brave_browser:"
   ;;
@@ -17,7 +17,7 @@ case "$1" in
 "Affinity Publisher")
   icon_result=":affinity_publisher:"
   ;;
-"Messages" | "Nachrichten" | "Messenger")
+"Messages" | "Nachrichten")
   icon_result=":messages:"
   ;;
 "Tweetbot" | "Twitter")
@@ -79,6 +79,9 @@ case "$1" in
   ;;
 "Microsoft Word")
   icon_result=":microsoft_word:"
+  ;;
+"Microsoft Teams")
+  icon_result=":microsoft_teams:"
   ;;
 "Iris")
   icon_result=":iris:"
@@ -185,7 +188,7 @@ case "$1" in
 "Bitwarden")
   icon_result=":bit_warden:"
   ;;
-"System Preferences")
+"System Preferences" | "System Settings")
   icon_result=":gear:"
   ;;
 "Discord" | "Discord Canary" | "Discord PTB")
@@ -212,7 +215,7 @@ case "$1" in
 "Blender")
   icon_result=":blender:"
   ;;
-"Canary Mail" | "HEY" | "Mail" | "Mailspring" | "MailMate" | "邮件")
+"Canary Mail" | "HEY" | "Mail" | "Mailspring" | "MailMate" | "邮件" | "Outlook")
   icon_result=":mail:"
   ;;
 "Safari" | "Safari Technology Preview")
