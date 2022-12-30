@@ -32,6 +32,10 @@ install_bat_themes() {
   bat cache --build
 }
 
+install_fish_plugins() {
+  fisher update
+}
+
 install_spicetify() {
   if [[ $(command -v spicetify) ]]; then
 
@@ -123,4 +127,5 @@ shared_install() {
   correct_ssh_permissions
   install_spicetify
   install_bat_themes
+  install_fish_plugins
 }
