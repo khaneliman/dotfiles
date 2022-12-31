@@ -8,28 +8,27 @@
 #
 # All imports must either be absolute paths starting with `/`, or paths relative
 # to the user's home directory starting with `~/`.
-#import:
+# import:
 #  - /path/to/alacritty.yml
 
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
 # set by alacritty itself.
-#env:
+# env:
 # TERM variable
 #
 # This value is used to set the `$TERM` environment variable for
 # each instance of Alacritty. If it is not present, alacritty will
 # check the local terminfo database and use `alacritty` if it is
 # available, otherwise `xterm-256color` is used.
-#TERM: alacritty
-
+# TERM: alacritty
 window:
   # Window dimensions (changes require restart)
   #
   # Number of lines/columns (not pixels) in the terminal. The number of columns
   # must be at least `2`, while using a value of `0` for columns and lines will
   # fall back to the window manager's recommended size.
-  #dimensions:
+  # dimensions:
   #  columns: 0
   #  lines: 0
   dimensions:
@@ -39,7 +38,7 @@ window:
   #
   # Specified in number of pixels.
   # If the position is not set, the window manager will handle the placement.
-  #position:
+  # position:
   #  x: 0
   #  y: 0
 
@@ -72,7 +71,7 @@ window:
   #
   # Values for `startup_mode` (macOS only):
   #   - SimpleFullscreen
-  #startup_mode: Windowed
+  # startup_mode: Windowed
 
   # Window title
   # title: Alacritty
@@ -80,24 +79,24 @@ window:
   # Allow terminal applications to change Alacritty's window title.
   dynamic_title: true
   # Window class (Linux/BSD only):
-  #class:
+  # class:
   # Application instance name
-  #instance: Alacritty
+  # instance: Alacritty
   # General application class
-  #general: Alacritty
+  # general: Alacritty
 # GTK theme variant (Linux/BSD only)
 #
 # Override the variant of the GTK theme. Commonly supported values are `dark`
 # and `light`. Set this to `None` to use the default theme variant.
-#gtk_theme_variant: None
+# gtk_theme_variant: None
 
-#scrolling:
+# scrolling:
 # Maximum number of lines in the scrollback buffer.
 # Specifying '0' will disable scrolling.
-#history: 10000
+# history: 10000
 
 # Scrolling distance multiplier.
-#multiplier: 3
+# multiplier: 3
 
 # Font configuration
 font:
@@ -111,7 +110,7 @@ font:
     #   - (Windows) Consolas
     family: Liga SFMono Nerd Font
     # The `style` can be specified to pick a specific face.
-    #style: Regular
+    # style: Regular
   # Bold font face
   bold:
     # Font family
@@ -157,9 +156,9 @@ font:
     #
     # Thin strokes are suitable for retina displays, but for non-retina screens
     # it is recommended to set `use_thin_strokes` to `false`.
-    #use_thin_strokes: true
+    # use_thin_strokes: true
 # If `true`, bold text is drawn using the bright color variants.
-#draw_bold_text_with_bright_colors: false
+# draw_bold_text_with_bright_colors: false
 color_schemes:
   latte: &latte
     primary: # Default colors
@@ -466,20 +465,20 @@ cursor:
     # the style of the active value of the normal cursor.
     #
     # See `cursor.style` for available options.
-    #vi_mode_style: None
+    # vi_mode_style: None
 # Cursor blinking interval in milliseconds.
-#blink_interval: 750
+# blink_interval: 750
 
 # If this is `true`, the cursor will be rendered as a hollow box when the
 # window is not focused.
-#unfocused_hollow: true
+# unfocused_hollow: true
 
 # Thickness of the cursor relative to the cell width as floating point number
 # from `0.0` to `1.0`.
-#thickness: 0.15
+# thickness: 0.15
 
 # Live config reload (changes require restart)
-#live_config_reload: true
+# live_config_reload: true
 
 # Shell
 #
@@ -491,7 +490,7 @@ cursor:
 #   - (macOS) /bin/bash --login
 #   - (Linux/BSD) user login shell
 #   - (Windows) powershell
-#shell:
+# shell:
 #  program: /bin/bash
 #  args:
 #    - --login
@@ -509,8 +508,8 @@ mouse:
   # The `double_click` and `triple_click` settings control the time
   # alacritty should wait for accepting multiple clicks as one double
   # or triple click.
-  #double_click: { threshold: 300 }
-  #triple_click: { threshold: 300 }
+  # double_click: { threshold: 300 }
+  # triple_click: { threshold: 300 }
 
   # If this is `true`, the cursor is temporarily hidden when typing.
   hide_when_typing: true
@@ -518,9 +517,9 @@ mouse:
 #
 # Terminal hints can be used to find text in the visible part of the terminal
 # and pipe it to other applications.
-#hints:
+# hints:
 # Keys used for the hint labels.
-#alphabet: "jfkdls;ahgurieowpq"
+# alphabet: "jfkdls;ahgurieowpq"
 
 # List with all available hints
 #
@@ -546,7 +545,7 @@ mouse:
 #       Select the hint's text.
 #   - MoveViModeCursor
 #       Move the vi mode cursor to the beginning of the hint.
-#enabled:
+# enabled:
 # - regex: "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)\
 #           [^\u0000-\u001F\u007F-\u009F<>\"\\s{-}\\^??`]+"
 #   command: xdg-open
@@ -581,7 +580,7 @@ mouse:
 # And optionally:
 #
 # - `mods` (see key bindings)
-#mouse_bindings:
+# mouse_bindings:
 #  - { mouse: Middle, action: PasteSelection }
 
 # Key bindings
@@ -898,12 +897,12 @@ key_bindings:
   #- { key: F,              mods: Command|Control,            action: ToggleFullscreen      }
   #- { key: F,              mods: Command, mode: ~Search,     action: SearchForward         }
   #- { key: B,              mods: Command, mode: ~Search,     action: SearchBackward        }
-#debug:
+# debug:
 # Display the time it takes to redraw each frame.
-#render_timer: false
+# render_timer: false
 
 # Keep the log file after quitting Alacritty.
-#persistent_logging: false
+# persistent_logging: false
 
 # Log level
 #
@@ -914,7 +913,6 @@ key_bindings:
 #   - Info
 #   - Debug
 #   - Trace
-#log_level: Warn
+# log_level: Warn
 
 # Print all received window events.
-#print_events: false
