@@ -39,4 +39,3 @@ hyprland_install() {
 	hypr_create_symlink
 	hypr_enable_systemd_services
 }
-
