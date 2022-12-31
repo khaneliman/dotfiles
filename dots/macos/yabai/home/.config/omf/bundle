@@ -1,6 +1,0 @@
-package foreign-env
-package https://github.com/catppuccin/fish
-package nvm
-theme bobthefish
-theme default
-theme lambda
