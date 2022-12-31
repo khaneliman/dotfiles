@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 source "$HOME/.config/sketchybar/colors.sh"
 
@@ -18,4 +18,4 @@ case "$COUNT" in
   ;;
 esac
 
-sketchybar --set $NAME label=$COUNT icon.color=$COLOR
+sketchybar --set "$NAME" label="$COUNT" icon.color="$COLOR"
