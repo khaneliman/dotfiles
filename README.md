@@ -83,3 +83,21 @@ I only use Windows for work and the rare VM access when needed. I have done some
 ## Shared
 
 This contains all the platform agnostic and / or shared application configurations that will be the same between all platforms and desktop environments.
+
+## Credits
+
+Inspiration and code from numerous locations all over the internet. Here's some of the major contributors to my setups. 
+
+- Shared dotfiles
+    - [Catppuccin](https://github.com/catppuccin/catppuccin)
+    - [AstroNvim](https://astronvim.github.io/)
+- Linux dotfiles
+    - Awesome
+        - [The Glorious Dotfiles](https://github.com/manilarome/the-glorious-dotfiles)
+    - Hyprland
+        - [sway-nvidia](https://github.com/crispyricepc/sway-nvidia)
+        - [Hyprland](https://wiki.hyprland.org/)
+- macOS dotfiles
+    - Yabai
+        - [FelixKratz dotfiles](https://github.com/FelixKratz/dotfiles)
+        - [crissNb Dynamic Island Sketchybar](https://github.com/crissNb/Dynamic-Island-Sketchybar)
