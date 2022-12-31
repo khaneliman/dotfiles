@@ -1,1 +1,1 @@
-require("syntax-tree-surfer").setup { highlight_group = "HopNextKey" }
+require("syntax-tree-surfer").setup({ highlight_group = "HopNextKey" })

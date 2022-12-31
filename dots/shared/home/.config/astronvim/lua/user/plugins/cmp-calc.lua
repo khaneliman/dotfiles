@@ -1,1 +1,1 @@
-astronvim.add_user_cmp_source "calc"
+astronvim.add_user_cmp_source("calc")

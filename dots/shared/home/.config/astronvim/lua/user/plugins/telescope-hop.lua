@@ -1,1 +1,1 @@
-require("telescope").load_extension "hop"
+require("telescope").load_extension("hop")

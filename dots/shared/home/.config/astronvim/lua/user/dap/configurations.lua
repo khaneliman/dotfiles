@@ -3,7 +3,7 @@ local attach_node = {
   request = "attach",
   name = "Attach",
   processId = function(...) return require("dap.utils").pick_process(...) end,
-  cwd = "${workspaceFolder}",
+  cwd = "${workspaceFolder}"
 }
 
 return {
@@ -13,9 +13,8 @@ return {
       request = "launch",
       name = "Launch file",
       program = "${file}",
-      cwd = "${workspaceFolder}",
-    },
-    attach_node,
+      cwd = "${workspaceFolder}"
+    }, attach_node
   },
   typescript = {
     {
@@ -29,11 +28,9 @@ return {
       protocol = "inspector",
       console = "integratedTerminal",
       resolveSourceMapLocations = {
-        "${workspaceFolder}/dist/**/*.js",
-        "${workspaceFolder}/**",
-        "!**/node_modules/**",
-      },
-    },
-    attach_node,
-  },
+        "${workspaceFolder}/dist/**/*.js", "${workspaceFolder}/**",
+        "!**/node_modules/**"
+      }
+    }, attach_node
+  }
 }

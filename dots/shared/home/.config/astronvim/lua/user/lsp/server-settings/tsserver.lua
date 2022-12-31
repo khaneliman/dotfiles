@@ -8,8 +8,8 @@ return {
         includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
         includeInlayParameterNameHintsWhenArgumentMatchesName = true,
         includeInlayPropertyDeclarationTypeHints = true,
-        includeInlayVariableTypeHints = true,
-      },
+        includeInlayVariableTypeHints = true
+      }
     },
     typescript = {
       inlayHints = {
@@ -19,8 +19,8 @@ return {
         includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
         includeInlayParameterNameHintsWhenArgumentMatchesName = true,
         includeInlayPropertyDeclarationTypeHints = true,
-        includeInlayVariableTypeHints = true,
-      },
-    },
-  },
+        includeInlayVariableTypeHints = true
+      }
+    }
+  }
 }

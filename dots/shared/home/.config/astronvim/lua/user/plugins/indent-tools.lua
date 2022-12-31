@@ -1,1 +1,1 @@
-require("indent-tools").config {}
+require("indent-tools").config({})
