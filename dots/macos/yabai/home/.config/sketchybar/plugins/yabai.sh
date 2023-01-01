@@ -53,7 +53,8 @@ windows_on_spaces () {
           icon_strip+=" $($HOME/.config/sketchybar/plugins/icon_map.sh "$app")"
         done <<< "$apps"
       fi
-      args+=(--set space."$space" label="$icon_strip" label.drawing=on)
+      # Uncomment if you want to display icons for open applications
+      # args+=(--set space."$space" label="$icon_strip" label.drawing=on)
     done
   done <<< "$CURRENT_SPACES"
 

@@ -6,7 +6,7 @@ update() {
     WIDTH="0"
   fi
 
-  sketchybar --animate tanh 20 --set "$NAME" icon.highlight="$SELECTED" # label.width="$WIDTH" # uncomment if you want to show applicatinos in each space
+  sketchybar --animate tanh 20 --set "$NAME" icon.highlight="$SELECTED" label.width="$WIDTH"
 
 }
 

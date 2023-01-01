@@ -1,15 +1,18 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
+
+source "$HOME/.config/sketchybar/colors.sh"
 
 sketchybar --add item        cpu.top right                    \
            --set cpu.top     label.font="$FONT:Semibold:7"    \
-                             label=CPU                        \
+                             label=CPUTOP                    \
                              icon.drawing=off                 \
                              width=0                          \
                              y_offset=6                       \
                                                               \
            --add item        cpu.percent right                \
            --set cpu.percent label.font="$FONT:Heavy:12"      \
-                             label=CPU                        \
+                             label=CPU%                       \
+                             label.color="$WHITE"             \
                              y_offset=-4                      \
                              width=40                         \
                              icon.drawing=off                 \

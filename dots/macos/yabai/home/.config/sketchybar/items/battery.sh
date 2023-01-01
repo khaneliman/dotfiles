@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
 sketchybar -m --add item    battery right 																		\
-              --set battery update_freq=3 																		\
+              --set battery update_freq=10 																		\
                             script="~/.config/sketchybar/plugins/battery.sh" 	\
-                            icon.font="CaskaydiaCove NF:Bold:15.0"       
+                            icon.font="CaskaydiaCove NF:Bold:15.0"       			
