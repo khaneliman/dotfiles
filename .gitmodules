@@ -16,3 +16,6 @@
 [submodule "dots/macos/yabai/home/.config/sketchybar/plugins/Dynamic-Island-Sketchybar"]
 	path = dots/macos/yabai/home/.config/sketchybar/plugins/Dynamic-Island-Sketchybar
 	url = https://github.com/crissNb/Dynamic-Island-Sketchybar
+[submodule "dots/shared/home/.config/fish/plugins/dots/shared/home/.config/fish/plugins/ranger_udisk_menu"]
+	path = dots/shared/home/.config/fish/plugins/dots/shared/home/.config/fish/plugins/ranger_udisk_menu
+	url = https://github.com/SL-RU/ranger_udisk_menu

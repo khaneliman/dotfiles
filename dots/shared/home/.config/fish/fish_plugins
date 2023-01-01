@@ -1,7 +1,8 @@
 catppuccin/fish
 franciscolourenco/done
 gazorby/fish-abbreviation-tips
-ilancosman/tide
+ilancosman/tide@v5
+ivakyb/fish_ssh_agent
 jorgebucaran/autopair.fish
 jorgebucaran/fisher
 jorgebucaran/nvm.fish

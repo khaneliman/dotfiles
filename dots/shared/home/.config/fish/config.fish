@@ -5,10 +5,7 @@ fish_add_path /usr/lib/jvm/default/bin # java bin
 fish_add_path "$HOME"/.local/share/pnpm # pnpm
 
 # Hide welcome message
-set -g fish_greeting $(curl -s -H "Accept: text/plain" https://icanhazdadjoke.com/ 2>/dev/null )
-
-# Get terminal emulator
-set -g TERM_EMULATOR (ps -aux | grep (ps -p $fish_pid -o ppid=) | awk 'NR==1{print $11}')
+set -g fish_greeting
 
 set -g theme_nerd_fonts yes
 
@@ -90,7 +87,6 @@ switch (uname)
         alias grubup="sudo update-grub"
         alias psmem='ps auxf | sort -nr -k 4'
         alias psmem10='ps auxf | sort -nr -k 4 | head -10'
-        alias upd='/usr/bin/update'
         alias hw='hwinfo --short'                                   # Hardware Info
         alias jctl="journalctl -p 3 -xb" # Get the error messages from journalctl
         alias runsrv="systemctl list-units  --type=service  --state=running $argv" 
