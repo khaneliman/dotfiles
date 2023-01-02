@@ -52,8 +52,6 @@ CopyFile /etc/polkit-1/rules.d/50-udiskie.rules
 CopyFile /etc/polkit-1/rules.d/allow-mount-internal.rules
 
 # Network tweaks
-CopyFile /etc/NetworkManager/system-connections/sweden.nmconnection 600
-CopyFile /etc/NetworkManager/system-connections/us_chicago.nmconnection 600
 CopyFile /etc/nsswitch.conf
 CopyFile /etc/ntpd.service.d/ntpd-ipv4.conf
 CopyFile /etc/pacman.conf

@@ -15,6 +15,7 @@
 			"network",
 			"cpu",
 			"memory",
+			"disk",
 			"temperature",
 			"keyboard-state",
 			"clock",
@@ -33,8 +34,9 @@
 				"2": "",
 				"3": "",
 				"4": "",
-				"5": "",
+				"5": "",
 				"6": "",
+				"7": "",
 				"urgent": "",
 				"focused": "",
 				"default": ""
@@ -92,7 +94,7 @@
 		},
 		"clock": {
 			"tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-			"format": "{:%I:%M}",
+			"format": "{:%I:%M %p}",
 			"format-alt": "{:%Y-%m-%d}"
 		},
 		"cpu": {
@@ -100,26 +102,32 @@
 			"tooltip": true
 		},
 		"memory": {
-			"format": "{}% "
+			"format": " {}%"
+		},
+		"disk": {
+			"format": " {percentage_used}%"
 		},
 		"temperature": {
-			// "thermal-zone": 2,
-			// "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+			//"hwmon-path": "/sys/devices/platform/asus-ec-sensors/hwmon/hwmon4/temp3_input",
+			//"hwmon-path-abs": "/sys/devices/platform/asus-ec-sensors/hwmon",
+			"hwmon-path-abs": "/sys/devices/pci0000:00/0000:00:18.3/hwmon",
+			"input-filename": "temp3_input",
 			"critical-threshold": 80,
-			// "format-critical": "{temperatureC}°C {icon}",
+			"format-critical": "{temperatureC}°C {icon}",
 			"format": "{icon} {temperatureC}°C",
 			"format-icons": [
 				"",
 				"",
 				""
-			]
+			],
+			"interval": "5"
 		},
 		"network": {
 			"format-wifi": " {essid} ({signalStrength}%)",
-			"format-ethernet": " {ipaddr}/{cidr}",
-			"tooltip-format": " {ifname} via {gwaddr}",
-			"format-linked": " {ifname} (No IP)",
-			"format-disconnected": "⚠ Disconnected",
+			"format-ethernet": " {ipaddr}",
+			"tooltip-format": " {ifname} via {gwaddr}",
+			"format-linked": " {ifname} (No IP)",
+			"format-disconnected": " Disconnected",
 			"format-alt": "{ifname}: {ipaddr}/{cidr}"
 		},
 		"custom/pipewire": {

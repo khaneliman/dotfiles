@@ -5,183 +5,181 @@
 * Config settings listed in order from left -> right on bar
 * */
 
-
 /**
 * Global configuration for theme 
 * */
 * {
-    /* `otf-font-awesome` is required to be installed for icons */
-    font-family: Liga SFMono Nerd Font;
-    font-size: 14px;
+  font-family: Liga SFMono Nerd Font;
+  font-size: 14px;
 }
 
 window#waybar {
-    background-color: transparent;
-    color: #ffffff;
-    transition-property: background-color;
-    transition-duration: .5s;
+  background-color: transparent;
+  color: #ffffff;
+  transition-property: background-color;
+  transition-duration: 0.5s;
 }
 
 window#waybar.hidden {
-    opacity: 0.2;
+  opacity: 0.2;
 }
 
 window#waybar.termite {
-    background-color: #3F3F3F;
+  background-color: #3f3f3f;
 }
 
 window#waybar.firefox {
-    background-color: #000000;
-    border: none;
+  background-color: #000000;
+  border: none;
 }
 
 label:focus {
-    background-color: #000000;
+  background-color: #000000;
 }
 
 button {
-    /* Use box-shadow instead of border so the text isn't offset */
-    box-shadow: inset 0 -3px transparent;
-    /* Avoid rounded borders under each button name */
-    border: none;
-    border-radius: 0;
+  /* Use box-shadow instead of border so the text isn't offset */
+  box-shadow: inset 0 -3px transparent;
+  /* Avoid rounded borders under each button name */
+  border: none;
+  border-radius: 0;
 }
 
 /* Remove border from parent waybar */
 box {
-	border: none;
+  border: none;
 }
 
 /* Match gaps_out of hyprland.conf */
 .modules-left {
-    margin-left: 20px;
+  margin-left: 20px;
 }
 
 .modules-right {
-    margin-right: 20px;
+  margin-right: 20px;
 }
 
 /* Primary monitor configuration */
 window.DP-2 .modules-center,
 .modules-right,
 .modules-left {
-	padding: 0 1em;
-	color: @peach;
-	background-color: @surface0; 
-	font-weight: bold;
-	border-top-right-radius: 5em 5em; 
-	border-bottom-right-radius: 5em 5em;
-	border-top-left-radius: 5em 5em;
-	border-bottom-left-radius: 5em 5em;
-	margin-top: 5px;
+  padding: 0 1em;
+  color: @peach;
+  background-color: @surface0;
+  font-weight: bold;
+  border-top-right-radius: 5em 5em;
+  border-bottom-right-radius: 5em 5em;
+  border-top-left-radius: 5em 5em;
+  border-bottom-left-radius: 5em 5em;
+  margin-top: 5px;
 }
 
 /* Secondary monitor configuration */
 window.DP-1 #workspaces {
-	padding: 0;
-	margin: 0;
+  padding: 0;
+  margin: 0;
 }
 
 /* Wlr/workspaces configuration  */
 
 #window,
 #workspaces {
-    border-radius: 5em / 5em;
-    color: @peach;
+  border-radius: 5em / 5em;
+  color: @peach;
 }
 
 #workspaces label {
-   font-size:1.5em; 
+  font-size: 1em;
 }
 
 #workspaces button {
-    padding: 0 0.25em; 
-    border-radius: 5em / 5em;
-    background-color: @surface0;
-    color: @peach;
-    margin: 0.25em;
+  padding: 0 0.25em;
+  border-radius: 5em / 5em;
+  background-color: @surface0;
+  color: @peach;
+  margin: 0.25em;
 }
-
 
 /* Add spacing for right side modules */
 #tray,
-#custom-pipewire,
 #user,
 #custom-wlogout,
 #clock,
+#keyboard-state,
+#mpd {
+  padding: 0 1em;
+}
+
+#custom-pipewire,
+#pulseaudio,
 #battery,
 #cpu,
 #memory,
 #temperature,
-#network,
-#pulseaudio,
-#keyboard-state,
-#mpd {
-    padding: 0 1em;
+#disk,
+#network {
+  padding: 0 0.5em;
 }
 
 /* Unique colors for modules */
 #cpu {
-	color: @red;
+  color: @red;
 }
 
 #memory {
-   color: @yellow;
+  color: @yellow;
 }
 
 #user {
-	color: @blue;
+  color: @blue;
 }
 
 #custom-pipewire {
-	color: @green;
+  color: @green;
 }
 
 #temperature {
-   color: @green;
+  color: @green;
 }
 
 #network.disconnected {
-    background-color: #f53c3c;
+  background-color: #f53c3c;
 }
 
 #custom-pipewire.muted,
 #pulseaudio.muted {
-    background-color: #90b1b1;
-    color: #2a5c45;
+  background-color: #90b1b1;
+  color: #2a5c45;
 }
 
 #temperature.critical {
-    background-color: #eb4d4b;
+  background-color: #eb4d4b;
 }
 
 #keyboard-state {
-    padding: 0 0px;
-    min-width: 16px;
-    color: @mauve;
+  padding: 0 0px;
+  min-width: 16px;
+  color: @mauve;
 }
 
 #keyboard-state > label {
-    padding: 0 5px;
+  padding: 0 5px;
 }
 
 #keyboard-state > label.locked {
-    background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.2);
 }
 /* Custom styling for the logout icon on end */
 #custom-wlogout {
-    font-size: 1.75em;
-    padding-right: .25em;
-    padding-left: 0em;
-    color: @red;
+  font-size: 1.75em;
+  padding-right: 0.25em;
+  padding-left: 0em;
+  color: @red;
 }
 
 @keyframes blink {
-    to {
-        background-color: #ffffff;
-        color: #000000;
-    }
+  to {
+    background-color: #ffffff;
+    color: #000000;
+  }
 }
-
-
-
