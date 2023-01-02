@@ -122,29 +122,6 @@ CopyFile /etc/vconsole.conf
 CopyFile /etc/X11/xorg.conf
 CopyFile /usr/bin/archcraft-reboot-required 755
 
-# System Fonts
-CopyFile /usr/share/fonts/CascadiaCode/Caskaydia\ Cove\ Nerd\ Font\ Complete\ Mono.ttf
-CopyFile /usr/share/fonts/CascadiaCode/Caskaydia\ Cove\ Nerd\ Font\ Complete\ Mono\ Windows\ Compatible.ttf
-CopyFile /usr/share/fonts/CascadiaCode/Caskaydia\ Cove\ Nerd\ Font\ Complete.ttf
-CopyFile /usr/share/fonts/CascadiaCode/Caskaydia\ Cove\ Nerd\ Font\ Complete\ Windows\ Compatible.ttf
-CopyFile /usr/share/fonts/Roboto_Condensed/LICENSE.txt
-CopyFile /usr/share/fonts/Roboto_Condensed/RobotoCondensed-BoldItalic.ttf
-CopyFile /usr/share/fonts/Roboto_Condensed/RobotoCondensed-Bold.ttf
-CopyFile /usr/share/fonts/Roboto_Condensed/RobotoCondensed-Italic.ttf
-CopyFile /usr/share/fonts/Roboto_Condensed/RobotoCondensed-LightItalic.ttf
-CopyFile /usr/share/fonts/Roboto_Condensed/RobotoCondensed-Light.ttf
-CopyFile /usr/share/fonts/Roboto_Condensed/RobotoCondensed-Regular.ttf
-CopyFile /usr/share/fonts/sf-pro-display-cufonfonts/SFPRODISPLAYBLACKITALIC.OTF
-CopyFile /usr/share/fonts/sf-pro-display-cufonfonts/SFPRODISPLAYBOLD.OTF
-CopyFile /usr/share/fonts/sf-pro-display-cufonfonts/SFPRODISPLAYHEAVYITALIC.OTF
-CopyFile /usr/share/fonts/sf-pro-display-cufonfonts/SFPRODISPLAYLIGHTITALIC.OTF
-CopyFile /usr/share/fonts/sf-pro-display-cufonfonts/SFPRODISPLAYMEDIUM.OTF
-CopyFile /usr/share/fonts/sf-pro-display-cufonfonts/SFPRODISPLAYREGULAR.OTF
-CopyFile /usr/share/fonts/sf-pro-display-cufonfonts/SFPRODISPLAYSEMIBOLDITALIC.OTF
-CopyFile /usr/share/fonts/sf-pro-display-cufonfonts/SFPRODISPLAYTHINITALIC.OTF
-CopyFile /usr/share/fonts/sf-pro-display-cufonfonts/SFPRODISPLAYULTRALIGHTITALIC.OTF
-CopyFile /usr/share/fonts/typicons.ttf
-
 # Plymouth theme
 CopyFile /usr/share/plymouth/plymouthd.defaults
 CopyFile /usr/share/plymouth/themes/arch-glow/arch-glow.plymouth

@@ -39,7 +39,7 @@ prompt {
 button {
     action: "ok";
     str: " ";
-    font: "CaskaydiaCove Nerd Font Mono 16";
+    font: "Liga SFMono Nerd Font Mono 16";
     expand: false;
     text-color: @foreground;
     background-color: @transparent;
