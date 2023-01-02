@@ -1,3 +1,4 @@
+
 set -U tide_aws_bg_color FF9900
 set -U tide_aws_color 232F3E
 set -U tide_aws_icon \uf270
@@ -24,9 +25,6 @@ set -U tide_context_hostname_parts 1
 set -U tide_crystal_bg_color FFFFFF
 set -U tide_crystal_color 000000
 set -U tide_crystal_icon \u2b22
-set -U tide_distrobox_bg_color FF00FF
-set -U tide_distrobox_color 000000
-set -U tide_distrobox_icon \u2b22
 set -U tide_docker_bg_color 2496ED
 set -U tide_docker_color 000000
 set -U tide_docker_default_contexts default\x1ecolima
@@ -83,9 +81,6 @@ set -U tide_prompt_color_separator_same_color 949494
 set -U tide_prompt_icon_connection \u00b7
 set -U tide_prompt_min_cols 34
 set -U tide_prompt_pad_items true
-set -U tide_pulumi_bg_color F7BF2A
-set -U tide_pulumi_color 000000
-set -U tide_pulumi_icon \uf1b2
 set -U tide_pwd_bg_color 3465A4
 set -U tide_pwd_color_anchors E4E4E4
 set -U tide_pwd_color_dirs E4E4E4
@@ -95,7 +90,7 @@ set -U tide_pwd_icon_home \uf015
 set -U tide_pwd_icon_unwritable \uf023
 set -U tide_pwd_markers \x2ebzr\x1e\x2ecitc\x1e\x2egit\x1e\x2ehg\x1e\x2enode\x2dversion\x1e\x2epython\x2dversion\x1e\x2eruby\x2dversion\x1e\x2eshorten_folder_marker\x1e\x2esvn\x1e\x2eterraform\x1eCargo\x2etoml\x1ecomposer\x2ejson\x1eCVS\x1ego\x2emod\x1epackage\x2ejson
 set -U tide_right_prompt_frame_enabled false
-set -U tide_right_prompt_items status\x1ecmd_duration\x1econtext\x1ejobs\x1enode\x1evirtual_env\x1erustc\x1ejava\x1ephp\x1epulumi\x1echruby\x1ego\x1ekubectl\x1edistrobox\x1etoolbox\x1eterraform\x1eaws\x1enix_shell\x1ecrystal\x1etime
+set -U tide_right_prompt_items status\x1ecmd_duration\x1econtext\x1ejobs\x1enode\x1evirtual_env\x1erustc\x1ejava\x1ephp\x1echruby\x1ego\x1ekubectl\x1etoolbox\x1eterraform\x1eaws\x1enix_shell\x1ecrystal\x1etime
 set -U tide_right_prompt_prefix \ue0b2
 set -U tide_right_prompt_separator_diff_color \ue0b2
 set -U tide_right_prompt_separator_same_color \ue0b3

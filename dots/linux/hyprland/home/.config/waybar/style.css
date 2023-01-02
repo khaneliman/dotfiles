@@ -93,11 +93,21 @@ window.DP-1 #workspaces {
 }
 
 #workspaces button {
-  padding: 0 0.25em;
+  padding: 0 0.5em;
   border-radius: 5em / 5em;
   background-color: @surface0;
   color: @peach;
   margin: 0.25em;
+}
+
+#workspaces button.active {
+  background-color: @surface2;
+  color: @black;
+}
+
+#workspaces button.urgent {
+  background-color: @red;
+  color: @text;
 }
 
 /* Add spacing for right side modules */
