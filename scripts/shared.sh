@@ -4,6 +4,8 @@ current_time=$(date "+%Y.%m.%d-%H.%M.%S")
 backup_location="$HOME/.dotfiles-backup/$current_time/"
 
 backup_existing() {
+	echo "Backing up existing dotfiles to $backup_location"
+
 	mkdir -p "$backup_location"
 
 	# backup .config
@@ -23,16 +25,23 @@ backup_existing() {
 }
 
 correct_ssh_permissions() {
+	echo "Settings ~/.ssh permissions"
+
 	chmod 700 ~/.ssh
 	chmod 600 ~/.ssh/*
 }
 
 install_bat_themes() {
+	echo "Installing bat theme"
+
 	# bat requires cache to be rebuilt to detect themes in config directory
 	bat cache --build
 }
 
 install_fish_plugins() {
+	echo "Installing fish plugins"
+	echo "DO NOT configure Tide when prompted"
+
 	fisher update
 }
 
@@ -105,6 +114,9 @@ install_spicetify() {
 
 		spicetify config current_theme catppuccin-macchiato
 		spicetify config color_scheme blue
+		spicetify config inject_css 1
+		spicetify config replace_colors 1
+		spicetify config custom_apps marketplace
 
 		spicetify backup apply
 		spicetify apply

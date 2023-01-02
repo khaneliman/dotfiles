@@ -61,6 +61,11 @@ enable_brew_servies() {
 	brew services start sketchybar
 }
 
+install_fonts() {
+	# macOS Fonts aren't read from ~/.fonts and symbolic links dont work, need to move to ~/Library/Fonts
+	sudo mv ~/.fonts/* ~/Library/Fonts/
+}
+
 mac_copy_configuration() {
 	# copy home folder dotfiles
 	cp -r "$DOTS_DIR"/macos/yabai/home/. ~
@@ -73,6 +78,7 @@ mac_install() {
 
 	# Copy configuration
 	mac_copy_configuration
+	install_fonts
 
 	# Installs
 	brew_install

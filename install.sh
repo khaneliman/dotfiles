@@ -26,23 +26,24 @@ done
 
 logo
 
+# Install shared first in case specific overrides it
+shared_install
+
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-        echo 'linux detected... running install for linux'
-        
-        linux_install
+	echo 'linux detected... running install for linux'
+
+	linux_install
 
 elif [[ "$OSTYPE" == "darwin"* ]]; then
-        echo 'mac detected... running install for mac'
+	echo 'mac detected... running install for mac'
 
-        mac_install
+	mac_install
 
 elif [[ "$OSTYPE" == "win32" ]]; then
-        echo 'windows detected... running install for windows'
+	echo 'windows detected... running install for windows'
 
-        windows_install
+	windows_install
 
 else
-        echo 'unsupported os... exiting'
+	echo 'unsupported os... exiting'
 fi
-
-shared_install
