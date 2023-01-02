@@ -13,7 +13,7 @@ do
   sketchybar --add space      space.$sid left                               \
              --set space.$sid associated_space=$sid                         \
                               icon="${SPACE_ICONS[i]}"                      \
-                              icon.font="CaskaydiaCove Nerd Font:Bold:16.0" \
+                              icon.font="Liga SFMono Nerd Font:Bold:16.0" \
                               icon.padding_left=10                          \
                               icon.padding_right=15                         \
                               background.padding_left=2                     \
@@ -39,7 +39,7 @@ sketchybar --add bracket spaces '/space\..*/'                               \
 
 sketchybar   --add item       separator left                                  \
              --set separator  icon=                                          \
-                              icon.font="CaskaydiaCove Nerd Font:Regular:16.0"\
+                              icon.font="Liga SFMono Nerd Font:Regular:16.0"\
                               background.padding_left=17                      \
                               background.padding_right=10                     \
                               label.drawing=off                               \
