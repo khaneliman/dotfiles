@@ -38,6 +38,13 @@ install_bat_themes() {
 	bat cache --build
 }
 
+install_better_discord() {
+	if [[ $(command -v betterdiscordctl) ]]; then
+		echo 'Better discord detected... installing..'
+		betterdiscordctl install
+	fi
+}
+
 install_fish_plugins() {
 	echo "Installing fish plugins"
 	echo "DO NOT configure Tide when prompted"
@@ -133,11 +140,20 @@ shared_copy_configuration() {
 }
 
 shared_install() {
+
+	# Backup
 	backup_existing
+
+	# Fetch dependencies
 	initialize_submodules
+
+	# Copy config
 	shared_copy_configuration
 	correct_ssh_permissions
+
+	# Installations
 	install_spicetify
+	install_better_discord
 	install_bat_themes
 	install_fish_plugins
 }
