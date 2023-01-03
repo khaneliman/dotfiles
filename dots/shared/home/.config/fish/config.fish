@@ -2,7 +2,11 @@
 fish_add_path "/opt/local/bin" "/opt/local/sbin" # Homebrew applications
 fish_add_path "$HOME"/kde/src/kdesrc-build # KDE src location
 fish_add_path /usr/lib/jvm/default/bin # java bin
-fish_add_path "$HOME"/.local/share/pnpm # pnpm
+
+# pnpm
+set -gx PNPM_HOME "$HOME/.local/share/pnpm"
+set -gx PATH "$PNPM_HOME" $PATH
+# pnpm end
 
 # Hide welcome message
 set -g fish_greeting
@@ -139,4 +143,6 @@ fish_ssh_agent
 if status is-interactive
     fastfetch | lolcat
 end
+
+
 
