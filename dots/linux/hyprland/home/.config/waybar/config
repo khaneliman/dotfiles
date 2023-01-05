@@ -12,7 +12,6 @@
 		"modules-right": [
 			"tray",
 			"custom/pipewire",
-			"network",
 			"cpu",
 			"memory",
 			"disk",
