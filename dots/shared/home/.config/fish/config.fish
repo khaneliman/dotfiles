@@ -122,9 +122,20 @@ switch (uname)
                 alias hl='cat /tmp/hypr/$(lsd -t /tmp/hypr/ | head -n 1)/hyprland.log'
                 alias hl1='cat /tmp/hypr/$(lsd -t -r /tmp/hypr/ | head -n 2 | tail -n 1)/hyprland.log'
             end
+            
+            # Fetch on terminal open
+            if status is-interactive
+                fastfetch | lolcat
+            end
         end
     case Darwin
         eval $("/opt/homebrew/bin/brew" shellenv)
+        
+    # Fetch on terminal open
+            if status is-interactive
+                fastfetch
+            end
+
     case '*'
             echo Hi, stranger!
 end
@@ -138,11 +149,3 @@ export MICRO_TRUECOLOR="1"
 
 # SSH setup 
 fish_ssh_agent
-
-# Fetch on terminal open
-if status is-interactive
-    fastfetch | lolcat
-end
-
-
-

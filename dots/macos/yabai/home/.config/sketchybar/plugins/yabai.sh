@@ -25,12 +25,12 @@ window_state() {
           yabai -m config active_window_border_color "$BLUE" > /dev/null 2>&1 &
         else
           args+=(--set "$NAME" icon="$YABAI_GRID" icon.color="$ORANGE")
-          yabai -m config active_window_border_color "$WHITE" > /dev/null 2>&1 &
+          yabai -m config active_window_border_color "$BLUE" > /dev/null 2>&1 &
         fi
         ;;
       "true")
         args+=(--set "$NAME" icon="$YABAI_FLOAT" icon.color="$MAGENTA")
-        yabai -m config active_window_border_color "$MAGENTA" > /dev/null 2>&1 &
+        yabai -m config active_window_border_color "$BLUE" > /dev/null 2>&1 &
         ;;
     esac
   fi
@@ -53,8 +53,7 @@ windows_on_spaces () {
           icon_strip+=" $($HOME/.config/sketchybar/plugins/icon_map.sh "$app")"
         done <<< "$apps"
       fi
-      # Uncomment if you want to display icons for open applications
-      # args+=(--set space."$space" label="$icon_strip" label.drawing=on)
+      args+=(--set space."$space" label="$icon_strip" label.drawing=on)
     done
   done <<< "$CURRENT_SPACES"
 
@@ -73,6 +72,6 @@ case "$SENDER" in
   ;;
   "window_focus") window_state 
   ;;
-  "windows_on_spaces") windows_on_spaces
+  "windows_on_spaces") #windows_on_spaces # Uncomment if you want to display icons for open applications
   ;;
 esac
