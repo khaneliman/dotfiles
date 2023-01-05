@@ -149,3 +149,4 @@ export MICRO_TRUECOLOR="1"
 
 # SSH setup 
 fish_ssh_agent
+load_ssh
