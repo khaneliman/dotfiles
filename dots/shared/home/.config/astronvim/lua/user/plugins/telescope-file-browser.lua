@@ -1,1 +1,3 @@
-require("telescope").load_extension("file_browser")
+local telescope = require("telescope")
+
+telescope.load_extension("file_browser")
