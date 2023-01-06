@@ -8,7 +8,11 @@ export ACTIVITY=􀒓
 export LOCK=􀒳
 export BELL=􀋚
 export BELL_DOT=􀝗
+
 export BATTERY=
+export CPU=
+export DISK=
+export MEMORY=﬙
 
 # Git Icons
 export GIT_ISSUE=􀍷
