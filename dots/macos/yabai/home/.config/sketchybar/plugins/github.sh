@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 
+source "$HOME/.config/sketchybar/colors.sh"
+source "$HOME/.config/sketchybar/icons.sh"
+
 update() {
-  source "$HOME/.config/sketchybar/colors.sh"
-  source "$HOME/.config/sketchybar/icons.sh"
+  
 
   NOTIFICATIONS="$(gh api notifications)"
   COUNT="$(echo "$NOTIFICATIONS" | jq 'length')"
