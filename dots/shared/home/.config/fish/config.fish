@@ -95,8 +95,6 @@ switch (uname)
         alias jctl="journalctl -p 3 -xb" # Get the error messages from journalctl
         alias runsrv="systemctl list-units  --type=service  --state=running $argv" 
        
-        alias ips='ip link show'																					# Get network interfaces information
-
         # Package management
         # IF Arch
         if [ -f "/etc/arch-release" ];
@@ -149,4 +147,4 @@ export MICRO_TRUECOLOR="1"
 
 # SSH setup 
 fish_ssh_agent
-load_ssh
+load_ssh # uncomment if you need ssh loading keys on shell
