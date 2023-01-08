@@ -14,8 +14,11 @@
 }
 
 window#waybar {
-  background-color: transparent;
-  color: #ffffff;
+  border: 2px solid @surface1;
+  border-radius: 0.5em;
+  background: @theme_base_color;
+  box-shadow: 1px 1px 10px 10px @mantle;
+  color: @theme_text_color;
   transition-property: background-color;
   transition-duration: 0.5s;
 }
@@ -24,13 +27,13 @@ window#waybar.hidden {
   opacity: 0.2;
 }
 
-window#waybar.termite {
-  background-color: #3f3f3f;
+tooltip {
+  background: @base;
+  border: 1px solid @blue;
 }
 
-window#waybar.firefox {
-  background-color: #000000;
-  border: none;
+tooltip label {
+  color: white;
 }
 
 label:focus {
@@ -50,41 +53,30 @@ box {
   border: none;
 }
 
-/* Match gaps_out of hyprland.conf */
-.modules-left {
-  margin-left: 20px;
-}
-
-.modules-right {
-  margin-right: 20px;
-}
-
 /* Primary monitor configuration */
 window.DP-2 .modules-center,
 .modules-right,
-.modules-left {
+#workspaces {
+  margin: 0.5em;
   padding: 0 1em;
   color: @peach;
   background-color: @surface0;
   font-weight: bold;
-  border-top-right-radius: 5em 5em;
-  border-bottom-right-radius: 5em 5em;
-  border-top-left-radius: 5em 5em;
-  border-bottom-left-radius: 5em 5em;
-  margin-top: 5px;
+  border-radius: 0.5em;
+  border: 1px solid @surface1;
 }
 
 /* Secondary monitor configuration */
 window.DP-1 #workspaces {
-  padding: 0;
-  margin: 0;
+  margin: 0.5em;
+  padding: 0 1em;
 }
 
 /* Wlr/workspaces configuration  */
 
 #window,
 #workspaces {
-  border-radius: 5em / 5em;
+  border-radius: 0.5em;
   color: @peach;
 }
 
@@ -94,15 +86,15 @@ window.DP-1 #workspaces {
 
 #workspaces button {
   padding: 0 0.5em;
-  border-radius: 5em / 5em;
+  border-radius: 0.5em;
   background-color: @surface0;
-  color: @peach;
+  color: @text;
   margin: 0.25em;
 }
 
 #workspaces button.active {
-  background-color: @surface2;
-  color: @black;
+  /* background-color: @surface2; */
+  color: @blue;
 }
 
 #workspaces button.urgent {
@@ -113,8 +105,6 @@ window.DP-1 #workspaces {
 /* Add spacing for right side modules */
 #tray,
 #user,
-#custom-wlogout,
-#clock,
 #keyboard-state,
 #mpd {
   padding: 0 1em;
@@ -179,12 +169,24 @@ window.DP-1 #workspaces {
 #keyboard-state > label.locked {
   background: rgba(0, 0, 0, 0.2);
 }
+
+#clock {
+  font-size: 16px;
+}
+
 /* Custom styling for the logout icon on end */
 #custom-wlogout {
   font-size: 1.75em;
-  padding-right: 0.25em;
-  padding-left: 0em;
-  color: @red;
+  padding-right: 0.5em;
+  padding-left: 0.5em;
+  color: @blue;
+}
+
+#custom-separator {
+  font-size: 16px;
+  padding-left: 1em;
+  padding-right: 1em;
+  color: @text;
 }
 
 @keyframes blink {

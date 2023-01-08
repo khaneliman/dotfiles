@@ -3,23 +3,26 @@
 		"layer": "top", // Waybar at top layer
 		"position": "top", // top|left|bottom|right
 		"output": "DP-2", // BOTTOM MONITOR
+		"width": 5080,
 		"modules-center": [
 			"hyprland/window"
 		],
 		"modules-left": [
+			"custom/wlogout",
 			"wlr/workspaces"
 		],
 		"modules-right": [
 			"tray",
+			"custom/separator",
 			"custom/pipewire",
 			"cpu",
 			"memory",
 			"disk",
 			"temperature",
 			"keyboard-state",
-			"clock",
+			"hyprland/submap",
 			"user",
-			"custom/wlogout"
+			"clock"
 		],
 		"wlr/workspaces": {
 			"all-outputs": false,
@@ -50,8 +53,13 @@
 			}
 		},
 		"hyprland/window": {
-			"format": "➡ {}",
+			"format": "{}",
 			"separate-outputs": true
+		},
+		"hyprland/submap": {
+			"format": "✌️ {}",
+			"max-length": 8,
+			"tooltip": false
 		},
 		"mpd": {
 			"format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",
@@ -164,23 +172,27 @@
 			"icon": true,
 		},
 		"custom/wlogout": {
-			"format": "",
+			"format": "",
 			"interval": "once",
 			"on-click": "wlogout -c 5 -r 5 -p layer-shell"
+		},
+		"custom/separator": {
+			"format": ""
 		}
 	},
 	{
 		"layer": "top", // Waybar at top layer
 		"position": "top", // top|left|bottom|right
 		"output": "DP-1", // TOP MONITOR
+		"width": 1880,
 		"modules-left": [
+			"custom/wlogout",
 			"wlr/workspaces"
 		],
 		//"modules-center": ["wlr/workspaces"],
 		"modules-right": [
 			"clock",
-			"user",
-			"custom/wlogout"
+			"user"
 		],
 		"clock": {
 			"format": "{:%I:%M %Y-%m-%d }"
@@ -193,9 +205,12 @@
 			"icon": true
 		},
 		"custom/wlogout": {
-			"format": "",
+			"format": "",
 			"interval": "once",
 			"on-click": "wlogout -c 5 -r 5 -p layer-shell"
+		},
+		"custom/separator": {
+			"format": "<",
 		},
 		"wlr/workspaces": {
 			"all-outputs": false,
