@@ -19,3 +19,6 @@
 [submodule "dots/shared/home/.config/fish/plugins/dots/shared/home/.config/fish/plugins/ranger_udisk_menu"]
 	path = dots/shared/home/.config/fish/plugins/dots/shared/home/.config/fish/plugins/ranger_udisk_menu
 	url = https://github.com/SL-RU/ranger_udisk_menu
+[submodule "dots/shared/home/.config/ranger/plugins/ranger_devicons"]
+	path = dots/shared/home/.config/ranger/plugins/ranger_devicons
+	url = https://github.com/alexanderjeurissen/ranger_devicons
