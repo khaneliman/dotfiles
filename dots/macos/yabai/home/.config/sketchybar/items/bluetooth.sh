@@ -4,7 +4,7 @@ sketchybar --add alias "Control Center,Bluetooth" right                         
            --rename "Control Center,Bluetooth" bluetooth_alias                              \
            --set        bluetooth_alias   icon.drawing=off                                  \
                                           label.drawing=off                                 \
-                                          alias.color="$ORANGE"                             \
+                                          alias.color="$PEACH"                              \
                                           background.padding_right=0                        \
                                           align=right                                       \
                                           script="$PLUGIN_DIR/bluetooth.sh"                 \

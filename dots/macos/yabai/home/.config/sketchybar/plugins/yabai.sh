@@ -25,12 +25,12 @@ window_state() {
 				args+=(--set "$NAME" icon="$YABAI_PARENT_ZOOM" icon.color="$BLUE")
 				yabai -m config active_window_border_color "$BLUE" >/dev/null 2>&1 &
 			else
-				args+=(--set "$NAME" icon="$YABAI_GRID" icon.color="$ORANGE")
+				args+=(--set "$NAME" icon="$YABAI_GRID" icon.color="$PEACH")
 				yabai -m config active_window_border_color "$BLUE" >/dev/null 2>&1 &
 			fi
 			;;
 		"true")
-			args+=(--set "$NAME" icon="$YABAI_FLOAT" icon.color="$MAGENTA")
+			args+=(--set "$NAME" icon="$YABAI_FLOAT" icon.color="$MAROON")
 			yabai -m config active_window_border_color "$BLUE" >/dev/null 2>&1 &
 			;;
 		esac

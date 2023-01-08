@@ -10,7 +10,7 @@ sketchybar --add       event        window_focus                  \
                                     label.drawing=off             \
                                     icon.width=30                 \
                                     icon="$YABAI_GRID"            \
-                                    icon.color="$ORANGE"          \
+                                    icon.color="$PEACH"           \
                                     associated_display=active     \
            --subscribe system.yabai window_focus                  \
                                     windows_on_spaces             \
@@ -20,7 +20,7 @@ sketchybar --add       event        window_focus                  \
            --set       front_app    script="$FRONT_APP_SCRIPT"    \
                                     icon.drawing=off              \
                                     background.padding_left=0     \
-                                    label.color="$WHITE"          \
+                                    label.color="$TEXT"           \
                                     label.font="$FONT:Black:12.0" \
                                     associated_display=active     \
            --subscribe front_app    front_app_switched

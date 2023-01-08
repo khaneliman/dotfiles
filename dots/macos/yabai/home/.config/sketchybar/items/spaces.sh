@@ -8,7 +8,6 @@ SPACE_ICONS=("" " " " " " " "" "" "" " " " " "10")
 # New space by left clicking separator (>)
 
 sid=0
-spaces=()
 for i in "${!SPACE_ICONS[@]}"
 do
   sid=$(($i+1))
@@ -21,11 +20,11 @@ do
                               background.padding_left=2                     \
                               background.padding_right=2                    \
                               label.padding_right=20                        \
-                              icon.highlight_color="$(getRandomColor)"      \
+                              icon.highlight_color="$(getRandomCatColor)"   \
                               label.font="sketchybar-app-font:Regular:16.0" \
                               label.background.height=26                    \
                               label.background.drawing=on                   \
-                              label.background.color="$BACKGROUND_2"        \
+                              label.background.color="$SURFACE1"            \
                               label.background.corner_radius=8              \
                               label.drawing=off                             \
                               script="$PLUGIN_DIR/space.sh"                 \
@@ -33,8 +32,8 @@ do
 done
 
 sketchybar --add bracket spaces '/space\..*/'                               \
-           --set spaces  background.color="$BACKGROUND_1"                   \
-                         background.border_color="$BACKGROUND_2"            \
+           --set spaces  background.color="$SURFACE0"                       \
+                         background.border_color="$SURFACE1"                \
                          background.border_width=2                          \
                          background.drawing=on
 
@@ -48,4 +47,4 @@ sketchybar   --add item       separator left                                  \
                               associated_display=active                       \
                               click_script='yabai -m space --create
                                             sketchybar --trigger space_change'\
-                              icon.color="$WHITE"
+                              icon.color="$TEXT"
