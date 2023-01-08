@@ -3,22 +3,19 @@
 source "$HOME/.config/sketchybar/colors.sh"
 source "$HOME/.config/sketchybar/icons.sh"
 
-update() {
-  
+NOTIFICATIONS="$(gh api notifications)"
+COUNT="$(echo "$NOTIFICATIONS" | jq 'length')"
 
-  NOTIFICATIONS="$(gh api notifications)"
-  COUNT="$(echo "$NOTIFICATIONS" | jq 'length')"
-  args=()
+render_bar_item() {
   if [ "$NOTIFICATIONS" = "[]" ]; then
     args+=(--set "$NAME" icon="$BELL" label="0")
   else
     args+=(--set "$NAME" icon="$BELL_DOT" label="$COUNT")
   fi
 
-  PREV_COUNT=$(sketchybar --query github.bell | jq -r .label.value)
-  # For sound to play around with:
-  # afplay /System/Library/Sounds/Morse.aiff
+}
 
+render_popup() {
   args+=(--remove '/github.notification\.*/')
 
   COUNTER=0
@@ -68,6 +65,18 @@ update() {
 
   sketchybar -m "${args[@]}" > /dev/null
 
+}
+
+update() {
+  args=()
+  
+  PREV_COUNT=$(sketchybar --query github.bell | jq -r .label.value)
+  # For sound to play around with:
+  # afplay /System/Library/Sounds/Morse.aiff
+  
+  render_bar_item
+  render_popup
+  
   if [ "$COUNT" -gt "$PREV_COUNT" ] 2>/dev/null || [ "$SENDER" = "forced" ]; then
     sketchybar --animate tanh 15 --set github.bell label.y_offset=5 label.y_offset=0
   fi

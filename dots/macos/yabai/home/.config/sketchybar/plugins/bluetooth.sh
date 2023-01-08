@@ -5,19 +5,17 @@ source "$HOME/.config/sketchybar/icons.sh"
 
 PAIRED="$(blueutil --paired)"
 CONNECTED="$(blueutil --connected)"
+COUNT="$("$CONNECTED" | grep "^.*$" -c)"
 
-update() {
-  
-  COUNT="$("$CONNECTED" | grep "^.*$" -c)"
-  args=()
+render_bar_item() {
   if [ "$CONNECTED" = "" ]; then
     args+=(--set "$NAME" label.drawing=off)
   else
     args+=(--set "$NAME" label="$COUNT" label.drawing=on)
   fi
+}
 
-  PREV_COUNT=$(sketchybar --query "$NAME" | jq -r .label.value)
-  
+render_popup() {
   args+=(--remove '/bluetooth.notification\.*/')
 
   args+=(--clone bluetooth.notification.0 bluetooth.template                                          \
@@ -47,7 +45,16 @@ update() {
 
 
   sketchybar -m "${args[@]}" > /dev/null
+}
 
+update() {
+  args=()
+
+  render_bar_item
+  render_popup
+
+  PREV_COUNT=$(sketchybar --query "$NAME" | jq -r .label.value)
+  
   if [ "$COUNT" -gt "$PREV_COUNT" ] 2>/dev/null || [ "$SENDER" = "forced" ]; then
     sketchybar --animate tanh 15 --set "$NAME" label.y_offset=5 label.y_offset=0
   fi

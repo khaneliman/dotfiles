@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
 
 hide_stats() {
-sketchybar 		--set cpu.percent 									\
-  															label.drawing=off \
-  															icon.drawing=off  \
-  						--set memory 												\
-  															label.drawing=off \
-  															icon.drawing=off  \
-  						--set disk 													\
-																label.drawing=off \
-  															icon.drawing=off  \
-  						--set stats_separator 							\
-  															icon=
+  sketchybar 		--set cpu.percent 									\
+  															  label.drawing=off \
+  															  icon.drawing=off  \
+  						  --set memory 												\
+  						  									label.drawing=off \
+  							  								icon.drawing=off  \
+  						  --set disk 													\
+							  									label.drawing=off \
+  						  									icon.drawing=off  \
+  						  --set stats_separator 							\
+  									  						icon=
 
                    
 }

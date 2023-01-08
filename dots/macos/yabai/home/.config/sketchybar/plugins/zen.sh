@@ -33,7 +33,7 @@ zen_off() {
              --set spotify.play updates=on      \
              --set battery drawing=on           \
              --set brew drawing=on              \
-             --set disk drawing=on               \
+             --set disk drawing=on              \
              --set memory drawing=on            \
              --set bluetooth_alias drawing=on   \
              --set wifi_alias drawing=on        \

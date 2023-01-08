@@ -59,7 +59,7 @@ function brew() {
   command brew "$@"
 
   if [[ $* =~ "upgrade" ]] || [[ $* =~ "update" ]] || [[ $* =~ "outdated" ]]; then
-    sketchybar --trigger brew_upgrade
+    sketchybar --trigger brew_update
   fi
 }
 
@@ -67,7 +67,7 @@ function mas() {
   command mas "$@"
 
   if [[ $* =~ "upgrade" ]] || [[ $* =~ "update" ]] || [[ $* =~ "outdated" ]]; then
-    sketchybar --trigger brew_upgrade
+    sketchybar --trigger brew_update
   fi
 }
 

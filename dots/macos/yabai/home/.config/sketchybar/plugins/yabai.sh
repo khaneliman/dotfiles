@@ -4,7 +4,6 @@ source "$HOME/.config/sketchybar/colors.sh"
 source "$HOME/.config/sketchybar/icons.sh"
 
 window_state() {
-
 	WINDOW=$(yabai -m query --windows --window)
 	CURRENT=$(echo "$WINDOW" | jq '.["stack-index"]')
 
