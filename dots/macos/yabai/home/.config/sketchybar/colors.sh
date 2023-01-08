@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 # Color Palette
 export BLACK=0xff181926
@@ -23,3 +23,9 @@ export POPUP_BACKGROUND_COLOR=$BLACK
 export POPUP_BORDER_COLOR=$WHITE
 
 export SHADOW_COLOR=$BLACK
+
+export RANDOM_COLOR_ARRAY=("$RED" "$GREEN" "$BLUE" "$YELLOW" "$ORANGE" "$MAGENTA")
+
+function getRandomColor() {
+  echo "${RANDOM_COLOR_ARRAY[ $RANDOM % ${#RANDOM_COLOR_ARRAY[@]} ]}"
+}

@@ -40,10 +40,9 @@ sketchybar 	--bar 			height=39 																						\
 												y_offset=10 																					\
 												margin=10 																						\
 												blur_radius=20 																				\
-												notch_width=0 																				\
 																																							\
 						--default 	updates=when_shown 																		\
-												icon.font="$NERD_FONT:Bold:16.0" 													\
+												icon.font="$NERD_FONT:Bold:16.0" 											\
 												icon.color="$ICON_COLOR" 															\
 												icon.padding_left="$PADDINGS" 												\
 												icon.padding_right="$PADDINGS" 												\
@@ -61,6 +60,14 @@ sketchybar 	--bar 			height=39 																						\
 												popup.background.color="$POPUP_BACKGROUND_COLOR" 			\
 												popup.background.shadow.drawing=on
 
+sketchybar 	--add event 				lock   "com.apple.screenIsLocked"   					\
+           	--add event 				unlock "com.apple.screenIsUnlocked" 					\
+                                                           										\
+           	--add item         	animator left                									\
+           	--set animator     	drawing=off                  									\
+                              	updates=on                   									\
+                              	script="$PLUGIN_DIR/wake.sh" 									\
+           	--subscribe        	animator lock unlock
 # Left
 source "$ITEM_DIR/apple.sh"
 source "$ITEM_DIR/spaces.sh"
