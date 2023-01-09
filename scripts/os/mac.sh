@@ -84,6 +84,8 @@ mac_install() {
 	brew_install
 	bundle_install
 
+	cat_theme_all
+
 	# Enable services
 	enable_brew_servies
 

@@ -119,8 +119,6 @@ install_spicetify() {
 			fi
 		fi
 
-		spicetify config current_theme catppuccin-macchiato
-		spicetify config color_scheme blue
 		spicetify config inject_css 1
 		spicetify config replace_colors 1
 		spicetify config custom_apps marketplace

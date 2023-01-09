@@ -19,7 +19,8 @@ BRED='\e[91m'
 
 set +a
 
-for filename in "$SCRIPTS_DIR"/utils/*.sh "$SCRIPTS_DIR"/os/*.sh "$SCRIPTS_DIR"/shared.sh "$SCRIPTS_DIR"/desktop-environment/*.sh; do
+# Source all scripts
+for filename in "$SCRIPTS_DIR"/**/*.sh; do
 	[ -e "$filename" ] || continue
 	source "$filename"
 done
