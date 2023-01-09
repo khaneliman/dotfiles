@@ -36,9 +36,9 @@ return {
 		-- Default quake terminal
 		quake = 'kitty --name QuakeTerminal',
 		-- Default rofi global menu
-		rofi_global = 'rofi -dpi ' .. screen.primary.dpi .. 
-							' -show "Global Search" -modi "Global Search":' .. config_dir .. 
-							'/configuration/rofi/global/rofi-spotlight.sh' .. 
+		rofi_global = 'rofi -dpi ' .. screen.primary.dpi ..
+							' -show "Global Search" -modi "Global Search":' .. config_dir ..
+							'/configuration/rofi/global/rofi-spotlight.sh' ..
 							' -theme ' .. config_dir ..
 							'/configuration/rofi/global/rofi.rasi',
 		-- Default app menu
@@ -61,7 +61,7 @@ return {
 		' eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg)',
 		-- Audio equalizer
 		-- 'pulseeffects --gapplication-service',
-		-- 'easyeffects --gapplication-service',
+		'easyeffects --gapplication-service',
 		-- Blueman applet
 		'blueman-applet',
 		-- Music server
@@ -72,10 +72,16 @@ return {
 		"awesome-client 'awesome.emit_signal(\"module::lockscreen_show\")'" ""
 		]],
 		-- Corsair keyboard driver
-		-- 'ckb-next -b',
+		'ckb-next -b',
 		-- RGB software
-		-- 'openrgb --startminimized --profile Default'
+		'openrgb --startminimized --profile Default',
 		-- EWS server (moved to systemd service)
+		-- Theme configuration for window manager
+		'sed -i s/theme.*/theme=KvGlass/ ~/.config/Kvantum/kvantum.kvconfig',
+		'sed -i s/gtk-theme-name.*/gtk-theme-name="Breeze_Dark_Glass_80"/ ~/.gtkrc-2.0',
+		'sed -i s/gtk-theme-name.*/gtk-theme-name=Breeze_Dark_Glass_80/ ~/.config/.gtk-3.0/settings.ini',
+		'sed -i s/gtk-theme-name.*/gtk-theme-name=Breeze_Dark_Glass_80/ ~/.config/.gtk-4.0/settings.ini',
+		'sed -i s/GTK_THEME.*/GTK_THEME=Breeze_Dark_Glass_80/ ~/.xprofile'
 	},
 
 	-- List of binaries/shell scripts that will execute for a certain task
@@ -88,4 +94,4 @@ return {
 		update_profile  = utils_dir .. 'profile-image'
 	}
 }
- 
+
