@@ -15,16 +15,17 @@ Personal dotfiles for each of the platforms I own or have customized. Personal i
 
 ## Install
 
-#### Clone repo:
+### Clone repo:
 
     git clone git@github.com:khaneliman/dotfiles.git ~/.config/.dotfiles
     cd ~/.config/.dotfiles && git submodule update --init
 
- Manual installation, for now. Some will have installation scripts to automate process a little more in-line with what I've been doing with [ArchInstaller](https://github.com/khaneliman/ArchInstaller) 
- 
-#### Manual 
+Manual installation, for now. Some will have installation scripts to automate process a little more in-line with what I've been doing with [ArchInstaller](https://github.com/khaneliman/ArchInstaller)
+
+### Manual
 
 Copy files to respective directories:
+
 - dots
   - OS
     - DE/WM
@@ -32,9 +33,9 @@ Copy files to respective directories:
 
 Each environment might require further steps that will be detailed in their respective section.
 
-#### Automatic
+### Automatic
 
-    ./install.sh 
+    ./install.sh
 
 The script will detect what OS you are running script from and perform the installation for that OS. You will need to select what environment you would like to install the dots for, if there are multiple for that given OS.
 
@@ -42,24 +43,29 @@ The script will detect what OS you are running script from and perform the insta
 
 There are numerous linux configs. My primary desktop usage is done through Arch Linux so I will update these most often.
 
-#### Awesome
+### Awesome
 
 This configuration is a glass effect [AwesomeWM](https://github.com/awesomeWM/awesome) with [Picom](https://github.com/yshui/picom) configuration. No utilities used for deployment, just basic dots. One of my first ricing attempts utilizing the glorious dotfiles as a base.
 
-#### Hyprland
+### Hyprland
 
 [Catppuccin](https://github.com/catppuccin/catppuccin) themed [Hyprland](https://github.com/hyprwm/Hyprland) configuration with a lot more time spent on it since it's my current daily driver. There's basic dotfiles and then some [aconfmgr](https://github.com/CyberShadow/aconfmgr) config thrown in for deploying a system. (WIP and not tested thoroughly)
 
-##### Unique Install Steps
+#### Unique Install Steps
 
 See the install steps in Hyrpland config's [README](/dots/linux/hyprland/README.md)
 
-<div>
-    <img src="https://github.com/khaneliman/dotfiles/blob/main/assets/linux-hyprland-tiling.png">
-    <img src="https://github.com/khaneliman/dotfiles/blob/main/assets/linux-hyprland-wlogout.png">
-</div>
+##### Standard Monitor
 
-#### Gnome
+![linux-hyprland-tiling](assets/linux-hyprland-tiling.png)
+![linux-hyprland-tiling](assets/linux-hyprland-nvim.png)
+
+##### Ultrawide Monitor
+
+![linux-hyprland-tiling](assets/linux-hyprland-tiling-wide.png)
+![linux-hyprland-tiling](assets/linux-hyprland-nvim-wide.png)
+
+### Gnome
 
 Dotfiles from my brief usage of Fedora with Gnome. Currently sparse and only contains the [dconf](https://github.com/GNOME/dconf) files that can be imported using dconf.
 
@@ -67,14 +73,12 @@ Dotfiles from my brief usage of Fedora with Gnome. Currently sparse and only con
 
 I currently use [yabai](https://github.com/koekeishiya/yabai) with my daily driver MacBook Pro so this will contain the configuration used on my laptop.
 
-#### Yabai
+### Yabai
 
 Current window manager used on my laptop. Uses [sketchybar](https://github.com/FelixKratz/SketchyBar) for UI and [skhd](https://github.com/koekeishiya/skhd) for keybinds.
 
-<div>
-    <img src="https://github.com/khaneliman/dotfiles/blob/main/assets/macos-yabai-nvim.png">
-    <img src="https://github.com/khaneliman/dotfiles/blob/main/assets/macos-yabai-tiling.png">
-</div>
+![macos-yabai-tiling](assets/macos-yabai-tiling.png)
+![macos-yabai-nvim](assets/macos-yabai-nvim.png)
 
 ## Windows
 
@@ -86,18 +90,18 @@ This contains all the platform agnostic and / or shared application configuratio
 
 ## Credits
 
-Inspiration and code from numerous locations all over the internet. Here's some of the major contributors to my setups. 
+Inspiration and code from numerous locations all over the internet. Here's some of the major contributors to my setups.
 
 - Shared dotfiles
-    - [Catppuccin](https://github.com/catppuccin/catppuccin)
-    - [AstroNvim](https://astronvim.github.io/)
+  - [Catppuccin](https://github.com/catppuccin/catppuccin)
+  - [AstroNvim](https://astronvim.github.io/)
 - Linux dotfiles
-    - Awesome
-        - [The Glorious Dotfiles](https://github.com/manilarome/the-glorious-dotfiles)
-    - Hyprland
-        - [sway-nvidia](https://github.com/crispyricepc/sway-nvidia)
-        - [Hyprland](https://wiki.hyprland.org/)
+  - Awesome
+    - [The Glorious Dotfiles](https://github.com/manilarome/the-glorious-dotfiles)
+  - Hyprland
+    - [sway-nvidia](https://github.com/crispyricepc/sway-nvidia)
+    - [Hyprland](https://wiki.hyprland.org/)
 - macOS dotfiles
-    - Yabai
-        - [FelixKratz dotfiles](https://github.com/FelixKratz/dotfiles)
-        - [crissNb Dynamic Island Sketchybar](https://github.com/crissNb/Dynamic-Island-Sketchybar)
+  - Yabai
+    - [FelixKratz dotfiles](https://github.com/FelixKratz/dotfiles)
+    - [crissNb Dynamic Island Sketchybar](https://github.com/crissNb/Dynamic-Island-Sketchybar)

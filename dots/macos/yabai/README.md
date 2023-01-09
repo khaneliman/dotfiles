@@ -32,5 +32,7 @@ There's basic configuration of sketchybar, yabai, and skhd with application them
  brew services start sketchybar
 ```
 
-![macOS Yabai Tiling example](/assets/macos-yabai-tiling.png)
-![macOS Yabai Nvim example](/assets/macos-yabai-nvim.png)
+## Screenshots
+
+![macos-yabai-tiling](../../../assets/macos-yabai-tiling.png)
+![macos-yabai-nvim](../../../assets/macos-yabai-nvim.png)
