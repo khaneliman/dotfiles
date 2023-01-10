@@ -49,9 +49,7 @@ cat_theme_firefox() {
 	# Install firefox theme
 	case "$(uname)" in
 	"Linux")
-		for dir in ~/.mozilla/firefox/*default*/; do
-			cp -r ../dots/shared/home/.mozilla/firefox/profile.default/chrome/ "${dir}"
-		done
+		install_theme dev minimal
 		;;
 	"Darwin")
 		# TODO: need to identify location on mac
