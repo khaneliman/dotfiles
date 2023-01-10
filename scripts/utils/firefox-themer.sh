@@ -1,17 +1,13 @@
 #!/usr/bin/env bash
 
-FF_USER_DIRECTORY=""
-CHROME_DIRECTORY=""
-RELEASE_NAME=""
-
 print_help() {
-	echo -e "firefox-themer: firefox-themer [-hp] [arguments]														\n\
-	Copies a firefox chrome folder to a firefox profile.																\n\
+	echo -e "firefox-themer: firefox-themer [-hpt] [arguments]														\n\
+	Installs a predefined theme to a specified firefox profile													\n\
 																																											\n\
 	Options: 																																						\n\
 	 -help 			- Show this message 																										\n\
-	 -profile <edition> 	- Check for profile path for specific edition 								\n\
-	 -theme <edition> 	- Check for theme path 																					\n\
+	 -profile <PROFILE> 	- Which firefox profile to install theme to 	 								\n\
+	 -theme <THEME> 	- Theme to install 			 																					\n\
 																																											\n\
 	Arguments:																																					\n\
 	 PROFILE	Profile to install theme in 																							\n\
@@ -26,16 +22,14 @@ print_help() {
 	  minimal 	- Minimal theme with vertical tabs via Tab Center Reborn 								\n\
 																																											\n\
 	Example: 																																						\n\
-	 $ ./firefox-themer.sh stable blurredfox																						\n\
-	 $ ./firefox-themer.sh dev  minimal																									\n\
+	 $ ./firefox-themer.sh -p stable -t blurredfox																			\n\
+	 $ ./firefox-themer.sh -d dev -m minimal																						\n\
 																																											\n\
 	Defaults to 'stable' if empty."
 }
 
 get_profile() {
 	# Check args
-	echo "${*}"
-	echo "${1}"
 	if [[ -n "${*}" ]] && [[ -n "${1}" ]]; then
 		if [[ "${1}" == "dev" ]]; then
 			RELEASE_NAME="Developer Edition"
@@ -65,13 +59,11 @@ get_profile() {
 	FF_USER_DIRECTORY="$(find "${HOME}/.mozilla/firefox/" -maxdepth 1 -type d -regextype egrep -regex '.*[a-zA-Z0-9]+.'"${EDITION}")"
 
 	if [[ -n $EDITION ]]; then
-		message "$FF_USER_DIRECTORY"
+		message "[>>] Firefox profile location:  $FF_USER_DIRECTORY"
 	fi
 }
 
 get_theme() {
-	echo "${*}"
-	echo "${1}"
 	# Check args
 	if [[ -n "${*}" ]] && [[ -n "${1}" ]]; then
 		if [[ "${1}" == "blurredfox" ]]; then
@@ -90,7 +82,7 @@ get_theme() {
 	THEME=$(readlink -f $THEME)
 
 	if [[ -d $THEME ]]; then
-		message "$THEME"
+		message "[>>] Theme location:  $THEME"
 	fi
 }
 
@@ -99,8 +91,13 @@ message() {
 }
 
 install_theme() {
-	get_profile "$1"
-	get_theme "$2"
+	if [[ ! -d $FF_USER_DIRECTORY ]]; then
+		get_profile
+	fi
+
+	if [[ ! -d $THEME ]]; then
+		get_theme
+	fi
 
 	if [[ -n "$FF_USER_DIRECTORY" ]]; then
 		message "[>>] Firefox user profile directory located..."
@@ -127,10 +124,11 @@ install_theme() {
 
 			# copy theme directory to firefox chrome folder
 			if [[ -d "$THEME" ]]; then
+				message "[>>] Theme found! copying files..."
 				cp -r "$THEME"/* "${FF_USER_DIRECTORY}/chrome"
 			else
 				message "[!!] Theme isn't a directory. Terminating..."
-				return 1
+				exit 1
 			fi
 		else
 			message "[>>] Chrome folder does not exist! Creating one..."
@@ -140,20 +138,21 @@ install_theme() {
 			if [[ $? -eq 0 ]]; then
 				# copy theme directory to firefox chrome folder
 				if [[ -d "$THEME" ]]; then
+					message "[>>] Theme found! copying files..."
 					cp -r "$THEME"/* "${FF_USER_DIRECTORY}/chrome"
 				else
 					message "[!!] Theme isn't a directory. Terminating..."
-					return 1
+					exit 1
 				fi
 			else
 				message "[!!] There was a problem while creating the directory. Terminating..."
-				return 1
+				exit 1
 			fi
 		fi
 
 	else
 		message "[!!] No Firefox ${RELEASE_NAME} user profile detected! Make sure to run Firefox ${RELEASE_NAME} atleast once! Terminating..."
-		return 1
+		exit 1
 	fi
 }
 
@@ -166,12 +165,12 @@ while getopts ":hp:t:" option; do
 		;;
 	p)
 		get_profile "$OPTARG"
-		exit
 		;;
 	t)
 		get_theme "$OPTARG"
-		exit
 		;;
 	*) ;;
 	esac
 done
+
+install_theme

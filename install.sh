@@ -22,7 +22,9 @@ set +a
 # Source all scripts
 for filename in "$SCRIPTS_DIR"/**/*.sh; do
 	[ -e "$filename" ] || continue
-	source "$filename"
+	if [ ! -f "firefox-themer.sh" ]; then
+		source "$filename"
+	fi
 done
 
 logo
