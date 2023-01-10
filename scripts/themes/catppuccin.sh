@@ -49,7 +49,7 @@ cat_theme_firefox() {
 	# Install firefox theme
 	case "$(uname)" in
 	"Linux")
-		../../scripts/utils/firefox-themer.sh dev minimal
+		../../scripts/utils/firefox-themer.sh -p dev -t minimal
 		;;
 	"Darwin")
 		# TODO: need to identify location on mac
