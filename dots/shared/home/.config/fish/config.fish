@@ -125,11 +125,21 @@ switch (uname)
             if status is-interactive
                 fastfetch | lolcat
             end
+        else if [ -f "/etc/fedora-release" ];
+            # Fetch on terminal open
+            if status is-interactive
+                fastfetch
+            end
+        else 
+             # Fetch on terminal open
+            if status is-interactive
+                fastfetch
+            end
         end
     case Darwin
         eval $("/opt/homebrew/bin/brew" shellenv)
         
-    # Fetch on terminal open
+            # Fetch on terminal open
             if status is-interactive
                 fastfetch
             end
@@ -146,5 +156,5 @@ export EDITOR="$VISUAL"
 export MICRO_TRUECOLOR="1"
 
 # SSH setup 
-fish_ssh_agent
+[ $(command -v fish_ssh_agent) ] && fish_ssh_agent
 load_ssh # uncomment if you need ssh loading keys on shell

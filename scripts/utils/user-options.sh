@@ -27,7 +27,7 @@ desktop_environment() {
 	# Let the user choose Desktop Enviroment from predefined list
 	echo -ne "Please select your desired Desktop Enviroment:\n"
 
-	mapfile -t options < <(for f in linux/*; do echo "${f##*/}" | sed -r "s/.+\/(.+)\..+/\1/;/pkgs/d"; done)
+	mapfile -t options < <(for f in scripts/desktop-environment/*.sh; do echo "${f##*/}" | sed -r 's/\.[^.]*$//'; done)
 
 	select_option $? 4 "${options[@]}"
 

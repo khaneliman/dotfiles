@@ -1,27 +1,27 @@
 #!/usr/bin/env bash
 
-current_time=$(date "+%Y.%m.%d-%H.%M.%S")
-backup_location="$HOME/.dotfiles-backup/$current_time/"
+shared_backup_existing() {
+	echo "Backing up existing dotfiles to $BACKUP_LOCATION"
 
-backup_existing() {
-	echo "Backing up existing dotfiles to $backup_location"
-
-	mkdir -p "$backup_location"
+	mkdir -p "$BACKUP_LOCATION"
 
 	# backup .config
-	mv ~/.config/astronvim "$backup_location"
-	mv ~/.config/bat "$backup_location"
-	mv ~/.config/btop "$backup_location"
-	mv ~/.config/davmail "$backup_location"
-	mv ~/.config/fastfetch "$backup_location"
-	mv ~/.config/kitty "$backup_location"
-	mv ~/.config/nvim "$backup_location"
-	mv ~/.config/ranger "$backup_location"
-	mv ~/.config/spicetify "$backup_location"
+	mv ~/.config/alacritty "$BACKUP_LOCATION"
+	mv ~/.config/astronvim "$BACKUP_LOCATION"
+	mv ~/.config/bat "$BACKUP_LOCATION"
+	mv ~/.config/btop "$BACKUP_LOCATION"
+	mv ~/.config/davmail "$BACKUP_LOCATION"
+	mv ~/.config/fastfetch "$BACKUP_LOCATION"
+	mv ~/.config/fish "$BACKUP_LOCATION"
+	mv ~/.config/kitty "$BACKUP_LOCATION"
+	mv ~/.config/micro "$BACKUP_LOCATION"
+	mv ~/.config/nvim "$BACKUP_LOCATION"
+	mv ~/.config/ranger "$BACKUP_LOCATION"
+	mv ~/.config/spicetify "$BACKUP_LOCATION"
 
-	mv ~/.gnupg "$backup_location"
-	mv ~/.ssh "$backup_location"
-	mv ~/.gitconfig "$backup_location"
+	mv ~/.gnupg "$BACKUP_LOCATION"
+	mv ~/.ssh "$BACKUP_LOCATION"
+	mv ~/.gitconfig "$BACKUP_LOCATION"
 }
 
 correct_ssh_permissions() {
@@ -46,10 +46,15 @@ install_better_discord() {
 }
 
 install_fish_plugins() {
+	echo "Installing fisher..."
+	fish -c "curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher"
+
 	echo "Installing fish plugins"
 	echo "DO NOT configure Tide when prompted"
 
-	fisher update
+	cp "$DOTS_DIR"/shared/home/.config/fish/fish_plugins ~/.config/fish/
+
+	fish -c "fisher update"
 }
 
 install_spicetify() {
@@ -140,7 +145,7 @@ shared_copy_configuration() {
 shared_install() {
 
 	# Backup
-	backup_existing
+	shared_backup_existing
 
 	# Fetch dependencies
 	initialize_submodules

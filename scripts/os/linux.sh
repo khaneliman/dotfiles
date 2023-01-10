@@ -11,10 +11,14 @@ linux_install() {
 		hyprland_install
 		;;
 	awesome)
-		echo 'Awesome currently not set up, manually copy files...'
+		awesome_install
 		;;
 	gnome)
-		echo 'Gnome currently not set up, manually copy files...'
+		gnome_install
+		;;
+	*)
+		echo 'No desktop environment selected... aborting...'
+		exit
 		;;
 	esac
 }

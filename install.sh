@@ -3,6 +3,9 @@
 # Find the name of the folder the scripts are in
 set -a # mark variables to be exported to subsequent commands
 
+CURRENT_TIME=$(date "+%Y.%m.%d-%H.%M.%S")
+BACKUP_LOCATION="$HOME/.dotfiles-backup/$CURRENT_TIME/"
+
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
 SCRIPTS_DIR="$SCRIPT_DIR"/scripts
 DOTS_DIR="$SCRIPT_DIR"/dots
@@ -20,11 +23,9 @@ BRED='\e[91m'
 set +a
 
 # Source all scripts
-for filename in "$SCRIPTS_DIR"/**/*.sh; do
+for filename in "$SCRIPTS_DIR"/**/*.sh "$SCRIPTS_DIR"/shared.sh; do
 	[ -e "$filename" ] || continue
-	if [ ! -f "firefox-themer.sh" ]; then
-		source "$filename"
-	fi
+	source "$filename"
 done
 
 logo

@@ -49,7 +49,7 @@ glass_theme_firefox() {
 	# Install firefox theme
 	case "$(uname)" in
 	"Linux")
-		../../scripts/utils/firefox-themer.sh -p dev -t blurredfox
+		../../firefox-themer.sh -p dev -t blurredfox
 		;;
 	"Darwin")
 		# TODO: need to identify location on mac
@@ -74,5 +74,3 @@ glass_theme_all() {
 	glass_theme_firefox
 	# glass_theme_spotify
 }
-
-echo 'sourced glass theme'

@@ -7,6 +7,33 @@
 # @stdout Output routed to install.log
 # @stderror Output routed to install.log
 
+hypr_backup_existing() {
+	echo "Backing up existing dotfiles to $BACKUP_LOCATION"
+
+	mkdir -p "$BACKUP_LOCATION"
+
+	# backup .config
+	mv ~/.config/Kvantum "$BACKUP_LOCATION"
+	mv ~/.config/aconfmgr "$BACKUP_LOCATION"
+	mv ~/.config/gtk-2.0 "$BACKUP_LOCATION"
+	mv ~/.config/gtk-3.0 "$BACKUP_LOCATION"
+	mv ~/.config/gtk-4.0 "$BACKUP_LOCATION"
+	mv ~/.config/hypr "$BACKUP_LOCATION"
+	mv ~/.config/mako "$BACKUP_LOCATION"
+	mv ~/.config/paru "$BACKUP_LOCATION"
+	mv ~/.config/qt5ct "$BACKUP_LOCATION"
+	mv ~/.config/qt6ct "$BACKUP_LOCATION"
+	mv ~/.config/rofi "$BACKUP_LOCATION"
+	mv ~/.config/swappy "$BACKUP_LOCATION"
+	mv ~/.config/swaylock "$BACKUP_LOCATION"
+	mv ~/.config/systemd "$BACKUP_LOCATION"
+	mv ~/.config/waybar "$BACKUP_LOCATION"
+	mv ~/.config/wlogout "$BACKUP_LOCATION"
+
+	mv ~/.screenlayout/primary.sh "$BACKUP_LOCATION"
+	mv ~/.gtkrc-2.0 "$BACKUP_LOCATION"
+}
+
 hypr_create_symlink() {
 	sudo ln -s ~/.local/share/wlroots-env/ /usr/local/share/
 	sudo ln -s ~/.config/waybar/ /usr/local/share/waybar
@@ -35,6 +62,8 @@ hypr_copy_configuration() {
 }
 
 hyprland_install() {
+	hypr_backup_existing
+
 	hypr_copy_configuration
 	hypr_create_symlink
 	hypr_enable_systemd_services
