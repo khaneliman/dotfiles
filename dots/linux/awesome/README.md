@@ -9,6 +9,8 @@
 ### Standard monitor
 
 ![linux-awesomewm-tiling](../../../assets/linux-awesomewm-tiling.png)
+![linux-awesomewm-tiling](../../../assets/linux-awesomewm-tiling2.png)
+![linux-awesomewm-tiling](../../../assets/linux-awesomewm-blurredfox.png)
 ![linux-awesomewm-dolphin](../../../assets/linux-awesomewm-dolphin.png)
 ![linux-awesomewm-spotlight](../../../assets/linux-awesomewm-spotlight.png)
 ![linux-awesomewm-notifications](../../../assets/linux-awesomewm-notifications.png)
