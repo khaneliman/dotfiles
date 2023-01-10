@@ -22,3 +22,6 @@
 [submodule "dots/shared/home/.config/ranger/plugins/ranger_devicons"]
 	path = dots/shared/home/.config/ranger/plugins/ranger_devicons
 	url = https://github.com/alexanderjeurissen/ranger_devicons
+[submodule "dots/linux/awesome/home/.mozilla/firefox/profile.default/chrome"]
+	path = dots/linux/awesome/home/.mozilla/firefox/profile.default/chrome
+	url = https://github.com/khaneliman/blurredfox
