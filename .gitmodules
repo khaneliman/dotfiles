@@ -1,6 +1,7 @@
 [submodule "dots/shared/home/.config/nvim"]
 	path = dots/shared/home/.config/nvim
 	url = https://github.com/AstroNvim/AstroNvim
+	branch = v3
 [submodule "dots/linux/awesome/home/.config/awesome/awesome-wm-widgets"]
 	path = dots/linux/awesome/home/.config/awesome/awesome-wm-widgets
 	url = https://github.com/streetturtle/awesome-wm-widgets
