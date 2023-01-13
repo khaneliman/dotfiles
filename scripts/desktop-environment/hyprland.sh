@@ -8,7 +8,7 @@
 # @stderror Output routed to install.log
 
 hypr_backup_existing() {
-	echo "Backing up existing dotfiles to $BACKUP_LOCATION"
+	message "[>>] Backing up existing dotfiles to $BACKUP_LOCATION"
 
 	mkdir -p "$BACKUP_LOCATION"
 
@@ -35,6 +35,8 @@ hypr_backup_existing() {
 }
 
 hypr_create_symlink() {
+	message "[>>] Creating sym links for hyprland files"
+
 	sudo ln -s ~/.local/share/wlroots-env/ /usr/local/share/
 	sudo ln -s ~/.config/waybar/ /usr/local/share/waybar
 	sudo ln -s ~/.local/bin/Hyprland-custom /usr/local/bin/
@@ -45,6 +47,8 @@ hypr_create_symlink() {
 }
 
 hypr_enable_systemd_services() {
+	message "[>>] Enabling user systemd services for hyprland"
+
 	systemctl --user enable --now hypr-waybar.service
 	systemctl --user enable --now waybar-config.path
 	systemctl --user enable --now hypr-swayidle.service
@@ -53,6 +57,8 @@ hypr_enable_systemd_services() {
 }
 
 hypr_copy_configuration() {
+	message "[>>] Copying config files for hyprland"
+
 	# copy home folder dotfiles
 	cp -r "$DOTS_DIR"/linux/hyprland/home/. ~
 

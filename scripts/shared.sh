@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 shared_backup_existing() {
-	echo "Backing up existing dotfiles to $BACKUP_LOCATION"
+	message "[>>] Backing up existing dotfiles to $BACKUP_LOCATION"
 
 	mkdir -p "$BACKUP_LOCATION"/.local/share/
 
@@ -26,7 +26,7 @@ shared_backup_existing() {
 }
 
 correct_ssh_permissions() {
-	echo "Settings ~/.ssh permissions"
+	message "[>>] Settings ~/.ssh permissions"
 
 	chmod 700 ~/.ssh
 	chmod 600 ~/.ssh/*
@@ -34,51 +34,51 @@ correct_ssh_permissions() {
 
 install_bat_themes() {
 	if [[ $(command -v bat) ]]; then
-		echo "Installing bat theme"
+		message "[>>] Installing bat theme"
 		# bat requires cache to be rebuilt to detect themes in config directory
 		bat cache --build
 	else
-		echo 'bat not detected... installation instructions: https://github.com/sharkdp/bat#installation'
+		message '[!!] bat not detected... installation instructions: https://github.com/sharkdp/bat#installation'
 	fi
 }
 
 install_better_discord() {
 	if [[ $(command -v betterdiscordctl) ]]; then
-		echo 'Better discord detected... installing..'
+		message '[>>] Better discord detected... installing..'
 		betterdiscordctl install
 	else
-		echo 'Better Discord not detected... installation instructions: https://docs.betterdiscord.app/users/getting-started/installation'
+		message '[!!] Better Discord not detected... installation instructions: https://docs.betterdiscord.app/users/getting-started/installation'
 	fi
 }
 
 install_fish_plugins() {
 	if [[ $(command -v fish) ]]; then
-		echo "Installing fisher..."
+		message "[>>] Installing fisher..."
 		fish -c "curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher"
 
-		echo "Installing fish plugins"
-		echo "DO NOT configure Tide when prompted"
+		message "[>>] Installing fish plugins"
+		message "[>>] DO NOT configure Tide when prompted"
 
 		cp "$DOTS_DIR"/shared/home/.config/fish/fish_plugins ~/.config/fish/
 
 		fish -c "fisher update"
 	else
-		echo 'Fish not detected... installation instructions: https://fishshell.com/'
+		message '[!!] Fish not detected... installation instructions: https://fishshell.com/'
 	fi
 }
 
 install_spicetify() {
 	if [[ $(command -v spicetify) ]]; then
 
-		echo 'Spicetify detected.. configuring and setting theme'
+		message '[>>] Spicetify detected.. configuring and setting theme'
 
 		if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 
-			echo 'Linux detected.. checking for spotify installations'
+			message '[>>] Linux detected.. checking for spotify installations'
 
 			# Spotify path
 			if [[ -d "/opt/spotify/" ]]; then
-				echo 'Spotify detected in /opt/spotify.. setting permissions and spotify_path'
+				message '[>>] Spotify detected in /opt/spotify.. setting permissions and spotify_path'
 
 				sudo chmod a+wr /opt/spotify
 				sudo chmod a+wr /opt/spotify/Apps -R
@@ -86,7 +86,7 @@ install_spicetify() {
 				command -v spicetify && spicetify config spotify_path /opt/spotify/
 
 			elif [[ -d "/usr/share/spotify" ]]; then
-				echo 'Spotify detected in /usr/share/spotify.. settings permissions and spotify_path'
+				message '[>>] Spotify detected in /usr/share/spotify.. settings permissions and spotify_path'
 
 				sudo chmod a+wr /usr/share/spotify
 				sudo chmod a+wr /usr/share/spotify/Apps -R
@@ -94,7 +94,7 @@ install_spicetify() {
 				command -v spicetify && spicetify config spotify_path /usr/share/spotify
 
 			elif [[ -d "$HOME/.var/app/com.spotify.Client/config/spotify" ]]; then
-				echo 'Spotify detected in ~/.var/app/com.spotify.Client/config/spotify.. settings permissions and spotify_path'
+				message '[>>] Spotify detected in ~/.var/app/com.spotify.Client/config/spotify.. settings permissions and spotify_path'
 
 				sudo chmod a+wr ~/.var/app/com.spotify.Client/config/spotify
 				sudo chmod a+wr ~/.var/app/com.spotify.Client/config/spotify/Apps -R
@@ -104,12 +104,12 @@ install_spicetify() {
 
 			# Preferences path
 			if [[ -f "$HOME/.config.spotify/prefs" ]]; then
-				echo 'Spotify prefs found at ~/.config/spotify/prefs... settings prefs_path'
+				message '[>>] Spotify prefs found at ~/.config/spotify/prefs... settings prefs_path'
 
 				command -v spicetify && spicetify config prefs_path ~/.config/spotify/prefs
 
 			elif [[ -f "$HOME/.var/app/com.spotify.Client/config/spotify/prefs" ]]; then
-				echo 'Spotify prefs found at ~/.var/app/com.spotify.Client/config/spotify/prefs... settings prefs_path'
+				message '[>>] Spotify prefs found at ~/.var/app/com.spotify.Client/config/spotify/prefs... settings prefs_path'
 
 				command -v spicetify && spicetify config prefs_path ~/.var/app/com.spotify.Client/config/spotify/prefs
 			fi
@@ -117,18 +117,18 @@ install_spicetify() {
 
 		if [[ "$OSTYPE" == "darwin"* ]]; then
 
-			echo 'macOS detected.. checking for spotify installations'
+			message '[>>] macOS detected.. checking for spotify installations'
 
 			# Spotify path
 			if [[ -d "/Applications/Spotify.app/" ]]; then
-				echo 'Spotify detected in /Applications/Spotify.app/.. setting spotify_path'
+				message '[>>] Spotify detected in /Applications/Spotify.app/.. setting spotify_path'
 
 				command -v spicetify && spicetify config spotify_path /Applications/Spotify.app/Contents/Resources
 			fi
 
 			# Preferences path
 			if [[ -f "$HOME/Library/Application Support/Spotify/prefs" ]]; then
-				echo 'Spotify prefs found at ~/Library/Application Support/Spotify/prefs... settings prefs_path'
+				message '[>>] Spotify prefs found at ~/Library/Application Support/Spotify/prefs... settings prefs_path'
 
 				command -v spicetify && spicetify config prefs_path "$HOME/Library/Application Support/Spotify/prefs"
 			fi
@@ -141,16 +141,20 @@ install_spicetify() {
 		spicetify backup apply
 		spicetify apply
 	else
-		echo 'Spicetify not detected... installation instructions: https://spicetify.app/docs/advanced-usage/installation/'
+		message '[!!] Spicetify not detected... installation instructions: https://spicetify.app/docs/advanced-usage/installation/'
 	fi
 }
 
 initialize_submodules() {
+	message '[>>] Pulling submodules'
+
 	git submodule update --init --recursive --remote
 	git pull --recurse-submodules
 }
 
 shared_copy_configuration() {
+	message '[>>] Copying shared config files'
+
 	# copy home folder dotfiles
 	cp -r "$DOTS_DIR"/shared/home/. ~
 }

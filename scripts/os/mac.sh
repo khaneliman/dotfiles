@@ -2,20 +2,20 @@
 
 brew_install() {
 	# Install Brew
-	echo "Installing Brew..."
+	message "[>>] Installing Brew..."
 
 	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 	brew analytics off
 }
 
 bundle_install() {
-	echo "Installing taps, brews, casks, and apps... "
+	message "[>>] Installing taps, brews, casks, and apps... "
 
 	brew bundle --file ./mac/Brewfile
 }
 
 change_defaults() {
-	echo "Changing macOS defaults..."
+	message "[>>] Changing macOS defaults..."
 
 	defaults write NSGlobalDomain AppleAccentColor -int 1
 	defaults write NSGlobalDomain AppleHighlightColor -string "0.65098 0.85490 0.58431"
@@ -55,7 +55,7 @@ change_defaults() {
 
 enable_brew_servies() {
 	# Start Services
-	echo "Starting Services (grant permissions)..."
+	message "[>>] Starting Services (grant permissions)..."
 	brew services start skhd
 	brew services start yabai
 	brew services start sketchybar

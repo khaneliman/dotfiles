@@ -8,6 +8,8 @@
 # @stderror Output routed to install.log
 
 awesome_copy_configuration() {
+	message "[>>] Copying config files for awesomewm"
+
 	# copy home folder dotfiles
 	cp -r "$DOTS_DIR"/linux/awesome/home/. ~
 

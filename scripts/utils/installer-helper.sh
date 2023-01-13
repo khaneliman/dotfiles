@@ -49,6 +49,10 @@ logo() {
 "
 }
 
+message() {
+	printf "%s\n" "$*" >&2
+}
+
 # @description Select multiple options
 # @noargs
 function multiselect {
