@@ -3,7 +3,7 @@
 shared_backup_existing() {
 	echo "Backing up existing dotfiles to $BACKUP_LOCATION"
 
-	mkdir -p "$BACKUP_LOCATION"
+	mkdir -p "$BACKUP_LOCATION"/.local/share/
 
 	# backup .config
 	mv ~/.config/alacritty "$BACKUP_LOCATION"/.config/
@@ -16,7 +16,7 @@ shared_backup_existing() {
 	mv ~/.config/kitty "$BACKUP_LOCATION"/.config/
 	mv ~/.config/micro "$BACKUP_LOCATION"/.config/
 	mv ~/.config/nvim "$BACKUP_LOCATION"/.config/
-	mv ~/.local/share/nvim "$BACKUP_LOCATION/.local/share/"
+	mv ~/.local/share/nvim "$BACKUP_LOCATION"/.local/share/nvim/
 	mv ~/.config/ranger "$BACKUP_LOCATION"/.config/
 	mv ~/.config/spicetify "$BACKUP_LOCATION"/.config/
 
@@ -33,29 +33,38 @@ correct_ssh_permissions() {
 }
 
 install_bat_themes() {
-	echo "Installing bat theme"
-
-	# bat requires cache to be rebuilt to detect themes in config directory
-	bat cache --build
+	if [[ $(command -v bat) ]]; then
+		echo "Installing bat theme"
+		# bat requires cache to be rebuilt to detect themes in config directory
+		bat cache --build
+	else
+		echo 'bat not detected... installation instructions: https://github.com/sharkdp/bat#installation'
+	fi
 }
 
 install_better_discord() {
 	if [[ $(command -v betterdiscordctl) ]]; then
 		echo 'Better discord detected... installing..'
 		betterdiscordctl install
+	else
+		echo 'Better Discord not detected... installation instructions: https://docs.betterdiscord.app/users/getting-started/installation'
 	fi
 }
 
 install_fish_plugins() {
-	echo "Installing fisher..."
-	fish -c "curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher"
+	if [[ $(command -v fish) ]]; then
+		echo "Installing fisher..."
+		fish -c "curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher"
 
-	echo "Installing fish plugins"
-	echo "DO NOT configure Tide when prompted"
+		echo "Installing fish plugins"
+		echo "DO NOT configure Tide when prompted"
 
-	cp "$DOTS_DIR"/shared/home/.config/fish/fish_plugins ~/.config/fish/
+		cp "$DOTS_DIR"/shared/home/.config/fish/fish_plugins ~/.config/fish/
 
-	fish -c "fisher update"
+		fish -c "fisher update"
+	else
+		echo 'Fish not detected... installation instructions: https://fishshell.com/'
+	fi
 }
 
 install_spicetify() {
@@ -131,11 +140,13 @@ install_spicetify() {
 
 		spicetify backup apply
 		spicetify apply
+	else
+		echo 'Spicetify not detected... installation instructions: https://spicetify.app/docs/advanced-usage/installation/'
 	fi
 }
 
 initialize_submodules() {
-	git submodule update --init --recursive
+	git submodule update --init --recursive --remote
 	git pull --recurse-submodules
 }
 
