@@ -134,7 +134,8 @@ install_spicetify() {
 }
 
 initialize_submodules() {
-	cd "$DOTS_DIR"/shared/home/.config/nvim/ && git submodule update --init
+	git submodule update --init --recursive
+	git pull --recurse-submodules
 }
 
 shared_copy_configuration() {
