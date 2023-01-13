@@ -6,18 +6,19 @@ shared_backup_existing() {
 	mkdir -p "$BACKUP_LOCATION"
 
 	# backup .config
-	mv ~/.config/alacritty "$BACKUP_LOCATION"
-	mv ~/.config/astronvim "$BACKUP_LOCATION"
-	mv ~/.config/bat "$BACKUP_LOCATION"
-	mv ~/.config/btop "$BACKUP_LOCATION"
-	mv ~/.config/davmail "$BACKUP_LOCATION"
-	mv ~/.config/fastfetch "$BACKUP_LOCATION"
-	mv ~/.config/fish "$BACKUP_LOCATION"
-	mv ~/.config/kitty "$BACKUP_LOCATION"
-	mv ~/.config/micro "$BACKUP_LOCATION"
-	mv ~/.config/nvim "$BACKUP_LOCATION"
-	mv ~/.config/ranger "$BACKUP_LOCATION"
-	mv ~/.config/spicetify "$BACKUP_LOCATION"
+	mv ~/.config/alacritty "$BACKUP_LOCATION"/.config/
+	mv ~/.config/astronvim "$BACKUP_LOCATION"/.config/
+	mv ~/.config/bat "$BACKUP_LOCATION"/.config/
+	mv ~/.config/btop "$BACKUP_LOCATION"/.config/
+	mv ~/.config/davmail "$BACKUP_LOCATION"/.config/
+	mv ~/.config/fastfetch "$BACKUP_LOCATION"/.config/
+	mv ~/.config/fish "$BACKUP_LOCATION"/.config/
+	mv ~/.config/kitty "$BACKUP_LOCATION"/.config/
+	mv ~/.config/micro "$BACKUP_LOCATION"/.config/
+	mv ~/.config/nvim "$BACKUP_LOCATION"/.config/
+	mv ~/.local/share/nvim "$BACKUP_LOCATION/.local/share/"
+	mv ~/.config/ranger "$BACKUP_LOCATION"/.config/
+	mv ~/.config/spicetify "$BACKUP_LOCATION"/.config/
 
 	mv ~/.gnupg "$BACKUP_LOCATION"
 	mv ~/.ssh "$BACKUP_LOCATION"
