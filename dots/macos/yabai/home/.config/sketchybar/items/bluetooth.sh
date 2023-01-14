@@ -1,22 +1,24 @@
 #!/usr/bin/env sh
 
-sketchybar --add alias "Control Center,Bluetooth" right                                     \
-           --rename "Control Center,Bluetooth" bluetooth_alias                              \
-           --set        bluetooth_alias   icon.drawing=off                                  \
-                                          label.drawing=off                                 \
+sketchybar --add alias 	"Control Center,Bluetooth" 	right                                   \
+           --rename 		"Control Center,Bluetooth" 	bluetooth.alias                         \
+           --set        bluetooth.alias   icon.drawing=off                                  \
                                           alias.color="$PEACH"                              \
                                           background.padding_right=0                        \
                                           align=right                                       \
-                                          script="$PLUGIN_DIR/bluetooth.sh"                 \
                                           click_script="$PLUGIN_DIR/bluetooth_click.sh"     \
-            --subscribe  bluetooth_alias  mouse.entered                                     \
+                                          script="$PLUGIN_DIR/bluetooth.sh"                 \
+                                          popup.horizontal=false                            \
+                                          popup.height=30                                   \
+                                      		update_freq=1                      								\
+            --subscribe  bluetooth.alias  mouse.entered                                     \
                                           mouse.exited                                      \
                                           mouse.exited.global                               \
                                                                                             \
-            --add       item              bluetooth.template popup.bluetooth_alias          \
-            --set                         bluetooth.template drawing=off                    \
-                                          background.corner_radius=12                       \
+            --add       item              bluetooth.details popup.bluetooth.alias          	\
+            --set       bluetooth.details	background.corner_radius=12                       \
                                           background.padding_left=7                         \
                                           background.padding_right=7                        \
                                           icon.background.height=2                          \
-                                          icon.background.y_offset=-12
+                                          icon.background.y_offset=-12      								\
+                                      		click_script="sketchybar --set bluetooth.alias popup.drawing=off"

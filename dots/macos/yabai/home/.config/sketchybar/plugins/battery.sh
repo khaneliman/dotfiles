@@ -2,9 +2,6 @@
 
 source "$HOME/.config/sketchybar/colors.sh"
 
-BATT_PERCENT=$(pmset -g batt | grep -Eo "\d+%" | cut -d% -f1)
-CHARGING=$(pmset -g batt | grep 'AC Power')
-
 render_bar_item() {
         sketchybar --set "${NAME}" icon.color=0xff989898
 
@@ -47,20 +44,19 @@ render_bar_item() {
 }
 
 render_popup() {
-        args+=(--remove '/battery.notification\.*/')
 
-        args+=( --clone battery.notification.0 battery.template                                         \
-                --set  battery.notification.0                                                           \
-                                            label="${BATT_PERCENT}%"                                    \
-                                            label.padding_right=0                                       \
-                                            position=popup."$NAME"                                      \
-                                            drawing=on                                                  \
-                                            click_script="sketchybar --set $NAME popup.drawing=off")
+        args+=(--set  battery.details                                                           \
+                                    label="${BATT_PERCENT}%"                                    \
+                                    label.padding_right=0                                       \
+                                    click_script="sketchybar --set $NAME popup.drawing=off")
 
         sketchybar -m "${args[@]}" > /dev/null
 }
 
 update() {
+        BATT_PERCENT=$(pmset -g batt | grep -Eo "\d+%" | cut -d% -f1)
+        CHARGING=$(pmset -g batt | grep 'AC Power')
+
         render_bar_item
         render_popup
 }

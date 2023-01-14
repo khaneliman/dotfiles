@@ -8,5 +8,5 @@ sketchybar --add item        memory right                 \
                              icon="$MEMORY"               \
                              icon.font="$FONT:Bold:16.0"  \
                              icon.color="$GREEN"          \
-                             update_freq=2                \
+                             update_freq=15               \
                              script="$PLUGIN_DIR/ram.sh"

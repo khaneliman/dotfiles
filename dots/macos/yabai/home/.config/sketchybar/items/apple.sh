@@ -10,6 +10,8 @@ sketchybar --add item           apple.logo left                             \
                                 background.padding_right=15                 \
                                 label.drawing=off                           \
                                 click_script="$POPUP_CLICK_SCRIPT"          \
+                                popup.horizontal=false                      \
+                                popup.height=30                             \
                                                                             \
            --add item           apple.prefs popup.apple.logo                \
            --set apple.prefs    icon="$PREFERENCES"                         \
@@ -27,4 +29,5 @@ sketchybar --add item           apple.logo left                             \
            --set apple.lock     icon="$LOCK"                                \
                                 label="Lock Screen"                         \
                                 click_script="pmset displaysleepnow;
-                                              $POPUP_OFF"
+                                              $POPUP_OFF" \
+                                               

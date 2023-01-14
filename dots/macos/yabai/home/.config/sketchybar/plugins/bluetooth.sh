@@ -5,41 +5,46 @@ source "$HOME/.config/sketchybar/icons.sh"
 
 PAIRED="$(blueutil --paired)"
 CONNECTED="$(blueutil --connected)"
-COUNT="$("$CONNECTED" | grep "^.*$" -c)"
+COUNT_PAIRED="$(echo "$PAIRED" | grep "^.*$" -c)"
+COUNT_CONNECTED="$(echo "$CONNECTED" | grep "^.*$" -c)"
 
 render_bar_item() {
-  if [ "$CONNECTED" = "" ]; then
+  if [ "$PAIRED" = "" ]; then
     args+=(--set "$NAME" label.drawing=off)
   else
-    args+=(--set "$NAME" label="$COUNT" label.drawing=on)
+    args+=(--set "$NAME" label="$COUNT_PAIRED" label.drawing=off)
   fi
 }
 
 render_popup() {
-  args+=(--remove '/bluetooth.notification\.*/')
-
-  args+=(--clone bluetooth.notification.0 bluetooth.template                                          \
-         --set  bluetooth.notification.0                                                              \
+  args+=(                                          \
+         --set  bluetooth.details                                                              \
                                             label="$(echo -e 'Paired Devices')"                       \
                                             label.padding_right="$PADDING"                            \
-                                            position=popup."$NAME"                                    \
-                                            drawing=on                                                \
+                                            icon.drawing=off \
                                             click_script="sketchybar --set $NAME popup.drawing=off")
 
 
-  COUNTER=1
+  COUNTER=0
   
   while read -r device 
   do
+
     COUNTER=$((COUNTER + 1))
     PADDING=0
+  
+    # if [ "$COUNT_PAIRED" -ne "$PREV_COUNT" ] 2>/dev/null || [ "$SENDER" = "forced" ]; then
+      args+=(--remove '/bluetooth.notification\.*/')
+      args+=(--clone  bluetooth.notification."$COUNTER" bluetooth.details)
+    # fi
     
-    args+=(--clone  bluetooth.notification."$COUNTER" bluetooth.template                                \
-           --set    bluetooth.notification."$COUNTER"                                                   \
+    args+=(--set    bluetooth.notification."$COUNTER"                                                   \
                                             label="$(echo "$device" | grep -Eo '".*."')"                \
-                                            label.padding_right="$PADDING"                              \
+                                            label.padding_right=0                                       \
                                             position=popup."$NAME"                                      \
-                                            drawing=on                                                  \
+                                            label.align=left                                            \
+                                            icon="$COUNT_PAIRED : $PREV_COUNT"                          \
+                                            icon.drawing=off                                             \
                                             click_script="sketchybar --set $NAME popup.drawing=off")
 	done <<<"$(echo -e "$PAIRED")"
 
@@ -50,12 +55,13 @@ render_popup() {
 update() {
   args=()
 
+  PREV_COUNT=$(sketchybar --query "$NAME" | jq -r .label.value)
+
   render_bar_item
   render_popup
 
-  PREV_COUNT=$(sketchybar --query "$NAME" | jq -r .label.value)
   
-  if [ "$COUNT" -gt "$PREV_COUNT" ] 2>/dev/null || [ "$SENDER" = "forced" ]; then
+  if [ "$COUNT_PAIRED" -gt "$PREV_COUNT" ] 2>/dev/null || [ "$SENDER" = "forced" ]; then
     sketchybar --animate tanh 15 --set "$NAME" label.y_offset=5 label.y_offset=0
   fi
 }
