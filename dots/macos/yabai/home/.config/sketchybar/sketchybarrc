@@ -2,6 +2,7 @@
 
 source "$HOME/.config/sketchybar/colors.sh" # Loads all defined colors
 source "$HOME/.config/sketchybar/icons.sh"  # Loads all defined icons
+source "$HOME/.config/sketchybar/userconfig.sh"  # Loads all defined icons
 
 # Setting up and starting the helper process
 HELPER=git.felix.helper
@@ -22,9 +23,7 @@ killall islandhelper
 cd "$DYNAMIC_ISLAND_DIR"/helper && make
 "$DYNAMIC_ISLAND_DIR"/helper/islandhelper "$ISLANDHELPER" &
 
-FONT="SF Pro" # Needs to have Regular, Bold, Semibold, Heavy and Black variants
-NERD_FONT="Liga SFMono Nerd Font"
-PADDINGS=3    # All paddings use this value (icon, label, background)
+
 
 # Unload the macOS on screen indicator overlay for volume change
 launchctl unload -F /System/Library/LaunchAgents/com.apple.OSDUIHelper.plist >/dev/null 2>&1 &

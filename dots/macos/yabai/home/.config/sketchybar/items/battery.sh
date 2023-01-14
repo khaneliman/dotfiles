@@ -8,7 +8,8 @@ sketchybar -m --add item    battery right 																		                  \
                                                                                                 \
               --add         item              battery.details popup.battery                     \
               --set         battery.details   background.corner_radius=12                       \
-                                              background.padding_left=7                         \
-                                              background.padding_right=7                        \
+                                              background.padding_left=5                         \
+                                              background.padding_right=10                       \
                                               icon.background.height=2                          \
-                                              icon.background.y_offset=-12
+                                              icon.background.y_offset=-12                      
+                                             

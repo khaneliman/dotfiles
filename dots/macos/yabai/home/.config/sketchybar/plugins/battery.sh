@@ -2,6 +2,9 @@
 
 source "$HOME/.config/sketchybar/colors.sh"
 
+BATT_PERCENT=$(pmset -g batt | grep -Eo "\d+%" | cut -d% -f1)
+CHARGING=$(pmset -g batt | grep 'AC Power')
+
 render_bar_item() {
         sketchybar --set "${NAME}" icon.color=0xff989898
 
@@ -40,7 +43,12 @@ render_bar_item() {
         esac
 
         sketchybar --set "${NAME}" icon="${ICON}" icon.color="${COLOR}"
-        # sketchybar --set "${NAME}" label="${BATT_PERCENT}%" # uncomment if you want to always see the percent remaining
+
+        if [[ "$BATT_PERCENT" -lt 50 ]]; then 
+                sketchybar --set "${NAME}" label="${BATT_PERCENT}%"
+        else 
+                sketchybar --set "${NAME}" label.drawing=off
+        fi
 }
 
 render_popup() {
@@ -48,21 +56,22 @@ render_popup() {
         args+=(--set  battery.details                                                           \
                                     label="${BATT_PERCENT}%"                                    \
                                     label.padding_right=0                                       \
+                                    label.padding_right=0                                       \
+                                    label.align=center \
                                     click_script="sketchybar --set $NAME popup.drawing=off")
 
         sketchybar -m "${args[@]}" > /dev/null
 }
 
 update() {
-        BATT_PERCENT=$(pmset -g batt | grep -Eo "\d+%" | cut -d% -f1)
-        CHARGING=$(pmset -g batt | grep 'AC Power')
-
         render_bar_item
         render_popup
 }
 
 popup() {
-        sketchybar --set "$NAME" popup.drawing="$1"
+        if [[ "$BATT_PERCENT" -gt 50 ]]; then         
+                sketchybar --set "$NAME" popup.drawing="$1"
+        fi
 }
 
 case "$SENDER" in

@@ -2,6 +2,7 @@
 
 source "$HOME/.config/sketchybar/colors.sh"
 source "$HOME/.config/sketchybar/icons.sh"
+source "$HOME/.config/sketchybar/userconfig.sh"  # Loads all defined icons
 
 render_bar_item() {
   if [ "$PAIRED" = "" ]; then
@@ -14,7 +15,8 @@ render_bar_item() {
 add_paired_header() {
 sketchybar -m --set  bluetooth.details                                                      \
                                   label="$(echo -e 'Paired Devices')"                       \
-                                  label.padding_right="$PADDING"                            \
+																	label.font="$FONT:Bold:14.0" 															\
+																	label.align=left 																					\
                                   icon.drawing=off 																					\
                                   click_script="sketchybar --set $NAME popup.drawing=off"
 
@@ -43,12 +45,11 @@ render_popup() {
   	fi
    
    	echo "Updating existing device"
-    sketchybar -m --set    bluetooth.device."$COUNTER"                                  \
+    sketchybar -m --set    bluetooth.device."$COUNTER"                                  			\
                               		label="$(echo "$device" | grep -Eo '".*."')"                \
-                              		label.padding_right=0                                       \
-                              		label.align=left                                            \
+                              		label.align=right                                           \
                               		icon="$COUNT_PAIRED : $PREV_COUNT"                          \
-                              		icon.drawing=off                                             \
+                              		icon.drawing=off                                            \
                               		click_script="sketchybar --set $NAME popup.drawing=off"
     COUNTER=$((COUNTER + 1))
 

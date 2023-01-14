@@ -107,3 +107,11 @@ export P_DYNAMIC_ISLAND_COLOR_WHITE=0xffffffff
 export P_DYNAMIC_ISLAND_COLOR_BLACK=0xff000000
 export P_DYNAMIC_ISLAND_COLOR_TRANSPARENT=0x00000000
 export P_DYNAMIC_ISLAND_COLOR_ICON_HIDDEN=$P_DYNAMIC_ISLAND_COLOR_BLACK
+
+#
+## Fonts
+#
+export FONT="SF Pro" # Needs to have Regular, Bold, Semibold, Heavy and Black variants
+export NERD_FONT="Liga SFMono Nerd Font"
+
+export PADDINGS=3    # All paddings use this value (icon, label, background)
