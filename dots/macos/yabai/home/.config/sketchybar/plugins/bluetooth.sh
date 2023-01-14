@@ -26,12 +26,8 @@ render_popup() {
   add_paired_header 
 
   COUNTER=0
- 
- 	echo "$COUNT_CONNECTED"
- 	echo "$PREV_COUNT"
 
   if [ "$COUNT_PAIRED" -lt "$PREV_COUNT" ]; then
-  	echo "Removing existing devices"
   	sketchybar -m --remove '/bluetooth.device\.*/'
   fi
 
@@ -40,11 +36,9 @@ render_popup() {
   	PADDING=0
 
     if [ "$COUNT_PAIRED" -gt "$PREV_COUNT" ]; then
-    	echo "Adding new device"
       sketchybar -m --add item  bluetooth.device."$COUNTER" popup."$NAME"
   	fi
    
-   	echo "Updating existing device"
     sketchybar -m --set    bluetooth.device."$COUNTER"                                  			\
                               		label="$(echo "$device" | grep -Eo '".*."')"                \
                               		label.align=right                                           \

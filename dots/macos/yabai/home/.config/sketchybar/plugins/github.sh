@@ -12,7 +12,6 @@ render_bar_item() {
   else
     args+=(--set "$NAME" icon="$BELL_DOT" label="$COUNT")
   fi
-
 }
 
 render_popup() {
