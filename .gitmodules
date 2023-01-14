@@ -26,3 +26,6 @@
 [submodule "dots/shared/firefox-themes/blurredfox"]
 	path = dots/shared/firefox-themes/blurredfox
 	url = https://github.com/khaneliman/blurredfox
+[submodule "dots/macos/yabai/home/.config/sketchybar/helper/sketchybarhelper"]
+	path = dots/macos/yabai/home/.config/sketchybar/helper/sketchybarhelper
+	url = https://github.com/FelixKratz/SketchyBarHelper.git
