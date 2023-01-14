@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-POPUP_CLICK_SCRIPT="sketchybar --set \$NAME popup.drawing=toggle"
+POPUP_CLICK_SCRIPT="sketchybar --set $NAME popup.drawing=toggle"
 
 sketchybar --add alias  "Control Center,WiFi" right                      \
            --rename     "Control Center,WiFi" wifi.alias                 \

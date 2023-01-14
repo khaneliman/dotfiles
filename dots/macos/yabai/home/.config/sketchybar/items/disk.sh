@@ -7,5 +7,5 @@ sketchybar --add item        disk right                       \
                              label.color="$TEXT"             	\
                              icon="$DISK"                     \
                              icon.color="$MAROON"            	\
-                             update_freq=60                   \
+                             update_freq=60                  \
                              script="$PLUGIN_DIR/disk.sh"
