@@ -5,6 +5,7 @@ return {
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		"nvim-treesitter/nvim-treesitter-refactor",
 		"nvim-treesitter/nvim-treesitter-context",
+		"khaveesh/vim-fish-syntax",
 	},
 
 	opts = function(_, opts)
@@ -21,15 +22,20 @@ return {
 			"gitcommit",
 			"gitignore",
 			"html",
+			"javascript",
+			"jq",
 			"json",
+			"llvm",
 			"lua",
 			"markdown",
 			"python",
 			"rasi",
+			"regex",
 			"rust",
 			"sql",
 			"typescript",
 			"vim",
+			"yaml",
 		}
 
 		opts.auto_install = vim.fn.executable("tree-sitter") == 1
