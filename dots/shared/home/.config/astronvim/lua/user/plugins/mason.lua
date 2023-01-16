@@ -61,6 +61,7 @@ return {
 				"firefox",
 				"node2",
 				"python",
+				"js",
 			}
 			return opts
 		end,
