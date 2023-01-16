@@ -35,10 +35,15 @@ return {
 			end,
 			desc = "File",
 		},
+
+		-- Telescope
 		["<leader>fe"] = { "<cmd>Telescope file_browser<cr>", desc = "Find in Explorer" },
 		["<leader>fd"] = { "<cmd>Telescope dir live_grep<cr>", desc = "Find relative files" },
 		["<leader>fM"] = { "<cmd>Telescope media_files<cr>", desc = "Find media" },
 		["<leader>fp"] = { "<cmd>Telescope projects<cr>", desc = "Find projects" },
+
+		-- UI
+		["<leader>uz"] = { "<cmd>ZenMode<cr>", desc = "Toggle Zen Mode" },
 	},
 }
 -- return {
