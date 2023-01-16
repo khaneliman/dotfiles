@@ -5,5 +5,5 @@ return {
   emoji = 700,
   calc = 650,
   path = 500,
-  buffer = 250
+  buffer = 250,
 }
