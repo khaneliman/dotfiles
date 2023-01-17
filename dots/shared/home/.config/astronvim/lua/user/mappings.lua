@@ -44,120 +44,95 @@ return {
 
 		-- UI
 		["<leader>uz"] = { "<cmd>ZenMode<cr>", desc = "Toggle Zen Mode" },
+
+		-- Navigate buffer
+		["<leader>s"] = { name = "Surf" },
+		["<leader>ss"] = {
+			function()
+				require("syntax-tree-surfer").select()
+			end,
+			desc = "Surf",
+		},
+		["<leader>sS"] = {
+			function()
+				require("syntax-tree-surfer").select_current_node()
+			end,
+			desc = "Surf Node",
+		},
+		["<leader>sv"] = {
+			function()
+				require("syntax-tree-surfer").targeted_jump({
+					"variable_declaration",
+				})
+			end,
+			desc = "Go to Variables",
+		},
+		["<leader>sf"] = {
+			function()
+				require("syntax-tree-surfer").targeted_jump({ "function" })
+			end,
+			desc = "Go to Functions",
+		},
+		["<leader>si"] = {
+			function()
+				require("syntax-tree-surfer").targeted_jump({
+					"if_statement",
+					"else_clause",
+					"else_statement",
+					"elseif_statement",
+				})
+			end,
+			desc = "Go to If Statements",
+		},
+		["<leader>sr"] = {
+			function()
+				require("syntax-tree-surfer").targeted_jump({
+					"for_statement",
+				})
+			end,
+			desc = "Go to For Statements",
+		},
+		["<leader>sw"] = {
+			function()
+				require("syntax-tree-surfer").targeted_jump({
+					"white_statement",
+				})
+			end,
+			desc = "Go to While Statements",
+		},
+		["<leader>sc"] = {
+			function()
+				require("syntax-tree-surfer").targeted_jump({
+					"switch_statement",
+				})
+			end,
+			desc = "Go to Switch Statements",
+		},
+		["<leader>st"] = {
+			function()
+				require("syntax-tree-surfer").targeted_jump({
+					"function",
+					"if_statement",
+					"else_clause",
+					"else_statement",
+					"elseif_statement",
+					"for_statement",
+					"while_statement",
+					"switch_statement",
+				})
+			end,
+			desc = "Go to Statement",
+		},
+		-- i = {
+		-- 		["<c-d>"] = {
+		-- 			n = { "<c-r>=strftime('%Y-%m-%d')<cr>", name = "Y-m-d" },
+		-- 			x = { "<c-r>=strftime('%m/%d/%y')<cr>", name = "m/d/y" },
+		-- 			f = { "<c-r>=strftime('%B %d, %Y')<cr>", name = "B d, Y" },
+		-- 			X = { "<c-r>=strftime('%H:%M')<cr>", name = "H:M" },
+		-- 			F = { "<c-r>=strftime('%H:%M:%S')<cr>", name = "H:M:S" },
+		-- 			d = { "<c-r>=strftime('%Y/%m/%d %H:%M:%S -')<cr>", name = "Y/m/d H:M:S -" },
+		-- 		},
+		-- 	},
+		-- }
 	},
 }
--- return {
--- 	n = {
--- 		["<leader>"] = {
---
--- 			u = {
--- 				t = { "<cmd>Telescope colorscheme<cr>", name = "Change Theme" },
--- 			},
---
--- 			n = {
--- 				name = "Navigate",
--- 				s = {
--- 					function()
--- 						require("syntax-tree-surfer").select()
--- 					end,
--- 					name = "Surf",
--- 				},
--- 				S = {
--- 					function()
--- 						require("syntax-tree-surfer").select_current_node()
--- 					end,
--- 					name = "Surf Node",
--- 				},
--- 				v = {
--- 					function()
--- 						require("syntax-tree-surfer").targeted_jump({
--- 							"variable_declaration",
--- 						})
--- 					end,
--- 					name = "Go to Variables",
--- 				},
--- 				f = {
--- 					function()
--- 						require("syntax-tree-surfer").targeted_jump({ "function" })
--- 					end,
--- 					name = "Go to Functions",
--- 				},
--- 				i = {
--- 					function()
--- 						require("syntax-tree-surfer").targeted_jump({
--- 							"if_statement",
--- 							"else_clause",
--- 							"else_statement",
--- 							"elseif_statement",
--- 						})
--- 					end,
--- 					name = "Go to If Statements",
--- 				},
--- 				r = {
--- 					function()
--- 						require("syntax-tree-surfer").targeted_jump({
--- 							"for_statement",
--- 						})
--- 					end,
--- 					name = "Go to For Statements",
--- 				},
--- 				w = {
--- 					function()
--- 						require("syntax-tree-surfer").targeted_jump({
--- 							"white_statement",
--- 						})
--- 					end,
--- 					name = "Go to While Statements",
--- 				},
--- 				c = {
--- 					function()
--- 						require("syntax-tree-surfer").targeted_jump({
--- 							"switch_statement",
--- 						})
--- 					end,
--- 					name = "Go to Switch Statements",
--- 				},
--- 				t = {
--- 					function()
--- 						require("syntax-tree-surfer").targeted_jump({
--- 							"function",
--- 							"if_statement",
--- 							"else_clause",
--- 							"else_statement",
--- 							"elseif_statement",
--- 							"for_statement",
--- 							"while_statement",
--- 							"switch_statement",
--- 						})
--- 					end,
--- 					name = "Go to Statement",
--- 				},
--- 			},
--- 		},
---
--- 		["]"] = {
--- 			f = "Next function start",
--- 			x = "Next class start",
--- 			F = "Next function end",
--- 			X = "Next class end",
--- 		},
---
--- 		["["] = {
--- 			f = "Previous function start",
--- 			x = "Previous class start",
--- 			F = "Previous function end",
--- 			X = "Previous class end",
--- 		},
--- 	},
---
--- 	i = {
--- 		["<c-d>"] = {
--- 			n = { "<c-r>=strftime('%Y-%m-%d')<cr>", name = "Y-m-d" },
--- 			x = { "<c-r>=strftime('%m/%d/%y')<cr>", name = "m/d/y" },
--- 			f = { "<c-r>=strftime('%B %d, %Y')<cr>", name = "B d, Y" },
--- 			X = { "<c-r>=strftime('%H:%M')<cr>", name = "H:M" },
--- 			F = { "<c-r>=strftime('%H:%M:%S')<cr>", name = "H:M:S" },
--- 			d = { "<c-r>=strftime('%Y/%m/%d %H:%M:%S -')<cr>", name = "Y/m/d H:M:S -" },
--- 		},
--- 	},
--- }
