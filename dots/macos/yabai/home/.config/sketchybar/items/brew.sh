@@ -5,24 +5,24 @@
 
 POPUP_CLICK_SCRIPT="sketchybar --set $NAME popup.drawing=toggle"
 
-sketchybar  --add event brew_update                   	\
-            --add item 	brew right                     	\
-            --set brew 	script="$PLUGIN_DIR/brew.sh"   	\
-                        click_script="$POPUP_CLICK_SCRIPT" \
-                      	icon=􀐛                          \
-                      	label=?                         \
-                      	popup.horizontal=false          \
-                        popup.height=20                 \
-                      	update_freq=30 									\
-                      	                                \
-            --subscribe brew  brew_update               \
-                              mouse.entered             \
-                              mouse.exited              \
-                              mouse.exited.global       \
-                                                                                            \
-            --add       item              brew.details popup.brew          	                \
-            --set       brew.details	    background.corner_radius=12                       \
-                                          background.padding_left=5                         \
-                                          background.padding_right=10                       \
+sketchybar  --add event brew_update                   	    \
+            --add item 	brew right                     	    \
+            --set brew 	script="$PLUGIN_DIR/brew.sh"   	    \
+                        click_script="$POPUP_CLICK_SCRIPT"  \
+                      	icon=􀐛                              \
+                      	label=?                             \
+                      	update_freq=30 									    \
+                        popup.align=right                   \
+                        popup.height=20                     \
+                      	                                    \
+            --subscribe brew  brew_update                   \
+                              mouse.entered                 \
+                              mouse.exited                  \
+                              mouse.exited.global           \
+                                                            \
+            --add       item              brew.details popup.brew          \
+            --set       brew.details	    background.corner_radius=12      \
+                                          background.padding_left=5        \
+                                          background.padding_right=10      \
                                       		click_script="sketchybar --set brew popup.drawing=off"
 

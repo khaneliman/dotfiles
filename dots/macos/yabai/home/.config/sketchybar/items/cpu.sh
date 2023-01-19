@@ -9,6 +9,6 @@ sketchybar --add item        cpu.percent right                \
                              icon="$CPU"                      \
                              icon.color="$BLUE"               \
                              update_freq=2                    \
-                             mach_helper="$HELPER"            
+                             mach_helper="$HELPER"
 
 

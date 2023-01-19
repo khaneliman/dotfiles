@@ -10,7 +10,6 @@ sketchybar --add item           apple.logo left                             \
                                 background.padding_right=15                 \
                                 label.drawing=off                           \
                                 click_script="$POPUP_CLICK_SCRIPT"          \
-                                popup.horizontal=false                      \
                                 popup.height=30                             \
                                                                             \
            --add item           apple.prefs popup.apple.logo                \

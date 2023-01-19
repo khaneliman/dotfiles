@@ -26,7 +26,7 @@ render_bar_item() {
 }
 
 add_outdated_header() {
-  sketchybar -m --set  brew.details                                                      \
+  sketchybar -m --set  brew.details                                                         \
                                   label="$(echo -e 'Outdated Brews')"                       \
 																	label.font="$FONT:Bold:14.0" 															\
 																	label.align=left 																					\
@@ -46,7 +46,6 @@ render_popup() {
 
   while IFS= read -r package 
   do
-  	PADDING=0
 
     if [ "$COUNT" -gt "$PREV_COUNT" ]; then
       sketchybar -m --add item  brew.package."$COUNTER" popup."$NAME"

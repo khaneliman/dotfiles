@@ -8,17 +8,15 @@ zen_on() {
              --set system.yabai drawing=off     \
              --set separator drawing=off        \
              --set front_app drawing=off        \
-             --set volume_alias drawing=off     \
              --set spotify.anchor drawing=off   \
              --set spotify.play updates=off     \
              --set brew drawing=off             \
              --set battery drawing=off          \
              --set disk drawing=off             \
              --set memory drawing=off           \
-             --set bluetooth_alias drawing=off  \
-             --set wifi_alias drawing=off       \
-             --set stats_separator drawing=off  \
-             --set divider drawing=off
+             --set bluetooth.alias drawing=off  \
+             --set wifi.alias drawing=off       \
+             --set stats_separator drawing=off  
 }
 
 zen_off() {
@@ -29,16 +27,14 @@ zen_off() {
              --set separator drawing=on         \
              --set front_app drawing=on         \
              --set system.yabai drawing=on      \
-             --set volume_alias drawing=on      \
              --set spotify.play updates=on      \
              --set battery drawing=on           \
              --set brew drawing=on              \
              --set disk drawing=on              \
              --set memory drawing=on            \
-             --set bluetooth_alias drawing=on   \
-             --set wifi_alias drawing=on        \
-             --set stats_separator drawing=on   \
-             --set divider drawing=on
+             --set bluetooth.alias drawing=on   \
+             --set wifi.alias drawing=on        \
+             --set stats_separator drawing=on
 }
 
 if [ "$1" = "on" ]; then
