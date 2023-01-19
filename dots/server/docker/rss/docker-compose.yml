@@ -1,0 +1,104 @@
+version: "3.6"
+services:
+  Full-Text-RSS:
+    command:
+      - "apache2-foreground"
+    container_name: "Full-Text-RSS"
+    entrypoint:
+      - "docker-php-entrypoint"
+    environment:
+      - "HOST_CONTAINERNAME=Full-Text-RSS"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "PHPIZE_DEPS=autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\
+        \tmake \t\tpkg-config \t\tre2c"
+      - "PHP_INI_DIR=/usr/local/etc/php"
+      - "APACHE_CONFDIR=/etc/apache2"
+      - "APACHE_ENVVARS=/etc/apache2/envvars"
+      - "PHP_EXTRA_BUILD_DEPS=apache2-dev"
+      - "PHP_EXTRA_CONFIGURE_ARGS=--with-apxs2 --disable-cgi"
+      - "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2"
+      - "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2"
+      - "PHP_LDFLAGS=-Wl,-O1 -Wl,--hash-style=both -pie"
+      - "GPG_KEYS=${FULL_TEXT_RSS_GPG_KEYS}"
+      - "PHP_VERSION=5.6.40"
+      - "PHP_URL=https://secure.php.net/get/php-5.6.40.tar.xz/from/this/mirror"
+      - "PHP_ASC_URL=https://secure.php.net/get/php-5.6.40.tar.xz.asc/from/this/mirror"
+      - "PHP_SHA256=1369a51eee3995d7fbd1c5342e5cc917760e276d561595b6052b21ace2656d1c"
+      - "PHP_MD5="
+    hostname: "8eee2fb2ed43"
+    image: "heussd/fivefilters-full-text-rss:latest"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://github.com/imTHAI/unraid-templates/raw/main/rss.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:8081]"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "8081:80/tcp"
+    volumes:
+      - "2f61d5237e670c17a851f4463b70f1d144cc3b5fb0acf2619e6d8decf7f6f265:/var/www/html/cache"
+    working_dir: "/var/www/html"
+
+  freshrss:
+    container_name: "freshrss"
+    entrypoint:
+      - "/init"
+    environment:
+      - "HOST_CONTAINERNAME=freshrss"
+      - "PUID=99"
+      - "PGID=100"
+      - "UMASK=022"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "PS1=$(whoami)@$(hostname):$(pwd)\\$ "
+      - "HOME=/root"
+      - "TERM=xterm"
+      - "S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0"
+    hostname: "963e226685cf"
+    image: "lscr.io/linuxserver/freshrss"
+    ipc: "private"
+    labels:
+      build_version: "Linuxserver.io version:- 1.20.2-ls158 Build-date:- 2022-12-29T06:44:01-06:00"
+      maintainer: "aptalca"
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/freshrss-logo.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:8084]"
+      org.opencontainers.image.authors: "linuxserver.io"
+      org.opencontainers.image.created: "2022-12-29T06:44:01-06:00"
+      org.opencontainers.image.description:
+        "[Freshrss](https://freshrss.org/) is\
+        \ a free, self-hostable aggregator for rss feeds."
+      org.opencontainers.image.documentation: "https://docs.linuxserver.io/images/docker-freshrss"
+      org.opencontainers.image.licenses: "GPL-3.0-only"
+      org.opencontainers.image.ref.name: "72e6e737f805710786fb0d4d08c28565e9425bba"
+      org.opencontainers.image.revision: "72e6e737f805710786fb0d4d08c28565e9425bba"
+      org.opencontainers.image.source: "https://github.com/linuxserver/docker-freshrss"
+      org.opencontainers.image.title: "Freshrss"
+      org.opencontainers.image.url: "https://github.com/linuxserver/docker-freshrss/packages"
+      org.opencontainers.image.vendor: "linuxserver.io"
+      org.opencontainers.image.version: "1.20.2-ls158"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "8084:80/tcp"
+    volumes:
+      - "/mnt/cache/appdata/freshrss:/config"
+    working_dir: "/"
+
+networks:
+  br0:
+    external: true
+    name: "br0"
+  khaneproxy:
+    external: true
+    name: "khaneproxy"

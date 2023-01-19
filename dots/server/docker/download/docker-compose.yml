@@ -1,0 +1,104 @@
+version: "3.6"
+services:
+  binhex-nzbget:
+    command:
+      - "/bin/bash"
+      - "/usr/local/bin/init.sh"
+    container_name: "binhex-nzbget"
+    entrypoint:
+      - "/usr/bin/tini"
+      - "-g"
+      - "--"
+    environment:
+      - "HOST_CONTAINERNAME=binhex-nzbget"
+      - "UMASK=000"
+      - "PUID=99"
+      - "PGID=100"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "HOME=/home/nobody"
+      - "TERM=xterm"
+    hostname: "c26d97086419"
+    image: "binhex/arch-nzbget"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/binhex/docker-templates/master/binhex/images/nzbget-icon.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:6789]/"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "100m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "6789:6789/tcp"
+    volumes:
+      - "96e3ee4889f8dfc2ed4474e514b938365558420da2b756a1c085f9d53673a5ba:/media"
+      - "/mnt/user/appdata/binhex-nzbget:/config"
+      - "/mnt/user/data/usenet:/data"
+
+  qbittorrentvpn:
+    command:
+      - "/bin/bash"
+      - "/usr/local/bin/init.sh"
+    container_name: "qbittorrentvpn"
+    entrypoint:
+      - "/usr/bin/dumb-init"
+      - "--"
+    environment:
+      - "WEBUI_PORT=8082"
+      - "LAN_NETWORK=192.168.1.0/24"
+      - "VPN_INPUT_PORTS="
+      - "HOST_CONTAINERNAME=qbittorrentvpn"
+      - "VPN_PROV=pia"
+      - "STRICT_PORT_FORWARD=yes"
+      - "ENABLE_PRIVOXY=no"
+      - "UMASK=000"
+      - "PGID=100"
+      - "VPN_ENABLED=yes"
+      - "VPN_CLIENT=wireguard"
+      - "PUID=99"
+      - "VPN_OPTIONS="
+      - "NAME_SERVERS=209.222.18.222,84.200.69.80,37.235.1.174,1.1.1.1,209.222.18.218,37.235.1.177,84.200.70.40,1.0.0.1"
+      - "DEBUG=false"
+      - "VPN_OUTPUT_PORTS="
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "HOME=/home/nobody"
+      - "TERM=xterm"
+    hostname: "a6f044785dfc"
+    image: "binhex/arch-qbittorrentvpn:4.4.5-2-02"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/binhex/docker-templates/master/binhex/images/qbittorrent-icon.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:8082]/"
+      org.opencontainers.image.authors: "= binhex"
+      org.opencontainers.image.source: "= https://github.com/binhex/arch-qbittorrentvpn"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "6881:6881/tcp"
+      - "6881:6881/udp"
+      - "8082:8082/tcp"
+      - "8118:8118/tcp"
+    privileged: true
+    security_opt:
+      - "label=disable"
+    volumes:
+      - "/mnt/user/appdata/binhex-qbittorrentvpn:/config"
+      - "/mnt/user/data:/data"
+      - "/mnt/cache/appdata/binhex-qbittorrentvpn/vuetorrent:/vuetorrent"
+
+networks:
+  br0:
+    external: true
+    name: "br0"
+  khaneproxy:
+    external: true
+    name: "khaneproxy"

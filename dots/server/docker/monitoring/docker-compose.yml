@@ -1,0 +1,264 @@
+version: "3.6"
+services:
+  Grafana-Unraid-Stack:
+    container_name: "Grafana-Unraid-Stack"
+    entrypoint:
+      - "tini"
+      - "--"
+      - "/static-ubuntu/grafana-unraid-stack/entrypoint.sh"
+    environment:
+      - "HOST_SYS=/rootfs/sys"
+      - "PROMTAIL_PORT=9086"
+      - "HOST_ETC=/rootfs/etc"
+      - "USE_HDDTEMP=no"
+      - "INFLUXDB_HTTP_PORT=8086"
+      - "LOKI_PORT=3100"
+      - "GRAFANA_PORT=3006"
+      - "HOST_PROC=/rootfs/proc"
+      - "HOST_CONTAINERNAME=Grafana-Unraid-Stack"
+      - "HOST_MOUNT_PREFIX=/rootfs"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "INFLUXDB_RPC_PORT=58083"
+    expose:
+      - "3006/tcp"
+      - "3100/tcp"
+      - "58083/tcp"
+      - "8086/tcp"
+      - "9086/tcp"
+    hostname: "AustinServer"
+    image: "testdasi/grafana-unraid-stack:latest"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/testdasi/grafana-unraid-stack-base/master/grafana-unraid-stack.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:3006]/"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    network_mode: "host"
+    privileged: true
+    security_opt:
+      - "label=disable"
+    volumes:
+      - "/:/rootfs:ro"
+      - "/etc:/rootfs/etc:ro"
+      - "/var/run/utmp:/var/run/utmp:ro"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "/mnt/cache/appdata/Grafana-Unraid-Stack:/config"
+      - "/mnt/cache/appdata/Grafana-Unraid-Stack/data:/data"
+      - "/proc:/rootfs/proc:ro"
+      - "/sys:/rootfs/sys:ro"
+      - "/run/udev:/run/udev:ro"
+
+  Dozzle:
+    container_name: "Dozzle"
+    entrypoint:
+      - "/dozzle"
+    environment:
+      - "DOZZLE_TAILSIZE=300"
+      - "DOZZLE_USERNAME="
+      - "DOZZLE_NO_ANALYTICS=true"
+      - "HOST_CONTAINERNAME=Dozzle"
+      - "DOZZLE_BASE=/"
+      - "DOZZLE_LEVEL=info"
+      - "DOZZLE_PASSWORD="
+      - "PATH=/bin"
+    hostname: "ec9895144176"
+    image: "amir20/dozzle"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/selfhosters/unRAID-CA-templates/master/templates/img/dozzle.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:8080]/"
+      org.opencontainers.image.created: "2023-01-02T18:10:21.262Z"
+      org.opencontainers.image.description: "Realtime log viewer for docker containers."
+      org.opencontainers.image.licenses: "MIT"
+      org.opencontainers.image.revision: "ce39d3837fa57e9c77e374ed839667ba8f85fb85"
+      org.opencontainers.image.source: "https://github.com/amir20/dozzle"
+      org.opencontainers.image.title: "dozzle"
+      org.opencontainers.image.url: "https://github.com/amir20/dozzle"
+      org.opencontainers.image.version: "v4.6.2"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "8888:8080/tcp"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    working_dir: "/"
+
+  goaccess:
+    command:
+      - "sh"
+      - "/usr/local/bin/goaccess.sh"
+    container_name: "goaccess"
+    entrypoint:
+      - "/usr/local/bin/entrypoint.sh"
+    environment:
+      - "HOST_CONTAINERNAME=goaccess"
+      - "PUID=99"
+      - "PGID=100"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    hostname: "3f144af284a6"
+    image: "gregyankovoy/goaccess"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/gregyankovoy/docker-templates/master/greg/img/goaccess-logo.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:7889]/"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    mac_address: "02:42:ac:11:00:02"
+    network_mode: "bridge"
+    ports:
+      - "7889:7889/tcp"
+    volumes:
+      - "/mnt/user/appdata/goaccess:/config"
+      - "/mnt/cache/appdata/dmz/goaccess/log:/opt/log"
+    working_dir: "/goaccess"
+
+  scrutiny:
+    command:
+      - "/init"
+    container_name: "scrutiny"
+    environment:
+      - "HOST_CONTAINERNAME=scrutiny"
+      - "PATH=/opt/scrutiny/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "INFLUXD_CONFIG_PATH=/opt/scrutiny/influxdb"
+    hostname: "7c28a36610b5"
+    image: "ghcr.io/analogj/scrutiny:master-omnibus"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/selfhosters/unRAID-CA-templates/master/templates/img/scrutiny.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:8083]"
+      org.opencontainers.image.created: "2023-01-12T02:07:59.961Z"
+      org.opencontainers.image.description:
+        "Hard Drive S.M.A.R.T Monitoring, Historical\
+        \ Trends & Real World Failure Thresholds"
+      org.opencontainers.image.licenses: "MIT"
+      org.opencontainers.image.revision: "d49497da805327dec2a6dc33010676b260188e5a"
+      org.opencontainers.image.source: "https://github.com/AnalogJ/scrutiny"
+      org.opencontainers.image.title: "scrutiny"
+      org.opencontainers.image.url: "https://github.com/AnalogJ/scrutiny"
+      org.opencontainers.image.version: "master-omnibus"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "8083:8080/tcp"
+    privileged: true
+    security_opt:
+      - "label=disable"
+    volumes:
+      - "/mnt/cache/appdata/scrutiny:/opt/scrutiny/influxdb"
+      - "/run/udev:/run/udev:ro"
+      - "/dev/disk:/dev/disk:ro"
+      - "/mnt/cache/appdata/scrutiny:/opt/scrutiny/config"
+    working_dir: "/opt/scrutiny"
+
+  tautulli:
+    command:
+      - "python"
+      - "Tautulli.py"
+      - "--datadir"
+      - "/config"
+    container_name: "tautulli"
+    entrypoint:
+      - "./start.sh"
+    environment:
+      - "HOST_CONTAINERNAME=tautulli"
+      - "PUID=99"
+      - "PGID=100"
+      - "TZ=UTC"
+      - "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "GPG_KEY=${TAUTULLI_GPG_KEY}"
+      - "PYTHON_VERSION=3.9.16"
+      - "PYTHON_PIP_VERSION=22.0.4"
+      - "PYTHON_SETUPTOOLS_VERSION=58.1.0"
+      - "PYTHON_GET_PIP_URL=https://github.com/pypa/get-pip/raw/66030fa03382b4914d4c4d0896961a0bdeeeb274/public/get-pip.py"
+      - "PYTHON_GET_PIP_SHA256=1e501cf004eac1b7eb1f97266d28f995ae835d30250bec7f8850562703067dc6"
+      - "TAUTULLI_DOCKER=True"
+    hostname: "18dfef11326e"
+    image: "tautulli/tautulli:latest"
+    ipc: "private"
+    labels:
+      maintainer: "Tautulli"
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/Tautulli/Tautulli-Unraid-Template/master/img/logo-circle.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:8181]/"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "8181:8181/tcp"
+    volumes:
+      - "/mnt/cache/appdata/plex/Library/Application Support/Plex Media Server/Logs:/plexlogs"
+      - "/mnt/cache/appdata/tautulli:/config"
+    working_dir: "/app"
+
+  DiskSpeed:
+    command:
+      - "catalina.sh"
+      - "run"
+    container_name: "DiskSpeed"
+    environment:
+      - "HOST_CONTAINERNAME=DiskSpeed"
+      - "PATH=/usr/local/tomcat/bin:/usr/local/openjdk-11/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "JAVA_HOME=/usr/local/openjdk-11"
+      - "JAVA_VERSION=11.0.16"
+      - "CATALINA_HOME=/usr/local/tomcat"
+      - "TOMCAT_NATIVE_LIBDIR=/usr/local/tomcat/native-jni-lib"
+      - "LD_LIBRARY_PATH=/usr/local/tomcat/native-jni-lib"
+      - "GPG_KEYS=${DISK_SPEED_GPG_KEYS}"
+      - "TOMCAT_MAJOR=9"
+      - "TOMCAT_VERSION=9.0.65"
+      - "TOMCAT_SHA512=2ae846848b8436856be11cfa18d9c62caa06ca7d3134012b2e10cbf6078753c4af20cc5d37f7dc75f1779f5c59d7c033850b8626534c3ce7e389641a67963cf6"
+      - "LUCEE_JAVA_OPTS=-Xms64m -Xmx512m"
+    hostname: "2d7679fc5fb4"
+    image: "jbartlett777/diskspeed"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/jbartlett777/DiskSpeed/master/DiskSpeed.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:8888]/"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    network_mode: "bridge"
+    ports:
+      - "18888:8888/tcp"
+    privileged: true
+    security_opt:
+      - "label=disable"
+    volumes:
+      - "/var/local/emhttp:/var/local/emhttp:ro"
+      - "/mnt/cache/appdata/DiskSpeed:/tmp/DiskSpeed"
+    working_dir: "/usr/local/tomcat"
+
+networks:
+  br0:
+    external: true
+    name: "br0"
+  khaneproxy:
+    external: true
+    name: "khaneproxy"

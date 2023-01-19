@@ -1,0 +1,51 @@
+version: "3.3"
+services:
+  Virt-Manager:
+    command:
+      - "/usr/local/bin/startapp"
+    container_name: "Virt-Manager"
+    environment:
+      - "HOSTS=['qemu:///system']"
+      - "USER_ID=99"
+      - "GROUP_ID=100"
+      - "UMASK=000"
+      - "HOST_CONTAINERNAME=Virt-Manager"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "GDK_BACKEND=broadway"
+      - "BROADWAY_DISPLAY=:5"
+      - "DARK_MODE=false"
+      - "GTK_THEME=Materia"
+      - "BG_GRADIENT=#ddd, #999"
+      - "FAVICON_URL=https://raw.githubusercontent.com/virt-manager/virt-manager/931936a328d22413bb663e0e21d2f7bb111dbd7c/data/icons/256x256/apps/virt-manager.png"
+      - "APP_TITLE=Virtual Machine Manager"
+      - "CORNER_IMAGE_URL=https://raw.githubusercontent.com/virt-manager/virt-manager/931936a328d22413bb663e0e21d2f7bb111dbd7c/data/icons/256x256/apps/virt-manager.png"
+    hostname: "3befe5290532"
+    image: "mber5/virt-manager:latest"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/redvex2460/docker-templates/master/redvex2460/images/vman.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:80]"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "8185:80/tcp"
+    volumes:
+      - "/mnt/cache/appdata/vman/root:/root"
+      - "/mnt/user/isos:/mnt/isos"
+      - "/var/run/libvirt/libvirt-sock:/var/run/libvirt/libvirt-sock"
+      - "/mnt/user/domains:/var/lib/libvirt/images"
+      - "/dev/kvm:/dev/kvm"
+
+networks:
+  br0:
+    external: true
+    name: "br0"
+  khaneproxy:
+    external: true
+    name: "khaneproxy"

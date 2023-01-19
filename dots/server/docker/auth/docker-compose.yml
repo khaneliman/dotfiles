@@ -1,0 +1,113 @@
+version: "3.6"
+services:
+  Authelia:
+    command:
+      - "--config"
+      - "/config/configuration.yml"
+    container_name: "Authelia"
+    entrypoint:
+      - "/app/entrypoint.sh"
+    environment:
+      - "HOST_CONTAINERNAME=Authelia"
+      - "PUID=99"
+      - "PGID=100"
+      - "PATH=/app:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    hostname: "6b9591f43425"
+    image: "authelia/authelia"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://i.imgur.com/DCn2yiv.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:9091]/"
+      org.opencontainers.image.base.name: "docker.io/library/alpine:3.17.0"
+      org.opencontainers.image.created: "2022-12-21T19:58:21+11:00"
+      org.opencontainers.image.description:
+        "Authelia is an open-source authentication\
+        \ and authorization server providing two-factor authentication and single\
+        \ sign-on (SSO) for your applications via a web portal."
+      org.opencontainers.image.documentation: "https://www.authelia.com"
+      org.opencontainers.image.licenses: "Apache-2.0"
+      org.opencontainers.image.revision: "566a0d7fc71b450123ad33d350cd3890d311da82"
+      org.opencontainers.image.source: "https://github.com/authelia/authelia/tree/566a0d7fc71b450123ad33d350cd3890d311da82"
+      org.opencontainers.image.title: "authelia"
+      org.opencontainers.image.url: "https://github.com/authelia/authelia/pkgs/container/authelia"
+      org.opencontainers.image.vendor: "Authelia"
+      org.opencontainers.image.version: "4.37.5"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "9091:9091/tcp"
+    restart: "unless-stopped"
+    volumes:
+      - "/mnt/cache/appdata/Authelia:/config"
+    working_dir: "/app"
+
+  pwm:
+    command:
+      - "catalina.sh"
+      - "run"
+    container_name: "pwm"
+    environment:
+      - "HOST_CONTAINERNAME=pwm"
+      - "PWM_APPLICATIONFLAGS=NoFileLock"
+      - "PATH=/usr/local/tomcat/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "JAVA_HOME=/docker-java-home"
+      - "JAVA_VERSION=11.0.3"
+      - "JAVA_DEBIAN_VERSION=11.0.3+1-1~bpo9+1"
+      - "CATALINA_HOME=/usr/local/tomcat"
+      - "TOMCAT_NATIVE_LIBDIR=/usr/local/tomcat/native-jni-lib"
+      - "LD_LIBRARY_PATH=/usr/local/tomcat/native-jni-lib"
+      - "OPENSSL_VERSION=1.1.0j-1~deb9u1"
+      - "GPG_KEYS=${PWM_GPG_KEYS}"
+      - "TOMCAT_MAJOR=9"
+      - "TOMCAT_VERSION=9.0.20"
+      - "TOMCAT_SHA512=6d2df51f0bfc6a90cfca61c86473b8843da4162c430ab06b8f66f364931f3d8a3ad399703acdd600ff4f633d7d6725edf05d5d5d19534716a2f3f9f5238a32a0"
+      - "TOMCAT_TGZ_URLS=https://www.apache.org/dyn/closer.cgi?action=download&filename=tomcat/tomcat-9/v9.0.20/bin/apache-tomcat-9.0.20.tar.gz\
+        \ \thttps://www-us.apache.org/dist/tomcat/tomcat-9/v9.0.20/bin/apache-tomcat-9.0.20.tar.gz\
+        \ \thttps://www.apache.org/dist/tomcat/tomcat-9/v9.0.20/bin/apache-tomcat-9.0.20.tar.gz\
+        \ \thttps://archive.apache.org/dist/tomcat/tomcat-9/v9.0.20/bin/apache-tomcat-9.0.20.tar.gz"
+      - "TOMCAT_ASC_URLS=https://www.apache.org/dyn/closer.cgi?action=download&filename=tomcat/tomcat-9/v9.0.20/bin/apache-tomcat-9.0.20.tar.gz.asc\
+        \ \thttps://www-us.apache.org/dist/tomcat/tomcat-9/v9.0.20/bin/apache-tomcat-9.0.20.tar.gz.asc\
+        \ \thttps://www.apache.org/dist/tomcat/tomcat-9/v9.0.20/bin/apache-tomcat-9.0.20.tar.gz.asc\
+        \ \thttps://archive.apache.org/dist/tomcat/tomcat-9/v9.0.20/bin/apache-tomcat-9.0.20.tar.gz.asc"
+      - "MYSQL_DRIVER_VERSION=8.0.15"
+      - "POSTGRES_DRIVER_VERSION=42.2.5"
+      - "MONGODB_DRIVER_VERSION=3.9.1"
+      - "MARIADB_DRIVER_VERSION=2.4.0"
+      - "PWM_HOME=/usr/local/tomcat/webapps/pwm"
+      - "PWM_APPLICATIONPATH=/usr/share/pwm"
+    hostname: "15f7294b1302"
+    image: "fjudith/pwm"
+    ipc: "private"
+    labels:
+      maintainer: "Florian JUDITH <florian.judith.b@gmail.com>"
+      net.unraid.docker.icon: "https://i.imgur.com/dAMqu51.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:8282]/"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "8282:8080/tcp"
+    restart: "unless-stopped"
+    user: "pwm"
+    volumes:
+      - "/mnt/cache/appdata/pwm:/usr/share/pwm"
+    working_dir: "/usr/local/tomcat"
+
+networks:
+  br0:
+    external: true
+    name: "br0"
+  khaneproxy:
+    external: true
+    name: "khaneproxy"

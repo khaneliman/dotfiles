@@ -1,0 +1,141 @@
+version: "3.3"
+services:
+  AH-WebApp:
+    container_name: "AH-WebApp"
+    entrypoint:
+      - "dotnet"
+      - "WebApp.dll"
+    environment:
+      - "HOST_CONTAINERNAME=AH-WebApp"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "ASPNETCORE_URLS=http://+:80"
+      - "DOTNET_RUNNING_IN_CONTAINER=true"
+      - "DOTNET_VERSION=6.0.10"
+      - "ASPNET_VERSION=6.0.10"
+    hostname: "9b240a4deb1d"
+    image: "ghcr.io/khaneliman/austin-horstman-webapp:latest"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://i.imgur.com/nYoosop.jpg"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:8088]/"
+      org.opencontainers.image.created: "2022-10-25T03:50:15.872Z"
+      org.opencontainers.image.description: "Personal website for Austin Horstman."
+      org.opencontainers.image.licenses: ""
+      org.opencontainers.image.revision: "e1151865db136dde4a685295cd79d3c7ee75612c"
+      org.opencontainers.image.source: "https://github.com/khaneliman/Austin-Horstman"
+      org.opencontainers.image.title: "Austin-Horstman"
+      org.opencontainers.image.url: "https://github.com/khaneliman/Austin-Horstman"
+      org.opencontainers.image.version: "v3.0.0"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "17443:443/tcp"
+      - "8088:80/tcp"
+    volumes:
+      - "/mnt/cache/appdata/AH-WebApp/latest:/root/.aspnet/DataProtection-Keys"
+    working_dir: "/app"
+
+  AH-WebApp-Dev:
+    container_name: "AH-WebApp-Dev"
+    entrypoint:
+      - "dotnet"
+      - "WebApp.dll"
+    environment:
+      - "HOST_CONTAINERNAME=AH-WebApp-Dev"
+      - "ASPNETCORE_ENVIRONMENT=Production"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "ASPNETCORE_URLS=http://+:80"
+      - "DOTNET_RUNNING_IN_CONTAINER=true"
+      - "DOTNET_VERSION=6.0.10"
+      - "ASPNET_VERSION=6.0.10"
+    hostname: "5f32693b656d"
+    image: "ghcr.io/khaneliman/austin-horstman-webapp:develop"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://i.imgur.com/nYoosop.jpg"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:8099]/"
+      org.opencontainers.image.created: "2022-10-25T03:37:22.434Z"
+      org.opencontainers.image.description: "Personal website for Austin Horstman."
+      org.opencontainers.image.licenses: ""
+      org.opencontainers.image.revision: "d273c4b0a4d1bec9ee658fcb1dc74502f25bbcac"
+      org.opencontainers.image.source: "https://github.com/khaneliman/Austin-Horstman"
+      org.opencontainers.image.title: "Austin-Horstman"
+      org.opencontainers.image.url: "https://github.com/khaneliman/Austin-Horstman"
+      org.opencontainers.image.version: "develop"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "19443:443/tcp"
+      - "8099:80/tcp"
+    volumes:
+      - "/mnt/cache/appdata/AH-WebApp/dev:/root/.aspnet/DataProtection-Keys"
+    working_dir: "/app"
+
+  organizr:
+    container_name: "organizr"
+    entrypoint:
+      - "/init"
+    environment:
+      - "HOST_CONTAINERNAME=organizr"
+      - "branch=develop"
+      - "PUID=99"
+      - "PGID=100"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "S6_REL=2.2.0.3"
+      - "S6_ARCH=amd64"
+      - "S6_BEHAVIOUR_IF_STAGE2_FAILS=2"
+      - "PS1=$(whoami)@$(hostname):$(pwd)$ "
+      - "HOME=/root"
+      - "TERM=xterm"
+      - "fpm=false"
+    hostname: "1bda5f97d56b"
+    image: "organizr/organizr"
+    ipc: "private"
+    labels:
+      base.maintainer: "christronyxyocum,Roxedus"
+      base.s6.arch: "amd64"
+      base.s6.rel: "2.2.0.3"
+      maintainer: "christronyxyocum,Roxedus"
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/causefx/Organizr/v2-master/plugins/images/organizr/logo-no-border.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:80]/"
+      org.label-schema.description: "Baseimage for Organizr"
+      org.label-schema.name: "organizr/base"
+      org.label-schema.schema-version: "1.0"
+      org.label-schema.url: "https://organizr.app/"
+      org.label-schema.vcs-url: "https://github.com/organizr/docker-base"
+      org.opencontainers.image.created: "2022-05-08_15"
+      org.opencontainers.image.source: "https://github.com/Organizr/docker-organizr/tree/master"
+      org.opencontainers.image.title: "organizr/base"
+      org.opencontainers.image.url: "https://github.com/Organizr/docker-organizr/blob/master/README.md"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "280:80/tcp"
+    volumes:
+      - "/mnt/cache/appdata/organizrv2:/config"
+
+networks:
+  br0:
+    external: true
+    name: "br0"
+  khaneproxy:
+    external: true
+    name: "khaneproxy"

@@ -1,0 +1,174 @@
+version: "3.6"
+services:
+  redis:
+    command:
+      - "/opt/bitnami/scripts/redis/run.sh"
+    container_name: "redis"
+    entrypoint:
+      - "/opt/bitnami/scripts/redis/entrypoint.sh"
+    environment:
+      - "HOST_CONTAINERNAME=redis"
+      - "ALLOW_EMPTY_PASSWORD=no"
+      - "PATH=/opt/bitnami/common/bin:/opt/bitnami/redis/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "HOME=/"
+      - "OS_ARCH=amd64"
+      - "OS_FLAVOUR=debian-11"
+      - "OS_NAME=linux"
+      - "APP_VERSION=7.0.8"
+      - "BITNAMI_APP_NAME=redis"
+    hostname: "4c0046597c1d"
+    image: "bitnami/redis:latest"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/A75G/docker-templates/master/templates/icons/redis.png"
+      net.unraid.docker.managed: "dockerman"
+      org.opencontainers.image.authors: "https://bitnami.com/contact"
+      org.opencontainers.image.description: "Application packaged by Bitnami"
+      org.opencontainers.image.licenses: "Apache-2.0"
+      org.opencontainers.image.ref.name: "7.0.8-debian-11-r1"
+      org.opencontainers.image.source: "https://github.com/bitnami/containers/tree/main/bitnami/redis"
+      org.opencontainers.image.title: "redis"
+      org.opencontainers.image.vendor: "VMware, Inc."
+      org.opencontainers.image.version: "7.0.8"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "6379:6379/tcp"
+    restart: "unless-stopped"
+    user: "1001"
+
+  MongoDB:
+    command:
+      - "mongod"
+    container_name: "MongoDB"
+    entrypoint:
+      - "docker-entrypoint.sh"
+    environment:
+      - "HOST_CONTAINERNAME=MongoDB"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "GOSU_VERSION=1.12"
+      - "JSYAML_VERSION=3.13.1"
+      - "MONGO_PACKAGE=mongodb-org"
+      - "MONGO_REPO=repo.mongodb.org"
+      - "MONGO_MAJOR=6.0"
+      - "MONGO_VERSION=6.0.3"
+      - "HOME=/data/db"
+    hostname: "fef16130c0ca"
+    image: "mongo"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/jason-bean/docker-templates/master/jasonbean-repo/mongo.sh-600x600.png"
+      net.unraid.docker.managed: "dockerman"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "27017:27017/tcp"
+    restart: "unless-stopped"
+    volumes:
+      - "8421139ee4fc3ad24cd921057458ec110736bc4c11a747fa791cb69c581fec73:/data/configdb"
+      - "/mnt/cache/appdata/mongodb:/data/db"
+
+  mariadb:
+    container_name: "mariadb"
+    entrypoint:
+      - "/init"
+    environment:
+      - "HOST_CONTAINERNAME=mariadb"
+      - "PUID=99"
+      - "PGID=100"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "PS1=$(whoami)@$(hostname):$(pwd)\\$ "
+      - "HOME=/root"
+      - "TERM=xterm"
+      - "S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0"
+      - "S6_VERBOSITY=1"
+      - "S6_STAGE2_HOOK=/docker-mods"
+      - "MYSQL_DIR=/config"
+      - "DATADIR=/config/databases"
+    hostname: "30dee00a70e0"
+    image: "linuxserver/mariadb"
+    ipc: "private"
+    labels:
+      build_version: "Linuxserver.io version:- 10.6.10-r0-ls79 Build-date:- 2022-12-30T23:46:51-06:00"
+      maintainer: "thelamer,nemchik"
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/mariadb-icon.png"
+      net.unraid.docker.managed: "dockerman"
+      org.opencontainers.image.authors: "linuxserver.io"
+      org.opencontainers.image.created: "2022-12-30T23:46:51-06:00"
+      org.opencontainers.image.description:
+        "[Mariadb](https://mariadb.org/) is one\
+        \ of the most popular database servers. Made by the original developers of\
+        \ MySQL."
+      org.opencontainers.image.documentation: "https://docs.linuxserver.io/images/docker-mariadb"
+      org.opencontainers.image.licenses: "GPL-3.0-only"
+      org.opencontainers.image.ref.name: "f495d83ec26d6d21357c3943f997c2dc1b196a31"
+      org.opencontainers.image.revision: "f495d83ec26d6d21357c3943f997c2dc1b196a31"
+      org.opencontainers.image.source: "https://github.com/linuxserver/docker-mariadb"
+      org.opencontainers.image.title: "Mariadb"
+      org.opencontainers.image.url: "https://github.com/linuxserver/docker-mariadb/packages"
+      org.opencontainers.image.vendor: "linuxserver.io"
+      org.opencontainers.image.version: "10.6.10-r0-ls79"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "3306:3306/tcp"
+    restart: "unless-stopped"
+    volumes:
+      - "/mnt/cache/appdata/mariadb:/config"
+    working_dir: "/"
+
+  Postgres11:
+    command:
+      - "postgres"
+    container_name: "Postgres11"
+    entrypoint:
+      - "docker-entrypoint.sh"
+    environment:
+      - "HOST_CONTAINERNAME=Postgres11"
+      - "POSTGRES_USER=postgres"
+      - "POSTGRES_DB=postgres"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/postgresql/11/bin"
+      - "GOSU_VERSION=1.14"
+      - "PG_MAJOR=11"
+      - "PG_VERSION=11.16-1.pgdg90+1"
+      - "PGDATA=/var/lib/postgresql/data"
+    hostname: "c04061de28dd"
+    image: "postgres:11"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://github.com/juusujanar/unraid-templates/raw/master/img/PostgreSQL-logo.png"
+      net.unraid.docker.managed: "dockerman"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "100m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "5432:5432/tcp"
+    volumes:
+      - "/mnt/cache/appdata/postgres:/var/lib/postgresql/data"
+
+networks:
+  br0:
+    external: true
+    name: "br0"
+  khaneproxy:
+    external: true
+    name: "khaneproxy"

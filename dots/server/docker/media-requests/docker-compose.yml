@@ -1,0 +1,199 @@
+version: "3.6"
+services:
+  petio:
+    container_name: "petio"
+    entrypoint:
+      - "/init"
+    environment:
+      - "HOST_CONTAINERNAME=petio"
+      - "PUID=99"
+      - "PGID=100"
+      - "UMASK=002"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "APP_DIR=/app"
+      - "CONFIG_DIR=/config"
+      - "ARGS="
+      - "XDG_CONFIG_HOME=/config/.config"
+      - "XDG_CACHE_HOME=/config/.cache"
+      - "XDG_DATA_HOME=/config/.local/share"
+      - "S6_BEHAVIOUR_IF_STAGE2_FAILS=2"
+      - "BUILD_ARCHITECTURE=linux-amd64"
+    hostname: "1e013c4dd287"
+    image: "hotio/petio"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://hotio.dev/webhook-avatars/petio.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:7777]"
+      org.opencontainers.image.created: "2022-04-03T00:13:16Z"
+      org.opencontainers.image.revision: "90ee60ae6f22485140334a7981469193e9d1cb0c"
+      org.opencontainers.image.source: "https://github.com/hotio/petio/tree/release"
+      org.opencontainers.image.title: "hotio/petio:release"
+      org.opencontainers.image.url: "https://github.com/hotio/petio/blob/master/README.md"
+      org.opencontainers.image.vendor: "hotio"
+      org.opencontainers.image.version: "0.5.4"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "7777:7777/tcp"
+    volumes:
+      - "/mnt/cache/appdata/petio:/config"
+
+  ombi:
+    container_name: "ombi"
+    entrypoint:
+      - "/init"
+    environment:
+      - "HOST_CONTAINERNAME=ombi"
+      - "PUID=99"
+      - "PGID=100"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "HOME=/config"
+      - "TERM=xterm"
+      - "S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0"
+      - "S6_VERBOSITY=1"
+      - "S6_STAGE2_HOOK=/docker-mods"
+      - "DEBIAN_FRONTEND=noninteractive"
+    hostname: "5e16ed1d53b8"
+    image: "linuxserver/ombi"
+    ipc: "private"
+    labels:
+      build_version: "Linuxserver.io version:- v4.22.5-ls148 Build-date:- 2023-01-10T02:32:02-06:00"
+      maintainer: "aptalca"
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/ombi.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:3579]/"
+      org.opencontainers.image.authors: "linuxserver.io"
+      org.opencontainers.image.created: "2023-01-10T02:32:02-06:00"
+      org.opencontainers.image.description:
+        "[Ombi](https://ombi.io) allows you to\
+        \ host your own Plex Request and user management system.  If you are sharing\
+        \ your Plex server with other users, allow them to request new content using\
+        \ an easy to manage interface!  Manage all your requests for Movies and TV\
+        \ with ease, leave notes for the user and get notification when a user requests\
+        \ something.  Allow your users to post issues against their requests so you\
+        \ know there is a problem with the audio etc.  Even automatically send them\
+        \ weekly newsletters of new content that has been added to your Plex server!"
+      org.opencontainers.image.documentation: "https://docs.linuxserver.io/images/docker-ombi"
+      org.opencontainers.image.licenses: "GPL-3.0-only"
+      org.opencontainers.image.ref.name: "f15fcb2edbd1ffbc8a9e78005a68140b00d2a9e8"
+      org.opencontainers.image.revision: "f15fcb2edbd1ffbc8a9e78005a68140b00d2a9e8"
+      org.opencontainers.image.source: "https://github.com/linuxserver/docker-ombi"
+      org.opencontainers.image.title: "Ombi"
+      org.opencontainers.image.url: "https://github.com/linuxserver/docker-ombi/packages"
+      org.opencontainers.image.vendor: "linuxserver.io"
+      org.opencontainers.image.version: "v4.22.5-ls148"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "3579:3579/tcp"
+    volumes:
+      - "/mnt/cache/appdata/ombi:/config"
+    working_dir: "/"
+
+  overseerr:
+    container_name: "overseerr"
+    entrypoint:
+      - "/init"
+    environment:
+      - "HOST_CONTAINERNAME=overseerr"
+      - "PUID=99"
+      - "PGID=100"
+      - "UMASK=002"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "APP_DIR=/app"
+      - "CONFIG_DIR=/config"
+      - "ARGS="
+      - "XDG_CONFIG_HOME=/config/.config"
+      - "XDG_CACHE_HOME=/config/.cache"
+      - "XDG_DATA_HOME=/config/.local/share"
+      - "S6_BEHAVIOUR_IF_STAGE2_FAILS=2"
+      - "S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0"
+      - "BUILD_ARCHITECTURE=linux-amd64"
+    hostname: "a765fe876133"
+    image: "cr.hotio.dev/hotio/overseerr"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://hotio.dev/webhook-avatars/overseerr.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:5055]"
+      org.opencontainers.image.created: "2022-12-20T10:49:54Z"
+      org.opencontainers.image.revision: "31407c3143b041de8ce514d464fc74d754fd968a"
+      org.opencontainers.image.source: "https://github.com/hotio/overseerr/tree/release"
+      org.opencontainers.image.title: "hotio/overseerr:release"
+      org.opencontainers.image.url: "https://github.com/hotio/overseerr/blob/master/README.md"
+      org.opencontainers.image.vendor: "hotio"
+      org.opencontainers.image.version: "1.31.0"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "5055:5055/tcp"
+    volumes:
+      - "/mnt/cache/appdata/overseerr:/config"
+
+  requestrr:
+    container_name: "requestrr"
+    entrypoint:
+      - "/init"
+    environment:
+      - "HOST_CONTAINERNAME=requestrr"
+      - "PUID=99"
+      - "PGID=100"
+      - "UMASK=002"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "APP_DIR=/app"
+      - "CONFIG_DIR=/config"
+      - "ARGS="
+      - "XDG_CONFIG_HOME=/config/.config"
+      - "XDG_CACHE_HOME=/config/.cache"
+      - "XDG_DATA_HOME=/config/.local/share"
+      - "S6_BEHAVIOUR_IF_STAGE2_FAILS=2"
+      - "BUILD_ARCHITECTURE=linux-amd64"
+    hostname: "ca5a65c8db35"
+    image: "hotio/requestrr"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://hotio.dev/webhook-avatars/requestrr.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:4545]"
+      org.opencontainers.image.created: "2022-09-02T14:09:10Z"
+      org.opencontainers.image.revision: "4d1f0c9e29bb1b97d0d0fc007d306a1fb0c9ceca"
+      org.opencontainers.image.source: "https://github.com/hotio/requestrr/tree/release"
+      org.opencontainers.image.title: "hotio/requestrr:release"
+      org.opencontainers.image.url: "https://github.com/hotio/requestrr/blob/master/README.md"
+      org.opencontainers.image.vendor: "hotio"
+      org.opencontainers.image.version: "2.1.2"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "4545:4545/tcp"
+    volumes:
+      - "/mnt/cache/appdata/requestrr:/config"
+
+networks:
+  br0:
+    external: true
+    name: "br0"
+  khaneproxy:
+    external: true
+    name: "khaneproxy"
