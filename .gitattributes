@@ -6,5 +6,6 @@ dots/shared/home/.ssh/** filter=git-crypt diff=git-crypt
 dots/shared/home/.gnupg/** filter=git-crypt diff=git-crypt
 dots/shared/home/.config/davmail/** filter=git-crypt diff=git-crypt
 dots/server/docker/secrets.env filter=git-crypt diff=git-crypt
+dots/server/rclone.config filter=git-crypt diff=git-crypt
 
 .gitattributes !filter !diff
