@@ -17,8 +17,7 @@ Personal dotfiles for each of the platforms I own or have customized. Personal i
 
 ### Clone repo:
 
-    git clone git@github.com:khaneliman/dotfiles.git ~/.config/.dotfiles
-    cd ~/.config/.dotfiles && git submodule update --init
+    git clone --recurse-submodules https://github.com/khaneliman/dotfiles.git ~/.config/.dotfiles
 
 Manual installation, for now. Some will have installation scripts to automate process a little more in-line with what I've been doing with [ArchInstaller](https://github.com/khaneliman/ArchInstaller)
 
