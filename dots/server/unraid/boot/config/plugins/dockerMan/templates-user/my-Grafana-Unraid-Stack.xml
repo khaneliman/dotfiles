@@ -1,0 +1,163 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>Grafana-Unraid-Stack</Name>
+  <Repository>testdasi/grafana-unraid-stack:latest</Repository>
+  <Registry>https://registry.hub.docker.com/r/testdasi/grafana-unraid-stack/</Registry>
+  <Network>host</Network>
+  <MyIP/>
+  <Shell>bash</Shell>
+  <Privileged>true</Privileged>
+  <Support>https://forums.unraid.net/topic/96233-support-testdasi-repo/</Support>
+  <Project>https://github.com/testdasi/grafana-unraid-stack</Project>
+  <Overview>
+Meet Gus! He has everything you need to start monitoring Unraid in style (Grafana - Influxdb - Telegraf - Loki - Promtail).&#xD;
+&#xD;
+NOTE: Grafana always requires some customisation to suit each exact system.&#xD;
+&#xD;
+Includes both GUS demo Dashboard and Ultimate UNRAID Dashboard v1.3 (UUD - https://forums.unraid.net/topic/96895-ultimate-unraid-dashboard-uud/).&#xD;
+&#xD;
+High-level instructions: (1) Decide whether you want hddtemp or S.M.A.R.T (smartmontools) and set USE_HDDTEMP variable accordingly. Hint: GUS and UUD both use S.M.A.R.T  (2) Install docker with host network.  (3) Go to ip:3006 to access grafana, login with admin/admin and customize away.&#xD;
+&#xD;
+For more detailed instructions, refer to the support thread (https://forums.unraid.net/topic/96233-support-testdasi-repo/) or project page (https://github.com/testdasi/grafana-unraid-stack).&#xD;
+&#xD;
+</Overview>
+  <Category>Productivity: Tools: Other:</Category>
+  <WebUI>http://[IP]:[PORT:3006]/</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/testdasi/testdasi-unraid-repo/master/grafana-unraid-stack.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/testdasi/grafana-unraid-stack-base/master/grafana-unraid-stack.png</Icon>
+  <ExtraParams/>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1635645997</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>&#xD;
+Meet Gus! He has everything you need to start monitoring Unraid in style (Grafana - Influxdb - Telegraf - Loki - Promtail).&#xD;
+&#xD;
+NOTE: Grafana always requires some customisation to suit each exact system.&#xD;
+&#xD;
+Includes both GUS demo Dashboard and Ultimate UNRAID Dashboard v1.3 (UUD - https://forums.unraid.net/topic/96895-ultimate-unraid-dashboard-uud/).&#xD;
+&#xD;
+High-level instructions: (1) Decide whether you want hddtemp or S.M.A.R.T (smartmontools) and set USE_HDDTEMP variable accordingly. Hint: GUS and UUD both use S.M.A.R.T  (2) Install docker with host network.  (3) Go to ip:3006 to access grafana, login with admin/admin and customize away.&#xD;
+&#xD;
+For more detailed instructions, refer to the support thread (https://forums.unraid.net/topic/96233-support-testdasi-repo/) or project page (https://github.com/testdasi/grafana-unraid-stack).&#xD;
+&#xD;
+</Description>
+  <Networking>
+    <Mode>host</Mode>
+    <Publish/>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/appdata/Grafana-Unraid-Stack</HostDir>
+      <ContainerDir>/config</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/appdata/Grafana-Unraid-Stack/data</HostDir>
+      <ContainerDir>/data</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/</HostDir>
+      <ContainerDir>/rootfs</ContainerDir>
+      <Mode>ro</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/etc</HostDir>
+      <ContainerDir>/rootfs/etc</ContainerDir>
+      <Mode>ro</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/proc</HostDir>
+      <ContainerDir>/rootfs/proc</ContainerDir>
+      <Mode>ro</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/sys</HostDir>
+      <ContainerDir>/rootfs/sys</ContainerDir>
+      <Mode>ro</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/var/run/docker.sock</HostDir>
+      <ContainerDir>/var/run/docker.sock</ContainerDir>
+      <Mode>ro</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/var/run/utmp</HostDir>
+      <ContainerDir>/var/run/utmp</ContainerDir>
+      <Mode>ro</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/run/udev</HostDir>
+      <ContainerDir>/run/udev</ContainerDir>
+      <Mode>ro</Mode>
+    </Volume>
+  </Data>
+  <Environment>
+    <Variable>
+      <Value>no</Value>
+      <Name>USE_HDDTEMP</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>8086</Value>
+      <Name>INFLUXDB_HTTP_PORT</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>3100</Value>
+      <Name>LOKI_PORT</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>9086</Value>
+      <Name>PROMTAIL_PORT</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>3006</Value>
+      <Name>GRAFANA_PORT</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>/rootfs/etc</Value>
+      <Name>HOST_ETC</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>/rootfs/proc</Value>
+      <Name>HOST_PROC</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>/rootfs/sys</Value>
+      <Name>HOST_SYS</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>/rootfs</Value>
+      <Name>HOST_MOUNT_PREFIX</Name>
+      <Mode/>
+    </Variable>
+  </Environment>
+  <Labels/>
+  <Config Name="Config" Target="/config" Default="/mnt/user/appdata/Grafana-Unraid-Stack/config" Mode="rw" Description="Container Path: /config" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/Grafana-Unraid-Stack</Config>
+  <Config Name="Data (db)" Target="/data" Default="/mnt/user/appdata/Grafana-Unraid-Stack/data" Mode="rw" Description="Container Path: /data" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/Grafana-Unraid-Stack/data</Config>
+  <Config Name="USE_HDDTEMP" Target="USE_HDDTEMP" Default="yes|no" Mode="" Description="Container Variable: USE_HDDTEMP" Type="Variable" Display="always" Required="false" Mask="false">no</Config>
+  <Config Name="INFLUXDB_HTTP_PORT" Target="INFLUXDB_HTTP_PORT" Default="8086" Mode="" Description="Container Variable: INFLUXDB_HTTP_PORT" Type="Variable" Display="advanced-hide" Required="false" Mask="false">8086</Config>
+  <Config Name="LOKI_PORT" Target="LOKI_PORT" Default="3100" Mode="" Description="Container Variable: LOKI_PORT" Type="Variable" Display="advanced-hide" Required="false" Mask="false">3100</Config>
+  <Config Name="PROMTAIL_PORT" Target="PROMTAIL_PORT" Default="9086" Mode="" Description="Container Variable: PROMTAIL_PORT" Type="Variable" Display="advanced-hide" Required="false" Mask="false">9086</Config>
+  <Config Name="GRAFANA_PORT" Target="GRAFANA_PORT" Default="3006" Mode="" Description="Container Variable: GRAFANA_PORT" Type="Variable" Display="advanced-hide" Required="false" Mask="false">3006</Config>
+  <Config Name="Telegraf 1" Target="/rootfs" Default="/" Mode="ro" Description="Container Path: /rootfs" Type="Path" Display="advanced-hide" Required="false" Mask="false">/</Config>
+  <Config Name="Telegraf 2" Target="/rootfs/etc" Default="/etc" Mode="ro" Description="Container Path: /rootfs/etc" Type="Path" Display="advanced-hide" Required="false" Mask="false">/etc</Config>
+  <Config Name="Telegraf 3" Target="/rootfs/proc" Default="/proc" Mode="ro" Description="Container Path: /rootfs/proc" Type="Path" Display="advanced-hide" Required="false" Mask="false">/proc</Config>
+  <Config Name="Telegraf 4" Target="/rootfs/sys" Default="/sys" Mode="ro" Description="Container Path: /rootfs/sys" Type="Path" Display="advanced-hide" Required="false" Mask="false">/sys</Config>
+  <Config Name="Telegraf 5" Target="/var/run/docker.sock" Default="/var/run/docker.sock" Mode="ro" Description="Container Path: /var/run/docker.sock" Type="Path" Display="advanced-hide" Required="false" Mask="false">/var/run/docker.sock</Config>
+  <Config Name="Telegraf 6" Target="/var/run/utmp" Default="/var/run/utmp" Mode="ro" Description="Container Path: /var/run/utmp" Type="Path" Display="advanced-hide" Required="false" Mask="false">/var/run/utmp</Config>
+  <Config Name="Telegraf 7" Target="/run/udev" Default="/run/udev" Mode="ro" Description="Container Path: /run/udev" Type="Path" Display="advanced-hide" Required="false" Mask="false">/run/udev</Config>
+  <Config Name="HOST_ETC" Target="HOST_ETC" Default="/rootfs/etc" Mode="" Description="Container Variable: HOST_ETC" Type="Variable" Display="advanced-hide" Required="false" Mask="false">/rootfs/etc</Config>
+  <Config Name="HOST_PROC" Target="HOST_PROC" Default="/rootfs/proc" Mode="" Description="Container Variable: HOST_PROC" Type="Variable" Display="advanced-hide" Required="false" Mask="false">/rootfs/proc</Config>
+  <Config Name="HOST_SYS" Target="HOST_SYS" Default="/rootfs/sys" Mode="" Description="Container Variable: HOST_SYS" Type="Variable" Display="advanced-hide" Required="false" Mask="false">/rootfs/sys</Config>
+  <Config Name="HOST_MOUNT_PREFIX" Target="HOST_MOUNT_PREFIX" Default="/rootfs" Mode="" Description="Container Variable: HOST_MOUNT_PREFIX" Type="Variable" Display="advanced-hide" Required="false" Mask="false">/rootfs</Config>
+</Container>

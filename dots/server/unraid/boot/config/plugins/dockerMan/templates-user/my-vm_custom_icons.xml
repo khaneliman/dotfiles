@@ -1,0 +1,142 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>vm_custom_icons</Name>
+  <Repository>spaceinvaderone/vm_custom_icons</Repository>
+  <Registry>https://hub.docker.com/r/spaceinvaderone/vm_custom_icons</Registry>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>true</Privileged>
+  <Support/>
+  <Project>https://github.com/SpaceinvaderOne/unraid_vm_icons</Project>
+  <Overview>Downloads and installs additional custom VM icons to the Unraid VM Manager.&#xD;
+&#xD;
+After install Container should be set to auto start.&#xD;
+&#xD;
+Usage&#xD;
+&#xD;
+Basic settings&#xD;
+1. Choose which custom icons you want to be installed from the drop downs.&#xD;
+2. Choose wether you want to keep the existing stock vm icons (recommended to keep)&#xD;
+3. Set wether all icons are redownloaded when container starts.&#xD;
+    Setting this as yes will clear all vm icons then redownload all choosen icons from github repo. &#xD;
+    Setting to yes will on every start download any new icons in selected sections.&#xD;
+    (This is also useful if you deceide you no longer want a choosen section of icons anymore)&#xD;
+4. If your server has a beep speaker you can enable a tune to be played each time icons are synced!&#xD;
+&#xD;
+Advanced settings (under show more settings)&#xD;
+1. You can set how long the container should wait before exiting after syncing icons (default 30 seconds)&#xD;
+Other options dont change&#xD;
+&#xD;
+&#xD;
+&#xD;
+</Overview>
+  <Category>Tools:</Category>
+  <WebUI>https://github.com/SpaceinvaderOne/unraid_vm_icons</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/SpaceinvaderOne/Docker-Templates-Unraid/master/spaceinvaderone/vm_icon_downloader.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/SpaceinvaderOne/unraid_vm_icons/master/dockericon.png</Icon>
+  <ExtraParams/>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1634180570</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>Downloads and installs additional custom VM icons to the Unraid VM Manager.&#xD;
+&#xD;
+After install Container should be set to auto start.&#xD;
+&#xD;
+Usage&#xD;
+&#xD;
+Basic settings&#xD;
+1. Choose which custom icons you want to be installed from the drop downs.&#xD;
+2. Choose wether you want to keep the existing stock vm icons (recommended to keep)&#xD;
+3. Set wether all icons are redownloaded when container starts.&#xD;
+    Setting this as yes will clear all vm icons then redownload all choosen icons from github repo. &#xD;
+    Setting to yes will on every start download any new icons in selected sections.&#xD;
+    (This is also useful if you deceide you no longer want a choosen section of icons anymore)&#xD;
+4. If your server has a beep speaker you can enable a tune to be played each time icons are synced!&#xD;
+&#xD;
+Advanced settings (under show more settings)&#xD;
+1. You can set how long the container should wait before exiting after syncing icons (default 30 seconds)&#xD;
+Other options dont change&#xD;
+&#xD;
+&#xD;
+&#xD;
+</Description>
+  <Networking>
+    <Mode>bridge</Mode>
+    <Publish/>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/usr/local/emhttp/plugins/dynamix.vm.manager/templates/images</HostDir>
+      <ContainerDir>/unraid_vm_icons</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/appdata/vm_custom_icons</HostDir>
+      <ContainerDir>/config</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment>
+    <Variable>
+      <Value>yes</Value>
+      <Name>windows</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>yes</Value>
+      <Name>linux</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>yes</Value>
+      <Name>freebsd</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>yes</Value>
+      <Name>macos</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>yes</Value>
+      <Name>other</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>yes</Value>
+      <Name>stock</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>no</Value>
+      <Name>delete</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>no</Value>
+      <Name>tune</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>30 seconds</Value>
+      <Name>sleeptimehuman</Name>
+      <Mode/>
+    </Variable>
+  </Environment>
+  <Labels/>
+  <Config Name="windows icons" Target="windows" Default="yes|no" Mode="" Description="select yes or no to download windows vm icons" Type="Variable" Display="always" Required="false" Mask="false">yes</Config>
+  <Config Name="linux icons" Target="linux" Default="yes|no" Mode="" Description="select yes or no to download linux vm icons" Type="Variable" Display="always" Required="false" Mask="false">yes</Config>
+  <Config Name="freebsd icons" Target="freebsd" Default="yes|no" Mode="" Description="select yes or no to download freebsd vm icons" Type="Variable" Display="always" Required="false" Mask="false">yes</Config>
+  <Config Name="macos vm icons" Target="macos" Default="yes|no" Mode="" Description="select yes or no to download macos vm icons" Type="Variable" Display="always" Required="false" Mask="false">yes</Config>
+  <Config Name="other os  icons" Target="other" Default="yes|no" Mode="" Description="select yes or no to download other vm icons" Type="Variable" Display="always" Required="false" Mask="false">yes</Config>
+  <Config Name="Keep Stock VM Icons" Target="stock" Default="yes|no" Mode="" Description="set to no to remove stock unraid vm icons" Type="Variable" Display="always" Required="false" Mask="false">yes</Config>
+  <Config Name="Clear all icons &amp;amp; redownload above on each start" Target="delete" Default="no|yes" Mode="" Description="set to yes to delete all vm icons. and redownload the above from github on every run of container " Type="Variable" Display="always" Required="false" Mask="false">no</Config>
+  <Config Name="Enable sucess tune on icon load" Target="tune" Default="no|yes" Mode="" Description="Enable tune on sucess. (you must have a beep speaker)" Type="Variable" Display="always" Required="false" Mask="false">no</Config>
+  <Config Name="Time to wait before exit" Target="sleeptimehuman" Default="30 seconds|1 minute|2 minutes|5 minutes|10 minutes" Mode="" Description="Time to wait before stopping container after syncing icons " Type="Variable" Display="advanced" Required="false" Mask="false">30 seconds</Config>
+  <Config Name="vm manager icon location" Target="/unraid_vm_icons" Default="" Mode="rw" Description="location on server where Unraid stores vm icons (dont change this)" Type="Path" Display="advanced" Required="false" Mask="false">/usr/local/emhttp/plugins/dynamix.vm.manager/templates/images</Config>
+  <Config Name="appdata" Target="/config" Default="" Mode="rw" Description="appdata" Type="Path" Display="advanced" Required="false" Mask="false">/mnt/user/appdata/vm_custom_icons</Config>
+  <Config Name="beep speaker" Target="" Default="" Mode="" Description="Container Device: " Type="Device" Display="advanced" Required="false" Mask="false">/dev/tty0</Config>
+</Container>

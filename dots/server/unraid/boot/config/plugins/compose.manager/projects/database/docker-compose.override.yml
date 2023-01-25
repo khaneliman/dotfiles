@@ -1,0 +1,25 @@
+services:
+  redis:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/A75G/docker-templates/master/templates/icons/redis.png'
+      net.unraid.docker.webui: ''
+      net.unraid.docker.shell: ''
+  MongoDB:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/jason-bean/docker-templates/master/jasonbean-repo/mongo.sh-600x600.png'
+      net.unraid.docker.webui: ''
+      net.unraid.docker.shell: ''
+  mariadb:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/mariadb-icon.png'
+      net.unraid.docker.webui: ''
+      net.unraid.docker.shell: ''
+  Postgres11:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://github.com/juusujanar/unraid-templates/raw/master/img/PostgreSQL-logo.png'
+      net.unraid.docker.webui: ''
+      net.unraid.docker.shell: ''

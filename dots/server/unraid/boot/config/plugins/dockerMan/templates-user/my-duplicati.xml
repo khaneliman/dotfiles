@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>duplicati</Name>
+  <Repository>linuxserver/duplicati</Repository>
+  <Registry>https://hub.docker.com/r/linuxserver/duplicati/</Registry>
+  <Network>khaneproxy</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://forums.unraid.net/topic/56610-support-linuxserverio-duplicati/</Support>
+  <Project>https://www.duplicati.com/</Project>
+  <Overview>Free backup software to store encrypted backups online, Duplicati works with standard protocols like FTP, SSH, WebDAV as well as popular services like Microsoft OneDrive, Amazon Cloud Drive and S3, Google Drive, box.com, Mega, hubiC and many others.</Overview>
+  <Category>Backup: Cloud: Network:Other Productivity: Tools:</Category>
+  <WebUI>http://[IP]:[PORT:8200]/</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/duplicati.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/duplicati-icon.png</Icon>
+  <ExtraParams/>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1634436256</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>Free backup software to store encrypted backups online, Duplicati works with standard protocols like FTP, SSH, WebDAV as well as popular services like Microsoft OneDrive, Amazon Cloud Drive and S3, Google Drive, box.com, Mega, hubiC and many others.</Description>
+  <Networking>
+    <Mode>khaneproxy</Mode>
+    <Publish>
+      <Port>
+        <HostPort>8200</HostPort>
+        <ContainerPort>8200</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/tmp/</HostDir>
+      <ContainerDir>/tmp</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/Backups/</HostDir>
+      <ContainerDir>/backups</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/</HostDir>
+      <ContainerDir>/source</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/appdata/duplicati</HostDir>
+      <ContainerDir>/config</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment>
+    <Variable>
+      <Value>99</Value>
+      <Name>PUID</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>100</Value>
+      <Name>PGID</Name>
+      <Mode/>
+    </Variable>
+  </Environment>
+  <Labels/>
+  <Config Name="Host Port 1" Target="8200" Default="8200" Mode="tcp" Description="Container Port: 8200" Type="Port" Display="always" Required="true" Mask="false">8200</Config>
+  <Config Name="Host Path 2" Target="/tmp" Default="" Mode="rw" Description="Container Path: /tmp" Type="Path" Display="always" Required="true" Mask="false">/tmp/</Config>
+  <Config Name="Host Path 3" Target="/backups" Default="" Mode="rw" Description="Container Path: /backups" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/Backups/</Config>
+  <Config Name="Host Path 4" Target="/source" Default="" Mode="rw" Description="Container Path: /source" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/</Config>
+  <Config Name="Key 1" Target="PUID" Default="99" Mode="" Description="Container Variable: PUID" Type="Variable" Display="always" Required="false" Mask="false">99</Config>
+  <Config Name="Key 2" Target="PGID" Default="100" Mode="" Description="Container Variable: PGID" Type="Variable" Display="always" Required="false" Mask="false">100</Config>
+  <Config Name="AppData Config Path" Target="/config" Default="/mnt/user/appdata/duplicati" Mode="rw" Description="Container Path: /config" Type="Path" Display="advanced-hide" Required="true" Mask="false">/mnt/user/appdata/duplicati</Config>
+</Container>

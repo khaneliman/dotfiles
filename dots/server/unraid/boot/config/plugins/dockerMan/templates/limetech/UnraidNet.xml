@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Containers>
+<Plugin>True</Plugin>
+<PluginURL>https://unraid-dl.sfo2.cdn.digitaloceanspaces.com/unraid-api/dynamix.unraid.net.plg</PluginURL>
+<PluginAuthor>limetech</PluginAuthor>
+<Beta>True</Beta>
+<Category>Tools:System</Category>
+<Name>My Servers</Name>
+<Description>
+My Servers is designed to extend the value of your investment in Unraid by enabling you to more easily connect, monitor, and access your Unraid server. Download and sign-in with your Unraid.net account to unlock the benefits of My Servers.
+</Description>
+<ExtraSearchTerms>My%20Servers unraid%20api Unraid.net myservers</ExtraSearchTerms>
+<Support>https://forums.unraid.net/forum/94-support/</Support>
+<Icon>https://raw.githubusercontent.com/limetech/Unraid.net/master/Unraid.net.png</Icon>
+<Screenshot>https://github.com/limetech/docker-templates/raw/master/images/myservers_screen1.png</Screenshot>
+<Video>https://www.youtube.com/watch?v=O1Uge6fKAlM</Video>
+<Video>https://www.buzzsprout.com/1746902/9136307-the-upc-my-servers-and-why-zfs-support</Video>
+</Containers>

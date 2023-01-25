@@ -1,0 +1,5 @@
+#!/bin/bash
+# Start the Management Utility
+/usr/local/sbin/emhttp &
+modprobe i915
+chmod -R 777 /dev/dri

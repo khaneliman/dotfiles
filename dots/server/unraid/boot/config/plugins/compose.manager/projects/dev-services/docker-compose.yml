@@ -1,0 +1,153 @@
+version: "3.6"
+services:
+  adminer:
+    command:
+      - "php"
+      - "-S"
+      - "[::]:8080"
+      - "-t"
+      - "/var/www/html"
+    container_name: "adminer"
+    entrypoint:
+      - "entrypoint.sh"
+    environment:
+      - "HOST_CONTAINERNAME=adminer"
+      - "ADMINER_DESIGN=dracula"
+      - "ADMINER_PLUGINS="
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "ADMINER_VERSION=4.8.1"
+      - "ADMINER_DOWNLOAD_SHA256=2fd7e6d8f987b243ab1839249551f62adce19704c47d3d0c8dd9e57ea5b9c6b3"
+      - "ADMINER_COMMIT=1f173e18bdf0be29182e0d67989df56eadea4754"
+    hostname: "d962fc1ed7f8"
+    image: "adminer"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/selfhosters/unRAID-CA-templates/master/templates/img/adminer.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:8080]"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "8585:8080/tcp"
+    user: "adminer"
+    working_dir: "/var/www/html"
+
+  DockerRegistry:
+    command:
+      - "/etc/docker/registry/config.yml"
+    container_name: "DockerRegistry"
+    entrypoint:
+      - "/entrypoint.sh"
+    environment:
+      - "HOST_CONTAINERNAME=DockerRegistry"
+      - "REGISTRY_AUTH=htpasswd"
+      - "REGISTRY_AUTH_HTPASSWD_REALM=Registry Realm"
+      - "REGISTRY_AUTH_HTPASSWD_PATH=/auth/htpasswd"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    hostname: "4ada41613234"
+    image: "registry"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://github.com/juusujanar/unraid-templates/raw/master/img/DockerRegistry-logo.png"
+      net.unraid.docker.managed: "dockerman"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "5000:5000/tcp"
+    volumes:
+      - "/mnt/cache/appdata/registry/auth:/auth"
+      - "/mnt/user/appdata/registry:/var/lib/registry"
+
+  CloudBeaver:
+    container_name: "CloudBeaver"
+    entrypoint:
+      - "./run-server.sh"
+    environment:
+      - "HOST_CONTAINERNAME=CloudBeaver"
+      - "PATH=/opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "JAVA_HOME=/opt/java/openjdk"
+      - "JAVA_VERSION=jdk-17.0.4.1+1"
+    hostname: "d7359979a409"
+    image: "dbeaver/cloudbeaver"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/CorneliousJD/Docker-Templates/master/icons/cloudbeaver.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:8978]/"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "8978:8978/tcp"
+    volumes:
+      - "/mnt/user/appdata/cloudbeaver:/opt/cloudbeaver/workspace"
+    working_dir: "/opt/cloudbeaver"
+
+  binhex-jenkins:
+    command:
+      - "/bin/bash"
+      - "/usr/local/bin/init.sh"
+    container_name: "binhex-jenkins"
+    entrypoint:
+      - "/usr/bin/dumb-init"
+      - "--"
+    environment:
+      - "PUID=99"
+      - "PGID=100"
+      - "HOST_CONTAINERNAME=binhex-jenkins"
+      - "JAVA_ARGS=-Xmx512m"
+      - "JAVA_OPTS=-Dhudson.footerURL=https://khaneliman.com"
+      - "UMASK=000"
+      - "DOCKER_HOST=tcp://dockersocket:2375"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "HOME=/home/nobody"
+      - "TERM=xterm"
+    hostname: "eaba27db50a4"
+    image: "binhex/arch-jenkins"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/binhex/docker-templates/master/binhex/images/jenkins-icon.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:8090]/"
+      org.opencontainers.image.authors: "= binhex"
+      org.opencontainers.image.source: "= https://github.com/binhex/arch-jenkins"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "4243:4243/tcp"
+      - "8090:8090/tcp"
+    privileged: true
+    security_opt:
+      - "label=disable"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "/usr/bin/docker:/usr/bin/docker"
+      - "/mnt/user/Downloads:/mnt/downloads"
+      - "/mnt/user/appdata/binhex-jenkins:/config"
+
+networks:
+  br0:
+    external: true
+    name: "br0"
+  khaneproxy:
+    external: true
+    name: "khaneproxy"

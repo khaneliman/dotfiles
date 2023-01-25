@@ -1,0 +1,281 @@
+<?xml version='1.0' standalone='yes'?>
+
+<!DOCTYPE PLUGIN [
+  <!ENTITY name       "plexstreams">
+  <!ENTITY author     "Donald Organ">
+  <!ENTITY version    "2022.08.31">
+  <!ENTITY launch     "Settings/PlexStreams">
+  <!ENTITY branch     "master">
+  <!ENTITY gitURL     "https://raw.githubusercontent.com/dorgan/Unraid-&name;/&branch;">
+  <!ENTITY vnstatURL  "&gitURL;/deps/">
+  <!ENTITY pluginURL  "&gitURL;/&name;.plg">
+  <!ENTITY emhttp     "/usr/local/emhttp/plugins/&name;">
+  <!ENTITY plgPATH    "/boot/config/plugins/&name;">
+  <!ENTITY plgNAME    "&name;-&version;-x86_64-1">
+  <!ENTITY md5        "94c32cc8f3fcb2b1febe39780406bde0">
+]>
+
+<PLUGIN  name="&name;"
+         author="&author;"
+         version="&version;"
+         pluginURL="&pluginURL;"
+         support="https://forums.unraid.net/topic/92459-plugin-plex-streams/"
+         launch="&launch;"
+         IconFA="film"
+         icon="film">
+
+    <CHANGES>
+    ##&name;
+###2022.08.31
+- Fix permissions issues
+
+###2022.08.29
+- Fix issue for audio files where title attribute contained html
+
+###2021.08.26
+- Fix file permissions issues
+
+###2021.08.09a
+- just some adjustments to naming
+
+###2021.08.09
+- Fixes for sorting of dashboard widget
+- Fix for collapsing/expanding of dashboard widget
+
+###2021.03.22
+- Fixing Removal of custom servers
+
+###2021.03.17
+- Fix collapse bug for dashboard widget
+
+###2021.02.11a
+- Added custom servers to Legacy Settings page
+
+###2021.02.11
+- Added ability to setup custom servers, that may not be getting returned from plex
+
+###2021.02.09a
+- Fix issue with images not showing
+
+###2021.02.09
+- Correcting some display issues where audio streams from plexamp were not showing
+- Adding details about transcoding sessions
+
+###2020.07.23
+- Correcting legacy display issue for dashboard widget
+
+###2020.07.20
+- Correct display issue on settings page
+
+###2020.07.09
+- Correcting display issue for the dashboard widget
+
+###2020.06.30b
+- Correct display issue for details page when there is no Director.
+
+###2020.06.30a
+ - Fix display issue for Legacy support
+
+###2020.06.27
+ - Add Multi language support
+
+###2020.06.26b
+ - Both the dashboard and the streams page now fully update with new/removed streams without having to reload
+ 
+###2020.06.22
+ - Updated streams page to update streams via ajax, still need to have it add streams as they come online
+
+###2020.06.20c
+ - Add streaming user to dashboard widget
+
+###2020.06.20b
+ - Updating movie details page to use correct HOST
+
+###2020.06.20a
+ - Fix javascript issues, and dashboard widget issue
+
+###2020.06.20
+ - Fix JavaScript Issue when retrieving plex token
+
+###2020.06.19
+ - Added the ability to view multiple servers at a time
+
+###2020.06.12a
+ - Add Geo IP lookup
+ 
+###2020.06.12
+ - Make server list load via ajax so that it doesnt slow down the initial rendering the pages
+ 
+###2020.06.10a
+ - Correcting display issue with live streams from Tuner Devices
+
+###2020.06.10
+ - Updated way to use SSL when connecting to plex server.  This should fix outstanding problems.
+
+###2020.06.09c
+ - All multi-curl support and foundation for including DVR recording sessions
+ - Added option to force https communication with Plex Servers - doesnt work locally, but maybe would work for others
+
+###2020.06.09b
+ - Correct streams page image output and error for ajax call for Live TV streams
+
+###2020.06.09a
+ - Make sure settings are set before trying to display streams in the widget
+
+###2020.06.09
+ - Correct issue when plex server has disabled remote connections
+
+###2020.06.07a
+ - Make dashboard widget use ajax so that it doesnt slow down the loading of the dashboard
+ 
+###2020.06.07
+ - Maintain settings for dashboard widget and nav item
+
+###2020.06.03
+ - Fix diplay issue where more than 3 streams was not wrapping
+
+###2020.05.28b
+ - Make sure server selection drop down appears when default server has no streams
+
+###2020.05.28a
+ - Added the ability for the streams page to show different servers
+     - Default server is what is used for dashboard widget
+
+###2020.05.28
+ - Correcting details sent to Plex.tv during OAuth Process
+
+###2020.05.27a
+ - Fix issue for movie details where not being pulled
+
+###2020.05.27
+ - Integrate with Plex OAuth
+ - Allow for remote plex server connection
+ - Correct issue for remote plex server wasnt displaying artwork
+
+###2020.05.20b
+ - Ability to turn dashboard widget on/off
+ - Ability to turn top level nav on/off
+
+###2020.05.20a
+ - Correcting missing streamcount from dashboard widget
+
+###2020.05.20
+ - Add audio streams to both streams page and dashboard widget
+ - Remove debug output from saving settings
+ - Correct details screen for TV Shows
+
+###2020.05.19a
+ - Correcting display issue for stream transcodes
+
+###2020.05.19
+ - Correct display issue on dashboard widget for long titles
+
+###2020.05.18b
+ - Display state icon on dashboard widget
+ - Correct label for password on settings screen
+ - Make setting icon link directly to Plex Stream Settings
+
+###2020.05.18a
+ - Added basic dashboard widget functionality
+
+###2020.05.18
+ - Correct issue for direct play status wasnt showing for audtio/video
+
+###2020.05.16
+ - Added the ability to click on the Stream title to get content details
+ - Fixed bug that was displaying progress time incorrectly
+
+###2020.05.15a
+ - Fixing bug for stream type wasnt being displayed
+ 
+###2020.05.15
+ - More tweaks to UI
+
+###2020.05.14e
+ - Remove unused function
+
+###2020.05.14d
+ - Some CSS tweaks and add icon for when tasks menu is on the left
+     
+###2020.05.14c
+ - Initial Beta Release
+    </CHANGES>
+
+    <FILE Name="&plgPATH;/&name;.cfg">
+      <INLINE>
+      <![CDATA[
+      HOST=""
+      TOKEN=""
+      ]]>
+      </INLINE>
+    </FILE>
+
+
+    <!-- PRE-INSTALL SCRIPT -->
+    <!--<FILE Run="/bin/bash">
+    <INLINE>
+    # Remove old 'name' packages
+    MD5=$(md5sum &name;.txz 2>/dev/null|grep -Po '^\S+')
+    if [[ $MD5 != "&md5;" ]]; then
+        rm -f &name;*.txz
+    fi
+    </INLINE>
+    </FILE>-->
+
+    <!-- Install Package-->
+    <FILE Name="&plgPATH;/&plgNAME;.txz" Run="upgradepkg --install-new --reinstall">
+        <URL>&gitURL;/archive/&plgNAME;.txz</URL>
+        <MD5>&md5;</MD5>
+    </FILE>
+
+    <!-- POST-INSTALL SCRIPT -->
+    <FILE Run="/bin/bash">
+        <INLINE>
+            WIDGET_OFF_FILE=/usr/local/emhttp/plugins/plexstreams/PlexStreams_dashboard.page.off
+            WIDGET_SETTING=`php -r 'exit(parse_ini_file("/boot/config/plugins/plexstreams/plexstreams.cfg", false)["DISPLAY_WIDGET"]);'`
+            if [[ -f "$WIDGET_OFF_FILE" || "$WIDGET_SETTING" == "0" ]]; then
+                rm /usr/local/emhttp/plugins/plexstreams/PlexStreams_dashboard.page.off
+                mv /usr/local/emhttp/plugins/plexstreams/PlexStreams_dashboard.page /usr/local/emhttp/plugins/plexstreams/PlexStreams_dashboard.page.off
+            fi
+            
+            NAV_OFF=/usr/local/emhttp/plugins/plexstreams/Plex_Streams.page.off
+            NAV_SETTING=`php -r 'exit(parse_ini_file("/boot/config/plugins/plexstreams/plexstreams.cfg", false)["DISPLAY_NAV"]);'`
+            if [[ -f "$NAV_OFF" || "$NAV_SETTING" == "0" ]]; then
+                rm /usr/local/emhttp/plugins/plexstreams/Plex_Streams.page.off
+                mv /usr/local/emhttp/plugins/plexstreams/Plex_Streams.page /usr/local/emhttp/plugins/plexstreams/Plex_Streams.page.off
+            fi
+
+            echo ""
+            echo "-----------------------------------------------------------"
+            echo " &name; has been installed."
+            echo " Version: &version;"
+            echo "-----------------------------------------------------------"
+            echo ""
+        </INLINE>
+    </FILE>
+
+    <!--
+    The 'remove' script.
+    -->
+    <FILE Run="/bin/bash" Method="remove">
+        <INLINE>
+          # uninstall plugin
+	        removepkg &plgPATH;/*.txz
+
+	        rm -rf &emhttp;
+            rm -rf &plgPATH;/*.txz \
+		        &plgPATH;/*.md5
+
+            echo ""
+            echo "-----------------------------------------------------------"
+            echo " &name; has been uninstalled."
+            echo " Please reboot your server to complete uninstall this plugin."
+            echo " Version: &version;"
+            echo "-----------------------------------------------------------"
+            echo ""
+
+            exit 0
+        </INLINE>
+    </FILE>
+
+</PLUGIN>

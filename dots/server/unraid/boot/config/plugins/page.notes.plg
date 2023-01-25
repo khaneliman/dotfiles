@@ -1,0 +1,72 @@
+<?xml version="1.0" standalone="yes"?>
+<!DOCTYPE PLUGIN [
+<!ENTITY name "page.notes">
+<!ENTITY author "Andrew Zawadzki">
+<!ENTITY version "2021.07.17">
+<!ENTITY md5 "7e661e50c26c33f89726df0834d3aa4d">
+<!ENTITY plugdir "/usr/local/emhttp/plugins/&name;">
+<!ENTITY github "Squidly271/page.notes">
+<!ENTITY pluginURL "https://raw.githubusercontent.com/&github;/main/plugins/&name;.plg">
+]>
+<PLUGIN name="&name;" author="&author;" version="&version;" pluginURL="&pluginURL;" icon="edit" support="https://forums.unraid.net/topic/105155-plugin-user-notes/">
+
+<CHANGES>
+###2021.07.17
+- Fixed: Display aberrations if browser zoom is not 100%
+
+###2021.04.10
+- Support flashing on Azure / Gray
+
+###2021.04.09
+- Switch to monospaced font
+
+###2021.04.04
+- Identify server on the popup page
+
+###2021.04.03
+- Initial release
+
+</CHANGES>
+
+<FILE Run="/bin/bash">
+<INLINE>
+# Remove old 'source' files
+rm -f $(ls /boot/config/plugins/&name;/&name;*.txz 2&gt;/dev/null | grep -v '&version;')
+</INLINE>
+</FILE>
+
+<!--
+The 'source' file.
+-->
+<FILE Name="/boot/config/plugins/&name;/&name;-&version;-x86_64-1.txz" Run="upgradepkg --install-new">
+<URL>https://raw.github.com/&github;/main/archive/&name;-&version;-x86_64-1.txz</URL>
+<MD5>&md5;</MD5>
+</FILE>
+
+<!--
+The 'post-install' script
+-->
+<FILE Run="/bin/bash">
+<INLINE>
+ln -s /usr/local/emhttp/plugins/page.notes/pageNotes.php /usr/local/emhttp/pageNotes.php &gt; /dev/null 2&gt; /dev/null
+echo ""
+echo "----------------------------------------------------"
+echo " &name; has been installed."
+echo " Copyright 2021, Andrew Zawadzki"
+echo " Version: &version;"
+echo "----------------------------------------------------"
+echo ""
+</INLINE>
+</FILE>
+
+<!--
+The 'remove' script.
+-->
+<FILE Run="/bin/bash" Method="remove">
+<INLINE>
+removepkg &name;-&version;-x86_64-1
+rm -rf &plugdir;
+rm -rf /usr/local/emhttp/pageNotes.php
+</INLINE>
+</FILE> 
+</PLUGIN>

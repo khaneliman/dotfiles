@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>Dolphin</Name>
+  <Repository>aptalca/docker-dolphin</Repository>
+  <Registry>https://registry.hub.docker.com/r/aptalca/docker-dolphin/</Registry>
+  <Network>khaneproxy</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>http://lime-technology.com/forum/index.php?topic=39413.0</Support>
+  <Project/>
+  <Overview>&#xD;
+  Dolphin is KDE's default file manager. With this docker, you can access the dolphin interface through a web browser.&#xD;
+  </Overview>
+  <Category>Tools:Utilities</Category>
+  <WebUI>http://[IP]:[PORT:8080]/#/client/c/Dolphin</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/aptalca/docker-templates/master/aptalca/dolphin.xml</TemplateURL>
+  <Icon>https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Dolphin-icon.svg/500px-Dolphin-icon.svg.png</Icon>
+  <ExtraParams/>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1634437332</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>&#xD;
+  Dolphin is KDE's default file manager. With this docker, you can access the dolphin interface through a web browser.&#xD;
+  </Description>
+  <Networking>
+    <Mode>khaneproxy</Mode>
+    <Publish>
+      <Port>
+        <HostPort>8087</HostPort>
+        <ContainerPort>8080</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/</HostDir>
+      <ContainerDir>/mnt</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/appdata/Dolphin</HostDir>
+      <ContainerDir>/config</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment>
+    <Variable>
+      <Value>99</Value>
+      <Name>USER_ID</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>100</Value>
+      <Name>GROUP_ID</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>1280</Value>
+      <Name>WIDTH</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>720</Value>
+      <Name>HEIGHT</Name>
+      <Mode/>
+    </Variable>
+  </Environment>
+  <Labels/>
+  <Config Name="Host Port 1" Target="8080" Default="" Mode="tcp" Description="Container Port: 8080" Type="Port" Display="always" Required="true" Mask="false">8087</Config>
+  <Config Name="Host Path 2" Target="/mnt" Default="/mnt/" Mode="rw" Description="Container Path: /mnt" Type="Path" Display="always" Required="true" Mask="false">/mnt/</Config>
+  <Config Name="Key 1" Target="USER_ID" Default="99" Mode="" Description="Container Variable: USER_ID" Type="Variable" Display="always" Required="false" Mask="false">99</Config>
+  <Config Name="Key 2" Target="GROUP_ID" Default="100" Mode="" Description="Container Variable: GROUP_ID" Type="Variable" Display="always" Required="false" Mask="false">100</Config>
+  <Config Name="Key 3" Target="WIDTH" Default="1280" Mode="" Description="Container Variable: WIDTH" Type="Variable" Display="always" Required="false" Mask="false">1280</Config>
+  <Config Name="Key 4" Target="HEIGHT" Default="720" Mode="" Description="Container Variable: HEIGHT" Type="Variable" Display="always" Required="false" Mask="false">720</Config>
+  <Config Name="AppData Config Path" Target="/config" Default="/mnt/user/appdata/Dolphin" Mode="rw" Description="Container Path: /config" Type="Path" Display="advanced-hide" Required="true" Mask="false">/mnt/user/appdata/Dolphin</Config>
+</Container>

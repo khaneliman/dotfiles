@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>binhex-airsonic</Name>
+  <Repository>binhex/arch-airsonic</Repository>
+  <Registry>https://registry.hub.docker.com/r/binhex/arch-airsonic/</Registry>
+  <Network>khaneproxy</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://forums.lime-technology.com/topic/59427-support-binhex-airsonic/</Support>
+  <Project>https://github.com/airsonic/airsonic</Project>
+  <Overview>
+    Airsonic is a free, web-based media streamer, providing ubiquitious access to your music. Use it to share your music with friends, or to listen to your own music while at work. You can stream to multiple players simultaneously, for instance to one player in your kitchen and another in your living room.[br]
+    Airsonic is designed to handle very large music collections (hundreds of gigabytes). Although optimized for MP3 streaming, it works for any audio or video format that can stream over HTTP, for instance AAC and OGG. By using transcoder plug-ins, Airsonic supports on-the-fly conversion and streaming of virtually any audio format, including WMA, FLAC, APE, Musepack, WavPck and Shorten.[br]
+    If you have constrained bandwidth, you may set an upper limit for the bitrate of the music streams. Airsonic will then automatically resample the music to a suitable bitrate.[br]
+    In addition to being a streaming media server, Airsonic works very well as a local jukebox. The intuitive web interface, as well as search and index facilities, are optimized for efficient browsing through large media libraries. Airsonic also comes with an integrated Podcast receiver, with many of the same features as you find in iTunes.[br]
+    Based on Java technology, Airsonic runs on most platforms, including Windows, Mac, Linux and Unix variants.[br][br]
+  </Overview>
+  <Category>MediaServer:Music</Category>
+  <WebUI>http://[IP]:[PORT:4040]/</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/binhex/docker-templates/master/binhex/airsonic.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/binhex/docker-templates/master/binhex/images/airsonic-icon.png</Icon>
+  <ExtraParams/>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1634432525</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>&#xD;
+    Airsonic is a free, web-based media streamer, providing ubiquitious access to your music. Use it to share your music with friends, or to listen to your own music while at work. You can stream to multiple players simultaneously, for instance to one player in your kitchen and another in your living room.[br]&#xD;
+    Airsonic is designed to handle very large music collections (hundreds of gigabytes). Although optimized for MP3 streaming, it works for any audio or video format that can stream over HTTP, for instance AAC and OGG. By using transcoder plug-ins, Airsonic supports on-the-fly conversion and streaming of virtually any audio format, including WMA, FLAC, APE, Musepack, WavPck and Shorten.[br]&#xD;
+    If you have constrained bandwidth, you may set an upper limit for the bitrate of the music streams. Airsonic will then automatically resample the music to a suitable bitrate.[br]&#xD;
+    In addition to being a streaming media server, Airsonic works very well as a local jukebox. The intuitive web interface, as well as search and index facilities, are optimized for efficient browsing through large media libraries. Airsonic also comes with an integrated Podcast receiver, with many of the same features as you find in iTunes.[br]&#xD;
+    Based on Java technology, Airsonic runs on most platforms, including Windows, Mac, Linux and Unix variants.[br][br]&#xD;
+  </Description>
+  <Networking>
+    <Mode>khaneproxy</Mode>
+    <Publish>
+      <Port>
+        <HostPort>4040</HostPort>
+        <ContainerPort>4040</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/data/media/music/</HostDir>
+      <ContainerDir>/media</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/appdata/binhex-airsonic</HostDir>
+      <ContainerDir>/config</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment>
+    <Variable>
+      <Value>/</Value>
+      <Name>CONTEXT_PATH</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>2046</Value>
+      <Name>MAX_MEMORY</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>000</Value>
+      <Name>UMASK</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>99</Value>
+      <Name>PUID</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>100</Value>
+      <Name>PGID</Name>
+      <Mode/>
+    </Variable>
+  </Environment>
+  <Labels/>
+  <Config Name="Host Port 1" Target="4040" Default="4040" Mode="tcp" Description="Container Port: 4040" Type="Port" Display="always" Required="true" Mask="false">4040</Config>
+  <Config Name="Host Path 2" Target="/media" Default="/mnt/user" Mode="rw" Description="Container Path: /media" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/data/media/music/</Config>
+  <Config Name="Key 1" Target="CONTEXT_PATH" Default="/" Mode="" Description="Container Variable: CONTEXT_PATH" Type="Variable" Display="always" Required="false" Mask="false">/</Config>
+  <Config Name="Key 2" Target="MAX_MEMORY" Default="2046" Mode="" Description="Container Variable: MAX_MEMORY" Type="Variable" Display="always" Required="false" Mask="false">2046</Config>
+  <Config Name="Key 3" Target="UMASK" Default="000" Mode="" Description="Container Variable: UMASK" Type="Variable" Display="always" Required="false" Mask="false">000</Config>
+  <Config Name="Key 4" Target="PUID" Default="99" Mode="" Description="Container Variable: PUID" Type="Variable" Display="always" Required="false" Mask="false">99</Config>
+  <Config Name="Key 5" Target="PGID" Default="100" Mode="" Description="Container Variable: PGID" Type="Variable" Display="always" Required="false" Mask="false">100</Config>
+  <Config Name="AppData Config Path" Target="/config" Default="/mnt/user/appdata/binhex-airsonic" Mode="rw" Description="Container Path: /config" Type="Path" Display="advanced-hide" Required="true" Mask="false">/mnt/user/appdata/binhex-airsonic</Config>
+</Container>

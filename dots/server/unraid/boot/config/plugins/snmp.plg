@@ -1,0 +1,299 @@
+<?xml version='1.0' standalone='yes'?>
+
+<!DOCTYPE PLUGIN [
+<!ENTITY name          "snmp">
+<!ENTITY author        "kubedzero">
+<!ENTITY gitbranch     "main">
+
+<!ENTITY pluginver     "2021.05.21">
+<!ENTITY minosver      "6.7.0">
+
+<!ENTITY githuburl     "https://raw.githubusercontent.com/&author;/unraid-snmp/&gitbranch;">
+<!ENTITY pluginurl     "&githuburl;/snmp.plg">
+<!ENTITY pkgurl        "&githuburl;/packages">
+<!ENTITY supporturl    "https://forums.unraid.net/topic/39339-plug-in-snmp">
+
+<!-- Defines the persistent (USB) directory where downloaded packages are cached -->
+<!ENTITY usbcfgdir     "/boot/config/plugins/&name;/">
+
+<!ENTITY snmppkg       "net-snmp-5.9-x86_64-1.txz">
+<!ENTITY snmppkgmd5    "b4f6f3dfef81d1f58171012800b8ffc6">
+
+<!ENTITY libnlpkg      "libnl-1.1.4-x86_64-3.txz">
+<!ENTITY libnlpkgmd5   "82c9374aaa9c7f4efbde8041f87d6053">
+
+<!ENTITY perlpkg       "perl-5.32.0-x86_64-1.txz">
+<!ENTITY perlpkgmd5    "6993da990e2decbae18e92c5bf615dbe">
+
+<!ENTITY pluginpkg     "unraid-snmp-&pluginver;-x86_64-1.txz">
+<!ENTITY pluginpkgmd5  "6afea4c03bb4f0a9db8d49e2450bd40d">
+]>
+
+<PLUGIN  name="&name;"
+         author="&author;"
+         version="&pluginver;"
+         pluginURL="&pluginurl;"
+         support="&supporturl;"
+         min="&minosver;"
+         >
+
+<CHANGES>
+## SNMP
+
+### 2021.05.21
+- Added customizable snmpd.conf to the SNMP Settings page. Thanks @Mattie112 for the contribution!
+- Users can define a custom SNMP config at `/boot/config/plugins/snmp/snmpd.conf` that will automatically be picked up at boot/install time
+- Tweaked the install script to avoid an early exit if the bundled snmpd.conf was missing
+- Adjusted PLG uninstall process to properly remove `/etc/rc.d/rc.snmpd*`
+- SNMP HDD/CPU/RAM/etc scripts now use `/bin/bash` as `/usr/bin/bash` just symlinks to it anyway
+
+### 2020.12.20
+- Add Dirty Memory reporting.
+
+### 2020.11.20
+- Repository branch references changed from "master" to "main"
+ - https://github.com/github/renaming
+- Code and functionally identical to version 2020.10.04
+
+### 2020.10.04
+- Added `mem_info.sh` to print memory values in bytes
+ - Exposed in SNMP as `meminfo`
+ - Current memory values exported are MemTotal, MemFree, MemAvailable, Cached, Active, Inactive, Committed_AS
+- Added Settings page to disable `--no-check standby` when getting disk temps
+ - Used in Unraid setups where disks are always reported to be in Standby
+ - Used in Unraid setups where disks don't need spinning up to get temperature 
+ - State is stored between reboots in `/boot/config/plugins/snmp/snmp.cfg`
+ - The script `/usr/local/emhttp/plugins/snmp/disk_temps.sh` reads this config to change behavior
+
+### 2020.09.20
+- Bugfix: SMB and NFS permission denied errors after plugin install
+ - Unused scripts were present in `unraid-snmp-2020.09.19-x86_64-1.txz` and somehow interrupted server access
+ - Resolved by rebuilding the `.txz` to contain only used files
+- Updated `slack-desc` formatting
+- PLG tweak: moved forward slash into XML variable for `usbcfgdir`
+
+### 2020.09.19
+- Migrate SNMP plugin to .txz style install 
+- Optimized plugin removal for more complete cleanup
+- Updated net-snmp from 5.8-5 to 5.9
+- Updated libnl from 1.1.4 to 1.1.4-3
+- Perl 5.32.0 declared as dependency instead of separate install. 
+ - Plugin maintainer should keep the version in sync with Nerd Pack to avoid overwriting with an older version
+- Install logging more clearly states usage of single and double quotes in sample calls
+- Refactored `share_free_space.sh` for added clarity. 
+ - Preexisting behavior: Outputs in bytes
+- Refactored `drive_temps.sh`
+ - Changed name to `disk_temps.sh`
+ - Preexisting behavior: Five minute TTL cached results for rapid SNMP calls and large arrays
+ - New behavior: Avoids disk spinup, preferring to report standby "temperature" of -2
+ - New behavior: If an error is encountered during parsing, report a "temperature" of -1
+ - New behavior: Script originally output nothing if no cached results present. Now it reports whatever results were collected in the first 1000ms
+- Added `disk_free_space.sh` to print free bytes in /boot, /mnt/disk*, /mnt/cache
+ - Exposed in SNMP as `diskfree`
+- Added `cpu_mhz.sh` at request of forum user Max to output CPU speed in MHz 
+ - Exposed in SNMP as `cpumhz`
+ - Tested with an Intel CPU virtualized under ESXi
+
+### 2020.04.01
+- Cache downloaded files on USB to support offline installation
+- Add /mnt/disk up to 28 from 20 to provide 30 drive support
+- Add MD5 for shell scripts
+- Format plugin name in README to be in line with other plugins
+- More consistent variable use and naming in .plg file
+- Clearer install and uninstall logging
+
+### 2019.05.28c
+- Fix icon file
+
+### 2019.05.28b
+- Customized for the kubedzero repository
+
+### 2019.05.28
+- Updated plugin to work with 6.7.0, enforce minimum version
+
+### 2018.07.22
+- Fix bug with grep and "mostfree" allocator. https://github.com/coppit/unraid-snmp/pull/1
+
+### 2017.02.07
+- Drop all pretense of trying to keep up with nerd tools. Just require perl, and suggest that the user install nerd tools.
+
+### 2016.02.28
+- Bump the version of perl to match nerd tools.
+
+### 2015.10.18
+- Run temperature updates in the background
+
+### 2015.09.06
+- Move packages to github for better reliability
+
+### 2015.09.05
+- Add support for reporting share free space
+
+### 2015.08.25
+- Download and install the drive temp script (duh)
+
+### 2015.08.24
+- Added hard drive temperature capture
+
+### 2015.08.23
+- Reduced logging to "warning" level
+
+### 2015.06.24
+- Initial unRAID V6 release.
+</CHANGES>
+
+
+<!-- Download, cache and install dependent perl package shared with Nerd Pack -->
+<FILE Name="&usbcfgdir;&perlpkg;" Run="upgradepkg --install-new">
+<URL>&pkgurl;/&perlpkg;</URL>
+<MD5>&perlpkgmd5;</MD5>
+</FILE>
+
+<!-- Download, cache and install dependent libnl package -->
+<FILE Name="&usbcfgdir;&libnlpkg;" Run="upgradepkg --install-new">
+<URL>&pkgurl;/&libnlpkg;</URL>
+<MD5>&libnlpkgmd5;</MD5>
+</FILE>
+
+<!-- Download, cache and install the net-snmp package -->
+<FILE Name="&usbcfgdir;&snmppkg;" Run="upgradepkg --install-new">
+<URL>&pkgurl;/&snmppkg;</URL>
+<MD5>&snmppkgmd5;</MD5>
+</FILE>
+
+<!-- Download, cache and install the Unraid Plugin package -->
+<FILE Name="&usbcfgdir;&pluginpkg;" Run="upgradepkg --install-new">
+<URL>&pkgurl;/&pluginpkg;</URL>
+<MD5>&pluginpkgmd5;</MD5>
+</FILE>
+
+<!-- Test SNMP functionality -->
+<FILE Run="/bin/bash">
+<INLINE>
+
+# NOTE: Modified bash for embedding in XML with ampersand-semicolon placeholders
+
+# https://vaneyckt.io/posts/safer_bash_scripts_with_set_euxo_pipefail/
+# exit script early if we encounter an error
+set -e
+
+echo ""
+echo "+=============================================================================="
+echo "| Testing SNMP by listing mounts, /boot should be present"
+echo "+=============================================================================="
+echo ""
+
+printf "snmpwalk -v 2c localhost -c public hrFSMountPoint\n"
+results=$(snmpwalk -v 2c localhost -c public hrFSMountPoint 2>&amp;1) || printf "snmpwalk failure"
+if [[ "$results" =~ "/boot" ]]
+then
+  echo "SNMP appears to be working. Output:"
+  echo "$results"
+else
+  echo "Couldn't find /boot mount point. SNMP output:"
+  echo "$results"
+  exit 1
+fi
+
+echo ""
+echo "+=============================================================================="
+echo "| Other SNMP Examples"
+echo "+=============================================================================="
+echo ""
+
+printf "Here are how sharefree lines look:\n"
+printf "snmpwalk -v 2c -c public localhost 'NET-SNMP-EXTEND-MIB::nsExtendOutLine.\"sharefree\"'\n"
+snmpwalk -v 2c -c public localhost 'NET-SNMP-EXTEND-MIB::nsExtendOutLine."sharefree"'
+
+printf "\nHere are how all custom extensions look:\n"
+printf "snmpwalk -v 2c -c public localhost nsExtendOutLine\n"
+snmpwalk -v 2c -c public localhost nsExtendOutLine
+
+
+echo ""
+echo "+=============================================================================="
+echo "| &name; version &pluginver; has been installed."
+echo "+=============================================================================="
+echo ""
+
+exit 0
+</INLINE>
+</FILE>
+
+<!-- The 'remove' script -->
+<FILE Run="/bin/bash" Method="remove">
+<INLINE>
+
+# NOTE: Modified bash for embedding in XML with ampersand-semicolon placeholders
+
+# https://vaneyckt.io/posts/safer_bash_scripts_with_set_euxo_pipefail/
+# exit script early if we encounter an error
+set -e
+
+echo ""
+echo "+=============================================================================="
+echo "| Uninstalling packages, removing directories and files"
+echo "+=============================================================================="
+echo ""
+
+# Shut down the SNMP daemon. It emits its own STDOUT lines when done
+/bin/bash /etc/rc.d/rc.snmpd stop
+
+# Define packages to remove in a multi-line string in inverse order of installation
+# NOTE: Skipping package removal of prereqs in Nerd Pack in case other plugins depend on them
+pkgs_to_remove="
+&pluginpkg;
+&snmppkg;
+&libnlpkg;
+"
+
+# Define directories and files to remove in a multi-line string
+dirs_files_to_remove="
+&usbcfgdir;
+/usr/local/emhttp/plugins/snmp/
+/etc/rc.d/rc.snmpd*
+/etc/snmp/
+/var/lib/net-snmp/
+/var/log/snmpd.log
+"
+
+echo "Starting TXZ package removal"
+# Read through package removal lines, uninstalling each
+while IFS= read -r line
+do
+  # if line is empty, skip to the next iteration
+  [ -z "$line" ] &amp;&amp; continue
+
+  # remove the directory path and extension, leaving just the package name
+  pkg_name="$(basename $line .txz)"
+
+  # perform the package removal
+  removepkg "$pkg_name"
+done &lt; &lt;(printf '%s\n' "$pkgs_to_remove")
+
+printf "\nTXZ package removal done. Starting directory and file removal\n"
+
+# Read through package removal lines, uninstalling each
+while IFS= read -r line
+do
+  # if line is empty, skip to the next iteration
+  [ -z "$line" ] &amp;&amp; continue
+
+  echo "Deleting $line"
+  # rm -rf "/path/to/prefix*" * expansion fails due to quotes, wrap in bash exec
+  bash -c "rm -rf $line"
+done &lt; &lt;(printf '%s\n' "$dirs_files_to_remove")
+
+printf "\nDirectory and file removal done"
+
+echo ""
+echo "+=============================================================================="
+echo "| &name; has been uninstalled."
+echo "+=============================================================================="
+echo ""
+
+exit 0
+</INLINE>
+</FILE>
+
+</PLUGIN>

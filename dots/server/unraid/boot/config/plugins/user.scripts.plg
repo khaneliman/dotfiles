@@ -1,0 +1,260 @@
+<?xml version="1.0" standalone="yes"?>
+<!DOCTYPE PLUGIN [
+<!ENTITY name "user.scripts">
+<!ENTITY author "Andrew Zawadzki">
+<!ENTITY version "2022.08.01">
+<!ENTITY md5 "fda67501b1bab349cd225c0807552d09">
+<!ENTITY launch "Settings/Userscripts">
+<!ENTITY plugdir "/usr/local/emhttp/plugins/&name;">
+<!ENTITY github "Squidly271/user.scripts">
+<!ENTITY pluginURL "https://raw.githubusercontent.com/&github;/master/plugins/&name;.plg">
+]>
+<PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" min="6.3.3" icon="file-text-o" support="http://lime-technology.com/forum/index.php?topic=49992.0">
+
+<CHANGES>
+###2022.08.01
+- Use ACE editor (thanks dcflachs)
+- Update link for cron (thanks Magic-Mayo)
+
+###2021.11.28
+- Fix abort scripts (Thanks @Noim)
+
+###2021.03.10
+- Permission Fix
+
+###2020.12.11
+- Revert removing non-ascii characters
+
+###2020.10.23
+- Fix regression error: Run in background not working
+
+###2020.10.21
+- Compatibility Fixes
+
+###2020.08.22
+- Set HOME directory when executing scripts.  Thanks @l4t3b0
+
+###2020.05.30
+- Fix Name / Description containing HTML when editing
+
+###2020.05.11
+- Fix display aberration caused by debugging info
+
+###2020.04.25
+- Various minor display changes
+
+###2020.03.19
+- Disallow outside click closing popup script running
+
+###2020.02.27
+- All startup scripts now run in the background
+
+###2019.08.17
+- Remove all non-ASCII characters from editing window prior to saving (everything over 0x7F)
+
+###2019.06.16
+- Larger script editing window
+- Remove some unused code
+
+###2019.05.05
+- Implement CA update check API
+- Fixed: Touch on name wouldn't bring up edit menu
+
+###2019.01.13
+- Update Icons
+
+###2018.10.19
+- Fix broken pipe
+
+###2018.10.08
+- Remove debugging code
+
+###2018.04.02
+- Fix regression error on inline variables and custom scheduled scripts
+
+###2018.03.31
+- Support inline variable to disallow execution of scheduled script if a parity check / rebuild is in progress
+
+###2018.02.16
+- Some UI changes (more intuitive)
+- Fix CornTab link
+
+###2017.11.18
+- Fix changed URL for corntab
+
+###2017.09.13
+- Handle special characters when adding a new script
+
+###2017.06.02
+- Suppress script not found error on custom cron schedules if user manually deletes the script
+
+###2017.05.18
+- Fixed: Popup not closing when editing name
+
+###2017.04.15
+- Fixed: After cancelled edit, a new edit would bring up original contents
+- Fixed: + signs being converted to spaces when saving a script
+
+###2017.04.06a
+- Better handling of duplicate folder names when adding scripts
+
+###2017.04.05
+- Support editing of scripts if running unRaid 6.3.3+
+
+###2017.04.04
+- Fix regression on argument passing
+- Integrate tooltipster (6.3.3+)
+
+###2017.03.15
+- Add schedule for bootup only
+
+###2017.03.14
+- Fix regression error on variable parsing
+
+###2017.03.13
+- Fixed: inline variable parsing
+
+###2017.03.05
+- Fixed: unable to download / displays logs from first script
+- Added: ability for a background script to delete logs at start of execution
+
+###2017.02.18
+- Somehow the sample scripts have been left off of the installation
+
+###2017.02.04
+- Improve killing of background scripts
+
+###2017.01.28b
+- Expand built-in help system
+
+###2017.01.28a
+- Add in support for default arguments being passed to background scripts
+
+###2017.01.28
+- Add in support for upfront entry of arguments to scripts
+
+###2017.01.22
+- Remove extraneous debugging display from GUI
+
+###2017.01.21a
+- Add in support fo direct execution of PHP scripts (for directly manipulating / adding HTML DOMs, javascript scripts, etc)
+
+###2017.01.21
+- Add in support for a name variable within scripts
+
+###2017.01.13
+- Add help text for where to look for cron syntax
+
+###2017.01.12
+- Ability to run scripts on a custom cron schedule
+
+###2016.11.20
+- Added in some exceptions for certain commenting styles
+
+###2016.11.19
+- Added in variable to script to dictate operation of plugin.  See support thread for details
+
+###2016.08.16
+- Added name of script
+
+###2016.08.14
+- Added Schedule For Start And Stop of Array
+
+###2016.08.01
+- Fixed: Scripts using an interpreter other than bash wouldn't run on a schedule
+
+###2016.07.16
+- If an interpreter designation line is present in the script, do not add #!/bin/bash
+
+###2016.07.12
+- Added ability to remove built-in scripts
+
+###2016.07.02
+- Fixed: /tmp/user.scripts folder not being created on cold boot without entering UI page
+
+###2016.07.01
+- Add in ability to download the script log files
+
+###2016.06.30
+- Add in schedules for background scripts
+
+###2016.06.28
+- Add in background logging
+- Fixed: User scripts with spaces would not execute
+
+###2016.06.26
+- Add in ability to start as a background task
+
+###2016.06.25
+- Initial Release
+</CHANGES>
+
+<!-- The 'pre-install' script. -->
+
+
+
+<!--
+The 'source' file.
+-->
+<FILE Name="/boot/config/plugins/&name;/&name;-&version;-x86_64-1.txz" Run="upgradepkg --install-new">
+<URL>https://raw.githubusercontent.com/&github;/master/archive/&name;-&version;-x86_64-1.txz</URL>
+<MD5>&md5;</MD5>
+</FILE>
+<!-- The 'pre-install' script. -->
+<FILE Run="/usr/bin/php">
+<INLINE>
+<![CDATA[
+<?
+  $flashContents = @array_diff(@scandir("/boot/config/plugins/user.scripts/scripts"),array(".",".."));
+  
+  if ( ! $flashContents ) {
+    exec("mkdir -p /boot/config/plugins/user.scripts/scripts");
+    exec("cp /usr/local/emhttp/plugins/user.scripts/scripts/* /boot/config/plugins/user.scripts/scripts/ -R -v");
+  }
+  exec("rm -rf /usr/local/emhttp/plugins/user.scripts/scripts");
+  if ( is_file("/boot/config/plugins/user.scripts/schedule.json") ) {
+    $schedule = file_get_contents("/boot/config/plugins/user.scripts/schedule.json");
+    $schedule = str_replace("/usr/local/emhttp/plugins/user.scripts/scripts/","/boot/config/plugins/user.scripts/scripts/",$schedule);
+    file_put_contents("/boot/config/plugins/user.scripts/schedule.json",$schedule);
+  }
+?>
+]]>
+</INLINE>
+</FILE>
+
+<!--
+The 'post-install' script
+-->
+<FILE Run="/bin/bash">
+<INLINE>
+rm -f $(ls /boot/config/plugins/&name;/&name;*.txz 2&gt;/dev/null | grep -v '&version;')
+cp /usr/local/emhttp/plugins/user.scripts/cron/user.script.start.daily.sh /etc/cron.daily
+cp /usr/local/emhttp/plugins/user.scripts/cron/user.script.start.hourly.sh /etc/cron.hourly
+cp /usr/local/emhttp/plugins/user.scripts/cron/user.script.start.weekly.sh /etc/cron.weekly
+cp /usr/local/emhttp/plugins/user.scripts/cron/user.script.start.monthly.sh /etc/cron.monthly
+
+echo ""
+echo "----------------------------------------------------"
+echo " &name; has been installed."
+echo " Copyright 2016-2021, Andrew Zawadzki"
+echo " Version: &version;"
+echo "----------------------------------------------------"
+echo ""
+</INLINE>
+</FILE>
+
+<!--
+The 'remove' script.
+-->
+<FILE Run="/bin/bash" Method="remove">
+<INLINE>
+rm /etc/cron.daily/user.script.start.daily.sh
+rm /etc/cron.hourly/user.script.start.hourly.sh
+rm /etc/cron.weekly/user.script.start.weekly.sh
+rm /etc/cron.monthly/user.script.start.monthly.sh
+rm -rf /tmp/user.scripts
+
+removepkg &name;-&version;-x86_64-1
+</INLINE>
+</FILE> 
+</PLUGIN>

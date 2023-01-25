@@ -1,0 +1,3 @@
+# Generated mover schedule:
+0 */1 * * * /usr/local/sbin/mover &> /dev/null
+

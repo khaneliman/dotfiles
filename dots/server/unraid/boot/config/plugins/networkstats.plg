@@ -1,0 +1,260 @@
+<?xml version='1.0' standalone='yes'?>
+
+<!DOCTYPE PLUGIN [
+  <!ENTITY name      "networkstats">
+  <!ENTITY author    "Donald Organ">
+  <!ENTITY version   "2022.08.25">
+  <!ENTITY launch    "Settings/NetworkStats">
+  <!ENTITY branch    "master">
+  <!ENTITY gitURL    "https://raw.githubusercontent.com/dorgan/Unraid-&name;/&branch;">
+  <!ENTITY vnstatURL "&gitURL;/deps/">
+  <!ENTITY pluginURL "&gitURL;/&name;.plg">
+  <!ENTITY emhttp    "/usr/local/emhttp/plugins/&name;">
+  <!ENTITY plgPATH   "/boot/config/plugins/&name;">
+  <!ENTITY plgNAME   "&name;-&version;-x86_64-1">
+  <!ENTITY vnstatFile "vnstat-2.6-x86_64-1_slonly.txz">
+  <!ENTITY vnstatFileMD5 "727cf2d1f8aafb04c3315a96e02022ae">
+]>
+
+<PLUGIN  name="&name;"
+         author="&author;"
+         version="&version;"
+         pluginURL="&pluginURL;"
+         support="https://forums.unraid.net/topic/74525-plugin-network-stat/"
+         launch="&launch;"
+         icon="pie-chart">
+
+    <CHANGES>
+    ##&name;
+###2022.08.25
+- Removing images for now to get rid of external package dependencies, will add back images/graphs/charts in a future release
+
+###2021.11.02
+- Updating vnstat to version 2.6
+
+###2021.08.26
+ - Fix file permission
+ - change how vnstat is pulled so it doesnt give a false warning in Fix Common Problems
+ 
+###2020.05.14
+ - Fix missing icons
+
+###2020.04.21a
+ - Update to make sure interfaces get added
+
+###2020.04.21
+ - Updating to FA icon
+ 
+###2020.04.15a
+ - Removing Stray function
+
+###2020.04.15
+ - Cleaning up layout and adding a button for stopping/starting the vnstat daemon
+
+###2020.04.14d
+ - Fixing accidentially removed page info that was breaking plugin
+
+###2020.04.14c
+ - Added the ability to set an alias, friendly name for each interface
+###2020.04.14b
+ - Correcting PHP syntax issue
+
+###2020.04.14a
+ - Longer interface names were getting truncated, this is now fixed
+
+###2020.04.14
+ - Add ability to track more interfaces
+
+###2020.02.16
+ - Move vnstats package to be apart of the plugin, this way their releases do not break the plugin
+
+###2019.12.24a
+ - Updating vnstats to version 2.4
+
+###2019.12.24
+ - Updated MD5 hash of vnstat package
+
+###2019.02.11
+ - Correcting image output issue
+
+###2018.12.11a
+ - Correcting issue with Stats.page
+
+###2018.12.11
+  - No longer need dynamix plugin installed
+  - Fi vnstat config issue
+
+###2018.10.10a - Fix switching tabs
+
+###2018.10.10 - Fix breaking unRAID
+  - Remove using DOCKER_CONFIG_APP_PATH
+  - revert to use /var/lib/vnstat for vnstat db
+  - future release I will look to make persistent across reboots and utilize events to copy data in/out of flash
+
+###2018.10.07d - Fix out of sync version
+
+###2018.10.07c - Fix pathing inside vnstat.conf
+
+###2018.10.07b - Couple bug fixes
+  - Fix mkdir command in install
+  - Fix incorrect substitution inside of vnstat.conf
+  
+###2018.10.07a - Update vnstat.conf and set MaxBandwidth to 0
+
+###2018.10.07 - Update plugin to use docker appdata path
+    
+###2018.10.06c - Fixing plugin to work without a cache drive
+
+###2018.10.06b - adjusting sequence of commands
+
+###2018.10.06a - Adjusting file paths
+	    
+###2018.10.06 - Want this damn thing to work
+  - Correct pluginURL reference
+  - fix pointing to correct vnstat.conf file
+
+###2018.10.05 - Fix detection of vnstat daemon
+
+###2018.10.03 - Fix borked plugin
+  - Fix issues where vnstat service wasnt starting
+
+###2018.10.02 -  More Tweaks
+  - Add ability for user to start/stop vnstat
+  - Fix detecting of vnstat daemon
+
+###2018.09.29 - A bunch of fixes and updates
+  - Changing icons and Correcting sizes
+  - Update settings to detect interfaces
+  - Update install script to detect settings
+
+###2018.09.27d - Correction to start vnstat
+
+###2018.09.27c - Quick Tweaks
+  - Changed author to actual name
+  - Corrected Status label on settings screen
+
+###2018.09.27b - Initial Release
+    Initial release, right now using default image output from vnstati, but will be updating to a better library soon
+    </CHANGES>
+
+    <!--
+    The 'plugin' package file.
+    -->
+    <FILE Name="&plgPATH;/&plgNAME;.txz">
+        <URL>&gitURL;/archive/&plgNAME;.txz</URL>
+    </FILE>
+
+    <!--
+    The 'plugin' MD5 hash.
+    -->
+    <FILE Name="&plgPATH;/&plgNAME;.md5">
+        <URL>&gitURL;/archive/&plgNAME;.md5</URL>
+    </FILE>
+
+    <FILE Name="&plgPATH;/&name;.cfg">
+      <INLINE>
+      <![CDATA[
+      INTERFACES="eth0,bond0"
+      ]]>
+      </INLINE>
+    </FILE>
+
+
+    <!--
+    vnstat file
+    -->
+    <FILE Name="/boot/config/plugins/&name;/&vnstatFile;" Run="upgradepkg --install-new">
+      <URL>&vnstatURL;&vnstatFile;</URL>
+      <MD5>&vnstatFileMD5;</MD5>
+    </FILE>
+    <FILE Run="/bin/bash">
+        <INLINE>
+            chmod ugo+x /etc/rc.d/rc.vnstat
+
+            sed -i -e 's@BandwidthDetection 1@BandwidthDetection 0@g' /etc/vnstat.conf
+            /etc/rc.d/rc.vnstat stop
+
+            mkdir -p /var/run/vnstat
+            chmod +w /var/run/vnstat
+
+            # Verify and install plugin package
+            sum1=$(/usr/bin/md5sum /boot/config/plugins/&name;/&plgNAME;.txz)
+            sum2=$(/usr/bin/cat /boot/config/plugins/&name;/&plgNAME;.md5)
+            if [ "${sum1:0:32}" != "${sum2:0:32}" ]; then
+                echo "Wrong 'plugin' md5 hash."
+                rm &plgPATH;/&plgNAME;.txz
+                rm &plgPATH;/&plgNAME;.md5
+                exit 1
+            else
+                upgradepkg --install-new &plgPATH;/&plgNAME;.txz
+            fi
+
+            cp -f /usr/local/emhttp/plugins/&name;/vnstat.conf /etc/vnstat.conf
+            sed -i -e "s;/var/run/vnstat.pid;/var/run/vnstat/vnstat.pid;g" /etc/rc.d/rc.vnstat
+
+            # Cleaning old source files
+            find &plgPATH;/ -type f -iname "&name;*.txz" ! -iname "*&version;*" -delete
+            find &plgPATH;/ -type f -iname "&name;*.md5" ! -iname "*&version;*" -delete
+
+            interfaces=($(ifconfig | cut -d " " -f1 | awk 'NF==1{print $1}'))
+
+            # Creating some directories
+            if [ ! -f "/boot/config/plugins/&name;/&name;.cfg" ]; then
+                strInterfaces=$(IFS=, ; echo "${interfaces[*]}")
+                echo "INTERFACES=\"${strInterfaces}\"" > /boot/config/plugins/&name;/&name;.cfg
+
+                for i in "${interfaces[@]}"
+                do
+                    if [ ! -f "/var/lib/${i}" ]; then
+                        vnstat --add -i "${i}"
+                    fi
+                done
+            fi
+     
+            # restart vnstat
+            /etc/rc.d/rc.vnstat start
+
+            echo ""
+            echo "-----------------------------------------------------------"
+            echo " &name; has been installed."
+            echo " This plugin requires vnstat to operate"
+            echo " Version: &version;"
+            echo "-----------------------------------------------------------"
+            echo ""
+        </INLINE>
+    </FILE>
+
+    <!--
+    The 'remove' script.
+    -->
+    <FILE Run="/bin/bash" Method="remove">
+        <INLINE>
+            #stop daemon
+            /etc/rc.d/rc.vnstat stop
+	          sleep 1
+		
+            # Remove plugin config files
+            rm -rf "/etc/vnstat.conf"
+
+            rm -rf /var/lib/vnstat
+		
+            # uninstall plugin
+	        removepkg &plgPATH;/*.txz
+
+	        rm -rf &emhttp;
+            rm -rf &plgPATH;/*.txz \
+		        &plgPATH;/*.md5
+
+            echo ""
+            echo "-----------------------------------------------------------"
+            echo " &name; has been uninstalled."
+            echo " Please reboot your server to complete uninstall this plugin."
+            echo " Version: &version;"
+            echo "-----------------------------------------------------------"
+            echo ""
+
+            exit 0
+        </INLINE>
+    </FILE>
+
+</PLUGIN>

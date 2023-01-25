@@ -1,0 +1,102 @@
+<?xml version="1.0" standalone="yes"?>
+<!DOCTYPE PLUGIN [
+<!ENTITY name "theme.engine">
+<!ENTITY author "Justin Nolan / Skitals">
+<!ENTITY version "2023.01.17">
+<!ENTITY md5 "1418c490b47fe7947a704e3f4186a190">
+<!ENTITY launch "Settings/ThemeEngine">
+<!ENTITY plugdir "/usr/local/emhttp/plugins/&name;">
+<!ENTITY github "Skitals/unraid-theme-engine">
+<!ENTITY pluginURL "https://raw.githubusercontent.com/&github;/master/plugins/&name;.plg">
+]>
+<PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" icon="paint-brush" min="6.7.0" support="https://forums.unraid.net/topic/87126-plugin-theme-engine-a-webgui-styler/">
+<CHANGES>
+###2023.01.17
+- Fix grep warning (Thanks uraid).  
+  
+###2020.01.16
+- Includes 8 more themes by Raz! Select them from the Saved Themes dropdown and hit Load.
+
+###2020.01.13b
+- Fix: No longer a 2048 character limit when saving custom styling.
+
+###2020.01.13b
+- Import Zip only extracts *-*.cfg and *-*.css files.
+
+###2020.01.13b
+- Add option to overwrite existing files when importing zip file.
+- Import Zip only extracts *.cfg and *.css files.
+
+###2020.01.13
+- Includes NordDark by Raz.
+- Import theme from zip file (usb or url).
+- Toggle advanced mode.
+- Advanced: Additional color settings.
+- Advanced: Custom theme styling.
+- Advanced: Custom color variables for theme styling.
+- Advanced: Download theme as zip file.
+
+###2020.01.09
+- Enable/disable custom.css (advanced).
+
+###2020.01.09
+- Fix Done button.
+
+###2020.01.08
+- Initial Release
+</CHANGES>
+<FILE Run="/bin/bash">
+<INLINE>
+# Remove old 'source' files
+rm -f $(ls /boot/config/plugins/&name;/&name;*.txz 2&gt;/dev/null | grep -v '&version;')
+</INLINE>
+</FILE>
+<!--
+The 'source' file.
+-->
+<FILE Name="/boot/config/plugins/&name;/&name;-&version;-x86_64-1.txz" Run="upgradepkg --install-new">
+<URL>https://raw.github.com/&github;/master/archive/&name;-&version;-x86_64-1.txz</URL>
+<MD5>&md5;</MD5>
+</FILE>
+<!--
+The 'post-install' script
+-->
+<FILE Run="/bin/bash">
+<INLINE>
+<![CDATA[
+if cat /usr/local/emhttp/plugins/dynamix/include/DefaultPageLayout.php | grep '<?php include '\''/usr/local/emhttp/plugins/theme\.engine/include\.php'\''; ?>' > /dev/null;
+then
+echo "Looks good... continuing... "
+else
+sed -i '/^<\/style>/i <?php include '\''\/usr\/local\/emhttp\/plugins\/theme\.engine\/include\.php'\''; ?>' /usr/local/emhttp/plugins/dynamix/include/DefaultPageLayout.php
+fi
+sed -i 's/select,input\[type=text\],input\[type=number\],input\[type=password\],input\[type=checkbox\],input\[type=radio\],input\[type=file\],textarea/select,input\[type=text\],input\[type=color\],input\[type=number\],input\[type=password\],input\[type=checkbox\],input\[type=radio\],input\[type=file\],textarea/' /usr/local/emhttp/plugins/dynamix/include/DefaultPageLayout.php
+]]>
+echo ""
+echo "----------------------------------------------------"
+echo " &name; has been installed."
+echo " Copyright 2019, Justin Nolan"
+echo " Version: &version;"
+echo "----------------------------------------------------"
+echo ""
+</INLINE>
+</FILE>
+<!--
+The 'remove' script.
+-->
+<FILE Run="/bin/bash" Method="remove">
+<INLINE>
+echo "Removing Dark Theme"
+echo ""
+removepkg &name;-&version;-x86_64-1
+rm -rf &plugdir;
+rm -rf /boot/config/plugins/&name;
+<![CDATA[
+sed -i '/^<?php include '\''\/usr\/local\/emhttp\/plugins\/theme\.engine\/include\.php'\''; ?>/d' /usr/local/emhttp/plugins/dynamix/include/DefaultPageLayout.php
+sed -i 's/select,input\[type=text\],input\[type=color\],input\[type=number\],input\[type=password\],input\[type=checkbox\],input\[type=radio\],input\[type=file\],textarea/select,input\[type=text\],input\[type=number\],input\[type=password\],input\[type=checkbox\],input\[type=radio\],input\[type=file\],textarea/' /usr/local/emhttp/plugins/dynamix/include/DefaultPageLayout.php
+]]>
+echo ""
+echo "Theme Engine Removed"
+</INLINE>
+</FILE>
+</PLUGIN>

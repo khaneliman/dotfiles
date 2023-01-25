@@ -1,0 +1,76 @@
+<?xml version="1.0" standalone="yes"?>
+<!DOCTYPE PLUGIN [
+<!ENTITY name "dynamix.share.floor">
+<!ENTITY author "Bergware">
+<!ENTITY version "2022.05.20">
+<!ENTITY launch "Settings/Scheduler">
+<!ENTITY pluginURL "https://raw.githubusercontent.com/bergware/dynamix/master/unRAIDv6/&name;.plg">
+<!ENTITY source "/boot/config/plugins/&name;/&name;">
+<!ENTITY MD5 "88d5c3c5a64a0e1093c4b01815e3c5f9">
+]>
+<PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" min="6.9.0" support="http://lime-technology.com/forum/index.php?topic=36543.0">
+
+<CHANGES>
+##&name;
+
+###&version;
+- Fixed GUI access when non-standard ports are used
+- Ignore *.img files in calculation, e.g. docker.img and vdisk1.img
+- Removed "Update Now" button, it interferes with the GUI communication
+- Minimum Unraid version set to 6.9.0
+
+###2022.05.17
+- initial release
+</CHANGES>
+
+<!--
+Copyright 2022, Bergware International
+Dynamix Share Fllor - create a cronjob to do regular share floor settings
+-->
+
+<!-- PRE-INSTALL SCRIPT -->
+<FILE Run="/bin/bash">
+<INLINE>
+# Remove old 'source' packages
+MD5=$(md5sum &source;.txz 2&gt;/dev/null|grep -Po '^\S+')
+if [[ $MD5 != &MD5; ]]; then
+  rm -f &source;*.txz
+fi
+</INLINE>
+</FILE>
+
+<!-- SOURCE PACKAGE -->
+<FILE Name="&source;.txz" Run="upgradepkg --install-new --reinstall">
+<URL>https://raw.githubusercontent.com/bergware/dynamix/master/archive/&name;.txz</URL>
+<MD5>&MD5;</MD5>
+</FILE>
+
+<!-- POST-INSTALL SCRIPT -->
+<FILE Run="/bin/bash">
+<INLINE>
+echo ""
+echo "-----------------------------------------------------------"
+echo " Plugin &name; is installed."
+echo " This plugin requires Dynamix webGui to operate"
+echo " Copyright 2022, Bergware International"
+echo " Version: &version;"
+echo "-----------------------------------------------------------"
+echo ""
+</INLINE>
+</FILE>
+
+<!-- REMOVE SCRIPT -->
+<FILE Run="/bin/bash" Method="remove">
+<INLINE>
+# Remove plugin related files
+rm -rf /boot/config/plugins/&name;
+
+# Uninstall the 'source' package
+removepkg &name;
+
+# Update cronjob
+/usr/local/sbin/update_cron
+</INLINE>
+</FILE>
+
+</PLUGIN>

@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>Artifactory-OSS</Name>
+  <Repository>docker.bintray.io/jfrog/artifactory-oss:6.23.7</Repository>
+  <Registry>https://registry.hub.docker.com/r/docker.bintray.io/jfrog/artifactory-oss</Registry>
+  <Network>khaneproxy</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>true</Privileged>
+  <Support>https://forums.unraid.net/topic/102491-support-frakman-artifactory-oss/</Support>
+  <Project>https://jfrog.com/</Project>
+  <Overview>JFrog&#x2019;s Artifactory open source project was created to speed up development cycles using binary repositories. It&#x2019;s the world&#x2019;s most advanced repository manager, creating a single place for teams to manage all their binary artifacts efficiently.</Overview>
+  <Category>Productivity: Tools:</Category>
+  <WebUI>http://[IP]:[PORT:8182]/</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/frakman1/docker-templates/master/tynor88/artifactory-oss.xml</TemplateURL>
+  <Icon>https://i.imgur.com/aYdPHTy.png</Icon>
+  <ExtraParams>--ulimit nofile=32000:40000 --ulimit nproc=65535</ExtraParams>
+  <PostArgs/>
+  <CPUset>3,4,5,9,10,11</CPUset>
+  <DateInstalled>1635991415</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>JFrog&#x2019;s Artifactory open source project was created to speed up development cycles using binary repositories. It&#x2019;s the world&#x2019;s most advanced repository manager, creating a single place for teams to manage all their binary artifacts efficiently.</Description>
+  <Networking>
+    <Mode>khaneproxy</Mode>
+    <Publish>
+      <Port>
+        <HostPort>8182</HostPort>
+        <ContainerPort>8081</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/appdata/artifactory-oss</HostDir>
+      <ContainerDir>/var/opt/jfrog/artifactory</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment>
+    <Variable>
+      <Value>-Xms512m -Xmx4g</Value>
+      <Name>EXTRA_JAVA_OPTIONS</Name>
+      <Mode/>
+    </Variable>
+  </Environment>
+  <Labels/>
+  <Config Name="EXTRA_JAVA_OPTIONS" Target="EXTRA_JAVA_OPTIONS" Default="-Xmx512m" Mode="" Description="Container Variable: EXTRA_JAVA_OPTIONS" Type="Variable" Display="always" Required="false" Mask="false">-Xms512m -Xmx4g</Config>
+  <Config Name="Port 8081" Target="8081" Default="" Mode="tcp" Description="Container Port: 8081" Type="Port" Display="always" Required="false" Mask="false">8182</Config>
+  <Config Name="/var/opt/jfrog/artifactory" Target="/var/opt/jfrog/artifactory" Default="" Mode="rw" Description="/var/opt/jfrog/artifactory" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/artifactory-oss</Config>
+</Container>

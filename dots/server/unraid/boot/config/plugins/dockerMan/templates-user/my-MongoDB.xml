@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>MongoDB</Name>
+  <Repository>mongo</Repository>
+  <Registry>https://hub.docker.com/_/mongo/</Registry>
+  <Network>khaneproxy</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://forums.unraid.net/topic/54895-support-jasonbean-mongodb/</Support>
+  <Project>https://www.mongodb.com/</Project>
+  <Overview>&#xD;
+    [h3]MongoDB[/h3]MongoDB (from "humongous") is a cross-platform document-oriented database. Classified as a NoSQL database, MongoDB eschews the traditional table-based relational database structure in favor of JSON-like documents with dynamic schemas (MongoDB calls the format BSON), making the integration of data in certain types of applications easier and faster. Released under a combination of the GNU Affero General Public License and the Apache License, MongoDB is free and open-source software.&#xD;
+  </Overview>
+  <Category>Network:Other</Category>
+  <WebUI/>
+  <TemplateURL>https://raw.githubusercontent.com/jason-bean/docker-templates/master/jasonbean-repo/MongoDB.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/jason-bean/docker-templates/master/jasonbean-repo/mongo.sh-600x600.png</Icon>
+  <ExtraParams>--restart unless-stopped --memory=250M</ExtraParams>
+  <PostArgs/>
+  <CPUset>2,8</CPUset>
+  <DateInstalled>1635398966</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>&#xD;
+    [h3]MongoDB[/h3]MongoDB (from "humongous") is a cross-platform document-oriented database. Classified as a NoSQL database, MongoDB eschews the traditional table-based relational database structure in favor of JSON-like documents with dynamic schemas (MongoDB calls the format BSON), making the integration of data in certain types of applications easier and faster. Released under a combination of the GNU Affero General Public License and the Apache License, MongoDB is free and open-source software.&#xD;
+  </Description>
+  <Networking>
+    <Mode>khaneproxy</Mode>
+    <Publish>
+      <Port>
+        <HostPort>27017</HostPort>
+        <ContainerPort>27017</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/appdata/mongodb/</HostDir>
+      <ContainerDir>/data/db</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment/>
+  <Labels/>
+  <Config Name="Host Port 1" Target="27017" Default="27017" Mode="tcp" Description="Container Port: 27017" Type="Port" Display="always" Required="true" Mask="false">27017</Config>
+  <Config Name="Host Path 1" Target="/data/db" Default="/mnt/user/appdata/mongodb/" Mode="rw" Description="Container Path: /data/db" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/mongodb/</Config>
+</Container>

@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>CloudBeaver</Name>
+  <Repository>dbeaver/cloudbeaver</Repository>
+  <Registry>https://hub.docker.com/r/dbeaver/cloudbeaver/</Registry>
+  <Network>khaneproxy</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://forums.unraid.net/topic/99746-support-cloudbeaver-corneliousjd-repo/</Support>
+  <Project>https://github.com/dbeaver/cloudbeaver</Project>
+  <Overview>Cloud Database Manager (Official Docker Image)&#xD;
+As an open-source product it already supports the most popular open source databases, such as PostgreSQL, MySQL, MariaDB, SQLite and Firebird.</Overview>
+  <Category>Cloud: Tools:</Category>
+  <WebUI>http://[IP]:[PORT:8978]/</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/CorneliousJD/Docker-Templates/master/cloudbeaver.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/CorneliousJD/Docker-Templates/master/icons/cloudbeaver.png</Icon>
+  <ExtraParams>-m 2G</ExtraParams>
+  <PostArgs/>
+  <CPUset>2,8</CPUset>
+  <DateInstalled>1635444492</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>Cloud Database Manager (Official Docker Image)&#xD;
+As an open-source product it already supports the most popular open source databases, such as PostgreSQL, MySQL, MariaDB, SQLite and Firebird.</Description>
+  <Networking>
+    <Mode>khaneproxy</Mode>
+    <Publish>
+      <Port>
+        <HostPort>8978</HostPort>
+        <ContainerPort>8978</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/appdata/cloudbeaver</HostDir>
+      <ContainerDir>/opt/cloudbeaver/workspace</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment/>
+  <Labels/>
+  <Config Name="Web Interface Port" Target="8978" Default="8978" Mode="tcp" Description="Container Port: 8080" Type="Port" Display="always" Required="true" Mask="false">8978</Config>
+  <Config Name="AppData" Target="/opt/cloudbeaver/workspace" Default="/mnt/user/appdata/cloudbeaver" Mode="rw" Description="Container Path: /opt/cloudbeaver/workspace" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/cloudbeaver</Config>
+</Container>

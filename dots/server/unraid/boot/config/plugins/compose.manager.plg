@@ -1,0 +1,173 @@
+<?xml version="1.0" standalone="yes"?>
+<!DOCTYPE PLUGIN [
+<!ENTITY name "compose.manager">
+<!ENTITY author "dcflachs">
+<!ENTITY version "2022.11.17">
+<!ENTITY launch "Settings/&name;">
+<!ENTITY packageVER "&version;">
+<!ENTITY packageMD5 "8e42ac33764c17835f2f48a7bb1fdc24">
+<!ENTITY packageName "&name;-package-&packageVER;">
+<!ENTITY packagefile "&packageName;.txz">
+<!ENTITY github "dcflachs/compose_plugin">
+<!ENTITY pluginURL "https://raw.githubusercontent.com/&github;/main/&name;.plg">
+<!ENTITY packageURL "https://github.com/&github;/releases/download/&version;/&packagefile;">
+<!ENTITY pluginLOC "/boot/config/plugins/&name;">
+<!ENTITY emhttpLOC "/usr/local/emhttp/plugins/&name;">
+]>
+<PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" icon="cubes" min="6.9.0" support="https://forums.unraid.net/topic/114415-plugin-docker-compose-manager/">
+
+<CHANGES>
+###2022.11.17
+- Update Stack function will now remove orphaned images.
+- Fix styling in Black and White themes to better match dockerman gui. (Thanks to enkows)
+- Show red play icon when a container in a stack is restarting.
+###2022.11.13
+- Fix issue with autostart script not sanitizing stack names.
+###2022.10.15
+- Modify the webUI integration patches to not remove old style icons.
+###2022.10.11
+- Fix for the update stack function.
+- Add debug option in settings.
+###2022.10.05 
+- Docker Compose v2.11.2
+- Fix styling when unassigned devices plugin is not installed.
+###2022.09.27 
+- Replace compose pull function with update stack.
+- Tweak the look of the stack table. 
+- Add help text to settings page.
+- Add label for specifying shell command.
+- Add ability to patch ability to patch dockerman ui.
+- Add patch to dockerman ui to fix icon caching.
+- Add patch to dockerman ui to fix update ready label. 
+###2022.08.02
+- Docker Compose v2.9.0
+- Compose Switch v1.0.5
+- Fix sanitizing of project names.
+###2022.07.28a
+- Bugfix for improperly built SweetAlert package
+###2022.07.28
+- Added ability to manage unRAID webui integration labels.
+- Added ability to specify alternate locations to store stack files.
+- Change usage for compose.yml to the standard docker-compose.yml
+###2022.05.27
+- Fix package build.
+###2022.05.25
+- Minor bugfixes.
+- Include additional ace editor files.
+###2022.05.21
+- Minor update to fix terminal style output in 6.10.0
+- Change default compose file template to not include vesion.
+###2022.05.14
+- Change default output style to terminal.
+- Added theme support.
+- Docker Compose v2.5.0
+- Compose Switch v1.0.4
+###2022.05.08
+- Bugfix for stack names containing spaces.
+###2022.03.19 
+- Added Ace editor from ace.c9.io 
+- Added button for getting compose logs. Experimental mode only for now.
+###2022.03.13
+- Add Icons indicating stack state.
+- Disable Rename and Delete buttons when stack is running.
+- Add Done button to popups in experimental mode.
+###2022.02.12
+- Add autostart functionality.
+###2022.01.26
+- Add settings page.
+- Add terminal style output option.
+- Add Compose Pull command.
+- Add handling for .env files.
+###2021.12.03
+- Add basic web ui
+- Docker Compose v2.1.1 
+- Compose Switch v1.0.3
+###2021.10.03
+- Initial Release 
+- Docker Compose v2.0.1 
+- Compose Switch v1.0.2
+</CHANGES>
+
+<!-- The 'pre-install' script. -->
+<FILE Run="/bin/bash">
+<INLINE>
+# Remove old 'source' files
+rm -f $(ls &pluginLOC;/&name;*.txz 2&gt;/dev/null|grep -v '&packageVER;')
+
+#Create projects folder if it doesnt exist
+mkdir -p &pluginLOC;/projects
+
+if [[ ! -f "&pluginLOC;/projects/version" ]]; then
+    #Upgrade projects to latest format
+    for dir in &pluginLOC;/projects/*; do
+        if [[ -d $dir ]]; then
+            if [[ -f $dir/compose.yml ]]; then
+                mv $dir/compose.yml $dir/docker-compose.yml
+            fi
+        fi
+    done
+
+    echo "1" &gt; &pluginLOC;/projects/version
+fi
+</INLINE>
+</FILE>
+
+<FILE Name="&pluginLOC;/&packagefile;" Run="upgradepkg --install-new">
+<URL>&packageURL;</URL>
+<MD5>&packageMD5;</MD5>
+</FILE> 
+
+<FILE Run="/bin/bash">
+<INLINE>
+patch_script=/usr/local/emhttp/plugins/compose.manager/scripts/patch_ui.sh
+config_file=/boot/config/plugins/compose.manager/compose.manager.cfg
+if [ -f "$patch_script" ]; then
+    if [ -f "$config_file" ]; then
+        #Grab the contents of our config file.
+        source &lt;(grep = $config_file)
+        patch_ui=${PATCH_UI:='false'}
+
+        if [ $patch_ui == 'true' ]; then
+            echo ""
+            echo "----------------------------------------------------"
+            echo " Applying WebUI Patches..."
+            echo "----------------------------------------------------"
+            echo ""
+            #Remove patchs if already applied
+            $patch_script -r
+
+            #Apply Patches
+            $patch_script
+        fi
+    fi
+fi
+</INLINE>
+</FILE>
+
+<FILE Run="/bin/bash">
+<INLINE>
+echo ""
+echo "----------------------------------------------------"
+echo " &name; has been installed."
+echo " Version: &version;"
+echo "----------------------------------------------------"
+echo ""
+</INLINE>
+</FILE>
+
+<FILE Run="/bin/bash" Method="remove">
+<INLINE>
+#Remove patchs if already applied
+patch_remove_script=/usr/local/emhttp/plugins/compose.manager/scripts/patch_ui.sh
+if [ -f "$patch_remove_script" ]; then
+    $patch_remove_script -r
+fi
+
+removepkg &packageName;
+
+# Remove plugin related files
+rm -f $(ls &pluginLOC;/&name;*.txz 2&gt;/dev/null|grep -v '&packageVER;')
+</INLINE>
+</FILE> 
+
+</PLUGIN>

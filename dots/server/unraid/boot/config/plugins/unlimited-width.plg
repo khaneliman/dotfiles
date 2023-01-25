@@ -1,0 +1,57 @@
+<?xml version='1.0' standalone='yes'?>
+<!DOCTYPE PLUGIN [
+<!ENTITY name      "unlimited-width">
+<!ENTITY author    "Andrew Zawadzki">
+<!ENTITY version   "2020.05.27">
+<!ENTITY plugdir   "/usr/local/emhttp/plugins/&name;">
+<!ENTITY github    "Squidly271/unlimited-width">
+<!ENTITY pluginURL "https://raw.githubusercontent.com/Squidly271/unlimited-width/master/unlimited-width.plg">
+]>
+
+<PLUGIN name="&name;" author="&author;" version="&version;" pluginURL="&pluginURL;" min="6.6.0" support="https://forums.unraid.net/topic/76211-plugin-ca-dynamix-unlimited-width/" icon="arrows-h">
+
+<CHANGES>
+###2020.05.27
+- Incorporate suggestion from GrantR
+
+###2020.01.05
+- Support future themes if they are named starting with v, w, x, y, z
+
+###2019.10.27
+- OCD: Fix font size on plugins tab
+
+###2018.12.08
+- Initial Release
+</CHANGES>
+
+<!-- The 'pre-install' script. -->
+
+<FILE Name='/usr/local/emhttp/plugins/unlimited-width/README.md'>
+<INLINE>
+####CA Dynamix Unlimited Width####
+A plugin to allow Dynamix to utilize the entire width of your browser and not be artificially capped at 1920 pixel across
+</INLINE>
+</FILE>
+
+<FILE Name='/usr/local/emhttp/plugins/unlimited-width/event/disks_mounted'>
+<INLINE>
+sed -i 's/max-width:1920px;//g' /usr/local/emhttp/plugins/dynamix/styles/*.css
+sed -i 's/@media (min-width:1921px){#template{min-width:1260px;margin:0 auto}}//g' /usr/local/emhttp/plugins/dynamix/styles/*.css
+</INLINE>
+</FILE>
+
+<FILE Run="/bin/bash">
+<INLINE>
+sed -i 's/max-width:1920px;//g' /usr/local/emhttp/plugins/dynamix/styles/*.css
+sed -i 's/@media (min-width:1921px){#template{min-width:1260px;margin:0 auto}}//g' /usr/local/emhttp/plugins/dynamix/styles/*.css
+chmod 0777 -R /usr/local/emhttp/plugins/unlimited-width
+</INLINE>
+</FILE>
+
+<FILE Run="/bin/bash" Method="remove">
+<INLINE>
+echo
+echo "**** You must reboot for the uninstall to take effect ****"
+</INLINE>
+</FILE> 
+</PLUGIN>

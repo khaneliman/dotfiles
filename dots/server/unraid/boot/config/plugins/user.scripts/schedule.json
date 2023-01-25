@@ -1,0 +1,62 @@
+{
+    "/boot/config/plugins/user.scripts/scripts/1_macinabox_helper/script": {
+        "script": "/boot/config/plugins/user.scripts/scripts/1_macinabox_helper/script",
+        "frequency": "disabled",
+        "id": "schedule1_macinabox_helper",
+        "custom": ""
+    },
+    "/boot/config/plugins/user.scripts/scripts/1_macinabox_vmready_notify/script": {
+        "script": "/boot/config/plugins/user.scripts/scripts/1_macinabox_vmready_notify/script",
+        "frequency": "disabled",
+        "id": "schedule1_macinabox_vmready_notify",
+        "custom": ""
+    },
+    "/boot/config/plugins/user.scripts/scripts/delete_dangling_images/script": {
+        "script": "/boot/config/plugins/user.scripts/scripts/delete_dangling_images/script",
+        "frequency": "disabled",
+        "id": "scheduledelete_dangling_images",
+        "custom": ""
+    },
+    "/boot/config/plugins/user.scripts/scripts/delete.ds_store/script": {
+        "script": "/boot/config/plugins/user.scripts/scripts/delete.ds_store/script",
+        "frequency": "weekly",
+        "id": "scheduledelete-ds_store",
+        "custom": ""
+    },
+    "/boot/config/plugins/user.scripts/scripts/Plex Holiday Collections/script": {
+        "script": "/boot/config/plugins/user.scripts/scripts/Plex Holiday Collections/script",
+        "frequency": "start",
+        "id": "schedulePlexHolidayCollections",
+        "custom": ""
+    },
+    "/boot/config/plugins/user.scripts/scripts/Plex Remove Holiday Collections/script": {
+        "script": "/boot/config/plugins/user.scripts/scripts/Plex Remove Holiday Collections/script",
+        "frequency": "custom",
+        "id": "schedulePlexRemoveHolidayCollections",
+        "custom": "0 10,22 * * *"
+    },
+    "/boot/config/plugins/user.scripts/scripts/RClone Mount/script": {
+        "script": "/boot/config/plugins/user.scripts/scripts/RClone Mount/script",
+        "frequency": "start",
+        "id": "scheduleRCloneMount",
+        "custom": ""
+    },
+    "/boot/config/plugins/user.scripts/scripts/Rclone Unmount/script": {
+        "script": "/boot/config/plugins/user.scripts/scripts/Rclone Unmount/script",
+        "frequency": "stop",
+        "id": "scheduleRcloneUnmount",
+        "custom": ""
+    },
+    "/boot/config/plugins/user.scripts/scripts/Unraid Login Script/script": {
+        "script": "/boot/config/plugins/user.scripts/scripts/Unraid Login Script/script",
+        "frequency": "start",
+        "id": "scheduleUnraidLoginScript",
+        "custom": ""
+    },
+    "/boot/config/plugins/user.scripts/scripts/viewDockerLogSize/script": {
+        "script": "/boot/config/plugins/user.scripts/scripts/viewDockerLogSize/script",
+        "frequency": "disabled",
+        "id": "scheduleviewDockerLogSize",
+        "custom": ""
+    }
+}

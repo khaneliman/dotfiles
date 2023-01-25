@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>JIRA-Service-Desk</Name>
+  <Repository>atlassian/jira-servicedesk</Repository>
+  <Registry>https://hub.docker.com/r/atlassian/jira-servicedesk</Registry>
+  <Network>khaneproxy</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://discord.gg/VWAG7rZ</Support>
+  <Project>https://www.atlassian.com/software/jira/service-desk</Project>
+  <Overview>
+    Jira Service Desk is a fully featured service desk tool used by modern IT teams.
+  </Overview>
+  <Category>Cloud: Tools:</Category>
+  <WebUI>http://[IP]:[PORT:8089]/</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/ibracorp/unraid-templates/master/jira-servicedesk/jira-servicedesk.xml</TemplateURL>
+  <Icon>https://i.imgur.com/rNMse7m.png</Icon>
+  <ExtraParams>--memory=4G</ExtraParams>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1635441863</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>&#xD;
+    Jira Service Desk is a fully featured service desk tool used by modern IT teams.&#xD;
+  </Description>
+  <Networking>
+    <Mode>khaneproxy</Mode>
+    <Publish>
+      <Port>
+        <HostPort>8089</HostPort>
+        <ContainerPort>8080</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/appdata/JiraServiceDesk</HostDir>
+      <ContainerDir>/var/atlassian/application-data/jira</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment>
+    <Variable>
+      <Value>jira.khaneliman.com</Value>
+      <Name>ATL_PROXY_NAME</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>443</Value>
+      <Name>ATL_PROXY_PORT</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>https</Value>
+      <Name>ATL_TOMCAT_SCHEME</Name>
+      <Mode/>
+    </Variable>
+  </Environment>
+  <Labels/>
+  <Config Name="ATL_PROXY_NAME" Target="ATL_PROXY_NAME" Default="" Mode="" Description="If behind a reverse proxy, what's the root address. i.e. jira.example.com" Type="Variable" Display="always" Required="false" Mask="false">jira.khaneliman.com</Config>
+  <Config Name="ATL_PROXY_PORT" Target="ATL_PROXY_PORT" Default="" Mode="" Description="Container Variable: ATL_PROXY_PORT" Type="Variable" Display="always" Required="false" Mask="false">443</Config>
+  <Config Name="ATL_TOMCAT_SCHEME" Target="ATL_TOMCAT_SCHEME" Default="" Mode="" Description="Container Variable: ATL_TOMCAT_SCHEME" Type="Variable" Display="always" Required="false" Mask="false">https</Config>
+  <Config Name="Host Port 1" Target="8080" Default="8080" Mode="tcp" Description="Container Port: 8080" Type="Port" Display="always" Required="true" Mask="false">8089</Config>
+  <Config Name="Host Path 1" Target="/var/atlassian/application-data/jira" Default="" Mode="rw" Description="Container Path: /var/atlassian/application-data/jira" Type="Path" Display="advanced-hide" Required="true" Mask="false">/mnt/user/appdata/JiraServiceDesk</Config>
+</Container>

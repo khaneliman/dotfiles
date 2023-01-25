@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>requestrr</Name>
+  <Repository>hotio/requestrr</Repository>
+  <Registry>https://hub.docker.com/r/hotio/requestrr</Registry>
+  <Network>khaneproxy</Network>
+  <MyIP/>
+  <Shell>bash</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://hotio.dev/discord</Support>
+  <Project>https://hotio.dev/containers/requestrr</Project>
+  <Overview>Requestrr is a chatbot used to simplify using services like Sonarr/Radarr/Ombi via the use of chat!</Overview>
+  <Category>Downloaders:</Category>
+  <WebUI>http://[IP]:[PORT:4545]</WebUI>
+  <TemplateURL/>
+  <Icon>https://hotio.dev/webhook-avatars/requestrr.png</Icon>
+  <ExtraParams>--memory=1G</ExtraParams>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1635441906</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>Requestrr is a chatbot used to simplify using services like Sonarr/Radarr/Ombi via the use of chat!</Description>
+  <Networking>
+    <Mode>khaneproxy</Mode>
+    <Publish>
+      <Port>
+        <HostPort>4545</HostPort>
+        <ContainerPort>4545</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/appdata/requestrr</HostDir>
+      <ContainerDir>/config</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment>
+    <Variable>
+      <Value>99</Value>
+      <Name>PUID</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>100</Value>
+      <Name>PGID</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>002</Value>
+      <Name>UMASK</Name>
+      <Mode/>
+    </Variable>
+  </Environment>
+  <Labels/>
+  <Config Name="Host Port for 4545" Target="4545" Default="4545" Mode="tcp" Description="Container Port: 4545" Type="Port" Display="always-hide" Required="true" Mask="false">4545</Config>
+  <Config Name="Host Path for /config" Target="/config" Default="/mnt/user/appdata/requestrr" Mode="rw" Description="Container Path: /config" Type="Path" Display="always-hide" Required="true" Mask="false">/mnt/user/appdata/requestrr</Config>
+  <Config Name="PUID" Target="PUID" Default="99" Mode="" Description="Container Variable: PUID" Type="Variable" Display="advanced-hide" Required="false" Mask="false">99</Config>
+  <Config Name="PGID" Target="PGID" Default="100" Mode="" Description="Container Variable: PGID" Type="Variable" Display="advanced-hide" Required="false" Mask="false">100</Config>
+  <Config Name="UMASK" Target="UMASK" Default="002" Mode="" Description="Container Variable: UMASK" Type="Variable" Display="advanced-hide" Required="false" Mask="false">002</Config>
+</Container>

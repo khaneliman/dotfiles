@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>tautulli</Name>
+  <Repository>tautulli/tautulli:latest</Repository>
+  <Registry>https://registry.hub.docker.com/r/tautulli/tautulli/</Registry>
+  <Network>khaneproxy</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://tautulli.com/#support</Support>
+  <Project>http://tautulli.com/</Project>
+  <Overview>This is the official container supported by the Tautulli devs.&#xD;
+&#xD;
+Tautulli is a 3rd party application that you can run alongside your Plex Media Server to monitor activity and track various statistics.</Overview>
+  <Category>Tools: MediaServer:Other</Category>
+  <WebUI>http://[IP]:[PORT:8181]/</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/Tautulli/Tautulli-Unraid-Template/master/tautulli.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/Tautulli/Tautulli-Unraid-Template/master/img/logo-circle.png</Icon>
+  <ExtraParams/>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1634869931</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>This is the official container supported by the Tautulli devs.&#xD;
+&#xD;
+Tautulli is a 3rd party application that you can run alongside your Plex Media Server to monitor activity and track various statistics.</Description>
+  <Networking>
+    <Mode>khaneproxy</Mode>
+    <Publish>
+      <Port>
+        <HostPort>8181</HostPort>
+        <ContainerPort>8181</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/appdata/Plex-Media-Server/Library/Application Support/Plex Media Server/Logs/</HostDir>
+      <ContainerDir>/plexlogs</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/appdata/tautulli</HostDir>
+      <ContainerDir>/config</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment>
+    <Variable>
+      <Value>99</Value>
+      <Name>PUID</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>100</Value>
+      <Name>PGID</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>UTC</Value>
+      <Name>TZ</Name>
+      <Mode/>
+    </Variable>
+  </Environment>
+  <Labels/>
+  <Config Name="HTTP Port" Target="8181" Default="" Mode="tcp" Description="Container Port: 8181" Type="Port" Display="always" Required="false" Mask="false">8181</Config>
+  <Config Name="PUID" Target="PUID" Default="99" Mode="" Description="Container Variable: PUID" Type="Variable" Display="always" Required="false" Mask="false">99</Config>
+  <Config Name="PGID" Target="PGID" Default="100" Mode="" Description="Container Variable: PGID" Type="Variable" Display="always" Required="false" Mask="false">100</Config>
+  <Config Name="Timezone" Target="TZ" Default="" Mode="" Description="Container Variable: TZ" Type="Variable" Display="always" Required="false" Mask="false">UTC</Config>
+  <Config Name="Plex Logs" Target="/plexlogs" Default="" Mode="rw" Description="Container Path: /plexlogs" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/Plex-Media-Server/Library/Application Support/Plex Media Server/Logs/</Config>
+  <Config Name="Config" Target="/config" Default="/mnt/cache/appdata/tautulli" Mode="rw" Description="Container Path: /config" Type="Path" Display="advanced-hide" Required="true" Mask="false">/mnt/user/appdata/tautulli</Config>
+</Container>

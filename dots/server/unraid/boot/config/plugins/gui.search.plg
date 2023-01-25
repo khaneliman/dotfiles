@@ -1,0 +1,103 @@
+<?xml version='1.0' standalone='yes'?>
+<!DOCTYPE PLUGIN [
+<!ENTITY name      "gui.search">
+<!ENTITY author    "Andrew Zawadzki">
+<!ENTITY version   "2022.12.07">
+<!ENTITY md5       "3739c9d913a3a95622fab6c79eb168a9">
+<!ENTITY plugdir   "/usr/local/emhttp/plugins/&name;">
+<!ENTITY github    "Squidly271/gui.search">
+<!ENTITY pluginURL "https://raw.githubusercontent.com/&github;/main/plugins/&name;.plg">
+]>
+
+<PLUGIN name="&name;" author="&author;" version="&version;" pluginURL="&pluginURL;" icon="search" support="https://forums.unraid.net/topic/104822-plugin-gui-search/">
+
+<CHANGES>
+###2022.12.07
+- Fixed: Compatibility when searching from within File Manager
+
+###2022.02.12
+- Fixed: Preclear wouldn't show up in autocomplete entries
+- Fixed: Many autocomplete entries were being redirected to VPN Manager inproperly
+
+###2021.12.24
+- Compatibility fix with Dynamix File Manager (TBA)
+
+###2021.11.15
+- Redirect WG* to VPNmanager
+
+###2021.06.04
+- Don't show flashing cursor
+
+###2021.04.25
+- Prevent browser auto filling
+
+###2021.04.10
+- Support for Azure / Grey Themes
+
+###2021.04.04
+- Fixed: After navigating to a search result, the DONE button would reload the current page instead of taking you back to the previous
+
+###2021.03.30
+- Fix compatibility with OpenVPN plugin
+
+###2021.03.28c
+- Only processes when the possibility exists for results to change
+- Compatibility with indexing Unassigned Devices' Settings
+
+###2021.03.28a
+- Add indexing of individual settings on pages
+
+###2021.03.28
+- Fixed: Search bar wouldn't appear if coming from Apps tab
+
+###2021.03.27b
+- Make search box and autocomplete font smaller
+- Do not interfere with GUI if autocomplete fails to populate
+
+###2021.03.27
+- Initial Release
+</CHANGES>
+
+<FILE Run="/bin/bash">
+<INLINE>
+# Remove old 'source' files
+rm -f $(ls /boot/config/plugins/&name;/&name;*.txz 2>/dev/null &#124; grep -v '&version;')
+</INLINE>
+</FILE>
+
+<!--
+The 'source' file.
+-->
+<FILE Name="/boot/config/plugins/&name;/&name;-&version;-x86_64-1.txz" Run="upgradepkg --install-new">
+<URL>https://raw.github.com/&github;/master/archive/&name;-&version;-x86_64-1.txz</URL>
+<MD5>&md5;</MD5>
+</FILE>
+
+<!--
+The 'post-install' script
+-->
+<FILE Run="/bin/bash">
+<INLINE>
+rm -rf /tmp/gui.search
+echo ""
+echo "----------------------------------------------------"
+echo " &name; has been installed."
+echo " Copyright 2021, Andrew Zawadzki"
+echo " Version: &version;"
+echo " You need to navigate to another page for this to be active"
+echo "----------------------------------------------------"
+echo ""
+</INLINE>
+</FILE>
+
+<!--
+The 'remove' script.
+-->
+<FILE Run="/bin/bash" Method="remove">
+<INLINE>
+removepkg &name;-&version;-x86_64-1
+rm -rf &plugdir;
+rm -rf /boot/config/plugins/&name;
+</INLINE>
+</FILE> 
+</PLUGIN>

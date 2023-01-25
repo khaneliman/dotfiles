@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>ombi</Name>
+  <Repository>linuxserver/ombi</Repository>
+  <Registry>https://hub.docker.com/r/linuxserver/ombi/</Registry>
+  <Network>khaneproxy</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://forums.unraid.net/topic/53520-support-linuxserverio-ombi/</Support>
+  <Project>https://www.ombi.io/</Project>
+  <Overview>Ombi allows you to host your own Plex Request and user management system. </Overview>
+  <Category>Downloaders: Network:Other MediaApp:Video Tools:</Category>
+  <WebUI>http://[IP]:[PORT:3579]/</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/ombi.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/ombi.png</Icon>
+  <ExtraParams>--memory=500M</ExtraParams>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1635476057</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>Ombi allows you to host your own Plex Request and user management system. </Description>
+  <Networking>
+    <Mode>khaneproxy</Mode>
+    <Publish>
+      <Port>
+        <HostPort>3579</HostPort>
+        <ContainerPort>3579</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/appdata/ombi</HostDir>
+      <ContainerDir>/config</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment>
+    <Variable>
+      <Value>99</Value>
+      <Name>PUID</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>100</Value>
+      <Name>PGID</Name>
+      <Mode/>
+    </Variable>
+  </Environment>
+  <Labels/>
+  <Config Name="Host Port 1" Target="3579" Default="3579" Mode="tcp" Description="Container Port: 3579" Type="Port" Display="always" Required="true" Mask="false">3579</Config>
+  <Config Name="Key 1" Target="PUID" Default="99" Mode="" Description="Container Variable: PUID" Type="Variable" Display="always" Required="false" Mask="false">99</Config>
+  <Config Name="Key 2" Target="PGID" Default="100" Mode="" Description="Container Variable: PGID" Type="Variable" Display="always" Required="false" Mask="false">100</Config>
+  <Config Name="AppData Config Path" Target="/config" Default="/mnt/user/appdata/ombi" Mode="rw" Description="Container Path: /config" Type="Path" Display="advanced-hide" Required="true" Mask="false">/mnt/user/appdata/ombi</Config>
+</Container>

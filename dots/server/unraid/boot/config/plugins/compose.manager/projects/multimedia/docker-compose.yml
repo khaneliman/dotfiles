@@ -1,0 +1,99 @@
+version: "3.6"
+services:
+  Cleanarr:
+    command:
+      - "/start.sh"
+    container_name: "Cleanarr"
+    entrypoint:
+      - "/entrypoint.sh"
+    environment:
+      - "LIBRARY_NAMES="
+      - "BYPASS_SSL_VERIFY="
+      - "HOST_CONTAINERNAME=Cleanarr"
+      - "PLEX_BASE_URL=http://192.168.1.37:32400"
+      - "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "GPG_KEY=${CLEANARR_GPG_KEY}"
+      - "PYTHON_VERSION=3.7.13"
+      - "PYTHON_PIP_VERSION=22.0.4"
+      - "PYTHON_SETUPTOOLS_VERSION=57.5.0"
+      - "PYTHON_GET_PIP_URL=https://github.com/pypa/get-pip/raw/38e54e5de07c66e875c11a1ebbdb938854625dd8/public/get-pip.py"
+      - "PYTHON_GET_PIP_SHA256=e235c437e5c7d7524fbce3880ca39b917a73dc565e0c813465b7a7a329bb279a"
+      - "UWSGI_INI=/app/uwsgi.ini"
+      - "UWSGI_CHEAPER=2"
+      - "UWSGI_PROCESSES=16"
+      - "NGINX_MAX_UPLOAD=0"
+      - "NGINX_WORKER_PROCESSES=1"
+      - "LISTEN_PORT=80"
+      - "STATIC_URL=/static"
+      - "STATIC_PATH=/app/static"
+      - "STATIC_INDEX=1"
+      - "PYTHONPATH=/app"
+      - "CONFIG_DIR=/config"
+    hostname: "ec6a24ce59b6"
+    image: "selexin/cleanarr"
+    ipc: "private"
+    labels:
+      maintainer: "Sebastian Ramirez <tiangolo@gmail.com>"
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/Alphacosmos/unraid-templetes/main/Images/plex-library-cleaner.ico"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:80]/"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "100m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "5001:80/tcp"
+    volumes:
+      - "/mnt/user/appdata/plex-library-cleaner:/config"
+    working_dir: "/app"
+
+  PhotoStructure:
+    container_name: "PhotoStructure"
+    entrypoint:
+      - "/sbin/tini"
+      - "--"
+      - "/ps/app/docker-entrypoint.sh"
+    environment:
+      - "PGID=100"
+      - "PS_LOG_LEVEL=error"
+      - "HOST_CONTAINERNAME=PhotoStructure"
+      - "PUID=99"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "NODE_VERSION=16.2.0"
+      - "YARN_VERSION=1.22.5"
+    hostname: "d98e723a9754"
+    image: "photostructure/server:stable"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://photostructure.com/img/logo-circle-gradient-256.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:1787]"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "100m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "1787:1787/tcp"
+    volumes:
+      - "/mnt/user/appdata/photostructure/config:/ps/config"
+      - "/mnt/user/data/media/pictures:/ps/library"
+      - "/mnt/user/appdata/photostructure/logs:/ps/logs"
+      - "/mnt/cache/appdata/photostructure/tmp:/ps/tmp"
+      - "/mnt/user/backup/Photos:/backupphotos"
+      - "/mnt/disks/dropbox/Pictures/Austins Photos:/dropboxphotos"
+      - "/mnt/user/data/media/familyphotos:/familyphotos"
+    working_dir: "/ps/app"
+
+networks:
+  br0:
+    external: true
+    name: "br0"
+  khaneproxy:
+    external: true
+    name: "khaneproxy"

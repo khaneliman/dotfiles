@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>adminer</Name>
+  <Repository>adminer</Repository>
+  <Registry>http://hub.docker.com/_/adminer/</Registry>
+  <Network>khaneproxy</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://forums.unraid.net/topic/87798-support-selfhostersnets-template-repository/</Support>
+  <Project>https://github.com/vrana/adminer</Project>
+  <Overview>Adminer (formerly phpMinAdmin) is a full-featured database management tool written in PHP. Conversely to phpMyAdmin, it consist of a single file ready to deploy to the target server. Adminer is available for MySQL, PostgreSQL, SQLite, MS SQL, Oracle, Firebird, SimpleDB, Elasticsearch and MongoDB.&#xD;
+    [br]&#xD;
+    [br]&#xD;
+    Go to  [b][u][span style='color: #E80000;']https://github.com/vrana/adminer/tree/master/designs[/span][/u][/b] for themes&#xD;
+[br] [br]&#xD;
+Plugins: https://github.com/vrana/adminer/tree/master/plugins</Overview>
+  <Category>Tools:</Category>
+  <WebUI>http://[IP]:[PORT:8080]</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/selfhosters/unRAID-CA-templates/master/templates/adminer.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/selfhosters/unRAID-CA-templates/master/templates/img/adminer.png</Icon>
+  <ExtraParams>--memory=20M</ExtraParams>
+  <PostArgs/>
+  <CPUset>2</CPUset>
+  <DateInstalled>1635399077</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>Adminer (formerly phpMinAdmin) is a full-featured database management tool written in PHP. Conversely to phpMyAdmin, it consist of a single file ready to deploy to the target server. Adminer is available for MySQL, PostgreSQL, SQLite, MS SQL, Oracle, Firebird, SimpleDB, Elasticsearch and MongoDB.&#xD;
+    [br]&#xD;
+    [br]&#xD;
+    Go to  [b][u][span style='color: #E80000;']https://github.com/vrana/adminer/tree/master/designs[/span][/u][/b] for themes&#xD;
+[br] [br]&#xD;
+Plugins: https://github.com/vrana/adminer/tree/master/plugins</Description>
+  <Networking>
+    <Mode>khaneproxy</Mode>
+    <Publish>
+      <Port>
+        <HostPort>8585</HostPort>
+        <ContainerPort>8080</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data/>
+  <Environment>
+    <Variable>
+      <Value>dracula</Value>
+      <Name>ADMINER_DESIGN</Name>
+      <Mode>{3}</Mode>
+    </Variable>
+    <Variable>
+      <Value/>
+      <Name>ADMINER_PLUGINS</Name>
+      <Mode>{3}</Mode>
+    </Variable>
+  </Environment>
+  <Labels/>
+  <Config Name="WebUI Port" Target="8080" Default="8080" Mode="tcp" Description="Container Port: 8080" Type="Port" Display="always" Required="true" Mask="false">8585</Config>
+  <Config Name="Theme" Target="ADMINER_DESIGN" Default="flat" Mode="{3}" Description="Container Variable: ADMINER_DESIGN" Type="Variable" Display="always" Required="false" Mask="false">dracula</Config>
+  <Config Name="Plugins" Target="ADMINER_PLUGINS" Default="" Mode="{3}" Description="e.g. ADMINER_PLUGINS='tables-filter tinymce'" Type="Variable" Display="always" Required="false" Mask="false"/>
+</Container>

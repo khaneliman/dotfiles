@@ -1,0 +1,736 @@
+<?xml version="1.0" standalone="yes"?>
+<!DOCTYPE PLUGIN [
+<!ENTITY name "fix.common.problems">
+<!ENTITY author "Andrew Zawadzki">
+<!ENTITY version "2022.12.18">
+<!ENTITY md5 "9bcb01b3ae587faca30ed105b6c2ff38">
+<!ENTITY launch "Settings/FixProblems">
+<!ENTITY plugdir "/usr/local/emhttp/plugins/&name;">
+<!ENTITY github "Squidly271/fix.common.problems">
+<!ENTITY pluginURL "https://raw.githubusercontent.com/&github;/master/plugins/&name;.plg">
+]>
+<PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" icon="warning" min="6.7.0" support="http://lime-technology.com/forum/index.php?topic=48972.0">
+
+<CHANGES>
+###2022.12.18
+- Re-add excluded folders option for New Perms
+
+###2022.12.13
+- Fixed: Certificate tests
+
+###2022.12.10
+- Remove Extended Tests
+
+###2022.12.09
+- Fixed: PHP8 compliance
+- Added: Check for Legacy Unraid.net certificates
+
+###2022.11.18
+- Fixed: Errors containing an apostrophe couldn't be re-monitored once ignored
+
+###2022.10.17
+- Coding refinements
+
+###2022.10.09
+- Stop testing for packagaes in /boot/extra on 6.11
+
+###2022.09.26
+- Test for eth0 not having a valid IP address
+
+###2022.09.10
+- Add test for jumbo frames
+- Add test for ReiserFS on Unraid 6.11+
+
+###2022.08.29
+- Fix upgrade assistant and TG3 tests
+
+###2022.08.24
+- Remove NerdPack reference from one test
+
+###2022.08.23
+- Don't run SSD Trim tests on OS versions 6.11.0-rc4+
+
+###2022.08.16
+- Messaging change
+
+###2022.08.06
+- Misc updates
+
+###2022.05.30
+- Add tg3 &amp; IOMMU test to Upgrade Assistant
+
+###2022.04.14
+- Don't use polling to determine if the extended test is still running.  After the notification user just needs to reload the page
+
+###2022.03.18
+- Compatibility with Dynamix File Manager
+
+###2022.03.13
+- Don't scan plugins folder for corruption tests
+
+###2022.03.12
+- Compatibility with new features in Unassigned Devices
+
+###2022.03.07
+- Further exceptions on corruption test
+
+###2022.03.04
+- Further exceptions on corruption test
+
+###2022.03.01
+- Further exceptions on corruption test
+
+###2022.02.26
+- Further exceptions on corruption test
+
+###2022.02.24
+- Attempt to parse corruption tests as JSON
+
+###2022.02.23
+- Add in More Information links to most test results
+- Ignore bread test if the flash remount plugin is installed
+- Fix Unraid branding
+- Add in flash corruption tests
+- Fixed progress window immediately disappearing under certain circumstances
+- Removed a test no longer applicable
+- Remove references to troubleshooting mode in the What is Checked
+
+###2022.01.31
+- Fixes to cache pool tests
+- Ignore Slave test if UD share is mounted as Shared
+
+###2022.01.26
+- Check for non-existent cache pools being referenced in a share's setting
+- Check for files stored on a cache pool other than what is dictated by the share's settings
+- Fixed: Check for unmountable drives hasn't been working for a while.  Also this check is now only done after a restart following an unclean shutdown
+
+###2022.01.16
+- Remove TemplateURL tests
+
+###2022.01.15
+- Fixed: Typo
+- Re-added: Slave Mode tests on UD mounts for docker containers
+
+###2022.01.13
+- Enhancements to certificate tests
+- If FCP not up to date issue a warning instead of error
+
+###2022.01.06
+- Further TLD / Certificate Tests
+
+###2022.01.01
+- Additional tests on TLD
+- Re-add unknown plugin tests
+
+###2021.12.26
+- Check for blank or invalid characters within TLD
+
+###2021.08.05
+- Remove Scaling governor tests - not relevant anymore
+
+###2021.05.03
+- Catch duplicate xmrig tests
+
+###2021.04.28
+- Debug xmrig tests
+
+###2021.04.25
+- Remove some tests no longer applicable
+- Better formatting on emails being sent out (if used)
+
+###2021.04.11
+- Test for 6.9.2 shares with a space set to cache-prefer
+
+###2021.04.10
+- Check for xmrig running
+
+###2021.04.02
+- Remote FTP test.  No longer applicable
+
+###2021.03.30
+- Fix spurious SSD Trim tests
+
+###2021.03.24
+- Check for root password set
+
+###2021.03.22
+- SSD Trim tests - take into consideration multi-device pools
+
+###2021.03.20
+- Check for template existing before testing for templateURL wrong
+- Add in to Update assistant and FCP tests for reserved names as user shares
+- Change Trim plugin tests to check if running 6.9.0+ and btrfs formatted drives
+
+###2021.03.17
+- Add link to vfio tests
+
+###2021.03.14
+- Add in tests for authorized keys in go
+- Fix FTP test couldn't be readded from ignore list
+
+###2021.03.10
+- Permission Fix
+
+###2021.03.07
+- Add in tests for packages within /boot/extra
+
+###2021.03.05
+- Add in some network tests (Thanks ljm42)
+
+###2021.02.18
+- Some tests were missing a timeout potentially causing a hang under certain circumstances
+
+###2021.01.27
+- Add test for legacy methods of device isolation
+
+###2020.12.27
+- Fix update test on incompatible updates
+
+###2020.12.19
+- Fix incosistency in default settings
+
+###2020.12.17
+- Unraid 6.9 fix spundown detection
+
+###2020.12.05
+- Unraid 6.9 compatibility fix
+
+###2020.11.28
+- Handle changes to Unassigned Devices SMB mounts
+
+###2020.10.21
+- Compatibility Fixes
+
+###2020.09.27
+- When running 6.9 beta27+ clicking on the notification alert from FCP will take you to FCP
+
+###2020.09.15
+- Compatibility Fix for Unraid 6.9+
+
+###2020.08.02
+- Automatically exclude the docker folder (if docker set to use folder instead of image) from Extended Tests and Docker Safe New Perms
+
+###2020.05.05
+- Remove some tests that were only relevant a few years ago
+
+###2020.04.19
+- Fixed: If a cache pool had first member missing, invalid folder present would appear
+
+###2020.04.16
+- Multi cache pool compatibility
+- Fix excluded shares being run on extended tests
+
+###2020.03.18
+- Check for CA notifications being enabled
+
+###2020.02.06
+- Check for sysdream mitigations on affected unRaid OS versions
+
+###2019.12.29
+- Tests related to unassigned devices / unassigned devices plus
+
+###2019.11.22
+- Remove test for IRQ x: Nobody cared
+
+###2019.11.13
+- Added warning for syslog being mirrored to flash drive
+- Fixed: Any link within unRaid's GUI will now return to FCP when pressing Done
+
+###2019.10.13
+- Improved method of reporting current test
+
+###2019.10.12
+- Automatically update changed support links for plugins
+
+###2019.10.11
+- Add in test for extra.cfg if upgrading to 6.8
+
+###2019.10.06
+- Fixed: If tests take longer than 120 seconds, popup will never close
+- Changed: Minimum unRaid version now 6.7.0
+
+###2019.09.23
+- Fixed: Handle spaces in Template URLs
+- Remove purple text
+
+###2019-09-08
+- Don't check for docker apps having an update available for them unless running 6.8
+
+###2019-08-31
+- Due to changes in Community Applications over the last few months, don't issue a warning / error if CA is not up to date
+
+###2019-06-30a
+- Fixed: Drive write cache enabled tests were never checking parity drives
+
+###2019-06-30
+- Change wording on write cache disabled to point to a FAQ to lessen redundant posts on forum
+
+###2019-05-29
+- Suppress cron errors from tests
+
+###2019-05-26
+- Suppress errors from HDPARM
+
+###2019-05-18
+- Wording change
+- Add in update API to docker safe permissions page and update assistant page
+
+###2019-05-12
+- Add in checks for write cache disabled on hard drives
+
+###2019-05-11
+- Add in note stating where to find Syslog server instead of Troubleshooting mode
+
+###2019-03-26
+- Fixed: Troubleshooting mode wouldn't appear on 6.6.7
+
+###2019-03-14
+- Update to support CA API
+
+###2019-03-10
+- Remove write to flash test
+
+###2019-03-07
+- Stop pointless write to flashdrive on array stop / start
+
+###2019-02-18
+- Slight modification to detection of comments within a container
+
+###2019-02-16
+- Deprecate Troubleshooting mode when running unRaid 6.7+
+- Check for corrupted xml files on flash drive
+- Remove impossible to read highlighting on errors
+
+###2019-02-03
+- autov fix
+
+###2019-01-19
+- Don't issue a warning if a plugin update requires an OS update
+
+###2019-01-06
+- Remove zenstates test
+- Remove autoupdate test on CA
+- Remove warning that CA not installed (IMHO should be an error/the world will stop spinning, but what can you do?)
+- CSS fixes for future unRaid versions
+- Remove excess graphic files
+- Change file system check defaults to not spin up drives
+
+###2019-01-01
+- Fix compatibility with Azure / Gray themes
+
+###2018-12-31
+- Update icons
+- Update Assistant was flagging ALL plugins as being incompatible with all versions of unRaid
+
+###2018-12-07
+- Revamp of outside communication test
+- Remove happy face :(
+
+###2018-11-03
+- Fix display aberration
+
+###2018-10-21
+- 6.6.3 Compatibility Fix
+
+###2018-10-19
+- Fix Broken Pipe
+
+###2018-10-02
+- Update Appfeed URL for tests
+
+###2018-09-08
+- Add in checks for CPU isolation and Docker CPU pinning colliding on unRaid 6.6+
+
+###2018-09-07
+- Fixed unRaid version tests for CPU pinning
+
+###2018-09-02
+- Update Assistant always recommend to delete dynamix.plg
+
+###2018-09-01
+- Add in checks for --cpuset-cpus on unRaid 6.6
+
+###2018-08-05
+- Revamp GitHub test
+
+###2018-07-28
+- Fix update plugins link
+
+###2018-07-26
+- Add identifier to Notifications
+
+###2018-07-25
+- Remove call trace test
+
+###2018-07-21
+- Issue Other Comment if PHP warnings are enabled
+- Issue Error if Share's disk include settings includes a disk that isn't present
+
+###2018-06-21
+- Update link for OS out of date
+
+###2018-04-25
+- Update assistant handle major mismatches of URL's between templates and plugin files
+
+###2018-04-14
+- Change extended test output
+
+###2018-03-25
+- Remove test for partition if already running 6.4+
+
+###2018-03-21
+- Add in checks against either stable or next branch
+
+###2018-03-17a
+- Fix compatibility against branch Next when no next branch exists
+- Suppress warning if Settings - Global Share settings have never been changed
+
+###2018-03-17
+- Fix compatibility with unRaid 6.3.5
+
+###2018-03-16
+- Fix partition start test for nvme drives
+
+###2018-03-15
+- Additional tests and fixes on Update Assistant
+
+###2018-03-14
+- Add in an Update Assistant to check for compatibility prior to updating the unRaid OS
+
+###2018-02-18
+- Remove docker network mode test
+- Remove docker port changed test
+- Remove docker webUI link test
+
+###2018-02-16
+- Refined check for zenstates test
+- Certain template errors could cause a failure on Network mode set tests
+
+###2018-02-14
+- Added: Check for mover logging enabled (recommended to be disabled)
+- Added: Check for zenstates installed on Ryzen CPU
+
+###2018-01-18
+- Added: CPU Overheating causing throttle down test (May not work on all CPUs though)
+- Added: Statistics plugin installed, but Preclear plugin not installed (recommend to uninstall Statistics)
+
+###2018-01-13
+- Fixed: Edge case of default docker storage location within a subfolder of a share
+- Fixed: Edge case of default docker storage location within a UD mounted device and similar named share and a cache drive exists.
+
+###2018-01-09
+- Changed: Delay execution of startup scans by 10 minutes, and run as a background process
+
+###2018-01-06
+- Fixed: Hack attempts within the first 10 days of a month would not show the day
+- Added: Check for incompatible docker apps present
+
+###2017-12-11
+- Fixed: Minimum/Maximum versions of unRaid for plugin compatibility set by CA moderators was not being honoured for plugin compatibility tests
+- Fixed: Blacklisted plugins not being caught if Plugin's URL subject to redirection
+
+###2017-12-09
+- Fixed: Out of memory errors if syslog files exceed PHP's default memory limits
+
+###2017-11-25
+- Fixed: PHP error displayed if cache floor not set in unRaid settings
+
+###2017-11-24
+- Fix URL subjected to redirection
+
+###2017-11-18
+- Ignore Network mode tests if network not set to Bridge or Host
+
+###2017-11-12
+- Check to see if enough installed memory to be able to operate at "functional" minimum
+
+###2017-11-04
+- Update link for BTRFS filesystem corruption
+
+###2017-11-02a
+- Tighten code for call trace searches to only display serious traces and ignore informational ones
+
+###2017-11-02
+- Add in check for Ryzen cpu running with unRaid version pre 6.4
+
+###2017-10-28
+- Remove Sensors display, running processes, etc from troubleshooting mode
+
+###2017-10-15
+- Check for directory bread errors (flash drive disconnected)
+
+###2017-09-09
+- Scan all syslogs (including rotated) for call traces
+
+###2017-09-04
+- Support Encrypted drives being found in array
+
+###2017-09-02
+- Maintenance release
+
+###2017-08-14
+- Display multiple IRQ disabled messages if found
+
+###2017-07-28
+- Add in warnings if Marvel Hard Drive controller found
+
+###2017-07-03
+- Fix Permissions on executables
+
+###2017-06-30
+- Added check for missing/different TemplateURL field in docker application's template
+
+###2017-04-17
+- Fixed: Ignore Dynamix check for plugin / docker updates if CA Auto Update is set to check for updates
+
+###2017-04-12
+- Fixed: Spurious Dynamix SSD Trim plugin not installed
+
+###2017-04-10
+- Added check for SSD cache drive, but Dynamix SSD Trim plugin not installed
+
+###2017-04-09
+- Added check for SSD cache formatted as reiserFS (does not support trim)
+
+###2017-04-06
+- Fixed Plugins not up to date, but set to autoupdate generating errors
+
+###2017-03-22##
+- Fix typos
+- Support CA's new method of blacklisting / deprecating apps
+
+###2017-03-19###
+- Deprecate inotify install checks on 6.3
+- Don't flag multiple key errors if one of keys is Trial
+
+###2017-03-17###
+- Fix false positive within extended tests
+
+###2017-03-01###
+- Fixed: Prevent messages from appearing on local console
+
+###2017-02-28###
+- Added check for inotifywatches exhausted
+- Added output of mcelog if mce error is detected
+- Added check for irq xx: nobody cared (and log output of cat /proc/interrupts for diagnosis)
+
+###2017-02-26###
+- Ignore RecycleBin folder within /mnt
+
+###2017-02-25a###
+- Added: Check for non-system folders / files within /mnt
+
+###2017-02-25###
+- Fixed: Don't follow symlinked directories on extended tests
+
+###2017-02-18###
+- Added: MCE Errors
+- Added: Ability re-add previously ignored (but not currently found) errors
+
+###2017-02-13###
+- Fix error message resulting from a specific error in an author's application template
+
+###2017-02-03a###
+- Fix typo detailing where to find troubleshooting logs
+
+###2017-02-03###
+- Change file name of syslog in troubleshooting mode for better clarity
+
+###2017-01-28###
+- Add in tests for call traces.  Should be able to handle Kernel Oops, General Protection failures and the like
+
+###2017-01-24###
+- Change New Permissions tool's name for better compatibility
+
+###2017-01-21###
+- Added: Check for out of memory errors
+
+###2017-01-19###
+- Fixed: Do not change permissions on CA Appdata Backup Destinations
+
+###2016-12-16###
+- Add in during troubleshooting tests every 10 minutes to display and/all available sensors
+
+###2016-12-10###
+- Add in check for NerdPack installing inotify-tools on unRaid 6.3.0-rc6+
+
+###2016-10-27###
+- Fix possible future issue with 6.3 and unRaid including comments within .cfg files
+
+###2016-10-09###
+- Change some wording around
+- Add in test for multiple registration keys on a flash drive
+
+###2016-09-25###
+- Exclude illegal character name tests from appdata/CA backup folders
+- Itemize disks duplicate files found on
+- Delete extended logs at start of tests
+- Update plugin version checks to honour OS version
+
+###2016-09-23###
+- Adjust FCP for new CA settings organization
+- Ignore dynamix webUI update warnings on different OS versions
+
+###2016-09-15###
+- Fix docker appdata tests on 6.2
+- Powerdown not installed will not generate a warning on 6.2+
+
+###2016-09-13###
+- Old school alert for ad-blocker detection (solves a race condition)
+- Faster downloads of application feed
+- Downgrade powerdown not installed to warning
+
+###2016-09-04###
+- Remove date / time check as external source continually has intermittent problems (ie: too many false positives).  Will investigate other solutions in the future
+
+###2016-08-20###
+- Suppress error messages if unable to download the application feed
+
+###2016-08-06###
+- Skip appdata tests within /mnt/user on 6.2-rc3+
+
+###2016-07-08###
+- Relegate permission tests to strictly the extended tests
+- Fix error on plugin checks if appfeed unable to download
+
+###2016-07-03###
+- Adjustable excluded shares on extended tests and new perms
+
+###2016-06-26###
+- Suppress error on port checks if docker is bridge mode and no ports defined
+
+###2016-06-24###
+- Add in Extended Checks On Files / Folders
+
+###2016-06-11###
+- Better appdata determination
+- More forgiving determination of cache only shares on array
+
+###2016-06-04a###
+- Add in a Docker Safe New Permissions utility (Tools Tab)
+
+###2016-06-04###
+- Add in warning for unRaid OS not current
+
+###2016-06-03###
+- Add in driver check for CPU throttling
+- Check docker apps for improper setting (wrong section) of extra parameters
+- Ability to not log ignored entries
+
+###2016-05-29###
+- Finally fix Crashplan webUI issues
+- Check for sharenames same as disknames
+- Check for cacheonly shares but not cache drive
+- Add exception for NVMe drives showing HPA
+- Fix scan time aberration if no errors found
+
+###2016-05-28###
+- Fix some logging issues
+
+###2016-05-26###
+- Fix webUI changes detection if special characters present
+- Downgrade fix common problems and CA not set to auto update to be warnings
+- More forgiving determination of cache only shares (and files on array)
+- Fix not being able to ignore if ' present in description
+- Fix some wording inconsistencies with ignore pop up
+
+###2016-05-23###
+- Only scan for errors when entering webpage if no errors already logged
+- Added in checks for moderated / blacklisted docker applications
+- Added in checks for plugins incompatible with your unraid version
+- Added in checks for changed webUI on docker apps
+
+###2016-05-22###
+- Fix array non started error when not using user shares
+- Add in ps aux logging to troubleshooting mode
+- Add in free memory logging to troubleshooting mode
+- Add in hack attack detection
+
+###2016-05-19###
+- Added in troubleshooting mode
+- Checks for wrong permissions on shares
+- Checks for improper shutdown
+
+###2016-05-14###
+- Fix (hopefully) false positive HPA when using Areca controllers
+- Added ability to ignore certain errors / warnings
+
+###2016-05-13a###
+- Removed check for control characters in filenames
+- Added Checks for dockers not running in same network mode as what author intended
+- Added in checks for HPA
+- Added in checks for illegal suffixes on cachefloor settings
+- Added in checks for cache floor larger than cache drive
+- Added in checks for cache free space less than cache floor
+- Added in check for array started
+- Fix false positive for implied array only files on cache
+- Fix false positive if docker container had no ports in template
+
+###2016.05-13###
+- Added in ad blocker checking (thx bonienl)
+- Added in illegal character checks in share names
+- Fixed bug preventing some docker checks from running
+
+###2016-05-10b###
+- Added in ability for user defined scripts to run
+- Ability to only check spun up disks for problems
+- Check installed docker apps for changed container ports
+
+###2016-05-10###
+- Further enhance FTP checks
+- Add installed plugin compatibility tests
+
+###2016-05-09###
+- Fix cache pool invalid file system
+- Add notification checks
+- Enhance FTP checks
+
+###2016-05-08###
+- Initial Release
+</CHANGES>
+
+<!-- The 'pre-install' script. -->
+
+
+
+<!--
+The 'source' file.
+-->
+<FILE Name="/boot/config/plugins/&name;/&name;-&version;-x86_64-1.txz" Run="upgradepkg --install-new">
+<URL>https://raw.githubusercontent.com/&github;/master/archive/&name;-&version;-x86_64-1.txz</URL>
+<MD5>&md5;</MD5>
+</FILE>
+
+<!--
+The 'post-install' script
+-->
+<FILE Run="/bin/bash">
+<INLINE>
+rm -f $(ls /boot/config/plugins/&name;/&name;*.txz 2&gt;/dev/null | grep -v '&version;')
+/usr/local/emhttp/plugins/fix.common.problems/scripts/applyFrequency.php
+mkdir -p /boot/config/plugins/fix.common.problems/scripts/
+rm -rf /tmp/fix.common.problems/errors.json
+echo ""
+echo "----------------------------------------------------"
+echo " &name; has been installed."
+echo " Copyright 2016-2022, Andrew Zawadzki"
+echo " Version: &version;"
+echo "----------------------------------------------------"
+echo ""
+</INLINE>
+</FILE>
+
+<!--
+The 'remove' script.
+-->
+<FILE Run="/bin/bash" Method="remove">
+<INLINE>
+removepkg &name;-&version;-x86_64-1
+rm -rf /usr/local/emhttp/plugins/fix.common.problems
+rm -f /etc/cron.hourly/fix.common.problems.sh
+rm -f /etc/cron.daily/fix.common.problems.sh
+rm -f /etc/cron.weekly/fix.common.problems.sh
+rm -f /etc/cron.monthly/fix.common.problems.sh
+</INLINE>
+</FILE> 
+</PLUGIN>

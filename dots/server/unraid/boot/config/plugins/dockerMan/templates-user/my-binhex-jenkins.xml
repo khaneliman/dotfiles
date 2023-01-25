@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>binhex-jenkins</Name>
+  <Repository>binhex/arch-jenkins</Repository>
+  <Registry>https://registry.hub.docker.com/r/binhex/arch-jenkins/</Registry>
+  <Network>khaneproxy</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>true</Privileged>
+  <Support>http://lime-technology.com/forum/index.php?topic=45839.0</Support>
+  <Project>https://jenkins-ci.org/</Project>
+  <Overview>
+  Jenkins is an open source continuous integration tool written in Java. The project was forked from Hudson after a dispute with Oracle. Jenkins provides continuous integration services for software development. It is a server-based system running in a servlet container such as Apache Tomcat.
+  </Overview>
+  <Category>Productivity: Tools:</Category>
+  <WebUI>http://[IP]:[PORT:8090]/</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/binhex/docker-templates/master/binhex/jenkins.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/binhex/docker-templates/master/binhex/images/jenkins-icon.png</Icon>
+  <ExtraParams>--memory=4G</ExtraParams>
+  <PostArgs/>
+  <CPUset>3,4,5,9,10,11</CPUset>
+  <DateInstalled>1636035756</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>&#xD;
+  Jenkins is an open source continuous integration tool written in Java. The project was forked from Hudson after a dispute with Oracle. Jenkins provides continuous integration services for software development. It is a server-based system running in a servlet container such as Apache Tomcat.&#xD;
+  </Description>
+  <Networking>
+    <Mode>khaneproxy</Mode>
+    <Publish>
+      <Port>
+        <HostPort>8090</HostPort>
+        <ContainerPort>8090</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+      <Port>
+        <HostPort>4243</HostPort>
+        <ContainerPort>4243</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/var/run/docker.sock</HostDir>
+      <ContainerDir>/var/run/docker.sock</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/usr/bin/docker</HostDir>
+      <ContainerDir>/usr/bin/docker</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/Downloads/</HostDir>
+      <ContainerDir>/mnt/downloads</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/appdata/binhex-jenkins</HostDir>
+      <ContainerDir>/config</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment>
+    <Variable>
+      <Value>-Xmx512m</Value>
+      <Name>JAVA_ARGS</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>-Dhudson.footerURL=https://khaneliman.com</Value>
+      <Name>JAVA_OPTS</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>000</Value>
+      <Name>UMASK</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>99</Value>
+      <Name>PUID</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>100</Value>
+      <Name>PGID</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>tcp://dockersocket:2375</Value>
+      <Name>DOCKER_HOST</Name>
+      <Mode/>
+    </Variable>
+  </Environment>
+  <Labels/>
+  <Config Name="Host Port 1" Target="8090" Default="8090" Mode="tcp" Description="Container Port: 8090" Type="Port" Display="always" Required="true" Mask="false">8090</Config>
+  <Config Name="Host Port 2" Target="4243" Default="4243" Mode="tcp" Description="Container Port: 4243" Type="Port" Display="always" Required="true" Mask="false">4243</Config>
+  <Config Name="Key 1" Target="JAVA_ARGS" Default="-Xmx512m" Mode="" Description="Container Variable: JAVA_ARGS" Type="Variable" Display="always" Required="false" Mask="false">-Xmx512m</Config>
+  <Config Name="Key 2" Target="JAVA_OPTS" Default="-Dhudson.footerURL=http://mycompany.com" Mode="" Description="Container Variable: JAVA_OPTS" Type="Variable" Display="always" Required="false" Mask="false">-Dhudson.footerURL=https://khaneliman.com</Config>
+  <Config Name="Key 3" Target="UMASK" Default="000" Mode="" Description="Container Variable: UMASK" Type="Variable" Display="always" Required="false" Mask="false">000</Config>
+  <Config Name="Key 4" Target="PUID" Default="99" Mode="" Description="Container Variable: PUID" Type="Variable" Display="always" Required="false" Mask="false">99</Config>
+  <Config Name="Key 5" Target="PGID" Default="100" Mode="" Description="Container Variable: PGID" Type="Variable" Display="always" Required="false" Mask="false">100</Config>
+  <Config Name="Docker Sock" Target="/var/run/docker.sock" Default="" Mode="rw" Description="Container Path: /var/run/docker.sock" Type="Path" Display="always" Required="false" Mask="false">/var/run/docker.sock</Config>
+  <Config Name="Docker" Target="/usr/bin/docker" Default="" Mode="rw" Description="Container Path: /usr/bin/docker" Type="Path" Display="always" Required="false" Mask="false">/usr/bin/docker</Config>
+  <Config Name="DOCKER_HOST" Target="DOCKER_HOST" Default="" Mode="" Description="Container Variable: DOCKER_HOST" Type="Variable" Display="always" Required="false" Mask="false">tcp://dockersocket:2375</Config>
+  <Config Name="Host Path 3" Target="/mnt/downloads" Default="" Mode="rw" Description="Container Path: /mnt/downloads" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/Downloads/</Config>
+  <Config Name="AppData Config Path" Target="/config" Default="/mnt/user/appdata/binhex-jenkins" Mode="rw" Description="Container Path: /config" Type="Path" Display="advanced-hide" Required="true" Mask="false">/mnt/user/appdata/binhex-jenkins</Config>
+</Container>

@@ -1,0 +1,146 @@
+<?xml version="1.0" standalone="yes"?>
+<!DOCTYPE PLUGIN [
+<!ENTITY name "dynamix.active.streams">
+<!ENTITY author "Bergware">
+<!ENTITY version "2020.06.17">
+<!ENTITY launch "Tools/ActiveStreams">
+<!ENTITY pluginURL "https://raw.githubusercontent.com/bergware/dynamix/master/unRAIDv6/&name;.plg">
+<!ENTITY source "/boot/config/plugins/&name;/&name;">
+<!ENTITY MD5 "3c0fbba75800727ed7006381fec035e4">
+]>
+<PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" min="6.1.9" support="http://lime-technology.com/forum/index.php?topic=36543.0">
+
+<CHANGES>
+##&name;
+
+###&version;
+- updated multi-language support
+
+###2020.05.10
+- updated multi-language support
+
+###2020.03.31
+- added multi-language support
+- minor updates
+
+###2019.01.03
+- added ipv6 support
+
+###2018.12.31
+- fixed errors when plex not active/not installed
+- fixed active streams should not include appdata
+
+###2018.12.24
+- updated handling of plex streams
+- GUI adjustments
+
+###2017.04.24
+- adjusted table header
+- fixed regression error
+- fixed potential conflict with unassigned devices plugin
+
+###2017.04.23
+- fixed missing csrf_token when using unRAID v6.3.3 or higher
+- fixed saving of user names
+- fixed folder remapping when using Plex
+
+###2016.09.13
+- fixed absolute path using $docroot
+
+###2016.08.26
+- fixed folders and files permissions
+- added minimum unRAID version 6.1.9
+
+###2015.12.14
+- added unRAID version check. Only version 6.1 or higher is allowed
+- updated consistency of PLG file
+
+###2015.12.13
+- changed .txz file naming to support consistent package upgrading
+
+###2015.08.13
+- fixed regression error (missing tools header file)
+
+###2015.06.27
+- introduced new logo (thanks Zonediver)
+- removed Reset button (now controlled by Dynamix webGui)
+- enable/Disable Apply button when changes are made
+- replaced halt image for awesome font symbol
+- added Done button on active streams page
+
+###2015.04.28
+- added Reset button on User Names page
+
+###2015.04.18
+- improved IP/Users list
+
+###2015.04.11
+- included online help information
+- better support for Plex streams
+
+###2015.01.22
+- version update for webGui 2015.01.21
+
+###2014.12.08
+- adjusted table to new css styling
+
+###2014.12.06
+- fixed wrong placement of config file
+- fixed regression error in names list
+
+###2014.12.05
+- fixed wrong file size display
+- fixed compatability issue with unRAID v6
+
+###2014.11.28
+- initial release for unRAID v6
+</CHANGES>
+
+<!--
+Copyright 2020, Bergware International
+Dynamix Active Streams - Real-time monitoring of SMB shares
+-->
+
+<!-- PRE-INSTALL SCRIPT -->
+<FILE Run="/bin/bash">
+<INLINE>
+# Remove old 'source' packages
+MD5=$(md5sum &source;.txz 2&gt;/dev/null|grep -Po '^\S+')
+if [[ $MD5 != &MD5; ]]; then
+  rm -f &source;*.txz
+fi
+</INLINE>
+</FILE>
+
+<!-- SOURCE PACKAGE -->
+<FILE Name="&source;.txz" Run="upgradepkg --install-new --reinstall">
+<URL>https://raw.githubusercontent.com/bergware/dynamix/master/archive/&name;.txz</URL>
+<MD5>&MD5;</MD5>
+</FILE>
+
+<!-- POST-INSTALL SCRIPT -->
+<FILE Run="/bin/bash">
+<INLINE>
+echo ""
+echo "-----------------------------------------------------------"
+echo " Plugin &name; is installed."
+echo " This plugin requires Dynamix webGui to operate"
+echo " Copyright 2020, Bergware International"
+echo " Version: &version;"
+echo "-----------------------------------------------------------"
+echo ""
+</INLINE>
+</FILE>
+
+<!-- REMOVE SCRIPT -->
+<FILE Run="/bin/bash" Method="remove">
+<INLINE>
+# Remove plugin related files
+rm -rf /boot/config/plugins/&name;
+
+# Uninstall the 'source' package
+removepkg &name;
+</INLINE>
+</FILE>
+
+</PLUGIN>

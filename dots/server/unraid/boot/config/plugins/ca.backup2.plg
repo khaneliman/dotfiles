@@ -1,0 +1,182 @@
+<?xml version="1.0" standalone="yes"?>
+<!DOCTYPE PLUGIN [
+<!ENTITY name "ca.backup2">
+<!ENTITY author "Robin Kluth">
+<!ENTITY version "2023.01.11">
+<!ENTITY md5 "380090359a8ced1f18b930c945a91a92">
+<!ENTITY launch "Settings/BackupMainV2">
+<!ENTITY plugdir "/usr/local/emhttp/plugins/&name;">
+<!ENTITY github "Commifreak/ca.backup2">
+<!ENTITY pluginURL "https://raw.githubusercontent.com/&github;/master/&name;.plg">
+]>
+<PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" icon="shield" support="https://forums.unraid.net/topic/132721-plugin-ca-appdata-backup-restore-v3/">
+
+<CHANGES>
+<![CDATA[
+###2023.01.11
+- 🚀 Happy new year!
+- Added an option, to disable backup error detection.
+
+###2022.12.27
+- Fixed restore
+
+###2022.12.22
+- Added some debug infos for the "Already started" docker issue
+- Fixes "Abort" function
+
+###2022.12.08
+- Fix scanned source files with spaces in it
+- Output a bit more debug info for not stopped containers.
+
+###2022.12.05
+- Fix `Allowed memory size of xxx exhausted` error, which was caused by a too big logfile from previous plugin
+version.
+- Also copy the log in case of an error
+- Fixed the exclusion of subfolders
+
+###2022.12.04
+- Fixed a permission issue, which prevented the backup to run
+
+###2022.12.02
+- Fixed tar verification check
+- Changed schedule hour format in settings page
+- Added option to disable the warning message when accessing the settings page
+- Added option to create multiple archives - one for each appdata folder
+- Fixed some styling inside settings page
+- The logging tab now shows the whole log as well as date/time
+- Fixed an error, which caused a reset of the log while backing up
+- Made docker container stops/starts more robust: the plugin now tries 3 times to start a container
+- The backup log is now copied to the destination to keep it with its run
+
+###2022.07.23
+- Set permissions on backups to be 0777
+
+###2021.12.05
+- Don't exclude the docker image file since it's now extremely rare for it to be placed within appdata
+
+###2021.11.03
+- Fixed: File picker for start / stop scripts wasn't working
+
+###2021.03.13
+- Deprecate usb backup (still works though) when running Unraid 6.9
+
+###2021.03.10
+- Permission Fix
+
+###2020.12.27
+- Fix some permission issues
+
+###2020.10.21
+- Compatibility Fixes
+
+###2020.09.27
+- When running 6.9-beta 27+, clicking on the notification will take you to the plugin's settings
+
+###2020.07.09
+- Execute all custom scripts from RAM
+
+###2020.05.31
+- Add pre-start script (Thanks jburnham)
+
+###2019.10.27
+- Adjust permissions on backup version of flash drive
+
+###2019.09.25
+- Remove purple text
+
+###2019.03.23
+- Utilize CA API for update checks
+
+###2019.03.09
+- Only rewrite the disk assignments file if it's changed
+
+###2019.01.13
+- update Icon
+
+###2018.11.17
+- unRaid 6.6+: Honor autostart rules when restarting containers
+
+###2018.11.11
+- Add in autov routines
+
+###2018.11.01
+- Fix dropdown color for 6.6
+
+###2018.10.19
+- Fix Broken Pipe
+
+###2018.07.15
+- Fixed: Don't run a scheduled backup if array isn't started
+
+###2018.03.15
+- Fixed: Don't delete old backup sets if the source doesn't exist
+
+###2018.03.02
+- Fixed: PHP Warnings (hidden) in 6.5.0+
+
+###2017.12.22
+- Fixed: Apply not being activated when using customized excluded folder
+
+###2017.11.26
+- Fixed: Backup schedule wouldn't run following a reboot of server
+
+###2017.11.23
+- Reorganization as part of updates to CA proper
+
+###2017.11.05
+- Initial Release
+]]>
+</CHANGES>
+
+<!-- The 'pre-install' script. -->
+
+<FILE Run="/bin/bash">
+<INLINE>
+# Remove old 'source' files
+rm -f $(ls /boot/config/plugins/&name;/&name;*.txz 2&gt;/dev/null | grep -v '&version;')
+</INLINE>
+</FILE>
+
+<!--
+The 'source' file.
+-->
+<FILE Name="/boot/config/plugins/&name;/&name;-&version;-x86_64-1.txz" Run="upgradepkg --install-new">
+<URL>https://github.com/&github;/releases/download/v&version;/&name;-&version;-x86_64-1.txz</URL>
+<MD5>&md5;</MD5>
+</FILE>
+
+<!--
+The 'post-install' script
+-->
+<FILE Run="/bin/bash">
+<INLINE>
+mkdir -p /tmp/ca.backup2/tempFiles
+mkdir -p /var/lib/docker/unraid/ca.backup2.datastore
+mkdir -p /boot/config/plugins/ca.backup2/
+rm -rf /usr/local/emhttp/plugins/ca.backup2/CA.page
+rm -rf /usr/local/emhttp/plugins/ca.backup2/caHelp.page
+/usr/local/emhttp/plugins/ca.backup2/scripts/removeCron.php
+/usr/local/emhttp/plugins/ca.backup2/scripts/addCron.php
+echo ""
+echo "----------------------------------------------------"
+echo " &name; has been installed."
+echo " 2022-2023, Robin Kluth"
+echo " 2015-2022, Andrew Zawadzki"
+echo " Version: &version;"
+echo "----------------------------------------------------"
+echo ""
+</INLINE>
+</FILE>
+
+<!--
+The 'remove' script.
+-->
+<FILE Run="/bin/bash" Method="remove">
+<INLINE>
+/usr/local/emhttp/plugins/ca.backup2/scripts/removeCron.php
+removepkg &name;-&version;-x86_64-1
+rm -rf &plugdir;
+rm -rf /boot/config/plugins/&name;
+</INLINE>
+</FILE>
+</PLUGIN>

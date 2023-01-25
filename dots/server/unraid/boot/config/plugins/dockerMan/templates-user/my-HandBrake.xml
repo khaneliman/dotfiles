@@ -1,0 +1,236 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>HandBrake</Name>
+  <Repository>jlesage/handbrake</Repository>
+  <Registry>https://hub.docker.com/r/jlesage/handbrake/</Registry>
+  <Network>khaneproxy</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://forums.unraid.net/topic/57420-support-handbrake/</Support>
+  <Project>https://handbrake.fr/</Project>
+  <Overview>
+HandBrake is a tool for converting video from nearly any format to a selection of modern, widely supported codecs.
+
+The GUI of the application is accessed through a modern web browser (no installation or configuration needed on the client side) or via any VNC client.
+A fully automated mode is also available: drop files into a watch folder and let HandBrake process them without any user interaction.
+
+Also, being based on Alpine Linux, size of this container is very small (less
+than 80MB in download size).
+
+For a complete documentation of this container, see
+https://github.com/jlesage/docker-handbrake/blob/master/README.md
+  </Overview>
+  <Category>MediaApp:Video</Category>
+  <WebUI>http://[IP]:[PORT:5800]</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/jlesage/docker-templates/master/jlesage/handbrake.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/jlesage/docker-templates/master/jlesage/images/handbrake-icon.png</Icon>
+  <ExtraParams/>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1634092181</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>&#xD;
+HandBrake is a tool for converting video from nearly any format to a selection of modern, widely supported codecs.&#xD;
+&#xD;
+The GUI of the application is accessed through a modern web browser (no installation or configuration needed on the client side) or via any VNC client.&#xD;
+A fully automated mode is also available: drop files into a watch folder and let HandBrake process them without any user interaction.&#xD;
+&#xD;
+Also, being based on Alpine Linux, size of this container is very small (less&#xD;
+than 80MB in download size).&#xD;
+&#xD;
+For a complete documentation of this container, see&#xD;
+https://github.com/jlesage/docker-handbrake/blob/master/README.md&#xD;
+  </Description>
+  <Networking>
+    <Mode>khaneproxy</Mode>
+    <Publish>
+      <Port>
+        <HostPort>7803</HostPort>
+        <ContainerPort>5800</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+      <Port>
+        <HostPort>7903</HostPort>
+        <ContainerPort>5900</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user</HostDir>
+      <ContainerDir>/storage</ContainerDir>
+      <Mode>ro</Mode>
+    </Volume>
+    <Volume>
+      <HostDir/>
+      <ContainerDir>/watch</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/data/media/converted</HostDir>
+      <ContainerDir>/output</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/appdata/HandBrake</HostDir>
+      <ContainerDir>/config</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment>
+    <Variable>
+      <Value>General/Very Fast 1080p30</Value>
+      <Name>AUTOMATED_CONVERSION_PRESET</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>mp4</Value>
+      <Name>AUTOMATED_CONVERSION_FORMAT</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>1</Value>
+      <Name>AUTOMATED_CONVERSION_KEEP_SOURCE</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>ignore</Value>
+      <Name>AUTOMATED_CONVERSION_NON_VIDEO_FILE_ACTION</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>/output</Value>
+      <Name>AUTOMATED_CONVERSION_OUTPUT_DIR</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value/>
+      <Name>AUTOMATED_CONVERSION_OUTPUT_SUBDIR</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>99</Value>
+      <Name>USER_ID</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>100</Value>
+      <Name>GROUP_ID</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>000</Value>
+      <Name>UMASK</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value/>
+      <Name>APP_NICENESS</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>1280</Value>
+      <Name>DISPLAY_WIDTH</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>768</Value>
+      <Name>DISPLAY_HEIGHT</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>0</Value>
+      <Name>SECURE_CONNECTION</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value/>
+      <Name>X11VNC_EXTRA_OPTS</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value/>
+      <Name>AUTOMATED_CONVERSION_VIDEO_FILE_EXTENSIONS</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>jpg jpeg bmp png gif txt nfo</Value>
+      <Name>AUTOMATED_CONVERSION_NON_VIDEO_FILE_EXTENSIONS</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>0</Value>
+      <Name>AUTOMATED_CONVERSION_OVERWRITE_OUTPUT</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>5</Value>
+      <Name>AUTOMATED_CONVERSION_SOURCE_STABLE_TIME</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>10</Value>
+      <Name>AUTOMATED_CONVERSION_SOURCE_MIN_DURATION</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>5</Value>
+      <Name>AUTOMATED_CONVERSION_CHECK_INTERVAL</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>5</Value>
+      <Name>AUTOMATED_CONVERSION_MAX_WATCH_FOLDERS</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>0</Value>
+      <Name>AUTOMATED_CONVERSION_NO_GUI_PROGRESS</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value/>
+      <Name>AUTOMATED_CONVERSION_HANDBRAKE_CUSTOM_ARGS</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value/>
+      <Name>AUTOMATED_CONVERSION_INSTALL_PKGS</Name>
+      <Mode/>
+    </Variable>
+  </Environment>
+  <Labels/>
+  <Config Name="Storage" Target="/storage" Default="/mnt/user" Mode="ro" Description="This location contains files from your host that need to be accessible by the application.&amp;lt;br&amp;gt;Container path: /storage" Type="Path" Display="always-hide" Required="true" Mask="false">/mnt/user</Config>
+  <Config Name="Watch Directory" Target="/watch" Default="" Mode="rw" Description="This is the watch folder of the automatic video converter.  Any video copied into this folder will be automatically converted by HandBrake.&amp;lt;br&amp;gt;Container path: /watch" Type="Path" Display="always" Required="false" Mask="false"/>
+  <Config Name="Output Directory" Target="/output" Default="" Mode="rw" Description="This is the default output folder for converted videos.  Also used by the automatic video converter.&amp;lt;br&amp;gt;Container path: /output" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/data/media/converted</Config>
+  <Config Name="Automatic Video Converter: Preset" Target="AUTOMATED_CONVERSION_PRESET" Default="General/Very Fast 1080p30" Mode="" Description="Preset used by the automatic video converter.  Identification of the preset must follow the format 'CATEGORY/PRESET NAME'.  Name of all available presets can be seen via the HandBrake GUI." Type="Variable" Display="always" Required="false" Mask="false">General/Very Fast 1080p30</Config>
+  <Config Name="Automatic Video Converter: Format" Target="AUTOMATED_CONVERSION_FORMAT" Default="mp4" Mode="" Description="Video container format used by the automatic video converter for output files.  This is typically the video filename extension." Type="Variable" Display="always" Required="false" Mask="false">mp4</Config>
+  <Config Name="Automatic Video Converter: Keep Source Files" Target="AUTOMATED_CONVERSION_KEEP_SOURCE" Default="1" Mode="" Description="Set to 0 to remove successfully converted videos from the watch folder, 1 to keep them." Type="Variable" Display="always" Required="false" Mask="false">1</Config>
+  <Config Name="Automatic Video Converter: Non-Video File Action" Target="AUTOMATED_CONVERSION_NON_VIDEO_FILE_ACTION" Default="ignore" Mode="" Description="Set to &amp;lt;b&amp;gt;&amp;lt;i&amp;gt;ignore&amp;lt;/i&amp;gt;&amp;lt;/b&amp;gt; to ignore non-video files from the watch folder, or set to &amp;lt;b&amp;gt;&amp;lt;i&amp;gt;copy&amp;lt;/i&amp;gt;&amp;lt;/b&amp;gt; to copy them as-is to the output folder." Type="Variable" Display="always" Required="false" Mask="false">ignore</Config>
+  <Config Name="Automatic Video Converter: Output directory" Target="AUTOMATED_CONVERSION_OUTPUT_DIR" Default="/output" Mode="" Description="Root directory where converted videos should be written." Type="Variable" Display="always" Required="false" Mask="false">/output</Config>
+  <Config Name="Automatic Video Converter: Output Subdirectory" Target="AUTOMATED_CONVERSION_OUTPUT_SUBDIR" Default="" Mode="" Description="Subdirectory of the output folder into which converted videos should be written.&amp;lt;ul&amp;gt;&amp;lt;li&amp;gt;Leave value empty to save converted videos directly into &amp;lt;b&amp;gt;&amp;lt;i&amp;gt;/output/&amp;lt;/i&amp;gt;&amp;lt;/b&amp;gt;.&amp;lt;/li&amp;gt;&amp;lt;li&amp;gt;Use the special value &amp;lt;b&amp;gt;&amp;lt;i&amp;gt;SAME_AS_SRC&amp;lt;/i&amp;gt;&amp;lt;/b&amp;gt; to use the same subfolder as the source.  For example, if the video source file is &amp;lt;b&amp;gt;&amp;lt;i&amp;gt;/watch/Movies/mymovie.mkv&amp;lt;/i&amp;gt;&amp;lt;/b&amp;gt;, the converted video will be written to &amp;lt;b&amp;gt;&amp;lt;i&amp;gt;/output/Movies/&amp;lt;/i&amp;gt;&amp;lt;/b&amp;gt;.&amp;lt;/li&amp;gt;&amp;lt;li&amp;gt;Use any subfolder name.  For example, setting the value &amp;lt;b&amp;gt;&amp;lt;i&amp;gt;Home/Movies&amp;lt;/i&amp;gt;&amp;lt;/b&amp;gt; will make converted videos written to &amp;lt;b&amp;gt;&amp;lt;i&amp;gt;/output/Home/Movies&amp;lt;/i&amp;gt;&amp;lt;/b&amp;gt;/&amp;lt;/li&amp;gt;&amp;lt;/ul&amp;gt;" Type="Variable" Display="always" Required="false" Mask="false"/>
+  <Config Name="Config Directory" Target="/config" Default="/mnt/user/appdata/handbrake" Mode="rw" Description="This is where the application stores its configuration, log and any files needing persistency.&amp;lt;br&amp;gt;Container path: /config" Type="Path" Display="advanced-hide" Required="true" Mask="false">/mnt/user/appdata/HandBrake</Config>
+  <Config Name="User ID" Target="USER_ID" Default="99" Mode="" Description="ID of the user the application runs as." Type="Variable" Display="advanced-hide" Required="true" Mask="false">99</Config>
+  <Config Name="Group ID" Target="GROUP_ID" Default="100" Mode="" Description="ID of the group the application runs as." Type="Variable" Display="advanced-hide" Required="true" Mask="false">100</Config>
+  <Config Name="Umask" Target="UMASK" Default="000" Mode="" Description="Mask that controls how file permissions are set for newly created files. The value of the mask is in octal notation." Type="Variable" Display="advanced" Required="false" Mask="false">000</Config>
+  <Config Name="Niceness (priority)" Target="APP_NICENESS" Default="" Mode="" Description="Priority at which the application should run.  A niceness value of -20 is the highest priority and 19 is the lowest priority.&amp;lt;br&amp;gt;&amp;lt;b&amp;gt;NOTE:&amp;lt;/b&amp;gt; Setting a negative value requires additional permissions.  Thus, &amp;lt;i&amp;gt;&amp;lt;b&amp;gt;--cap-add=SYS_NICE&amp;lt;/b&amp;gt;&amp;lt;/i&amp;gt; must be added in &amp;lt;i&amp;gt;Extra Parameters&amp;lt;/i&amp;gt; (shown when &amp;lt;i&amp;gt;Advanced View&amp;lt;/i&amp;gt; is enabled)." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="Display Width" Target="DISPLAY_WIDTH" Default="1280" Mode="" Description="Width (in pixels) of the application's window." Type="Variable" Display="advanced" Required="false" Mask="false">1280</Config>
+  <Config Name="Display Height" Target="DISPLAY_HEIGHT" Default="768" Mode="" Description="Height (in pixels) of the application's window." Type="Variable" Display="advanced" Required="false" Mask="false">768</Config>
+  <Config Name="Secure Connection" Target="SECURE_CONNECTION" Default="0" Mode="" Description="Whether or not an encrypted connection should be used to access the application's GUI.  Set to &amp;lt;i&amp;gt;&amp;lt;b&amp;gt;1&amp;lt;/b&amp;gt;&amp;lt;/i&amp;gt; to encrypt the connection.&amp;lt;br&amp;gt;&amp;lt;span style='color: red;'&amp;gt;&amp;lt;b&amp;gt;Note:&amp;lt;/b&amp;gt;&amp;lt;/span&amp;gt; When enabling the secure connection, security parameters needs to be generated.  This &amp;lt;b&amp;gt;one-time&amp;lt;/b&amp;gt; operation is done during container startup.  Depending on your system, this could take a few minutes.  GUI of the application won't be available until the operation completes." Type="Variable" Display="advanced" Required="false" Mask="false">0</Config>
+  <Config Name="Extra x11vnc Options" Target="X11VNC_EXTRA_OPTS" Default="" Mode="" Description="Extra options to pass to the x11vnc server running in the Docker container.&amp;lt;br&amp;gt;&amp;lt;span style='color: red;'&amp;gt;&amp;lt;b&amp;gt;Warning:&amp;lt;/b&amp;gt;&amp;lt;/span&amp;gt; For advanced users. Do not use unless you know what you are doing." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="Automatic Video Converter: Video File Extensions" Target="AUTOMATED_CONVERSION_VIDEO_FILE_EXTENSIONS" Default="" Mode="" Description="Space-separated list of file extensions to be considered as video files.  By default, this list is empty, meaning that the automatic video converter will let HandBrake automatically detects if a file, no matter its extension, is a video or not (note that extensions defined by the &amp;lt;i&amp;gt;Non-Video File Extensions&amp;lt;/i&amp;gt; list are always considered as non-video files).  Normally, this variable doesn't need to be set.  Usage of this variable is useful when only specific video files need to converted." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="Automatic Video Converter: Non-Video File Extensions" Target="AUTOMATED_CONVERSION_NON_VIDEO_FILE_EXTENSIONS" Default="jpg jpeg bmp png gif txt nfo" Mode="" Description="Space-separated list of file extensions to be considered as not being videos.  Most non-video files are properly rejected by HandBrake.  However, some files, like images, are convertible by HandBrake even if they are not video files." Type="Variable" Display="advanced" Required="false" Mask="false">jpg jpeg bmp png gif txt nfo</Config>
+  <Config Name="Automatic Video Converter: Overwrite Destination" Target="AUTOMATED_CONVERSION_OVERWRITE_OUTPUT" Default="0" Mode="" Description="Setting this to 1 allows the final destination file to be overwritten if it already exists." Type="Variable" Display="advanced" Required="false" Mask="false">0</Config>
+  <Config Name="Automatic Video Converter: Source File Stable Time" Target="AUTOMATED_CONVERSION_SOURCE_STABLE_TIME" Default="5" Mode="" Description="Time (in seconds) during which properties (e.g. size, time, etc) of a video file in the watch folder need to remain the same.  This is to avoid processing a file that is being copied." Type="Variable" Display="advanced" Required="false" Mask="false">5</Config>
+  <Config Name="Automatic Video Converter: Minimum Title Duration" Target="AUTOMATED_CONVERSION_SOURCE_MIN_DURATION" Default="10" Mode="" Description="Minimum title duration (in seconds).  Shorter titles will be ignored.  This applies only to video disc sources (ISO file, &amp;lt;i&amp;gt;VIDEO_TS&amp;lt;/i&amp;gt; folder or &amp;lt;i&amp;gt;BDMV&amp;lt;/i&amp;gt; folder)." Type="Variable" Display="advanced" Required="false" Mask="false">10</Config>
+  <Config Name="Automatic Video Converter: Check Interval" Target="AUTOMATED_CONVERSION_CHECK_INTERVAL" Default="5" Mode="" Description="Interval (in seconds) at which the automatic video converter checks for new files." Type="Variable" Display="advanced" Required="false" Mask="false">5</Config>
+  <Config Name="Automatic Video Converter: Number of Watch Folders" Target="AUTOMATED_CONVERSION_MAX_WATCH_FOLDERS" Default="5" Mode="" Description="Maximum number of watch folders handled by the automatic video converter." Type="Variable" Display="advanced" Required="false" Mask="false">5</Config>
+  <Config Name="Automatic Video Converter: Disable Progress in GUI" Target="AUTOMATED_CONVERSION_NO_GUI_PROGRESS" Default="0" Mode="" Description="Set to 1 to disable display of the video conversion progress in HandBrake GUI." Type="Variable" Display="advanced" Required="false" Mask="false">0</Config>
+  <Config Name="Automatic Video Converter: Custom HandBrake Arguments" Target="AUTOMATED_CONVERSION_HANDBRAKE_CUSTOM_ARGS" Default="" Mode="" Description="Custom arguments to pass to HandBrake when performing a conversion." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="Automatic Video Converter: Install Packages" Target="AUTOMATED_CONVERSION_INSTALL_PKGS" Default="" Mode="" Description="Space-separated list of Alpine Linux packages to install.  This is useful when the automatic video converter's hooks require requires tools not available in the container image.  See &amp;lt;i&amp;gt;https://pkgs.alpinelinux.org&amp;lt;/i&amp;gt; for the list of available Alpine Linux packages." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="WEB Port for GUI" Target="5800" Default="7803" Mode="tcp" Description="Port used to access the application's GUI via the web interface.&amp;lt;br&amp;gt;&amp;lt;b&amp;gt;NOTE:&amp;lt;/b&amp;gt; This applies only when &amp;lt;i&amp;gt;Network Type&amp;lt;/i&amp;gt; is set to &amp;lt;i&amp;gt;Bridge&amp;lt;/i&amp;gt;.  For other network types, port 5800 should be used instead." Type="Port" Display="advanced-hide" Required="true" Mask="false">7803</Config>
+  <Config Name="VNC Port for GUI" Target="5900" Default="7903" Mode="tcp" Description="Port used to access the application's GUI via the VNC protocol.  Optional if no VNC client is used.&amp;lt;br&amp;gt;&amp;lt;b&amp;gt;NOTE:&amp;lt;/b&amp;gt; This applies only when &amp;lt;i&amp;gt;Network Type&amp;lt;/i&amp;gt; is set to &amp;lt;i&amp;gt;Bridge&amp;lt;/i&amp;gt;.  For other network types, port 5900 should be used instead." Type="Port" Display="advanced-hide" Required="false" Mask="false">7903</Config>
+</Container>

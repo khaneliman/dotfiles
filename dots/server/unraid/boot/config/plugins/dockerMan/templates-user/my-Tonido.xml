@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>Tonido</Name>
+  <Repository>captinsano/tonido</Repository>
+  <Registry>https://registry.hub.docker.com/r/captinsano/tonido/</Registry>
+  <Network>khaneproxy</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>http://lime-technology.com/forum/index.php?topic=39065.0</Support>
+  <Project/>
+  <Overview>Tonido Server allows you to access all your files on your computer from a web browser, smartphone, tablet or even DLNA enabled devices. No setup necessary.
+  </Overview>
+  <Category>Cloud:</Category>
+  <WebUI>http://[IP]:[PORT:10001]/</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/CaptInsano/docker-containers/templates/Capt.Insano/Tonido.xml</TemplateURL>
+  <Icon>http://i.imgur.com/i2obdi6.png</Icon>
+  <ExtraParams/>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1634092480</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>Tonido Server allows you to access all your files on your computer from a web browser, smartphone, tablet or even DLNA enabled devices. No setup necessary.&#xD;
+  </Description>
+  <Networking>
+    <Mode>khaneproxy</Mode>
+    <Publish>
+      <Port>
+        <HostPort>10001</HostPort>
+        <ContainerPort>10001</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user</HostDir>
+      <ContainerDir>/unRAID</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/appdata/Tonido</HostDir>
+      <ContainerDir>/config</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment/>
+  <Labels/>
+  <Config Name="Host Port 1" Target="10001" Default="10001" Mode="tcp" Description="Container Port: 10001" Type="Port" Display="always" Required="true" Mask="false">10001</Config>
+  <Config Name="Host Path 2" Target="/unRAID" Default="/mnt/user" Mode="rw" Description="Container Path: /unRAID" Type="Path" Display="always" Required="true" Mask="false">/mnt/user</Config>
+  <Config Name="AppData Config Path" Target="/config" Default="/mnt/user/appdata/Tonido" Mode="rw" Description="Container Path: /config" Type="Path" Display="advanced-hide" Required="true" Mask="false">/mnt/user/appdata/Tonido</Config>
+</Container>

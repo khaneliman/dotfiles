@@ -1,0 +1,731 @@
+<?xml version='1.0' standalone='yes'?>
+<!DOCTYPE PLUGIN [
+<!ENTITY name		"recycle.bin">
+<!ENTITY author		"dlandon">
+<!ENTITY version	"2023.01.20">
+<!ENTITY launch		"Settings/RecycleBin">
+<!ENTITY gitURL		"https://raw.githubusercontent.com/&author;/&name;/master">
+<!ENTITY pluginURL	"&gitURL;/&name;.plg">
+<!ENTITY supportURL	"https://forums.unraid.net/topic/41044-recycle-bin-vfs-recycle-for-smb-shares/">
+<!ENTITY MD5		"ba9cf5401f6a229650655b54e9ff2903">
+]>
+
+<PLUGIN	name="&name;"
+		author="&author;"
+		version="&version;"
+		launch="&launch;"
+		pluginURL="&pluginURL;"
+		support="&supportURL;"
+		icon="trash"
+		min="6.9.0">
+
+<CHANGES>
+##&name;
+###&version;
+- Fix: Setting '.Recycle.Bin' directory permissions not setting on shares with spaces in the name.
+
+###2023.01.18
+- Fix: Default directory mode setting not set to 0777.
+
+###2023.01.14
+- Fix: Multiple excluded directores on the same share.
+
+###2022.12.10
+- Fix: Initial php 8.1 compatibility for Unraid 6.12.
+
+###2022.11.19a
+- Fix: Cleanup writing of SMB config files.
+
+###2022.11.11
+- Fix: Recycle bin not stopped properly when updating.
+- Fix: Better handling of smb configuration.
+
+###2022.11.04a
+- Fix: Adjustments to logging setup to delay application of smb.conf changes.
+
+###2022.11.02
+- Fix: Additional logging cleanup.  Remove rsyslog filter.
+
+###2022.10.26a
+- Fix: Logging issue with 6.9.
+
+###2022.10.25a
+- Fix: Changed the way the log filter is applied.
+- Fix: Reversion causing excessive logging with 6.10 and below.
+
+###2022.10.25
+- Fix: Remove added Samba logging settings.  Settings are no longer needed.
+- Add: Log filter to remove excessive smbd_audit log entries.  This is to overcome some logging problems with Samba 4.17.
+- Add: Set minimum version to 6.9.
+
+###2022.10.18a
+- Fix: Revert to restarting Samba when starting and stopping the Recycle Bin.  This is required to enable/disable vfs_recycle.
+- Fix: Adjust buttons on bottom of page to show when using 'fixed' listing height.
+
+###2022.10.12
+- Fix: Don't use Samba restart to load changed configuration, use configuration reload.
+- Fix: Remove Recycle Bin settings from smb-extra.conf and move to /etc/samba/smb-recycle_bin.conf.
+
+###2022.08.24
+- Fix: Use standard Unraid disk size display format.
+- Fix: Clear trash sizes when recycle bin is emptied and refresh is in the background.
+
+###2022.08.19
+- Fix: Reference to GitHub repository.
+
+###2022.04.23
+- Add: Don't clear trash sizes when the Recycle Bin is started and trashsize updates are done in the background.
+- Add: Logic and semaphore flags to be sure the trashsize update is not running when a cron purge is running.  The trashsize script conflicts with the 'find' commands used to locate aged files.
+- Add: Ability to set up to one share sub-directory when excluding directories from shares.  i.e. /share/directory/sub-directory.
+- Fix: Change daily and weekly cron times to 5 AM.  The idea is to have the recycle bin purge occur when disks are already spinning.
+- Fix: Rewrite 'find' command to handle the symlinks in the /mnt/RecycleBin/ folder.
+- Fix: Tweak the RecycleBin mount point creation.
+- Fix: Change trash size refresh to every 5 minutes.  On large Recycle Bins every minute is too much processing and the Recycle Bin really doesn't change that much.
+- Fix: Remove the PATH environment variable from rc.recycle.bin.  It is not necessary.
+
+###2022.04.11
+- Add: PATH to rc.recycle.bin for cron purge execution.
+- Fix: Change the way spaces are removed from the age days setting.
+
+###2022.03.22b
+- Fix: Disk shares not showing in shares tab.
+- Fix: Recycle Bin not stopping when array is stopped.
+- Fix: Additional work on Root Shares.
+- Fix: Enable check boxes on Share 'Empty' buttons not working with a '.', or '-' character in the share name.
+- Fix: Recycle Bin total trash size was duplicating Disk and Root Share sizes.
+
+###2022.03.20
+- Add: Plugin update check.
+- Fix: Don't remove the vfs_recycle entries from the smb-extra.conf file when installing the plugin.
+
+###2022.03.11
+- Add: Allow UD root shares to be added to the recycle bin.
+- Add: Recycle Bin plugin update check.
+
+###2022.01.27
+- Fix: Change in UD that broke the recycle bin.
+
+###2022.01.01
+- Fix: Change browse icon to Unraid standard.
+
+###2021.10.27
+- Fix: Language translaton.
+- Fix: Put comment about hiding the recycle bin folder into the Help.
+
+###2021.08.14
+- Add: Note about how to hide the Recycle Bin folder with the 'Hide Dot Files' SMB setting.
+
+###2021.07.28
+- Fix: Show Unassigned Devices Recycle Bin when mounted and not shared.
+
+###2021.07.13b
+- Fix: Directory permissions change.
+
+###2021.06.09
+- Add: Default age days to 7.
+
+###2021.06.09
+- Fix: Failure to start because of moving the pid file.
+
+2021.06.08a
+- Add: Status indicator for Running/Stopped.
+- Fix: Code cleanup.
+
+###2021.05.29
+- Fix: Change directory mode default.
+- Fix: Some code cleanup.
+
+###2021.05.16
+- Fix: Update support URL.
+- Fix: Minimum version changed to 6.7.
+- Fix: Keep recycle bin configuration file on flash drive when uninstalling.
+- Fix: Plugin uninstall not removing pid file.
+
+###2021.04.24
+- Add: Link to remove aged files notification.
+- Fix: Change enable check box for destructive buttons to be more consistent with Unraid.
+
+###2021.03.28
+- Add: Ability to exclude directories by share.
+
+###2021.03.27
+- Add: Ability to exclude directories.
+
+###2021.03.20
+- Fix: Plugin permissions.
+
+###2021.02.14a
+- Add: 'Yes i want to do this' confirmation to enable destructive buttons.
+- Add: Additional explanation on permissions help.
+
+###2020.02.12
+- Add: Configuration parameter to set recycle bin directory permissions.
+
+###2021.02.10
+- Fix: Failure to create smb-extra.conf on flash drive.
+
+###2020.10.04
+- Fix: Samba deleted file logging in 6.8.  Samba logging changed in 6.9 and broke the logging in 6.8.
+
+###2020.09.16
+- Fix: Use 'find -delete' to remove aged files instead of 'find -exec rm'.  Some files were deleted before they were aged.
+
+###2020.09.12
+- Add: Remove empty directories when the recycle bin is purged.
+
+###2020.07.08c
+- Fix: Samba share config parameters not set properly.
+- Fix: Excessive smbd logging in 6.9.
+- Fix: Remove smb-extra.conf settings when the recycle bin is stopped.
+
+###2020.07.03
+- Fix: Ownership of recycle bin browse at /mnt.
+- Fix: Modify settings titles to remove redundancy.
+
+###2020.06.26
+- Fix: Help changes.
+
+###2020.06.23
+- Add: Multi Language support.
+
+###2020.02.27
+- Fix: Flash share not displaying correctly.
+
+###2019.04.08
+- Fix: Purge not deleting aged files properly.
+
+###2019.03.08b
+- Fix: Cut down on writes of cron file on flash drive.
+
+###2019.03.07
+- Fix: Cut down on writes of smb-extra.conf on flash drive.
+
+###2019.02.27a
+- Fix: Run trash size update in the background when performing web UI operations.  This can help with hangs from large recycle bins or a busy server.
+- Fix: Additional rc.recycle.bin script cleanup.
+
+###2019.02.22
+- Fix: Remove trash bin browse from the trash bin icon.  It's not necessary and can be confusing.  Share browsing makes more sense.
+
+###2019.02.20
+- Add: Longer time to wait for trash size updates.
+- Add: Check to be sure trash size task is not run when it is already running.
+
+###2019.02.10
+- Add: Cron task to keep trash sizes up to date.  This makes the recycle bin more responsive without spinning up array disks.
+- Add: Background trash size update configurable.  When set to 'Yes' a cron task will run every minute to update the Recycle Bin size.
+
+###2019.02.15b
+- Fix: rc.recycle.bin script cleanup.
+- Fix: Remove delete empty .Recycle.Bin folders completely from rc.recycle.bin script.  It takes too much time when the array is busy.
+
+###2019.02.14
+- Fix: Move delete empty .Recycle.Bin folders to cron task.
+
+###2019.02.12a
+- Fix: Running status indicator.
+- Fix: Don't restart samba on event 'stopping_svcs'.
+- Fix: Plugin removal cleanup.
+- Fix: Remove some delays.
+
+###2019.02.10
+- Fix: Minor cosmetic issues and code cleanup.
+
+###2019.02.08
+- Fix: Empty all trash and aged files not working properly on disk shares.
+
+###2019.02.06
+- Fix: Change vfs_recycle repository setting.
+- Fix: Recycle Bin parameters not working properly.
+
+###2019.02.05
+- Add: Additional logging when emptying a share recyce bin.
+
+###2019.02.04b
+- Fix: Don't create a RecycleBin symlink if the recycle bin doesn't exist on the share.
+- Fix: Deal with shares with special characters in the share name - like apostrophies.
+- Fix: Remove all empty .Recycle.Bin directories before setting up the RecycleBin browse.
+- Fix: Add a check to be sure a share empty operaton is on /mnt/RecycleBin/ and not on the array.
+
+###2019.02.03b
+- Fix: Check Recycle Bin shares sizes based on browse links.
+- Fix: Show all shares with Recycle Bin contents even if excluded from the recycle bin deleted files functionality.
+- Fix: Allow management of the Recycle Bin when the deleted files functionality is disabled.
+- Fix: The Recycle Bin was enabled on UD remote and iso mounts when the Recycle Bin was started from the UI.
+- Add: Remote mounted UD shares are not managed or shown in the Recycle Bin.
+- Add: Additional help explanations.
+- Fix: Optimizations so the Recycle Bin will load faster.
+- Fix: Disk and cache shares not showing in the 'Shares'.
+- Add: Stop the Recycle Bin and then restart it when updating the plugin.
+- Fix: Logging not always turned on.
+
+###2019.01.31b
+- Fix: Refresh Recycle Bin share browse when entering recycle bin settings.
+- Fix: Add all UD shares to the 'Shares' tab.
+- Fix: Properly handle when unassigned devices are not included in the recycle bin.
+- Fix: Check recycle bin size based on browse links.
+- Fix: Adjust du timeouts when checking share recycle bin sizes.
+
+###2019.01.22
+- Fix: Revert back to trash can icon on settings page.
+
+###2019.01.21
+- Fix: Change trash can icon to fa icon.  Fix UD browse icon.
+
+###2019.01.17
+- Fix: Samba shares configuration for 6.7.
+
+###2019.01.14
+- Fix: Icons for v6.
+
+###2018.11.18a
+- Add: Ability to browse individual shares on shares tab.
+- Add: Timeout on determining share recycle bin size.
+- Fix: False empty recycle bin status.
+
+###2018.11.17a
+- Add: Timeout on trying to caclulate the recycle bin size after 10 seconds.
+- Fix: Determine the recycle bin size only when the recycle bin is enabled.
+
+###2018.11.05
+- Fix: Unraid capitalization.
+
+###2018.09.15a
+- Fix: Recycle bin parameters are not applied when changes are made.
+
+###2018.03.21
+- Fix: Minimum Unraid version check.
+
+###2018.03.03
+- Fix: Php warnings in Unraid 6.5.
+
+###2017.07.04
+- Fix: Unassigned Devices with spaces in the share name would not show on the shares tab.
+
+###2017.06.28
+- Add: Increase the excluded files field size in the Recycle Bin settings to 150 characters.
+
+###2017.06.25
+- Fix: Don't display UD shares if UD recycle bin setting is off or there are no UD shares.
+- Fix: Some webui cleanup and changes.
+
+###2017.06.24
+- Add: Recycle Bin shares tab shows only shares with Recycle Bin contents and Recycle Bins can now be emptied per share.
+
+###2017.06.11
+- Fix: Modifications for Unraid 6.4 Azure and Gray themes.
+
+###2017.05.14b
+- Fix: Change menu tabs.
+
+###2017.05.07
+- Add: Changed the recycle bin aging to the last access date and don't change the modify date when the file is put in the recycle bin.
+
+###2017.05.04
+- Fix: Remove Recycle Bin simlinks at /mnt/RecycleBin at svcs_stopped event.
+
+###2017.05.03
+- Fix: Shares not showing when "Log Deleted Files" was set to "No".
+
+###2017.03.26
+- Fix: Remove browsing symlinks at /mnt/RecycleBin/ when Recycle Bin is not running.
+
+###2017.03.05
+- Fix: Move cron file to plugin directory.
+
+###2017.02.19
+- Fix: Minor event script rewrites.
+
+###2017.02.17
+- Fix: Reformat date on deleted files log to be consistent with other logs.
+
+###2017.02.10
+- Fix: Trash size display issue in 'Shares'.
+
+###2017.02.08
+- Add: Excluded shares are now treated as wild cards unless quoted.
+- Fix: Some code cleanup in script generating smb-shares.conf.
+
+###2017.02.06a
+- Fix: Reorganized tabs and made some minor adjustments.
+- Add: All .Recycle.Bin directories are removed when the recycle bin is enptied.
+- Add: All empty .Recycle.Bin directories are removed when the recycle bin is purged.
+
+###2017.02.05
+- Fix: Changed samba restart to samba reload configuration to prevent interruption of samba shares when the recycle bin is started and stopped.
+- Fix: Reformatted deleted files log.
+
+###2017.02.04d
+- Add: Added a 'Shares' tab to show the included shares and the recycle bin size on each share.
+- Fix: Issues with excluding UD devices.
+- Fix: Zero length files will not be saved to the recycle bin.
+
+###2017.02.04
+- Add: Modifications for 6.3 final compatibility.  This version is not backwards compatible.
+- Fix: Recycle bins are now set up on a per share basis.  Excluding a share disables the recycle bin functionality on that share.
+
+###2016.11.08
+- Fix: Eliminate error message when trying to determine the docroot.
+
+###2016.10.30
+- Fix: Script hanging when plugin is removed keeping the "Done" button from showing.
+
+###2016.10.23
+- Fix: Changed absolute path using $docroot in preparation for moving from emhttp.
+
+###2016.10.22a
+- Fix: Updates for compatibility with Unraid 6.2 and later.
+
+###2016.10.20
+- Fix: Recursion where unmounting_disks event was left in.
+
+###2016.10.18
+- Fix: Syntax in rc.recycle.bin script.
+
+###2016.10.07
+- Fix: Move stop recycle bin event to 'stopping_svcs'.
+
+###2016.10.06
+- Fix: Samba being restarted on a shutdown.
+
+###2016.06.03
+- Fix: Reverted to samba restart.
+
+###2016.05.29
+- Fix: Error when smb-extra.conf file does not exist.
+
+###2016.05.28
+- Fix: Changed samba configuration reload so the samba shares would not go offline briefly.
+- Fix: Unclean shutdown could end up with two entries for the recycle bin in the smb-extra.conf.
+- Fix: Added tool tips.
+
+###2016.04.24
+- Add: Can now exclude disk and cache shares.
+- Fix: Shares with spaces in the share name caused problems with excluding shares.
+- Fix: Don't start recycle bin when plugin is installed.  This started the recycle bin too early on a startup and is not really necessary.  An array event starts the recycle bin at the right time.
+
+###2016.04.23
+- Add: Ability to exclude shares.  A cron is run once an hour to remove deleted files from the share.  Note: Disks may spin up to remove the deleted files.
+
+###2016.01.16
+- Add: Compatibility with Unraid 6.1.7.
+
+###2015.12.31
+- Add: Deleted files log now scrolls in preparation for next release of Dynamix.
+
+###2015.12.18
+- Add: MD5 checksum to bundle file.
+
+###2015.12.14
+- Add: Unraid version check.  Only Unraid 6.1 and higher.
+
+###2015.11.30
+- Fix: Dynamix cron entries not always updated.
+
+###2015.11.29
+- Add: Add Hourly, Daily, and Weekly selections to remove files choices.  You can now set the schedule for the aged files removal.
+
+###2015.10.28
+- Fix: Change to '/usr/local/sbin/update_cron' to update Dynamix crons.
+
+###2015.10.25
+- Fix: Adjust 'syslog only' setting in smb-extra.conf when turning logging on/off.
+
+###2015.10.04
+- Add: Logging of vfs recycle delete file events and viewer to view deleted (unlinked) files.
+
+###2015.10.03
+- Fix: Typo in rc.recycle.bin.
+
+###2015.10.02
+- Fix: Minor changes to rc.recycle.bin for clarity and documentation.
+
+###2015.09.29a
+- Fix: Webgui browsing issues.
+
+###2015.09.27
+- Fix: Use dynamix cron mechanism for weekly removal of aged files.
+
+###2015.09.25
+- Fix: Improved webgui browsing of recycle bin.
+
+###2015.09.24
+- Fix: Minor changes to rc.recycle.bin.
+- Fix: Other very minor tweaks.
+
+###2015.09.23
+- Add: Flash, disk, and unassigned devices shares are now managed in the recycle bin.
+- Fix: Change purge procedure to handle hidden files and directories.
+- FIx: More rc.recycle.bin modifications.
+
+###2015.09.22
+- Fix: rc.recycle.bin script issues.
+
+###2015.09.20
+- Fix: Plugin installation changes.
+
+###2015.09.19f
+- Add: Move /etc/rc.d/rc.recycle.bin to recycle.bin/scripts/rc.recycle.bin.
+- Fix: More script work.
+
+###2015.09.19a
+- Add: "Removing aged files..." message.
+
+###2015.09.19
+- Fix: Clarifications in README.md and help text.
+- Fix: Changed plugin name to 'recycle.bin' to be more consistent with plugin naming.
+- Fix: Made modifications for plugin consistency.
+- Add: Moved recycle bin repository.
+- Add: Cannot manage recycle bin if array is stopped.
+
+###2015.09.17
+- Add: Launch so clicking on plugin icon will take you to the recycle bin.
+
+###2015.09.14
+- Fix: Remove unused functions from rc.recycle.bin.  Better handle config file.
+
+###2015.09.13
+- Added some additional help text.
+
+###2015.09.11
+- Fix: Recycle bin is now by share.  Each share has its own Recycle Bin that can be accessed by any User that has access to the share.
+
+###2015.09.09a
+- Fix: Installation cleanup - /boot/plugins/recycle.bin/config/smb-extra.conf settings were lost on reboot.  Select default and then reapply your configuration settings.
+
+###2015.09.09
+- Add: Excluded files setting.
+- Fix: Modified web page to dynamix standards.
+
+###2015.09.08
+- Fix: Some plugin organization - image files moved to images/.
+- Add: Changed the weekly age to days instead of minutes.
+- Add: Changed weekly age days to 'Age Days to remove files'.  This is used for removing files weekly or when the 'Remove Files' button is clicked.
+- Add: Added a 'Remove Files' button to remove files older that the 'Age Days' setting.
+- Add: Browse the Recycle Bin by clicking on the full trash can.
+- Add: Don't empty the trash when removing the plugin.  Deleted files will have to be removed by emptying the trash or manually.
+
+###2015.09.07a
+- Add: You can add additional Users that can access the Recycle Bin as admin.
+- Add: You can set the Recycle Bin read only or read/write.
+
+###2015.09.07
+- Fix: Remove deleting of the .Recycle.Bin when the plugin is removed.  Removal of .Recycle.Bin is automatic when the Recycle Bin is disabled and the bin is empty.
+- Fix: Typo and minor cleanup of rc.recycle.bin.
+- Fix: Interference with unassigned devices and user entries in the smb-extra.conf file.
+- Add: Parameters for the Recycle Bin file structure are now settable.
+- Add: You can set whether the Recycle Bin is browseable.
+
+###2015.09.06a
+- Add: Notification when weekly empty trash is run.
+
+###2015.09.06
+- Fix: Suppress console error messages.
+- Fix: Weekly empty trash cron settings.
+- Add: Help information.
+
+###2015.09.05
+- Initial Unraid V6.1 release.
+</CHANGES>
+
+<!--
+Copyright 2015-2023, Dan Landon
+VFS Recycle Bin for samba deleted files.  This is the webGUI used to setup and manage
+the vfs recycle functionality in samba on Unraid.
+-->
+
+<!--
+Get the plugin bundle.
+-->
+<FILE Name="/boot/config/plugins/&name;/&name;-&version;.tgz">
+<URL>"&gitURL;/&name;-&version;.tgz"</URL>
+<MD5>&MD5;</MD5>
+</FILE>
+
+<!--
+Recycle bin background wait script.
+-->
+<FILE Name="/tmp/&name;/wait_recycle.bin" Mode="0770">
+<INLINE>
+<![CDATA[
+#!/bin/bash
+# Wait for the recycle bin to stop.
+while [ -e /var/run/recycle.bin.pid ]; do
+	sleep 1
+done
+]]>
+</INLINE>
+</FILE>
+
+<!--
+Remove smb-extra parameters.
+-->
+<FILE Name="/tmp/&name;/remove-smb-extra" Mode="0770">
+<INLINE>
+<![CDATA[
+#!/bin/bash
+if [[ `grep '#vfs_recycle_start' /boot/config/smb-extra.conf` != "" ]]; then
+	sed '/#vfs_recycle_start/,/#vfs_recycle_end/d' /boot/config/smb-extra.conf >> smb.tmp
+	printf %s "$(< smb.tmp)" > /boot/config/smb-extra.conf
+	rm -f smb.tmp
+fi
+]]>
+</INLINE>
+</FILE>
+
+<!--
+The 'pre-install' script.
+-->
+<FILE Run="/bin/bash">
+<INLINE>
+# Stop the recycle bin if it is running
+if [ -e /var/run/&name;.pid ]; then
+	# Stop recycle bin in the background.
+	echo "Stopping Recycle Bin..."
+	echo "/usr/local/emhttp/plugins/recycle.bin/scripts/rc.recycle.bin stop" > /tmp/recycle.bin/recycle_bin_stop
+	at -M -f /tmp/&name;/recycle_bin_stop now 2>/dev/null
+
+	# Wait for the recycle bin to stop
+	timeout 5 /tmp/&name;/wait_recycle.bin
+
+	# Show that the	recycle bin was already running
+	echo "" > /tmp/recycle.bin/started
+fi
+
+# Remove old cron files.
+rm -rf /boot/config/plugins/dynamix/share_exclude.cron
+
+# Remove emhttp files so we can re-install.
+rm -rf /usr/local/emhttp/plugins/&name;/* 2>/dev/null
+
+# Remove old 'bundle' files.
+rm -f $(ls /boot/config/plugins/&name;/&name;*.tgz 2>/dev/null | grep -v '&version;')
+
+# Remove the default smb-extra.conf file.
+rm -f /boot/config/plugins/&name;/config/smb-extra.conf
+
+# Remove vfs_recycle from smb-extra.conf.
+at -M -f /tmp/&name;/remove-smb-extra now 2>/dev/null
+</INLINE>
+</FILE>
+
+<!--
+Install the plugin bundle.
+-->
+<FILE Run="/bin/bash">
+<INLINE>
+# Install the 'bundle'.
+tar -xf /boot/config/plugins/&name;/&name;-&version;.tgz -C /usr/local/emhttp/plugins 2>/dev/null
+</INLINE>
+</FILE>
+
+<FILE Name="/boot/config/plugins/&name;/&name;.cfg">
+<INLINE>
+<![CDATA[
+SERVICE="disable"
+BACKGROUND="yes"
+DIR_MODE=""
+PARAMETERS=""
+EXCLUDE="*.tmp"
+EXCLUDE_DIRS=""
+EXCLUDE_SHARES=""
+SCHEDRUN="no"
+AGE="7"
+NOTIFY="no"
+LOG="no"
+INCLUDE_UD="no"
+]]>
+</INLINE>
+</FILE>
+
+<FILE Run="/usr/bin/php">
+<INLINE>
+<![CDATA[
+<?
+$version = parse_ini_file("/etc/unraid-version");
+@mkdir("/boot/config/plugins/recycle.bin/config/");
+$file = "/boot/config/plugins/recycle.bin/config/smb-extra.conf";
+if ( version_compare($version['version'],"6.10.9", "<=") ) {
+	/* Logging settings for earlier versions of Unraid */
+	file_put_contents($file, array("\t# recycle bin parameters\n", "\tsyslog only = No\n", "\tsyslog = 0\n", "\tlogging = 0\n", "\tlog level = 0 vfs:0\n"));
+} else {
+	/* Logging settings for later versions of Unraid */
+	file_put_contents($file, array("\t# recycle bin parameters\n", "\tsyslog = 0\n", "\tlogging = 0\n", "\tmax log size = 10000\n"));
+}
+?>
+]]>
+</INLINE>
+</FILE>
+
+<!--
+The 'post-install' script.
+-->
+<FILE Run="/bin/bash">
+<INLINE>
+# Restart the recycle bin if it was already running
+if [ -f /tmp/recycle.bin/started ]; then
+	# Start recycle bin in the background.
+	echo "Starting Recycle Bin..."
+	at -M -f /usr/local/emhttp/plugins/&name;/event/disks_mounted now 2>/dev/null
+
+	# Remove started status file
+	rm -rf /tmp/recycle.bin/started
+fi
+
+echo ""
+echo "-----------------------------------------------------------"
+echo " &name; has been installed."
+echo " Copyright 2015-2023 &author;"
+echo " Version: &version;"
+echo "-----------------------------------------------------------"
+echo ""
+</INLINE>
+</FILE>
+
+<!--
+The 'remove' script.
+-->
+<FILE Run="/bin/bash" Method="remove">
+<INLINE>
+# Stop the recycle bin if it is running
+if [ -e /var/run/&name;.pid ]; then
+	# Stop recycle bin in the background.
+	echo "Stopping Recycle Bin..."
+	echo "/usr/local/emhttp/plugins/recycle.bin/scripts/rc.recycle.bin stop" > /tmp/recycle.bin/recycle_bin_stop
+	at -M -f /tmp/&name;/recycle_bin_stop now 2>/dev/null
+
+	# Wait for the recycle bin to stop
+	timeout 5 /tmp/&name;/wait_recycle.bin
+fi
+
+# Remove plugin files from emhttp.
+rm -rf /usr/local/emhttp/plugins/&name; 2>/dev/null
+
+# Remove the recycle bin bundle so it will be downloaded if re-installed.
+rm -rf /boot/config/plugins/&name;/&name;-&version;.tgz
+
+# Remove the config folder.
+rm -rf /boot/config/plugins/&name;/config/
+
+# Remove RecycleBin browse symlinks.
+rm -rf /mnt/RecycleBin
+
+# Remove the pid file.
+rm -rf /var/run/&name;.pid 2>/dev/null
+
+# Remove vfs_recycle from smb-extra.conf.
+at -M -f /tmp/&name;/remove-smb-extra now 2>/dev/null
+
+# Remove the tmp directory.
+rm -rf /tmp/&name; 2>/dev/null
+
+echo ""
+echo "-----------------------------------------------------------"
+echo " &name; has been removed."
+echo " Version: &version;"
+echo "-----------------------------------------------------------"
+echo ""
+</INLINE>
+</FILE>
+
+</PLUGIN>

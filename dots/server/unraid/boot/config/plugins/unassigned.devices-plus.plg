@@ -1,0 +1,205 @@
+<?xml version='1.0' standalone='yes'?>
+<!DOCTYPE PLUGIN [
+<!ENTITY name      "unassigned.devices-plus">
+<!ENTITY author    "dlandon">
+<!ENTITY version   "2022.11.06">
+<!ENTITY launch    "Main/UnassignedDevices">
+<!ENTITY gitURL		"https://raw.githubusercontent.com/&author;/unassigned.devices/master">
+<!ENTITY pluginURL	"&gitURL;/&name;.plg">
+<!ENTITY supportURL	"https://forums.unraid.net/topic/92462-unassigned-devices-managing-disk-drives-and-remote-shares-outside-of-the-unraid-array/">
+<!ENTITY packages	"/boot/config/plugins/&name;/packages">
+]>
+
+<PLUGIN name="&name;"
+		author="&author;"
+		launch="&launch;"
+		version="&version;"
+		pluginURL="&pluginURL;"
+		support="&supportURL;"
+		icon="unlink"
+		min="6.9.0">
+
+<CHANGES>
+##&name;
+###&version;
+- Add: Parted 3.5 for Unraid 6.11.
+
+###2022.08.19
+- Fix: Reference to GitHub repository.
+
+###2022.05.17
+- Add: Set min Unraid version to 6.9.
+
+###2021.12.12
+- Add: Update libbsd package.
+- Add: Change icon to unlink.
+
+###2021.05.01A
+- Add: apfs-fuse package for mounting apfs disks.
+
+###2021.01.24
+- Fix: Remove libfsapfs package.
+
+###2021.01.21
+- Add: libfsapfs package to support apfs file systems.
+
+###2020.05.22
+- Fix: Update support link.
+
+###2020.03.08
+- Fix: Remove max version.
+
+###2020.03.06
+- Fix: Minimum version is now 6.7.  Maintaining backwards compatibility back farther is cumbersome and unnecessary.  Users are encouraged to update.
+
+###2020.01.13
+- Fix: Remove nmap and libnl packages.
+
+###2020.01.12
+- Update exfat packages.
+
+###2020.01.11a
+- Fix: Don't install if UD is not an installed plugin.
+
+###2019.12.29
+- First release.
+</CHANGES>
+
+<!--
+The 'pre-install' script.
+-->
+<FILE Run="/bin/bash">
+<INLINE>
+# Unassigned Devices must be installed.
+if [ ! -f /boot/config/plugins/unassigned.devices.plg ] ; then
+echo ""
+echo "-----------------------------------------------------------"
+echo " &name; has not been installed!"
+echo " Install Unassigned Devices plugin first."
+echo "-----------------------------------------------------------"
+echo ""
+exit 1
+fi
+
+# Remove emhttp files so we can re-install.
+rm -rf /usr/local/emhttp/plugins/&name;/* 2>/dev/null
+</INLINE>
+</FILE>
+
+<!--
+parted-3.3-x86_64-1.txz
+-->
+<FILE Name="&packages;/parted-3.3-x86_64-1.txz" Run="upgradepkg --install-new">
+<URL>"&gitURL;/packages/parted-3.3-x86_64-1.txz"</URL>
+<MD5>0f298896be48094a690a19cdc5e0c1e6</MD5>
+</FILE>
+
+
+
+<!--
+parted-3.5-x86_64-1.txz
+-->
+<FILE Min='6.11.0' Name="&packages;/parted-3.5-x86_64-1.txz" Run="upgradepkg --install-new">
+<URL>"&gitURL;/packages/parted-3.5-x86_64-1.txz"</URL>
+<MD5>c91efdc64b48eb0218aae4a155b887d1</MD5>
+</FILE>
+
+<!--
+exfat-utils-1.3.0-x86_64-1_slonly.txz
+-->
+<FILE Name="&packages;/exfat-utils-1.3.0-x86_64-1_slonly.txz" Run="upgradepkg --install-new">
+<URL>"&gitURL;/packages/exfat-utils-1.3.0-x86_64-1_slonly.txz"</URL>
+<MD5>5f7e017b6a56075b6232483b8028a37c</MD5>
+</FILE>
+
+<!--
+fuse-exfat-1.3.0-x86_64-1_slonly.txz
+-->
+<FILE Name="&packages;/fuse-exfat-1.3.0-x86_64-1_slonly.txz" Run="upgradepkg --install-new">
+<URL>"&gitURL;/packages/fuse-exfat-1.3.0-x86_64-1_slonly.txz"</URL>
+<MD5>97298a972e2c0ac0ea12256134a2a723</MD5>
+</FILE>
+
+<!--
+hfsprogs-332.25-x86_64-2sl.txz
+-->
+<FILE Name="&packages;/hfsprogs-332.25-x86_64-2sl.txz" Run="upgradepkg --install-new">
+<URL>"&gitURL;/packages/hfsprogs-332.25-x86_64-2sl.txz"</URL>
+<MD5>9ddd7cb7e0782e9fb7756b1946808228</MD5>
+</FILE>
+
+<!--
+libbsd-0.10.0-x86_64-2_slonly.txz
+-->
+<FILE Name="&packages;/libbsd-0.10.0-x86_64-2_slonly.txz" Run="upgradepkg --install-new">
+<URL>"&gitURL;/packages/libbsd-0.10.0-x86_64-2_slonly.txz"</URL>
+<MD5>1b8dbaa180721964bf9d864e50dae1ac</MD5>
+</FILE>
+
+<!--
+apfsfuse-v20200708-x86_64-1.txz
+-->
+<FILE Name="&packages;/apfsfuse-v20200708-x86_64-1.txz" Run="upgradepkg --install-new">
+<URL>"&gitURL;/packages/apfsfuse-v20200708-x86_64-1.txz"</URL>
+<MD5>7535b1bd7122c4ffcbac6e2bff22144f</MD5>
+</FILE>
+
+<!--
+README.md
+-->
+<FILE Name="/usr/local/emhttp/plugins/&name;/README.md">
+<INLINE>
+<![CDATA[
+**Unassigned Devices Plus**
+
+Unassigned Devices support for HFS+, exFAT, and apfs disk formats, and enabling destructive mode.
+]]>
+</INLINE>
+</FILE>
+
+<!--
+The 'post-install' script.
+-->
+<FILE Run="/bin/bash">
+<INLINE>
+echo ""
+echo "-----------------------------------------------------------"
+echo " &name; has been installed."
+echo " Copyright 2015, gfjardim"
+echo " Copyright 2016-2021, &author;"
+echo " Version: &version;"
+echo "-----------------------------------------------------------"
+echo ""
+</INLINE>
+</FILE>
+
+<!--
+The 'remove' script.
+-->
+<FILE Run="/bin/bash" Method="remove">
+<INLINE>
+echo "Removing packages..."
+
+# Remove all installed packages.
+removepkg parted-3.3-x86_64-1 >/dev/null
+removepkg parted-3.5-x86_64-1 >/dev/null
+removepkg exfat-utils-1.3.0-x86_64-1_slonly >/dev/null
+removepkg fuse-exfat-1.3.0-x86_64-1_slonly.txz >/dev/null
+removepkg hfsprogs-332.25-x86_64-2sl >/dev/null
+removepkg libbsd-0.10.0-x86_64-2_slonly >/dev/null
+removepkg apfsfuse-v20200708-x86_64-1.txz >/dev/null
+
+# Remove possible leftovers
+rm -rf /usr/local/emhttp/plugins/&name;
+rm -rf /boot/config/plugins/&name;
+
+echo ""
+echo "-----------------------------------------------------------"
+echo " &name; has been uninstalled."
+echo "-----------------------------------------------------------"
+echo ""
+
+</INLINE>
+</FILE>
+
+</PLUGIN>

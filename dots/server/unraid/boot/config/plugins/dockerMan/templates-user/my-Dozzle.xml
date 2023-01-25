@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>Dozzle</Name>
+  <Repository>amir20/dozzle</Repository>
+  <Registry>https://hub.docker.com/r/amir20/dozzle/</Registry>
+  <Network>khaneproxy</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://forums.unraid.net/topic/87798-support-selfhostersnets-template-repository/</Support>
+  <Project>https://github.com/amir20/dozzle</Project>
+  <Overview>Dozzle is a real-time log viewer for docker containers. </Overview>
+  <Category>Tools:Utilities</Category>
+  <WebUI>http://[IP]:[PORT:8080]/</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/selfhosters/unRAID-CA-templates/master/templates/dozzle.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/selfhosters/unRAID-CA-templates/master/templates/img/dozzle.png</Icon>
+  <ExtraParams/>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1634664479</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>Dozzle is a real-time log viewer for docker containers. </Description>
+  <Networking>
+    <Mode>khaneproxy</Mode>
+    <Publish>
+      <Port>
+        <HostPort>8888</HostPort>
+        <ContainerPort>8080</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/var/run/docker.sock</HostDir>
+      <ContainerDir>/var/run/docker.sock</ContainerDir>
+      <Mode>ro</Mode>
+    </Volume>
+  </Data>
+  <Environment>
+    <Variable>
+      <Value>/</Value>
+      <Name>DOZZLE_BASE</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>info</Value>
+      <Name>DOZZLE_LEVEL</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>300</Value>
+      <Name>DOZZLE_TAILSIZE</Name>
+      <Mode/>
+    </Variable>
+  </Environment>
+  <Labels/>
+  <Config Name="WebUI" Target="8080" Default="8080" Mode="tcp" Description="Container Port: 8888" Type="Port" Display="always" Required="false" Mask="false">8888</Config>
+  <Config Name="Docker Logs" Target="/var/run/docker.sock" Default="/var/run/docker.sock" Mode="ro" Description="Container Path: /var/run/docker.sock" Type="Path" Display="always" Required="true" Mask="false">/var/run/docker.sock</Config>
+  <Config Name="Base URL" Target="DOZZLE_BASE" Default="/" Mode="" Description="Container Variable: DOZZLE_BASE" Type="Variable" Display="always" Required="false" Mask="false">/</Config>
+  <Config Name="Log Level" Target="DOZZLE_LEVEL" Default="info" Mode="" Description="Container Variable: DOZZLE_LEVEL" Type="Variable" Display="always" Required="false" Mask="false">info</Config>
+  <Config Name="Log Tailsize" Target="DOZZLE_TAILSIZE" Default="300" Mode="" Description="Container Variable: DOZZLE_TAILSIZE" Type="Variable" Display="always" Required="false" Mask="false">300</Config>
+  <Config Name="Username" Target="DOZZLE_USERNAME" Default="" Mode="" Description="Container Variable: DOZZLE_USERNAME" Type="Variable" Display="always" Required="false" Mask="false"/>
+  <Config Name="Password" Target="DOZZLE_PASSWORD" Default="" Mode="" Description="Container Variable: DOZZLE_PASSWORD" Type="Variable" Display="always" Required="false" Mask="false"/>
+  <Config Name="Secret Key" Target="DOZZLE_KEY" Default="9Q9SJ69MZhZ0WrjbF" Mode="" Description="Container Variable: DOZZLE_KEY . Dozzle uses this to make session tokens. If you expose dozzle on the internet, you need to change this, since the default secret is well known" Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="Disable Analytics" Target="DOZZLE_NO_ANALYTICS" Default="true" Mode="" Description="Container Variable: DOZZLE_NO_ANALYTICS . Dozzle collects anonymous user configurations using Google Analytics." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+</Container>

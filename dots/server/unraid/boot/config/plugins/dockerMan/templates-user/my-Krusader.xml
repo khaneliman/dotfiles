@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>Krusader</Name>
+  <Repository>ich777/krusader</Repository>
+  <Registry>https://hub.docker.com/r/ich777/krusader</Registry>
+  <Network>khaneproxy</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://forums.unraid.net/topic/83786-support-ich777-application-dockers/</Support>
+  <Project>https://krusader.org/</Project>
+  <Overview>Krusader is an advanced orthodox file manager for KDE and other desktops in the Unix world. It is similar to the console-based GNU Midnight Commander, GNOME Commander for the GNOME desktop environment, or Total Commander for Windows, all of which can trace their paradigmatic features to the original Norton Commander for DOS. It supports extensive archive handling, mounted filesystem support, FTP, advanced search, viewer/editor, directory synchronisation, file content comparisons, batch renaming, etc.&#xD;
+&#xD;
+Language Notice: Enter your prefered locales, you can find a full list of supported languages in: '/usr/share/i18n/SUPPORTED' simply open up a console from the Container and type in 'cat /usr/share/i18n/SUPPORTED' (eg: 'en_US.UTF-8 UTF8' or 'de_DE.UTF-8 UTF-8', 'fr_FR.UTF-8 UTF-8'...)&#xD;
+&#xD;
+ATTENTION: Wronge usage of this tool can lead to data loss, be carefull when using Krusader with Unraid.&#xD;
+You can delete your whole Array with a single button press if you don't be carefull!!!</Overview>
+  <Category>Productivity: Tools:Utilities</Category>
+  <WebUI>http://[IP]:[PORT:8080]/vnc.html?autoconnect=true</WebUI>
+  <TemplateURL/>
+  <Icon>https://raw.githubusercontent.com/ich777/docker-templates/master/ich777/images/krusader.png</Icon>
+  <ExtraParams>--restart=unless-stopped</ExtraParams>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1634092607</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>Krusader is an advanced orthodox file manager for KDE and other desktops in the Unix world. It is similar to the console-based GNU Midnight Commander, GNOME Commander for the GNOME desktop environment, or Total Commander for Windows, all of which can trace their paradigmatic features to the original Norton Commander for DOS. It supports extensive archive handling, mounted filesystem support, FTP, advanced search, viewer/editor, directory synchronisation, file content comparisons, batch renaming, etc.&#xD;
+&#xD;
+Language Notice: Enter your prefered locales, you can find a full list of supported languages in: '/usr/share/i18n/SUPPORTED' simply open up a console from the Container and type in 'cat /usr/share/i18n/SUPPORTED' (eg: 'en_US.UTF-8 UTF8' or 'de_DE.UTF-8 UTF-8', 'fr_FR.UTF-8 UTF-8'...)&#xD;
+&#xD;
+ATTENTION: Wronge usage of this tool can lead to data loss, be carefull when using Krusader with Unraid.&#xD;
+You can delete your whole Array with a single button press if you don't be carefull!!!</Description>
+  <Networking>
+    <Mode>khaneproxy</Mode>
+    <Publish>
+      <Port>
+        <HostPort>8080</HostPort>
+        <ContainerPort>8080</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/disk3/appdata/krusader</HostDir>
+      <ContainerDir>/krusader</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user</HostDir>
+      <ContainerDir>/mnt/user</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/</HostDir>
+      <ContainerDir>/UNRAID</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment>
+    <Variable>
+      <Value>en_US.UTF-8 UTF-8</Value>
+      <Name>USER_LOCALES</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>false</Value>
+      <Name>RUNASROOT</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>remote</Value>
+      <Name>NOVNC_RESIZE</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>1280</Value>
+      <Name>CUSTOM_RES_W</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>768</Value>
+      <Name>CUSTOM_RES_H</Name>
+      <Mode/>
+    </Variable>
+  </Environment>
+  <Labels/>
+  <Config Name="Container Path" Target="/krusader" Default="" Mode="rw" Description="Container Path: /krusader" Type="Path" Display="always" Required="true" Mask="false">/mnt/disk3/appdata/krusader</Config>
+  <Config Name="Data Path" Target="/mnt/user" Default="" Mode="rw" Description="Main data path to your unRAID shares (if you want to get access to a disk mounted through UnassignedDevices change the Host Path to '/mnt', if you want to get system level access change the Host Path to '/', you will then find the mounted path in Kruser in '/mnt/user')." Type="Path" Display="always" Required="true" Mask="false">/mnt/user</Config>
+  <Config Name="TCP - VNC Port" Target="8080" Default="" Mode="tcp" Description="noVNC Port" Type="Port" Display="always" Required="true" Mask="false">8080</Config>
+  <Config Name="Locales - Language" Target="USER_LOCALES" Default="" Mode="" Description="Enter your prefered locales, you can find a full list of supported languages in: '/usr/share/i18n/SUPPORTED' simply open up a console from the Container and type in 'cat /usr/share/i18n/SUPPORTED' (eg: 'en_US.UTF-8 UTF8' or 'de_DE.UTF-8 UTF-8', 'fr_FR.UTF-8 UTF-8'...)" Type="Variable" Display="always" Required="true" Mask="false">en_US.UTF-8 UTF-8</Config>
+  <Config Name="Run as root" Target="RUNASROOT" Default="false|true" Mode="" Description="Set this variable to 'true' if you want to run Krusader as root to edit system files (please remember you have to also change the Data Path to edit system level files)" Type="Variable" Display="always" Required="false" Mask="false">false</Config>
+  <Config Name="Unassigned Devices" Target="/UNRAID" Default="" Mode="rw" Description="Container Path: /UNRAID" Type="Path" Display="always" Required="false" Mask="false">/mnt/</Config>
+  <Config Name="Local Scaling" Target="NOVNC_RESIZE" Default="" Mode="" Description="Delete this value if you don't want local scaling." Type="Variable" Display="advanced" Required="true" Mask="false">remote</Config>
+  <Config Name="Custom Resolution Width" Target="CUSTOM_RES_W" Default="" Mode="" Description="Enter the preferred resolution width" Type="Variable" Display="advanced" Required="true" Mask="false">1280</Config>
+  <Config Name="Custom Resolution Height" Target="CUSTOM_RES_H" Default="" Mode="" Description="Enter the preferred resolution height" Type="Variable" Display="advanced" Required="true" Mask="false">768</Config>
+</Container>

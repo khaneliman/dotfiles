@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>dockersocket</Name>
+  <Repository>ghcr.io/tecnativa/docker-socket-proxy:latest</Repository>
+  <Registry>https://hub.docker.com/r/tecnativa/docker-socket-proxy</Registry>
+  <Network>khaneproxy</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://discord.com/invite/VWAG7rZ</Support>
+  <Project>https://github.com/Tecnativa/docker-socket-proxy</Project>
+  <Overview>This is a security-enhanced proxy for the Docker Socket.</Overview>
+  <Category>Security: Tools:</Category>
+  <WebUI/>
+  <TemplateURL>https://raw.githubusercontent.com/ibracorp/unraid-templates/master/docker-socket-proxy/docker-socket-proxy.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/ibracorp/app-logos/main/docker/docker-logo.png</Icon>
+  <ExtraParams>--restart unless-stopped</ExtraParams>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1636072748</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>This is a security-enhanced proxy for the Docker Socket.</Description>
+  <Networking>
+    <Mode>khaneproxy</Mode>
+    <Publish>
+      <Port>
+        <HostPort>2375</HostPort>
+        <ContainerPort>2375</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/var/run/docker.sock</HostDir>
+      <ContainerDir>/var/run/docker.sock</ContainerDir>
+      <Mode>ro</Mode>
+    </Volume>
+  </Data>
+  <Environment>
+    <Variable>
+      <Value>0</Value>
+      <Name>CONTAINERS</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>1</Value>
+      <Name>POST</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>1</Value>
+      <Name>BUILD</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>1</Value>
+      <Name>PUSH</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>1</Value>
+      <Name>PULL</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>1</Value>
+      <Name>DISTRIBUTION</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>1</Value>
+      <Name>IMAGES</Name>
+      <Mode/>
+    </Variable>
+  </Environment>
+  <Labels/>
+  <Config Name="Containers" Target="CONTAINERS" Default="1" Mode="" Description="Allow access to running containers" Type="Variable" Display="always" Required="false" Mask="false">0</Config>
+  <Config Name="Post" Target="POST" Default="0" Mode="" Description="Disable access to " Type="Variable" Display="always" Required="false" Mask="false">1</Config>
+  <Config Name="Host Port 1" Target="2375" Default="" Mode="tcp" Description="Container Port: 2375" Type="Port" Display="always" Required="false" Mask="false">2375</Config>
+  <Config Name="Build" Target="BUILD" Default="" Mode="" Description="Container Variable: BUILD" Type="Variable" Display="always" Required="false" Mask="false">1</Config>
+  <Config Name="Push" Target="PUSH" Default="" Mode="" Description="Container Variable: PUSH" Type="Variable" Display="always" Required="false" Mask="false">1</Config>
+  <Config Name="Pull" Target="PULL" Default="" Mode="" Description="Container Variable: PULL" Type="Variable" Display="always" Required="false" Mask="false">1</Config>
+  <Config Name="Distribution" Target="DISTRIBUTION" Default="" Mode="" Description="Container Variable: DISTRIBUTION" Type="Variable" Display="always" Required="false" Mask="false">1</Config>
+  <Config Name="Images" Target="IMAGES" Default="" Mode="" Description="Container Variable: IMAGES" Type="Variable" Display="always" Required="false" Mask="false">1</Config>
+  <Config Name="docker.sock" Target="/var/run/docker.sock" Default="/var/run/docker.sock" Mode="ro" Description="docker.sock" Type="Path" Display="advanced" Required="true" Mask="false">/var/run/docker.sock</Config>
+</Container>

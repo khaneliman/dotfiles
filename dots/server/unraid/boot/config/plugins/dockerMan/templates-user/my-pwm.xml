@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>pwm</Name>
+  <Repository>fjudith/pwm</Repository>
+  <Registry>https://hub.docker.com/r/fjudith/pwm</Registry>
+  <Network>khaneproxy</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://discord.gg/VWAG7rZ</Support>
+  <Project>https://github.com/pwm-project/pwm</Project>
+  <Overview>PWM is a free and opensource password self-service application enabling end-users to reset their enterprise password themselves.</Overview>
+  <Category>Security:</Category>
+  <WebUI>http://[IP]:[PORT:8282]/</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/ibracorp/unraid-templates/master/pwm/pwm.xml</TemplateURL>
+  <Icon>https://i.imgur.com/dAMqu51.png</Icon>
+  <ExtraParams>--restart unless-stopped --memory=1G</ExtraParams>
+  <PostArgs/>
+  <CPUset>2,8</CPUset>
+  <DateInstalled>1635397417</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>PWM is a free and opensource password self-service application enabling end-users to reset their enterprise password themselves.</Description>
+  <Networking>
+    <Mode>khaneproxy</Mode>
+    <Publish>
+      <Port>
+        <HostPort>8282</HostPort>
+        <ContainerPort>8080</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/appdata/pwm</HostDir>
+      <ContainerDir>/usr/share/pwm</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment>
+    <Variable>
+      <Value>NoFileLock</Value>
+      <Name>PWM_APPLICATIONFLAGS</Name>
+      <Mode/>
+    </Variable>
+  </Environment>
+  <Labels/>
+  <Config Name="Host Port 1" Target="8080" Default="" Mode="tcp" Description="Container Port: 8080" Type="Port" Display="always" Required="false" Mask="false">8282</Config>
+  <Config Name="File Lock Bypass" Target="PWM_APPLICATIONFLAGS" Default="PWM_APPLICATIONFLAGS" Mode="" Description="Container Variable: PWM_APPLICATIONFLAGS" Type="Variable" Display="always" Required="false" Mask="false">NoFileLock</Config>
+  <Config Name="appdata" Target="/usr/share/pwm" Default="" Mode="rw" Description="Container Path: /usr/share/pwm" Type="Path" Display="advanced" Required="true" Mask="false">/mnt/user/appdata/pwm</Config>
+</Container>

@@ -1,0 +1,43 @@
+services:
+  cloudflared:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/aeleos/cloudflared/main/cloudflare-icon.png'
+      net.unraid.docker.webui: ''
+      net.unraid.docker.shell: ''
+  dockersocket:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/ibracorp/app-logos/main/docker/docker-logo.png'
+      net.unraid.docker.webui: ''
+      net.unraid.docker.shell: ''
+  NginxProxyManager:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/jlesage/docker-templates/master/jlesage/images/nginx-proxy-manager-icon.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:8181]'
+      net.unraid.docker.shell: ''
+  pihole-template:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://i.imgur.com/OWkNcEn.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:80]/admin'
+      net.unraid.docker.shell: ''
+  Tailscale:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/deasmi/unraid-tailscale/master/logo.png'
+      net.unraid.docker.webui: ''
+      net.unraid.docker.shell: ''
+  RustDeskServer:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://github.com/JmzTaylor/unraid_templates/raw/master/rustserver.png'
+      net.unraid.docker.webui: ''
+      net.unraid.docker.shell: ''
+  RustDeskServer-Relay:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://github.com/JmzTaylor/unraid_templates/raw/master/rustserver.png'
+      net.unraid.docker.webui: ''
+      net.unraid.docker.shell: ''

@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>UptimeKuma</Name>
+  <Repository>louislam/uptime-kuma</Repository>
+  <Registry>https://hub.docker.com/r/louislam/uptime-kuma/</Registry>
+  <Network>khaneproxy</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://forums.unraid.net/topic/111962-support-uptime-kuma-corneliousjd-repo/</Support>
+  <Project>https://github.com/louislam/uptime-kuma</Project>
+  <Overview>Self-hosted monitoring tool like "Uptime Robot".  &#xD;
+Monitoring uptime for HTTP(s) / TCP / Ping. &#xD;
+Fancy, Reactive, Fast UI/UX.Notifications via Webhook, Telegram, Discord, Gotify, Slack, Pushover, Email (SMTP) and more by Apprise. &#xD;
+Fast 20 second inverval checks.&#xD;
+&#xD;
+</Overview>
+  <Category>Productivity: Tools: Network:Other</Category>
+  <WebUI>http://[IP]:[PORT:3001]</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/CorneliousJD/Docker-Templates/master/uptimekuma.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/CorneliousJD/Docker-Templates/master/icons/uptimekuma.png</Icon>
+  <ExtraParams/>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1634744807</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>Self-hosted monitoring tool like "Uptime Robot".  &#xD;
+Monitoring uptime for HTTP(s) / TCP / Ping. &#xD;
+Fancy, Reactive, Fast UI/UX.Notifications via Webhook, Telegram, Discord, Gotify, Slack, Pushover, Email (SMTP) and more by Apprise. &#xD;
+Fast 20 second inverval checks.&#xD;
+&#xD;
+</Description>
+  <Networking>
+    <Mode>khaneproxy</Mode>
+    <Publish>
+      <Port>
+        <HostPort>3001</HostPort>
+        <ContainerPort>3001</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/appdata/uptimekuma</HostDir>
+      <ContainerDir>/app/data</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment/>
+  <Labels/>
+  <Config Name="Web Interface" Target="3001" Default="3001" Mode="tcp" Description="Container Port: 3001" Type="Port" Display="always" Required="false" Mask="false">3001</Config>
+  <Config Name="AppData" Target="/app/data" Default="/mnt/user/appdata/uptimekuma" Mode="rw" Description="Container Path: /app/data" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/uptimekuma</Config>
+</Container>

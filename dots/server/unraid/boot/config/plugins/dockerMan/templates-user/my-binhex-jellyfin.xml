@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>binhex-jellyfin</Name>
+  <Repository>binhex/arch-jellyfin</Repository>
+  <Registry>https://registry.hub.docker.com/r/binhex/arch-jellyfin/</Registry>
+  <Network>khaneproxy</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://forums.unraid.net/topic/77506-support-binhex-jellyfin/</Support>
+  <Project>https://github.com/jellyfin/jellyfin</Project>
+  <Overview>
+    Jellyfin is a Free Software Media System that puts you in control of managing and streaming your media. It is an alternative to the proprietary Emby and Plex, to provide media from a dedicated server to end-user devices via multiple apps. Jellyfin is descended from Emby's 3.5.2 release and ported to the .NET Core framework to enable full cross-platform support. There are no strings attached, no premium licenses or features, and no hidden agendas: just a team who want to build something better and work together to achieve it.
+  </Overview>
+  <Category>MediaApp:Video MediaApp:Music MediaApp:Photos MediaServer:Video MediaServer:Music MediaServer:Photos</Category>
+  <WebUI>http://[IP]:[PORT:8096]/</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/binhex/docker-templates/master/binhex/jellyfin.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/binhex/docker-templates/master/binhex/images/jellyfin-icon.png</Icon>
+  <ExtraParams>-m 2G</ExtraParams>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1635445320</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>&#xD;
+    Jellyfin is a Free Software Media System that puts you in control of managing and streaming your media. It is an alternative to the proprietary Emby and Plex, to provide media from a dedicated server to end-user devices via multiple apps. Jellyfin is descended from Emby's 3.5.2 release and ported to the .NET Core framework to enable full cross-platform support. There are no strings attached, no premium licenses or features, and no hidden agendas: just a team who want to build something better and work together to achieve it.&#xD;
+  </Description>
+  <Networking>
+    <Mode>khaneproxy</Mode>
+    <Publish>
+      <Port>
+        <HostPort>8096</HostPort>
+        <ContainerPort>8096</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/data/media/</HostDir>
+      <ContainerDir>/media</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/appdata/binhex-jellyfin</HostDir>
+      <ContainerDir>/config</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment>
+    <Variable>
+      <Value>000</Value>
+      <Name>UMASK</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>99</Value>
+      <Name>PUID</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>100</Value>
+      <Name>PGID</Name>
+      <Mode/>
+    </Variable>
+  </Environment>
+  <Labels/>
+  <Config Name="Host Port 1" Target="8096" Default="8096" Mode="tcp" Description="Container Port: 8096" Type="Port" Display="always" Required="true" Mask="false">8096</Config>
+  <Config Name="Host Path 2" Target="/media" Default="/mnt/user" Mode="rw" Description="Container Path: /media" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/data/media/</Config>
+  <Config Name="Key 1" Target="UMASK" Default="000" Mode="" Description="Container Variable: UMASK" Type="Variable" Display="always" Required="false" Mask="false">000</Config>
+  <Config Name="Key 2" Target="PUID" Default="99" Mode="" Description="Container Variable: PUID" Type="Variable" Display="always" Required="false" Mask="false">99</Config>
+  <Config Name="Key 3" Target="PGID" Default="100" Mode="" Description="Container Variable: PGID" Type="Variable" Display="always" Required="false" Mask="false">100</Config>
+  <Config Name="AppData Config Path" Target="/config" Default="/mnt/user/appdata/binhex-jellyfin" Mode="rw" Description="Container Path: /config" Type="Path" Display="advanced-hide" Required="true" Mask="false">/mnt/user/appdata/binhex-jellyfin</Config>
+</Container>

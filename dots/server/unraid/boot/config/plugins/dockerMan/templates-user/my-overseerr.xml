@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>overseerr</Name>
+  <Repository>cr.hotio.dev/hotio/overseerr</Repository>
+  <Registry>https://hub.docker.com/r/hotio/overseerr</Registry>
+  <Network>khaneproxy</Network>
+  <MyIP/>
+  <Shell>bash</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://hotio.dev/discord</Support>
+  <Project>https://hotio.dev/containers/overseerr</Project>
+  <Overview>Request management and media discovery tool for the Plex ecosystem.</Overview>
+  <Category>Downloaders: MediaApp:Other</Category>
+  <WebUI>http://[IP]:[PORT:5055]</WebUI>
+  <TemplateURL/>
+  <Icon>https://hotio.dev/webhook-avatars/overseerr.png</Icon>
+  <ExtraParams/>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1641273100</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>Request management and media discovery tool for the Plex ecosystem.</Description>
+  <Networking>
+    <Mode>khaneproxy</Mode>
+    <Publish>
+      <Port>
+        <HostPort>5055</HostPort>
+        <ContainerPort>5055</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/appdata/overseerr</HostDir>
+      <ContainerDir>/config</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment>
+    <Variable>
+      <Value>99</Value>
+      <Name>PUID</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>100</Value>
+      <Name>PGID</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>002</Value>
+      <Name>UMASK</Name>
+      <Mode/>
+    </Variable>
+  </Environment>
+  <Labels/>
+  <Config Name="Host Port for 5055" Target="5055" Default="5055" Mode="tcp" Description="Container Port: 5055" Type="Port" Display="always-hide" Required="true" Mask="false">5055</Config>
+  <Config Name="Host Path for /config" Target="/config" Default="/mnt/user/appdata/overseerr" Mode="rw" Description="Container Path: /config" Type="Path" Display="always-hide" Required="true" Mask="false">/mnt/user/appdata/overseerr</Config>
+  <Config Name="PUID" Target="PUID" Default="99" Mode="" Description="Container Variable: PUID" Type="Variable" Display="advanced-hide" Required="false" Mask="false">99</Config>
+  <Config Name="PGID" Target="PGID" Default="100" Mode="" Description="Container Variable: PGID" Type="Variable" Display="advanced-hide" Required="false" Mask="false">100</Config>
+  <Config Name="UMASK" Target="UMASK" Default="002" Mode="" Description="Container Variable: UMASK" Type="Variable" Display="advanced-hide" Required="false" Mask="false">002</Config>
+</Container>

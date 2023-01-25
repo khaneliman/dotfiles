@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>Tailscale</Name>
+  <Repository>deasmi/unraid-tailscale:latest</Repository>
+  <Registry>https://hub.docker.com/repository/docker/deasmi/unraid-tailscale</Registry>
+  <Network>host</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>true</Privileged>
+  <Support>https://forums.unraid.net/topic/90719-will-move-to-ca-tailscale-support-thread/</Support>
+  <Project>https://github.com/deasmi/unraid-tailscale</Project>
+  <Overview>Private networks made easy&#xD;
+&#xD;
+Connect all your devices using WireGuard,&#xAE; without the hassle.&#xD;
+Tailscale makes it as easy as installing an app and signing in.&#xD;
+&#xD;
+This container sets up tailscale for unraid.&#xD;
+&#xD;
+It will register as hostname unraid, if you want to change that see 'Extra Parameters' below and change to the hostname you would like.&#xD;
+&#xD;
+** IMPORTANT When you first start this container you must check the log file for the logon URL and then enter it into a browser and logon to tail scale. I would then also advise setting the keys to not expire for your unraid host **&#xD;
+&#xD;
+** Note that this will expose your whole server into your tailscale VPN network ** &#xD;
+Do not do this if you do not understand what that means.</Overview>
+  <Category>Network:VPN</Category>
+  <WebUI/>
+  <TemplateURL>https://raw.githubusercontent.com/deasmi/unraid-ca/master/unraid-tailscale.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/deasmi/unraid-tailscale/master/logo.png</Icon>
+  <ExtraParams>--cap-add=NET_ADMIN --hostname=unraid --memory=50M</ExtraParams>
+  <PostArgs/>
+  <CPUset>2</CPUset>
+  <DateInstalled>1635398819</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>Private networks made easy&#xD;
+&#xD;
+Connect all your devices using WireGuard,&#xAE; without the hassle.&#xD;
+Tailscale makes it as easy as installing an app and signing in.&#xD;
+&#xD;
+This container sets up tailscale for unraid.&#xD;
+&#xD;
+It will register as hostname unraid, if you want to change that see 'Extra Parameters' below and change to the hostname you would like.&#xD;
+&#xD;
+** IMPORTANT When you first start this container you must check the log file for the logon URL and then enter it into a browser and logon to tail scale. I would then also advise setting the keys to not expire for your unraid host **&#xD;
+&#xD;
+** Note that this will expose your whole server into your tailscale VPN network ** &#xD;
+Do not do this if you do not understand what that means.</Description>
+  <Networking>
+    <Mode>host</Mode>
+    <Publish/>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/appdata/tailscale</HostDir>
+      <ContainerDir>/state</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment>
+    <Variable>
+      <Value>--advertise-exit-node</Value>
+      <Name>UP_FLAGS</Name>
+      <Mode/>
+    </Variable>
+  </Environment>
+  <Labels/>
+  <Config Name="Appdata path" Target="/state" Default="" Mode="rw" Description="Container Path: /state" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/tailscale</Config>
+  <Config Name="UP_FLAGS" Target="UP_FLAGS" Default="" Mode="" Description="Additional flags to pass to tailscale on startup" Type="Variable" Display="always" Required="false" Mask="false">--advertise-exit-node</Config>
+</Container>

@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>Dashdot</Name>
+  <Repository>mauricenino/dashdot</Repository>
+  <Registry>https://hub.docker.com/r/mauricenino/dashdot</Registry>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>true</Privileged>
+  <Support>https://forums.unraid.net/topic/123795-support-smartphonelover-dash-dashdot/</Support>
+  <Project>https://github.com/MauriceNino/dashdot</Project>
+  <Overview>DESCRIPTION&#xD;
+Dash. (or Dashdot) is a modern server dashboard, developed with a simple, but performant stack and designed with glassmorphism in mind.&#xD;
+&#xD;
+Live demo:&#xD;
+https://dash.mauz.io/&#xD;
+&#xD;
+NOTES&#xD;
+&#x2022; You have other variables available to use, if needed. Check the GitHub repo to know more about them.&#xD;
+&#x2022; The 'privileged' flag is needed to correctly determine the memory info.&#xD;
+&#x2022; The volume mount on '/etc/os-release' is for the dashboard to show the OS version of the host (unRAID) instead of the OS of the docker container (which is running on Alpine Linux). If you wish to show the docker container OS instead, just remove this parameter from the template.&#xD;
+&#xD;
+VERSION&#xD;
+1.1 (2022-05-21)</Overview>
+  <Category>Tools:Utilities</Category>
+  <WebUI>http://[IP]:[PORT:3001]/</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/SmartPhoneLover/unraid-docker-templates/master/templates/Dashdot.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/SmartPhoneLover/unraid-docker-templates/main/templates/icons/dashdot.png</Icon>
+  <ExtraParams/>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1674238086</DateInstalled>
+  <DonateText>If you like my work, please consider making a little donation.</DonateText>
+  <DonateLink>https://github.com/SmartPhoneLover/unraid-docker-templates/blob/main/DONATION.md</DonateLink>
+  <Requires/>
+  <Config Name="WebUI" Target="3001" Default="" Mode="tcp" Description="" Type="Port" Display="always" Required="false" Mask="false">3001</Config>
+  <Config Name="Storage (OS information)" Target="/etc/os-release" Default="" Mode="ro" Description="This is the location for the OS release information (unRAID base)." Type="Path" Display="always" Required="false" Mask="false">/etc/os-release</Config>
+  <Config Name="DASHDOT_DISABLE_TILT" Target="DASHDOT_DISABLE_TILT" Default="false|true" Mode="" Description="Enable/disable the tilt effect when hovering over the widgets with your mouse." Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
+  <Config Name="DASHDOT_DISABLE_HOST" Target="DASHDOT_DISABLE_HOST" Default="false|true" Mode="" Description="Show/hideide the host part in the server widget (e.g. dash.mauz.io -&amp;gt; dash.)" Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
+  <Config Name="DASHDOT_ENABLE_CPU_TEMPS" Target="DASHDOT_ENABLE_CPU_TEMPS" Default="false|true" Mode="" Description="Show/hide the CPU temperature in the graph." Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
+  <Config Name="DASHDOT_OS_WIDGET_ENABLE" Target="DASHDOT_OS_WIDGET_ENABLE" Default="true|false" Mode="" Description="Show/hide the OS widget." Type="Variable" Display="advanced" Required="false" Mask="false">true</Config>
+  <Config Name="DASHDOT_OS_WIDGET_GROW" Target="DASHDOT_OS_WIDGET_GROW" Default="" Mode="" Description="Adjust the relative size of the OS widget, in numbers." Type="Variable" Display="advanced" Required="false" Mask="false">1</Config>
+  <Config Name="DASHDOT_CPU_WIDGET_ENABLE" Target="DASHDOT_CPU_WIDGET_ENABLE" Default="true|false" Mode="" Description="Show/hide the Processor widget." Type="Variable" Display="advanced" Required="false" Mask="false">true</Config>
+  <Config Name="DASHDOT_CPU_WIDGET_GROW" Target="DASHDOT_CPU_WIDGET_GROW" Default="" Mode="" Description="adjust the relative size of the Processor widget, in numbers." Type="Variable" Display="advanced" Required="false" Mask="false">2</Config>
+  <Config Name="DASHDOT_CPU_DATAPOINTS" Target="DASHDOT_CPU_DATAPOINTS" Default="" Mode="" Description="The amount of datapoints in the Processor graph." Type="Variable" Display="advanced" Required="false" Mask="false">20</Config>
+  <Config Name="DASHDOT_CPU_POLL_INTERVAL" Target="DASHDOT_CPU_POLL_INTERVAL" Default="" Mode="" Description="Read the Processor load every x milliseconds." Type="Variable" Display="advanced" Required="false" Mask="false">1000</Config>
+  <Config Name="DASHDOT_RAM_WIDGET_ENABLE" Target="DASHDOT_RAM_WIDGET_ENABLE" Default="true|false" Mode="" Description="Show/hide the Memory widget." Type="Variable" Display="advanced" Required="false" Mask="false">true</Config>
+  <Config Name="DASHDOT_RAM_WIDGET_GROW" Target="DASHDOT_RAM_WIDGET_GROW" Default="" Mode="" Description="Adjust the relative size of the Memory widget, in numbers." Type="Variable" Display="advanced" Required="false" Mask="false">1.5</Config>
+  <Config Name="DASHDOT_RAM_DATAPOINTS" Target="DASHDOT_RAM_DATAPOINTS" Default="" Mode="" Description="The amount of datapoints in the Memory graph, in numbers." Type="Variable" Display="advanced" Required="false" Mask="false">20</Config>
+  <Config Name="DASHDOT_RAM_POLL_INTERVAL" Target="DASHDOT_RAM_POLL_INTERVAL" Default="" Mode="" Description="Read the Memory load every x milliseconds." Type="Variable" Display="advanced" Required="false" Mask="false">1000</Config>
+  <Config Name="DASHDOT_STORAGE_WIDGET_ENABLE" Target="DASHDOT_STORAGE_WIDGET_ENABLE" Default="true|false" Mode="" Description="Show/hide the Storage widget." Type="Variable" Display="advanced" Required="false" Mask="false">true</Config>
+  <Config Name="DASHDOT_STORAGE_WIDGET_GROW" Target="DASHDOT_STORAGE_WIDGET_GROW" Default="" Mode="" Description="To adjust the relative size of the Storage widget, in numbers." Type="Variable" Display="advanced" Required="false" Mask="false">1.5</Config>
+  <Config Name="DASHDOT_STORAGE_POLL_INTERVAL" Target="DASHDOT_STORAGE_POLL_INTERVAL" Default="" Mode="" Description="Read the Storage load every x milliseconds." Type="Variable" Display="advanced" Required="false" Mask="false">60000</Config>
+</Container>

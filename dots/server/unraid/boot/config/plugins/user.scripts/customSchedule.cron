@@ -1,0 +1,3 @@
+# Generated cron schedule for user.scripts
+0 10,22 * * * /usr/local/emhttp/plugins/user.scripts/startCustom.php /boot/config/plugins/user.scripts/scripts/Plex Remove Holiday Collections/script > /dev/null 2>&1
+

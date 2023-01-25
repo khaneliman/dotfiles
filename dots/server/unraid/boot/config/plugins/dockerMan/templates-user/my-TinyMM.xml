@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>TinyMM</Name>
+  <Repository>coolasice1999/tmm:latest</Repository>
+  <Registry>https://registry.hub.docker.com/r/coolasice1999/tmm</Registry>
+  <Network>khaneproxy</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>http://lime-technology.com/forum/index.php?topic=39623.0</Support>
+  <Project/>
+  <Overview>
+   Tiny Media Manager. 
+  </Overview>
+  <Category>MediaManager</Category>
+  <WebUI>http://[IP]:[PORT:5800]</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/hernandito/docker-templates/master/hernando/TinyMM-GUI.xml</TemplateURL>
+  <Icon>https://i.imgur.com/CU1cNL6.png</Icon>
+  <ExtraParams/>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1634329031</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>&#xD;
+   Tiny Media Manager. &#xD;
+  </Description>
+  <Networking>
+    <Mode>khaneproxy</Mode>
+    <Publish>
+      <Port>
+        <HostPort>5800</HostPort>
+        <ContainerPort>5800</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+      <Port>
+        <HostPort>5900</HostPort>
+        <ContainerPort>5900</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/data/media/</HostDir>
+      <ContainerDir>/media</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/appdata/TinyMM</HostDir>
+      <ContainerDir>/config</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment>
+    <Variable>
+      <Value>0</Value>
+      <Name>USER_ID</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>America/Chicago</Value>
+      <Name>TZ</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>1380</Value>
+      <Name>DISPLAY_HEIGHT</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>1200</Value>
+      <Name>DISPLAY_WIDTH</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>99</Value>
+      <Name>PUID</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>100</Value>
+      <Name>GUID</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>000</Value>
+      <Name>UMASK</Name>
+      <Mode/>
+    </Variable>
+  </Environment>
+  <Labels/>
+  <Config Name="Host Port 1" Target="5800" Default="5800" Mode="tcp" Description="Container Port: 5800" Type="Port" Display="always" Required="true" Mask="false">5800</Config>
+  <Config Name="Host Port 2" Target="5900" Default="5900" Mode="tcp" Description="Container Port: 5900" Type="Port" Display="always" Required="true" Mask="false">5900</Config>
+  <Config Name="Host Path 1" Target="/media" Default="/mnt/user/Media/" Mode="rw" Description="Container Path: /media" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/data/media/</Config>
+  <Config Name="Key 1" Target="USER_ID" Default="0" Mode="" Description="Container Variable: USER_ID" Type="Variable" Display="always" Required="false" Mask="false">0</Config>
+  <Config Name="Key 2" Target="TZ" Default="America/NewYork" Mode="" Description="Container Variable: TZ" Type="Variable" Display="always" Required="false" Mask="false">America/Chicago</Config>
+  <Config Name="Key 3" Target="DISPLAY_HEIGHT" Default="1380" Mode="" Description="Container Variable: DISPLAY_HEIGHT" Type="Variable" Display="always" Required="false" Mask="false">1380</Config>
+  <Config Name="Key 4" Target="DISPLAY_WIDTH" Default="1200" Mode="" Description="Container Variable: DISPLAY_WIDTH" Type="Variable" Display="always" Required="false" Mask="false">1200</Config>
+  <Config Name="Key 5" Target="PUID" Default="99" Mode="" Description="Container Variable: PUID" Type="Variable" Display="always" Required="false" Mask="false">99</Config>
+  <Config Name="Key 6" Target="GUID" Default="100" Mode="" Description="Container Variable: GUID" Type="Variable" Display="always" Required="false" Mask="false">100</Config>
+  <Config Name="Key 7" Target="UMASK" Default="000" Mode="" Description="Container Variable: UMASK" Type="Variable" Display="always" Required="false" Mask="false">000</Config>
+  <Config Name="AppData Config Path" Target="/config" Default="/mnt/user/appdata/TinyMM" Mode="rw" Description="Container Path: /config" Type="Path" Display="advanced-hide" Required="true" Mask="false">/mnt/user/appdata/TinyMM</Config>
+</Container>

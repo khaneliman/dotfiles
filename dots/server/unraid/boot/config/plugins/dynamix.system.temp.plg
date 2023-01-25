@@ -1,0 +1,209 @@
+<?xml version="1.0" standalone="yes"?>
+<!DOCTYPE PLUGIN [
+<!ENTITY name "dynamix.system.temp">
+<!ENTITY author "Bergware">
+<!ENTITY version "2022.09.16b">
+<!ENTITY launch "Settings/TempSettings">
+<!ENTITY pluginURL "https://raw.githubusercontent.com/bergware/dynamix/master/unRAIDv6/&name;.plg">
+<!ENTITY flash "/boot/config/plugins/&name;">
+<!ENTITY MD5 "686c96b1d87be2413749108909ee94e7">
+]>
+<PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" min="6.1.9" support="http://lime-technology.com/forum/index.php?topic=36543.0">
+
+<CHANGES>
+##&name;
+
+###&version;
+- fixed typos
+- added icons
+
+###2021.06.25
+- added Nchan operation (Unraid 6.10)
+
+###2021.05.20
+- added sensors --buslist command
+- made compatible with Unraid 6.10
+
+###2020.06.20
+- updated multi-language support
+
+###2020.05.10
+- updated multi-language support
+
+###2020.03.31
+- added multi-language support
+- added multi fan selection
+- minor updates
+
+###2019.11.03
+- Added busy spinner when detection is running
+
+###2019.11.03
+- Do not load script 'sensors-detect' when Unraid version is 6.8 or higher
+
+###2019.01.12
+- fixed incorrect temperature display on dashboard
+
+###2018.12.27
+- updated icons
+- added support for Unraid 6.7
+
+###2018.03.18
+- fixed sensors sometimes not displayed
+
+###2017.12.06
+- keep a local copy of sensors-detect script
+
+###2016.08.16
+- fixed folders and files permissions
+- added minimum unRAID version 6.1.9
+
+###2016.06.19
+- disable 'detect' button and give message when perl is not installed
+- auto-update sensors-detect script to latest known version
+
+###2016.02.27
+- added display of autofan speed percentage when system autofan is installed (courtesy of gfjardim)
+
+###2015.12.14
+- added unRAID version check. Only version 6.1 or higher is allowed
+- updated consistency of PLG file
+
+###2015.12.13
+- changed .txz file naming to support consistent package upgrading
+
+###2015.10.12
+- fixed incorrect timer pause/resume function
+
+###2015.06.27
+- introduced new logo (thanks Zonediver)
+- removed utilities page (now standard included with Dynamix webGui)
+- removed Reset button (now controlled by Dynamix webGui)
+- fixed intermittent non-display
+
+###2015.04.28
+- added Reset button on settings page
+
+###2015.04.11
+- included online help information
+
+###2015.02.07
+- replaced 'add to startup/remove from startup' with automatic loading by plugin
+- changed 'detect' and 'save' buttons are made permanent
+- fixed list of drivers not always displayed
+- changed icon of mainboard
+
+###2015.02.03
+- added 'detect' button to do manual scanning (fixes long wait issues - some people have)
+- added possibility to manually add a driver name
+- added improved control management
+- changed probe activation is integrated in dropdown menus
+
+###2015.02.02
+- added suppression of inactive/unused probes
+- added selection of probes to display in footer
+
+###2015.01.31
+- added display of array fan
+- added settings page (contributed by gfjardim)
+- changed icons
+
+###2015.01.22
+- version update for webGui 2015.01.21
+
+###2014.12.05
+- used function showFooter()
+
+###2014.11.28
+- initial release for unRAID v6
+</CHANGES>
+
+<!--
+Copyright 2021, Bergware International
+Dynamix System Temperature - Real-time monitoring of CPU and MB temperatures
+-->
+
+<!-- PRE-INSTALL SCRIPT -->
+<FILE Run="/bin/bash">
+<INLINE>
+# Remove legacy config file
+rm -f /boot/config/plugins/&name;/&name;.cfg
+
+# Remove legacy commands from 'go' file
+if grep -q '^# Sensors drivers' /boot/config/go; then
+  sed -i '/^# Sensors drivers/d;/^.*drivers.conf)$/d' /boot/config/go
+fi
+
+# Remove old 'source' package when new is available
+MD5=$(md5sum &flash;/&name;.txz 2&gt;/dev/null|grep -Po '^\S+')
+if [[ $MD5 != &MD5; ]]; then
+  rm -f &flash;/&name;*.txz
+fi
+
+# Remove sensors-detect script (Unraid 6.7 and earlier)
+source /etc/unraid-version
+version=${version:2:2}
+if [[ $((${version/./}*1)) -lt 8 ]]; then
+  rm -f /usr/sbin/sensors-detect
+fi
+
+# stop nchan script
+if [[ -e /var/run/nchan.pid ]]; then
+  pkill system_temp
+  sed -ri '/system_temp$/d' /var/run/nchan.pid
+fi
+</INLINE>
+</FILE>
+
+<!-- SOURCE PACKAGE -->
+<FILE Name="&flash;/&name;.txz" Run="upgradepkg --install-new --reinstall">
+<URL>https://raw.githubusercontent.com/bergware/dynamix/master/archive/&name;.txz</URL>
+<MD5>&MD5;</MD5>
+</FILE>
+
+<!-- SENSORS-DETECT SCRIPT -->
+<FILE Name="&flash;/sensors-detect" Max="6.7.2">
+<URL>https://raw.githubusercontent.com/bergware/dynamix/master/archive/sensors-detect</URL>
+</FILE>
+<FILE Name="/usr/sbin/sensors-detect" Mode="0755" Max="6.7.2">
+<LOCAL>&flash;/sensors-detect</LOCAL>
+</FILE>
+
+<!-- POST-INSTALL SCRIPT -->
+<FILE Run="/bin/bash">
+<INLINE>
+# Load sensor drivers
+drivers=/boot/config/plugins/&name;/drivers.conf
+if [[ -f $drivers ]]; then
+  modprobe -a $(cat $drivers)
+fi
+
+# Copy settings file
+sensors=/boot/config/plugins/&name;/sensors.conf
+if [[ -f $sensors ]]; then
+  cp -f $sensors /etc/sensors.d
+fi
+
+echo ""
+echo "-----------------------------------------------------------"
+echo " Plugin &name; is installed."
+echo " This plugin requires Dynamix webGui to operate"
+echo " Copyright 2021, Bergware International"
+echo " Version: &version;"
+echo "-----------------------------------------------------------"
+echo ""
+</INLINE>
+</FILE>
+
+<!-- REMOVE SCRIPT -->
+<FILE Run="/bin/bash" Method="remove">
+<INLINE>
+# Remove plugin related files
+rm -rf /boot/config/plugins/&name;
+
+# Uninstall the 'source' package
+removepkg &name;
+</INLINE>
+</FILE>
+
+</PLUGIN>

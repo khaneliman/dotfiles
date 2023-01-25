@@ -1,11 +1,44 @@
 dots/linux/hyprland/home/.config/aconfmgr/files/etc/pug.bkp filter=git-crypt diff=git-crypt
 dots/linux/hyprland/home/.config/aconfmgr/files/etc/davmail.properties filter=git-crypt diff=git-crypt
 dots/linux/hyprland/home/.config/aconfmgr/files/etc/NetworkManager/system-connections/* filter=git-crypt diff=git-crypt
+
 dots/shared/home/.wakatime.cfg filter=git-crypt diff=git-crypt
+
 dots/shared/home/.ssh/** filter=git-crypt diff=git-crypt
 dots/shared/home/.gnupg/** filter=git-crypt diff=git-crypt
 dots/shared/home/.config/davmail/** filter=git-crypt diff=git-crypt
+
 dots/server/docker/secrets.env filter=git-crypt diff=git-crypt
+
+dots/server/unraid/boot/config/plugins/compose.manager/projects/**/*.env filter=git-crypt diff=git-crypt
+
+dots/server/unraid/boot/config/plugins/dockerMan/templates-user/my-redis.xml filter=git-crypt diff=git-crypt
+dots/server/unraid/boot/config/plugins/dockerMan/templates-user/my-qbittorrentvpn.xml filter=git-crypt diff=git-crypt
+dots/server/unraid/boot/config/plugins/dockerMan/templates-user/my-Postgres11.xml filter=git-crypt diff=git-crypt
+dots/server/unraid/boot/config/plugins/dockerMan/templates-user/my-Plex-Media-Server.xml filter=git-crypt diff=git-crypt
+dots/server/unraid/boot/config/plugins/dockerMan/templates-user/my-pihole-template.xml filter=git-crypt diff=git-crypt
+dots/server/unraid/boot/config/plugins/dockerMan/templates-user/my-PhotoPrism.xml filter=git-crypt diff=git-crypt
+dots/server/unraid/boot/config/plugins/dockerMan/templates-user/my-Notifiarr.xml filter=git-crypt diff=git-crypt
+dots/server/unraid/boot/config/plugins/dockerMan/templates-user/my-mariadb.xml filter=git-crypt diff=git-crypt
+dots/server/unraid/boot/config/plugins/dockerMan/templates-user/my-Cleanarr.xml filter=git-crypt diff=git-crypt
+dots/server/unraid/boot/config/plugins/dockerMan/templates-user/my-binhex-delugevpn.xml filter=git-crypt diff=git-crypt
+dots/server/unraid/boot/config/plugins/dockerMan/templates-user/my-binhex-code-server.xml filter=git-crypt diff=git-crypt
+dots/server/unraid/boot/config/plugins/dockerMan/templates-user/my-.xml filter=git-crypt diff=git-crypt
+
+dots/server/unraid/boot/config/plugins/dockerMan/config.json filter=git-crypt diff=git-crypt
+dots/server/unraid/boot/config/plugins/dynamix.my.servers/myservers.cfg filter=git-crypt diff=git-crypt
+dots/server/unraid/boot/config/plugins/rclone/.rclone.conf filter=git-crypt diff=git-crypt
+
+dots/server/unraid/boot/config/ssh/** filter=git-crypt diff=git-crypt
+
+dots/server/unraid/boot/config/ssl/** filter=git-crypt diff=git-crypt
+
+dots/server/unraid/boot/config/Basic.key filter=git-crypt diff=git-crypt
+dots/server/unraid/boot/config/machine-id filter=git-crypt diff=git-crypt
+dots/server/unraid/boot/config/random-seed filter=git-crypt diff=git-crypt
+dots/server/unraid/boot/config/smbpasswd filter=git-crypt diff=git-crypt
+dots/server/unraid/boot/config/super.dat filter=git-crypt diff=git-crypt
+
 dots/server/rclone.config filter=git-crypt diff=git-crypt
 
 .gitattributes !filter !diff

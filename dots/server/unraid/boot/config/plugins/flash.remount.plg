@@ -1,0 +1,73 @@
+<?xml version="1.0" standalone="yes"?>
+<!DOCTYPE PLUGIN [
+<!ENTITY name "flash.remount">
+<!ENTITY author "Andrew Zawadzki">
+<!ENTITY version "2021.09.06">
+<!ENTITY plugdir "/usr/local/emhttp/plugins/&name;">
+<!ENTITY github "Squidly271/flash.remount">
+<!ENTITY pluginURL "https://raw.githubusercontent.com/Squidly271/flash.remount/main/flash.remount.plg">
+]>
+<PLUGIN name="&name;" author="&author;" version="&version;" pluginURL="&pluginURL;" min="6.6.0" icon="usb" support="https://forums.unraid.net/topic/113396-plugin-remount-flash-drive/">
+
+<CHANGES>
+###2021.09.06
+- Initial Release
+</CHANGES>
+
+<!-- The 'pre-install' script. -->
+
+<FILE Name="/usr/local/emhttp/plugins/flash.remount/README.md">
+<INLINE>
+####Flash Remount####
+A plugin to automatically remount your flash drive if it happens to drop offline to minimize problems with your server
+</INLINE>
+</FILE>
+
+<FILE Name="/usr/local/emhttp/plugins/flash.remount/remount.sh">
+<INLINE>
+#!/bin/bash
+if [ -d /mnt/user ]; then
+	logger Remounting flash drive
+	mount /dev/flashmount1 /boot -o noatime,nodiratime,dmask=77,fmask=177,shortname=mixed
+	fsck.fat -w -a -l -v /dev/flashmount1
+fi
+</INLINE>
+</FILE>
+
+<FILE Run="/usr/bin/php">
+<INLINE>
+<![CDATA[
+<?PHP
+exec("chmod 0777 /usr/local/emhttp/plugins/flash.remount/remount.sh");
+$disks = @parse_ini_file("/var/local/emhttp/disks.ini",true);
+
+@unlink("/etc/udev/rules.d/80-flash.rules");
+
+// if flashmount exists, drive has already dropped offline, so link back to it (to handle updates after the flash has been remounted)
+$flashID = is_link("/dev/flashmount") ? exec("readlink /dev/flashmount") : $disks['flash']['device'];
+if ( ! $disks ) {
+	// We wind up here on first boots, because disks.ini doesn't exist yet
+	$ff = exec("mount | grep -m 1 /boot");
+	$flashID = str_replace("/dev/","",explode(" ",$ff)[0]);
+	$flashID = preg_replace("/[^a-zA-Z]/","",$flashID);
+}
+$vendor = trim(exec("udevadm info -a -n /dev/$flashID | grep -m 1 idVendor"));
+$product = trim(exec("udevadm info -a -n /dev/$flashID | grep -m 1 idProduct"));
+$serial = trim(exec("udevadm info -a -n /dev/$flashID | grep -m 1 ATTRS{serial}"));
+$udevRules = 'SUBSYSTEM=="block", '.$vendor.', '.$product.', '.$serial.', ACTION=="add", SYMLINK+="flashmount%n"'."\n".'SUBSYSTEM=="block", '.$vendor.', '.$product.', '.$serial.', ACTION=="add", RUN="/usr/local/emhttp/plugins/flash.remount/remount.sh"'."\n";
+
+echo "Monitoring $flashID $vendor, $product, $serial\n";
+file_put_contents("/etc/udev/rules.d/80-flash.rules",$udevRules);
+exec("udevadm control --reload");
+?>
+]]>
+</INLINE>
+</FILE>
+
+<FILE Run="/bin/bash" Method="remove">
+<INLINE>
+rm /etc/udev/rules.d/80-flash.rules 2&gt; /dev/null
+udevadm control --reload
+</INLINE>
+</FILE> 
+</PLUGIN>

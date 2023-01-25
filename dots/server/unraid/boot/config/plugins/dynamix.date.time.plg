@@ -1,0 +1,110 @@
+<?xml version="1.0" standalone="yes"?>
+<!DOCTYPE PLUGIN [
+<!ENTITY name "dynamix.date.time">
+<!ENTITY author "Bergware">
+<!ENTITY version "2021.05.20">
+<!ENTITY launch "Settings/DateTime">
+<!ENTITY pluginURL "https://raw.githubusercontent.com/bergware/dynamix/master/unRAIDv6/&name;.plg">
+<!ENTITY source "/boot/config/plugins/&name;/&name;">
+<!ENTITY MD5 "92ad7d6aa9542a65a40e8f649c824769">
+]>
+<PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" min="6.2" support="http://lime-technology.com/forum/index.php?topic=36543.0">
+  <CHANGES>
+##&name;
+
+###&version;
+- made compatible with Unraid 6.10
+
+###2020.06.21
+- fixed regression error
+
+###2020.06.17
+- updated multi-language support
+
+###2020.05.10
+- updated multi-language support
+
+###2020.03.31
+- added multi-language support
+
+###2019.11.02
+- use new icon when Unraid version is 6.7+
+
+###2018.03.08
+- added fourth NTP server entry (supported from unRAID 6.5)
+
+###2017.09.01
+- fixed PHP time variable
+
+###2016.11.20
+- fixed compatibility with unRAID version 6.3 and higher
+
+###2016.09.17
+- minimum unRAID version 6.2 (stable version)
+
+###2016.09.07
+- removed custom time zone setting
+
+###2016.08.26
+- fixed folders and files permissions
+
+###2016.08.24a
+- added show selected country
+
+###2016.08.24
+- initial release for unRAID v6.2
+</CHANGES>
+  <!--
+Copyright 2021, Bergware International
+Dynamix Date Time adds an interactive world map to the date and time settings.
+-->
+
+<!-- PRE-INSTALL SCRIPT -->
+<FILE Run="/bin/bash">
+<INLINE>
+# Remove old 'source' packages
+MD5=$(md5sum &source;.txz 2&gt;/dev/null|grep -Po '^\S+')
+if [[ $MD5 != &MD5; ]]; then
+  rm -f &source;*.txz
+fi
+</INLINE>
+</FILE>
+
+<!-- SOURCE PACKAGE -->
+<FILE Name="&source;.txz" Run="upgradepkg --install-new --reinstall">
+<URL>https://raw.githubusercontent.com/bergware/dynamix/master/archive/&name;.txz</URL>
+<MD5>&MD5;</MD5>
+</FILE>
+
+<!-- POST-INSTALL SCRIPT -->
+<FILE Run="/bin/bash">
+<INLINE>
+source /etc/unraid-version
+version=${version:2:2}
+# Update icon if Unraid version is 6.7+
+if [[ $((${version/./}*1)) -ge 7 ]]; then
+  sed -ri 's/date-time.png/icon-clock/' /usr/local/emhttp/plugins/dynamix.date.time/DateTime.page
+fi
+
+echo ""
+echo "-----------------------------------------------------------"
+echo " Plugin &name; is installed."
+echo " This plugin requires Dynamix webGui to operate"
+echo " Copyright 2021, Bergware International"
+echo " Version: &version;"
+echo "-----------------------------------------------------------"
+echo ""
+</INLINE>
+</FILE>
+
+<!-- REMOVE SCRIPT -->
+<FILE Run="/bin/bash" Method="remove">
+<INLINE>
+# Remove plugin related files
+rm -rf /boot/config/plugins/&name;
+
+# Uninstall the 'source' package
+removepkg &name;
+</INLINE>
+  </FILE>
+</PLUGIN>

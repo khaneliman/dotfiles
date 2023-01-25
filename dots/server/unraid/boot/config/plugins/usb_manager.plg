@@ -1,0 +1,403 @@
+<?xml version='1.0' standalone='yes'?>
+
+<!DOCTYPE PLUGIN [
+<!ENTITY name      "usb_manager">
+<!ENTITY author    "SimonFair">
+<!ENTITY version   "2022.08.20">
+<!ENTITY launch    "USBManagerSettings">
+<!ENTITY gitURL    "https://raw.githubusercontent.com/SimonFair/USB_Manager/master">
+<!ENTITY pluginURL "&gitURL;/usb_manager.plg">
+<!ENTITY supportURL	"https://forums.unraid.net/topic/100511-plugin-usbip-commands/">
+<!ENTITY packages	"/boot/config/plugins/&name;/packages">
+<!ENTITY md5		"83f37aabdb2ded3ae4c342536f55e551">
+]>
+
+<PLUGIN name="&name;"
+		author="&author;"
+		launch="&launch;"
+		version="&version;"
+		pluginURL="&pluginURL;"
+		support="&supportURL;"
+		icon="fa-usb"
+		min="6.8.0">
+
+<CHANGES>
+##USB_Manager
+###&version;
+
+  - Add Option to remove USB from menu bar.
+
+2022.07.24
+
+  - Fix process if no available devices for USBIP attach.
+  - Code tidy.
+
+2022.07.23
+
+  - Add USBIP host finder and checker options and processing. Checker will attach a USBIP device found not connected to host already.
+    Finder will look for devices in the local subnet using port 3240 and depending on options add or remove the host from the remote USBIP hosts, removal is for a host no longer found.
+
+2022.07.18a
+
+  - Chg Hotplug view, show only usable USB devices and Devices attached to the selected VM.
+
+2022.07.17
+
+  - Add Hotplug processing for Serial attach
+  - Add User defined Guest USB Port, Defaults to 04 if not defined.
+
+2022.07.13a
+
+  - Chg state to use bus/dev as key(V2).
+  - Add Serial processing.
+  - Fix upgrade processing for state file.
+  - Code tidy.
+
+2022.05.20
+
+  - Fix Possible race condition via PR from KnF thankyou.
+
+2022.03.26
+  - Fix error trying to attach to VM that no longer exists.
+  - Add Eject symbol next to VM if it does not exists.
+
+2022.03.13
+
+  - Fix RC3 issues
+
+2022.01.21
+
+  - Reapply Changes of 2022.01.15
+
+2022.01.21
+
+  - Revert to 2021.12.30 Version.
+
+2022.01.15
+
+  - Chg Combine VM Name and Status. Status is now replaced with an icon.
+  - Add Slider for Serial Number to Hide Serial.
+  - Add Hover over on the Vendor:Product to show serial.
+
+2022.01.09
+
+  - Add HUB processing. Enable via the configuration page. Allow you to define a port mapping on a hub. 
+        When a device is connected to a hub it will be connected at plugin or VM start as defined on the port connection.
+        Cascaded hubs will need their own mapping. 
+  - Add Inuse Processing. Plugin will report if a device is being used outside of USB Manager. 
+        It will show Mounted devices on UD, devices in use within Unraid and devices used in a ZPool.
+  - Add Bluetooth controllers Identify with an icon.
+  - Chg Status is set to Green if connected and Red if used outside of USB Manager. 
+  - Chg Show ProductID from Database if available.
+  - Chg Dashboard updated to show in use devices.      
+
+2021.12.30
+
+  - Fix to parent processing.
+
+2021.12.28
+
+  - Chg Disable device mapping for Root Hubs and Hubs. Disable port mapping for Root Hub.
+  - Chg Detach button show next to connected port or device on the main line.
+  - Fix Buttons if Hotplug mapping used.
+  - Upd Status file to include new fields for future hub processing.
+
+2021.12.12a
+
+Revert Changes for 2021.12.12
+
+2021.12.12
+
+  - Add Hub processing.You can define a port mapping for a hub. If connected or vm starts all devices on that hub will be connected to the VM. Will not process next level down hubs.
+  - Chg Disable device mapping for Root Hubs and Hubs. Disable port mapping for Root Hub.
+  - Chg Detach button show next to connected port or device on the main line.
+  - Fix Buttons if Hotplug mapping used.
+  - Note reboot or disconnect/reconnect of Hub may be required.
+
+2021.09.18
+
+  - Code review and update.
+
+2021.09.01
+
+  - Fix start of usbipd and load of modules on array start.
+
+2021.08.01
+
+  - Code clean up
+  - Change to udev rules for 6.10+ support.
+  - Enable zebra strips on tables.
+  
+2021.07.27
+
+  - Fix Change Unraid Flash to Unraid in use on the hub lines on dashboard page.
+  - Chg Use Port as standard rather than Physical BUSI/Port.
+
+2021.07.23
+
+  - Fix Disable roothub and hubs used for Unraid Flash device.
+
+2021.07.10
+
+  - Add volume to device list in USBHotplug page.
+
+2021.07.09a
+
+  - Add display of Hotplug Devices on main USB page and allow detach.
+
+2021.07.09
+
+  - Fix Virsh error if both port and device mapping exist for a device a connection time.
+  - Add USB Manager Hotplug page on VM page, to enable change options in settings. Base code from DLandons Hot plug plugin. Addition support to show on USB page if mapping doesn't exist in next release.
+
+2021.06.02a
+
+  - Fix table formatting if both port and device mappings for new volume column
+  - Add Log virsh calls.
+
+2021.06.26
+ 
+  - Enhancement Show Volume for USB Storage Devices.
+
+2021.06.20
+
+- Enhancement enable port processing for mapping ports to VM at start.
+- Update text on edit settings page to describe entry being changed.
+
+2021.06.19
+
+- Install QEMU hooks file code, thanks to ljm42 for code.
+
+2021.06.08
+
+- Fix USBIP command check.
+
+2021.06.06
+
+- Initial beta release.
+
+If you are using USBIP-GUI continue to do so at this time. This plugin will supercede USBIP-GUI in the future and will migrate configurations.
+
+USBIP-GUI and USB_Manager cannot co-exist. If you want to replace USBIP-GUI then uninstall first, Config files will remain on the flash drive you can copy them to usb_manager directory.
+
+USBIP and USBIP-HOST module are not loaded by default. If you want to use them enable USBIP in the Settings and click the install button to install the additional plug.
+
+
+</CHANGES>
+
+<!--
+The 'pre-install' script.
+-->
+<FILE Run="/bin/bash">
+<INLINE>
+# Check to see if new install.
+
+
+if [ ! -d "/boot/config/plugins/&name;" ]
+then
+ mkdir "/boot/config/plugins/&name;"
+ #Check to see if USBIP GUI exists
+ if  [  -d "/boot/config/plugins/unraid.usbip-gui" ]
+ then
+    cp /boot/config/plugins/unraid.usbip-gui/*.cfg /boot/config/plugins/&name;/
+    mv /boot/config/plugins/&name;/unraid.usbip-gui.cfg /boot/config/plugins/&name;/&name;.cfg
+    plugin remove "usbip-gui.plg"
+ fi
+fi
+
+
+</INLINE>
+</FILE>
+
+<!--
+Get the plugin bundle.
+-->
+<FILE Name="&packages;/&name;-&version;.txz" Run="upgradepkg --install-new &packages;/&name;*%&packages;/&name;-&version;.txz">
+<URL>"&gitURL;/&name;-&version;.txz"</URL>
+<MD5>&md5;</MD5>
+</FILE>
+
+<!--
+The 'post-updgrade' script.
+-->
+<FILE Run="/bin/bash">
+<INLINE>
+echo "Removing previous versons now upgrade has completed."
+echo
+# Remove old 'bundle' files.
+rm -f $(ls &packages;/*.txz 2>/dev/null | grep -v '&version;')
+</INLINE>
+</FILE>
+
+<!--
+USB_Manager background start script.
+-->
+<FILE Name="/tmp/start_usb_manager" Mode="0770">
+<INLINE>
+#!/bin/bash
+# Copy configuration files to tmp file system.
+/usr/local/emhttp/plugins/&name;/scripts/copy_config.sh 2>/dev/null
+
+#Start USBIPD if required.
+
+if [ ! -z "$(pidof emhttpd)" ]
+  then
+
+   if [ ! -f /boot/config/plugins/usb_manager/v2 ]
+       then
+       mv /usr/local/emhttp/state/usb.ini /usr/local/emhttp/state/usb.old
+   fi
+	
+   /usr/local/emhttp/plugins/&name;/scripts/rc.&name; check_config 2>/dev/null
+
+   if [ ! -f /boot/config/plugins/&name;/v2 ]
+      then
+      /usr/local/emhttp/plugins/&name;/scripts/rc.&name; USBMgrUpgradeConnectedStatusv2 2>/dev/null
+      touch /boot/config/plugins/&name;/v2 
+   fi
+fi
+
+# Remove the background start script.
+rm -f /tmp/start_usb_manager 2>/dev/null
+</INLINE>
+</FILE>
+
+<FILE Name="/boot/config/plugins/&name;/&name;.cfg">
+<INLINE>
+<![CDATA[
+]]>
+</INLINE>
+</FILE>
+
+<FILE Name="/boot/config/plugins/&name;/remote_usbip.cfg">
+<INLINE>
+<![CDATA[
+]]>
+</INLINE>
+</FILE>
+
+<FILE Name="/boot/config/plugins/&name;/vm_mappings.cfg">
+<INLINE>
+<![CDATA[
+]]>
+</INLINE>
+</FILE>
+
+
+
+<!--
+The 'post-install' script.
+-->
+<FILE Run="/bin/bash">
+<INLINE>
+# Define Functions
+
+
+#Define Variables
+
+KERNEL_V="$(uname -r)"
+PACKAGE="usbip"
+DL_URL="https://github.com/ich777/unraid-plugins-repo/releases/download/$KERNEL_V"
+
+# Install the plugin bundle.
+# Create plugin directory
+mkdir /boot/config/plugins/&name; 2>/dev/null
+mkdir /usr/local/emhttp/plugins/&name; 2>/dev/null
+mkdir -p /tmp/&name;/config 2>/dev/null
+
+#if [ ! -d "&packages;/${KERNEL_V%%-*}" ]; then
+#  mkdir -p "&packages;/${KERNEL_V%%-*}"
+#fi
+
+# move the rules file
+#cp /usr/local/emhttp/plugins/&name;/99_persistent_usb_manager.rules /etc/udev/rules.d/
+#chmod 644 -R /etc/udev/rules.d/99_persistent_usb_manager.rules 2>/dev/null
+
+# copy the syslog  rules config file
+#cp /usr/local/emhttp/plugins/&name;/99_usb_manager_syslog.conf /etc/rsyslog.d/
+#chmod 644 -R /etc/udev/rules.d/99_persistent_usb.rules 2>/dev/null
+
+# Adjust plugin permissions.
+chmod 755 -R /usr/local/emhttp/plugins/&name; 2>/dev/null
+
+# Fix permissions of executable files
+chmod +x /usr/local/emhttp/plugins/&name;/scripts/* /usr/local/emhttp/plugins/&name;/event/*
+
+# Create a symlink to USB_Manager scripts.
+ln -sf /usr/local/emhttp/plugins/&name;/scripts/rc.usb_manager /usr/local/sbin
+
+# Copy Config to tmp and load modules.
+at -M -f /tmp/start_usb_manager now 2>/dev/null
+
+# Update QEMU Hooks file and udev rules.
+/usr/local/emhttp/plugins/&name;/scripts/install.sh 2>/dev/null
+
+# reload udev rules
+udevadm control --reload-rules
+
+# restart rsyslogd
+/etc/rc.d/rc.rsyslogd restart
+
+echo 
+echo "-----------------------------------------------------------"
+echo " &name; has been installed."
+echo " "
+echo " Copyright 2016-2020, &author;"
+echo " Version: &version;"
+echo ""
+echo "-----------------------------------------------------------"
+echo 
+</INLINE>
+</FILE>
+
+<!--
+The 'remove' script.
+-->
+<FILE Run="/bin/bash" Method="remove">
+<INLINE>
+
+#Define Variables
+
+KERNEL_V="$(uname -r)"
+PACKAGE="usbip"
+
+# Remove installed packages
+find "&packages;/" -type f -iname "*.txz" -delete
+
+rm -f /tmp/plugins/&name;.plg 
+rm -r /tmp/&name;
+rm  -f /etc/udev/rules.d/99_persistent_usb_manager.rules
+rm  -f /etc/rsyslog.d/99_usb_manager_syslog.conf
+rm  -f /boot/config/plugins/&name;/*.cron 
+update_cron
+
+#modprobe -r usbip_host
+#modprobe -r vhci_hcd
+#killall usbipd
+
+# reload udev rules
+udevadm control --reload-rules
+
+# restart rsyslogd
+/etc/rc.d/rc.rsyslogd restart
+
+# Remove QEMU Hooks entries
+
+/usr/local/emhttp/plugins/&name;/scripts/uninstall.sh 2>/dev/null
+
+
+# Remove all plugin files from emhttp.
+removepkg &packages;/&name;-&version;.txz 
+#removepkg "&packages;/&name;/packages/${KERNEL_V%%-*}/${PACKAGE}-1.txz"
+#depmod -a > /dev/null
+
+echo 
+echo "-----------------------------------------------------------"
+echo " &name; has been uninstalled."
+echo "-----------------------------------------------------------"
+echo 
+
+</INLINE>
+</FILE>
+
+</PLUGIN>

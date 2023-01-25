@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>owncloud</Name>
+  <Repository>owncloud</Repository>
+  <Registry>https://hub.docker.com/_/owncloud/</Registry>
+  <Network>khaneproxy</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>http://lime-technology.com/forum/index.php?topic=38930.0</Support>
+  <Project/>
+  <Overview>ownCloud gives you universal access to your files through a web interface or WebDAV. It also provides a platform to easily view and sync your contacts, calendars and bookmarks across all your devices and enables basic editing right on the web.&#xD;
+</Overview>
+  <Category/>
+  <WebUI>http://[IP]:[PORT:80]/</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/jshridha/templates/master/Bungy/owncloud.xml</TemplateURL>
+  <Icon>http://i.imgur.com/EX4qL2V.png</Icon>
+  <ExtraParams/>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1634563078</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>ownCloud gives you universal access to your files through a web interface or WebDAV. It also provides a platform to easily view and sync your contacts, calendars and bookmarks across all your devices and enables basic editing right on the web.&#xD;
+</Description>
+  <Networking>
+    <Mode>khaneproxy</Mode>
+    <Publish>
+      <Port>
+        <HostPort>8001</HostPort>
+        <ContainerPort>80</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/cache/appdata/owncloud/apps</HostDir>
+      <ContainerDir>/var/www/html/apps</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/cache/appdata/owncloud/config</HostDir>
+      <ContainerDir>/var/www/html/config</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/cache/appdata/owncloud/data</HostDir>
+      <ContainerDir>/var/www/html/data</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/data/</HostDir>
+      <ContainerDir>/mnt/data</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment/>
+  <Labels/>
+  <Config Name="Host Port 1" Target="80" Default="8000" Mode="tcp" Description="Container Port: 80" Type="Port" Display="always" Required="true" Mask="false">8001</Config>
+  <Config Name="Host Path 1" Target="/var/www/html/apps" Default="/mnt/cache/appdata/owncloud/apps" Mode="rw" Description="Container Path: /var/www/html/apps" Type="Path" Display="always" Required="true" Mask="false">/mnt/cache/appdata/owncloud/apps</Config>
+  <Config Name="Host Path 2" Target="/var/www/html/config" Default="/mnt/cache/appdata/owncloud/config" Mode="rw" Description="Container Path: /var/www/html/config" Type="Path" Display="always" Required="true" Mask="false">/mnt/cache/appdata/owncloud/config</Config>
+  <Config Name="Host Path 3" Target="/var/www/html/data" Default="/mnt/cache/appdata/owncloud/data" Mode="rw" Description="Container Path: /var/www/html/data" Type="Path" Display="always" Required="true" Mask="false">/mnt/cache/appdata/owncloud/data</Config>
+  <Config Name="Data" Target="/mnt/data" Default="" Mode="rw" Description="Container Path: /mnt/data" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/data/</Config>
+</Container>

@@ -1,0 +1,180 @@
+<?xml version='1.0' standalone='yes'?>
+
+<!DOCTYPE PLUGIN [
+	<!ENTITY name               "advCPaMV">
+	<!ENTITY displayName        "Advanced Copy and Move">
+	<!ENTITY author             "SlrG">
+	<!ENTITY authorName         "Michael Wehr">
+	<!ENTITY plgVersion         "2021.03.17">
+	<!ENTITY icon               "terminal">
+	<!ENTITY md5                "c351f9da143c9876ec8abbb564d52130">
+	<!ENTITY pld                "/boot/config/plugins">
+	<!ENTITY plg                "&pld;/&name;">
+	<!ENTITY epld               "/usr/local/emhttp/plugins/&name;">
+	<!ENTITY ghm                "https://github.com/&author;/unRAID/raw/master">
+	<!ENTITY pluginURL          "&ghm;/Plugins/&name;.plg">
+	<!ENTITY supportURL         "https://forums.unraid.net/topic/79570-plugin-advanced-copy-and-move-for-unraid-v683-and-later/">
+]>
+
+<PLUGIN
+	name="&name;"
+	author="&author;"
+	version="&plgVersion;"
+	icon="&icon;"
+	pluginURL="&pluginURL;"
+	support="&supportURL;"
+>
+
+<CHANGES>
+###2021.03.17
+- apply progress bar patch on top of coreutils-8.32 of unraid 6.9.1
+- fix ownership and permission problems in package (thanks ljm42!) 
+- fix problem in uninstall script
+###2021.02.17
+- renamed from gcp and gmv to cpg and mvg, if you have shell aliases
+  you'll need to change them!
+- replace external calls to find and du with native c code (the
+  external calls had trouble with filenames with single quotes)
+- show global progress bar for directory movement (will still not show
+  if multiple single files are moved)
+###2020.04.10
+- fix numerical overflows (graphical, no data corruptions known)
+- fix RCE problem caused by du and find calls
+- fix du errors when source not available
+- fix progress info shown when nothing happend
+- fix empty progress info shown on moving files
+- add warranty disclaimer
+###2019.04.30
+- change plugin display name
+###2019.04.23.4
+- change short plugin description
+###2019.04.23.3
+- public release
+###2019.04.23.2
+- final icon
+###2019.04.23.1
+- restructuring
+###2019.04.23
+- bugfix in uninstall script
+###2019.04.22
+- icon
+###2019.04.21.2
+- additional explanations
+###2019.04.21.1
+- Bugfixes
+###2019.04.21
+- First release
+</CHANGES>
+
+<!--
+=========================================================================
+License
+=========================================================================
+
+GNU General Public License v3 (GPL v3)
+
+=========================================================================
+List of files created by this plugin
+=========================================================================
+
+INSTALLED TO: /boot/config/plugins/advCPaMV
+
+advCPaMV-&plgVersion;
+README
+
+INSTALLED TO: /usr/local/bin
+cpg
+mvg
+-->
+
+<FILE Name="&plg;/README">
+<INLINE>
+=========================================================================
+README
+=========================================================================
+                                Credits:
+                             **************
+Great thanks go to Limetech for giving us unRAID.
+                             **************
+
+This plugin provides advanced cp and mv shell command alternatives named
+cpg and mvg that were created by applying the advcpmv-0.9-8.32.patch
+from here: https://github.com/SlrG/advcpmv on the coreutils version used
+by unRAID. The Patch is a modified version of the one available here:
+https://github.com/jarun/advcpmv
+
+But what does it do?
+
+cpg and mvg are the normal cp and mv shell commands extended to support
+the parameters -g or --progress-bar, which will show the progress of
+the copy or move commands.
+
+It will look like this while in progress:
+cpg -rg temp/ temp1
+
+2 files copied so far...                             3.0 GiB /   5.0 GiB
+[================================>                              ] 60.0 %
+Copying at   2.6 GiB/s (about 0h 0m 12s remaining)
+temp/file2.txt                                       1.0 GiB /   1.0 GiB
+[=============================================================> ] 99.9 %
+
+And afterwards it will show a summary of the copy process:
+
+5 files (  5.0 GiB) copied in 44.5 seconds (115.2 MiB/s).
+
+THIS SOFTWARE IS PROVIDED 'AS IS' AND WITHOUT ANY EXPRESSED OR IMPLIED
+WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE AUTHOR SHALL
+NOT BE HELD LIABLE FOR ANY DAMAGES RESULTING FROM THE USE OF THIS
+SOFTWARE, EITHER DIRECTLY OR INDIRECTLY, INCLUDING, BUT NOT LIMITED TO,
+LOSS OF DATA OR DATA BEING RENDERED INACCURATE.
+
+SlrG
+</INLINE>
+</FILE>
+
+<!-- pre install - remove old files -->
+<FILE Run="/bin/bash">
+	<INLINE>
+	rm -f $(ls &plg;/&name;*.txz 2&gt;/dev/null|grep -v '&plgVersion;')
+	</INLINE>
+</FILE>
+
+<!-- install -->
+<FILE Name="&plg;/&name;-&plgVersion;.txz" Run="upgradepkg --install-new">
+	<URL>&ghm;/AppSupport/&name;/&name;-&plgVersion;.txz</URL>
+	<MD5>&md5;</MD5>
+</FILE>
+
+<!-- post install -->
+<FILE Run="/bin/bash">
+	<INLINE>
+	echo ""
+	echo "----------------------------------------------------"
+	echo " &name; has been installed."
+	echo " Copyright 2021, &author;"
+	echo " Version: &plgVersion;"
+	echo "----------------------------------------------------"
+	echo ""
+	</INLINE>
+</FILE>
+
+<!-- uninstall -->
+<FILE Run="/bin/bash" Method="remove">
+	<INLINE>
+	removepkg &plg;/&name;-&plgVersion;.txz
+	[ -d &plg; ] &amp;&amp; rm -rf &plg;
+	[ -f /usr/local/bin/cpg ] &amp;&amp; rm -f /usr/local/bin/cpg
+	[ -f /usr/local/bin/mvg ] &amp;&amp; rm -f /usr/local/bin/mvg
+	[ -d &epld; ] &amp;&amp; rm -rf &epld;
+	echo ""
+	echo "----------------------------------------------------"
+	echo " &name; has been removed."
+	echo " Copyright 2021, &author;"
+	echo " Version: &plgVersion;"
+	echo "----------------------------------------------------"
+	echo ""
+	</INLINE>
+</FILE>
+
+</PLUGIN>

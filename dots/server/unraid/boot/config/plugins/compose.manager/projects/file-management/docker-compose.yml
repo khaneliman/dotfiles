@@ -1,0 +1,218 @@
+version: "3.6"
+services:
+  TimeMachine:
+    command:
+      - "s6-svscan"
+      - "/etc/s6"
+    container_name: "TimeMachine"
+    entrypoint:
+      - "/entrypoint.sh"
+    environment:
+      - "DEBUG_LEVEL=1"
+      - "SET_PERMISSIONS=false"
+      - "SMB_NFS_ACES=yes"
+      - "SMB_VFS_OBJECTS=acl_xattr fruit streams_xattr"
+      - "TM_GID=1000"
+      - "HOST_CONTAINERNAME=TimeMachine"
+      - "VOLUME_SIZE_LIMIT=1 T"
+      - "ADVERTISED_HOSTNAME=timemachine"
+      - "CUSTOM_USER=false"
+      - "TM_GROUPNAME=timemachine"
+      - "TM_UID=1000"
+      - "CUSTOM_SMB_CONF=false"
+      - "EXTERNAL_CONF="
+      - "SMB_PORT=445"
+      - "WORKGROUP=WORKGROUP"
+      - "MIMIC_MODEL=TimeCapsule8,119"
+      - "HIDE_SHARES=no"
+      - "SMB_INHERIT_PERMISSIONS=no"
+      - "SMB_METADATA=stream"
+      - "SHARE_NAME=TimeMachine"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    hostname: "timemachine"
+    image: "mbentley/timemachine"
+    ipc: "private"
+    labels:
+      maintainer: "Matt Bentley <mbentley@mbentley.net>"
+      net.unraid.docker.icon: "https://upload.wikimedia.org/wikipedia/de/f/f4/Time_Machine_%28Apple%29_Logo.png"
+      net.unraid.docker.managed: "dockerman"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "br0"
+    volumes:
+      - "8fe2e2394d8c8d2a0dd3afdb7ec33b7092d53010eab53cf3317f57b7feb20a08:/run/samba"
+      - "ef9cf24bea51f4fb04afc6cf1ea059e8c926d938d5ffe18acb0d55f180d31258:/var/cache/samba"
+      - "697744c7847508a1454454aad57d5870c67d7934fb068642cc4be988c093866d:/var/lib/samba"
+      - "/mnt/user/timemachine:/opt/timemachine"
+    working_dir: "/"
+
+  nextcloud:
+    container_name: "nextcloud"
+    entrypoint:
+      - "/init"
+    environment:
+      - "PUID=99"
+      - "PGID=100"
+      - "HOST_CONTAINERNAME=nextcloud"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "PS1=$(whoami)@$(hostname):$(pwd)\\$ "
+      - "HOME=/root"
+      - "TERM=xterm"
+      - "S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0"
+      - "NEXTCLOUD_PATH=/config/www/nextcloud"
+      - "LD_PRELOAD=/usr/lib/preloadable_libiconv.so"
+    hostname: "bde486b2ee1e"
+    image: "linuxserver/nextcloud"
+    ipc: "private"
+    labels:
+      build_version: "Linuxserver.io version:- 25.0.3-ls217 Build-date:- 2023-01-17T06:26:52-06:00"
+      maintainer: "aptalca"
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/nextcloud-icon.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "https://[IP]:[PORT:443]/"
+      org.opencontainers.image.authors: "linuxserver.io"
+      org.opencontainers.image.created: "2023-01-17T06:26:52-06:00"
+      org.opencontainers.image.description:
+        "[Nextcloud](https://nextcloud.com/) gives\
+        \ you access to all your files wherever you are.    Where are your photos\
+        \ and documents? With Nextcloud you pick a server of your choice, at home,\
+        \ in a data center or at a provider. And that is where your files will be.\
+        \ Nextcloud runs on that server, protecting your data and giving you access\
+        \ from your desktop or mobile devices. Through Nextcloud you also access,\
+        \ sync and share your existing data on that FTP drive at the office, a Dropbox\
+        \ or a NAS you have at home.  "
+      org.opencontainers.image.documentation: "https://docs.linuxserver.io/images/docker-nextcloud"
+      org.opencontainers.image.licenses: "GPL-3.0-only"
+      org.opencontainers.image.ref.name: "8c36f67e537a52c14abcb3cb5e1f871053e2968e"
+      org.opencontainers.image.revision: "8c36f67e537a52c14abcb3cb5e1f871053e2968e"
+      org.opencontainers.image.source: "https://github.com/linuxserver/docker-nextcloud"
+      org.opencontainers.image.title: "Nextcloud"
+      org.opencontainers.image.url: "https://github.com/linuxserver/docker-nextcloud/packages"
+      org.opencontainers.image.vendor: "linuxserver.io"
+      org.opencontainers.image.version: "25.0.3-ls217"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "444:443/tcp"
+    volumes:
+      - "/mnt/cache/appdata/nextcloud:/config"
+      - "/mnt/user/data/nextcloud:/data"
+    working_dir: "/"
+
+  Krusader:
+    container_name: "Krusader"
+    entrypoint:
+      - "/opt/scripts/start.sh"
+    environment:
+      - "USER_LOCALES=en_US.UTF-8 UTF-8"
+      - "RUNASROOT=false"
+      - "NOVNC_RESIZE=remote"
+      - "CUSTOM_RES_W=1280"
+      - "HOST_CONTAINERNAME=Krusader"
+      - "CUSTOM_RES_H=768"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "DATA_DIR=/krusader"
+      - "CUSTOM_DEPTH=16"
+      - "NOVNC_PORT=8080"
+      - "RFB_PORT=5900"
+      - "TURBOVNC_PARAMS=-securitytypes none"
+      - "UMASK=000"
+      - "UID=99"
+      - "GID=100"
+      - "DATA_PERM=770"
+      - "USER=krusader"
+    hostname: "b54e04622661"
+    image: "ich777/krusader"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/ich777/docker-templates/master/ich777/images/krusader.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:8080]/vnc.html?autoconnect=true"
+      org.opencontainers.image.authors: "admin@minenet.at"
+      org.opencontainers.image.source: "https://github.com/ich777/docker-krusader"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "8080:8080/tcp"
+    restart: "unless-stopped"
+    volumes:
+      - "/mnt:/UNRAID"
+      - "/mnt/cache/appdata/krusader:/krusader"
+      - "/mnt/user:/mnt/user"
+
+  Czkawka:
+    command:
+      - "/init"
+    container_name: "Czkawka"
+    environment:
+      - "HOST_CONTAINERNAME=Czkawka"
+      - "USER_ID=99"
+      - "DISPLAY_WIDTH=1280"
+      - "SECURE_CONNECTION=0"
+      - "GROUP_ID=100"
+      - "UMASK=000"
+      - "APP_NICENESS="
+      - "DISPLAY_HEIGHT=768"
+      - "X11VNC_EXTRA_OPTS="
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/base/sbin:/opt/base/bin"
+      - "ENV=/root/.docker_rc"
+      - "SUP_GROUP_IDS="
+      - "KEEP_APP_RUNNING=0"
+      - "INSTALL_PACKAGES="
+      - "CONTAINER_DEBUG=0"
+      - "DARK_MODE=0"
+      - "SECURE_CONNECTION_VNC_METHOD=SSL"
+      - "SECURE_CONNECTION_CERTS_CHECK_INTERVAL=60"
+      - "WEB_LISTENING_PORT=5800"
+      - "VNC_LISTENING_PORT=5900"
+      - "VNC_PASSWORD="
+      - "ENABLE_CJK_FONT=0"
+    hostname: "8001f90d6dcc"
+    image: "jlesage/czkawka"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/jlesage/docker-templates/master/jlesage/images/czkawka-icon.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:5800]"
+      org.label-schema.description: "Docker container for Czkawka"
+      org.label-schema.name: "czkawka"
+      org.label-schema.schema-version: "1.0"
+      org.label-schema.vcs-url: "https://github.com/jlesage/docker-czkawka"
+      org.label-schema.version: "22.12.1"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "7821:5800/tcp"
+      - "7921:5900/tcp"
+    volumes:
+      - "/mnt/cache/appdata/Czkawka:/config"
+      - "/mnt/user:/storage"
+      - "/mnt/user/temp:/trash"
+    working_dir: "/tmp"
+
+networks:
+  br0:
+    external: true
+    name: "br0"
+  khaneproxy:
+    external: true
+    name: "khaneproxy"

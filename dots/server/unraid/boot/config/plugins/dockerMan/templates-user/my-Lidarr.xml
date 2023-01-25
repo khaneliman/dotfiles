@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>lidarr</Name>
+  <Repository>linuxserver/lidarr</Repository>
+  <Registry>https://hub.docker.com/r/linuxserver/lidarr/</Registry>
+  <Network>khaneproxy</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://forums.unraid.net/topic/69663-support-linuxserverio-lidarr/</Support>
+  <Project>https://github.com/lidarr/Lidarr</Project>
+  <Overview>Lidarr is a music collection manager for Usenet and BitTorrent users.</Overview>
+  <Category>Downloaders: MediaApp:Music Status:Beta</Category>
+  <WebUI>http://[IP]:[PORT:8686]</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/lidarr.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/lidarr.png</Icon>
+  <ExtraParams>-m 2G</ExtraParams>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1635443682</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>Lidarr is a music collection manager for Usenet and BitTorrent users.</Description>
+  <Networking>
+    <Mode>khaneproxy</Mode>
+    <Publish>
+      <Port>
+        <HostPort>8686</HostPort>
+        <ContainerPort>8686</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/data/</HostDir>
+      <ContainerDir>/data</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/appdata/lidarr</HostDir>
+      <ContainerDir>/config</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment>
+    <Variable>
+      <Value>99</Value>
+      <Name>PUID</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>100</Value>
+      <Name>PGID</Name>
+      <Mode/>
+    </Variable>
+  </Environment>
+  <Labels/>
+  <Config Name="Host Port 1" Target="8686" Default="8686" Mode="tcp" Description="Container Port: 8686" Type="Port" Display="always" Required="true" Mask="false">8686</Config>
+  <Config Name="Key 1" Target="PUID" Default="99" Mode="" Description="Container Variable: PUID" Type="Variable" Display="always" Required="false" Mask="false">99</Config>
+  <Config Name="Key 2" Target="PGID" Default="100" Mode="" Description="Container Variable: PGID" Type="Variable" Display="always" Required="false" Mask="false">100</Config>
+  <Config Name="data" Target="/data" Default="" Mode="rw" Description="Container Path: /data" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/data/</Config>
+  <Config Name="AppData Config Path" Target="/config" Default="/mnt/user/appdata/lidarr" Mode="rw" Description="Container Path: /config" Type="Path" Display="advanced-hide" Required="true" Mask="false">/mnt/user/appdata/lidarr</Config>
+</Container>

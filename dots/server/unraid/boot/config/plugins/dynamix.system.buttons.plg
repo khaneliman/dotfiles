@@ -1,0 +1,156 @@
+<?xml version="1.0" standalone="yes"?>
+<!DOCTYPE PLUGIN [
+<!ENTITY name "dynamix.system.buttons">
+<!ENTITY author "Bergware">
+<!ENTITY version "2020.06.20">
+<!ENTITY pluginURL "https://raw.githubusercontent.com/bergware/dynamix/master/unRAIDv6/&name;.plg">
+<!ENTITY source "/boot/config/plugins/&name;/&name;">
+<!ENTITY MD5 "251a28eac7e7b9caa2f15f9b0616e1cf">
+]>
+<PLUGIN name="&name;" author="&author;" version="&version;" pluginURL="&pluginURL;" min="6.1.9" support="http://lime-technology.com/forum/index.php?topic=36543.0">
+
+<CHANGES>
+##&name;
+
+###&version;
+- updated multi-language support
+
+###2020.05.10
+- updated multi-language support
+
+###2020.03.31
+- added multi-language support
+
+###2018.09.08
+- make plugin compatible with latest version of Unraid
+
+###2017.12.30
+- added icon for themes AZURE and GRAY
+
+###2017.06.07
+- added support for new themes GRAY and AZURE
+
+###2017.04.26
+- fixed array start/stop missing csrf_token
+
+###2017.04.23
+- fixed display of shutdown/reboot page for unRAID 6.2 and higher
+
+###2016.11.20a
+- fixed compatibility with unRAID 6.2 and higher
+- replaced deprecated HTML5 'center' tags
+- replaced plugin icon
+
+###2016.09.13
+- added header to dropdown menu
+
+###2016.08.26
+- fixed folders and files permissions
+- added minimum unRAID version 6.1.9
+
+###2016.01.17
+- removed legacy code
+
+###2015.12.14
+- added unRAID version check. Only version 6.1 or higher is allowed
+- updated consistency of PLG file
+
+###2015.12.13
+- changed .txz file naming to support consistent package upgrading
+
+###2015.09.12
+- changed shutdown and reboot execution. When the powerdown plugin is installed, it will be used instead of the standard webGUI commands.
+
+###2015.08.16
+- textual adjustments
+
+###2015.08.08
+- code optimizations
+
+###2015.08.07a
+- fixed regression error
+
+###2015.08.07
+- added menu commands are prohibited when parity operation or mover is running
+- added CTRL + mouse click to do a forced system shutdown or system reboot (requires powerdown plugin)
+- added system sleep indicator
+
+###2015.08.06a
+- used same confirmations for popup window as for Array Operations page
+
+###2015.08.06
+- added array start/stop buttons
+
+###2015.08.02
+- added confirmation of commands (default is OFF)
+- fixed improper command execution on some systems
+
+###2015.08.01c
+- fixed typo
+
+###2015.08.01b
+- corrected reference to javascript file for version 6.0.x
+
+###2015.08.01a
+- made it part of the Dynamix family
+
+###2015.08.01
+- changed to single button with context menu
+- added sleep action (avalaible when Dynamix S3 sleep plugin is installed)
+
+###2015.07.22a
+- removed close button from shadowbox
+
+###2015.07.22
+- initial release for unRAID v6
+</CHANGES>
+
+<!--
+Copyright 2020, Bergware International
+Dynamix System Buttons - Single click system reboot and system shutdown
+-->
+
+<!-- PRE-INSTALL SCRIPT -->
+<FILE Run="/bin/bash">
+<INLINE>
+# Remove old 'source' packages
+MD5=$(md5sum &source;.txz 2&gt;/dev/null|grep -Po '^\S+')
+if [[ $MD5 != &MD5; ]]; then
+  rm -f &source;*.txz
+fi
+</INLINE>
+</FILE>
+
+<!-- SOURCE PACKAGE -->
+<FILE Name="&source;.txz" Run="upgradepkg --install-new --reinstall">
+<URL>https://raw.githubusercontent.com/bergware/dynamix/master/archive/&name;.txz</URL>
+<MD5>&MD5;</MD5>
+</FILE>
+
+<!-- POST-INSTALL SCRIPT -->
+<FILE Run="/bin/bash">
+<INLINE>
+echo ""
+echo "-----------------------------------------------------------"
+echo " Plugin &name; is installed."
+echo " This plugin requires Dynamix webGui to operate"
+echo " Copyright 2020, Bergware International"
+echo " Version: &version;"
+echo "-----------------------------------------------------------"
+echo ""
+</INLINE>
+</FILE>
+
+<!-- REMOVE SCRIPT -->
+<FILE Run="/bin/bash" Method="remove">
+<INLINE>
+# Remove plugin related files
+rm -rf /boot/config/plugins/&name;
+
+# Uninstall the 'source' package
+removepkg &name;
+
+</INLINE>
+</FILE>
+
+</PLUGIN>

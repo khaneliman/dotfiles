@@ -1,0 +1,134 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>Czkawka</Name>
+  <Repository>jlesage/czkawka</Repository>
+  <Registry>https://hub.docker.com/r/jlesage/czkawka/</Registry>
+  <Network>khaneproxy</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://forums.unraid.net/topic/101459-support-czkawka/</Support>
+  <Project>https://github.com/qarmin/czkawka</Project>
+  <Overview>
+Czkawka is written in Rust, simple, fast and easy to use app to remove
+unnecessary files from your computer.
+
+The GUI of the application is accessed through a modern web browser (no installation or configuration needed on the client side) or via any VNC client.
+
+Also, being based on Alpine Linux, size of this container is very small (less
+than 200MB in download size).
+
+For a complete documentation of this container, see
+https://github.com/jlesage/docker-czkawka/blob/master/README.md
+  </Overview>
+  <Category>Tools:</Category>
+  <WebUI>http://[IP]:[PORT:5800]</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/jlesage/docker-templates/master/jlesage/czkawka.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/jlesage/docker-templates/master/jlesage/images/czkawka-icon.png</Icon>
+  <ExtraParams/>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1635479189</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>&#xD;
+Czkawka is written in Rust, simple, fast and easy to use app to remove&#xD;
+unnecessary files from your computer.&#xD;
+&#xD;
+The GUI of the application is accessed through a modern web browser (no installation or configuration needed on the client side) or via any VNC client.&#xD;
+&#xD;
+Also, being based on Alpine Linux, size of this container is very small (less&#xD;
+than 200MB in download size).&#xD;
+&#xD;
+For a complete documentation of this container, see&#xD;
+https://github.com/jlesage/docker-czkawka/blob/master/README.md&#xD;
+  </Description>
+  <Networking>
+    <Mode>khaneproxy</Mode>
+    <Publish>
+      <Port>
+        <HostPort>7821</HostPort>
+        <ContainerPort>5800</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+      <Port>
+        <HostPort>7921</HostPort>
+        <ContainerPort>5900</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user</HostDir>
+      <ContainerDir>/storage</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/temp/</HostDir>
+      <ContainerDir>/trash</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/appdata/Czkawka</HostDir>
+      <ContainerDir>/config</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment>
+    <Variable>
+      <Value>99</Value>
+      <Name>USER_ID</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>100</Value>
+      <Name>GROUP_ID</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>000</Value>
+      <Name>UMASK</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value/>
+      <Name>APP_NICENESS</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>1280</Value>
+      <Name>DISPLAY_WIDTH</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>768</Value>
+      <Name>DISPLAY_HEIGHT</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>0</Value>
+      <Name>SECURE_CONNECTION</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value/>
+      <Name>X11VNC_EXTRA_OPTS</Name>
+      <Mode/>
+    </Variable>
+  </Environment>
+  <Labels/>
+  <Config Name="Storage" Target="/storage" Default="/mnt/user" Mode="rw" Description="This location contains files from your host that need to be accessible by the application.&amp;lt;br&amp;gt;Container path: /storage" Type="Path" Display="always-hide" Required="true" Mask="false">/mnt/user</Config>
+  <Config Name="Trash" Target="/trash" Default="" Mode="rw" Description="This is where duplicated files are moved files when they are sent to trash.  Usage of the trash is optional.&amp;lt;br&amp;gt;Container path: /trash" Type="Path" Display="always-hide" Required="false" Mask="false">/mnt/user/temp/</Config>
+  <Config Name="Config Directory" Target="/config" Default="/mnt/user/appdata/czkawka" Mode="rw" Description="This is where the application stores its configuration, log and any files needing persistency.&amp;lt;br&amp;gt;Container path: /config" Type="Path" Display="advanced-hide" Required="true" Mask="false">/mnt/user/appdata/Czkawka</Config>
+  <Config Name="User ID" Target="USER_ID" Default="99" Mode="" Description="ID of the user the application runs as." Type="Variable" Display="advanced-hide" Required="true" Mask="false">99</Config>
+  <Config Name="Group ID" Target="GROUP_ID" Default="100" Mode="" Description="ID of the group the application runs as." Type="Variable" Display="advanced-hide" Required="true" Mask="false">100</Config>
+  <Config Name="Umask" Target="UMASK" Default="000" Mode="" Description="Mask that controls how file permissions are set for newly created files. The value of the mask is in octal notation." Type="Variable" Display="advanced" Required="false" Mask="false">000</Config>
+  <Config Name="Niceness (priority)" Target="APP_NICENESS" Default="" Mode="" Description="Priority at which the application should run.  A niceness value of -20 is the highest priority and 19 is the lowest priority.&amp;lt;br&amp;gt;&amp;lt;b&amp;gt;NOTE:&amp;lt;/b&amp;gt; Setting a negative value requires additional permissions.  Thus, &amp;lt;i&amp;gt;&amp;lt;b&amp;gt;--cap-add=SYS_NICE&amp;lt;/b&amp;gt;&amp;lt;/i&amp;gt; must be added in &amp;lt;i&amp;gt;Extra Parameters&amp;lt;/i&amp;gt; (shown when &amp;lt;i&amp;gt;Advanced View&amp;lt;/i&amp;gt; is enabled)." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="Display Width" Target="DISPLAY_WIDTH" Default="1280" Mode="" Description="Width (in pixels) of the application's window." Type="Variable" Display="advanced" Required="false" Mask="false">1280</Config>
+  <Config Name="Display Height" Target="DISPLAY_HEIGHT" Default="768" Mode="" Description="Height (in pixels) of the application's window." Type="Variable" Display="advanced" Required="false" Mask="false">768</Config>
+  <Config Name="Secure Connection" Target="SECURE_CONNECTION" Default="0" Mode="" Description="Whether or not an encrypted connection should be used to access the application's GUI.  Set to &amp;lt;i&amp;gt;&amp;lt;b&amp;gt;1&amp;lt;/b&amp;gt;&amp;lt;/i&amp;gt; to encrypt the connection.&amp;lt;br&amp;gt;&amp;lt;span style='color: red;'&amp;gt;&amp;lt;b&amp;gt;Note:&amp;lt;/b&amp;gt;&amp;lt;/span&amp;gt; When enabling the secure connection, security parameters needs to be generated.  This &amp;lt;b&amp;gt;one-time&amp;lt;/b&amp;gt; operation is done during container startup.  Depending on your system, this could take a few minutes.  GUI of the application won't be available until the operation completes." Type="Variable" Display="advanced" Required="false" Mask="false">0</Config>
+  <Config Name="Extra x11vnc Options" Target="X11VNC_EXTRA_OPTS" Default="" Mode="" Description="Extra options to pass to the x11vnc server running in the Docker container.&amp;lt;br&amp;gt;&amp;lt;span style='color: red;'&amp;gt;&amp;lt;b&amp;gt;Warning:&amp;lt;/b&amp;gt;&amp;lt;/span&amp;gt; For advanced users. Do not use unless you know what you are doing." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="WEB Port for GUI" Target="5800" Default="7821" Mode="tcp" Description="Port used to access the application's GUI via the web interface.&amp;lt;br&amp;gt;&amp;lt;b&amp;gt;NOTE:&amp;lt;/b&amp;gt; This applies only when &amp;lt;i&amp;gt;Network Type&amp;lt;/i&amp;gt; is set to &amp;lt;i&amp;gt;Bridge&amp;lt;/i&amp;gt;.  For other network types, port 5800 should be used instead." Type="Port" Display="advanced-hide" Required="true" Mask="false">7821</Config>
+  <Config Name="VNC Port for GUI" Target="5900" Default="7921" Mode="tcp" Description="Port used to access the application's GUI via the VNC protocol.  Optional if no VNC client is used.&amp;lt;br&amp;gt;&amp;lt;b&amp;gt;NOTE:&amp;lt;/b&amp;gt; This applies only when &amp;lt;i&amp;gt;Network Type&amp;lt;/i&amp;gt; is set to &amp;lt;i&amp;gt;Bridge&amp;lt;/i&amp;gt;.  For other network types, port 5900 should be used instead." Type="Port" Display="advanced-hide" Required="false" Mask="false">7921</Config>
+</Container>

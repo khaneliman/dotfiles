@@ -1,0 +1,137 @@
+<?xml version='1.0' standalone='yes'?>
+<!DOCTYPE PLUGIN [
+<!ENTITY name		"python3">
+<!ENTITY author		"dlandon">
+<!ENTITY version	"2022.08.24">
+<!ENTITY launch		"">
+<!ENTITY gitURL		"https://raw.githubusercontent.com/&author;/&name;/master">
+<!ENTITY pluginURL	"&gitURL;/Python3.plg">
+<!ENTITY supportURL	"https://forums.unraid.net/topic/92865-support-ich777-amd-vendor-reset-coraltpu-hpsahba/">
+<!ENTITY packages	"/boot/config/plugins/&name;/packages">
+]>
+
+<PLUGIN name="&name;"
+		author="&author;"
+		launch="&launch;"
+		version="&version;"
+		pluginURL="&pluginURL;"
+		support="&supportURL;"
+		min="6.11.0-rc3">
+
+<CHANGES>
+##&name;
+###&version;
+- Fix: Cleanup of files on /boot/ not working.
+
+###2022.08.19
+- Add: Save icon to flash and copy to emhttp plugin folder.
+- Add: Set emhttp plugin permissions.
+
+###2022.08.19
+- First release.
+</CHANGES>
+
+<!--
+The 'pre-install' script.
+-->
+<FILE Run="/bin/bash">
+<INLINE>
+# Remove emhttp files so we can re-install.
+rm -rf /usr/local/emhttp/plugins/&name;/* 2>/dev/null
+</INLINE>
+</FILE>
+
+<!--
+python3-3.9.13-x86_64-2.txz
+-->
+<FILE Name="&packages;/python3-3.9.13-x86_64-2.txz" Run="upgradepkg --install-new">
+<URL>"&gitURL;/packages/python3-3.9.13-x86_64-2.txz"</URL>
+<MD5>bdf96ccd36c0f224093eca1bad611944</MD5>
+</FILE>
+
+<!--
+python-pip-21.3.1-x86_64-2.txz
+-->
+<FILE Name="&packages;/python-pip-21.3.1-x86_64-2.txz" Run="upgradepkg --install-new">
+<URL>"&gitURL;/packages/python-pip-21.3.1-x86_64-2.txz"</URL>
+<MD5>946d93afa6785ba0120a4ec643776627</MD5>
+</FILE>
+
+<!--
+python-setuptools-63.2.0-x86_64-1.txz
+-->
+<FILE Name="&packages;/python-setuptools-63.2.0-x86_64-1.txz" Run="upgradepkg --install-new">
+<URL>"&gitURL;/packages/python-setuptools-63.2.0-x86_64-1.txz"</URL>
+<MD5>f045abd4a55f57beed619e9fda83f221</MD5>
+</FILE>
+
+<!--
+README.md
+-->
+<FILE Name="/usr/local/emhttp/plugins/&name;/README.md">
+<INLINE>
+<![CDATA[
+**Python 3**
+
+Python 3, PIP, and Python systools packages.
+]]>
+</INLINE>
+</FILE>
+
+<!--
+python3 icon
+-->
+<FILE Name="/boot/config/plugins/&name;/images/Python3.png">
+<URL>"&gitURL;/images/Python3.png"</URL>
+</FILE>
+
+<!--
+The 'post-install' script.
+-->
+<FILE Run="/bin/bash">
+<INLINE>
+# Copy icon.
+mkdir -p /usr/local/emhttp/plugins/&name;/images/
+cp /boot/config/plugins/&name;/images/Python3.png /usr/local/emhttp/plugins/&name;/images/python3.png
+
+# Set emhttp folder permissions.
+chown -R root:root /usr/local/emhttp/plugins/&name;/
+chmod -R 755 /usr/local/emhttp/plugins/&name;/
+
+echo ""
+echo "-----------------------------------------------------------"
+echo " &name; has been installed."
+echo " Copyright 2022, &author;"
+echo " Version: &version;"
+echo "-----------------------------------------------------------"
+echo ""
+</INLINE>
+</FILE>
+
+<!--
+The 'remove' script.
+-->
+<FILE Run="/bin/bash" Method="remove">
+<INLINE>
+
+echo "Removing packages..."
+
+# Remove all installed packages.
+removepkg python3-3.9.13-x86_64-2 >/dev/null
+removepkg python-pip-21.3.1-x86_64-2 >/dev/null
+removepkg python-setuptools-63.2.0-x86_64-1 >/dev/null
+
+# Remove possible leftovers
+rm -rf /usr/local/emhttp/plugins/&name;
+rm -rf /boot/config/plugins/&name;
+
+echo ""
+echo "-----------------------------------------------------------"
+echo " &name; has been uninstalled."
+echo "-----------------------------------------------------------"
+echo ""
+
+</INLINE>
+</FILE>
+
+</PLUGIN>

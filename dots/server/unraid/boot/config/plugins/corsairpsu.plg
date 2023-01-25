@@ -1,0 +1,27 @@
+<?xml version="1.0" standalone="yes"?>
+<!DOCTYPE PLUGIN [
+<!ENTITY name "corsairpsu">
+<!ENTITY author "Fma965">
+<!ENTITY version "2021.10.05">
+<!ENTITY launch "Settings/CorsairPSUSettings">
+<!ENTITY gitURL "https://raw.githubusercontent.com/Cyanlabs/&name;-unraid/master">
+<!ENTITY pluginURL "&gitURL;/&name;.plg">
+<!ENTITY pkgURL "&gitURL;/pkg">
+<!ENTITY plgPATH "/boot/config/plugins/&name;">
+<!ENTITY plgNAME "&name;-&version;-x86_64">
+<!ENTITY emhttp "/usr/local/emhttp/plugins/&name;">
+]>
+<PLUGIN name="&name;" author="&author;" version="&version;" icon="icon-ups" launch="&launch;" pluginURL="&pluginURL;" support="https://forums.unraid.net/topic/86715-corsair-psu-statistics-inteligent-psus-fma965s-fork/">
+ <FILE Name="&plgPATH;/&plgNAME;.txz" Min="6.4" Run="upgradepkg --install-new">
+  <URL>&pkgURL;/&plgNAME;.txz</URL>
+ </FILE>
+ <FILE Run="/bin/bash" Method="remove">
+  <INLINE>
+   echo "Removing &name;..."
+   removepkg &plgPATH;/*.txz
+   rm -rf &plgPATH;
+   rm -rf &emhttp;
+   echo "&name; has been removed"
+  </INLINE>
+ </FILE>
+</PLUGIN>

@@ -1,0 +1,208 @@
+:root {
+    --base00: <?=$ThemeEngine['base00']?>;
+    --base01: <?=$ThemeEngine['base01']?>;
+    --base02: <?=$ThemeEngine['base02']?>;
+    --base03: <?=$ThemeEngine['base03']?>;
+    --base04: <?=$ThemeEngine['base04']?>;
+    --base05: <?=$ThemeEngine['base05']?>;
+    --base06: <?=$ThemeEngine['base06']?>;
+    --base07: <?=$ThemeEngine['base07']?>;
+    --base08: <?=$ThemeEngine['base08']?>;
+    --base09: <?=$ThemeEngine['base09']?>;
+    --base0A: <?=$ThemeEngine['base0A']?>;
+    --base0B: <?=$ThemeEngine['base0B']?>;
+    --base0C: <?=$ThemeEngine['base0C']?>;
+    --base0D: <?=$ThemeEngine['base0D']?>;
+    --base0E: <?=$ThemeEngine['base0E']?>;
+    --base0F: <?=$ThemeEngine['base0F']?>;
+  
+  }
+  
+  body {
+    background-color: var(--base00);
+  }
+  .share-status.dashboard {
+    border: none;
+    -webkit-box-shadow: 0px 3px 19px 0px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0px 3px 19px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 3px 19px 0px rgba(0, 0, 0, 0.1);
+  }
+  
+  .usage-disk {
+    background-color: var(--base0A);
+  }
+  .usage-disk > span:first-child {
+    background-color: var(--base08);
+  }
+  span.outer.solid {
+    background-color: var(--base00);
+  }
+  .red {
+    color: var(--base0B);
+  }
+  #title {
+    margin: 20px 0 30px 0;
+    padding: 8px 10px;
+    clear: both;
+    border-bottom: none;
+    background-color: var(--base01);
+    letter-spacing: 1.8px;
+  }
+  
+  /* tables - The css can't be general because some UI elements like the
+   "Array Operation" in the "Main" section are made with tables. */
+   table {
+       background-color: var(--base00);
+   }
+  
+  /* Dashboard Tables */
+  table.share_status.dashboard {
+    background-color: var(--base00);
+    -webkit-box-shadow: 0px 3px 19px 0px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0px 3px 19px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 3px 19px 0px rgba(0, 0, 0, 0.1);
+    border: none;
+  }
+  table.share_status.dashboard thead tr:nth-of-type(odd){
+      background-color: var(--base01) !important;
+  }
+  table.share_status.dashboard thead tr:nth-of-type(even){
+      background-color: var(--base02) !important;
+  }
+  table.share_status.dashboard tbody tr:nth-child(even) {
+      background-color: var(--base00);
+  }
+  table.share_status.dashboard tr > td.next {
+    border-top: 1px solid var(--base01);
+  }
+  /* tbody.share tr:nth-of-type(even) {
+    background-color: var(--base03) !important;
+  } */
+  .sys_view tr{
+      background-color: var(--base00) !important;
+  }
+  .cpu_open, .mem_view, .view1, .vpn_view {
+      background-color: var(--base00) !important;
+  }
+  .docker_view tr {
+      background-color: var(--base00) !important;
+  }
+  .vm_view tr {
+      background-color: var(--base00) !important;
+  }
+  /* Main Tables */
+  td.line {
+      border-color: var(--base03) !important;
+  }
+  table.disk_status, table.share_status {
+      background-color: var(--base00);
+  }
+  table.disk_status thead tr:last-child, table.share_status thead tr:last-child {
+      border-bottom: none;
+  }
+  table.disk_status thead tr td, table.share_status thead tr td{
+      background-color: var(--base02) !important;
+  }
+  table.disk_status tbody tr:nth-child(even), table.share_status tbody tr:nth-child(even) {
+      background-color: var(--base00);
+  }
+  table.disk_status tbody tr:nth-child(odd), table.share_status tbody tr:nth-child(odd) {
+      background-color: var(--base01);
+  }
+  table tbody tr.tr_last {
+      border: none;
+      background-color: var(--base03) !important;
+  }
+  table.array_status {
+      background-color: var(--base00);
+  }
+  div.user-list {
+    border: none;
+    border-radius: 0;
+    background-color: var(--base01);
+  }
+  table.tablesorter thead tr .tablesorter-headerAsc,
+  table.tablesorter thead tr .tablesorter-headerDesc {
+    background-color: var(--base03);
+  }
+  table.tablesorter tbody tr:nth-child(even) {
+    background-color: var(--base01);
+  }
+  table.tablesorter tbody tr:nth-child(odd) {
+      background-color: var(--base02);
+    }
+  table.tablesorter thead tr {
+    border-bottom: var(--base01) 1px solid;
+  }
+  table.tablesorter thead tr th {
+    background-color: var(--base03);
+  }
+  table.tablesorter.four tbody tr:nth-child(4n-1) {
+    background-color: var(--base01);
+  }
+  .ca_holder {
+    background-color: var(--base01) !important;
+    border: none !important;
+    border-radius: 0 !important;
+  }
+  .disabledIcon {
+    color: var(--base07);
+  }
+  div.tab [type="radio"]:checked + label {
+    border: 1px solid var(--base07);
+  }
+  div.tab [type="radio"] + label {
+    border-radius: 0;
+  }
+  div.tab [type="radio"] + label:hover {
+    border: 1px solid var(--base07);
+  }
+  div.tab [type="radio"] + label {
+    background-color: var(--base01);
+  }
+  .dropdown-menu {
+    background-color: var(--base04);
+    border: 1px solid var(--base04);
+    border-radius: 0;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  }
+  .dropdown-menu .divider {
+    background-color: transparent;
+    border-bottom: none;
+  }
+  .dropdown-menu li > a:hover,
+  .dropdown-menu li > a:focus,
+  .dropdown-submenu:hover > a {
+    color: var(--base00);
+    text-decoration: none;
+    background-color: var(--base06);
+    background-image: none;
+    background-image: none;
+    background-image: none;
+  }
+  .dropdown-menu a {
+    color: var(--base00);
+  }
+  .usage-bar > span {
+    display: block;
+    height: 100%;
+    text-align: right;
+    border-radius: 0;
+    color: var(--base00);
+    background-color: var(--base08);
+    box-shadow: none;
+  }
+  .usage-bar {
+    float: left;
+    height: 2rem;
+    line-height: 2rem;
+    width: 14rem;
+    padding: 1px 1px 1px 2px;
+    margin: 8px 12px;
+    border-radius: 0;
+    background-color: var(--base0A);
+    box-shadow: none;
+  }
+  #nav-block #nav-item.active:after {
+    background-color: var(--base08);
+  }

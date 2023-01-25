@@ -1,0 +1,55 @@
+<?xml version="1.0" standalone="yes"?>
+<!DOCTYPE PLUGIN [
+<!ENTITY name "gui-links">
+<!ENTITY author "Andrew Zawadzki">
+<!ENTITY version "2022.05.29">
+<!ENTITY md5 "dd814c80744857a6c7407489a8516423">
+<!ENTITY plugdir "/usr/local/emhttp/plugins/&name;">
+<!ENTITY github "Squidly271/gui-links">
+<!ENTITY pluginURL "https://raw.githubusercontent.com/&github;/master/plugins/&name;.plg">
+]>
+<PLUGIN name="&name;" author="&author;" version="&version;" pluginURL="&pluginURL;" min="6.6.0" icon="link" support="https://forums.unraid.net/topic/76206-plugin-gui-links/">
+
+<CHANGES>
+###2022.05.29
+- Update FAQ link
+
+###2019.01.19
+- Update Icon
+
+###2018.12.08
+- Initial Release
+</CHANGES>
+
+<!-- The 'pre-install' script. -->
+
+<FILE Run="/bin/bash">
+<INLINE>
+# Remove old 'source' files
+rm -f $(ls /boot/config/plugins/&name;/&name;*.txz 2&gt;/dev/null | grep -v '&version;')
+</INLINE>
+</FILE>
+
+<!--
+The 'source' file.
+-->
+<FILE Name="/boot/config/plugins/&name;/&name;-&version;-x86_64-1.txz" Run="upgradepkg --install-new">
+<URL>https://raw.github.com/&github;/master/archive/&name;-&version;-x86_64-1.txz</URL>
+<MD5>&md5;</MD5>
+</FILE>
+
+<!--
+The 'post-install' script
+-->
+
+<!--
+The 'remove' script.
+-->
+<FILE Run="/bin/bash" Method="remove">
+<INLINE>
+removepkg &name;-&version;-x86_64-1
+rm -rf &plugdir;
+rm -rf /boot/config/plugins/&name;
+</INLINE>
+</FILE> 
+</PLUGIN>

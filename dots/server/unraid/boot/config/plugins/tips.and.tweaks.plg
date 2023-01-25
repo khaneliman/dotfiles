@@ -1,0 +1,362 @@
+<?xml version='1.0' standalone='yes'?>
+<!DOCTYPE PLUGIN [
+<!ENTITY name		"tips.and.tweaks">
+<!ENTITY author		"dlandon">
+<!ENTITY version	"2023.01.18">
+<!ENTITY launch		"Settings/TipsAndTweaks">
+<!ENTITY gitURL		"https://raw.githubusercontent.com/&author;/&name;/master">
+<!ENTITY pluginURL	"&gitURL;/&name;.plg">
+<!ENTITY supportURL	"https://forums.unraid.net/topic/47527-tips-and-tweaks-plugin-to-possibly-improve-performance-of-unraid-and-vms/?tab=comments#comment-468361">
+<!ENTITY MD5		"c85218fd61e532aa9503e7d21e1a610b">
+]>
+
+<PLUGIN	name="&name;"
+		author="&author;"
+		version="&version;"
+		launch="&launch;"
+		pluginURL="&pluginURL;"
+		support="&supportURL;"
+		icon="gear"
+		min="6.7.0">
+
+<CHANGES>
+##&name;
+###&version;
+- Fix: Remove broken links.
+
+###2022.12.31a
+- Fix: Processes to kill before array is stopped not working.
+
+###2022.12.23
+- Add: Current and available inotify watches.
+
+###2022.11.18
+- Add: SMB max open files setting.
+
+###2022.11.03
+- Fix: Governor setting does not change when schedule setting is set to 'Yes'.
+
+2022.08.30
+- Fix: Remove powertop.  The power savings are very minimal and it causes issues with some sata controllers.  It is not worth the headaches it can create.
+
+###2022.08.27a
+- Add: Ability to set CPU Scaling for normal and power saving modes and enable cron to switch modes.
+- Add: Powertop package and ability to run powertop from GUI.
+
+###2022.08.19
+- Fix: Reference to GitHub repository.
+
+###2021.12.22
+- Fix: Apply settings at 'started' event instead of 'array_started'  event.  This event is later in the start up of Unraid.
+
+###2021.08.08
+- Fix: Remove 'Disable FTP?' setting.  Ftp is disabled by default in 6.10.
+
+###2021.05.28
+- Fix: Restore event script.
+
+###2021.05.18
+- Fix: Minimum version changed to 6.7.
+- Fix: Keep tips and tweaks configuration file on flash drive when uninstalling.
+- Fix: Remove unneeded images folder.
+- Fix: Remove unneeded event script.
+
+###2021.03.09
+- Fix: Plugin permissions.
+
+###2021.03.05
+- Add: Intel CPU Freq driver configuration.
+
+###2020.12.24a
+- Fix: Set default nics to what is found in the system.
+- Add: Add comments about the use of 'Power Save' CPU Governor.
+
+###2020.12.24
+- Add: Set nic placeholder to the nics found on the system.
+
+###2020.08.27
+- Add: Schedutil CPU governor.  This is still in development and not implemented yet on the Intel Pstate driver.
+
+###2020.090.17
+- Add: 'Default' setting for NIC paramaters to leave NIC setting to the default.
+
+###2020.08.02
+- Add: Settings placeholder for selected settings.
+
+###2020.06.24
+- Add: Multi Language support.
+
+###2019.10.17
+- Fix: Revert offloads to gso, gro, and tso.
+
+###2019.06.09
+- Fix: Change wording on turbo boost setting to include AMD performance boost.
+
+###2019.04.10a
+- Fix: Modificatons to NIC offload.
+
+##2019.03.29
+- Add: Add 4096 as a selection to the NIC Rx and Tx buffer sizes.
+
+###2019.02.16
+- Add: Additional tips text about the Syslog Server feature of Unraid 6.7.
+
+###2019.02.11
+- Fix: Changed all bold text to normal text.
+- Fix: Removed the PHP Warnings setting.  It no longer applies.
+
+###2019.01.14
+- Fix Help on Tweaks page.
+- Change icons for v6.
+
+###2018.11.04
+- Fix Unraid capitalization.
+
+###2018.04.28
+- Remove disable telnet.  This can now be managed in Unraid - Settings->Identification->Management Access.
+
+###2018.04.23
+- Remove all tips for V6 versions less than 6.4.
+- Minimum Unraid version is now 6.4.
+
+###2018.03.21
+- Update Unraid version check.
+
+###2018.03.03
+- Add option to turn on php warnings.
+
+###2018.01.04
+- Add gro (Generic Receive Offoad) to "Disable NIC Offload?"
+
+###2017.11.08
+- Save the kill tasks event and restore it when updating the plugin.
+
+###2017.11.07
+- Change the wording for the process kill before the array is being stopped feature.
+
+###2017.11.05
+- Add the ability to kill tasks when the array is stopped.
+
+###2017.09.24
+- Additional tips and help modificatins for Unraid 6.4.
+
+###2017.07.22
+- Default Turbo mode to on.
+
+###2017.07.16
+- Add ability to set turbo mode on 'ACPI CPU Freq' CPU Frequency Driver.
+
+###2017.06.07
+- Fix text crowding on 'Tweaks' page with Azure and Gray themes.
+
+###2017.05.20
+- Minor adjustments to ui and small script modifications.
+
+###2017.05.14
+- Changed the menu tabs.
+
+###2017.03.10
+- Add max_user_watches setting for inotify.
+
+###2017.01.30
+- Add option to rc.tweaks script to set cpu governor from a user script.  Click 'Help' and read under setting the CPU governor to see how to use the script.
+
+###2016.12.04
+- Added option to turn on/off the Intel turbo mode.
+
+###2016.10.23
+- Changed absolute path using $docroot in preparation for moving from emhttp.
+
+###2016.10.22b
+- Updates for compatibility with Unraid 6.2 and later.
+
+###2016.10.21
+- Added feature to capture and archive syslogs and diagnostics when shutting down.
+
+###2016.10.10
+- Fixed typos in rc script.
+
+###2016.09.25
+- Removed powerdown enhancement.  Removed 6.2 beta and RC notes.
+
+###2016.09.22
+- Powerdown enhancements - Add in new powerdown script for users that have changed their emhttp port.  The powerdown enhancements option will be removed on the next release of Unraid.
+- Fixed license and copyrights.
+
+###2016.09.16
+- Add powerdown enhancements - Diagnostics saved on shutdown, logs archived on shutdown, and enabled the Ctrl-Alt-Del powerdown.
+
+###2016.09.01
+- Add: Disable FTP Server and Telnet.
+
+###2016.06.12
+- Add: Tips for 6.2 b22 and b23.
+
+###2016.06.04
+- Add: Show '* no driver *' as driver when a cpu scaling driver is not found.
+- Add: Support for powernow_k8 driver.
+
+###2016.05.31a
+- Fix: Changed all links to open a new page in the browser.
+- Add: Turn off Turbo Speed mode on Intel pstate driver to keep cpu frequencies from going excessively high.
+
+###2016.05.30
+- Fix: Errors on console.
+
+###2016.05.30
+- Add: "Scheduled" to set cpu governor for performance on a schedule.
+
+###2016.05.28
+- Add: Tip about intel_pstate cpu scaling driver.
+- Add: Ability to change the cpu frequency governor.  Options are power saving (on demand) setting or performance setting.  Not sure this will survive in the plugin as I am questioning the value of the feature.
+
+###2016.05.22a
+- Add: Tips page that shows current Unraid issues and suggested work arounds.
+
+###2016.05.22
+- Fix: Lots of help adjustments.
+- Add: Add some additional links.
+
+###2016.05.21
+- Add: Link to forum post for the Tips and Tweaks plugin.
+
+###2016.05.20a
+- Fix: Help text was overwriting the current settings.
+- Add: Additional descirptions and help text.
+- Fix: Ability to have multiple NICs where some do not support certain features, while others do.
+- Add: Lots of help text.
+
+###2016.05.19a
+- Initial Unraid V6.0 release.
+</CHANGES>
+
+<!--
+Copyright 2016-2023, Dan Landon
+This plugin lets you set certain settings to adjust Linux and Unraid for better performance.
+-->
+
+<!--
+Get the plugin bundle.
+-->
+<FILE Name="/boot/config/plugins/&name;/&name;-&version;.tgz">
+<URL>"&gitURL;/&name;-&version;.tgz"</URL>
+<MD5>&MD5;</MD5>
+</FILE>
+
+<!--
+The 'pre-install' script.
+-->
+<FILE Run="/bin/bash">
+<INLINE>
+# Save a copy of the kill tasks event if we are updating the plugin.
+if [ -f /usr/local/emhttp/plugins/&name;/event/stopping_svcs ]; then
+	mv /usr/local/emhttp/plugins/&name;/event/stopping_svcs /tmp/
+fi
+
+# Remove emhttp files so we can re-install.
+rm -rf /usr/local/emhttp/plugins/&name;/* 2>/dev/null
+
+# Remove old 'bundle' files.
+rm -f $(ls /boot/config/plugins/&name;/&name;*.tgz 2>/dev/null | grep -v '&version;')
+</INLINE>
+</FILE>
+
+<!--
+Install the plugin bundle.
+-->
+<FILE Run="/bin/bash">
+<INLINE>
+# Create plugin directory
+mkdir /boot/config/plugins/&name; 2>/dev/null
+
+# Install the 'bundle'.
+tar -xf /boot/config/plugins/&name;/&name;-&version;.tgz -C /usr/local/emhttp/plugins 2>/dev/null
+</INLINE>
+</FILE>
+
+<FILE Name="/boot/config/plugins/&name;/&name;.cfg">
+<INLINE>
+<![CDATA[
+FLOW_CONTROL="default"
+TSO_OFFLOAD="default"
+RX_BUFFER="default"
+TX_BUFFER="default"
+ETHERNET_NICS=""
+VM_BACKGROUND=""
+VM_DIRTY=""
+MAX_WATCHES=""
+MAX_OPEN_FILES=""
+CPU_GOVERNOR="performance"
+TURBO_BOOST="yes"
+POWER_SAVE_CPU_GOVERNOR=""
+SCHEDULED="no"
+START_TIME=""
+STOP_TIME=""
+FTP="yes"
+ARCHIVE_LOGS="no"
+LOGSAVE=""
+KILL="ssh,bash"
+]]>
+</INLINE>
+</FILE>
+
+
+<!--
+The 'post-install' script.
+-->
+<FILE Run="/bin/bash">
+<INLINE>
+# Restore the kill tasks event
+if [ -f /tmp/stopping_svcs ]; then
+	mkdir -p /usr/local/emhttp/plugins/&name;/event/
+	mv /tmp/stopping_svcs /usr/local/emhttp/plugins/&name;/event/
+fi
+
+# Create a symlink to tips.and.tweaks script.
+ln -sf /usr/local/emhttp/plugins/&name;/scripts/rc.tweaks /usr/local/sbin
+
+echo ""
+echo "-----------------------------------------------------------"
+echo " &name; is installed."
+echo " Copyright 2016-2023 &author;"
+echo " Version: &version;"
+echo "-----------------------------------------------------------"
+echo ""
+</INLINE>
+</FILE>
+
+<!--
+The 'remove' script.
+-->
+<FILE Run="/bin/bash" Method="remove">
+<INLINE>
+# Remove the hook for log archiving
+/usr/local/emhttp/plugins/&name;/scripts/rc.tweaks remove_syslog
+
+# Remove dynamix set governor cron file.
+rm -f /boot/config/plugins/dynamix/cpu_governor.cron
+
+# Reload dynamix crons.
+/usr/local/sbin/update_cron
+
+# Remove symlink to rc.tweaks script
+rm -f /usr/local/sbin/rc.tweaks
+
+# Remove all plugin files.
+rm -rf /usr/local/emhttp/plugins/&name; 2>/dev/null
+
+# Remove the tips and tweaks 'bundle' so it will be downloaded if re-installed.
+rm -rf /boot/config/plugins/&name;/&name;-&version;.tgz
+
+echo "Removing packages..."
+
+echo ""
+echo "-----------------------------------------------------------"
+echo " &name; has been removed."
+echo " Version: &version;"
+echo "-----------------------------------------------------------"
+echo ""
+</INLINE>
+</FILE>
+
+</PLUGIN>

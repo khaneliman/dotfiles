@@ -1,0 +1,162 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>PhotoStructure</Name>
+  <Repository>photostructure/server:stable</Repository>
+  <Registry>https://hub.docker.com/r/photostructure/server/</Registry>
+  <Network>khaneproxy</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://forum.photostructure.com/</Support>
+  <Project>https://photostructure.com/</Project>
+  <Overview>[b]PhotoStructure is your new home for all your photos and videos.[/b]
+
+[ul]
+[li] Cross-platform libraries that you can move seamlessly across Docker, Windows, macOS, and Linux [/li]
+[li] Fast, fun mobile-friendly UI [/li]
+[li] Support for very large (250k+) libraries [/li]
+[li] Support for almost all RAW and video formats (thanks to LibRaw and FFmpeg) [/li]
+[li] Robust metadata support, including Google Takeouts, XMP sidecars, and sibling inference [/li]
+[li] Robust image and video deduplication [/li]
+[/ul]
+
+[p] PhotoStructure is extremely configurable. [b][a href="https://photostructure.com/faq/environment-variables/"]See the documentation for details.[/a][/b]
+
+[p] Be sure to visit [b][a href="https://forum.photostructure.com"]PhotoStructure's forum[/a][/b] for tips, support, and to vote on what features you want to see next. We also have a [b][a href="https://discord.gg/gU9h8uQTYw"]discord[/a][/b]!
+
+[p] [b]To import additional directories or volumes:[/b]
+
+[ol]
+[li] click "Add another Path" [/li]
+[li] enter a Container path (like "/photos") [/li]
+[li] click Host Path and pick the directory you want to import [/li]
+[li] click "Add", then [/li]
+[li] click "Apply". [/li]
+[/ol]
+
+[p] PhotoStructure will find the new directory automatically if you leave the "Where else are your photos and videos?" section set to "Automatic", which is the default.
+
+[p] Initial template by Spants (thanks!)
+</Overview>
+  <Category>MediaApp:Photos, MediaServer:Video, MediaServer:Photos, Status:Stable</Category>
+  <WebUI>http://[IP]:[PORT:1787]</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/photostructure/unraid-template/main/photostructure/photostructure.xml</TemplateURL>
+  <Icon>https://photostructure.com/img/logo-circle-gradient-256.png</Icon>
+  <ExtraParams>--stop-timeout=120 --memory=4G</ExtraParams>
+  <PostArgs/>
+  <CPUset>0,1,2,6,7,8</CPUset>
+  <DateInstalled>1640748817</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>[b]PhotoStructure is your new home for all your photos and videos.[/b]&#xD;
+&#xD;
+[ul]&#xD;
+[li] Cross-platform libraries that you can move seamlessly across Docker, Windows, macOS, and Linux [/li]&#xD;
+[li] Fast, fun mobile-friendly UI [/li]&#xD;
+[li] Support for very large (250k+) libraries [/li]&#xD;
+[li] Support for almost all RAW and video formats (thanks to LibRaw and FFmpeg) [/li]&#xD;
+[li] Robust metadata support, including Google Takeouts, XMP sidecars, and sibling inference [/li]&#xD;
+[li] Robust image and video deduplication [/li]&#xD;
+[/ul]&#xD;
+&#xD;
+[p] PhotoStructure is extremely configurable. [b][a href="https://photostructure.com/faq/environment-variables/"]See the documentation for details.[/a][/b]&#xD;
+&#xD;
+[p] Be sure to visit [b][a href="https://forum.photostructure.com"]PhotoStructure's forum[/a][/b] for tips, support, and to vote on what features you want to see next. We also have a [b][a href="https://discord.gg/gU9h8uQTYw"]discord[/a][/b]!&#xD;
+&#xD;
+[p] [b]To import additional directories or volumes:[/b]&#xD;
+&#xD;
+[ol]&#xD;
+[li] click "Add another Path" [/li]&#xD;
+[li] enter a Container path (like "/photos") [/li]&#xD;
+[li] click Host Path and pick the directory you want to import [/li]&#xD;
+[li] click "Add", then [/li]&#xD;
+[li] click "Apply". [/li]&#xD;
+[/ol]&#xD;
+&#xD;
+[p] PhotoStructure will find the new directory automatically if you leave the "Where else are your photos and videos?" section set to "Automatic", which is the default.&#xD;
+&#xD;
+[p] Initial template by Spants (thanks!)&#xD;
+</Description>
+  <Networking>
+    <Mode>khaneproxy</Mode>
+    <Publish>
+      <Port>
+        <HostPort>1787</HostPort>
+        <ContainerPort>1787</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/data/media/pictures/</HostDir>
+      <ContainerDir>/ps/library</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/data/media/familyphotos/</HostDir>
+      <ContainerDir>/familyphotos</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/Backups/Photos/</HostDir>
+      <ContainerDir>/backupphotos</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/disks/dropbox/Pictures/Austins Photos/</HostDir>
+      <ContainerDir>/dropboxphotos</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/cache/appdata/photostructure/tmp</HostDir>
+      <ContainerDir>/ps/tmp</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/appdata/photostructure/logs</HostDir>
+      <ContainerDir>/ps/logs</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/appdata/photostructure/config</HostDir>
+      <ContainerDir>/ps/config</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment>
+    <Variable>
+      <Value>99</Value>
+      <Name>PUID</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>100</Value>
+      <Name>PGID</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>America/Chicago</Value>
+      <Name>TZ</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>error</Value>
+      <Name>PS_LOG_LEVEL</Name>
+      <Mode/>
+    </Variable>
+  </Environment>
+  <Labels/>
+  <Config Name="Web UI" Target="1787" Default="" Mode="tcp" Description="Port to access the HTTP UI. Can be modified by setting the PS_HTTP_PORT environment variable." Type="Port" Display="always" Required="true" Mask="false">1787</Config>
+  <Config Name="Library" Target="/ps/library" Default="/mnt/user/Photos" Mode="rw" Description="This is where your PhotoStructure Library will be stored. It needs to have sufficient free space to hold preview images, and transcoded videos." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/data/media/pictures/</Config>
+  <Config Name="User ID" Target="PUID" Default="" Mode="" Description="This is the userid that PhotoStructure will run under, instead of the default of root (userid 0).&#13;&#10;&#13;&#10;Files copied into your library will be owned by this userid." Type="Variable" Display="always" Required="false" Mask="false">99</Config>
+  <Config Name="Group ID" Target="PGID" Default="" Mode="" Description="This is the groupid that PhotoStructure will run under. " Type="Variable" Display="always" Required="false" Mask="false">100</Config>
+  <Config Name="TZ" Target="TZ" Default="TZ" Mode="" Description="Setting the default timezone helps PhotoStructure infer captured-at time for assets that are missing timezone metadata.&#13;&#10;&#13;&#10;" Type="Variable" Display="always" Required="false" Mask="false">America/Chicago</Config>
+  <Config Name="Plex Family Photos" Target="/familyphotos" Default="" Mode="rw" Description="Container Path: /familyphotos" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/data/media/familyphotos/</Config>
+  <Config Name="Backup Photos" Target="/backupphotos" Default="" Mode="rw" Description="Container Path: /backupphotos" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/Backups/Photos/</Config>
+  <Config Name="Dropbox Photos" Target="/dropboxphotos" Default="" Mode="rw" Description="Container Path: /dropboxphotos" Type="Path" Display="always" Required="false" Mask="false">/mnt/disks/dropbox/Pictures/Austins Photos/</Config>
+  <Config Name="Logging level" Target="PS_LOG_LEVEL" Default="error" Mode="" Description="Valid values are debug, info, warn, and error. Default is error, which (should be) quiet." Type="Variable" Display="advanced" Required="false" Mask="false">error</Config>
+  <Config Name="Temp/Scratch disk" Target="/ps/tmp" Default="/mnt/cache/appdata/photostructure/tmp" Mode="rw" Description="This needs to be fast, local disk." Type="Path" Display="advanced" Required="true" Mask="false">/mnt/cache/appdata/photostructure/tmp</Config>
+  <Config Name="Logs" Target="/ps/logs" Default="/mnt/user/appdata/photostructure/logs" Mode="rw" Description="Logfiles will be written into this directory. Set environment variable " Type="Path" Display="advanced" Required="true" Mask="false">/mnt/user/appdata/photostructure/logs</Config>
+  <Config Name="System config" Target="/ps/config" Default="/mnt/user/appdata/photostructure/config" Mode="rw" Description="System configuration is written into this directory." Type="Path" Display="advanced" Required="true" Mask="false">/mnt/user/appdata/photostructure/config</Config>
+</Container>

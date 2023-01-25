@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>DockerRegistry</Name>
+  <Repository>registry</Repository>
+  <Registry>https://registry.hub.docker.com/_/registry/</Registry>
+  <Network>khaneproxy</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://lime-technology.com/forums/topic/69492-support-jj9987-docker-registry/</Support>
+  <Project>https://github.com/distribution/distribution</Project>
+  <Overview>
+    Docker Registry is used to store and distribute Docker images using HTTP API. This allows you host your own private Registry and store your images. Uses official Docker Registry image @ https://hub.docker.com/_/registry/
+    [br][br]
+
+    [b][u][span style='color: #E80000;']Configuration[/span][/u][/b][br]
+    [b]/mnt/user/appdata/registry[/b] This is where Registry will store it's data.[br]
+    [b]Port 5000[/b] Default connection port[br]
+  </Overview>
+  <Category>Cloud: Network:Management Productivity: Tools:</Category>
+  <WebUI/>
+  <TemplateURL>https://raw.githubusercontent.com/juusujanar/unraid-templates/master/DockerRegistry.xml</TemplateURL>
+  <Icon>https://github.com/juusujanar/unraid-templates/raw/master/img/DockerRegistry-logo.png</Icon>
+  <ExtraParams/>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1635992115</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>&#xD;
+    Docker Registry is used to store and distribute Docker images using HTTP API. This allows you host your own private Registry and store your images.&#xD;
+  </Description>
+  <Networking>
+    <Mode>khaneproxy</Mode>
+    <Publish>
+      <Port>
+        <HostPort>5000</HostPort>
+        <ContainerPort>5000</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/appdata/registry</HostDir>
+      <ContainerDir>/var/lib/registry</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment/>
+  <Labels/>
+  <Config Name="Web Port" Target="5000" Default="5000" Mode="tcp" Description="This is Docker Registry TCP port." Type="Port" Display="always-hide" Required="true" Mask="{8}">5000</Config>
+  <Config Name="Data Storage Path" Target="/var/lib/registry" Default="/mnt/user/appdata/registry" Mode="rw" Description="This is where Docker Registry will store it's data." Type="Path" Display="advanced-hide" Required="true" Mask="{8}">/mnt/user/appdata/registry</Config>
+</Container>

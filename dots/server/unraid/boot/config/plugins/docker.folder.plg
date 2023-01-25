@@ -1,0 +1,392 @@
+<?xml version="1.0" standalone="yes"?>
+<!DOCTYPE PLUGIN [
+<!ENTITY name "docker.folder">
+<!ENTITY author "GuildDarts">
+<!ENTITY version "2022.09.24">
+<!ENTITY launch "Docker/AddFolder">
+<!ENTITY github "Squidly271/docker.folder">
+<!ENTITY plugdir "/usr/local/emhttp/plugins/&name;">
+<!ENTITY pluginURL "https://raw.githubusercontent.com/&github;/main/plugins/&name;.plg">
+<!ENTITY md5 "6db0bf3c7b6655e5e931f50b8ef0a4a4">
+]>
+<PLUGIN name="&name;" author="&author;" version="&version;" pluginURL="&pluginURL;" icon="docker" support="https://forums.unraid.net/topic/89702-plugin-docker-folder/" min="6.10.0">
+<CHANGES>
+###2022.09.24
+- Fix broken VM expand
+- Fix dashboard docker folders
+
+###2022.06.19
+- TheCode's fixes for VM logs
+
+###2022.06.18
+- Removing Debugging Info
+
+###2022.05.23a
+- Re-add dashboard
+
+###2022.05.23
+- WebUI icon wasn't appearing
+
+###2022.05.22
+- 6.10.0 fork with compatibility fixes by Squid
+
+###2021.08.20
+- Check folderType is valid
+- Use post request for running bash commands
+- Fix icon animate hover with none base64 img
+
+###2021.08.01
+- Fix dashboard expanded children order
+- Fix switchButton not rendering when adding folder
+
+###2021.07.27
+- Fix vm migration if no folders exist
+
+###2021.07.04
+- Add option to remove uptime column
+
+###2021.06.08
+- Fix docker preview quick-access icons spinning
+
+###2021.06.04
+- Fix dashboard expanded on folder with no children
+- Fix disable submit button on submit
+- Fix advanced context menu log icon
+- Show dangling children on edit folder page
+- Update chartjs libraries
+
+###2021.03.14
+- Fix folders.json corruption when saving folder
+
+###2021.03.14
+- Fix migrations not working for both docker and vm
+- Fix regex null check
+- Fix import migration
+
+###2021.03.08a
+- Fix regex in safari
+
+###2021.03.08
+- Improve theme support
+- Fix preview icon click
+
+###2021.03.07
+- Fix docker preview log button
+
+###2021.03.03
+- Add first time install help info at launch path
+- Fix unraid 6.9.0 docker dragging
+
+###2021.02.05
+- Fix: vm sorting inside folder
+
+###2021.02.04a
+- Fix: vm folder edit not loading settings
+
+###2021.02.04
+- Fix: add-update vm folder submit
+
+###2021.01.30
+- Fix: disable 'animate icon on hover' on safari
+- Clean up add-update.folder
+
+###2021.01.21
+- Added: preview icon-basic
+- Fixed: long folder names
+- Fixed: docker/vm renaming
+
+###2020.12.05
+- Added: no-icon preview container count options
+- Fixed: dashboard expanded breaking after first open
+- Change: Remove old migration script
+
+###2020.11.11
+- Fixed: Action bash
+- Fixed: Docker action update
+
+###2020.10.28
+- Change: Make preview no-icon fixed height
+- Fixed: editFolder switch not showing state
+- Fixed: dashboard start expanded
+- Fixed: loadlist shifting expanded folders
+
+###2020.10.27
+- Fixed: Align preview no-icon text with only one container
+- Fixed: folderId showing instead of folderName
+- Change: Use "Containers" not "Dockers"
+
+###2020.10.19
+- Fixed: Dashboard not working without VMs enabled
+
+###2020.10.13
+- Change: Allow more characters for folder names
+- Fixed: Prevent multiple scripts from editing folders simultaneously
+- Fixed: Folder order shifting
+- Added: Button help info
+
+###2020.09.09
+- Change: Add hostname to folder export
+
+###2020.08.30
+- Fixed: Preview no webui shortcut and visual issue
+
+###2020.08.25b
+- Fixed: Sort-order attempt the second
+
+###2020.08.25a
+- Fixed: Sort-order not saving
+
+###2020.08.25
+- Added: VM folder support
+- Fixed: Oddly named dockers showing up
+
+###2020.08.11a
+- Fixed: Fix for the prefs being an object and not an array (Thanks darki73)
+
+###2020.08.11
+- Fixed: dfSettings undefined
+
+###2020.07.29
+- Fixed: Mabye fix one more loadlist shifting folders
+- Fixed: Renaming folders
+
+###2020.07.28a
+- Fixed: Expanded folder content moving on loadlist
+
+###2020.07.28
+- Fixed: Refactor migration script and fix a few issues
+- Fixed: folder export
+
+###2020.07.26a
+- Fixed: Object turning into array
+- Fixed: eventControl_edit
+
+###2020.07.26
+- Added: Global settings
+- Added: Option to prevent docker page shifting
+- Added: Preview webui icon
+
+###2020.07.14
+- Fixed: loadlistUpdate not being defined
+
+###2020.07.13
+- Change: A few small style tweaks
+- Change: Cleanup edit functions a bit
+
+###2020.07.05
+- Change: Improve chart performance a bit
+- Change: Make advanced context feel like default context
+- Change: Added padding to preview log icon
+- Fixed: Mapping tab only showing 2 ports and paths
+- Fixed: expanding folder shifting EVERYTHING (thanks bambi73)
+
+###2020.07.02
+- Fixed: Not loading if no prefs (again)
+
+###2020.07.01
+- Added: Preview update text
+- Change: Click folder name to edit folder
+- Fixed: Not getting data in basic view
+- Fixed: Label-tab making preview bold
+- Fixed: Items not showing in advanced/basic view
+- Fixed: Prevent opeing default context menu in advanced
+- Fixed: Advanced context style fixes
+- Fixed: Preview icon causing horizontal scroll
+- Fixed: Folder page text overflow
+- Fixed: Preview/advanced context status not animating
+- Fixed: Renaming folder reseting sort order
+
+###2020.06.26a
+- Fixed: Folders not respecting sort-order
+
+###2020.06.26
+- Added: Advanced context menu (thanks hernandito)
+- Fixed: Folders sometimes not loading
+- Fixed: Log icon not showing in advanced view
+- Fixed: Sort-order getting reset on sort
+
+###2020.06.12
+- Added: Basic help info
+- Added: Preview log icon
+- Change: Style a bit
+
+###2020.06.02
+- Added: New icon style label-tab (thanks hernandito)
+- Added: Only animate icon on hover
+- Added: Preview icons grayscaled as option
+- Added: Preview display only on hover
+- Change: Expand button style default
+- Fixed: Prevent a bit more bad input
+- Fixed: Improve dashboard expanded started only
+
+###2020.05.25
+- Added: preview no-icon context-menu
+- Added: regex docker selection
+- Added: WebUI subcommand
+- Added: subMenu triangle icon
+- Change: Preview and expanded folder style changes (thanks hernandito)
+- Change: Dont run cpuMemoryLoad in basic view
+- Change: Stop folder and docker name being same
+- Change: Display current folder for dockers in editFolder
+- Change: Allow moving docker to and from folder
+- Fixed: preview display order
+- Fixed: preview icon breaking save sort-order
+- Fixed: preview in advanced view
+
+###2020.05.18
+- Added: New docker expand button style
+- Added: Docker preview
+- Added: Log migration
+
+###2020.05.13
+- Fixed: Dashboard expanded border-top
+- Fixed: Dashboard expanded needing specific loadorder
+
+###2020.05.09
+- Change: Improve memory display
+- Change: Save advanced view mode
+- Fixed: Wait for folders to load
+- Fixed: Dashboard Expanded work with other than 3 rows
+
+###2020.05.07
+- Fixed: EventControl
+
+###2020.05.06
+- Fixed: Prefs not existing wrecking hell
+- Fixed: Loadlist increasing status count
+- Fixed: Switchs not working on folders
+- Fixed: Dashboard remove docker from folder on remove
+- Fixed: Dashboard expanded evan nr of children
+
+###2020.05.03
+- Fixed: Migration
+
+###2020.04.30
+- Change: No more hidden docker
+- Change: Allow import of old folders
+- Added: Dashboard expanded button
+- Fixed: Moving expanded folder not saving
+- Fixed: Dashboard expanded
+
+###2020.04.24
+- Added: Dashboard expanded
+- Added: Unraid Docker WebUI construct
+- Change: Allow folder renaming
+- Change: Only restart started dockers
+
+###2020.04.22
+- fix: Docker_Sub_Menu
+- changed: plg launch
+- added: plg icon
+
+###2020.04.16
+- added: status icon autostart
+
+###2020.04.15a
+- fix: remove read_userprefs no longer used
+
+###2020.04.15
+- fix: any docker action removing it from folder
+- fix: activeDropdowns being a bit wonky
+
+###2020.04.14
+- add: update status for folder
+- fix: remove docker from folder on remove
+- fix: dont reset folder position on edit
+
+###2020.04.04c
+- fix: dashboard "started only" hiding folders
+
+###2020.04.04b
+- fix: import folders
+- add: WebUI open in new tab
+
+###2020.04.04a
+- fix: Fing windows 7 (LF no CR LF)
+
+###2020.04.04
+- change: folders are now sortable
+- added: import/export of folders
+- fix: some small fixes
+
+###2020.04.02a
+- fix: folders not saving on firefox (thanks NitroNine)
+
+###2020.04.02
+- fix: fresh installs
+- fix: folderRemove maybe breaking things
+
+###2020.03.28
+- fix: docker sub menu
+- fix: dashboard folder text no longer blue
+
+###2020.03.27a
+- added: choose a icon based on the current containers in the folder (thanks Roxedus)
+
+###2020.03.27
+- fix: missing getVal
+
+###2020.03.24
+- added: better buttons
+- added: folders can now start expanded
+- fix: there is now max image upload size of 3mb (per image)
+
+###2020.03.14
+- added: upload icon
+- fix: added double quotes around Docker_Default so double click does not get a trailing space
+- fix: remove tianon/true orphan image element (no more OCD)
+
+###2020.03.13
+- fix: "add folder" button now displays with Tabbed Mode (Display Settings)
+- fix: folder name no longer allow spaces
+- change: WebUI must start with http/https
+- change: edit/remove dropdown now include Folder at the end
+
+###2020.03.12
+- fix: if folders.json does not exist create it
+- fix: dashboard folder status icon not animating
+- fix: dropdown resetting on loadlist
+
+###2020.03.05
+- Initial Release
+</CHANGES>
+  <FILE Run="/bin/bash">
+    <INLINE>
+# Remove old 'source' files
+rm -f $(ls /boot/config/plugins/&name;/&name;*.txz 2&gt;/dev/null | grep -v '&version;')
+</INLINE>
+  </FILE>
+  <!--
+The 'source' file.
+-->
+  <FILE Name="/boot/config/plugins/&name;/&name;-&version;-x86_64-1.txz" Run="upgradepkg --install-new">
+    <URL>https://raw.github.com/&github;/master/archive/&name;-&version;-x86_64-1.txz</URL>
+    <MD5>&md5;</MD5>
+  </FILE>
+  <!--
+The 'post-install' script
+-->
+  <FILE Run="/bin/bash">
+    <INLINE>
+php &plugdir;/scripts/create_folders_file.php
+php &plugdir;/scripts/migration/common_migration.php
+
+echo ""
+echo "----------------------------------------------------"
+echo " &name; has been installed."
+echo " Version: &version;"
+echo "----------------------------------------------------"
+echo ""
+</INLINE>
+  </FILE>
+  <!--
+The 'remove' script.
+-->
+  <FILE Run="/bin/bash" Method="remove">
+    <INLINE>
+removepkg &name;-&version;-x86_64-1
+rm -rf &plugdir;
+rm -rf /boot/config/plugins/&name;
+</INLINE>
+  </FILE>
+</PLUGIN>

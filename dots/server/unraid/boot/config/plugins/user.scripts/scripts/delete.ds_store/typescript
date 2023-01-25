@@ -1,0 +1,68 @@
+Script started on Sat 18 Feb 2017 11:51:05 PM EST
+]0;root@Server_A: /usr/local/emhttp/plugins/user.scripts/scripts/delete.ds_store[01;32mroot@Server_A[00m:[01;34m/usr/local/emhttp/plugins/user.scripts/scripts/delete.ds_store[00m# cat script
+#!/bin/bash
+echo "Searching for (and deleting) .DS_Store Files"
+echo "This may take a awhile"
+find /mnt/user -maxdepth 9999 -noleaf -type f -name ".DS_Store" -exec rm "{}" \;
+]0;root@Server_A: /usr/local/emhttp/plugins/user.scripts/scripts/delete.ds_store[01;32mroot@Server_A[00m:[01;34m/usr/local/emhttp/plugins/user.scripts/scripts/delete.ds_store[00m# chmod +x script
+]0;root@Server_A: /usr/local/emhttp/plugins/user.scripts/scripts/delete.ds_store[01;32mroot@Server_A[00m:[01;34m/usr/local/emhttp/plugins/user.scripts/scripts/delete.ds_store[00m# cd ..
+]0;root@Server_A: /usr/local/emhttp/plugins/user.scripts/scripts[01;32mroot@Server_A[00m:[01;34m/usr/local/emhttp/plugins/user.scripts/scripts[00m# cd [K[K[Kcd delete_dangling_images/
+]0;root@Server_A: /usr/local/emhttp/plugins/user.scripts/scripts/delete_dangling_images[01;32mroot@Server_A[00m:[01;34m/usr/local/emhttp/plugins/user.scripts/scripts/delete_dangling_images[00m# chmod +x script 
+]0;root@Server_A: /usr/local/emhttp/plugins/user.scripts/scripts/delete_dangling_images[01;32mroot@Server_A[00m:[01;34m/usr/local/emhttp/plugins/user.scripts/scripts/delete_dangling_images[00m# cd ..
+]0;root@Server_A: /usr/local/emhttp/plugins/user.scripts/scripts[01;32mroot@Server_A[00m:[01;34m/usr/local/emhttp/plugins/user.scripts/scripts[00m# cd viewDockerLogSize/
+]0;root@Server_A: /usr/local/emhttp/plugins/user.scripts/scripts/viewDockerLogSize[01;32mroot@Server_A[00m:[01;34m/usr/local/emhttp/plugins/user.scripts/scripts/viewDockerLogSize[00m# chmod +x script 
+]0;root@Server_A: /usr/local/emhttp/plugins/user.scripts/scripts/viewDockerLogSize[01;32mroot@Server_A[00m:[01;34m/usr/local/emhttp/plugins/user.scripts/scripts/viewDockerLogSize[00m# cd /tmp/GitHubuser[K[K[K[K/user.scripts/
+]0;root@Server_A: /tmp/GitHub/user.scripts[01;32mroot@Server_A[00m:[01;34m/tmp/GitHub/user.scripts[00m# ls
+archive  copy_to_git.sh  plugins  source
+]0;root@Server_A: /tmp/GitHub/user.scripts[01;32mroot@Server_A[00m:[01;34m/tmp/GitHub/user.scripts[00m# ls -al
+total 12
+drwxrwxrwx 1 nobody users  60 Feb  5 04:00 .
+drwxrwxrwx 1 nobody users 114 Feb 18 17:03 ..
+drwxrwxrwx 1 nobody users  43 Feb  5 04:00 .git
+-rw-rw-rw- 1 nobody users 395 Aug 23 21:02 .gitattributes
+-rw-rw-rw- 1 nobody users 696 Aug 23 21:02 .gitignore
+drwxrwxrwx 1 nobody users 104 Feb  5 04:00 archive
+-rwxrwxrwx 1 nobody users 247 Dec 31 17:34 copy_to_git.sh
+drwxrwxrwx 1 nobody users  37 Dec 31 18:04 plugins
+drwxrwxrwx 1 nobody users  33 Jan 22 04:00 source
+]0;root@Server_A: /tmp/GitHub/user.scripts[01;32mroot@Server_A[00m:[01;34m/tmp/GitHub/user.scripts[00m# chmod +x copy_to_git.sh 
+]0;root@Server_A: /tmp/GitHub/user.scripts[01;32mroot@Server_A[00m:[01;34m/tmp/GitHub/user.scripts[00m# ls -al
+total 12
+drwxrwxrwx 1 nobody users  60 Feb  5 04:00 .
+drwxrwxrwx 1 nobody users 114 Feb 18 17:03 ..
+drwxrwxrwx 1 nobody users  43 Feb  5 04:00 .git
+-rw-rw-rw- 1 nobody users 395 Aug 23 21:02 .gitattributes
+-rw-rw-rw- 1 nobody users 696 Aug 23 21:02 .gitignore
+drwxrwxrwx 1 nobody users 104 Feb  5 04:00 archive
+-rwxrwxrwx 1 nobody users 247 Dec 31 17:34 copy_to_git.sh
+drwxrwxrwx 1 nobody users  37 Dec 31 18:04 plugins
+drwxrwxrwx 1 nobody users  33 Jan 22 04:00 source
+]0;root@Server_A: /tmp/GitHub/user.scripts[01;32mroot@Server_A[00m:[01;34m/tmp/GitHub/user.scripts[00m# ls
+archive  copy_to_git.sh  plugins  source
+]0;root@Server_A: /tmp/GitHub/user.scripts[01;32mroot@Server_A[00m:[01;34m/tmp/GitHub/user.scripts[00m# copy_to_git.sh 
+'/usr/local/emhttp/plugins/user.scripts/README.md' -> '/tmp/GitHub/user.scripts/source/user.scripts/usr/local/emhttp/plugins/user.scripts/README.md'
+'/usr/local/emhttp/plugins/user.scripts/Userscripts.page' -> '/tmp/GitHub/user.scripts/source/user.scripts/usr/local/emhttp/plugins/user.scripts/Userscripts.page'
+'/usr/local/emhttp/plugins/user.scripts/arrayNotStarted.sh' -> '/tmp/GitHub/user.scripts/source/user.scripts/usr/local/emhttp/plugins/user.scripts/arrayNotStarted.sh'
+'/usr/local/emhttp/plugins/user.scripts/backgroundScript.sh' -> '/tmp/GitHub/user.scripts/source/user.scripts/usr/local/emhttp/plugins/user.scripts/backgroundScript.sh'
+'/usr/local/emhttp/plugins/user.scripts/caCredits.php' -> '/tmp/GitHub/user.scripts/source/user.scripts/usr/local/emhttp/plugins/user.scripts/caCredits.php'
+'/usr/local/emhttp/plugins/user.scripts/cron/user.script.start.weekly.sh' -> '/tmp/GitHub/user.scripts/source/user.scripts/usr/local/emhttp/plugins/user.scripts/cron/user.script.start.weekly.sh'
+'/usr/local/emhttp/plugins/user.scripts/cron/user.script.start.monthly.sh' -> '/tmp/GitHub/user.scripts/source/user.scripts/usr/local/emhttp/plugins/user.scripts/cron/user.script.start.monthly.sh'
+'/usr/local/emhttp/plugins/user.scripts/cron/user.script.start.hourly.sh' -> '/tmp/GitHub/user.scripts/source/user.scripts/usr/local/emhttp/plugins/user.scripts/cron/user.script.start.hourly.sh'
+'/usr/local/emhttp/plugins/user.scripts/cron/user.script.start.daily.sh' -> '/tmp/GitHub/user.scripts/source/user.scripts/usr/local/emhttp/plugins/user.scripts/cron/user.script.start.daily.sh'
+'/usr/local/emhttp/plugins/user.scripts/event/stopping_svcs' -> '/tmp/GitHub/user.scripts/source/user.scripts/usr/local/emhttp/plugins/user.scripts/event/stopping_svcs'
+'/usr/local/emhttp/plugins/user.scripts/event/disks_mounted' -> '/tmp/GitHub/user.scripts/source/user.scripts/usr/local/emhttp/plugins/user.scripts/event/disks_mounted'
+'/usr/local/emhttp/plugins/user.scripts/exec.php' -> '/tmp/GitHub/user.scripts/source/user.scripts/usr/local/emhttp/plugins/user.scripts/exec.php'
+'/usr/local/emhttp/plugins/user.scripts/executeScript.php' -> '/tmp/GitHub/user.scripts/source/user.scripts/usr/local/emhttp/plugins/user.scripts/executeScript.php'
+'/usr/local/emhttp/plugins/user.scripts/helpers.php' -> '/tmp/GitHub/user.scripts/source/user.scripts/usr/local/emhttp/plugins/user.scripts/helpers.php'
+'/usr/local/emhttp/plugins/user.scripts/images/user.scripts.png' -> '/tmp/GitHub/user.scripts/source/user.scripts/usr/local/emhttp/plugins/user.scripts/images/user.scripts.png'
+'/usr/local/emhttp/plugins/user.scripts/images/log.png' -> '/tmp/GitHub/user.scripts/source/user.scripts/usr/local/emhttp/plugins/user.scripts/images/log.png'
+'/usr/local/emhttp/plugins/user.scripts/images/icon-exec.png' -> '/tmp/GitHub/user.scripts/source/user.scripts/usr/local/emhttp/plugins/user.scripts/images/icon-exec.png'
+'/usr/local/emhttp/plugins/user.scripts/images/download.png' -> '/tmp/GitHub/user.scripts/source/user.scripts/usr/local/emhttp/plugins/user.scripts/images/download.png'
+'/usr/local/emhttp/plugins/user.scripts/images/delete-24.png' -> '/tmp/GitHub/user.scripts/source/user.scripts/usr/local/emhttp/plugins/user.scripts/images/delete-24.png'
+'/usr/local/emhttp/plugins/user.scripts/log.txt' -> '/tmp/GitHub/user.scripts/source/user.scripts/usr/local/emhttp/plugins/user.scripts/log.txt'
+'/usr/local/emhttp/plugins/user.scripts/log.zip' -> '/tmp/GitHub/user.scripts/source/user.scripts/usr/local/emhttp/plugins/user.scripts/log.zip'
+'/usr/local/emhttp/plugins/user.scripts/scriptSupportFile.php' -> '/tmp/GitHub/user.scripts/source/user.scripts/usr/local/emhttp/plugins/user.scripts/scriptSupportFile.php'
+'/usr/local/emhttp/plugins/user.scripts/scripts' -> '/tmp/GitHub/user.scripts/source/user.scripts/usr/local/emhttp/plugins/user.scripts/scripts'
+'/usr/local/emhttp/plugins/user.scripts/scripts/delete_dangling_images' -> '/tmp/GitHub/user.scripts/source/user.scripts/usr/local/emhttp/plugins/user.scripts/scripts/delete_dangling_images'
+'/usr/local/emhttp/plugins/user.scripts/scripts/delete_dangling_images/description' -> '/tmp/GitHub/user.scripts/source/user.scripts/usr/local/emhttp/plugins/user.scripts/scripts/delete_dangling_images/description'
+'/usr/local/emhttp/plugins/user.scripts/scripts/delete_dangling_images/scrip

@@ -1,0 +1,2 @@
+This script will display the size of your docker logs, so you can see if runaway logging is contributing to your docker.img file filling up
+

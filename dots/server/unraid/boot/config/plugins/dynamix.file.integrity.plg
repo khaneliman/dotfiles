@@ -1,0 +1,579 @@
+<?xml version="1.0" standalone="yes"?>
+<!DOCTYPE PLUGIN [
+<!ENTITY name "dynamix.file.integrity">
+<!ENTITY author "Bergware">
+<!ENTITY version "2021.08.24e">
+<!ENTITY launch "Settings/FileIntegrity">
+<!ENTITY pluginURL "https://raw.githubusercontent.com/bergware/dynamix/master/unRAIDv6/&name;.plg">
+<!ENTITY source "/boot/config/plugins/&name;/&name;">
+<!ENTITY MD5 "b3ff8924d21a25c56d7c7bd74a4d75aa">
+]>
+<PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" min="6.1.9" support="http://lime-technology.com/forum/index.php?topic=44989.0">
+
+<CHANGES>
+##&name;
+
+###&version;
+- fixed all operations with new export file naming
+- fixed regression error in watcher
+
+###2021.8.23
+- include hashing name in export files (this allows to keep export files for different hashing methods)
+- Note: users must do a new 'Export' or rename existing files manually
+
+###2021.8.21
+- fixed regression errors
+- visual enhancements
+- fixed race-condition when starting operation
+
+###2021.8.20
+- Thanks to user Falcosc this plugin has received numerous updates
+- added blake3 hash support for 2-6 times more hash rate than blake2
+- reduced CPU load up to 4 times at same data rate when using blake3
+- improve build, verify and check speed for all hash methods on small files
+- fixed stacking find commands avoiding clean shutdowns while watching control page
+- fixed starting multiple build status checks while watching control page
+- added monitor background verify processes and all manual bunker script executions
+- fixed rare process status detection bug "Operation aborted"
+- fixed file name truncation if key is broken
+- inline help for disk table and commands more accessible
+- fixed multi-language support for buttons
+- added watch error and warning messages of running or finished progress
+- added Disk status icon for running build status check
+
+###2020.08.21
+- fixed regression error
+
+###2020.06.20
+- updated multi-language support
+
+###2020.05.10
+- updated multi-language support
+
+###2020.04.04
+- fixed mdstat reading
+
+###2020.03.31
+- added multi-language support
+- minor updates
+
+###2020.03.08
+- make plugin compatible with Unraid 6.8 and higher
+
+###2018.04.20
+- fixed uninstaller for unRAID 6.4 and higher
+
+###2017.12.05
+- fixed "exclude" selection is not correctly set upon system startup
+- don't install b2sum package for unRAID 6.4, it is already included
+
+###2017.11.18
+- minor changes in visual display
+
+###2017.10.01
+- fixed checking parity running status in unRAID 6.4
+
+###2017.09.30
+- made compatible with unRAID v6.4
+
+###2017.02.17
+- made compatible with unRAID v6.3
+
+###2016.09.20
+- fixed mdcmd not found error
+
+###2016.08.26
+- fixed folders and files permissions
+- added minimum unRAID version 6.1.9
+
+###2016.08.21
+- made all tables fixed size
+
+###2016.08.21
+- updated tables to accommodate unRAID 6.2 number of data disks
+
+###2016.04.08
+- fixed overcommitment of processor when many files are copied
+
+**PLEASE RE-APPLY THE SETTINGS AFTER THIS UPDATE**
+
+###2016.04.06
+- improved hash processing
+- updated bunker script to version 2.5.1
+
+###2016.04.05
+- improved file copying performance. Array write activity is monitored to delay hash calculations
+- separated file monitoring and file hashing processes (use named pipe to link them)
+- made process termination more robust when stopping array
+
+###2016.04.02
+- changed Corz output to folder structure and stored in zip file
+
+###2016.04.01
+- added conversion of exported hash files to Corz compatible format
+
+###2016.03.30
+- improved speed of file duplication script
+- fixed incorrect build/export updating
+- removed *Done* button when control page is under header menu
+
+###2016.03.29b
+- added warning when exported hash files are not all up-to-date
+- added direct hyperlink to duplicate names/hashes output files
+- added plugin update message (when supported by system)
+
+###2016.03.29
+- moved file integrity control page under Tools
+- added placement of file integrity control page under Tools or Header
+- added scan for file duplication function (find)
+
+###2016.03.21
+- added possibility to disable export status notifications (when no export file exists)
+
+###2016.03.20
+- fixed regression error, background verification not starting when low priority is selected
+- made compatible with unRAID v6.2
+
+###2016.03.19
+- fixed regression error (typo) in bunker script
+
+###2016.03.18
+- fixed selection of data disks in array only
+
+###2016.03.17
+- added start/stop notifications and log entries for processes started in the background
+- changed exportrotate to reporting mode only (passive)
+- improved build and export up-to-date display on control page
+- miscellaneous corrections
+- updated bunker script to version 2.5
+
+###2016.02.23
+- improved regular expressions for folder and file exclusions
+- updated bunker script to version 2.4
+
+###2016.02.21
+- added check for deleted files in exportrotate script
+- changed new hashing results (if enabled) are stored in separate folder 'saved'
+- changed Clear exclusion files list from AND to OR function
+- updated bunker script to version 2.3
+
+###2016.02.20b
+- fixed creation of rogue entries in disks.ini file
+- added view log files
+- added view hash files
+- added dedicated logs folder
+- added dedicated export folder
+
+###2016.02.20a
+- fixed substitution error in exportrotate script (causing cron emails)
+
+###2016.02.20
+- fixed file selection with Clear command when no exclusions exist
+- updated bunker script to version 2.2
+
+###2016.02.19b
+- fixed regression error in command cancelation
+
+###2016.02.19a
+- fixed regression error in export function
+
+###2016.02.19
+- fixed regression errors
+- added list of excluded files on control page
+- improved filtering of excluded folders and/or files, when control commands are executed
+- improved css styling on control page
+- updated bunker script to version 2.1
+
+###2016.02.18c
+- separated custom folders and custom files
+
+###2016.02.18
+- fixed regular expression when share and file names have 'special' characters
+- added *Clear* button, which allows to remove extended attributes from excluded folders and files only
+- added *Custom* field, which allows to enter custom file names and/or file extensions
+- make exclusion of Apple metadata (netatalk) user selectable
+
+###2016.01.19
+- exclude Apple specifics: .AppleDB and .DS_Store
+
+###2016.01.18
+- fixed sed error in cron script
+
+###2016.01.17
+- added process priority parameter (normal, low)
+
+###2016.01.13a
+- improved exclude rule for docker image
+
+###2016.01.13
+- exclude docker image file if located on a data disk, e.g. /mnt/disk1/docker.img
+- fixed cron error message when disks.ini file does not exist
+
+###2016.01.09a
+- fixed missing hash reference in watcher
+
+###2016.01.09
+- fixed text display when check/import command is done and no export file present
+- changed initial build/export to build/export up-to-date (daily scheduled verification done)
+- updated help information
+- minor adjustments
+
+###2016.01.06a
+- added initial build and initial export status of each disk on control page
+- changed "Exit" button to "Done" button
+
+###2016.01.05b
+- fixed cancel operation not always terminating the background processes
+
+###2016.01.05a
+- added colored command in progress bar
+
+###2016.01.05
+- official release
+
+###2016.01.04a
+- fixed parameter quoting in configuration file after a system restart
+
+###2016.01.04
+- changed last message and be more informative when operation is finished
+- improved file clean-up when operation is canceled
+
+###2016.01.03a
+- fixed wrong key length for MD5/SHA256 in bunker script
+- stop all background operations when array is put off-line or system goes down
+- include automatic stop/start service in PLG file
+
+###2016.01.03
+- bunker script refinements
+
+###2016.01.02a
+- fixed highlighting and disabling of 'active' disks on the settings page
+
+###2015.01.02
+- fixed bug in bunker script
+
+###2016.01.01b
+- fixed process termination and display update when a running disk operation is canceled
+
+###2016.01.01a
+- improved process killing when a running disk operation is canceled from the control page
+
+###2016.01.01
+- corrections and updates to bunker script (use new format for all commands)
+
+###2015.12.31b
+- changed export format to the same format as MD5/SHA256/BLAKE2 utilities &lt;hash-key&gt; *&lt;file-name&gt;
+- made display of settings and control pages conditional (array must be started)
+
+**DELETE OLD EXPORT FILES (IF EXISTING) AND REGENERATE**
+
+##2015.12.31
+- added exporter cron job - daily update of export files
+
+###2015.12.30d
+- fixed no display of SHA526 selection on control page
+- added new option *Save new hashing results to flash* (see Help)
+- added BLAKE2 test, option is disabled when unsupported by the processor
+
+###2015.12.30c
+- changed name and extension of export files to 'diskXX.export.hash'
+- changed cron job creation to prevent cron error messages
+- added events to start/stop service with array start/stop
+- fixed race-condition
+- other miscellanuous enhancements
+
+###2015.12.30b
+- adjustments to bunker script
+- optimized watcher
+
+
+###2015.12.30a
+- several corrections in bunker script, mandatory update
+
+###2015.12.30
+- fixed broken highlighting of active verifications
+- changed Remove command to completely empty the attribute information
+
+###2015.12.29a
+- fixed file cleanup when operation is canceled
+- fixed export function with excluded folders
+
+###2015.12.29
+- beta release for unRAID v6.1
+</CHANGES>
+
+<!--
+Copyright 2021, Bergware International
+Dynamix File Integrity - Real-time hashing and verification of files. Report on failed file content integrity (aka bit-rot).
+-->
+
+<!-- PRE-INSTALL SCRIPT -->
+<FILE Run="/bin/bash">
+<INLINE>
+# Stop service
+/usr/local/emhttp/plugins/&name;/scripts/rc.watcher stop 2&gt;/dev/null
+
+# Remove old 'source' packages
+MD5=$(md5sum &source;.txz 2&gt;/dev/null|grep -Po '^\S+')
+if [[ $MD5 != &MD5; ]]; then
+  rm -f &source;*.txz
+fi
+
+# Remove exportrotate script
+rm -f /etc/cron.daily/exportrotate
+</INLINE>
+</FILE>
+
+<!-- EXPORTROTATE SCRIPT - RUNS DAILY -->
+<FILE Name="/etc/cron.daily/exportrotate" Mode="0755">
+<INLINE>
+<![CDATA[
+#!/bin/bash
+plugin=dynamix.file.integrity
+conf=/etc/inotifywait.conf
+path=/boot/config/plugins/$plugin
+
+pidof -x exportrotate -o %PPID >/dev/null && exit 0 #is already running, don't execute this IO intensive task twice
+[[ -f /proc/mdstat ]] && mdstat=mdstat || mdstat=mdcmd
+[[ ! -f $conf || $(grep -Po '^mdState=\K.*' /proc/$mdstat) != STARTED || ! -f $path/disks.ini ]] && exit 0
+gui=$1
+
+source $conf 2>/dev/null
+tmpfile=/tmp/d.$RANDOM.list
+ifs=$IFS
+
+if [[ -z $method ]]; then
+  hash=sha256
+elif [[ $method == -b2 ]]; then
+  hash=blake2
+elif [[ $method == -b3 ]]; then
+  hash=blake3
+else
+  hash=md5
+fi
+
+[[ -n $gui ]] && devs=$(grep -Po '^(name|device)="\K[^"]+' /var/local/emhttp/disks.ini 2>/dev/null)
+[[ ${exclude:0:1} == '(' ]] && exclude=${exclude:1:-1}
+[[ -z $disks ]] && disks=/mnt/disk[0-9]*
+
+filter() {
+  case $1 in
+  0)
+    IFS='|'
+    for key in $exclude; do
+      key="$disk/$key"
+      sed -ri "s/: user.$hash: No such attribute$//;/^${key//\//\\/}/d" $tmpfile
+    done
+    IFS=$ifs
+    files=$(cat $tmpfile|wc -l)
+    if [[ $files -gt 0 ]]; then
+      ((day+=$files))
+      sed -ri "/$hdd/ s/,?build//g" $path/disks.ini
+      echo -n "$hdd," >>$tmpfile.build
+    else
+      if ! grep -q "^$hdd=" $path/disks.ini; then
+        echo "$hdd=build" >>$path/disks.ini
+      elif ! grep -q "^$hdd=.*build" $path/disks.ini; then
+        sed -ri "s/(^$hdd=.*)/\1,build/" $path/disks.ini
+      fi
+    fi ;;
+  1)
+    IFS='|'
+    for key in $exclude; do
+      key="$disk/$key"
+      sed -ri "/^#file: ${key//\//\\/}/,/^$/d" $tmpfile
+    done
+    IFS=$ifs
+    files=$(grep -c '^#file: ' $tmpfile) ;;
+  2)
+    sed -ri "/$hdd/ s/,?export//g" $path/disks.ini
+    echo -n "$hdd," >>$tmpfile.export
+    files=0 ;;
+  esac
+}
+
+plural() {
+  [[ $1 -eq 1 ]] && echo -n "$2" || echo -n "$2s"
+}
+
+opt() {
+  case $1 in
+  s)
+    echo -n "$(cat $2|sed 's/,/, /g;s/disk/Disk /g;s/, $/ /')"
+    [[ $(cat $2|wc -w) -eq 1 ]] && echo -n "$3s" || echo -n "$3" ;;
+  d)
+    if [[ $2 -lt 0 ]]; then
+      [[ $3 -gt 0 ]] && echo -n "$3 new $(plural $3 file) without hash value"
+    else
+      [[ $2 -gt 0 ]] && echo -n "$2 new $(plural $2 file) not exported, "
+      [[ $3 -gt 0 ]] && echo -n "$3 non-existing $(plural $3 file) in export file"
+      [[ $2 -eq 0 && $3 -eq 0 ]] && echo -n "missing export file"
+    fi ;;
+  esac
+}
+
+dev() {
+  d=
+  for dev in $devs; do
+    [[ -n $d ]] && break
+    [[ $1 == $dev ]] && d=1
+  done
+  echo -n $dev
+}
+
+get() {
+  echo -n $(grep -Po "^$1=\"\K[^\"]+" $path/$plugin.cfg)
+}
+
+touch -t $(date -d "@$(($(date +%s)-86400))" +%Y%m%d%H%M.%S) $tmpfile.0
+
+day=0; new=0; old=0
+for disk in $disks; do
+  hdd=${disk:5}
+  [[ -n $gui && -z $(hdparm -C /dev/$(dev $hdd) 2>/dev/null|grep -o active) ]] && continue
+  [[ -n $gui && -f /var/tmp/${hdd}.tmp ]] && continue #skip disk monitoring if user is watching progressbar
+  sed -ri "s/(^$hdd=.*)/\1,analyse/" $path/disks.ini
+  find $disk -type f -name "*" -newer $tmpfile.0 -exec getfattr -n user.$hash --absolute-names "{}" 1>/dev/null 2>$tmpfile +
+  # new files in the past 24 hours
+  filter 0
+  hashfile=$path/export/$hdd.export.$hash.hash
+  if [[ -s $hashfile ]]; then
+    changed=0
+    touch -t $(date -d "@$(stat -c %Y $hashfile)" +%Y%m%d%H%M.%S) $tmpfile.1
+    find $disk -type f -name "*" -newer $tmpfile.1 -exec getfattr -n user.$hash --absolute-names "{}" 1>$tmpfile 2>/dev/null +
+    filter 1
+    if [[ $files -gt 0 ]]; then
+      [[ -z $gui ]] && changed=1
+      # non-exported files
+      ((new+=$files))
+      filter 2
+    fi
+    IFS='*'
+    while read -ra file; do
+      [[ -n "${file[1]}" && ! -f "${file[1]}" ]] && ((files++))
+    done <$hashfile
+    IFS=$ifs
+    if [[ $files -gt 0 ]]; then
+      [[ -z $gui ]] && changed=1
+      # missing files
+      ((old+=$files))
+      filter 2
+    fi
+    if [[ $changed -eq 1 && $(get cmd) == A ]]; then
+      # update export file
+      echo -n "export"
+    fi
+  fi
+  sed -ri "/$hdd/ s/,?analyse//g" $path/disks.ini
+done
+
+if [[ -z $gui && -n $(get notify) ]]; then
+  notify=/usr/local/emhttp/webGui/scripts/notify
+  event="Dynamix file integrity daily update"
+  server=$(grep -Po '^NAME="\K\w+' /var/local/emhttp/var.ini 2>/dev/null)
+  [[ -z $server ]] && server=tower
+  [[ -s $tmpfile.build ]] && $notify -e "$event" -s "Notice [${server^^}] - $(opt s $tmpfile.build need) Build & Export updating" -d "$(opt d -1 $day)" -x
+  [[ -s $tmpfile.export ]] && $notify -e "$event" -s "Notice [${server^^}] - $(opt s $tmpfile.export need) Export updating" -d "$(opt d $new $old)" -x
+fi
+
+rm -f $tmpfile*
+exit 0
+]]>
+</INLINE>
+</FILE>
+
+<!-- WORKAROUND -->
+<FILE Name="/tmp/start_service" Mode="0770">
+<INLINE>
+#!/bin/bash
+/usr/local/emhttp/plugins/&name;/scripts/rc.watcher start
+</INLINE>
+</FILE>
+
+<!-- INOTIFY-TOOLS PACKAGE -->
+<FILE Name="/boot/packages/inotify-tools-3.14-x86_64-1.txz" Run="upgradepkg --install-new" Max="6.2.9">
+<URL>http://mirrors.slackware.com/slackware/slackware64-14.1/slackware64/a/inotify-tools-3.14-x86_64-1.txz</URL>
+</FILE>
+
+<!-- B2SUM PACKAGE (prepared by Bergware) -->
+<FILE Name="/boot/packages/b2sum-20130305-x86_64-1.txz" Run="upgradepkg --install-new" Max="6.3.9">
+<URL>https://raw.githubusercontent.com/bergware/dynamix/master/archive/b2sum-20130305-x86_64-1.txz</URL>
+</FILE>
+
+<!-- B2SUM PACKAGE (prepared by falcosc) -->
+<FILE Name="/boot/packages/b3sum-1.0.0-x86_64-1.txz" Run="upgradepkg --install-new">
+<URL>https://raw.githubusercontent.com/bergware/dynamix/master/archive/b3sum-1.0.0-x86_64-1.txz</URL>
+</FILE>
+
+<!-- SOURCE PACKAGE -->
+<FILE Name="&source;.txz" Run="upgradepkg --install-new --reinstall">
+<URL>https://raw.githubusercontent.com/bergware/dynamix/master/archive/&name;.txz</URL>
+<MD5>&MD5;</MD5>
+</FILE>
+
+<!-- POST-INSTALL SCRIPT -->
+<FILE Run="/bin/bash">
+<INLINE>
+usb=/boot/config/plugins/&name;
+cfg=&source;.cfg
+if [[ ! -e $cfg ]]; then
+  cfg=/usr/local/emhttp/plugins/&name;/default.cfg
+fi
+[[ -e /proc/mdstat ]] &amp;&amp; mdcmd=mdstat || mdcmd=mdcmd
+# get unRAID key
+getkey(){
+  local mdcmd=/proc/mdstat
+  if [[ -e $mdcmd ]]; then
+    local key=$1
+    grep -Po "^$key=\K.*" $mdcmd
+  fi
+}
+
+# Create logs, export, saved folders
+mkdir -p $usb/logs $usb/export $usb/saved
+
+# Move hash files from legacy location to export folder
+mv -f $usb/*.hash $usb/export 2&gt;/dev/null
+
+# Start service
+enable=$(grep -Po '^service="\K[^"]+' $cfg)
+if [[ $enable -eq 1 &amp;&amp; $(getkey mdState) == STARTED ]]; then
+  at -M -f /tmp/start_service now 2&gt;/dev/null
+fi
+rm -f /tmp/start_service
+
+echo ""
+echo "-----------------------------------------------------------"
+echo " Plugin &name; is installed."
+echo " This plugin requires Dynamix webGui to operate"
+echo " Copyright 2021, Bergware International"
+echo " Version: &version;"
+echo "-----------------------------------------------------------"
+echo ""
+</INLINE>
+</FILE>
+
+<!-- REMOVE SCRIPT -->
+<FILE Run="/bin/bash" Method="remove">
+<INLINE>
+# Stop all processes
+/usr/local/emhttp/plugins/&name;/event/stopping_svcs
+
+# Uninstall the packages
+. /etc/unraid-version
+[[ ${version:3:1} == . ]] &amp;&amp; version=${version:0:3} || version=${version:0:4}
+
+removepkg &name;
+if [[ $version == 6.3 || $version == 6.2 || $version == 6.1 || $version == 6.0 ]]; then
+  removepkg b2sum-20130305-x86_64-1
+fi
+if [[ $version == 6.2 || $version == 6.1 || $version == 6.0 ]]; then
+  removepkg inotify-tools-3.14-x86_64-1
+fi
+
+# Remove exportrotate cron job
+rm -f /etc/cron.daily/exportrotate
+</INLINE>
+</FILE>
+
+</PLUGIN>

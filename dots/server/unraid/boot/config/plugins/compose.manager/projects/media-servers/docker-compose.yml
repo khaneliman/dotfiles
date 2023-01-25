@@ -1,0 +1,294 @@
+version: "3.6"
+services:
+  plex:
+    container_name: "plex"
+    devices:
+      - "/dev/dri:/dev/dri"
+    entrypoint:
+      - "/init"
+    environment:
+      - "HOST_CONTAINERNAME=plex"
+      - "UMASK=022"
+      - "VERSION=docker"
+      - "PUID=99"
+      - "PGID=100"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "HOME=/root"
+      - "TERM=xterm"
+      - "S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0"
+      - "S6_VERBOSITY=1"
+      - "S6_STAGE2_HOOK=/docker-mods"
+      - "NVIDIA_DRIVER_CAPABILITIES=compute,video,utility"
+      - "DEBIAN_FRONTEND=noninteractive"
+      - "PLEX_DOWNLOAD=https://downloads.plex.tv/plex-media-server-new"
+      - "PLEX_ARCH=amd64"
+      - "PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR=/config/Library/Application Support"
+      - "PLEX_MEDIA_SERVER_HOME=/usr/lib/plexmediaserver"
+      - "PLEX_MEDIA_SERVER_MAX_PLUGIN_PROCS=6"
+      - "PLEX_MEDIA_SERVER_USER=abc"
+      - "PLEX_MEDIA_SERVER_INFO_VENDOR=Docker"
+      - "PLEX_MEDIA_SERVER_INFO_DEVICE=Docker Container (LinuxServer.io)"
+    expose:
+      - "1900/udp"
+      - "3005/tcp"
+      - "32400/tcp"
+      - "32410/udp"
+      - "32412/udp"
+      - "32413/udp"
+      - "32414/udp"
+      - "32469/tcp"
+      - "5353/udp"
+      - "8324/tcp"
+    hostname: "AustinServer"
+    image: "lscr.io/linuxserver/plex"
+    ipc: "private"
+    labels:
+      build_version:
+        "Linuxserver.io version:- 1.30.1.6562-915986d62-ls148 Build-date:-\
+        \ 2023-01-10T21:49:53+01:00"
+      maintainer: "thelamer"
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/plex-logo.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:32400]/web/index.html"
+      org.opencontainers.image.authors: "linuxserver.io"
+      org.opencontainers.image.created: "2023-01-10T21:49:53+01:00"
+      org.opencontainers.image.description:
+        "[Plex](https://plex.tv) organizes video,\
+        \ music and photos from personal media libraries and streams them to smart\
+        \ TVs, streaming boxes and mobile devices. This container is packaged as a\
+        \ standalone Plex Media Server. has always been a top priority. Straightforward\
+        \ design and bulk actions mean getting things done faster."
+      org.opencontainers.image.documentation: "https://docs.linuxserver.io/images/docker-plex"
+      org.opencontainers.image.licenses: "GPL-3.0-only"
+      org.opencontainers.image.ref.name: "8d73aa5c12d2eb00438f9cbf05bae0bbc6463840"
+      org.opencontainers.image.revision: "8d73aa5c12d2eb00438f9cbf05bae0bbc6463840"
+      org.opencontainers.image.source: "https://github.com/linuxserver/docker-plex"
+      org.opencontainers.image.title: "Plex"
+      org.opencontainers.image.url: "https://github.com/linuxserver/docker-plex/packages"
+      org.opencontainers.image.vendor: "linuxserver.io"
+      org.opencontainers.image.version: "1.30.1.6562-915986d62-ls148"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    network_mode: "host"
+    volumes:
+      - "/mnt/user/temp/Transcode:/transcode"
+      - "/mnt/cache/appdata/plex:/config"
+      - "/mnt/user/data/media:/data"
+    working_dir: "/"
+
+  Stash:
+    command:
+      - "stash"
+    container_name: "Stash"
+    environment:
+      - "HOST_CONTAINERNAME=Stash"
+      - "STASH_CACHE=/cache/"
+      - "STASH_METADATA=/metadata/"
+      - "STASH_GENERATED=/generated/"
+      - "STASH_STASH=/data/"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "STASH_CONFIG_FILE=/root/.stash/config.yml"
+    hostname: "c6939c7be73d"
+    image: "stashapp/stash"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/CorneliousJD/Docker-Templates/master/icons/stash.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:9999]"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "6969:9999/tcp"
+    volumes:
+      - "/mnt/user/data/media/shadowplay/temp/local/AppData/temp2:/data2"
+      - "/mnt/cache/appdata/stash/generated:/generated"
+      - "/mnt/cache/appdata/stash/metadata:/metadata"
+      - "/mnt/cache/appdata/stash/config:/root/.stash"
+      - "/mnt/cache/appdata/stash/cache:/cache"
+      - "/mnt/user/data/media/shadowplay/temp/local/AppData/temp:/data"
+
+  Kavita:
+    command:
+      - "/entrypoint.sh"
+    container_name: "Kavita"
+    entrypoint:
+      - "/bin/bash"
+    environment:
+      - "HOST_CONTAINERNAME=Kavita"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    hostname: "ad5cde491050"
+    image: "kizaing/kavita"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/Kareadita/Kavita/develop/UI/Web/src/assets/icons/android-chrome-192x192.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:5000]"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "5002:5000/tcp"
+    volumes:
+      - "/mnt/cache/appdata/kavita:/kavita/config"
+      - "/mnt/user/data/media/books:/library"
+    working_dir: "/kavita"
+
+  PhotoPrism:
+    command:
+      - "/opt/photoprism/bin/photoprism"
+      - "start"
+    container_name: "PhotoPrism"
+    entrypoint:
+      - "/scripts/entrypoint.sh"
+    environment:
+      - "PHOTOPRISM_AUTO_IMPORT=180"
+      - "PHOTOPRISM_JPEG_QUALITY=90"
+      - "PHOTOPRISM_STORAGE_PATH=/photoprism/storage"
+      - "PHOTOPRISM_SITE_TITLE=PhotoPrism"
+      - "PHOTOPRISM_SITE_DESCRIPTION="
+      - "PHOTOPRISM_SITE_AUTHOR="
+      - "PHOTOPRISM_THUMB_FILTER=lanczos"
+      - "PHOTOPRISM_EXPERIMENTAL=false"
+      - "PHOTOPRISM_UID=99"
+      - "PHOTOPRISM_SITE_CAPTION=Browse Your Life"
+      - "PHOTOPRISM_JPEG_SIZE=7680"
+      - "PHOTOPRISM_THUMB_UNCACHED=false"
+      - "PHOTOPRISM_THUMB_SIZE=2048"
+      - "PHOTOPRISM_THUMB_SIZE_UNCACHED=7680"
+      - "PHOTOPRISM_DATABASE_DSN=photoprism:ant*ctv6pkv5GDK-akt@tcp(mariadb:3306)/photoprism?parseTime=true"
+      - "PHOTOPRISM_AUTO_INDEX=180"
+      - "PHOTOPRISM_GID=100"
+      - "PHOTOPRISM_UPLOAD_NSFW=true"
+      - "PHOTOPRISM_DATABASE_DRIVER=mysql"
+      - "PHOTOPRISM_DARKTABLE_PRESETS=false"
+      - "HOST_CONTAINERNAME=PhotoPrism"
+      - "PHOTOPRISM_DETECT_NSFW=false"
+      - "PHOTOPRISM_SETTINGS_HIDDEN=false"
+      - "PATH=/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin:/scripts:/opt/photoprism/bin"
+      - "PHOTOPRISM_ARCH=amd64"
+      - "DOCKER_TAG=221118-jammy"
+      - "DOCKER_ENV=prod"
+      - "PS1=\\u@:\\w$ "
+      - "LD_LIBRARY_PATH=/usr/local/lib:/usr/lib"
+      - "TMPDIR=/tmp"
+      - "DEBIAN_FRONTEND=noninteractive"
+      - "TF_CPP_MIN_LOG_LEVEL=2"
+      - "PROG=photoprism"
+      - "PHOTOPRISM_ASSETS_PATH=/opt/photoprism/assets"
+      - "PHOTOPRISM_IMPORT_PATH=/photoprism/import"
+      - "PHOTOPRISM_ORIGINALS_PATH=/photoprism/originals"
+      - "PHOTOPRISM_BACKUP_PATH=/photoprism/storage/backups"
+      - "PHOTOPRISM_LOG_FILENAME=/photoprism/storage/photoprism.log"
+      - "PHOTOPRISM_PID_FILENAME=/photoprism/storage/photoprism.pid"
+      - "PHOTOPRISM_DEBUG=false"
+      - "PHOTOPRISM_PUBLIC=false"
+      - "PHOTOPRISM_READONLY=false"
+      - "PHOTOPRISM_SITE_URL=http://photoprism.me:2342/"
+      - "PHOTOPRISM_HTTP_HOST=0.0.0.0"
+      - "PHOTOPRISM_HTTP_PORT=2342"
+      - "PHOTOPRISM_DATABASE_SERVER="
+      - "PHOTOPRISM_DATABASE_NAME=photoprism"
+      - "PHOTOPRISM_DATABASE_USER=photoprism"
+      - "PHOTOPRISM_DATABASE_PASSWORD="
+      - "PHOTOPRISM_DISABLE_CHOWN=false"
+      - "PHOTOPRISM_DISABLE_WEBDAV=false"
+      - "PHOTOPRISM_DISABLE_SETTINGS=false"
+      - "PHOTOPRISM_DISABLE_BACKUPS=false"
+      - "PHOTOPRISM_DISABLE_EXIFTOOL=false"
+      - "PHOTOPRISM_DISABLE_PLACES=false"
+      - "PHOTOPRISM_DISABLE_TENSORFLOW=false"
+      - "PHOTOPRISM_DISABLE_FACES=false"
+      - "PHOTOPRISM_DISABLE_CLASSIFICATION=false"
+      - "PHOTOPRISM_RAW_PRESETS=false"
+      - "PHOTOPRISM_WORKERS=0"
+      - "PHOTOPRISM_WAKEUP_INTERVAL=900"
+    hostname: "ab5d1237ef13"
+    image: "photoprism/photoprism"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/ich777/docker-templates/master/ich777/images/photoprism.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:2342]/"
+      org.opencontainers.image.authors: "Michael Mayer <hello@photoprism.app>"
+      org.opencontainers.image.description: "Ubuntu 22.04 LTS (Jammy Jellyfish)"
+      org.opencontainers.image.documentation: "https://docs.photoprism.app/getting-started/"
+      org.opencontainers.image.source: "https://github.com/photoprism/photoprism"
+      org.opencontainers.image.title:
+        "PhotoPrism® Community Edition (Ubuntu 22.04\
+        \ LTS)"
+      org.opencontainers.image.url: "https://hub.docker.com/repository/docker/photoprism/photoprism"
+      org.opencontainers.image.vendor: "PhotoPrism UG"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "2342:2342/tcp"
+    restart: "unless-stopped"
+    volumes:
+      - "/mnt/user/backup/Photos:/backupphotos"
+      - "/mnt/user/data/media/familyphotos:/photoprism/import"
+      - "/mnt/user/data/media/photoprism:/photoprism/originals"
+      - "/mnt/cache/appdata/photoprism:/photoprism/storage"
+    working_dir: "/photoprism"
+
+  binhex-jellyfin:
+    command:
+      - "/bin/bash"
+      - "/usr/local/bin/init.sh"
+    container_name: "binhex-jellyfin"
+    entrypoint:
+      - "/usr/bin/dumb-init"
+      - "--"
+    environment:
+      - "HOST_CONTAINERNAME=binhex-jellyfin"
+      - "UMASK=000"
+      - "PUID=99"
+      - "PGID=100"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "HOME=/home/nobody"
+      - "TERM=xterm"
+    hostname: "8f3bc44f34da"
+    image: "binhex/arch-jellyfin"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/binhex/docker-templates/master/binhex/images/jellyfin-icon.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:8096]/"
+      org.opencontainers.image.authors: "= binhex"
+      org.opencontainers.image.source: "= https://github.com/binhex/arch-jellyfin"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "8096:8096/tcp"
+    volumes:
+      - "/mnt/cache/appdata/binhex-jellyfin:/config"
+      - "/mnt/user/data/media:/media"
+
+networks:
+  br0:
+    external: true
+    name: "br0"
+  khaneproxy:
+    external: true
+    name: "khaneproxy"

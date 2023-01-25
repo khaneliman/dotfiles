@@ -1,0 +1,3 @@
+# Generated system monitoring schedule:
+*/1 * * * * /usr/local/emhttp/plugins/dynamix/scripts/monitor &> /dev/null
+

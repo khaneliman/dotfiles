@@ -1,0 +1,31 @@
+services:
+  plex:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/plex-logo.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:32400]/web/index.html'
+      net.unraid.docker.shell: ''
+  Stash:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/CorneliousJD/Docker-Templates/master/icons/stash.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:9999]'
+      net.unraid.docker.shell: ''
+  Kavita:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/Kareadita/Kavita/develop/UI/Web/src/assets/icons/android-chrome-192x192.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:5000]'
+      net.unraid.docker.shell: ''
+  PhotoPrism:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/ich777/docker-templates/master/ich777/images/photoprism.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:2342]/'
+      net.unraid.docker.shell: ''
+  binhex-jellyfin:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/binhex/docker-templates/master/binhex/images/jellyfin-icon.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:8096]/'
+      net.unraid.docker.shell: ''

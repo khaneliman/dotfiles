@@ -1,0 +1,25 @@
+services:
+  petio:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://hotio.dev/webhook-avatars/petio.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:7777]'
+      net.unraid.docker.shell: ''
+  ombi:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/ombi.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:3579]/'
+      net.unraid.docker.shell: ''
+  overseerr:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://hotio.dev/webhook-avatars/overseerr.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:5055]'
+      net.unraid.docker.shell: ''
+  requestrr:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://hotio.dev/webhook-avatars/requestrr.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:4545]'
+      net.unraid.docker.shell: ''

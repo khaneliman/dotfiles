@@ -1,0 +1,159 @@
+<?xml version='1.0' standalone='yes'?>
+<!DOCTYPE PLUGIN [
+<!ENTITY name      "libvirt.hotplug.usb">
+<!ENTITY author    "dlandon">
+<!ENTITY version   "2022.08.19">
+<!ENTITY launch    "VMs/libvirthotplugusb">
+<!ENTITY gitURL		"https://raw.githubusercontent.com/&author;/&name;/master">
+<!ENTITY pluginURL	"&gitURL;/&name;.plg">
+<!ENTITY supportURL	"https://forums.unraid.net/topic/70001-libvirt-hot-plugin-usb-usb-hot-plugin-for-vms/?tab=comments#comment-640678">
+<!ENTITY MD5       "74a88b668454d690988bbdfd627339ea">
+]>
+
+<PLUGIN name="&name;"
+		author="&author;"
+		version="&version;"
+		launch="&launch;"
+		pluginURL="&pluginURL;"
+		support="&supportURL;"
+		icon="usb"
+		min="6.7.0">
+
+<CHANGES>
+##&name;
+###&version;
+- Fix: Reference to GitHub repository.
+
+###2022.05.25
+- Fix: Php error.
+
+###2022.05.24
+- Add: Plugin update check.
+
+###2022.09.17
+- Fix: Code review and cleanup.
+
+###2021.08.21
+- Fix: Code review and cleanup.
+
+###2021.05.28
+- Fix: Minor UI adjustments.
+
+###2021.05.19
+- Fix: Minimum version changed to 6.7.
+- Fix: Remove unneeded images folder.
+
+###2021.03.09
+- Fix: Plugin permissions.
+
+###2020.12.13
+- Fix: URL reference conflicting with Unraid.
+
+###2020.06.21
+- Add: Multi Language support.
+
+###2020.06.21
+- Fix: icons for v6.
+
+###2018.12.08
+- Fix: Some more UI adjustments.
+
+###2018.12.07
+- Fix: Sort VMs and USB devices in alphabetic order.
+- Fix: Change UI to be more Unraid style.
+
+###2018.04.08
+- Removed help and added to UI.
+- Change icon.
+
+###2018.03.21
+- Update unRAID minimum version check.
+
+###2018.03.11
+- Modifications to webgui, added help, and some code optimizations.
+
+###2018.03.10a
+- Update for unRAID 6.5 VM file structure changes.
+
+###2016.03.13
+- Using libvirt.php for Running VMs 
+- Fix for VM names with spaces
+
+###2016.03.09
+
+- launch and icon fix
+
+###2016.03.06
+
+- initial release for unRAID v6
+
+</CHANGES>
+
+<!--
+Copyright 2018-2022, Dan Landon
+libvirt usb hot plug addon plugin
+-->
+
+<!--
+Get the plugin bundle.
+-->
+<FILE Name="/boot/config/plugins/&name;/&name;-&version;.tgz">
+<URL>"&gitURL;/&name;-&version;.tgz"</URL>
+<MD5>&MD5;</MD5>
+</FILE>
+
+<!--
+The 'pre-install' script.
+-->
+<FILE Run="/bin/bash">
+<INLINE>
+# Remove emhttp files so we can re-install.
+rm -rf /usr/local/emhttp/plugins/&name;/* 2>/dev/null
+
+# Remove old 'bundle' files.
+rm -f $(ls /boot/config/plugins/&name;/&name;*.tgz 2>/dev/null | grep -v '&version;')
+</INLINE>
+</FILE>
+
+<!--
+Install the plugin bundle.
+-->
+<FILE Run="/bin/bash">
+<INLINE>
+# Install the 'bundle'.
+tar -xf /boot/config/plugins/&name;/&name;-&version;.tgz -C /usr/local/emhttp/plugins 2>/dev/null
+</INLINE>
+</FILE>
+
+<!-- POST-INSTALL SCRIPT -->
+<FILE Run="/bin/bash">
+<INLINE>
+echo ""
+echo "-----------------------------------------------------------"
+echo " &name; has been installed."
+echo " This plugin requires Dynamix webGui to operate"
+echo " Copyright 2016, Burhan Shakil"
+echo " Copyright 2018-2022, Dan Landon"
+echo " Version: &version;"
+echo "-----------------------------------------------------------"
+echo ""
+</INLINE>
+</FILE>
+
+<!-- REMOVE SCRIPT -->
+<FILE Run="/bin/bash" Method="remove">
+<INLINE>
+# Remove all plugin files.
+rm -rf /boot/config/plugins/&name; 2>/dev/null
+rm -rf /usr/local/emhttp/plugins/&name; 2>/dev/null
+
+echo ""
+echo "-----------------------------------------------------------"
+echo " &name; has been removed."
+echo " Version: &version;"
+echo "-----------------------------------------------------------"
+echo ""
+</INLINE>
+</FILE>
+
+</PLUGIN>

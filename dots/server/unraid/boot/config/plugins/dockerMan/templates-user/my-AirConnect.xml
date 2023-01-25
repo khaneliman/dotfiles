@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>AirConnect</Name>
+  <Repository>1activegeek/airconnect</Repository>
+  <Registry>https://hub.docker.com/r/1activegeek/airconnect/</Registry>
+  <Network>host</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://forums.unraid.net/topic/87798-support-selfhostersnets-template-repository/</Support>
+  <Project>https://github.com/philippe44/AirConnect</Project>
+  <Overview>AirConnect container for turning Chromecast into Airplay targets&#xD;
+[br][br]&#xD;
+This is a containerized build of the fantastic program by philippe44 called AirConnect. It allows you to be able to use AirPlay to push audio to Chromecast and UPNP based devices. There are some advanced details and information that you should review on his GitHub Project. &#xD;
+[br][br]&#xD;
+[b]https://github.com/philippe44/AirConnect[/b]&#xD;
+[br][br]&#xD;
+For the most part this container needs nothing more than to launch it using Host networking.</Overview>
+  <Category>MediaServer:Video MediaServer:Music MediaServer:Other Status:Stable</Category>
+  <WebUI/>
+  <TemplateURL>https://raw.githubusercontent.com/selfhosters/unRAID-CA-templates/master/templates/airconnect.xml</TemplateURL>
+  <Icon>https://i.imgur.com/hatCnm0.png</Icon>
+  <ExtraParams>--memory=50M</ExtraParams>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1635429590</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>AirConnect container for turning Chromecast into Airplay targets&#xD;
+[br][br]&#xD;
+This is a containerized build of the fantastic program by philippe44 called AirConnect. It allows you to be able to use AirPlay to push audio to Chromecast and UPNP based devices. There are some advanced details and information that you should review on his GitHub Project. &#xD;
+[br][br]&#xD;
+[b]https://github.com/philippe44/AirConnect[/b]&#xD;
+[br][br]&#xD;
+For the most part this container needs nothing more than to launch it using Host networking.</Description>
+  <Networking>
+    <Mode>host</Mode>
+    <Publish/>
+  </Networking>
+  <Data/>
+  <Environment/>
+  <Labels/>
+</Container>

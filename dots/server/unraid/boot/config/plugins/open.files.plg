@@ -1,0 +1,184 @@
+<?xml version='1.0' standalone='yes'?>
+<!DOCTYPE PLUGIN [
+<!ENTITY name       "open.files">
+<!ENTITY author     "dlandon">
+<!ENTITY version    "2022.08.19">
+<!ENTITY launch    "Tools/OpenFiles">
+<!ENTITY gitURL		"https://raw.githubusercontent.com/&author;/&name;/master">
+<!ENTITY pluginURL	"&gitURL;/&name;.plg">
+<!ENTITY supportURL	"https://forums.unraid.net/topic/41196-open-files-plugin-can-help-with-troubleshooting-why-server-wont-shut-down/">
+<!ENTITY MD5		"50aa0579c58e46ff5d8c4be57d0ef171">
+]>
+
+<PLUGIN	name="&name;"
+		author="&author;"
+		version="&version;"
+		launch="&launch;"
+		pluginURL="&pluginURL;"
+		support="&supportURL;"
+		icon="folder-open"
+		min="6.7.0">
+
+<CHANGES>
+##&name;
+###&version;
+- Fix: Reference to GitHub repository.
+
+###2021.08.21
+- Fix: Code review and cleanup.
+
+###2021.05.28.
+- Fix: Minor UI adjustments.
+
+###2021.05.19
+- Fix: Minimum version changed to 6.7.
+- Fix: Remove unneeded images folder.
+
+###2021.03.09
+- Fix: Plugin permissions.
+
+###2020.11.20
+- Fix: Revert max version.
+
+###2020.11.14
+- Add: Max version to 6.8.9.
+
+###2020.06.27
+- Add: Multi Language support.
+- Fix: Add Kill button to table.
+- Fix: Trim file path in the middle, rather than truncate long file name.
+- Fix: Update open files check for 6.9.
+
+###2019.01.14
+- Icons for v6.
+
+###2018.03.21
+- Change minimum Unraid version check.
+
+###2017.06.21
+- Changes for Azure and Gray theme screen widths.
+
+###2017.02.13
+- Minor code cleanup and cosmetic changes.
+
+###2016.10.22
+- Updates for compatibility with Unraid 6.2 and later.
+
+###2016.09.06
+- Removed stop array processes.
+
+###2015.12.18
+- Added MD5 checksum to bundle file.
+
+###2015.12.14
+- Add: Unraid version check.  Only Unraid 6.1 and higher.
+
+###2015.09.20
+- Fix: Plugin installation changes.
+
+###2015.09.19a
+- Fix: Typo in help and minor changes.
+
+###2015.09.17
+- Fix: New icon thanks to hernandito.
+
+###2015.09.16a
+- Add: Cosmetic changes.
+
+###2015.09.16
+- Add: Check for array started before allowing 'Stop Array Processes'.
+- Fix: Removed unused code.
+- Fix: Rewrote README.md.
+
+###2015.09.15a
+- Fix: When open files plugin is installed by itself, it was not creating a "System Information" group in the Tools.
+- Add: Added a 'Stop Array Processes' button to stop all array processes, but not stop the array.
+- Add: Additional help to explain the troubleshooting process.
+- Add: Removed the open files tab from Main.  It really didn't belong there, caused issues with the tabs, and doesn't have much value now.
+- Add: 'Yes I want to do this' checkbox to confirm the 'Stop Array Processes'.
+
+###2015.09.15
+- Fix: Changed 'Main->Files Open' to 'Main->Open Files' to minimize confusion.
+
+###2015.09.14a
+- Add: Files Open tab on Main.
+
+###2015.09.14
+- Add: Ability to sort columns.
+
+###2015.09.13
+- Initial Unraid V6.1 release.
+</CHANGES>
+
+<!--
+Copyright 2015-2022, Dan Landon
+The Open Files plugin shows files that are open that could
+prevent a clean shutdown of the array and lets you kill those
+tasks.
+-->
+
+<!--
+Get the plugin bundle.
+-->
+<FILE Name="/boot/config/plugins/&name;/&name;-&version;.tgz">
+<URL>"&gitURL;/&name;-&version;.tgz"</URL>
+<MD5>&MD5;</MD5>
+</FILE>
+
+<!--
+The 'pre-install' script.
+-->
+<FILE Run="/bin/bash">
+<INLINE>
+# Remove emhttp files so we can re-install.
+rm -f -r /usr/local/emhttp/plugins/&name;/* 2>/dev/null
+
+# Remove old 'bundle' files.
+rm -f $(ls /boot/config/plugins/&name;/&name;*.tgz 2>/dev/null | grep -v '&version;')
+</INLINE>
+</FILE>
+
+<!--
+Install the plugin bundle.
+-->
+<FILE Run="/bin/bash">
+<INLINE>
+# Install the 'bundle'.
+tar -xf /boot/config/plugins/&name;/&name;-&version;.tgz -C /usr/local/emhttp/plugins 2>/dev/null
+</INLINE>
+</FILE>
+
+<!--
+The 'post-install' script.
+-->
+<FILE Run="/bin/bash">
+<INLINE>
+echo ""
+echo "-----------------------------------------------------------"
+echo " &name; is installed."
+echo " Copyright 2015-2022, &author;"
+echo " Version: &version;"
+echo "-----------------------------------------------------------"
+echo ""
+</INLINE>
+</FILE>
+
+<!--
+The 'remove' script.
+-->
+<FILE Run="/bin/bash" Method="remove">
+<INLINE>
+# Remove all plugin files.
+rm -f -r /usr/local/emhttp/plugins/&name; 2>/dev/null
+rm -f -r /boot/config/plugins/&name; 2>/dev/null
+
+echo ""
+echo "-----------------------------------------------------------"
+echo " &name; has been removed."
+echo " Version: &version;"
+echo "-----------------------------------------------------------"
+echo ""
+</INLINE>
+</FILE>
+
+</PLUGIN>

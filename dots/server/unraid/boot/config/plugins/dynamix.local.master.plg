@@ -1,0 +1,126 @@
+<?xml version="1.0" standalone="yes"?>
+<!DOCTYPE PLUGIN [
+<!ENTITY name "dynamix.local.master">
+<!ENTITY author "Bergware">
+<!ENTITY version "2020.06.20">
+<!ENTITY pluginURL "https://raw.githubusercontent.com/bergware/dynamix/master/unRAIDv6/&name;.plg">
+<!ENTITY source "/boot/config/plugins/&name;/&name;">
+<!ENTITY MD5 "47e77fade0ebeb819b903796a58c4fc5">
+]>
+<PLUGIN name="&name;" author="&author;" version="&version;" pluginURL="&pluginURL;" min="6.1.9" support="http://lime-technology.com/forum/index.php?topic=36543.0">
+
+<CHANGES>
+##&name;
+
+###&version;
+- updated multi-language support
+
+###2020.05.10
+- updated multi-language support
+
+###2020.03.31
+- added multi-language support
+
+###2016.09.13
+- fixed absolute path using $docroot
+
+###2016.08.26
+- fixed folders and files permissions
+- added minimum unRAID version 6.1.9
+
+###2016.01.29
+- fixed wrong image reference in readme file
+
+###2016.01.24
+- changed file locations and made plugin autonomous
+
+###2015.12.30
+- changed to hook solution for main page display
+
+###2015.12.15
+- fixed regression error
+- changed icon display under SMB workgroup
+
+###2015.12.14
+- added unRAID version check. Only version 6.1 or higher is allowed
+- updated consistency of PLG file
+
+###2015.12.13
+- changed .txz file naming to support consistent package upgrading
+
+###2015.10.12
+- fixed timer pause/resume function
+- changed file extension of temporary file to avoid conflict with diagnostics
+
+###2015.09.26
+- added: enable/disable election monitoring
+- changed: display of elected local master browser
+
+###2015.09.05
+- test release for unRAID v6.1 only
+</CHANGES>
+
+<!--
+Copyright 2020, Bergware International
+Dynamix local master - Monitors and shows the local master election in an SMB network
+-->
+
+<!-- PRE-INSTALL SCRIPT -->
+<FILE Run="/bin/bash">
+<INLINE>
+# Remove old 'source' packages
+MD5=$(md5sum &source;.txz 2&gt;/dev/null|grep -Po '^\S+')
+if [[ $MD5 != &MD5; ]]; then
+  rm -f &source;*.txz
+fi
+
+# Remove legacy cron
+flash=/boot/config/plugins/dynamix
+if [[ -f $flash/localmaster.cron ]]; then
+  rm -f $flash/localmaster.cron
+  /usr/local/sbin/update_cron
+  sed -i '/^monitor=/d' $flash/dynamix.cfg
+fi
+
+</INLINE>
+</FILE>
+
+<!-- SOURCE PACKAGE -->
+<FILE Name="&source;.txz" Run="upgradepkg --install-new --reinstall">
+<URL>https://raw.githubusercontent.com/bergware/dynamix/master/archive/&name;.txz</URL>
+<MD5>&MD5;</MD5>
+</FILE>
+
+<!-- POST-INSTALL SCRIPT -->
+<FILE Run="/bin/bash">
+<INLINE>
+echo ""
+echo "-----------------------------------------------------------"
+echo " Plugin &name; is installed."
+echo " This plugin requires Dynamix webGui to operate"
+echo " Copyright 2020, Bergware International"
+echo " Version: &version;"
+echo "-----------------------------------------------------------"
+echo ""
+</INLINE>
+</FILE>
+
+<!-- REMOVE SCRIPT -->
+<FILE Run="/bin/bash" Method="remove">
+<INLINE>
+# Remove plugin related files
+rm -rf /boot/config/plugins/&name;
+
+# Update cron
+/usr/local/sbin/update_cron
+
+# Uninstall the 'source' package
+removepkg &name;
+
+# Remove setting
+sed -i '/^monitor=/d' /boot/config/plugins/dynamix/dynamix.cfg
+
+</INLINE>
+</FILE>
+
+</PLUGIN>

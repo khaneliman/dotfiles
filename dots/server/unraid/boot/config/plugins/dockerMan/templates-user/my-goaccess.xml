@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>goaccess</Name>
+  <Repository>gregyankovoy/goaccess</Repository>
+  <Registry>https://hub.docker.com/r/gregyankovoy/goaccess/dockerfile</Registry>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://hub.docker.com/r/gregyankovoy/goaccess</Support>
+  <Project/>
+  <Overview>GoAccess is an open source real-time web log analyzer and interactive viewer that runs in a terminal in *nix systems or through your browser. It provides fast and valuable HTTP statistics for system administrators that require a visual server report on the fly.</Overview>
+  <Category/>
+  <WebUI>http://[IP]:[PORT:7889]/</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/GregYankovoy/docker-templates/master/greg/goaccess.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/gregyankovoy/docker-templates/master/greg/img/goaccess-logo.png</Icon>
+  <ExtraParams/>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1634747987</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>GoAccess is an open source real-time web log analyzer and interactive viewer that runs in a terminal in *nix systems or through your browser. It provides fast and valuable HTTP statistics for system administrators that require a visual server report on the fly.</Description>
+  <Networking>
+    <Mode>bridge</Mode>
+    <Publish>
+      <Port>
+        <HostPort>7889</HostPort>
+        <ContainerPort>7889</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/appdata/dmz/goaccess/log</HostDir>
+      <ContainerDir>/opt/log</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/appdata/goaccess</HostDir>
+      <ContainerDir>/config</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment>
+    <Variable>
+      <Value>99</Value>
+      <Name>PUID</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>100</Value>
+      <Name>PGID</Name>
+      <Mode/>
+    </Variable>
+  </Environment>
+  <Labels/>
+  <Config Name="Host Port 1" Target="7889" Default="7889" Mode="tcp" Description="Container Port: 7889" Type="Port" Display="always" Required="true" Mask="false">7889</Config>
+  <Config Name="Host Path 2" Target="/opt/log" Default="" Mode="rw" Description="Container Path: /opt/log" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/dmz/goaccess/log</Config>
+  <Config Name="Key 1" Target="PUID" Default="99" Mode="" Description="Container Variable: PUID" Type="Variable" Display="always" Required="false" Mask="false">99</Config>
+  <Config Name="Key 2" Target="PGID" Default="100" Mode="" Description="Container Variable: PGID" Type="Variable" Display="always" Required="false" Mask="false">100</Config>
+  <Config Name="AppData Config Path" Target="/config" Default="/mnt/user/appdata/goaccess" Mode="rw" Description="Container Path: /config" Type="Path" Display="advanced-hide" Required="true" Mask="false">/mnt/user/appdata/goaccess</Config>
+</Container>

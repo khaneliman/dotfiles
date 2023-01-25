@@ -1,0 +1,13 @@
+services:
+  binhex-nzbget:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/binhex/docker-templates/master/binhex/images/nzbget-icon.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:6789]/'
+      net.unraid.docker.shell: ''
+  qbittorrentvpn:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/binhex/docker-templates/master/binhex/images/qbittorrent-icon.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:8082]/'
+      net.unraid.docker.shell: ''

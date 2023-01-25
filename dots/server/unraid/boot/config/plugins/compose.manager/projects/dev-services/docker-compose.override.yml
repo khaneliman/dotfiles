@@ -1,0 +1,25 @@
+services:
+  adminer:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/selfhosters/unRAID-CA-templates/master/templates/img/adminer.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:8080]'
+      net.unraid.docker.shell: ''
+  DockerRegistry:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://github.com/juusujanar/unraid-templates/raw/master/img/DockerRegistry-logo.png'
+      net.unraid.docker.webui: ''
+      net.unraid.docker.shell: ''
+  CloudBeaver:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/CorneliousJD/Docker-Templates/master/icons/cloudbeaver.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:8978]/'
+      net.unraid.docker.shell: ''
+  binhex-jenkins:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/binhex/docker-templates/master/binhex/images/jenkins-icon.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:8090]/'
+      net.unraid.docker.shell: ''

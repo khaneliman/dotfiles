@@ -1,0 +1,2 @@
+#!/bin/bash
+python3 mnt/user/appdata/Plex-Meta-Manager/plex_remove_holiday_collections.py

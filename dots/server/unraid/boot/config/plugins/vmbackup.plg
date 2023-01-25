@@ -1,0 +1,289 @@
+<?xml version='1.0' standalone='yes'?>
+
+<!DOCTYPE PLUGIN [
+<!ENTITY name       "vmbackup">
+<!ENTITY author     "jtok">
+<!ENTITY version    "2022.12.25">
+<!ENTITY tag        "v0.2.5">
+<!ENTITY branch     "master">
+<!ENTITY launch     "Settings/Vmbackup">
+<!ENTITY icon       "clone">
+<!ENTITY gitURL     "https://raw.githubusercontent.com/&author;/unraid.&name;/&branch;">
+<!ENTITY pluginURL  "&gitURL;/&name;.plg">
+<!ENTITY supportURL "https://forums.unraid.net/topic/86303-vm-backup-plugin/">
+<!ENTITY packages   "/boot/config/plugins/&name;/packages">
+<!ENTITY xmlstarlet "xmlstarlet-1.6.1-x86_64-1_slonly">
+<!ENTITY XMLMD5     "1539a7b5c9ea9c45fb0ec95418dfadb6">
+<!ENTITY MD5        "62e708fcad3ba7ff854fe3f0f63eca60">
+]>
+
+<PLUGIN name="&name;"
+  author="&author;"
+  version="&version;"
+  pluginURL="&pluginURL;"
+  support="&supportURL;"
+  launch="&launch;"
+  icon="&icon;"
+  min="6.7.0">
+
+<CHANGES>
+##&name;
+
+### v0.2.5 - 2022/12/25
+**The Last Dancer**
+
+- fixed typo in import for jquery filetree
+- fixed issue with renaming and deleting configs not showing configurations
+- cleaned up code
+- enabled beta for backup extra files
+- re-added option to backup vms while they are running
+
+### v0.2.4 - 2021/03/12
+**Fettuccine Afraido**
+
+- removed pigz and reverted back to standard gzip to reduce complexity.
+- fixed issue with legacy options not being updated correctly.
+- fixed issue with old package files not being removed.
+- fixed plugin package removal.
+- moved txt and json files from usb to /tmp to reduce writes to usb.
+- added option to backup configs.
+- added option to backup pre and post scripts.
+
+### v0.2.3 - 2021/03/11
+**Firetown**
+
+- removed max unraid version.
+- hotfix for graphic issues related to broken EOL characters.
+
+### v0.2.2 - 2021/02/03
+**Raz of the SAZ**
+
+- added checks to kill stuck scripts.
+- updated pigz to pigz-2.3-x86_64-2_slonly.
+- set max unraid version to 6.8.3 until 6.9 testing is done.
+- added version number to bottom of Settings tab.
+
+### v0.2.1 - 2020/02/20
+**Pika Pika**
+
+- merged changes from unraid-vmbackup script v1.3.1.
+- added seconds to logs.
+- added option to use zstandard compression.
+- added option to create a vm specific log in each vm's subfolder.
+- added config drop-down selection to the top of each tab.
+- updated method used to determine cpu thread count.
+
+### v0.2.0 - 2020/01/21
+**The Resistance**
+
+- fixed new config options not always getting added to user config.
+- fixed parenthesis in vm names.
+- added ability to run pre and post scripts.
+- added option to run backup without array started.
+- added confirmation dialogs to destructive or dangerous buttons.
+- added support for multiple configs/schedules.
+- added option to allow multiple configs to run simultaneously.
+- added option to set compression level.
+- added option to set the number of threads used during compression.
+- changed compression program from gzip to pigz to support multi-threading.
+- changed alert dialogs to use sweet alerts.
+- updated help for custom cron.
+
+### v0.1.9 - 2019/12/31
+**Flame Broiled**
+
+- fixed snapshot extension form validation.
+- added file versions to reduce writes to thumb drive.
+- added option to run backup even during parity check.
+- added alert if enable backups is set to 'No' when apply button is hit.
+- added ability to view latest log file.
+- updated buttons and pages to use XHR (ajax) for asynchronous loading to reduce page refreshes.
+- updated code to reduce page load times.
+- implemented md5 hash checks for package files during install.
+- removed "vms to backup while running" option due to difficulties with the menu item.
+
+### v0.1.8 - 2019/12/24
+**Penny Wise and Pound Stupid**
+
+- fixed weekly cronjob.
+- fixed validation to allow spaces in paths.
+- fixed cronjob not being removed during uninstall.
+- fixed extension matching case sensitivity.
+- added fix for stuck snapshots.
+- added ability to abort running scripts.
+- changed default folder start location based on restrictive validation setting.
+- updated help.
+- updated lists to be sorted alphabetically.
+
+### v0.1.7 - 2019/12/22
+**Ms. Frizzle**
+
+- fixed minor issues.
+- fixed paths requiring trailing slashes.
+- fixed backup location drop-down color when using black theme.
+- added additional logging.
+- added donate button.
+- added backup now button.
+- changed backup location drop-down start folder to /mnt/.
+- updated help.
+- updated readme.
+
+### v0.1.6 - 2019/12/18b
+**Powered by Caffeine**
+
+- fixed spacing in tmp log file.
+- fixed issue with xml plugin url.
+
+###v0.1.5 - 2019/12/18a
+**This Beer is Tasty**
+
+- fixed issue with runscript.php not being included in plugin package.
+- changed how logging is handled when running the script.
+
+###v0.1.4 - 2019/12/18
+**Aging Gracelessly**
+
+- intial beta release
+- based on unraid-vmbackup script v1.2.2 at https://github.com/JTok/unraid-vmbackup.
+</CHANGES>
+
+
+<!--
+  pre-install script.
+-->
+<FILE Run="/bin/bash">
+  <INLINE>
+    # remove plugin files from emhttp.
+    rm -rf /usr/local/emhttp/plugins/&name; 2>/dev/null
+
+    # remove old txt and json files.
+    rm -f /boot/config/plugins/&name;/*.txt 2>/dev/null
+    rm -f /boot/config/plugins/&name;/*.json 2>/dev/null
+    rm -f /tmp/&name;/*.txt 2>/dev/null
+    rm -f /tmp/&name;/*.json 2>/dev/null
+
+    # remove old package files.
+    rm -f /boot/config/plugins/&name;/*.txz 2>/dev/null
+    rm -f /boot/config/plugins/&name;/packages/*.txz 2>/dev/null
+
+    # remove xmlstarlet.
+    removepkg xmlstarlet* 2>/dev/null
+
+    # remove pigz.
+    removepkg pigz* 2>/dev/null
+
+    # create plugin tmp folder.
+    mkdir -p /tmp/&name;
+  </INLINE>
+</FILE>
+
+
+<!--
+  xmlstarlet package file.
+-->
+<FILE Name="&packages;/&xmlstarlet;.txz" Run="upgradepkg --install-new">
+  <URL>"&gitURL;/packages/&xmlstarlet;.txz"</URL>
+  <MD5>&XMLMD5;</MD5>
+</FILE>
+
+
+<!--
+  plugin package file.
+-->
+<FILE Name="/boot/config/plugins/&name;/&name;-&tag;-&version;.txz" Run="upgradepkg --install-new">
+  <URL>&gitURL;/&name;-&tag;-&version;.txz</URL>
+  <MD5>&MD5;</MD5>
+</FILE>
+
+
+<!--
+  set plugin permissions.
+-->
+<FILE Run="/bin/bash">
+  <INLINE>
+    chmod -R 755 /usr/local/emhttp/plugins/&name;
+    chmod -R 777 /tmp/&name;
+  </INLINE>
+</FILE>
+
+
+<!--
+  create initial user files.
+-->
+<FILE Run="/bin/bash">
+  <INLINE>
+    # remove legacy default cronjob.
+    ( crontab -l | grep -v -F "# Job for VM Backup plugin:" ) | crontab -
+    ( crontab -l | grep -v -F "/usr/local/emhttp/plugins/vmbackup/runscript.php run_backup > /dev/null" ) | crontab -
+    # update files and re-add missing cronjobs.
+    /usr/local/emhttp/plugins/vmbackup/scripts/commands.sh update_user_conf_file all
+    /usr/local/emhttp/plugins/vmbackup/scripts/commands.sh update_user_script all
+    /usr/local/emhttp/plugins/vmbackup/scripts/commands.sh create_vm_lists rebuild_text_files
+  </INLINE>
+</FILE>
+
+<!--
+  clean old files.
+-->
+<FILE Run="/bin/bash">
+  <INLINE>
+    find /boot/config/plugins/&name;/ -type f -iname "&name;*.txz" ! -iname "*&tag;*" -delete
+    find &packages;/ -type f -iname "xmlstarlet*.txz" ! -iname "&xmlstarlet;.txz" -delete
+  </INLINE>
+</FILE>
+
+
+<!--
+  finished message.
+-->
+<FILE Run="/bin/bash">
+  <INLINE>
+    echo ""
+    echo "-----------------------------------------------------------"
+    echo " &name; has been installed."
+    echo " copyright 2019-$(date +'%Y'), &author;"
+    echo " version: &tag; - &version;"
+    echo "-----------------------------------------------------------"
+    echo ""
+  </INLINE>
+</FILE>
+
+
+<!--
+  remove plugin.
+-->
+<FILE Run="/bin/bash" Method="remove">
+  <INLINE>
+    # remove cronjob.
+    ( crontab -l | grep -v -F "# Job for VM Backup plugin:" ) | crontab -
+    ( crontab -l | grep -v -F "/usr/local/emhttp/plugins/vmbackup/runscript.php" ) | crontab -
+
+    # remove installed packages.
+    find "&packages;/" -type f -iname "*.txz" -delete
+
+    # remove plugin config folder.
+    rm -rf /boot/config/plugins/&name;
+
+    # remove plugin folder.
+    rm -rf /usr/local/emhttp/plugins/&name;
+
+    # remove plugin files from tmp.
+    rm -rf /tmp/&name;
+
+    # remove xmlstarlet.
+    removepkg &xmlstarlet;
+
+    # remove plugin.
+    removepkg &name;-&tag;-&version;
+
+    echo ""
+    echo "-----------------------------------------------------------"
+    echo " &name; has been uninstalled."
+    echo " copyright 2019-$(date +'%Y'), &author;"
+    echo " version: &tag; - &version;"
+    echo "-----------------------------------------------------------"
+    echo ""
+  </INLINE>
+</FILE>
+
+</PLUGIN>

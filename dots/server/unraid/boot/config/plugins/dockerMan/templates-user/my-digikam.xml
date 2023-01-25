@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>digikam</Name>
+  <Repository>linuxserver/digikam</Repository>
+  <Registry>https://hub.docker.com/r/linuxserver/digikam/</Registry>
+  <Network>khaneproxy</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://forums.unraid.net/topic/97233-support-linuxserverio-digikam/</Support>
+  <Project>https://www.digikam.org/</Project>
+  <Overview>digiKam: Professional Photo Management with the Power of Open Source[br]By default the user/pass is abc/abc</Overview>
+  <Category>MediaApp:Photos</Category>
+  <WebUI>http://[IP]:[PORT:3000]</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/digikam.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/digikam.png</Icon>
+  <ExtraParams/>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1635525423</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>digiKam: Professional Photo Management with the Power of Open Source[br]By default the user/pass is abc/abc</Description>
+  <Networking>
+    <Mode>khaneproxy</Mode>
+    <Publish>
+      <Port>
+        <HostPort>3000</HostPort>
+        <ContainerPort>3000</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/appdata/digikam</HostDir>
+      <ContainerDir>/config</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/data/media/pictures/</HostDir>
+      <ContainerDir>/pictures</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment>
+    <Variable>
+      <Value>99</Value>
+      <Name>PUID</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>100</Value>
+      <Name>PGID</Name>
+      <Mode/>
+    </Variable>
+  </Environment>
+  <Labels/>
+  <Config Name="WebUI" Target="3000" Default="3000" Mode="tcp" Description="Container Port: 3000" Type="Port" Display="always" Required="false" Mask="false">3000</Config>
+  <Config Name="Appdata" Target="/config" Default="" Mode="rw" Description="Appdata" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/digikam</Config>
+  <Config Name="PUID" Target="PUID" Default="99" Mode="" Description="Container Variable: PUID" Type="Variable" Display="always" Required="false" Mask="false">99</Config>
+  <Config Name="PGID" Target="PGID" Default="100" Mode="" Description="Container Variable: PGID" Type="Variable" Display="always" Required="false" Mask="false">100</Config>
+  <Config Name="Pictures" Target="/pictures" Default="" Mode="rw" Description="Container Path: /pictures" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/data/media/pictures/</Config>
+</Container>

@@ -1,0 +1,292 @@
+<?xml version='1.0' standalone='yes'?>
+<!DOCTYPE PLUGIN [
+<!ENTITY name       "enhanced.log">
+<!ENTITY author     "dlandon">
+<!ENTITY version    "2022.10.15a">
+<!ENTITY launch		"Tools/EnhancedSyslog">
+<!ENTITY gitURL		"https://raw.githubusercontent.com/&author;/&name;/master">
+<!ENTITY pluginURL	"&gitURL;/&name;.plg">
+<!ENTITY supportURL	"https://forums.unraid.net/topic/43115-enhanced-log-view-with-lines-highlighted-in-color/">
+<!ENTITY MD5		"78b8c320d2870b757f9be1dec5d641e8">
+]>
+
+<PLUGIN	name="&name;"
+		author="&author;"
+		version="&version;"
+		launch="&launch;"
+		pluginURL="&pluginURL;"
+		support="&supportURL;"
+		icon="align-left"
+		min="6.7.0">
+
+<CHANGES>
+##&name;
+###&version;
+- Fix: Adjust buttons on bottom of page to show when using 'fixed' listing height.
+- Add: Plugin update check.
+
+###2022.08.19
+- Fix: Reference to GitHub repository.
+
+###2021.08.21
+- Fix: Code cleanup.
+
+###2021.05.28
+- Fix: Minor UI changes.
+- Fix: Help text to be compatible with other plugins.
+
+###2021.05.20
+- Fix: Minimum version changed to 6.7.
+- Fix: Keep configuration files on flash drive when uninstalling.
+- Fix: Remove unneeded images folder.
+- Fix: Handle rsyslog filtering when plugin is installed and removed.
+
+###2021.04.11
+- Fix: Log filter not working.
+
+###2021.03.20
+- Fix: Plugin permissions.
+
+###2020.11.20
+- Fix: Revert max version.
+
+###2020.11.20
+- Add: Max Unraid version 6.8.9.
+
+###2020.11.14
+- Add: Multi Language support.
+
+###2020.01.04
+- Add: Setting on how many lines to display in the Enhanced Syslog.
+
+###2019.12.26
+- Fix: Move apply syslog filter to 'started' event.
+- Fix: Change some icons.
+
+###2019.12.24a
+- Fix: Hang when displaying the log.
+
+###2019.12.15a
+-Add: Added syslog filter.
+
+###2019.02.24
+- Add: Refresh button and automatic scroll to the bottom when the log is loaded.
+
+###2019.02.19
+- Fix: Display complete log including rotated logs.
+
+###2019.02.12
+- Fix: Error message on console.
+
+###2019.02.10
+- Fix: Enhanced System Log no longer replaces the Unraid System Log due to additional enhancements in the built in System Log to support viewing and downloading logs from the Syslog Server.  It is now separated in the 'Tools->Unraid OS' section.
+
+###2019.02.07
+- Fix: Change file structure to not interfere with Unraid 6.7 syslog settings.
+
+###2019.01.30
+- Add: Additional match strings.
+
+###2019.01.28a
+- Fix: Fix some highlighting issues.
+
+###2019.01.18a
+- Fix: Change font awesome icon.
+- Fix: Initial color scheme when installing plugin.
+
+###2019.01.15
+- Fix: Change default colors to be more compatible with the black theme.
+
+2019.01.14
+- Fix: Icons for v6.
+
+###2018.11.04
+- Fix Unraid capitalization.
+
+###2017.12.16
+- Added 'microcode' to match strings.
+
+###2017.11.01
+- Fixed match strings for UD logging.
+
+###2017.07.06
+- Added some match strings for Unraid 6.4.
+
+###2017.06.18
+- More adjustments for the new Azure and Gray themes in Unraid 6.4.
+
+###2017-06-17b
+- Added some new match strings for Unraid 6.4.
+- Made some adjustments for the new Azure and Gray themes in Unraid 6.4.
+
+###2017.05.16
+- Tweak menu tabs.
+
+###2017.02.19
+- Replace the built-in Syslog with the enhanced Syslog.
+
+###2016.10.22
+- Updates for compatibility with Unraid 6.2 and later.
+
+###2016.09.06
+- Fixed broken link to html color chart.
+
+###2016.01.21
+- Fixed match string causing false positive "killer".
+
+###2016.01.16
+- Compatibility with Unraid 6.1.7.
+
+###2016.01.14
+- Fixed match strings causing false positives related to pre-clear messages.
+
+###2016.01.12
+- Fixed match strings order - "checksumming" before "checksum".
+
+###2016.01.05
+- Fixed false positives - "dev error handler" and "not tainted".
+
+###2015.01.04
+- Modified error and login match strings to help prevent false positives and prioritize highlighting.
+
+###2015.12.29
+- Initial Unraid V6.1 release.
+</CHANGES>
+
+<!--
+Copyright 2015-2022, Dan Landon
+This plugin adds a webGui page to view the system log with highlighted lines.
+You can enable or disable event highlighting and set your own colors for each event.
+You can add your own search string to highlight in the log.
+-->
+
+<!--
+Get the plugin bundle.
+-->
+<FILE Name="/boot/config/plugins/&name;/&name;-&version;.tgz">
+<URL>"&gitURL;/&name;-&version;.tgz"</URL>
+<MD5>&MD5;</MD5>
+</FILE>
+
+<!--
+The 'pre-install' script.
+-->
+<FILE Run="/bin/bash">
+<INLINE>
+# Remove emhttp files so we can re-install.
+rm -rf /usr/local/emhttp/plugins/&name;/* 2>/dev/null
+
+# Remove old 'bundle' files.
+rm -f $(ls /boot/config/plugins/&name;/&name;*.tgz 2>/dev/null | grep -v '&version;')
+</INLINE>
+</FILE>
+
+<!--
+Install the plugin bundle.
+-->
+<FILE Run="/bin/bash">
+<INLINE>
+# Create plugin directory
+mkdir /boot/config/plugins/&name; 2>/dev/null
+
+# Install the 'bundle'.
+tar -xf /boot/config/plugins/&name;/&name;-&version;.tgz -C /usr/local/emhttp/plugins 2>/dev/null
+
+# Fix permissions of executable files
+chmod +x /usr/local/emhttp/plugins/&name;/scripts/* /usr/local/emhttp/plugins/&name;/event/*
+
+# Start rsyslog filtering.
+echo "Restarting rsyslog..."
+/usr/local/emhttp/plugins/&name;/scripts/rc.enhanced.log
+</INLINE>
+</FILE>
+
+<FILE Name="/boot/config/plugins/&name;/&name;.cfg">
+<INLINE>
+<![CDATA[
+TEXT="yes"
+ERRORS="yes"
+MINOR_ISSUES="yes"
+LIME_TECH="yes"
+ARRAY="yes"
+SYSTEM="yes"
+FILE_SYSTEM="yes"
+DRIVE_RELATED="yes"
+NETWORK="yes"
+LOGIN="yes"
+EMHTTP="no"
+OTHER="no"
+ERRORS_CLR="IndianRed"
+MINOR_ISSUES_CLR="LightCoral"
+LIME_TECH_CLR="LimeGreen"
+ARRAY_CLR="DarkSeaGreen"
+SYSTEM_CLR="Gray"
+FILE_SYSTEM_CLR="Fuchsia"
+DRIVE_RELATED_CLR="CornFlowerBlue"
+NETWORK_CLR="Violet"
+LOGIN_CLR="LightSalmon"
+EMHTTP_CLR="CadetBlue"
+OTHER_CLR="SeaGreen"
+]]>
+</INLINE>
+</FILE>
+
+<FILE Name="/boot/config/plugins/&name;/custom_syslog.conf">
+<INLINE>
+<![CDATA[
+"Recycle Bin", "other"
+]]>
+</INLINE>
+</FILE>
+
+<FILE Name="/boot/config/plugins/&name;/syslog_filter.conf">
+<INLINE>
+<![CDATA[
+"this is an example line"
+]]>
+</INLINE>
+</FILE>
+
+<!--
+The 'post-install' script.
+
+-->
+<FILE Run="/bin/bash">
+<INLINE>
+echo ""
+echo "-----------------------------------------------------------"
+echo " Plugin &name; is installed."
+echo " Copyright 2015-2022, Dan Landon"
+echo " Version: &version;"
+echo "-----------------------------------------------------------"
+echo ""
+</INLINE>
+</FILE>
+
+<!--
+The 'remove' script.
+-->
+<FILE Run="/bin/bash" Method="remove">
+<INLINE>
+# Remove rsyslog filtering.
+rm -rf /etc/rsyslog.d/02-blocklist-extra.conf
+# Restart rsyslog
+echo "Restarting rsyslog..."
+/etc/rc.d/rc.rsyslogd restart >/dev/null
+
+# Remove the enhanced log 'bundle' so it will be downloaded if re-installed.
+rm -rf /boot/config/plugins/&name;/&name;-&version;.tgz
+
+# Remove all plugin files.
+rm -rf /usr/local/emhttp/plugins/&name; 2>/dev/null
+
+echo ""
+echo "-----------------------------------------------------------"
+echo " Plugin &name; has been removed."
+echo " Version: &version;"
+echo "-----------------------------------------------------------"
+echo ""
+</INLINE>
+</FILE>
+
+</PLUGIN>

@@ -1,0 +1,13 @@
+services:
+  Full-Text-RSS:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://github.com/imTHAI/unraid-templates/raw/main/rss.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:8081]'
+      net.unraid.docker.shell: ''
+  freshrss:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/freshrss-logo.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:8084]'
+      net.unraid.docker.shell: ''

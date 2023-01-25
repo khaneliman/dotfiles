@@ -1,0 +1,177 @@
+<?xml version="1.0" standalone="yes"?>
+<!DOCTYPE PLUGIN [
+<!ENTITY name "dynamix.system.info">
+<!ENTITY author "Bergware">
+<!ENTITY version "2020.06.21">
+<!ENTITY launch "Tools/SystemProfiler">
+<!ENTITY pluginURL "https://raw.githubusercontent.com/bergware/dynamix/master/unRAIDv6/&name;.plg">
+<!ENTITY source "/boot/config/plugins/&name;/&name;">
+<!ENTITY MD5 "be2a5a726e2ff01cbaffaece5eeada5b">
+]>
+<PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" min="6.1.9" support="http://lime-technology.com/forum/index.php?topic=36543.0">
+
+<CHANGES>
+##&name;
+
+###&version;
+- fixed regression error
+
+###2020.06.20
+- updated multi-language support
+
+###2020.05.10
+- updated multi-language support
+
+###2020.03.31
+- added multi-language support
+
+###2017.11.18
+- fixed memory calculation, sometimes wrong
+- fixed ethernet port listing, suppress VLANs
+
+###2017.08.23
+- fixed P+Q calculation
+
+###2017.08.08
+- fixed incorrect memory calculation in certain circumstances
+- fixed suppress error message in dmidecode
+- fixed include all available ethernet ports
+- suppress 'Done' button in non-tabbed view
+
+###2017.04.23
+- fixed P + Q display in system overview
+
+###2016.11.06
+- replaced deprecated PHP split function for explode function
+
+###2016.08.26
+- fixed folders and files permissions
+- added minimum unRAID version 6.1.9
+
+###2016.08.23a
+- fixed compatability with unRAID 6.1
+
+###2016.08.20
+- made conversion of CPU information case independent
+- added P+Q information
+
+###2016.06.19
+- changed display of available memory in GB
+
+###2016.03.20
+- added MTU size for ethernet ports
+- made compatible with latest grep version
+
+###2015.12.14
+- added unRAID version check. Only version 6.1 or higher is allowed
+- updated consistency of PLG file
+
+###2015.12.13
+- changed .txz file naming to support consistent package upgrading
+
+###2015.11.07
+- fixed truncated rows in some cases
+- code optimization
+
+###2015.09.26
+- fixed display when more than one ethernet port is present
+
+###2015.07.27
+- fixed incorrect display of memory under system overview
+
+###2015.06.27
+- introduced new logo (thanks Zonediver)
+- changed display of information to multiple pages
+- fixed incorrect maximum memory size reporting
+
+###2015.04.23
+- fixed memory display and calculation under 'System Overview'
+
+###2015.04.11
+- version update for new webGui
+
+###2015.02.01
+- fixed wrong display of system overview information. In certain cases.
+
+###2015.01.22
+- version update for webGui 2015.01.21
+
+###2014.12.07
+- fixed addition of info settings
+
+###2014.11.28
+- initial release for unRAID v6
+</CHANGES>
+
+<!--
+Copyright 2020, Bergware International
+Dynamix System Information - System hardware and BIOS details
+-->
+
+<!-- PRE-INSTALL SCRIPT -->
+<FILE Run="/bin/bash">
+<INLINE>
+cfg="/boot/config/plugins/dynamix/dynamix.cfg"
+
+add_key(){
+  key=$(echo $2|cut -d'=' -f1)
+  section=$(sed -n "/^\[$1\]/,/^\[/p" $cfg)
+  if [[ -z $section ]]; then
+    echo -e "[$1]\n$2" &gt;&gt;$cfg
+  else
+    if [[ $(echo $section|grep "$key="|wc -l) -eq 0 ]]; then
+      sed -i "$(sed -n "/^\[$1\]/,/^\[/=" $cfg|tail -1) i $2" $cfg
+    fi
+  fi
+}
+
+# Add sysinfo setting
+if [[ -e $cfg ]]; then
+  add_key 'display' 'sysinfo="/Tools/SystemProfiler"'
+else
+  echo -e "[display]\nsysinfo=\"/Tools/SystemProfiler\"" &gt;$cfg
+fi
+
+# Remove old 'source' packages
+MD5=$(md5sum &source;.txz 2&gt;/dev/null|grep -Po '^\S+')
+if [[ $MD5 != &MD5; ]]; then
+  rm -f &source;*.txz
+fi
+</INLINE>
+</FILE>
+
+<!-- SOURCE PACKAGE -->
+<FILE Name="&source;.txz" Run="upgradepkg --install-new --reinstall">
+<URL>https://raw.githubusercontent.com/bergware/dynamix/master/archive/&name;.txz</URL>
+<MD5>&MD5;</MD5>
+</FILE>
+
+<!-- POST-INSTALL SCRIPT -->
+<FILE Run="/bin/bash">
+<INLINE>
+echo ""
+echo "-----------------------------------------------------------"
+echo " Plugin &name; is installed."
+echo " This plugin requires Dynamix webGui to operate"
+echo " Copyright 2020, Bergware International"
+echo " Version: &version;"
+echo "-----------------------------------------------------------"
+echo ""
+</INLINE>
+</FILE>
+
+<!-- REMOVE SCRIPT -->
+<FILE Run="/bin/bash" Method="remove">
+<INLINE>
+# Delete sysinfo setting
+sed -i '/^sysinfo=/d' /boot/config/plugins/dynamix/dynamix.cfg
+
+# Remove plugin related files
+rm -rf /boot/config/plugins/&name;
+
+# Uninstall the 'source' package
+removepkg &name;
+</INLINE>
+</FILE>
+
+</PLUGIN>

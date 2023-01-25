@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>Logarr</Name>
+  <Repository>monitorr/logarr-alpha</Repository>
+  <Registry>https://hub.docker.com/r/monitorr/logarr-alpha/</Registry>
+  <Network>khaneproxy</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://forums.unraid.net/topic/87798-support-selfhostersnets-template-repository</Support>
+  <Project>https://github.com/Monitorr/logarr/</Project>
+  <Overview>Logarr is a self-hosted, single-page, log consolidation tool written in PHP </Overview>
+  <Category>Tools: Status:Beta</Category>
+  <WebUI>http://[IP]:[PORT:80]</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/selfhosters/unRAID-CA-templates/master/templates/logarr.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/selfhosters/unRAID-CA-templates/master/templates/img/logarr.png</Icon>
+  <ExtraParams/>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1634617268</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>Logarr is a self-hosted, single-page, log consolidation tool written in PHP </Description>
+  <Networking>
+    <Mode>khaneproxy</Mode>
+    <Publish>
+      <Port>
+        <HostPort>281</HostPort>
+        <ContainerPort>80</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/var/log/</HostDir>
+      <ContainerDir>/varlog</ContainerDir>
+      <Mode>ro</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/appdata/</HostDir>
+      <ContainerDir>/userappdata</ContainerDir>
+      <Mode>ro</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/appdata/Logarr</HostDir>
+      <ContainerDir>/app</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment>
+    <Variable>
+      <Value>99</Value>
+      <Name>PUID</Name>
+      <Mode>{3}</Mode>
+    </Variable>
+    <Variable>
+      <Value>100</Value>
+      <Name>PGID</Name>
+      <Mode>{3}</Mode>
+    </Variable>
+  </Environment>
+  <Labels/>
+  <Config Name="WebUI" Target="80" Default="" Mode="tcp" Description="Container Port: 80" Type="Port" Display="always" Required="true" Mask="false">281</Config>
+  <Config Name="Var Logs" Target="/varlog" Default="" Mode="ro" Description="Container Path: /varlog" Type="Path" Display="always" Required="false" Mask="false">/var/log/</Config>
+  <Config Name="AppData" Target="/userappdata" Default="" Mode="ro" Description="Container Path: /userappdata" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/</Config>
+  <Config Name="Config" Target="/app" Default="/mnt/user/appdata/Logarr" Mode="rw" Description="Container Path: /app" Type="Path" Display="advanced" Required="true" Mask="false">/mnt/user/appdata/Logarr</Config>
+  <Config Name="PUID" Target="PUID" Default="99" Mode="{3}" Description="Container Variable: PUID" Type="Variable" Display="advanced" Required="false" Mask="false">99</Config>
+  <Config Name="PGID" Target="PGID" Default="100" Mode="{3}" Description="Container Variable: PGID" Type="Variable" Display="advanced" Required="false" Mask="false">100</Config>
+</Container>

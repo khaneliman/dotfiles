@@ -1,0 +1,325 @@
+services:
+  AH-WebApp:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://i.imgur.com/nYoosop.jpg'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:8088]/'
+      net.unraid.docker.shell: ''
+  AH-WebApp-Dev:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://i.imgur.com/nYoosop.jpg'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:8099]/'
+      net.unraid.docker.shell: ''
+  Authelia:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://i.imgur.com/DCn2yiv.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:9091]/'
+      net.unraid.docker.shell: ''
+  Cleanarr:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/Alphacosmos/unraid-templetes/main/Images/plex-library-cleaner.ico'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:80]/'
+      net.unraid.docker.shell: ''
+  CloudBeaver:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/CorneliousJD/Docker-Templates/master/icons/cloudbeaver.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:8978]/'
+      net.unraid.docker.shell: ''
+  Czkawka:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/jlesage/docker-templates/master/jlesage/images/czkawka-icon.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:5800]'
+      net.unraid.docker.shell: ''
+  DiskSpeed:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/jbartlett777/DiskSpeed/master/DiskSpeed.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:8888]/'
+      net.unraid.docker.shell: ''
+  DockerRegistry:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://github.com/juusujanar/unraid-templates/raw/master/img/DockerRegistry-logo.png'
+      net.unraid.docker.webui: ''
+      net.unraid.docker.shell: ''
+  Dozzle:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/selfhosters/unRAID-CA-templates/master/templates/img/dozzle.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:8080]/'
+      net.unraid.docker.shell: ''
+  Full-Text-RSS:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://github.com/imTHAI/unraid-templates/raw/main/rss.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:8081]'
+      net.unraid.docker.shell: ''
+  Grafana-Unraid-Stack:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/testdasi/grafana-unraid-stack-base/master/grafana-unraid-stack.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:3006]/'
+      net.unraid.docker.shell: ''
+  Kavita:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/Kareadita/Kavita/develop/UI/Web/src/assets/icons/android-chrome-192x192.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:5000]'
+      net.unraid.docker.shell: ''
+  Krusader:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/ich777/docker-templates/master/ich777/images/krusader.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:8080]/vnc.html?autoconnect=true'
+      net.unraid.docker.shell: ''
+  MongoDB:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/jason-bean/docker-templates/master/jasonbean-repo/mongo.sh-600x600.png'
+      net.unraid.docker.webui: ''
+      net.unraid.docker.shell: ''
+  NginxProxyManager:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/jlesage/docker-templates/master/jlesage/images/nginx-proxy-manager-icon.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:8181]'
+      net.unraid.docker.shell: ''
+  PhotoPrism:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/ich777/docker-templates/master/ich777/images/photoprism.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:2342]/'
+      net.unraid.docker.shell: ''
+  PhotoStructure:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://photostructure.com/img/logo-circle-gradient-256.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:1787]'
+      net.unraid.docker.shell: ''
+  Plex-Meta-Manager:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://metamanager.wiki/en/latest/_static/pmm.png'
+      net.unraid.docker.webui: ''
+      net.unraid.docker.shell: ''
+  Postgres11:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://github.com/juusujanar/unraid-templates/raw/master/img/PostgreSQL-logo.png'
+      net.unraid.docker.webui: ''
+      net.unraid.docker.shell: ''
+  RustDeskServer:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://github.com/JmzTaylor/unraid_templates/raw/master/rustserver.png'
+      net.unraid.docker.webui: ''
+      net.unraid.docker.shell: ''
+  RustDeskServer-Relay:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://github.com/JmzTaylor/unraid_templates/raw/master/rustserver.png'
+      net.unraid.docker.webui: ''
+      net.unraid.docker.shell: ''
+  Stash:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/CorneliousJD/Docker-Templates/master/icons/stash.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:9999]'
+      net.unraid.docker.shell: ''
+  Tailscale:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/deasmi/unraid-tailscale/master/logo.png'
+      net.unraid.docker.webui: ''
+      net.unraid.docker.shell: ''
+  TimeMachine:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://upload.wikimedia.org/wikipedia/de/f/f4/Time_Machine_%28Apple%29_Logo.png'
+      net.unraid.docker.webui: ''
+      net.unraid.docker.shell: ''
+  Virt-Manager:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/redvex2460/docker-templates/master/redvex2460/images/vman.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:80]'
+      net.unraid.docker.shell: ''
+  adminer:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/selfhosters/unRAID-CA-templates/master/templates/img/adminer.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:8080]'
+      net.unraid.docker.shell: ''
+  bazarr:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/bazarr.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:6767]'
+      net.unraid.docker.shell: ''
+  binhex-jellyfin:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/binhex/docker-templates/master/binhex/images/jellyfin-icon.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:8096]/'
+      net.unraid.docker.shell: ''
+  binhex-jenkins:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/binhex/docker-templates/master/binhex/images/jenkins-icon.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:8090]/'
+      net.unraid.docker.shell: ''
+  binhex-nzbget:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/binhex/docker-templates/master/binhex/images/nzbget-icon.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:6789]/'
+      net.unraid.docker.shell: ''
+  cloudflared:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/aeleos/cloudflared/main/cloudflare-icon.png'
+      net.unraid.docker.webui: ''
+      net.unraid.docker.shell: ''
+  dockersocket:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/ibracorp/app-logos/main/docker/docker-logo.png'
+      net.unraid.docker.webui: ''
+      net.unraid.docker.shell: ''
+  freshrss:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/freshrss-logo.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:8084]'
+      net.unraid.docker.shell: ''
+  goaccess:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/gregyankovoy/docker-templates/master/greg/img/goaccess-logo.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:7889]/'
+      net.unraid.docker.shell: ''
+  lidarr:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/lidarr.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:8686]'
+      net.unraid.docker.shell: ''
+  mariadb:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/mariadb-icon.png'
+      net.unraid.docker.webui: ''
+      net.unraid.docker.shell: ''
+  nextcloud:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/nextcloud-icon.png'
+      net.unraid.docker.webui: 'https://[IP]:[PORT:443]/'
+      net.unraid.docker.shell: ''
+  ombi:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/ombi.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:3579]/'
+      net.unraid.docker.shell: ''
+  organizr:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/causefx/Organizr/v2-master/plugins/images/organizr/logo-no-border.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:80]/'
+      net.unraid.docker.shell: ''
+  overseerr:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://hotio.dev/webhook-avatars/overseerr.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:5055]'
+      net.unraid.docker.shell: ''
+  petio:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://hotio.dev/webhook-avatars/petio.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:7777]'
+      net.unraid.docker.shell: ''
+  pihole-template:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://i.imgur.com/OWkNcEn.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:80]/admin'
+      net.unraid.docker.shell: ''
+  plex:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/plex-logo.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:32400]/web/index.html'
+      net.unraid.docker.shell: ''
+  prowlarr:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/prowlarr-logo.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:9696]'
+      net.unraid.docker.shell: ''
+  pwm:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://i.imgur.com/dAMqu51.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:8282]/'
+      net.unraid.docker.shell: ''
+  qbittorrentvpn:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/binhex/docker-templates/master/binhex/images/qbittorrent-icon.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:8082]/'
+      net.unraid.docker.shell: ''
+  radarr:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/radarr.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:7878]'
+      net.unraid.docker.shell: ''
+  readarr:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://hotio.dev/webhook-avatars/readarr.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:8787]'
+      net.unraid.docker.shell: ''
+  redis:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/A75G/docker-templates/master/templates/icons/redis.png'
+      net.unraid.docker.webui: ''
+      net.unraid.docker.shell: ''
+  requestrr:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://hotio.dev/webhook-avatars/requestrr.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:4545]'
+      net.unraid.docker.shell: ''
+  scrutiny:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/selfhosters/unRAID-CA-templates/master/templates/img/scrutiny.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:8083]'
+      net.unraid.docker.shell: ''
+  sonarr:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/sonarr-icon.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:8989]/'
+      net.unraid.docker.shell: ''
+  tautulli:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/Tautulli/Tautulli-Unraid-Template/master/img/logo-circle.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:8181]/'
+      net.unraid.docker.shell: ''
+  unmanic:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/Unmanic/unmanic/master/icon.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:8889]/'
+      net.unraid.docker.shell: ''

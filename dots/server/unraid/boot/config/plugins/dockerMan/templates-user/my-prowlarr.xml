@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>prowlarr</Name>
+  <Repository>ghcr.io/linuxserver/prowlarr:develop</Repository>
+  <Registry>https://github.com/orgs/linuxserver/packages/container/package/prowlarr</Registry>
+  <Network>khaneproxy</Network>
+  <MyIP/>
+  <Shell>bash</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/linuxserver/docker-prowlarr/issues/new/choose</Support>
+  <Project>https://github.com/Prowlarr/Prowlarr</Project>
+  <Overview>[Prowlarr](https://github.com/Prowlarr/Prowlarr) is a indexer manager/proxy built on the popular arr .net/reactjs base stack to integrate with your various PVR apps. Prowlarr supports both Torrent Trackers and Usenet Indexers. It integrates seamlessly with Sonarr, Radarr, Lidarr, and Readarr offering complete management of your indexers with no per app Indexer setup required (we do it all).</Overview>
+  <Category>Productivity: Tools:</Category>
+  <WebUI>http://[IP]:[PORT:9696]</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/prowlarr.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/prowlarr-logo.png</Icon>
+  <ExtraParams>-m 2G</ExtraParams>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1635443344</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>[Prowlarr](https://github.com/Prowlarr/Prowlarr) is a indexer manager/proxy built on the popular arr .net/reactjs base stack to integrate with your various PVR apps. Prowlarr supports both Torrent Trackers and Usenet Indexers. It integrates seamlessly with Sonarr, Radarr, Lidarr, and Readarr offering complete management of your indexers with no per app Indexer setup required (we do it all).</Description>
+  <Networking>
+    <Mode>khaneproxy</Mode>
+    <Publish>
+      <Port>
+        <HostPort>9696</HostPort>
+        <ContainerPort>9696</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/appdata/prowlarr</HostDir>
+      <ContainerDir>/config</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment>
+    <Variable>
+      <Value>99</Value>
+      <Name>PUID</Name>
+      <Mode>{3}</Mode>
+    </Variable>
+    <Variable>
+      <Value>100</Value>
+      <Name>PGID</Name>
+      <Mode>{3}</Mode>
+    </Variable>
+    <Variable>
+      <Value>022</Value>
+      <Name>UMASK</Name>
+      <Mode>{3}</Mode>
+    </Variable>
+  </Environment>
+  <Labels/>
+  <Config Name="WebUI" Target="9696" Default="9696" Mode="tcp" Description="The port for the Prowlarr webinterface" Type="Port" Display="always" Required="true" Mask="false">9696</Config>
+  <Config Name="Appdata" Target="/config" Default="" Mode="rw" Description="Database and Prowlarr configs" Type="Path" Display="advanced" Required="true" Mask="false">/mnt/user/appdata/prowlarr</Config>
+  <Config Name="PUID" Target="PUID" Default="99" Mode="{3}" Description="Container Variable: PUID" Type="Variable" Display="advanced" Required="true" Mask="false">99</Config>
+  <Config Name="PGID" Target="PGID" Default="100" Mode="{3}" Description="Container Variable: PGID" Type="Variable" Display="advanced" Required="true" Mask="false">100</Config>
+  <Config Name="UMASK" Target="UMASK" Default="022" Mode="{3}" Description="Container Variable: UMASK" Type="Variable" Display="advanced" Required="false" Mask="false">022</Config>
+</Container>

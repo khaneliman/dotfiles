@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>Home-Assistant-Core</Name>
+  <Repository>homeassistant/home-assistant</Repository>
+  <Registry>https://registry.hub.docker.com/r/homeassistant/home-assistant/</Registry>
+  <Network>br0</Network>
+  <MyIP>192.168.1.182</MyIP>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://home-assistant.io/help/</Support>
+  <Project>https://home-assistant.io</Project>
+  <Overview>Home Assistant Core is the core of the Home Assistant home automation platform. It focuses on local control and privacy. Track and control all devices at home and automate control.</Overview>
+  <Category>HomeAutomation:</Category>
+  <WebUI>http://[IP]:[PORT:8123]</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/balloob/unraid-docker-templates/master/balloob/home-assistant.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/balloob/unraid-docker-templates/master/balloob/home-assistant-icon.png</Icon>
+  <ExtraParams/>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1634093105</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>Home Assistant Core is the core of the Home Assistant home automation platform. It focuses on local control and privacy. Track and control all devices at home and automate control.</Description>
+  <Networking>
+    <Mode>br0</Mode>
+    <Publish/>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/appdata/Home-Assistant-Core</HostDir>
+      <ContainerDir>/config</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment/>
+  <Labels/>
+  <Config Name="Config Directory" Target="/config" Default="/mnt/cache/app_config/home-assistant" Mode="rw" Description="This path is where Home Assistant will store it's configuration files." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/Home-Assistant-Core</Config>
+</Container>

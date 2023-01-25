@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Containers>
+  <Date>2019-06-20</Date>
+  <Beta>False</Beta>
+  <Category>MediaApp:Video MediaApp:Music MediaApp:Photos MediaServer:Video MediaServer:Music MediaServer:Photos</Category>
+  <Name>PlexMediaServer</Name>
+  <Project>https://plex.tv/</Project>
+  <Changes>
+[center][img width='155px' src='https://d2631fvi2jdnb6.cloudfront.net/docker/limetech.png'][/center]
+
+[center][font size=4]Plex Media Server Change Log[/font][/center]
+
+[font size=3]2019.06.20[/font]
+- Updated to Plex version 1.16.0.1226
+
+[font size=3]2019.05.29[/font]
+- Updated to Plex version 1.15.6.1079
+
+[font size=3]2019.05.14[/font]
+- Updated to Plex version 1.15.4.994
+
+[font size=3]2019.05.03[/font]
+- Updated to Plex version 1.15.4.993
+
+[font size=3]2019.04.08[/font]
+- Updated to Plex version 1.15.3.876
+
+[font size=3]2019.03.22[/font]
+- Updated to Plex version 1.15.2.793
+
+[font size=3]2019.03.20[/font]
+- Updated to Plex version 1.15.1.791
+
+[font size=3]2018.12.18[/font]
+- Updated to Plex version 1.14.1.5488
+
+[font size=3]2018.12.02[/font]
+- Updated to Plex version 1.14.0.5470
+
+[font size=3]2018.11.07[/font]
+- Updated to Plex version 1.13.9.5456
+
+[font size=3]2018.09.30[/font]
+- Updated to Plex version 1.13.8.5395
+
+[font size=3]2018.08.26[/font]
+- Updated to Plex version 1.13.5.5332
+
+[font size=3]2018.08.04[/font]
+- Updated to Plex version 1.13.5.5291
+
+[font size=3]2018.07.20[/font]
+- Updated to Plex version 1.13.4.5271
+
+[font size=3]2018.07.18[/font]
+- Updated to Plex version 1.13.4.5251
+
+[font size=3]2018.06.12[/font]
+- Updated to Plex version 1.13.2.5154
+
+[font size=3]2018.06.08[/font]
+- Updated to Plex version 1.13.2.5142
+
+[font size=3]2018.05.08[/font]
+- Updated to Plex version 1.13.0.5023
+
+[font size=3]2018.04.19[/font]
+- Updated to Plex version 1.12.3.4973
+
+[font size=3]2018.04.17[/font]
+- Updated to Plex version 1.12.2.4929
+
+[font size=3]2018.03.22[/font]
+- Updated to Plex version 1.12.1.4885
+
+[font size=3]2018.03.08[/font]
+- Updated to Plex version 1.12.0.4829
+
+[font size=3]2018.02.22[/font]
+- Updated to Plex version 1.11.3.4803
+
+[font size=3]2017.12.13[/font]
+- Updated to Plex version 1.10.1.4602
+
+[font size=3]2017.12.06[/font]
+- Updated to Plex version 1.10.0.4523
+
+[font size=3]2017.11.27[/font]
+- Updated to Plex version 1.9.7.4460
+
+[font size=3]2017.11.14[/font]
+- Updated to Plex version 1.9.6.4429
+
+[font size=3]2017.10.12[/font]
+- Updated to Plex version 1.9.4.4325
+
+[font size=3]2017.09.27[/font]
+- Updated to Plex version 1.9.2.4285
+
+[font size=3]2017.09.07[/font]
+- Updated to Plex version 1.8.4.4249
+
+[font size=3]2017.09.07[/font]
+- Updated to Plex version 1.8.3.4235
+
+[font size=3]2017.08.25[/font]
+- Updated to Plex version 1.8.1.4139
+
+[font size=3]2017.06.28[/font]
+- Updated to Plex version 1.7.5.4035
+
+[font size=3]2017.06.22[/font]
+- Updated to Plex version 1.5.7.4016
+
+[font size=3]2017.05.23[/font]
+- Updated to Plex version 1.5.6.3790
+
+[font size=3]2017.04.13[/font]
+- Updated to Plex version 1.5.5.3634
+
+[font size=3]2017.04.04[/font]
+- Updated to Plex version 1.5.3.3580
+
+[font size=3]2017.03.22[/font]
+- Updated to Plex version 1.4.4.3495
+
+[font size=3]2017.03.13[/font]
+- Updated to Plex version 1.4.3.3433
+
+[font size=3]2016.12.20[/font]
+- Updated to Plex version 1.3.3.3148
+
+[font size=3]2016.12.09[/font]
+- Updated to Plex version 1.3.2.3112
+
+[font size=3]2016.10.10[/font]
+- Updated to Plex version 1.2.7.2987
+
+[font size=3]2016.10.05[/font]
+- Updated to Plex version 1.2.6.2975
+
+[font size=3]2016.09.13[/font]
+- Updated to Plex version 1.1.4.2757
+
+[font size=3]2016.09.01[/font]
+- Updated to Plex version 1.1.3.2700
+
+[font size=3]2016.07.29[/font]
+- Updated to Plex version 1.0.3.2461
+
+[font size=3]2016.07.21[/font]
+- Updated to Plex version 1.0.2.2413
+
+[font size=3]2016.06.29[/font]
+- Updated to Plex version 1.0.0.2261
+
+[font size=3]2016.04.29[/font]
+- Updated to Plex version 0.9.16.6.1993
+
+[font size=3]2016.04.08[/font]
+- Updated to Plex version 0.9.16.4.1911
+
+[font size=3]2016.04.01[/font]
+- Updated to Plex version 0.9.16.3.1840
+
+[font size=3]2016.02.25[/font]
+- Updated to Plex version 0.9.15.6.1714
+
+[font size=3]2016.02.18[/font]
+- Updated to Plex version 0.9.15.3.1674
+
+[font size=3]2016.01.27[/font]
+- Updated to Plex version 0.9.15.2.1663
+
+[font size=3]2015.12.23[/font]
+- Updated to Plex version 0.9.14.6.1620
+
+[font size=3]2015.11.07[/font]
+- Updated to Plex version 0.9.12.19.1537
+
+[font size=3]2015.10.31[/font]
+- Updated to Plex version 0.9.12.18.1520
+
+[font size=3]2015.10.08[/font]
+- Updated to Plex version 0.9.12.13.1464
+
+[font size=3]2015.08.28[/font]
+- Updated to Plex version 0.9.12.11.1406
+
+[font size=3]2015.08.09[/font]
+- Updated to Plex version 0.9.12.8.1362
+
+[font size=3]2015.06.23[/font]
+- Updated to Plex version 0.9.12.4.1192
+
+[font size=3]2015.06.20[/font]
+- Fixed user permissions on files and folders off of /config
+
+[font size=3]2015.06.15[/font]
+- Initial Release
+  </Changes>
+  <Overview>
+    The Plex Media Server enriches your life by organizing all your personal media, presenting it beautifully and streaming it to all of your devices. It's easy to use, it's awesome, and it's free!
+  </Overview>
+  <Description>
+    The Plex Media Server enriches your life by organizing all your personal media, presenting it beautifully and streaming it to all of your devices. It's easy to use, it's awesome, and it's free![br][br]
+    [b][span style='color: #E80000;']Directions:[/span][/b][br]
+    [b]/config[/b] : this is where PMS will store it's databases and configuration.[br][br]
+    [b]Tip:[/b] You can add more volume mappings if you wish PMS has access to it.
+  </Description>
+  <Registry>https://registry.hub.docker.com/u/limetech/plex/</Registry>
+  <GitHub>https://github.com/limetech/dockerapp-plex</GitHub>
+  <Repository>limetech/plex</Repository>
+  <Support>https://forums.unraid.net/topic/38974-support-limetechs-docker-repository/</Support>
+  <BindTime>true</BindTime>
+  <Privileged>true</Privileged>
+  <Networking>
+    <Mode>host</Mode>
+    <Publish/>
+  </Networking>
+  <Environment/>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/appdata/PlexMediaServer</HostDir>
+      <ContainerDir>/config</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <WebUI>http://[IP]:[PORT:32400]/web/index.html</WebUI>
+  <Banner></Banner>
+  <Icon>https://d2631fvi2jdnb6.cloudfront.net/docker/limetech/plex.png</Icon>
+</Containers>

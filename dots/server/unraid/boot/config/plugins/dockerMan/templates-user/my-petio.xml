@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>petio</Name>
+  <Repository>hotio/petio</Repository>
+  <Registry>https://hub.docker.com/r/hotio/petio</Registry>
+  <Network>khaneproxy</Network>
+  <MyIP/>
+  <Shell>bash</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://hotio.dev/discord</Support>
+  <Project>https://hotio.dev/containers/petio</Project>
+  <Overview>Petio is a third party companion app available to Plex server owners to allow their users to request, review and discover content.</Overview>
+  <Category>Downloaders: MediaApp:Other</Category>
+  <WebUI>http://[IP]:[PORT:7777]</WebUI>
+  <TemplateURL/>
+  <Icon>https://hotio.dev/webhook-avatars/petio.png</Icon>
+  <ExtraParams>--memory=250M</ExtraParams>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1635442098</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>Petio is a third party companion app available to Plex server owners to allow their users to request, review and discover content.</Description>
+  <Networking>
+    <Mode>khaneproxy</Mode>
+    <Publish>
+      <Port>
+        <HostPort>7777</HostPort>
+        <ContainerPort>7777</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/appdata/petio</HostDir>
+      <ContainerDir>/config</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment>
+    <Variable>
+      <Value>99</Value>
+      <Name>PUID</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>100</Value>
+      <Name>PGID</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>002</Value>
+      <Name>UMASK</Name>
+      <Mode/>
+    </Variable>
+  </Environment>
+  <Labels/>
+  <Config Name="Host Port for 7777" Target="7777" Default="7777" Mode="tcp" Description="Container Port: 7777" Type="Port" Display="always-hide" Required="true" Mask="false">7777</Config>
+  <Config Name="Host Path for /config" Target="/config" Default="/mnt/user/appdata/petio" Mode="rw" Description="Container Path: /config" Type="Path" Display="always-hide" Required="true" Mask="false">/mnt/user/appdata/petio</Config>
+  <Config Name="PUID" Target="PUID" Default="99" Mode="" Description="Container Variable: PUID" Type="Variable" Display="advanced-hide" Required="false" Mask="false">99</Config>
+  <Config Name="PGID" Target="PGID" Default="100" Mode="" Description="Container Variable: PGID" Type="Variable" Display="advanced-hide" Required="false" Mask="false">100</Config>
+  <Config Name="UMASK" Target="UMASK" Default="002" Mode="" Description="Container Variable: UMASK" Type="Variable" Display="advanced-hide" Required="false" Mask="false">002</Config>
+</Container>

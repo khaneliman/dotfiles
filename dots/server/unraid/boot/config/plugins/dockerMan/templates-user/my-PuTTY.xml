@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>PuTTY</Name>
+  <Repository>jlesage/putty</Repository>
+  <Registry>https://hub.docker.com/r/jlesage/putty/</Registry>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://forums.unraid.net/topic/73494-support-putty/</Support>
+  <Project>https://www.putty.org</Project>
+  <Overview>&#xD;
+PuTTY is a free and open-source terminal emulator, serial console and network file transfer application. It supports several network protocols, including SCP, SSH, Telnet, rlogin, and raw socket connection. It can also connect to a serial port.&#xD;
+&#xD;
+The GUI of the application is accessed through a modern web browser (no installation or configuration needed on the client side) or via any VNC client.&#xD;
+&#xD;
+Also, being based on Alpine Linux, size of this container is very small (less&#xD;
+than 50MB in download size).&#xD;
+&#xD;
+For a complete documentation of this container, see&#xD;
+https://github.com/jlesage/docker-putty/blob/master/README.md&#xD;
+  </Overview>
+  <Category>Tools:Utilities</Category>
+  <WebUI>http://[IP]:[PORT:5800]</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/jlesage/docker-templates/master/jlesage/putty.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/jlesage/docker-templates/master/jlesage/images/putty-icon.png</Icon>
+  <ExtraParams/>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1634745983</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>&#xD;
+PuTTY is a free and open-source terminal emulator, serial console and network file transfer application. It supports several network protocols, including SCP, SSH, Telnet, rlogin, and raw socket connection. It can also connect to a serial port.&#xD;
+&#xD;
+The GUI of the application is accessed through a modern web browser (no installation or configuration needed on the client side) or via any VNC client.&#xD;
+&#xD;
+Also, being based on Alpine Linux, size of this container is very small (less&#xD;
+than 50MB in download size).&#xD;
+&#xD;
+For a complete documentation of this container, see&#xD;
+https://github.com/jlesage/docker-putty/blob/master/README.md&#xD;
+  </Description>
+  <Networking>
+    <Mode>bridge</Mode>
+    <Publish>
+      <Port>
+        <HostPort>7816</HostPort>
+        <ContainerPort>5800</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+      <Port>
+        <HostPort>7916</HostPort>
+        <ContainerPort>5900</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/appdata/PuTTY</HostDir>
+      <ContainerDir>/config</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment>
+    <Variable>
+      <Value>99</Value>
+      <Name>USER_ID</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>100</Value>
+      <Name>GROUP_ID</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>000</Value>
+      <Name>UMASK</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value/>
+      <Name>APP_NICENESS</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>1280</Value>
+      <Name>DISPLAY_WIDTH</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>768</Value>
+      <Name>DISPLAY_HEIGHT</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>0</Value>
+      <Name>SECURE_CONNECTION</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value/>
+      <Name>X11VNC_EXTRA_OPTS</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>0</Value>
+      <Name>DISABLE_RESTART_SESSION_DIALOG_WINDOW</Name>
+      <Mode/>
+    </Variable>
+  </Environment>
+  <Labels/>
+  <Config Name="Config Directory" Target="/config" Default="/mnt/user/appdata/PuTTY" Mode="rw" Description="This is where the application stores its configuration, log and any files needing persistency.&amp;lt;br&amp;gt;Container path: /config" Type="Path" Display="advanced-hide" Required="true" Mask="false">/mnt/user/appdata/PuTTY</Config>
+  <Config Name="User ID" Target="USER_ID" Default="99" Mode="" Description="ID of the user the application runs as." Type="Variable" Display="advanced-hide" Required="true" Mask="false">99</Config>
+  <Config Name="Group ID" Target="GROUP_ID" Default="100" Mode="" Description="ID of the group the application runs as." Type="Variable" Display="advanced-hide" Required="true" Mask="false">100</Config>
+  <Config Name="Umask" Target="UMASK" Default="000" Mode="" Description="Mask that controls how file permissions are set for newly created files. The value of the mask is in octal notation." Type="Variable" Display="advanced" Required="false" Mask="false">000</Config>
+  <Config Name="Niceness (priority)" Target="APP_NICENESS" Default="" Mode="" Description="Priority at which the application should run.  A niceness value of -20 is the highest priority and 19 is the lowest priority.&amp;lt;br&amp;gt;&amp;lt;b&amp;gt;NOTE:&amp;lt;/b&amp;gt; Setting a negative value requires additional permissions.  Thus, &amp;lt;i&amp;gt;&amp;lt;b&amp;gt;--cap-add=SYS_NICE&amp;lt;/b&amp;gt;&amp;lt;/i&amp;gt; must be added in &amp;lt;i&amp;gt;Extra Parameters&amp;lt;/i&amp;gt; (shown when &amp;lt;i&amp;gt;Advanced View&amp;lt;/i&amp;gt; is enabled)." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="Display Width" Target="DISPLAY_WIDTH" Default="1280" Mode="" Description="Width (in pixels) of the application's window." Type="Variable" Display="advanced" Required="false" Mask="false">1280</Config>
+  <Config Name="Display Height" Target="DISPLAY_HEIGHT" Default="768" Mode="" Description="Height (in pixels) of the application's window." Type="Variable" Display="advanced" Required="false" Mask="false">768</Config>
+  <Config Name="Secure Connection" Target="SECURE_CONNECTION" Default="0" Mode="" Description="Whether or not an encrypted connection should be used to access the application's GUI.  Set to &amp;lt;i&amp;gt;&amp;lt;b&amp;gt;1&amp;lt;/b&amp;gt;&amp;lt;/i&amp;gt; to encrypt the connection.&amp;lt;br&amp;gt;&amp;lt;span style='color: red;'&amp;gt;&amp;lt;b&amp;gt;Note:&amp;lt;/b&amp;gt;&amp;lt;/span&amp;gt; When enabling the secure connection, security parameters needs to be generated.  This &amp;lt;b&amp;gt;one-time&amp;lt;/b&amp;gt; operation is done during container startup.  Depending on your system, this could take a few minutes.  GUI of the application won't be available until the operation completes." Type="Variable" Display="advanced" Required="false" Mask="false">0</Config>
+  <Config Name="Extra x11vnc Options" Target="X11VNC_EXTRA_OPTS" Default="" Mode="" Description="Extra options to pass to the x11vnc server running in the Docker container.&amp;lt;br&amp;gt;&amp;lt;span style='color: red;'&amp;gt;&amp;lt;b&amp;gt;Warning:&amp;lt;/b&amp;gt;&amp;lt;/span&amp;gt; For advanced users. Do not use unless you know what you are doing." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="Disable Restart Session Dialog Window" Target="DISABLE_RESTART_SESSION_DIALOG_WINDOW" Default="0" Mode="" Description="When set to &amp;lt;b&amp;gt;&amp;lt;i&amp;gt;1&amp;lt;/i&amp;gt;&amp;lt;/b&amp;gt;, the dialog window used to restart PuTTY session is not displayed." Type="Variable" Display="advanced" Required="false" Mask="false">0</Config>
+  <Config Name="WEB Port for GUI" Target="5800" Default="7816" Mode="tcp" Description="Port used to access the application's GUI via the web interface.&amp;lt;br&amp;gt;&amp;lt;b&amp;gt;NOTE:&amp;lt;/b&amp;gt; This applies only when &amp;lt;i&amp;gt;Network Type&amp;lt;/i&amp;gt; is set to &amp;lt;i&amp;gt;Bridge&amp;lt;/i&amp;gt;.  For other network types, port 5800 should be used instead." Type="Port" Display="advanced-hide" Required="true" Mask="false">7816</Config>
+  <Config Name="VNC Port for GUI" Target="5900" Default="7916" Mode="tcp" Description="Port used to access the application's GUI via the VNC protocol.  Optional if no VNC client is used.&amp;lt;br&amp;gt;&amp;lt;b&amp;gt;NOTE:&amp;lt;/b&amp;gt; This applies only when &amp;lt;i&amp;gt;Network Type&amp;lt;/i&amp;gt; is set to &amp;lt;i&amp;gt;Bridge&amp;lt;/i&amp;gt;.  For other network types, port 5900 should be used instead." Type="Port" Display="advanced-hide" Required="false" Mask="false">7916</Config>
+</Container>

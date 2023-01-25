@@ -1,0 +1,11 @@
+/*.log {
+  su nobody users
+  missingok
+  create 0666 nobody users
+  size 2M
+  rotate 4
+  sharedscripts
+  postrotate
+    /bin/kill -HUP $(cat /var/run/rsyslogd.pid 2>/dev/null) 2>/dev/null || true
+  endscript
+}

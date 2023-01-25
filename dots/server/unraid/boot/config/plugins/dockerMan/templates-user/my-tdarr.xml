@@ -1,0 +1,116 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>tdarr</Name>
+  <Repository>haveagitgat/tdarr</Repository>
+  <Registry>https://hub.docker.com/r/haveagitgat/tdarr/</Registry>
+  <Network>khaneproxy</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://forums.unraid.net/topic/84070-support-haveagitgat-tdarr-audiovideo-library-analytics-transcode-automation/</Support>
+  <Project>https://github.com/HaveAGitGat/Tdarr</Project>
+  <Overview>(tdarr_node for transcoding required separately) Tdarr V2 is a distributed transcoding system for automating media library transcode/remux management and making sure your files are exactly how you need them to be in terms of codecs/streams/containers and so on. Put your spare hardware to use with Tdarr Nodes for Windows, Linux (including Linux arm) and macOS. &#xD;
+[br][br]&#xD;
+Designed to work alongside applications like Sonarr/Radarr and built with the aim of modularisation, parallelisation and scalability, each library you add has its own transcode settings, filters and schedule. Workers can be fired up and closed down as necessary, and are split into 4 types - Transcode CPU/GPU and Health Check CPU/GPU. Worker limits can be managed by the scheduler as well as manually. &#xD;
+[br][br]&#xD;
+For a desktop application with similar functionality please see HBBatchBeast.&#xD;
+[br][br]&#xD;
+Docs here: https://tdarr.io/docs/&#xD;
+[br][br]&#xD;
+Plugins here: https://github.com/HaveAGitGat/Tdarr_Plugins&#xD;
+[br][br]&#xD;
+&#xD;
+  </Overview>
+  <Category>Productivity: MediaApp:Video Status:Beta</Category>
+  <WebUI>http://[IP]:[PORT:8265]</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/selfhosters/unRAID-CA-templates/master/templates/tdarr.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/selfhosters/unRAID-CA-templates/master/templates/img/tdarr.png</Icon>
+  <ExtraParams>-m 2G</ExtraParams>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1635443837</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>(tdarr_node for transcoding required separately) Tdarr V2 is a distributed transcoding system for automating media library transcode/remux management and making sure your files are exactly how you need them to be in terms of codecs/streams/containers and so on. Put your spare hardware to use with Tdarr Nodes for Windows, Linux (including Linux arm) and macOS. &#xD;
+[br][br]&#xD;
+Designed to work alongside applications like Sonarr/Radarr and built with the aim of modularisation, parallelisation and scalability, each library you add has its own transcode settings, filters and schedule. Workers can be fired up and closed down as necessary, and are split into 4 types - Transcode CPU/GPU and Health Check CPU/GPU. Worker limits can be managed by the scheduler as well as manually. &#xD;
+[br][br]&#xD;
+For a desktop application with similar functionality please see HBBatchBeast.&#xD;
+[br][br]&#xD;
+Docs here: https://tdarr.io/docs/&#xD;
+[br][br]&#xD;
+Plugins here: https://github.com/HaveAGitGat/Tdarr_Plugins&#xD;
+[br][br]&#xD;
+&#xD;
+  </Description>
+  <Networking>
+    <Mode>khaneproxy</Mode>
+    <Publish>
+      <Port>
+        <HostPort>8266</HostPort>
+        <ContainerPort>8266</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+      <Port>
+        <HostPort>8265</HostPort>
+        <ContainerPort>8265</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/appdata/tdarr/server</HostDir>
+      <ContainerDir>/app/server</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/appdata/tdarr/configs</HostDir>
+      <ContainerDir>/app/configs</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/appdata/tdarr/logs</HostDir>
+      <ContainerDir>/app/logs</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/data/media/</HostDir>
+      <ContainerDir>/mnt/media</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/temp/</HostDir>
+      <ContainerDir>/temp</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment>
+    <Variable>
+      <Value>192.168.1.37</Value>
+      <Name>serverIP</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>99</Value>
+      <Name>PUID</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>100</Value>
+      <Name>PGID</Name>
+      <Mode/>
+    </Variable>
+  </Environment>
+  <Labels/>
+  <Config Name="Server IP" Target="serverIP" Default="0.0.0.0" Mode="" Description="Server IP. Required if using Tdarr Nodes on your local network" Type="Variable" Display="always" Required="false" Mask="false">192.168.1.37</Config>
+  <Config Name="Server Port" Target="8266" Default="8266" Mode="tcp" Description="Server Port" Type="Port" Display="always" Required="false" Mask="false">8266</Config>
+  <Config Name="WebUI Port" Target="8265" Default="8265" Mode="tcp" Description="WebUI Port" Type="Port" Display="always" Required="false" Mask="false">8265</Config>
+  <Config Name="PUID" Target="PUID" Default="99" Mode="" Description="Container Variable: PUID" Type="Variable" Display="always" Required="false" Mask="false">99</Config>
+  <Config Name="PGID" Target="PGID" Default="100" Mode="" Description="Container Variable: PGID" Type="Variable" Display="always" Required="false" Mask="false">100</Config>
+  <Config Name="Appdata" Target="/app/server" Default="/mnt/user/appdata/tdarr/server" Mode="rw" Description="Container Path: /app/server" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/tdarr/server</Config>
+  <Config Name="Configs" Target="/app/configs" Default="/mnt/user/appdata/tdarr/configs" Mode="rw" Description="Container Path: /app/configs" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/tdarr/configs</Config>
+  <Config Name="Logs" Target="/app/logs" Default="/mnt/user/appdata/tdarr/logs" Mode="rw" Description="Container Path: /app/logs" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/tdarr/logs</Config>
+  <Config Name="Media Library" Target="/mnt/media" Default="" Mode="rw" Description="Container Path: /mnt/media" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/data/media/</Config>
+  <Config Name="Transcode Cache" Target="/temp" Default="" Mode="rw" Description="Container Path: /temp" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/temp/</Config>
+</Container>

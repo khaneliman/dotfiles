@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>wifi-card</Name>
+  <Repository>bndw/wifi-card:latest</Repository>
+  <Registry>https://hub.docker.com/r/bndw/wifi-card/</Registry>
+  <Network>khaneproxy</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://forums.unraid.net/topic/89502-support-a75g-repo/</Support>
+  <Project>https://wifi.dev.bdw.to/</Project>
+  <Overview>Print a neat little card with your WiFi info and stick it on the fridge.</Overview>
+  <Category>Other:</Category>
+  <WebUI>http://[IP]:[PORT:80]/</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/A75G/docker-templates/master/templates/wifi-card.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/A75G/docker-templates/master/templates/icons/wifi-card.png</Icon>
+  <ExtraParams>--memory=50M</ExtraParams>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1635398537</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>Print a neat little card with your WiFi info and stick it on the fridge.</Description>
+  <Networking>
+    <Mode>khaneproxy</Mode>
+    <Publish>
+      <Port>
+        <HostPort>8000</HostPort>
+        <ContainerPort>80</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data/>
+  <Environment/>
+  <Labels/>
+  <Config Name="Port" Target="80" Default="8000" Mode="tcp" Description="Port" Type="Port" Display="always" Required="true" Mask="false">8000</Config>
+</Container>

@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>PlexMediaServer</Name>
+  <Repository>limetech/plex</Repository>
+  <Registry>https://registry.hub.docker.com/u/limetech/plex/</Registry>
+  <Network>host</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>true</Privileged>
+  <Support>https://forums.unraid.net/topic/38974-support-limetechs-docker-repository/</Support>
+  <Project>https://plex.tv/</Project>
+  <Overview>&#xD;
+    The Plex Media Server enriches your life by organizing all your personal media, presenting it beautifully and streaming it to all of your devices. It's easy to use, it's awesome, and it's free![br][br]&#xD;
+    [b][span style='color: #E80000;']Directions:[/span][/b][br]&#xD;
+    [b]/config[/b] : this is where PMS will store it's databases and configuration.[br][br]&#xD;
+    [b]Tip:[/b] You can add more volume mappings if you wish PMS has access to it.&#xD;
+  </Overview>
+  <Category>MediaApp:Video MediaApp:Music MediaApp:Photos MediaServer:Video MediaServer:Music MediaServer:Photos</Category>
+  <WebUI>http://[IP]:[PORT:32400]/web/index.html</WebUI>
+  <TemplateURL/>
+  <Icon>https://d2631fvi2jdnb6.cloudfront.net/docker/limetech/plex.png</Icon>
+  <ExtraParams/>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1633617956</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>&#xD;
+    The Plex Media Server enriches your life by organizing all your personal media, presenting it beautifully and streaming it to all of your devices. It's easy to use, it's awesome, and it's free![br][br]&#xD;
+    [b][span style='color: #E80000;']Directions:[/span][/b][br]&#xD;
+    [b]/config[/b] : this is where PMS will store it's databases and configuration.[br][br]&#xD;
+    [b]Tip:[/b] You can add more volume mappings if you wish PMS has access to it.&#xD;
+  </Description>
+  <Networking>
+    <Mode>host</Mode>
+    <Publish/>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/appdata/PlexMediaServer</HostDir>
+      <ContainerDir>/config</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment/>
+  <Labels/>
+  <Config Name="AppData Config Path" Target="/config" Default="/mnt/user/appdata/PlexMediaServer" Mode="rw" Description="Container Path: /config" Type="Path" Display="advanced-hide" Required="true" Mask="false">/mnt/user/appdata/PlexMediaServer</Config>
+</Container>

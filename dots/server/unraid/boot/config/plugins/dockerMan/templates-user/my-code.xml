@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>code</Name>
+  <Repository>linuxserver/code-server</Repository>
+  <Registry>https://hub.docker.com/r/linuxserver/code-server/</Registry>
+  <Network>khaneproxy</Network>
+  <MyIP/>
+  <Shell>bash</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://forums.unraid.net/topic/81306-support-linuxserverio-code-server/</Support>
+  <Project>https://github.com/cdr/code-server</Project>
+  <Overview>Code-server is VS Code running on a remote server, accessible through the browser.[ul][li]Code on your Chromebook, tablet, and laptop with a consistent dev environment.[/li][li]If you have a Windows or Mac workstation, more easily develop for Linux.[/li][li]Take advantage of large cloud servers to speed up tests, compilations, downloads, and more.[/li][li]Preserve battery life when you're on the go.[/li][li]All intensive computation runs on your server.[/li][li]You're no longer running excess instances of Chrome.[/li][/ul[br][br][b][a href="https://github.com/linuxserver/docker-code-server#application-setup"]Click here for first time set up details[/a][/b]</Overview>
+  <Category>Cloud: Productivity: Tools: Status:Stable</Category>
+  <WebUI>http://[IP]:[PORT:8443]</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/code-server.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/code-server.png</Icon>
+  <ExtraParams/>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1635287645</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>Code-server is VS Code running on a remote server, accessible through the browser.[ul][li]Code on your Chromebook, tablet, and laptop with a consistent dev environment.[/li][li]If you have a Windows or Mac workstation, more easily develop for Linux.[/li][li]Take advantage of large cloud servers to speed up tests, compilations, downloads, and more.[/li][li]Preserve battery life when you're on the go.[/li][li]All intensive computation runs on your server.[/li][li]You're no longer running excess instances of Chrome.[/li][/ul[br][br][b][a href="https://github.com/linuxserver/docker-code-server#application-setup"]Click here for first time set up details[/a][/b]</Description>
+  <Networking>
+    <Mode>khaneproxy</Mode>
+    <Publish>
+      <Port>
+        <HostPort>8443</HostPort>
+        <ContainerPort>8443</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/appdata/code-server</HostDir>
+      <ContainerDir>/config</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/disks/dropbox/Development/SCM/Github/</HostDir>
+      <ContainerDir>/source/GitHub/</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment>
+    <Variable>
+      <Value/>
+      <Name>PASSWORD</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value/>
+      <Name>SUDO_PASSWORD</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>99</Value>
+      <Name>PUID</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>100</Value>
+      <Name>PGID</Name>
+      <Mode/>
+    </Variable>
+  </Environment>
+  <Labels/>
+  <Config Name="Webui" Target="8443" Default="" Mode="tcp" Description="Webui Port - Default 8443" Type="Port" Display="always" Required="true" Mask="false">8443</Config>
+  <Config Name="Appdata" Target="/config" Default="" Mode="rw" Description="Appdata - /config" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/code-server</Config>
+  <Config Name="Password" Target="PASSWORD" Default="" Mode="" Description="Optional web gui password, if not provided, there will be no auth" Type="Variable" Display="always" Required="false" Mask="true"/>
+  <Config Name="Sudo Password" Target="SUDO_PASSWORD" Default="" Mode="" Description="If this optional variable is set, user will have sudo access in the code-server terminal with the specified password." Type="Variable" Display="always" Required="false" Mask="true"/>
+  <Config Name="GitHub Repos" Target="/source/GitHub/" Default="" Mode="rw" Description="Container Path: /source/GitHub/" Type="Path" Display="always" Required="false" Mask="false">/mnt/disks/dropbox/Development/SCM/Github/</Config>
+  <Config Name="PUID" Target="PUID" Default="" Mode="" Description="PUID" Type="Variable" Display="advanced" Required="false" Mask="false">99</Config>
+  <Config Name="PGID" Target="PGID" Default="" Mode="" Description="PGID" Type="Variable" Display="advanced" Required="false" Mask="false">100</Config>
+</Container>

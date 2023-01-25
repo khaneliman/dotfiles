@@ -1,0 +1,237 @@
+<?xml version='1.0' standalone='yes'?>
+<!DOCTYPE PLUGIN [
+<!ENTITY name       "file.activity">
+<!ENTITY author     "dlandon">
+<!ENTITY version    "2022.10.15b">
+<!ENTITY launch		"Tools/FileActivity">
+<!ENTITY gitURL		"https://raw.githubusercontent.com/&author;/&name;/master">
+<!ENTITY pluginURL	"&gitURL;/&name;.plg">
+<!ENTITY supportURL	"https://forums.unraid.net/topic/54808-file-activity-plugin-how-can-i-figure-out-what-keeps-spinning-up-my-disks/">
+<!ENTITY MD5		"5dd0b211f55c45d5e7edc053946aa2e7">
+]>
+
+<PLUGIN	name="&name;"
+		author="&author;"
+		version="&version;"
+		launch="&launch;"
+		pluginURL="&pluginURL;"
+		support="&supportURL;"
+		icon="folder"
+		min="6.7.0">
+
+<CHANGES>
+##&name;
+###&version;
+- Fix: Adjust buttons on bottom of page to show when using 'fixed' listing height.
+
+###2022.08.19
+- Fix: Reference to GitHub repository.
+
+###2022.06.21
+- Add: Exclude 'system' share from file activity.
+
+###2022.05.14a
+- Add: Additional logging for debugging.
+- Add: Plugin update check.
+
+###2021.11.18
+- Fix: Log trim deleted the last lines and not the first lines.  Logging stopped after log filled.
+
+###2021.08.21
+Fix: Code cleanup.
+
+###2021.05.31
+- Add: Configuration setting to log events by disk or by share.
+- Add: 'Modify' file event to inotify events.
+- Add: Exclude 'syslogs' directory from inotify.
+- Fix: Cut down on directory events to clean up logging.
+
+###2021.05.28
+- Fix: Minor UI changes.
+
+###2021.05.19
+- Fix: Minimum version changed to 6.7.
+- Fix: Remove unneeded images folder.
+
+###2021.03.09
+- Fix: Plugin permissions.
+
+###2020.12.27
+- Fix: Check for mount point to exist before adding to the list of directories to monitor.
+
+###2020.12.26
+- Fix: Don't add array disks without a device designation.
+
+###2020,12,23a
+- Add: Pool devices for Unraid 6.9.
+
+###2020.11.20
+- Fix: Revert max version.
+
+###2020.11.14
+- Add: Max version to 6.8.9.
+
+###2020.07.28
+- Add: System Information page so File Activity will show in tools if it is the only plugin installed in System Information.
+
+2020.06.26
+- Add: Multi Language support.
+
+###2019.0210a
+- Fix: Minor cosmetic cleanup.
+
+###2019.01.18
+- Fix: Change fa icon.
+
+###2019.01.14
+- Fix: Icons for v6.
+
+###2018.09.27
+- Fix: Button crowding in Unraid 6.6.
+
+###2018.03.21
+- Fix: Update Unraid version check.
+
+###2018.03.03a
+- Fix: Php warnings in Unraid 6.5.
+
+###2017.04.05
+- Fix: Minor cleanup from removal of Max User Watches setting.
+
+###2017.03.17
+- Fix: File Activity not starting when Unassigned Devices plugin not installed or there is no cache drive.
+
+###2017.03.10
+- Fix: Remove the inotify Max User Watches setting and move it to the Tips and Tweaks plugin.
+
+###2017.02.23
+- Fix: File Activity log not showing more than 9 disks.
+
+###2017.02.22c
+- Fix: Set minimum Unraid version to 6.3.
+- Fix: Log inotify errors to syslog.
+- Fix: Change detection of File Activity running to more accurately reflect inotify actually running.
+- Fix: Set full path for inotify.
+
+###2017.02.21b
+- Fix: Error on plugin installation at startup.
+- Fix: Only first nine disks were included in inotify.
+- Fix: Get list of disks to monitor from a file and not from the command line.
+- Add: Setting to adjust the max_user_watches.
+
+###2017.02.19
+- Add: Limit the number of lines in the File Activity log to 20,000 to prevent it growing excessively large.
+
+###2017.02.18a
+- Add: Settings so Unassigned Devices and Cache disk can be excluded.
+- Add: Enable/disable service to start/stop File Activity logging with the array start/stop.
+
+###2017.02.17
+- Add: File open event so file reads are now logged.
+
+###2017.02.16c
+- Fix: Changed to inotify to log all write file activity.
+
+###2017.02.14
+- Add: Additional help text.
+
+###2017.02.12
+- Initial release.
+</CHANGES>
+
+<!--
+Copyright 2017-2022, Dan Landon
+This is the webGUI plugin to view disk file activity.
+-->
+
+<!--
+Get the plugin bundle.
+-->
+<FILE Name="/boot/config/plugins/&name;/&name;-&version;.tgz">
+<URL>"&gitURL;/&name;-&version;.tgz"</URL>
+<MD5>&MD5;</MD5>
+</FILE>
+
+<!--
+The 'pre-install' script.
+-->
+<FILE Run="/bin/bash">
+<INLINE>
+# Stop File Activity inotify if it is running.
+if [ -x "/usr/local/emhttp/plugins/&name;/scripts/rc.&name;" ]; then
+	# Stop file activity.
+	/usr/local/emhttp/plugins/&name;/scripts/rc.&name; stop 2>/dev/null
+fi
+
+# Remove emhttp files so we can re-install.
+rm -rf /usr/local/emhttp/plugins/&name;/* 2>/dev/null
+
+# Remove old 'bundle' files.
+rm -f $(ls /boot/config/plugins/&name;/&name;*.tgz 2>/dev/null | grep -v '&version;')
+</INLINE>
+</FILE>
+
+<!--
+Install the plugin bundle.
+-->
+<FILE Run="/bin/bash">
+<INLINE>
+# Create plugin directory
+mkdir /boot/config/plugins/&name; 2>/dev/null
+
+# Install the 'bundle'.
+tar -xf /boot/config/plugins/&name;/&name;-&version;.tgz -C /usr/local/emhttp/plugins 2>/dev/null
+</INLINE>
+</FILE>
+
+<FILE Name="/boot/config/plugins/&name;/&name;.cfg">
+<INLINE>
+<![CDATA[
+SERVICE="disable"
+INCLUDE_UD="yes"
+INCLUDE_CACHE="no"
+LOG_BY="share"
+]]>
+</INLINE>
+</FILE>
+
+<!--
+The 'post-install' script.
+-->
+<FILE Run="/bin/bash">
+<INLINE>
+# Create disks file directory.
+mkdir /tmp/&name; 2>/dev/null
+
+echo ""
+echo "-----------------------------------------------------------"
+echo " &name; is installed."
+echo " Copyright 2017-2022, &author;"
+echo " Version: &version;"
+echo "-----------------------------------------------------------"
+echo ""
+</INLINE>
+</FILE>
+
+<!--
+The 'remove' script.
+-->
+<FILE Run="/bin/bash" Method="remove">
+<INLINE>
+# Stop file activity.
+/usr/local/emhttp/plugins/&name;/scripts/rc.&name; stop 2>/dev/null
+
+# Remove all plugin files.
+rm -rf /boot/config/plugins/&name; 2>/dev/null
+rm -rf /usr/local/emhttp/plugins/&name; 2>/dev/null
+
+echo ""
+echo "-----------------------------------------------------------"
+echo " &name; has been removed."
+echo " Version: &version;"
+echo "-----------------------------------------------------------"
+echo ""
+</INLINE>
+</FILE>
+
+</PLUGIN>

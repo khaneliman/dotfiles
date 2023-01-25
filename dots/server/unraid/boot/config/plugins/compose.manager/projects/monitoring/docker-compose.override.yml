@@ -1,0 +1,37 @@
+services:
+  Grafana-Unraid-Stack:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/testdasi/grafana-unraid-stack-base/master/grafana-unraid-stack.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:3006]/'
+      net.unraid.docker.shell: ''
+  Dozzle:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/selfhosters/unRAID-CA-templates/master/templates/img/dozzle.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:8080]/'
+      net.unraid.docker.shell: ''
+  goaccess:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/gregyankovoy/docker-templates/master/greg/img/goaccess-logo.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:7889]/'
+      net.unraid.docker.shell: ''
+  scrutiny:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/selfhosters/unRAID-CA-templates/master/templates/img/scrutiny.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:8083]'
+      net.unraid.docker.shell: ''
+  tautulli:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/Tautulli/Tautulli-Unraid-Template/master/img/logo-circle.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:8181]/'
+      net.unraid.docker.shell: ''
+  DiskSpeed:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/jbartlett777/DiskSpeed/master/DiskSpeed.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:8888]/'
+      net.unraid.docker.shell: ''

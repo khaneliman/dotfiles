@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>Dropbox</Name>
+  <Repository>otherguy/dropbox</Repository>
+  <Registry>https://hub.docker.com/r/otherguy/dropbox</Registry>
+  <Network>khaneproxy</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://forums.unraid.net/topic/104437-support-dropbox-by-otherguy/</Support>
+  <Project>https://github.com/otherguy/docker-dropbox</Project>
+  <Overview>Dropbox client which syncs a local path with your cloud.&#xD;
+&#xD;
+Manual:&#xD;
+After installing the Dropbox container&#xD;
+- open the container overview&#xD;
+- click on the logs icon&#xD;
+- wait until you are prompted to visit a Dropbox URL&#xD;
+- Copy and Paste the URL and link the container with your Dropbox account&#xD;
+- the container automatically starts syncing&#xD;
+&#xD;
+IMPORTANT:&#xD;
+The official Dropbox client (which is used in this container) does not support FUSE filesystems. Because of that its NOT possible to use the path "/mnt/user" as your user file path. You MUST use one of these direct disk paths:&#xD;
+&#xD;
+If your Dropbox share has the cache setting "No":&#xD;
+/mnt/disk1/Dropbox&#xD;
+&#xD;
+If your "Dropbox" share has the cache setting "Only":&#xD;
+/mnt/cache/Dropbox&#xD;
+&#xD;
+You could even use "/mnt/disk1/Dropbox" with the cache Option "Yes", but if you add new files to this share, they won't be uploaded to Dropbox as long the Mover did not move them to the array.</Overview>
+  <Category>Cloud</Category>
+  <WebUI/>
+  <TemplateURL>https://raw.githubusercontent.com/mgutt/unraid-docker-templates/main/mgutt/dropbox_by_otherguy.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/mgutt/unraid-docker-templates/main/mgutt/images/dropbox.png</Icon>
+  <ExtraParams/>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1633926469</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>Dropbox client which syncs a local path with your cloud.&#xD;
+&#xD;
+Manual:&#xD;
+After installing the Dropbox container&#xD;
+- open the container overview&#xD;
+- click on the logs icon&#xD;
+- wait until you are prompted to visit a Dropbox URL&#xD;
+- Copy and Paste the URL and link the container with your Dropbox account&#xD;
+- the container automatically starts syncing&#xD;
+&#xD;
+IMPORTANT:&#xD;
+The official Dropbox client (which is used in this container) does not support FUSE filesystems. Because of that its NOT possible to use the path "/mnt/user" as your user file path. You MUST use one of these direct disk paths:&#xD;
+&#xD;
+If your Dropbox share has the cache setting "No":&#xD;
+/mnt/disk1/Dropbox&#xD;
+&#xD;
+If your "Dropbox" share has the cache setting "Only":&#xD;
+/mnt/cache/Dropbox&#xD;
+&#xD;
+You could even use "/mnt/disk1/Dropbox" with the cache Option "Yes", but if you add new files to this share, they won't be uploaded to Dropbox as long the Mover did not move them to the array.</Description>
+  <Networking>
+    <Mode>khaneproxy</Mode>
+    <Publish/>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/disk1/Dropbox</HostDir>
+      <ContainerDir>/opt/dropbox/Dropbox</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/appdata/Dropbox</HostDir>
+      <ContainerDir>/opt/dropbox/.dropbox</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment>
+    <Variable>
+      <Value>99</Value>
+      <Name>DROPBOX_UID</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>100</Value>
+      <Name>DROPBOX_GID</Name>
+      <Mode/>
+    </Variable>
+  </Environment>
+  <Labels/>
+  <Config Name="Dropbox user files" Target="/opt/dropbox/Dropbox" Default="" Mode="rw" Description="Read the description! Do not set this path to /mnt/user..." Type="Path" Display="always" Required="false" Mask="false">/mnt/disk1/Dropbox</Config>
+  <Config Name="Dropbox settings" Target="/opt/dropbox/.dropbox" Default="" Mode="rw" Description="Container Path: /opt/dropbox/.dropbox" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/Dropbox</Config>
+  <Config Name="Host Key 1" Target="DROPBOX_UID" Default="" Mode="" Description="Container Variable: DROPBOX_UID" Type="Variable" Display="always" Required="false" Mask="false">99</Config>
+  <Config Name="Host Key 2" Target="DROPBOX_GID" Default="" Mode="" Description="Container Variable: DROPBOX_GID" Type="Variable" Display="always" Required="false" Mask="false">100</Config>
+</Container>

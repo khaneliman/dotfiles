@@ -1,0 +1,356 @@
+version: "3.6"
+services:
+  cloudflared:
+    command:
+      - "tunnel"
+      - "run"
+      - "9271e587-a647-4bc5-ac55-b5664d4a90a8"
+    container_name: "cloudflared"
+    entrypoint:
+      - "cloudflared"
+      - "--no-autoupdate"
+    environment:
+      - "HOST_CONTAINERNAME=cloudflared"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt"
+    hostname: "e543e0cc0861"
+    image: "cloudflare/cloudflared:latest"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/aeleos/cloudflared/main/cloudflare-icon.png"
+      net.unraid.docker.managed: "dockerman"
+      org.opencontainers.image.source: "https://github.com/cloudflare/cloudflared"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    restart: "unless-stopped"
+    user: "nonroot"
+    volumes:
+      - "/mnt/cache/appdata/cloudflared:/home/nonroot/.cloudflared"
+    working_dir: "/home/nonroot"
+
+  dockersocket:
+    command:
+      - "haproxy"
+      - "-f"
+      - "/usr/local/etc/haproxy/haproxy.cfg"
+    container_name: "dockersocket"
+    entrypoint:
+      - "/docker-entrypoint.sh"
+    environment:
+      - "PUSH=1"
+      - "PULL=1"
+      - "HOST_CONTAINERNAME=dockersocket"
+      - "CONTAINERS=0"
+      - "POST=1"
+      - "BUILD=1"
+      - "DISTRIBUTION=1"
+      - "IMAGES=1"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "HAPROXY_VERSION=1.9.16"
+      - "HAPROXY_URL=https://www.haproxy.org/download/1.9/src/haproxy-1.9.16.tar.gz"
+      - "HAPROXY_SHA256=47174becf7c641c837b7338210f6194f266de45c49a38b68655fcd980f95bdbf"
+      - "ALLOW_RESTARTS=0"
+      - "AUTH=0"
+      - "COMMIT=0"
+      - "CONFIGS=0"
+      - "EVENTS=1"
+      - "EXEC=0"
+      - "INFO=0"
+      - "LOG_LEVEL=info"
+      - "NETWORKS=0"
+      - "NODES=0"
+      - "PING=1"
+      - "PLUGINS=0"
+      - "SECRETS=0"
+      - "SERVICES=0"
+      - "SESSION=0"
+      - "SWARM=0"
+      - "SYSTEM=0"
+      - "TASKS=0"
+      - "VERSION=1"
+      - "VOLUMES=0"
+    hostname: "d6664dc1c712"
+    image: "ghcr.io/tecnativa/docker-socket-proxy:latest"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/ibracorp/app-logos/main/docker/docker-logo.png"
+      net.unraid.docker.managed: "dockerman"
+      org.opencontainers.image.created: "2021-01-26T10:32:59.090Z"
+      org.opencontainers.image.description:
+        "Proxy over your Docker socket to restrict\
+        \ which requests it accepts"
+      org.opencontainers.image.licenses: "Apache-2.0"
+      org.opencontainers.image.revision: "b911e572d0d65c672f4da6d2ef06d7d95c89de6d"
+      org.opencontainers.image.source: "https://github.com/Tecnativa/docker-socket-proxy"
+      org.opencontainers.image.title: "docker-socket-proxy"
+      org.opencontainers.image.url: "https://github.com/Tecnativa/docker-socket-proxy"
+      org.opencontainers.image.vendor: "Tecnativa"
+      org.opencontainers.image.version: "0.1.1"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "100m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "2375:2375/tcp"
+    restart: "unless-stopped"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+
+  NginxProxyManager:
+    command:
+      - "/init"
+    container_name: "NginxProxyManager"
+    environment:
+      - "USER_ID=99"
+      - "GROUP_ID=100"
+      - "APP_NICENESS="
+      - "HOST_CONTAINERNAME=NginxProxyManager"
+      - "UMASK=000"
+      - "DISABLE_IPV6=0"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "S6_BEHAVIOUR_IF_STAGE2_FAILS=3"
+      - "S6_SERVICE_DEPS=1"
+      - "APP_NAME=Nginx Proxy Manager"
+      - "APP_USER=app"
+      - "XDG_DATA_HOME=/config/xdg/data"
+      - "XDG_CONFIG_HOME=/config/xdg/config"
+      - "XDG_CACHE_HOME=/config/xdg/cache"
+      - "XDG_RUNTIME_DIR=/tmp/run/user/app"
+    hostname: "06858a59d51e"
+    image: "jlesage/nginx-proxy-manager"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/jlesage/docker-templates/master/jlesage/images/nginx-proxy-manager-icon.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:8181]"
+      org.label-schema.description: "Docker container for Nginx Proxy Manager"
+      org.label-schema.name: "nginx-proxy-manager"
+      org.label-schema.schema-version: "1.0"
+      org.label-schema.vcs-url: "https://github.com/jlesage/docker-nginx-proxy-manager"
+      org.label-schema.version: "1.26.1"
+      org.opencontainers.image.created: "2022-06-02T16:36:51Z"
+      org.opencontainers.image.revision: "1dba3108f2f6715c762b86308b5256d92b5d1aeb"
+      org.opencontainers.image.source: "https://github.com/jlesage/docker-nginx-proxy-manager.git"
+      org.opencontainers.image.url: "https://github.com/jlesage/docker-nginx-proxy-manager"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "18443:4443/tcp"
+      - "1880:8080/tcp"
+      - "7818:8181/tcp"
+    restart: "unless-stopped"
+    volumes:
+      - "/mnt/cache/appdata/NginxProxyManager:/config"
+      - "/mnt/cache/appdata/dmz/goaccess/log:/config/log"
+    working_dir: "/tmp"
+
+  pihole-template:
+    container_name: "pihole-template"
+    entrypoint:
+      - "/s6-init"
+    environment:
+      - "UDP_PORT_53=53"
+      - "TCP_PORT_443=443"
+      - "ServerIPv6="
+      - "ServerIP=192.168.1.181"
+      - "WEBUIBOXEDLAYOUT=boxed"
+      - "TCP_PORT_53=53"
+      - "INTERFACE=br0"
+      - "IPv6=False"
+      - "DNS2=1.0.0.1"
+      - "DNSMASQ_LISTENING=all"
+      - "PIHOLE_DNS_=8.8.8.8;8.8.4.4"
+      - "HOST_CONTAINERNAME=pihole-template"
+      - "UDP_PORT_67=67"
+      - "TCP_PORT_80=80"
+      - "DNS1=1.1.1.1"
+      - "PATH=/opt/pihole:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "phpver=php"
+      - "PHP_ENV_CONFIG=/etc/lighttpd/conf-enabled/15-pihole-admin.conf"
+      - "PHP_ERROR_LOG=/var/log/lighttpd/error-pihole.log"
+      - "S6_KEEP_ENV=1"
+      - "S6_BEHAVIOUR_IF_STAGE2_FAILS=2"
+      - "S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0"
+      - "FTLCONF_LOCAL_IPV4=0.0.0.0"
+      - "VIRTUAL_HOST="
+      - "FTL_CMD=no-daemon"
+      - "DNSMASQ_USER=pihole"
+    expose:
+      - "53/tcp"
+      - "53/udp"
+      - "67/udp"
+      - "80/tcp"
+    hostname: "4c8cff056222"
+    image: "pihole/pihole:latest"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://i.imgur.com/OWkNcEn.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:80]/admin"
+      org.opencontainers.image.created: "2023-01-16T08:47:31.607Z"
+      org.opencontainers.image.description: "Pi-hole in a docker container"
+      org.opencontainers.image.licenses: ""
+      org.opencontainers.image.revision: "45d5fa753a0dcd6f31687aeaa8f63f7a0ab7cd7c"
+      org.opencontainers.image.source: "https://github.com/pi-hole/docker-pi-hole"
+      org.opencontainers.image.title: "docker-pi-hole"
+      org.opencontainers.image.url: "https://github.com/pi-hole/docker-pi-hole"
+      org.opencontainers.image.version: "2023.01"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "br0"
+    restart: "unless-stopped"
+    volumes:
+      - "/mnt/cache/appdata/pihole/dnsmasq.d:/etc/dnsmasq.d"
+      - "/mnt/cache/appdata/pihole/pihole:/etc/pihole"
+
+  Tailscale:
+    container_name: "Tailscale"
+    entrypoint:
+      - "/app/docker-entrypoint.sh"
+    environment:
+      - "UP_FLAGS=--advertise-exit-node"
+      - "HOST_CONTAINERNAME=Tailscale"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    hostname: "unraid"
+    image: "deasmi/unraid-tailscale:latest"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/deasmi/unraid-tailscale/master/logo.png"
+      net.unraid.docker.managed: "dockerman"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    network_mode: "host"
+    privileged: true
+    security_opt:
+      - "label=disable"
+    volumes:
+      - "/mnt/cache/appdata/tailscale:/state"
+    working_dir: "/app"
+
+  RustDeskServer:
+    command:
+      - "/usr/bin/hbbs"
+    container_name: "RustDeskServer"
+    environment:
+      - "HOST_CONTAINERNAME=RustDeskServer"
+      - "TCP_PORT_21115=21115"
+      - "TCP_PORT_21116=21116"
+      - "UDP_PORT_21116=21116"
+      - "TCP_PORT_21118=21118"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    hostname: "d650f5a2c5f8"
+    image: "rustdesk/rustdesk-server"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://github.com/JmzTaylor/unraid_templates/raw/master/rustserver.png"
+      net.unraid.docker.managed: "dockerman"
+      org.opencontainers.image.created: "2023-01-11T03:49:09.196Z"
+      org.opencontainers.image.description: "RustDesk Server Program"
+      org.opencontainers.image.licenses: "AGPL-3.0"
+      org.opencontainers.image.revision: "accd96f1d84b43af5934a859a028fc70640a6317"
+      org.opencontainers.image.source: "https://github.com/rustdesk/rustdesk-server"
+      org.opencontainers.image.title: "rustdesk-server"
+      org.opencontainers.image.url: "https://github.com/rustdesk/rustdesk-server"
+      org.opencontainers.image.version: "1.1.7"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "br0"
+    volumes:
+      - "/mnt/cache/appdata/rustdesk-hbbs:/root"
+    working_dir: "/root"
+
+  RustDeskServer-Relay:
+    command:
+      - "/usr/bin/hbbr"
+    container_name: "RustDeskServer-Relay"
+    environment:
+      - "TCP_PORT_21119=21119"
+      - "HOST_CONTAINERNAME=RustDeskServer-Relay"
+      - "TCP_PORT_21117=21117"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    hostname: "efdcfcb6aeee"
+    image: "rustdesk/rustdesk-server"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://github.com/JmzTaylor/unraid_templates/raw/master/rustserver.png"
+      net.unraid.docker.managed: "dockerman"
+      org.opencontainers.image.created: "2023-01-11T03:49:09.196Z"
+      org.opencontainers.image.description: "RustDesk Server Program"
+      org.opencontainers.image.licenses: "AGPL-3.0"
+      org.opencontainers.image.revision: "accd96f1d84b43af5934a859a028fc70640a6317"
+      org.opencontainers.image.source: "https://github.com/rustdesk/rustdesk-server"
+      org.opencontainers.image.title: "rustdesk-server"
+      org.opencontainers.image.url: "https://github.com/rustdesk/rustdesk-server"
+      org.opencontainers.image.version: "1.1.7"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "br0"
+    volumes:
+      - "/mnt/cache/appdata/rustdesk-hbbr:/root"
+    working_dir: "/root"
+
+  # hbbs:
+  #   container_name: hbbs
+  #   ports:
+  #     - 21115:21115
+  #     - 21116:21116
+  #     - 21116:21116/udp
+  #     - 21118:21118
+  #   image: rustdesk/rustdesk-server:latest
+  #   command: hbbs -r example.com:21117
+  #   volumes:
+  #     - /mnt/cache/appdata/rustdesk-hbbs/:/root
+  #   networks:
+  #     - "khaneproxy"
+  #   depends_on:
+  #     - hbbr
+  #   restart: unless-stopped
+  #
+  # hbbr:
+  #   container_name: hbbr
+  #   ports:
+  #     - 21117:21117
+  #     - 21119:21119
+  #   image: rustdesk/rustdesk-server:latest
+  #   command: hbbr
+  #   volumes:
+  #     - /mnt/cache/appdata/rustdesk-hbbr:/root
+  #   networks:
+  #     - "khaneproxy"
+  #   restart: unless-stopped
+
+networks:
+  br0:
+    external: true
+    name: "br0"
+  khaneproxy:
+    external: true
+    name: "khaneproxy"

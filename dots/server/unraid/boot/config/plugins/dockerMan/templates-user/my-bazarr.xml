@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>bazarr</Name>
+  <Repository>linuxserver/bazarr</Repository>
+  <Registry>https://hub.docker.com/r/linuxserver/bazarr/</Registry>
+  <Network>khaneproxy</Network>
+  <MyIP/>
+  <Shell>bash</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://forums.unraid.net/topic/74410-support-linuxserverio-bazarr/</Support>
+  <Project>https://www.bazarr.media/</Project>
+  <Overview>Bazarr is a companion application to Sonarr and Radarr. It can manage and download subtitles based on your requirements. You define your preferences by TV show or movie and Bazarr takes care of everything for you. 
+
+  [br][br][b][u][span style='color: #E80000;']Configuration[/span][/u][/b][br]
+  [b]/config[/b] : Storing Bazarr config files [br]
+  [b]80[/b] : The web-interface. [br]
+ [b]/movies[/b]:  Path to Movies[br]
+ [b]/tv[/b]:  Path to TV Series[br]</Overview>
+  <Category>Downloaders: Network:Other MediaApp:Video Tools:</Category>
+  <WebUI>http://[IP]:[PORT:6767]</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/bazarr.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/bazarr.png</Icon>
+  <ExtraParams>-m 500M</ExtraParams>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1635528545</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>Bazarr is a companion application to Sonarr and Radarr. It can manage and download subtitles based on your requirements. You define your preferences by TV show or movie and Bazarr takes care of everything for you. &#xD;
+&#xD;
+  [br][br][b][u][span style='color: #E80000;']Configuration[/span][/u][/b][br]&#xD;
+  [b]/config[/b] : Storing Bazarr config files [br]&#xD;
+  [b]80[/b] : The web-interface. [br]&#xD;
+ [b]/movies[/b]:  Path to Movies[br]&#xD;
+ [b]/tv[/b]:  Path to TV Series[br]</Description>
+  <Networking>
+    <Mode>khaneproxy</Mode>
+    <Publish>
+      <Port>
+        <HostPort>6767</HostPort>
+        <ContainerPort>6767</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/data/media/movies/</HostDir>
+      <ContainerDir>/movies</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/data/media/tv/</HostDir>
+      <ContainerDir>/tv</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/data/torrents/</HostDir>
+      <ContainerDir>/data/torrents</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/appdata/bazarr</HostDir>
+      <ContainerDir>/config</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment>
+    <Variable>
+      <Value>99</Value>
+      <Name>PUID</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>100</Value>
+      <Name>PGID</Name>
+      <Mode/>
+    </Variable>
+  </Environment>
+  <Labels/>
+  <Config Name="Host Port 1" Target="6767" Default="6767" Mode="tcp" Description="Container Port: 6767" Type="Port" Display="always" Required="true" Mask="false">6767</Config>
+  <Config Name="Host Path 2" Target="/movies" Default="" Mode="rw" Description="Movies" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/data/media/movies/</Config>
+  <Config Name="Host Path 3" Target="/tv" Default="" Mode="rw" Description="TV" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/data/media/tv/</Config>
+  <Config Name="Host Path 3" Target="/data/torrents" Default="" Mode="rw" Description="Container Path: /torrents" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/data/torrents/</Config>
+  <Config Name="PUID" Target="PUID" Default="" Mode="" Description="Container Variable: PUID" Type="Variable" Display="advanced-hide" Required="false" Mask="false">99</Config>
+  <Config Name="PGID" Target="PGID" Default="" Mode="" Description="Container Variable: PGID" Type="Variable" Display="advanced-hide" Required="false" Mask="false">100</Config>
+  <Config Name="AppData Config Path" Target="/config" Default="" Mode="rw" Description="Appdata" Type="Path" Display="advanced-hide" Required="true" Mask="false">/mnt/user/appdata/bazarr</Config>
+</Container>

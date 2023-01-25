@@ -1,0 +1,5 @@
+#!/bin/bash
+#----------------------------------------------------------------------------
+fusermount -u /mnt/disks/dropbox
+fusermount -u /mnt/disks/google
+fusermount -u /mnt/disks/onedrive

@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>scrutiny</Name>
+  <Repository>hotio/scrutiny</Repository>
+  <Registry>https://hub.docker.com/r/hotio/scrutiny</Registry>
+  <Network>khaneproxy</Network>
+  <MyIP/>
+  <Shell>bash</Shell>
+  <Privileged>true</Privileged>
+  <Support>https://hotio.dev/discord</Support>
+  <Project>https://hotio.dev/containers/scrutiny</Project>
+  <Overview>Hard Drive S.M.A.R.T Monitoring, Historical Trends and Real World Failure Thresholds</Overview>
+  <Category>Other:</Category>
+  <WebUI>http://[IP]:[PORT:8080]</WebUI>
+  <TemplateURL/>
+  <Icon>https://hotio.dev/webhook-avatars/scrutiny.png</Icon>
+  <ExtraParams>-v /run/udev:/run/udev:ro -v /dev/disk:/dev/disk:ro</ExtraParams>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1634145064</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>Hard Drive S.M.A.R.T Monitoring, Historical Trends and Real World Failure Thresholds</Description>
+  <Networking>
+    <Mode>khaneproxy</Mode>
+    <Publish>
+      <Port>
+        <HostPort>8083</HostPort>
+        <ContainerPort>8080</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/appdata/scrutiny</HostDir>
+      <ContainerDir>/config</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment>
+    <Variable>
+      <Value>86400</Value>
+      <Name>INTERVAL</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>http://localhost:8080</Value>
+      <Name>API_ENDPOINT</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>both</Value>
+      <Name>MODE</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>99</Value>
+      <Name>PUID</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>100</Value>
+      <Name>PGID</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>002</Value>
+      <Name>UMASK</Name>
+      <Mode/>
+    </Variable>
+  </Environment>
+  <Labels/>
+  <Config Name="Host Port for 8080" Target="8080" Default="8080" Mode="tcp" Description="Container Port: 8080" Type="Port" Display="always-hide" Required="true" Mask="false">8083</Config>
+  <Config Name="Host Path for /config" Target="/config" Default="/mnt/user/appdata/scrutiny" Mode="rw" Description="Container Path: /config" Type="Path" Display="always-hide" Required="true" Mask="false">/mnt/user/appdata/scrutiny</Config>
+  <Config Name="INTERVAL" Target="INTERVAL" Default="86400" Mode="" Description="Container Variable: INTERVAL" Type="Variable" Display="always-hide" Required="false" Mask="false">86400</Config>
+  <Config Name="API_ENDPOINT" Target="API_ENDPOINT" Default="http://localhost:8080" Mode="" Description="Container Variable: API_ENDPOINT" Type="Variable" Display="always-hide" Required="false" Mask="false">http://localhost:8080</Config>
+  <Config Name="MODE" Target="MODE" Default="both|web|collector" Mode="" Description="Container Variable: MODE" Type="Variable" Display="always-hide" Required="false" Mask="false">both</Config>
+  <Config Name="PUID" Target="PUID" Default="99" Mode="" Description="Container Variable: PUID" Type="Variable" Display="advanced-hide" Required="false" Mask="false">99</Config>
+  <Config Name="PGID" Target="PGID" Default="100" Mode="" Description="Container Variable: PGID" Type="Variable" Display="advanced-hide" Required="false" Mask="false">100</Config>
+  <Config Name="UMASK" Target="UMASK" Default="002" Mode="" Description="Container Variable: UMASK" Type="Variable" Display="advanced-hide" Required="false" Mask="false">002</Config>
+</Container>

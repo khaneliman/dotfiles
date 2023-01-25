@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>Apache-NIFI</Name>
+  <Repository>apache/nifi</Repository>
+  <Registry>https://hub.docker.com/r/apache/nifi/</Registry>
+  <Network>khaneproxy</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://forums.unraid.net/topic/103150-support-apache-nifi/</Support>
+  <Project>https://nifi.apache.org/</Project>
+  <Overview>
+    Apache NiFi supports powerful and scalable directed graphs of data routing, transformation, and system mediation logic.
+  </Overview>
+  <Category>Docker:</Category>
+  <WebUI>http://[IP]:[PORT:8080]/nifi/</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/DanRegalia/UNRAID/main/apache-nifi-unraid.xml</TemplateURL>
+  <Icon>https://d36jcksde1wxzq.cloudfront.net/be7833db9bddb4494d2a7c3dd659199a.png</Icon>
+  <ExtraParams/>
+  <PostArgs/>
+  <CPUset>3,9,4,10,5,11</CPUset>
+  <DateInstalled>1634092541</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>&#xD;
+    Apache NiFi supports powerful and scalable directed graphs of data routing, transformation, and system mediation logic.&#xD;
+  </Description>
+  <Networking>
+    <Mode>khaneproxy</Mode>
+    <Publish>
+      <Port>
+        <HostPort>8081</HostPort>
+        <ContainerPort>8080</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/appdata/nifi</HostDir>
+      <ContainerDir>/nifi</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment/>
+  <Labels/>
+  <Config Name="Web Interface Port" Target="8080" Default="8080" Mode="tcp" Description="This is NIFIs Web UI port you can access via a web browser." Type="Port" Display="always-visible" Required="true" Mask="{8}">8081</Config>
+  <Config Name="Config Storage Path" Target="/nifi" Default="/mnt/user/appdata/nifi" Mode="rw" Description="This is where NIFI will store its databases and configuration." Type="Path" Display="always-visible" Required="true" Mask="{8}">/mnt/user/appdata/nifi</Config>
+</Container>

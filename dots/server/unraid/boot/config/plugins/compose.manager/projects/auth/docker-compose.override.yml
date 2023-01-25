@@ -1,0 +1,13 @@
+services:
+  Authelia:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://i.imgur.com/DCn2yiv.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:9091]/'
+      net.unraid.docker.shell: ''
+  pwm:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://i.imgur.com/dAMqu51.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:8282]/'
+      net.unraid.docker.shell: ''

@@ -1,0 +1,151 @@
+<?xml version="1.0" standalone="yes"?>
+<!DOCTYPE PLUGIN [
+<!ENTITY name "intel-gpu-top">
+<!ENTITY author "ich777">
+<!ENTITY version "2022.09.27">
+<!ENTITY gitURL "https://github.com/&author;/&name;/raw/master">
+<!ENTITY pluginURL "&gitURL;/&name;.plg">
+<!ENTITY md5 "f9988dd51b8d9e2ab9099b718ed65b4c">
+<!ENTITY plugin "/boot/config/plugins/&name;">
+<!ENTITY emhttp "/usr/local/emhttp/plugins/&name;">
+]>
+<PLUGIN name="&name;" author="&author;" version="&version;" pluginURL="&pluginURL;" min="6.8.3" support="https://forums.unraid.net/topic/92865-support-ich777-nvidiadvb-kernel-helperbuilder-docker/">
+
+<CHANGES>
+
+###2022.09.27
+- Bumped 'intel_gpu_top' version to Gitlab master branch from 2022.09.27
+
+###2022.06.28
+- Bumped 'intel_gpu_top' version to Gitlab master branch from 2022.06.28
+
+###2021.07.16
+- Bumped 'intel_gpu_top' version to Gitlab master branch from 2021.07.16
+
+###2021.06.15
+- Enable Intel Kernel module with 'force_probe' to support new Intel CPUs without the need to modify syslinux.cfg
+
+###2021.05.04
+- Bumped 'intel_gpu_top' version. Based on Intel-GPU-Tools v1.26
+- Changed package name to avoid conflicts with other plugins
+
+###2021.04.01
+- Bumped 'intel_gpu_top' version to Gitlab master branch from 2021.04.01
+
+###2021.03.27
+- Bumped 'intel_gpu_top' version to Gitlab master branch from 2021.03.27
+
+###2021.03.24
+- Added check for Intel GVT-g Plugin
+
+###2021.03.14a
+- Removed 'intel_gpu_frequency'
+
+###2021.03.14
+- Fixed unRAID GUI mode not working
+
+###2021.01.09
+- Added 'intel_gpu_frequency' - based on Intel-GPU-Tools 1.25
+
+###2021.01.07
+- Initial release - based on Intel-GPU-Tools 1.25
+
+</CHANGES>
+
+<FILE Run="/bin/bash">
+<INLINE>
+rm -f $(ls /boot/config/plugins/&name;/intel.gpu.top*.txz 2&gt;/dev/null|grep -v '&version;')
+</INLINE>
+</FILE>
+
+<FILE Name="/boot/config/plugins/&name;/intel.gpu.top-&version;.txz" Run="upgradepkg --install-new">
+<URL>&gitURL;/packages/intel.gpu.top-&version;.txz</URL>
+<MD5>&md5;</MD5>
+</FILE>
+
+<FILE Name="&emhttp;/README.md">
+<INLINE>
+**Intel GPU TOP**
+
+This plugin adds the tool 'intel_gpu_top' to your unRAID server and also enables your Intel iGPU from the installation of this plugin on, so no editis to the 'go' file or creation of other files are necessary.
+To see the usage of your iGPU open up the unRAID Terminal and type in 'intel_gpu_top' (without quotes).
+This plugin satisfies installation prerequisites of the GPU Statistics plugin from Community Apps. With both plugins installed you can display Intel GPU utilization on the unRAID Dashboard.
+</INLINE>
+</FILE>
+
+<FILE Run="/bin/bash">
+<INLINE>
+
+enableintel() {
+#Enable Intel Kernel module
+PROBE="$(lspci -nn | grep -E "VGA compatible controller|Display controller" | grep "Intel" | sort | tail -1 | grep -oE '\[[a-f0-9][a-f0-9][a-f0-9][a-f0-9]:[a-f0-9][a-f0-9][a-f0-9][a-f0-9]\]' | sed 's/[][]//g' | cut -d ':' -f2)"
+if [ -z "${PROBE}" ]; then
+  if modprobe i915 ; then
+    echo
+    echo "---Intel Kernel Module successfully enabled!---"
+  else
+    echo
+    echo "------Something went wrong! Can't enable-------"
+    echo "----Intel Kernel Module, removing package!-----"
+    removepkg &name;-&version;
+    rm -rf /usr/local/emhttp/plugins/&name;
+    rm -rf &plugin;
+    exit 1
+  fi
+else
+  if modprobe i915 force_probe=${PROBE} ; then
+    echo
+    echo "---Intel Kernel Module successfully enabled!---"
+  else
+    echo
+    echo "------Something went wrong! Can't enable-------"
+    echo "----Intel Kernel Module, removing package!-----"
+    removepkg &name;-&version;
+    rm -rf /usr/local/emhttp/plugins/&name;
+    rm -rf &plugin;
+    exit 1
+  fi
+fi
+sleep 1
+chmod -R 777 /dev/dri
+}
+
+#Check if Kernel Module is already enabled
+if [ -d /boot/config/plugins/intel-gvt-g ]; then
+  echo
+  echo "-----------Found Intel GVT-g Plugin!-----------"
+  echo "---GVT-g Plugin will enable the i915 Module!---"
+elif [ -z "$(lsmod | grep "i915")" ]; then
+  echo
+  echo "---------Enabling Intel Kernel Module----------"
+  enableintel
+else
+  echo
+  echo "-----Intel Kernel Module already enabled!------"
+fi
+
+echo
+echo "----Installation of Intel GPU TOP complete-----"
+
+</INLINE>
+</FILE>
+
+<FILE Run="/bin/bash" Method="remove">
+<INLINE>
+
+echo "-----------------------------------------------"
+echo "----------Uninstalling Intel GPU TOP-----------"
+echo "-----------------------------------------------"
+# Remove plugin related files
+removepkg intel.gpu.top-&version;
+rm -rf /usr/local/emhttp/plugins/&name;
+rm -rf &plugin;
+echo
+echo "-----------------------------------------------"
+echo "---Uninstallation of Intel GPU TOP complete!---"
+echo "-----------------------------------------------"
+echo
+
+</INLINE>
+</FILE>
+</PLUGIN>

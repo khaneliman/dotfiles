@@ -1,0 +1,22 @@
+#!/bin/bash
+#----------------------------------------------------------------------------
+#first section makes the folders for the mount in the /mnt/disks folder so docker containers can have access
+#there are 4 entries below as in the video i had 4 remotes amazon,dropbox, google and secure
+#you only need as many as what you need to mount for dockers or a network share
+
+mkdir -p /mnt/disks/dropbox
+mkdir -p /mnt/disks/google
+mkdir -p /mnt/disks/onedrive
+
+
+#This section mounts the various cloud storage into the folders that were created above.
+
+rclone mount --max-read-ahead 1024k --allow-other dropbox: /mnt/disks/dropbox &
+rclone mount --max-read-ahead 1024k --allow-other google: /mnt/disks/google &
+rclone mount --max-read-ahead 1024k --allow-other --vfs-cache-mode writes onedrive: /mnt/disks/onedrive &
+
+echo '"/mnt/disks/dropbox" -fsid=200,async,no_subtree_check *(rw,sec=sys,insecure,anongid=100,anonuid=99,all_squash)' >> /etc/exports
+echo '"/mnt/disks/google" -fsid=201,async,no_subtree_check *(rw,sec=sys,insecure,anongid=100,anonuid=99,all_squash)' >> /etc/exports
+echo '"/mnt/disks/onedrive" -fsid=202,async,no_subtree_check *(rw,sec=sys,insecure,anongid=100,anonuid=99,all_squash)' >> /etc/exports
+
+exportfs -ra

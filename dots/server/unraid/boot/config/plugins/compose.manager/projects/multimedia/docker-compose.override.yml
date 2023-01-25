@@ -1,0 +1,13 @@
+services:
+  Cleanarr:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/Alphacosmos/unraid-templetes/main/Images/plex-library-cleaner.ico'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:80]/'
+      net.unraid.docker.shell: ''
+  PhotoStructure:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://photostructure.com/img/logo-circle-gradient-256.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:1787]'
+      net.unraid.docker.shell: ''

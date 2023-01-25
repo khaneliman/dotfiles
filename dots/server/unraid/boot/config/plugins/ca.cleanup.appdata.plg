@@ -1,0 +1,138 @@
+<?xml version="1.0" standalone="yes"?>
+<!DOCTYPE PLUGIN [
+<!ENTITY name "ca.cleanup.appdata">
+<!ENTITY author "Andrew Zawadzki">
+<!ENTITY version "2022.10.21">
+<!ENTITY md5 "9f0deae4deb773088f9c628e7a77aff8">
+<!ENTITY launch "Settings/CleanUpAppdata">
+<!ENTITY plugdir "/usr/local/emhttp/plugins/&name;">
+<!ENTITY github "Squidly271/ca.cleanup.appdata">
+<!ENTITY pluginURL "https://raw.githubusercontent.com/&github;/master/plugins/&name;.plg">
+]>
+<PLUGIN name="&name;" author="&author;" version="&version;" min="6.9.0" launch="&launch;" pluginURL="&pluginURL;" icon="paint-brush" support="http://lime-technology.com/forum/index.php?topic=53695.0">
+
+<CHANGES>
+###AS ALWAYS VERIFY THE FOLDERS THE PLUGIN OFFERS UP TO DELETE###
+
+###2022.10.21
+- Support translations by request
+
+###2021.12.08
+- Ignore error if corrupted XML files
+
+###2021.11.27
+- Unraid 6.10 compatibility
+
+###2021.03.10
+- Permission Fix
+
+###2020.10.21
+- Compatibility Fixes
+
+###2019.09.15
+- Fixed: Weirdness if using an appdata folder containing special characters
+
+###2019.08.18
+- Add another CYA banner warning
+
+###2019.08.03
+- Add large warning that if you screwed up, it's your problem
+
+###2019.06.01
+- Fix typo, credits fix, change update notification to CA style
+
+###2019.05.14
+- Suppress errors if xml file is corrupted
+
+###2019.01.13
+- Update Icon
+
+###2018.12.31
+- Add in some checks for when user had a severely misconfigured application previously installed
+
+###2018.10.19
+- Fix Broken Pipe
+
+###2018.03.15
+- Ignore metadata files created by OSX
+
+###2017.11.23
+- Reorganization as part of updates to CA proper
+- Relocate Icon to Settings / User Utilities
+
+###2017.01.28
+- Fixed: Errors when no templates have any possibilities for cleanup
+
+###2016.11.11
+- Initial Release
+
+</CHANGES>
+
+<!-- The 'pre-install' script. -->
+<FILE Run="/usr/bin/php">
+<INLINE>
+<![CDATA[
+<?
+  $version = parse_ini_file("/etc/unraid-version");
+  
+  if ( version_compare($version['version'],"6.1.0", "<") )
+  {
+    echo "********************************************************************\n";
+    echo "\n";
+    echo "Community Applications Requires unRaid version 6.1 or greater to run\n";
+    echo "\n";
+    echo "********************************************************************\n";
+    exit(1);
+  }
+  if ( is_file("/usr/local/emhttp/plugins/community.applications/Backup.page") ) {
+    echo "Your installed version of Community Applications already includes Cleanup Appdata... Aborting Installation\n";
+    exit(1);
+  }
+?>
+]]>
+</INLINE>
+</FILE>
+
+<FILE Run="/bin/bash">
+<INLINE>
+# Remove old 'source' files
+rm -f $(ls /boot/config/plugins/&name;/&name;*.txz 2&gt;/dev/null | grep -v '&version;')
+</INLINE>
+</FILE>
+
+<!--
+The 'source' file.
+-->
+<FILE Name="/boot/config/plugins/&name;/&name;-&version;-x86_64-1.txz" Run="upgradepkg --install-new">
+<URL>https://raw.github.com/&github;/master/archive/&name;-&version;-x86_64-1.txz</URL>
+<MD5>&md5;</MD5>
+</FILE>
+
+<!--
+The 'post-install' script
+-->
+<FILE Run="/bin/bash">
+<INLINE>
+rm -rf /usr/local/emhttp/plugins/ca.cleanup.appdata/CA.page
+rm -rf /usr/local/emhttp/plugins/ca.cleanup.appdata/caHelp.page
+echo ""
+echo "----------------------------------------------------"
+echo " &name; has been installed."
+echo " Copyright 2015-2016, Andrew Zawadzki"
+echo " Version: &version;"
+echo "----------------------------------------------------"
+echo ""
+</INLINE>
+</FILE>
+
+<!--
+The 'remove' script.
+-->
+<FILE Run="/bin/bash" Method="remove">
+<INLINE>
+removepkg &name;-&version;-x86_64-1
+rm -rf &plugdir;
+rm -rf /boot/config/plugins/&name;
+</INLINE>
+</FILE> 
+</PLUGIN>

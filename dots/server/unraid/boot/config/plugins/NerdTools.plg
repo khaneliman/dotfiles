@@ -1,0 +1,158 @@
+<?xml version="1.0" standalone="yes"?>
+<!DOCTYPE PLUGIN [
+<!ENTITY name "NerdTools">
+<!ENTITY author "UnRAIDES">
+<!ENTITY version "2022.11.01">
+<!ENTITY md5 "5cd31bc67b3b3fb0f32e4e8a6c89216c">
+<!ENTITY launch "Settings/&name;">
+<!ENTITY github "UnRAIDES/unRAID-&name;">
+<!ENTITY pluginURL "https://raw.githubusercontent.com/&github;/main/plugin/&name;.plg">
+<!ENTITY plgPATH "/boot/config/plugins/&name;">
+<!ENTITY plgNAME "&name;-&version;-x86_64-1">
+<!ENTITY emhttp "/usr/local/emhttp/plugins/&name;">
+]>
+<PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" min="6.11" support="https://forums.unraid.net/topic/129200-plug-in-nerdtools/">
+
+<CHANGES>
+##&name;
+###2022.11.01
+- Fixed: Removepkg Fixed packages
+###2022.10.24
+- Added: wget2-2.0.0
+- Added: gpgme-1.16.0 as dependency of wget2
+- Added: lzlib-1.13 as dependency of wget2
+- Added: libassuan-2.5.5 as dependency of wget2
+- Added: bc-1.07
+- Added: tcl-8.6.12
+- Added: tcllib-1.21
+- Added: powershell-7.2.7
+###2022.10.19
+- Added: ipmitool-1.8.18
+- Added: mlocate-0.26
+- Added: pigz-2.7
+- Added: sshfs-3.7.2
+###2022.10.10
+- Changed: axel-2.17.11
+- Added: ddrescue-1.26
+- Added: exiftool-12.47
+- Added: iftop-1.0pre4
+- Added: iotop-0.6
+- Added: lftp-4.9.2
+- Added: llfuse-1.4.2 as dependency of borgbackup
+- Added: powertop-2.13
+- Changed: python-setuptools-57.5.0
+- Added: rsnapshot-1.4.4
+###2022.10.09
+- Fixed: Reinstall packages
+###2022.10.08
+- Fixed: The plugins column is changed by the current version
+- Fixed: The functionality to compare old versions is updated
+###2022.10.05
+- Fixed: Remove packages on uninstalling plugin
+###2022.10.04d
+- Fixed: Dependency for mediainfo package
+- Added: vim-9.0.0623 package
+- Added: libsodium-1.0.18 as dependency of vim
+- Changed: jdupes-1.21
+###2022.10.04c
+- Fixed: Bug with json file
+###2022.10.04b
+- Fixed: Minor change for developer tools
+###2022.10.04a
+- Fixed: Clean old code
+- Enhanced: Delete old packages
+- Changed: unrar6.12
+- Changed: uar-6.12
+- Changed: p7zip-17.04
+- Changed: mediainfo-22.06
+- Changed: libzen-0.4.39
+- Changed: libmediainfo-22.06 as dependency of mediainfo
+###2022.10.04
+- Initial release
+- Plugin based on NerdPack of dmacias72
+- Cleaned code and deleted packages unused that are include on UnRAID 6.11
+- New system for install packages
+
+</CHANGES>
+
+<!-- The 'pre-install' script. -->
+<FILE Run="/usr/bin/php">
+<INLINE>
+<![CDATA[
+<?
+  $version = parse_ini_file("/etc/unraid-version");
+  
+  if ( version_compare($version['version'],"6.11", "<") )
+  {
+    echo "**********************************************************************\n";
+    echo "\n";
+    echo "NerdTools Requires Unraid version 6.11.0 or greater to run\n";
+    echo "\n";
+    echo "**********************************************************************\n";
+    exit(1);
+  }
+	
+?>
+]]>
+</INLINE>
+</FILE>
+
+<FILE Run="/bin/bash">
+<INLINE>
+# Remove old 'source' files
+rm -f $(ls /boot/config/plugins/&name;/&name;*.txz 2&gt;/dev/null | grep -v '&version;')
+</INLINE>
+</FILE>
+
+
+
+<!--
+The 'install' script.
+-->
+<FILE Run="/bin/bash" Method="install">
+<INLINE>
+
+echo ""
+echo "-----------------------------------------------------------"
+echo " &name; has been installed."
+echo ""
+echo " Copyright 2022, &author;"
+echo " Credits, based on NerdPack plugin of dmacias72, eschultz"
+echo " Version: &version;"
+echo "-----------------------------------------------------------"
+echo ""
+</INLINE>
+</FILE>
+
+
+<FILE Name="/boot/config/plugins/&name;/&name;-&version;-x86_64-1.txz" Run="upgradepkg --install-new --reinstall">
+<URL>https://raw.githubusercontent.com/UnRAIDES/unRAID-&name;/main/archive/&name;-&version;-x86_64-1.txz</URL>
+<MD5>&md5;</MD5>
+</FILE>
+
+<!--
+The 'remove' script.
+-->
+<FILE Run="/bin/bash" Method="remove">
+<INLINE>
+
+removepkg &plgPATH;/&plgNAME;.txz
+rm -rf &emhttp;
+rm -f &plgPATH;/&plgNAME;.txz
+
+removepkg /boot/extra/*_nerdtools.txz 1&gt;/dev/null
+rm -f /boot/exta/*_nerdtools.txz 1&gt;/dev/null
+rm -f /boot/config/plugins/NerdTools 1&gt;/dev/null
+
+echo ""
+echo "-----------------------------------------------------------"
+echo " &name; has been removed."
+echo " Copyright 2022, &author;"
+echo " Credits, based on NerdPack plugin of dmacias72, eschultz"		
+echo " Version: &version;"
+echo "-----------------------------------------------------------"
+echo ""
+</INLINE>
+</FILE>
+
+</PLUGIN>

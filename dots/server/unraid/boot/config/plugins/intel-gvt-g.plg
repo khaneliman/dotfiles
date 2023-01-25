@@ -1,0 +1,285 @@
+<?xml version='1.0' standalone='yes'?>
+<!DOCTYPE PLUGIN [
+<!ENTITY name      "intel-gvt-g">
+<!ENTITY author    "ich777">
+<!ENTITY version   "2022.05.02">
+<!ENTITY md5       "fde9145be48115e8738cc40ee0e91b37">
+<!ENTITY launch    "Settings/&name;-main">
+<!ENTITY plugdir   "/usr/local/emhttp/plugins/&name;">
+<!ENTITY plugin    "/boot/config/plugins/&name;">
+<!ENTITY pluginURL "https://raw.githubusercontent.com/ich777/&name;/master/&name;.plg">
+]>
+
+<PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" min="6.9.2" support="https://forums.unraid.net/topic/108650-plugin-intel-gvt-g/">
+
+<CHANGES>
+
+###2022.05.02
+- Fixed GuC/HuC description and drop-down menu for Guc/HuC
+
+###2021.11.03
+- Fixed error messages on boot
+
+###2021.09.30
+- Fixed error message from check for old packages
+
+###2021.09.17
+- Fixed plugin to escape variables properly
+
+###2021.07.23
+- Compatibility changes for Unraid 6.10.0
+
+###2021.07.11
+- Added version check for packages directory
+
+###2021.06.20
+- Added error message for not supported CPUs
+
+###2021.06.18
+- Changed plugin remove routine to not replace qemu hooks with backup qemu hooks file
+
+###2021.06.15
+- Enable Intel Kernel module with 'force_probe' to support new Intel CPUs without the need to modify syslinux.cfg
+
+###2021.05.31
+- Compatibility changes for Unraid 6.10.0
+
+###2021.05.20
+- Added GuC/HuC mode selection
+- Reogranized GUI a little bit
+- Fixed a few spelling errors
+
+###2021.05.18
+- Fixed adapter not showing up on some motherboards where controller is named differently
+
+###2021.05.14c
+- Corrected a few typos
+- Updated Guide that only VM names without symbols and special characters are possible for now
+
+###2021.05.14b
+- Corrected a few typos
+- Updated Guide
+
+###2021.05.14a
+- Added Guide
+- Added confirm dialogue to Reset Qemu Config
+
+###2021.05.14
+- Fixed bug where not all vGPU UUID's are created/deleted if there are more than one assignment
+
+###2021.05.04
+- Changed package name to avoid conflicts with other plugins
+
+###2021.04.30a
+- Added additional time to wait after UUID for vGPU is created at start of the VM to avoid problems
+- Fixed bug where UUID isn't removed from the config after deleting a vGPU assignment
+
+###2021.04.28a
+- Rewrote plugin to interact directly with the VMs
+
+###2021.03.27
+- Corrected permission issue for '/dev/dri'
+
+###2021.03.22
+- Added download for custom i915 Kernel Module so that no Custom unRAID images are needed
+- Added detection if Custom unRAID images are used or not
+- Use IP address instead of hostname for online check
+
+###2021.03.12
+- Fixed permission issues
+- Added initial instructions
+
+###2021.03.04
+- Initial Release
+
+</CHANGES>
+
+<FILE Run="/bin/bash">
+<INLINE>
+rm -f $(ls &plugin;/gvt.g*.txz 2>/dev/null|grep -v '&version;')
+</INLINE>
+</FILE>
+
+<FILE Name="&plugin;/gvt.g-&version;.txz" Run="upgradepkg --install-new">
+<URL>https://raw.githubusercontent.com/ich777/&name;/master/packages/gvt.g-&version;.txz</URL>
+<MD5>&md5;</MD5>
+</FILE>
+
+<FILE Name="&plugdir;/README.md">
+<INLINE>
+**Intel GVT-g**
+
+Intel-GVT-g is a technology that provides mediated device passthrough for Intel iGPUs (Broadwell and newer). It can be used to virtualize the iGPU for multiple guest virtual machines and also in Docker containers, effectively providing near-native graphics performance in the virtual machine and still letting your host use the virtualized iGPU normally. This is useful if you want accelerated graphics in Windows virtual machines running without dedicated GPUs for full device passthrough.
+
+This means less power consumption, less heat output and better performance for your VMs.
+</INLINE>
+</FILE>
+
+<FILE Run="/bin/bash">
+<INLINE>
+
+#Create settings file if not found
+if [ ! -f "&plugin;/settings.cfg" ]; then
+  echo 'guc_huc_mode=default' > "&plugin;/settings.cfg"
+fi
+
+#Wait for Network and timeout after 30 seconds
+HOST="8.8.8.8"
+for i in {1..10}; do
+  ping -c1 $HOST &amp;> /dev/null &amp;&amp; break;
+done
+
+KERNEL_V="$(uname -r)"
+PACKAGE="gvtg"
+DL_URL="https://github.com/ich777/unraid-plugins-repo/releases/download/$KERNEL_V"
+
+#Version check, create packages directory or delete it depending on unRAID version
+TARGET_V="6.9.9"
+COMPARE="$(cat /etc/unraid-version | cut -d '=' -f2 | cut -d '"' -f2)
+$TARGET_V"
+if [ "$TARGET_V" != "$(echo "$COMPARE" | sort -V | tail -1)" ]; then
+  if [ -d "&plugin;/packages" ]; then
+    rm -rf "&plugin;/packages"
+  fi
+else
+  if [ ! -d "&plugin;/packages/${KERNEL_V%%-*}" ]; then
+    mkdir -p "&plugin;/packages/${KERNEL_V%%-*}"
+  fi
+fi
+
+#Check if i915 module is already blacklisted and let the plugin handle the activation from module/GVT-g/force_probe (unRAID v6.10up)
+if [ ! "$(grep "blacklist" /boot/config/modprobe.d/i915.conf 2>/dev/null)" ]; then
+  if [ ! -d /boot/config/modprobe.d ]; then
+    mkdir -p /boot/config/modprobe.d
+  fi
+  echo "blacklist i915" >> /boot/config/modprobe.d/i915.conf
+fi
+
+#Check for old packages
+rm -rf $(ls -d &plugin;/packages/* 2>/dev/null | grep -v "${KERNEL_V%%-*}")
+
+download() {
+#Download GVT-g Package
+if wget -q -nc --show-progress --progress=bar:force:noscroll -O "&plugin;/packages/${KERNEL_V%%-*}/${PACKAGE}-1.txz" "${DL_URL}/${PACKAGE}-1.txz" ; then
+  if [ "$(md5sum "&plugin;/packages/${KERNEL_V%%-*}/${PACKAGE}-1.txz" | cut -d ' ' -f1)" != "$(wget -qO- "${DL_URL}/${PACKAGE}-1.txz.md5" | cut -d ' ' -f1)" ]; then
+    echo
+    echo "---CHECKSUM ERROR!---"
+    exit 1
+  fi
+  echo
+  echo "-------Successfully downloaded Intel GVT-g, please wait...!-------"
+else
+  echo
+  echo "-------------------Can't download Intel GVT-g---------------------"
+  exit 1
+fi
+}
+
+check() {
+if [ ! -f "&plugin;/packages/${KERNEL_V%%-*}/${PACKAGE}-1.txz" ]; then
+  echo
+  echo "--------------------Downloading Intel GVT-g----------------------"
+  echo "---This could take some time, please don't close this window!----"
+  download
+elif [ ! -s "&plugin;/packages/${KERNEL_V%%-*}/${PACKAGE}-1.txz" ]; then
+  rm -rf &plugin;/packages/${KERNEL_V%%-*}/${PACKAGE}-1.txz
+  echo
+  echo "----Download is empty please contact the developer of this plugin if the-----"
+  echo "----------plugin has been already built against that Kernel version----------"
+  exit 1
+else
+  echo
+  echo "------------Intel GVT-g found locally, please wait...!-----------"
+fi
+}
+
+install() {
+#Install Intel GVT-g Package
+/sbin/installpkg "&plugin;/packages/${KERNEL_V%%-*}/${PACKAGE}-1.txz"
+depmod -a
+}
+
+enable_module() {
+#Load Module
+PROBE="$(lspci -nn | grep -E "VGA compatible controller|Display controller" | grep "Intel" | sort | tail -1 | grep -oE '\[[a-f0-9][a-f0-9][a-f0-9][a-f0-9]:[a-f0-9][a-f0-9][a-f0-9][a-f0-9]\]' | sed 's/[][]//g' | cut -d ':' -f2)" 
+GUC_HUC_MODE="$(cat &plugin;/settings.cfg | grep "guc_huc_mode=" | cut -d '=' -f2)"
+
+if [ -z "${PROBE}" ]; then
+  if [ "${GUC_HUC_MODE}" == "default" ]; then
+    /sbin/modprobe i915 enable_gvt=1
+  else
+    /sbin/modprobe i915 enable_gvt=1 enable_guc=${GUC_HUC_MODE}
+  fi
+else
+  if [ "${GUC_HUC_MODE}" == "default" ]; then
+    /sbin/modprobe i915 enable_gvt=1 force_probe=${PROBE} 2&gt;/dev/null
+  else
+    /sbin/modprobe i915 enable_gvt=1 enable_guc=${GUC_HUC_MODE} force_probe=${PROBE} 2&gt;/dev/null
+  fi
+fi
+/sbin/modprobe vfio-mdev 2&gt;/dev/null
+/sbin/modprobe mdev 2&gt;/dev/null
+/sbin/modprobe kvmgt 2&gt;/dev/null
+sleep 1
+chmod -R 777 /dev/dri
+}
+
+#Check if Intel GVT-g Package are already downloaded
+if [ -z "$(modinfo i915 | grep "gvt")" ]; then
+  check
+  install > /dev/null
+else
+  echo
+  echo "-----------Intel GVT-g already found, nothing to do------------"
+fi
+
+#Check if i915 module is already enabled
+if [ -z "$(lsmod | grep "i915")" ]; then
+  echo
+  echo "-----------------Loading Kernel Module 'i915'------------------"
+  enable_module > /dev/null
+else
+  echo
+  echo "-------------Kernel Module 'i915' already enabled--------------"
+fi
+
+
+echo
+echo "-------------Installation of Intel GVT-g successful--------------"
+echo
+
+echo
+echo "-----------------------------------------------------------------"
+echo "-----------------Intel GVT-g plugin installed--------------------"
+echo "-----------------------------------------------------------------"
+</INLINE>
+</FILE>
+
+
+<FILE Run="/bin/bash" Method="remove">
+<INLINE>
+echo "-------------------------------------"
+echo "---Uninstalling Intel GVT-g plugin---"
+echo "-------------------------------------"
+while read -r line
+do
+    line="$(echo $line | awk -F'[{}]' '{print $2"+with+mode+"$4}')"
+    usr/local/emhttp/plugins/intel-gvt-g/include/exec.sh delete_vm_assignment "${line// /+}"
+done &lt; "/boot/config/plugins/intel-gvt-g/vms.conf"
+removepkg gvt.g-&version;
+if [ "$(grep -v "blacklist" /boot/config/modprobe.d/i915.conf 2>/dev/null)" ]; then
+  sed -i '/blacklist i915/d' /boot/config/modprobe.d/i915.conf 2>/dev/null
+else
+  rm -rf /boot/config/modprobe.d/i915.conf 2>/dev/null
+fi
+rm -rf &plugdir;
+rm -rf /boot/config/plugins/&name;
+rm -rf /etc/libvirt/hooks/qemu.orig
+echo
+echo "---------------------------------------------------------"
+echo "---Intel GVT-g uninstalled, please reboot your server!---"
+echo "---------------------------------------------------------"
+echo
+</INLINE>
+</FILE>
+</PLUGIN>

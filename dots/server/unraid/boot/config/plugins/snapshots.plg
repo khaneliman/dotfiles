@@ -1,0 +1,178 @@
+<?xml version='1.0' standalone='yes'?>
+
+<!DOCTYPE PLUGIN [
+<!ENTITY name      "snapshots">
+<!ENTITY author    "SimonFair">
+<!ENTITY version   "2022.12.25">
+<!ENTITY launch    "Tools/Snapshots">
+<!ENTITY gitURL    "https://raw.githubusercontent.com/SimonFair/Snapshots/main">
+<!ENTITY pluginURL "&gitURL;/snapshots.plg">
+<!ENTITY supportURL	"https://forums.unraid.net/topic/114600-plugin-snapshots/">
+<!ENTITY packages	"/boot/config/plugins/&name;/packages">
+<!ENTITY md5		"10d4983f9134ffcc7ba8a093a32a0a3f">
+]>
+
+<PLUGIN name="&name;"
+		author="&author;"
+		launch="&launch;"
+		version="&version;"
+		pluginURL="&pluginURL;"
+		support="&supportURL;"
+		icon="fa-clone"
+		min="6.8.0">
+
+<CHANGES>
+##Snapshots
+###&version;
+
+  - Fix Retention process for disks(root volumes).
+  
+2022.12.23
+
+  - PHP8 Fixes.
+
+2022.12.04
+
+  - PHP8 Fixes.
+
+2022.08.05
+
+  - Add manual option to schedule.
+
+2022.06.25
+
+  - Fix count of snapshots to remove.
+  
+2022.06.17
+
+  - Add Docker file folders hide switch and functions to hide docker folder.
+
+2022.03.31
+
+  - Fix Toggle slider position
+
+2022.03.05
+
+  - Add Toggle switch for showing root of drives.
+  - Chg Hide Snapshots line if no snapshots 
+  - Fix Create Snapshot for root dialog did not complete correctly due to invalid path even thou snapshot created.
+
+2022.02.05
+
+  - Add Show root for BTRFS Volume.
+
+2022.01.16
+
+  - Chg Error processing on GUI for Creates/Send 
+  - Fix Create Directory if doesn't exist.
+
+2021.12.27
+
+  - Initial Beta Release.
+
+</CHANGES>
+
+<FILE Name="/boot/config/plugins/&name;/subvol.cfg">
+<INLINE>
+<![CDATA[
+]]>
+</INLINE>
+</FILE>
+
+<FILE Name="/boot/config/plugins/&name;/subvolsch.cfg">
+<INLINE>
+<![CDATA[
+]]>
+</INLINE>
+</FILE>
+
+<!--
+The 'pre-install' script.
+-->
+
+<!--
+Snapshots background start script.
+-->
+<FILE Name="/tmp/start_snapshots" Mode="0770">
+<INLINE>
+#!/bin/bash
+# Copy configuration files to tmp file system.
+/usr/local/emhttp/plugins/&name;/scripts/copy_config.sh 2>/dev/null
+</INLINE>
+</FILE>
+
+<!--
+Get the plugin bundle.
+-->
+<FILE Name="&packages;/&name;-&version;.txz" Run="upgradepkg --install-new &packages;/&name;*%&packages;/&name;-&version;.txz">
+<URL>"&gitURL;/&name;-&version;.txz"</URL>
+<MD5>&md5;</MD5>
+</FILE>
+
+<!--
+The 'post-updgrade' script.
+-->
+<FILE Run="/bin/bash">
+<INLINE>
+echo "Removing previous versons now upgrade has completed."
+echo
+# Remove old 'bundle' files.
+rm -f $(ls &packages;/*.txz 2>/dev/null | grep -v '&version;')
+</INLINE>
+</FILE>
+
+<FILE Run="/bin/bash">
+<INLINE>
+
+mkdir /boot/config/plugins/&name; 2>/dev/null
+mkdir /usr/local/emhttp/plugins/&name; 2>/dev/null
+mkdir -p /tmp/&name;/config 2>/dev/null
+
+# Adjust plugin permissions.
+chmod 755 -R /usr/local/emhttp/plugins/&name; 2>/dev/null
+
+# Fix permissions of executable files
+chmod +x /usr/local/emhttp/plugins/&name;/scripts/* /usr/local/emhttp/plugins/&name;/event/*
+
+# Copy Config to tmp 
+at -M -f /tmp/start_snapshots now 2>/dev/null
+
+echo 
+echo "-----------------------------------------------------------"
+echo " &name; has been installed."
+echo " "
+echo " Copyright 2016-2020, &author;"
+echo " Version: &version;"
+echo ""
+echo "-----------------------------------------------------------"
+echo 
+</INLINE>
+</FILE>
+
+<!--
+The 'remove' script.
+-->
+<FILE Run="/bin/bash" Method="remove">
+<INLINE>
+
+# Remove installed packages
+find "&packages;/" -type f -iname "*.txz" -delete
+
+rm -f /tmp/plugins/&name;.plg 
+rm -r /tmp/&name;
+rm  -f /boot/config/plugins/&name;/*.cron 
+update_cron
+
+# Remove all plugin files from emhttp.
+removepkg &packages;/&name;-&version;.txz 
+
+echo 
+echo "-----------------------------------------------------------"
+echo " &name; has been uninstalled."
+echo "-----------------------------------------------------------"
+echo 
+
+</INLINE>
+</FILE>
+
+</PLUGIN>

@@ -1,0 +1,253 @@
+<?xml version="1.0" standalone="yes"?>
+<!DOCTYPE PLUGIN [
+<!ENTITY name "dynamix.system.stats">
+<!ENTITY author "Bergware">
+<!ENTITY version "2022.05.20a">
+<!ENTITY launch "Settings/StatSettings">
+<!ENTITY pluginURL "https://raw.githubusercontent.com/bergware/dynamix/master/unRAIDv6/&name;.plg">
+<!ENTITY source "/boot/config/plugins/&name;/&name;">
+<!ENTITY MD5 "9c9daaedf26f3fcefa9fff3860410e08">
+]>
+<PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" min="6.9.0" icon="area-chart" support="http://lime-technology.com/forum/index.php?topic=36543.0">
+  <CHANGES>
+##&name;
+
+###&version;
+- Added missing .png file
+- Removed legacy code
+- Make font size in rem units
+- Minimum Unraid version set to 6.9.0
+
+###2020.06.21
+- fixed regression error
+
+###2020.06.20
+- updated multi-language support
+
+###2020.05.10
+- updated multi-language support
+
+###2020.03.31
+- added multi-language support
+- added multi cache pool support
+- minor updates
+
+###2019.01.31
+- fixed memory graph
+- updated font-awesome icons
+- fixed bar color regression
+- added 'autov' function for .css and .js loading
+
+###2019.01.12
+- updated sysstat files to version 12.0.2
+- fixed settings width
+- minimum Unraid version 6.7.0
+
+###2018.08.29
+- reverted to sysstat version 11.6.2
+
+###2018.08.28
+- updated sysstat files to version 11.6.4
+- fixed selection display
+
+###2018.02.04
+- show rounded numbers
+
+###2018.01.20
+- updated sysstat files to version 11.6.2
+- fixed graph width for themes AZURE and GRAY
+- minimum unRAID version 6.4.0
+
+###2017.12.30
+- added icon for themes AZURE and GRAY
+
+###2017.10.02
+- fixed regression error in RAM calculation
+- fixed y-axis numbering in storage graph
+
+###2017.10.01
+- updated sysstat files to version 11.6.0
+- added new parameter "CPU graph scaling"
+- fixed y-axis scaling of network graph
+- fixed RAM display with sysstat v11.6.0
+
+###2017.08.08
+- updated sysstat files to version 11.4.4
+- show memory utilization in kibi units
+
+###2017.06.09
+- support for new themes AZURE and GRAY
+
+###2016.11.03
+- fixed threshold indication of normal level
+
+###2016.09.13
+- fixed absolute path using $docroot
+
+###2016.08.26
+- fixed folders and files permissions
+- added minimum unRAID version 6.1.9
+
+###2016.08.20
+- updated sysstat files to version 11.2.1.1
+
+###2016.04.08
+- fixed display when either critical level or warning level or both are set to zero
+
+###2016.04.01
+- make *nice* a separate value to display in the processor load graph (previously it was combined with *user*)
+
+###2016.03.19
+- made compatible with unRAID v6.2
+- miscellaneous corrections
+
+###2016.02.07
+- fixed unRAID version checking
+- fixed cron cleanup after uninstallation
+
+###2016.01.30
+- changed handling of disk utilization thresholds. Warning or critical thresholds may be disabled.
+
+###2016.01.13
+- added new setting "Placement of Stats menu", allows the menu to move away from the header (requires unRAID 6.1.7 or higher)
+- added new setting "Opening page", selects the first page to view upon visiting Stats
+- added coloring based on global and individual disk settings
+- updated sysstat files to version 11.2.0
+- changed icons
+
+###2015.12.19b
+- updated sysstat files to version 11.1.8
+- added datafile conversion from version 10.x to 11.x
+
+###2015.12.19
+- moved log directory from /var/log/sa to /var/sa to prevent LOG file system from filling up
+
+###2015.12.14
+- added unRAID version check. Only version 6.1 or higher is allowed
+- updated consistency of PLG file
+
+###2015.12.13
+- changed .txz file naming to support consistent package upgrading
+
+###2015.08.17
+- adhere new security policy in unRAID v6.1
+
+###2015.06.27
+- introduced new logo (thanks Zonediver)
+- removed utilities page (now standard included with Dynamix webGui)
+- removed Reset button (now controlled by Dynamix webGui)
+- changed behavior of Default button (immediate reset)
+- fixed missing disks when these are in data rebuild
+
+###2015.04.28
+- added Reset button on settings page
+
+###2015.04.18
+- fixed top field position
+
+###2015.04.11
+- included online help information
+
+###2015.02.21
+- support of new cron mechanism
+
+###2015.02.15
+- workaround to restore /var/log permissions
+
+###2015.01.22
+- version update for webGui 2015.01.21
+
+###2014.12.05
+- used global disk utilization thresholds
+- fixed cron error message about sa1
+- fixed display error when array in maintenance mode
+
+###2014.12.01
+- fixed cache disk pool display in Disk Stats.
+
+###2014.11.28
+- initial release for unRAID v6
+</CHANGES>
+  <!--
+Copyright 2020, Bergware International
+Dynamix System Stats - disk and system usage graphs
+-->
+  <!-- PRE-INSTALL SCRIPT -->
+
+<FILE Run="/bin/bash">
+<INLINE>
+# Remove legacy cron entry (if existing)
+crontab -l|sed '/^# System data collection/d;/\/usr\/lib\/sa\/sa1/d'|crontab -
+
+# Remove old 'source' packages
+MD5=$(md5sum &source;.txz 2&gt;/dev/null|grep -Po '^\S+')
+if [[ $MD5 != &MD5; ]]; then
+  rm -f &source;*.txz
+fi
+</INLINE>
+</FILE>
+
+<!-- SOURCE PACKAGE -->
+<FILE Name="&source;.txz" Run="upgradepkg --install-new --reinstall">
+<URL>https://raw.githubusercontent.com/bergware/dynamix/master/archive/&name;.txz</URL>
+<MD5>&MD5;</MD5>
+</FILE>
+
+<!-- POST-INSTALL SCRIPT -->
+<FILE Run="/bin/bash">
+<INLINE>
+# Create sa directory
+old=/var/log/sa
+new=/var/sa
+tmp=/tmp/sa
+mkdir -p $new
+chmod 755 $new
+
+# Convert legacy files
+if [[ -d $old ]]; then
+  for sa in $old/sa* ; do
+    /usr/bin/sadf -c $sa &gt;$new/$(basename $sa) 2&gt;/dev/null
+  done
+  rm -rf $old
+elif [[ $(ls -A $new|wc -l) -gt 0 ]]; then
+  mkdir -p $tmp
+  for sa in $new/sa* ; do
+    /usr/bin/sadf -c $sa &gt;$tmp/$(basename $sa) 2&gt;/dev/null
+  done
+  mv -f $tmp/sa* $new
+  rm -rf $tmp
+fi
+
+# Create cron entry
+cron=/boot/config/plugins/&name;/sysstats.cron
+if [[ ! -f $cron ]]; then
+  echo '# Generated system data collection schedule:' &gt;$cron
+  echo -e '*/1 * * * * /usr/local/emhttp/plugins/&name;/scripts/sa1 1 1 &amp;&gt; /dev/null\n' &gt;&gt;$cron
+  /usr/local/sbin/update_cron
+fi
+
+echo ""
+echo "-----------------------------------------------------------"
+echo " Plugin &name; is installed."
+echo " This plugin requires Dynamix webGui to operate"
+echo " Copyright 2020, Bergware International"
+echo " Version: &version;"
+echo "-----------------------------------------------------------"
+echo ""
+</INLINE>
+</FILE>
+
+<!-- REMOVE SCRIPT -->
+<FILE Run="/bin/bash" Method="remove">
+<INLINE>
+# Remove plugin related files
+rm -rf /boot/config/plugins/&name;
+
+# Uninstall the 'source' package
+removepkg &name;
+
+# Remove cron entry
+/usr/local/sbin/update_cron
+</INLINE>
+</FILE>
+</PLUGIN>

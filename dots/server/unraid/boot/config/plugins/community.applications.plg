@@ -1,0 +1,2111 @@
+<?xml version='1.0' standalone='yes'?>
+<!DOCTYPE PLUGIN [
+<!ENTITY name      "community.applications">
+<!ENTITY author    "Andrew Zawadzki">
+<!ENTITY version   "2022.12.29">
+<!ENTITY md5       "7796f6fb9aed632b7803ff8b4aebcfd1">
+<!ENTITY launch    "Apps">
+<!ENTITY plugdir   "/usr/local/emhttp/plugins/&name;">
+<!ENTITY github    "Squidly271/community.applications">
+<!ENTITY pluginURL "https://raw.githubusercontent.com/&github;/master/plugins/&name;.plg">
+]>
+
+<PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" min="6.9.0" support="https://lime-technology.com/forums/topic/38582-plug-in-community-applications/" icon="users">
+
+<CHANGES>
+###2022.12.29
+- Fixed: Private App Category was not displaying
+- Fixed: First load of Apps after a application feed download would result in system thinking no docker apps installed
+
+###2022.12.28
+- Fixed: PHP8 compliance
+- Changed: Debugging banner enabled now will auto-hide
+- Fixed: v1 only templates were getting an extra invalid entry
+- Added: Better error handling for I/O errors
+- Added: Increase memory limit to 256M
+- Fixed: Prevent possible inifinit loop happening on a background task
+- Fixed: Under certain circumstances possible for CA to think a feed update was downloaded even though it wasn't
+- Fixed: Unraid version in debugging logs could be incorrect
+- Fixed: Feed would redownload every time entering in the apps tab
+- Changed: Always display Maintainer and Repo Name on a plugin's sidebar
+- Fixed: Don't process click events on menu items if onclick attribute present
+- Fixed: On occasion the first click to open a side bar could wind up with an empty sidebar
+- Fixed: Install comments popup could have a display aberration in the text under certain circumstances
+- Changed: More memory usage optimizations
+
+###2022.12.03
+- Fixed: Initial PHP8 compliance
+- Fixed: Don't process menu click events if onclick present
+- Code cleanup
+- Fixed: Infinite loop on sidebar possible in extremely unlikely set of circumstances
+- Changed: Don't redisplay Action Centre enabled banner after installing if it was already enabled
+- Fixed: Display aberration on "Requires" popup when installing from the card if a number was preceded by a space
+- Fixed: Display aberration on Repository cards
+- Fixed: On occasion, side bar would be empty or not populated correctly
+- Fixed: Action Centre would always get enabled if Docker Folder fork was installed
+- Changed: Significantly less memory usage
+
+###2022.11.11
+- Fixed: Loading sidebar on Papermerge twice would exhaust memory
+- Fixed: Uncategorized applications would not appear within "Other" category
+
+###2022.10.16
+- Fixed: Check for updates (via Installed Apps) also checked for OS updates
+- Enhanced: Update plugin support URLs (if necessary) whenever application feed downloaded
+- Fixed: Display issues on 6.11.x when installing a deprecated or incompatible plugin
+- Fixed: Installing deprecated or incompatible application wouldn't enable the Action Centre
+- Added: Relative popularity for plugins (top 45 plugins)
+- Fixed: Multiple line stock comments wouldn't properly translate
+- Added: Language installs / updates now honor the Pending state
+- Changed: Only prepopulate pending plugin installations if there is more than 1 plugin pending (partial OS mitigation)
+- Added: Setting to disable sidebar automatically opening on a hover (defaults to enabled)
+
+###2022.09.30
+- Possible fix for a javascript error in certain unlikely situations
+
+###2022.09.26
+- Performance improvement: Only scan for new private templates when going Home
+- Fixed: Flash drive offline would crash CA
+
+###2022.09.10
+- Tweaked: Various modifications to download timeouts to improve user experience on marginal internet connections
+- Fixed: Don't present edit as an option in the actions dropdown if the xml doesn't actually exist
+- Improved: Revamp debugging information on downloads
+- Changed: Statistics now downloaded asyncronously after an appfeed update instead of first time sidebar opened (Performance improvement)
+- Fixed: CSS changes when running 6.11.0-rc1+
+- Fixed: Action Centre was not being enabled after installing an incompatible application (if settings allowed incompatible installations)
+- Fixed: Action Centre was not being enabled if installing an application deemed to be incompatible via moderation
+- Fixed: Under certain circumstances, an application wouldn't install from the card (only from the sidebar) if extensive use of Requires tag was present
+- Changed: Refined text on Requirements not met messaging
+- Added: Direct CA search links within the reason on Apps of the Month
+- Fixed: Workaround for docker tab still showing updates available after updating all apps within Installed Apps
+
+###2022.07.26
+- Added: Support for Unraid 6.11
+- Fixed: Action Centre would appear if Favourite Repository was clicked
+- Fixed: Drivers couldn't be updated from within Action Centre
+- Fixed: Going to a plugin's settings from within CA would crash CA when hitting DONE on the plugin's settings
+- Fixed: Direct CA search links displayed were not displayed correctly when installing from a card that where a further requirements popup would appear
+- Fixed: Deprecated plugins (Previous Apps Section) couldn't be installed from sidebar
+
+###2022.06.18
+- Fixed: XSS vulnerability on search strings
+- Fixed: Less cookie use
+- Changed: Show Install on card, even if requirements are not met to lessen confusion (show a popup that requirements are not met after clicking)
+- Added: Show banner when background tasks looking for actionable items in action centre are running
+- Fixed: Application cards wouldn't reflect a plugin update being available unless the application feed knew about it
+- Fixed: Fatal flash drive error popup wouldn't appear under any circumstance
+- Fixed: On occasion Action Centre would never appear even if it should have
+- Added: Add check for updates and ability to update all from Installed Apps
+- Fixed: Background check for updates were not checking for language updates
+- Fixed: Clicking on the icon for certain plugins would open, close, and then reopen the sidebar
+- Added: Check for additional requirements not being met if updating a plugin
+- Fixed: Some text never had the ability to be translated
+- Fixed: A previously installed app couldn't be reinstalled from the card if it had multiple line comments included
+- Fixed: Any embedded videos within a profile wouldn't display the proper display video link
+- Added: Hovering over the app's icon or info button for 4 seconds will automatically open the sidebar
+- Added: Handle a specific error that may be made by language translators
+- Changed: Updated flag now takes precedence over Installed
+- Fixed: Disallow an inadvertent search against blacklisted / deprecated / incompatible applications
+- Changed: Automatically scroll to bottom of popup on installs / updates
+- Fixed: Display aberration on the page numberubg
+- Enhanced: Simpler and faster background processing for Action Centre
+
+###2022.05.15
+- Fixed: Action centre would appear even if nothing was present if templates outside of CA's control were installed
+
+###2022.05.08
+- Added: Action Centre
+- Fixed: Blacklisted Apps wouldn't appear within Installed Apps
+- Fixed: Allow non-CA apps to appear within Installed / Previous Apps
+- Added: Infrastructure to still know if an app is blacklisted even if its no longer within the appfeed
+- Fixed: 6.10.0-RC series - Headers already sent error when updating a container within CA
+- Fixed: Updated flag wouldn't always disappear from sidebar after updating
+- Removed: Extraneous warning icon for deprecated / blacklisted on the cards
+- Fixed: Improper IconURL was being added to dockerHub conversions
+- Fixed: Extra sessions were being created by a background process
+- Changed: Uninstalling no longer automatically goes to Installed Apps after completion
+- Fixed: Prevent a background process from being spawned multiple times if it takes longer than 60 minutes to complete
+- Fixed: Selected apps in Previous Apps would get cleared when page switching, deleting a template via actions etc
+- Fixed: Sidebar wouldn't allow a deprecated app (in previous apps) to be reinstalled
+- Changed: Installed flag takes precedence of deprecated / blacklisted flags
+
+###2022.04.17
+- Fixed: Don't allow renamed containers to be pinned
+- Fixed: If pinned apps comes up with No Matching Content Found (due to all pinned apps being incompatible etc) then disable the button
+- Fixed: Don't allow blacklisted apps to be pinned
+- Enhanced: Better handling of cURL download failures
+- Added: When installing multiple containers via Previous Apps, automatically download the icons - Speeds up the first access to Docker / Dashboard tabs
+- Fixed: Blacklisted apps wouldn't appear within Installed Apps, preventing their uninstallation via CA
+- Added: Handle in memory corruption of downloaded files - Redownload them if this is detected
+- Added: Delete unused volumes when uninstalling a container
+- Enhanced: If autostart selections are already made in docker tab, then do not override the settings to have everything set to autostart when doing a multiple install from Previous Apps
+- Added: Better WCAG 1.x compliance
+
+###2022.04.03
+- Fixed: Extraneous debugging spamming browser console log
+- Improved: Security / Privacy updates on cookies
+- Changed: Slight wording changes on app flags
+- Fixed: Regression error - plugins couldn't install from the sidebar
+- Changed: Easier identification if there is a video attached to the app
+- Fixed: Removing a previous app would wind up highlighting Installed Apps
+- Added: If only a single app is present in a search, automatically open up the sidebar
+- Fixed: If multiple browser tabs were open simultaneously to CA and the Max Per Page was changed on one of them, the Max Per Page dropdown on the other wouldn't update accordingly
+
+###2022.03.22
+- Fixed: Compatibility with browsers having Chinese set as their language (not the OS set as Chinese)
+- Added: Better banner warnings on why docker applications may not be available to install
+- Fixed: Update Available would erroneously appear if Unraid was unable to check for updates to a docker app
+
+###2022.03.17a
+- Fixed: Display aberration on dockerHub installs when running Unraid 6.9.x
+
+###2022.03.17
+- Added: Option to determine automatically any paths, ports, variables used by a dockerHub search install
+- Fixed: A dockerHub search install could overwrite an existing user template if the same name was used
+- Fixed: PHP error if no change to Settings - Display Settings had ever been made
+- Fixed: White on white text would appear on 6.10-rc3 during a container update
+
+###2022.03.13
+- Maintenance Release
+- Fixed: Cancelling a plugin installation from the card if there was a warning popup would disable the search box
+- Fixed: On occasion the warning popup could have corrupted text
+- Fixed: Installed Version was appearing on sidebar if plugin wasn't installed
+- Added: Show current plugin version of non-installed plugins
+- Fixed: Max per page was appearing on Credits and Stats pages
+- Fixed: Very old CA installations could display -1 as max per page
+- Fixed: Very old CA installations could crash on the home page
+- Added: Flag on the app cards if an update is available for them
+- Fixed: On the card it was possible for Actions to still display Install Update if the app was updated within the previous 2 hours and the update was already installed
+
+###2022.03.06
+- Added: Checkmark indicating currently selected Max Per Page on dropdown
+- Added: Identify apps in a dockerHub search that currently exist within Apps as a template (must install via templates)
+- Fixed: DockerHub search phrase 'no description present' couldn't be translated
+- Added: Direct searching for specific docker repository in templates
+- Added: Minor tweaking to search engine
+- Fixed: Roughly 50% of the world was seeing the incorrect month on Spotlight Apps
+- Fixed: If (for whatever reason) the home screen was unable to display any apps within a section, the page navigation buttons would appear
+- Fixed: Certain plugins with additional requirements couldn't be reinstalled by themselves from Previous Apps
+- Added: Ability for CA to check a plugin's requirements and not allow any attempted install if not met
+- Fixed: Couldn't pin a language or an official (library) dockerHub app
+- Changed: UI consistency on the pin / unpin within the sidebar
+
+###2022.02.26
+- Changed: Support ultra-wide displays up to 5120 pixels on home screen if Unlimited Width plugin installed
+- Added: Support displaying of License in sidebar
+- Fixed: Handle the situation where if some other application inadvertently deleted CA's data files, don't return PHP errors
+- Added: If when installing an app and there is already an app installed and a naming collision would result (eg: NZBGet already installed and you're attempting to install nzbget) rename the second app accordingly
+- Added: Detect if your browser is automatically translating the Apps tab and display a warning banner (Very mixed results in having the browser perform an automatic translation from no affect at all to many buttons will not work - YMMV)
+- Removed: Redundant file
+- Fixed: Under extremely rare circumstances a task could be spawned which would never complete
+- Changed: Speed up the gathering of Last Updated information when going to the sidebar
+- Changed: How certain errors are handled in the Statistics section to make maintenance easier
+- Changed: Minor skin tweaks
+- Changed: Populate autocomplete lists in background
+- Added: Link the CA requires internet access error to a forum post
+- Added: Ability to select the number of search results per page on the fly
+
+###2022.02.06
+- Added: Date updated for docker containers
+- Changed: Graphs going forward will now only populate to 7 months
+- Fixed: Not all dates present in the sidebar would get translated
+- Added: Ability in additional requirements to have a link for CA to perform a search
+- Added: Support for additional moderation options
+- Fixed: Install Multiple containers progress window was displaying white text on a white background (RC3 and possibly RC1/2)
+
+###2022.01.28
+- Maintenance release
+- Added: Support direct search results from the URL
+
+###2022.01.22
+- Fixed: After browsing and switching to page 2 then doing a search that only had a single page of results and installing No Apps Found would appear when returning to CA
+- Fixed: Don't re open/close the category when going from a subcategory back to the parent
+- Cleanup: Remove some unnecessary code
+- Fixed: Installing from a card wouldn't display both a CAComment and Additional Requirements if both were present
+- Appfeed: Security enhancements
+
+###2022.01.15
+- Fixed: Race conditions on setting the proper sort order after navigating from Home, Show More to anywhere else
+- Fixed: Don't allow CA to update itself from the card or sidebar (only allow from banner) as crashes would result
+- Fixed: Certain templates wouldn't display correctly on the cards
+- Fixed: Regression error would appear if the flash drive wasn't present
+- Fixed: If an app had additional requirements and a comment, only the comment would appear when installing from the card
+- Fixed: Prevent deletion of an installed app if no template exists on the flash drive (errors would result)
+- Fixed: A link to a profile was appearing on private apps
+- Fixed: If all pinned apps were no longer available within CA, errors would appear when going to Pinned Apps
+
+###2022.01.07
+- Fixed: Crashes with certain network configurations
+
+###2022.01.02
+- Fixed: If a spotlighted app was incompatible with a user's system it would still display in spotlight section
+- Added: Display warning to change host ports when installing a new app that has port conflicts with an already running container or service
+- Fixed: Comments etc weren't displaying when installing an app from the card that had branches
+- Added: Show installed / upgrade versions for plugin on sidebar
+- Removed: Extraneous file only used for compatibility with less than 6.9.0
+- Fixed: Apps with video's would not autoplay on chrome
+- Fixed: Memory leak from debugging being enabled
+- Possible Fix: Rare race condition
+- Changed: Simpler skinning
+- Fixed: Entire card is clickable for displaying the sidebar
+
+###2021.12.18
+- Prep work for next release
+- Added: Ability to cancel installation from card if there's a warning popup
+- Fixed: Plugins wouldn't display popup if there was a warning when installing from card
+- Added: Clearly show if an installed app is blacklisted / deprecated
+- Fixed: The very first template in the application feed wouldn't display correctly if it was installed
+- Fixed: Emergency notifications weren't working
+- Fixed: Even if settings didn't allow incompatible or deprecated installs, CA was allowing them via statistics and the sidebar
+- Fixed: Misc CSS fixes
+- Fixed: Removing coding for displaying cards without any description
+- Added: Under the hood debugging system far simpler
+
+###2021.12.05
+- Changed: Number of cards displayed back to 24
+- Added: Explicit support for Discord links per app in templates
+- Added: If there's a comment on an app within CA, then display the comment whenever installing the app from the card
+- Fixed: Minor CSS errors
+- Fixed: When multiple instances of an app were installed, uninstalling one of them from the card could result in the other instance being uninstalled instead
+- Added: Automatically adjust templates to match user's system if the template referenced a share and the share already existed but differed in case
+- Fixed: After returning from an install the main area could be scrolled separately from the sidebar
+- Fixed: On a template using Branches you couldn't click the text description on the default branch
+- Fixed: On a search for a previously installed app you may not have been able to reinstall it from previous apps directly from the card
+- Fixed: Prevent a search from happening if a search is already in progress
+
+###2021.11.13
+- Added: Support for screenshots, videos and more
+- Fixed: Certain plugins couldn't be uninstalled from the sidebar
+- Fixed: Plugins with only a single action after installing (Uninstall) would show the action in red
+- Added: Show template errors on the sidebar
+- Fixed: Main body would allow scrolling when the sidebar was open
+- Fixed: Possible error message if cookies are not enabled
+- Fixed: Author listed on sidebar would be wrong if the container was hosted on lscr.io
+- Fixed: Certain search terms (eg: Unraid) would return strange results
+- Refined: More intelligent duplicated template detection on statistics screen
+- CSS Tweaks
+
+###2021.11.05
+- Fixed: The link in moderator comments (on info screen) would go to the wrong URL on occasion
+
+###2021.11.04
+- Added: dockerHub searching
+- Changed: App cards showing descriptions is now the default setting
+- Fixed: Private Apps were not displaying
+- Added: More debugging information
+- Added: Cards with descriptions now include the Actions / Install button
+- Added: Flags on cards if favourite repository, pinned, additional comments etc
+- Fixed: Under certain circumstances after an application feed update, CA would think that no apps were installed
+- Added: Allow reinstalls from a search / browse, not just from previous apps
+- Fixed: Race condition when returning to CA from a docker install
+- Fixed: Checkbox on previous app wouldn't disappear if you installed the app separately
+- Enhanced: Better caching
+- Fixed: Under certain rare circumstances, and app could appear as being installed if it wasn't
+- Enhanced: Under supported OS versions, CA will ask the OS to not attempt a download of the app's icon if it doesn't exist
+- Added: Hover text to the various flags on the cards
+- Fixed: Download statistic wasn't appearing on the sidebar
+- Fixed: Don't allow CA to be uninstalled from within CA
+- Fixed: Descriptions on repository cards would display an error when clicking on them
+
+###2021.10.24
+- Windows 11 temporary compatibility fix
+- Fixed: Repository descriptions weren't showing up on cards if descriptions were allowed in Settings
+
+###2021.10.21
+- Changed / Fixed: Rendering speed at startup, page transitions etc
+- Fixee: Uninstalling from a category woulen't highlight Installed Apps after finish.
+- Fixed: Uninstalling from either the docker or plugin subsection of installed apps would highlight Installed Apps after uninstall
+- Various CSS tweaks
+
+###2021.10.19
+- Changed: Drop limit of displayed apps on home page from 25 to 7 / 10 depending upon settings
+- Added: Ability to display descriptions by default on the cards.  (Go to CA's Settings page)
+- Changed: Easier access to debugging information in certain cases
+
+###2021.10.17a
+- Fixed: Certain apps would have the Installed flag showing when in Installed Apps
+- Fixed: Pinned Apps were not honoring the sort order when initially going into that section
+- Fixed: Going from Home / SHOW MORE to Installed / Previously Installed the sort order would be incorrect
+
+###2021.10.17
+- Complete overhaul of GUI
+- Fixed: Disable categories after performing a dockerHub search
+- Removed: Compatibility with OS versions prior to 6.9.0
+- Fixed: Attempting to sort a repository display would return errors if only a single repository was present
+- Added: When installing a second instance, automatically change the app name
+- Changed: Priority of support options is now Project, Discord, Support Forum
+- Removed: Help text (unnecessary with replacement GUI)
+- Fixed: Setting a favourite repository would change all of CA's settings back to defaults
+- Added: Support ReadMe files on templates
+- Fixed: Multiple instances of apps installed using the same tag would only appear once within installed apps
+- Removed: dockerHub searches (See release post)
+- Fixed: All steamcmd apps would show as being installed if any of them were.
+- Changed: Dim background on any sweet alerts (eg: choose branch)
+- Fixed: Display aberrations if app's name didn't fit within designated area
+- Fixed: Entering a search term (but not searching for it) followed by selecting a category would return errors
+- Added: Languages show up within Installed Apps (plugins subsection)
+- Added: Identification of apps which are currently installed
+- Fixed: Second instance would show up within Previous Apps (and give installed options) if original instance was installed, then second instance was not installed and both used the same tag
+- Added: Fatal error if docker image / folder is either completely full or mounted read-only
+- Fixed: Hover area / click area of left menus extended into blank area to the right
+- Fixed: Deleting the entire private repository storage location (/boot/config/plugins/community.applications/private) would result in the private applications still appearing until the next appfeed update
+- Fixed: Various issues related to installing 2nd instances
+- Rediscovered: A profound appreciation of the phrase 'Nothing takes 5 minutes'
+
+###2021.08.31
+- Security updates
+- Fixed: Always reload CA if installing language updates
+- Fixed: Official containers would always show an update available
+- Added: Basic diagnostics information to 'something really went wrong' message
+
+###2021.08.16
+- Unraid 6.10.0-rc2 compatibility
+- Fixed: If a plugin failed to install, the update icon would appear
+- More skin improvements
+- Added: Allow outside click to close popup even if below the lowest displayed card
+- Added: Reinstall default now prompts to select a branch if app supports it
+- Changed: Installed / Previous Apps will now show the description the user sets instead of the default one
+
+###2021.08.08a
+- Fixed: Branches not installing
+- Fixed: Search results didn't include descriptions
+
+###2021.08.08
+- Added: Updates to plugins / docker apps directly from popup
+- Added: Remove HTML from any private apps' descriptions (security)
+- Changed: Don't artificially cut off dockerHub descriptions at 240 characters.  Follow the same logic as every other app in CA
+- Fixed: Hitting Select All on Previous Apps screen followed by a manual install of a previous app followed by Install All would return an error when installing everything else
+- Relocate Clear Search link to somewhere more logical
+- Changed: Only show Drivers watermark if the app is a plugin
+- Improved: Prep work for a possible new skinning engine
+- Changed: Improvements to the popup Descriptions to make them more inline with how they would look when installing
+- Changed: If a repository only has incompatible / deprecated apps, don't display it within Repositories unless CA settings would allow it (Would result in No Matching Apps Found)
+
+###2021.07.24
+- Fixed: Official containers were showing in Previous apps when installed, not within installed apps
+- Fixed: Apps installed as a branch would show twice within Installed Apps
+- Fixed: When installing from Previous Apps, the startup category would be get highlighted when returning to CA
+- Enhanced: Faster handling of installed apps section
+- Fixed: Disable docker sub-menu on installed / previous apps if docker service isn't enabled
+- Changed: Minimim OS compatibility now Unraid 6.6.2
+- Added: Ability to directly install updates to docker / plugin apps within CA instead of redirecting to Docker / Plugins tab
+- Changed: Fix reference made to Switch Language icon (Compatibility with a future version of Unraid [maybe])
+- Changed: Don't display xxx's Repository on tiles.  Only display xxx
+- Security Change: Don't allow HTML within changelogs
+- Added: Support Markdown within changelogs
+- Added: Support Changelogs from Private Apps
+- Added: Support for additional requirements xml tag
+- Fixed: Apps that were set to never get the template updated in dockerMan would never display a changelog if one was present
+- Added: Optional check for updates to apps outside of scheduled Dynamix checking
+
+###2021.06.21
+- Maintenance Update
+- Fixed: Repository that contained a duplicated dockerHub repository (even if it was removed from CA) wouldn't appear in the correct order when sorting repositories by Date Added
+- Fixed: When clicking on the description of an app, only allow clicking on the text, not the complete area allowed for the text
+- Changed: Remove autofocus on search bar when entering Apps tab (Some mobile devices would automatically bring up the virtual keyboard whenever entering the Apps tab)
+- Fixed / Changed: Complete revamp of how the readmore is generated on the app's tile
+- Fixed: Adjust color of hyperlinks on black / grey themes
+- Fixed: Various CSS tweaks, and all hyperlinks should now properly follow the CSS rules for color changes on hover etc.
+
+###2021.06.04
+- Added: Confirmation dialog (6.10) if leaving CA Settings without applying changes
+- Skin optimizations (13% less data transferred to browser, faster, smaller code base)
+- Fixed: In event of an appfeed failure, completely disable searches, browsing etc.
+- Fixed: Regression error: Original overviews weren't being sent to dockerMan for installation
+- Unraid 6.10 compatibility changes
+- Fixed: After installing one app via a search, and then another app via a search when returning back to CA the search for / search box would contain incorrect values
+- Added: Support Markdown formatting in app overviews
+- Added: Dynamically cutoff the descriptions in the cards based upon what fits rather than a set character count
+- Fixed: Descriptions on blacklisted cards wouldn't appear
+
+###2021.05.16
+- Fixed: Regression error when searching it allowed clicking on categories which weren't present on the search
+- Added more debugging information
+- Fixed: Docker apps with branding wouldn't show as installed during searches, or browsing (only via Installed Apps)
+- Removed: Support for BaseOS within templates (no one used it, and dockerHub hasn't supported returning this information for ~2 years)
+- Fixed: Uninstalling (or removing) from Previous Apps / Installed Apps and being on the docker/plugin sub category would return you back to the Main Category
+
+###2021.05.05
+- Fixed: CSS on Favourite Repo 
+- Maintenance improvements
+- Fixed: CSS Change language watermark to solve issue on Firefox when browser zoomed in
+- Added: Remove descriptions on docker Config elements when running a supported Unraid OS version
+- Misc code cleanup
+- Added: Author of container to autocomplete entries if author is not the same as repository
+- Added: Docker and Plugin submenus to both installed and previous apps sections
+
+###2021.03.28
+- Add in further debugging info if required
+- Added: Prioritize certain Extra Search Terms
+- Fixed: Certain auto complete entries (eg: NUT) wouldn't return any search results
+- Fixed: Regression error - Clicking on a plugin's settings icon would open a new tab
+- Readded: Install updates for plugins
+
+###2021.03.12
+- Added: Support plugins-error as part of previous apps
+- Added: Support spaces in extra search terms
+
+###2021.03.10
+- Permission Fix
+- Changed: Re-institute connection timeout on all downloads (30 seconds)
+- Added: Ability to selectively mark a single plugin version as being incompatible
+
+###2021.03.02
+- Emergency update: Unable to install de_DE / fr_FR languages if unraid.net is installed
+
+###2021.02.27
+- Changed: CSS color fixes, updates etc
+- Misc: Code re-organization
+- Changed / Fixed: Complete overhaul of sorting system
+- Added: Sorting options on repositories (Name, number of apps, average trend, date added)
+- Deprecated: Donation links within templates in lieu of links with profiles
+- Fixed: Some apps within installed / previous apps sections couldn't be pinned
+- Fixed: Display default icon on popups if error occurs when loading the image
+- Added: Different watermark on apps tagged as drivers
+- Changed: Hide the multi-install buttons if no previous apps present
+- Changed: Don't show private within stats if no private apps present
+- Changed: Always keep preferred repositories (ones with profiles) at the top whenever resorting the repository display
+- Fixed: Stop the spinner from "wiggling" the display when using an ultrawide monitor and the Unlimited Width plugin installed
+- Added: Apps within the selected favourite repository are always highlighted when browsing / searching apps
+- Fixed: Inadvertently clicking on an app's action icons to close the popup would wind up performing the action instead of only closing the popup
+- Changed: Don't count an author's deprecated / incompatible apps within the repository popup unless CA's settings allows deprecated / incompatible to be displayed
+- Fixed: Docker apps with hypens in their names couldn't be uninstalled
+- Fixed: Languages couldn't be installed or updated from the popup
+
+###2021.02.19
+- Fixed: Certain apps previously pinned would not appear within pinned apps
+- Patched: Sort order in Installed / Previous Apps section
+- Fixed: Deleting a private app from within pinned apps would return an error
+
+###2021.02.15
+- Switch to a floating popup for app / repository information
+- Remove Excess Files
+- Update Awesomeplete library
+- Fixed: Refine 'branding' on apps (autocomplete)
+- Added: Highlight search results on repository name
+- Fixed: Allow manually deleting search term and pressing enter to clear search results
+- Fixed: Statistics popup for apps would display a minor error at times
+- Added: Support 'extra' search terms for applications if defined by the author
+- Added: Ability to search for a complete dockerHub repository (ie:  author/container)
+- Changed: Pinned menu enabled / disabled according to if apps are pinned or not
+- Changed: App popups changed to reflect current Unraid theme selected
+- Fixed: Flickering on Favourite Repo menu 
+- Changed: Don't show Show More Results from dockerHub if searching apps from a repository
+
+###2021.01.01
+- Fixed: Private Apps were being flagged as being part of a favourite repository if no favourite was selected
+- Fixed: Don't allow dockerHub to be flagged as favourite repository
+- Changed: Displaying repositories will only present what's present in the category / filter being browsed instead of all repositories
+- Added: Keep category / filter highlighted when displaying repositories to allow easy return to apps display
+- Fixed: Displaying apps from certain repositories (eg: Emby repository) would display some apps not present in the repository
+- Fixed: 'PiHole Template' (and possibly others) was not displaying within the auto complete entries due to branding rules
+- Changed: Speedup previous apps section displaying.
+- Fixed (via appfeed): Certain apps would never appear within Previous Apps
+- Changed: Simpler display of navigation menu
+
+###2020.12.19
+- Fixed: Branding wasn't being properly removed
+
+###2020.12.14
+- Add readmore link to tiles
+- Fixed: Statistics / Incompatible was showing wrong apps
+- Added: Repository popups
+- Added: Favourite repository shows up first in any search result
+- Added: Filters on searches
+- Fixed: Plex appearing twice within autocomplete
+- Changed: Donate buttons only appear on installed apps
+- Changed: Refine autocomplete entries
+- Fixed: Clicking on a category already selected would re-search the category
+
+###2020.09.19
+- Added option to save debugging information
+
+###2020.09.12
+- Fixed regression error regarding get_categories
+- Test removing connection timeout on all downloads
+
+###2020.08.22
+- Suppress error if categories not downloading
+- Do not allow docker not enabled banner to be dismissed
+
+
+###2020.08.16
+- Enhanced: Sort Categories according to translation, not English (Not 100% perfect (ie: fr_FR), but will get enhanced on future versions of Unraid.  Non Roman character sets (Arabic / Chinese will not sort properly)
+- Enhanced: Language's popup now completely translated according to the language
+
+###2020.08.09
+- Fixed: Searches using UTF character sets (or via autocomplete) would return indeterminate results
+- Fixed: Templates with config entries pre-populatated with 0 would not be honoured
+- Minor CSS changes
+- Fixed: Installation line on popups might be corrupted under certain circumstances when in a language other than English
+- Fixed: Reinstall (Default) wouldn't work from the card (Only worked from the popup)
+- Changed: More consistent formatting on the help text
+- Enhanced: All icons / links change colour when hovering
+- Changed: Simplified disclaimer for languages
+- NOTE: Application feed has been updated to reflect some changes above.  This update is recommended
+
+###2020.07.13
+- Changed: Don't show installed apps within Random Section
+- Changed: Revisions on scripts to be more dynamix compliant on Multi-Language
+- Added: Select All Apps On Page while in Previous Apps section
+
+###2020.07.08
+- Fixed: CSS changes on multi-language disclaimers appearing off-screen / cut-off
+
+###2020.06.26
+- Fixed: Watermark issue on en_US language when template authoring mode is not enabled
+- Fixed: Various icon inconsistencies in previous apps after reinstalling a single app
+- Fixed: Edge case when using the OS switch-to English icon within the Apps tab
+- Fixed / Changed: Various multi-language tweaks
+- Updated Credits
+- Changed: Detect if another tab logged out of the UI and act accordingly
+
+###2020.06.13
+- Various minor fixes
+- Fixed: Identically named apps from within same repository AND same author, but different tags would install the wrong app.
+
+###2020.06.08
+- Add ability to delete multiple templates from Previous Apps Section
+
+###2020.05.27
+- Multi-language updates / fixes
+
+###2020.05.25
+- Multi-language updates / fixes
+
+###2020.05.16
+- Fixed: Identically named applications within same repository but with different authors would get mixed up
+- Language Pack Misc Updates / Fixes
+- Changed: Don't Display ***Updating Content*** prior to accepting disclaimer
+- Changed: Remove option to not delete the image when uninstalling an app
+- Fixed: Plugin popup would display wrong watermark under certain conditions
+
+###2020.05.12
+- Added: Localize values when hovering on the graphs
+- Fixed: Donation links on cards disappeared
+- Added: Language Pack Support
+- Fixed: Error displaying during a fresh CA install
+- Changed: Better displaying of a beta application
+- Fixed: Errors would appear in statistics screen if (unlikely) no template errors were made
+- Fixed: Unreadable links when hovering over an app's warning symbol (if present)
+- Fixed: Hitting Done from a plugin's settings page wouldn't return to CA
+- Fixed: If backup server was active, after installing a docker application, the backup active banner would not reappear
+
+###2020.04.19
+- Fixed: Display aberration after installing a single app from Previous Apps
+- Added: If an app directly references a disk or cache pool in the template, adjust template accordingly if the user does not have the disk / cache pool installed
+- Fixed: If installing an app from a search immediately after starting CA, the start up category would remain highlighted when returning back to CA after the install
+
+###2020.04.03
+- Added: Multilanguage support
+- Changed: Adjusted CSS for unRaid 6.9-beta2+
+- Fixed: Under certain circumstances, autocomplete on searches wouldn't populate
+- Fixed: Prevent browser console error if notifications are not enabled
+- Added: Support internet proxies
+
+###2020.03.18
+- Lower notification from alert to warning
+- Switch from opt-out to opt-in for notifications.  ***Highly advised to opt-in***
+
+###2020.03.14
+- Fixed: A sanitized overview when being displayed when installing a docker application
+- Fixed: Minor CSS fixes for unRaid 6.9+
+- Added: Background scanning for must see notifications
+
+###2020.03.07
+- CSS Fixes for 6.8.3 and Gray / Azure themes
+
+###2020.02.22
+- Fixed: If a browser tab was opened to CA and another tab rebooted the server, a blank error would appear on the original tab
+- Fixed: If installing an app from a search result that only had one hit, 'no matching apps' would appear following installation
+- Fixed: Popups on Safari and Edge wouldn't have the watermark displayed as a watermark
+- Fixed: Apps that were tagged differently than the default would appear in the Installed Apps list twice
+- Changed: More clearly identify Beta apps within the popup
+- Changed: Highlight hits on the app's name during searches
+- Fixed: Official docker containers would never be able to load the webUI from within CA
+- Changed: Recommended appears first during any search results (hits on name first, then 2nd section with hits on description etc)
+- Added: All users must acknowledge that CA also contains plugins within the apps
+- Changed: Watermarks when running the next release of unRaid
+
+###2020.02.13
+- Fixed: Reinstall default from searches
+
+###2020.02.11
+- Silence PHP error that should be impossible to appear in the first place
+- Minor CSS changes for next release of OS
+
+###2020.02.06
+- Fixed: Incompatible apps wouldn't appear on a startup screen even if CA's settings was set to allow incompatible apps
+- Fixed: If an app was pinned that later became incompatible, the pinned apps screen would still show it even if CA's settings disallowed incompatible apps (default)
+- Further security enhancements 
+
+###2020.02.05
+Security Update
+
+All users are highly encouraged to upgrade to this version
+
+###2020.02.01
+NOTE: This is the last version of CA that I will verify compatibility with 6.4.x thru 6.6.x
+
+- Changed: Help text refinements
+- Added: Clearly identify via a watermark whether the application is a plugin or docker container
+- Fixed: If a fatal error happens within CA, close the spinner to avoid locking up the browser tab
+- Changed: If a plugin version cannot be determined display Unknown instead of nothing
+- Fixed: Prevent an incompatible app from having a thumbs-up
+- Changed: Relocate uninstall and multiple install checkboxes to bottom icon area
+- Fixed: Spinner was dimming the display
+
+###2020.01.28
+- Fixed Regression Error: When uninstalling a docker application, the wrong app (or no app) could get uninstalled
+- Fixed: When using dynamix buttons plugin from the apps tab the popup confirmation would be corrupted
+- Fixed: When displaying a plugin popup, always display the plugin's current version instead of the version the appfeed thinks is the current version
+
+###2020.01.19
+- Refinements to PluginAPI
+
+###2020.01.18
+- PluginAPI: Add in further functions for plugin developers
+- Changed: Deleting a template from previous apps will no longer deselect anything else already selected
+- Added: Recommended apps
+- Changed: Re-enable cookies not enabled warnings when running 6.8+
+- Changed: Rename Top Performing to To New Installs
+- Changed: Adjust criteria on trending apps
+- Changed: Don't display minimim OS required for an app if it's less than CA's own minimum requirements
+
+###2020.01.11a
+- Changed: Install multiple plugins in same order as during a boot with the exception of UD / UD+
+
+###2020.01.11
+- Changed: On multiple previous apps installs, reverse sort the plugins (The UD+ fix)
+- Fixed: Reinstall default wouldn't appear on app cards contrary to settings
+
+###2020.01.09
+- Added links to Application Policies
+- Changed: Adjust criteria for top performing / trending
+- Added: Line of best fit to charts in pop ups
+
+###2020.01.04
+- Fixed regression error: autocomplete not populating
+
+###2020.01.03
+- Better displaying of fatal errors within CA
+
+###2020.01.02
+- Suppress error being logged under certain circumstances
+
+###2019.12.31a
+- Fixed: If startup disclaimer not accepted, do not allow dockerHub installs
+
+###2019.12.31
+- Fixed: On occasion strange characters would appear in autocomplete entries
+- Added: Support 3rd Party Themes
+
+###2019.12.21
+- Fixed regression error: Popup error if couldn't download feed
+- Fixed: Minor calculation errors on statistics
+- Changed: Allow dashes in search terms
+- OCD change regarding confirmation text when installing multiple previous apps
+
+###2019.12.05
+- Fixed regression error: Sorting not functional
+- Always show App's graphs
+- Plugin Support URL that appears in the install window now a link
+
+###2019.11.28
+- Prep work for future updates
+- Fixed: Installations from a startup page followed by visiting installed / previous / pinned, sort orders would be wrong
+- Fixed: Menu wasn't being properly highlighted again after installations
+- Fixed: In unlikely circumstance of a fatal error in CA, the browser tab could get locked up.
+
+###2019.11.15
+- Fixed: After installing an app from the startup screen, the sort order would change
+- Changed: Vastly simpler skinning
+- Enhanced: 50% less memory usage required
+- Fixed: If no access to internet, statistics screen would display errors
+- Changed: Generate XML files for applications on demand
+
+###2019.11.03
+- Fixed: unRaid log button wouldn't work within CA
+- Remove mobile enhancements until unRaid supports mobile devices
+
+###2019.09.22
+- Misc optimizations, etc
+- Fixed: When running on backup server, banner warning would appear / disappear
+- Enhanced: Update support threads on installed plugins if author changed URL
+- Changed: Fully support latest appfeed version
+
+###2019.09.09
+- Fixed: Plugin API wouldn't display updates available on unRaid 6.7.x
+
+###2019.09.02
+- Readd PluginAPI removed during 09.01's emergency fixes
+
+###2019.09.01
+- Compatibility fix for future versions of unRaid
+
+###2019.08.31a
+- Don't display any menu item in the case of an application feed download error
+
+###2019.08.31
+- Prevent a particular error display under an extremely unlikely set of circumstances
+
+###2019.08.27
+- Some cleanup of code
+- Rename cookies to not potentially interfere with other plugins / unRaid itself
+- Fixed: After installing an app from a search result, the results might change their sort order (bug introduced 8/17)
+
+###2019.08.23
+- Fixed: Under certain circumstances, installing a plugin with a duplicated name (Nut, Rclone, etc) would display the incorrect installed version in Installed / Previous Apps
+
+###2019.08.17
+- Prioritize search results for matches on app name first
+
+###2019.08.11
+- Compatibility fix for future versions of unRaid
+
+###2019.08.05
+- Added: Further functions to plugin API
+
+###2019.08.04
+- Added: Alert if browser configuration disallowed a dockerHub conversion to take place (ground work for next CA rev)
+- Added: Show current version of plugin on it's popup
+- Changed: Popups now always show minimum version of a plugin
+- Banner warnings now are live and added / removed with every navigation within CA if circumstances change (docker enabled / disabled, cookies enabled / disabled etc)
+- Added: Prep work for next rev of PluginAPI
+- Fixed: Regression error where installing an app from within a category would not highlight the category again after installation
+- Removed: Support for a USB stored backup appfeed
+- Added: Banner warning if CA running on backup server
+
+###2019.07.11
+- Fixed: Spinner wouldn't disappear when pinning / unpinning app
+
+###2019.07.07
+- Fixed: Very rapid clicks between sections / categories could result in the wrong apps being displayed
+- Fixed: Edge case of maintainer / author having multiple identically named apps would not properly distinguish between the two
+- Changed: Always display repository tags within pop up
+
+###2019.06.29
+- Changed: Better logging from Update API
+- Added: Current sort selected on the title bar
+- Changed: Modifications to requirements for a Top Performing App
+
+###2019.06.11
+- Fixed: Applications with branches were not getting the description on the template the authors intended
+
+###2019.06.09b
+- Changed: Don't display a blank screen if last private app was deleted
+- Removed: Easter Egg
+- Changed: When changing sort order, go back to page 1
+- Changed: Minor CSS Changes
+- Simplify Sort Options
+  - Remove Sort By Downloads Ascending
+  - Remove Sort By Trends Ascending
+    (Does anyone ever look for the least popular apps?)
+  - Add in Sort By Date Added to CA
+- Removed some extraneous code
+  
+###2019.06.09a
+- Fixed: Don't allow dockerHub searches if docker is not enabled
+
+###2019.06.09
+- Added: Private Apps (if present) will have their own category displayed
+- Changed: Scroll to top when changing categories
+- Changed: Remove JQuery Mobile.  Switch to smaller library for mobile enhancements
+- Changed: CA's Cookie warning &amp; docker not enabled warning will now display in top banner
+- Changed: Don't blank display when showing spinner
+- Fixed: Simplify code when showing spinner to prevent race conditions
+- Fixed: After going to a plugin's settings page, return to Apps tab when hitting Done
+- Fixed: Beta warning displays when hovering for consistentcy with rest of UI
+- Fixed: Ability to pin apps with same repository, but different templates (CSGO, CSSource)
+- Added: If user customizes unRaid's themes and changes the name, then CA will use it's Black theme as a default fall-back
+- Added: Optional ability for plugin authors to prioritize the plugin's update available banner over unRaid's OS update available
+
+###2019.05.24
+- Fixed: Docker search API changed
+- Changed: Populate Autocomplete categories from category list
+- Fixed: Under certain circumstances, autocomplete list wouldn't populate
+- Changed: Uninstall plugins via popup instead of modal
+- Changed: Client/Server communication infrastructure for future expansion
+- Fixed: Under certain circumstances, internal data structure could get corrupted
+- Remove unused code, simplifications, etc
+- Add sound to easter egg
+- Changed: All client requests to server will display a spinner if operation takes 100+ ms
+
+###2019.05.12
+- Fixed: Prevent a blank icon from showing on Grey / Azure themes
+- Added: Dates to graphs on popups
+- Changed: Dynamically generate categories from appfeed
+- Changed: Minimum qualification for Top Performing is now 100,000 downloads
+- Changed: Updated Apps will no longer display any new apps
+- Various simplifications in code
+
+###2019.04.28a
+- Added Game Servers as a category
+
+###2019.04.28
+- Support appfeed v2019.04.28
+- Fixed: After installing app from a search, a category would incorrectly selected when going back to Apps Tab
+- Code Cleanup, and simplifications
+- Fixed: Don't include blacklisted apps in startup displays
+
+###2019.04.20
+- Added: Support appfeed caching of HTTPS icons
+- Renamed: Trending Apps -&gt; Top Performing Apps
+- Added: Trending Apps ( highest delta improvement )
+- Various improvements and changes across the board	
+
+###2019.04.06
+- Fixed: Regression Error - Plugins were not getting support thread populated in Plugins Tab
+- Fixed: Plugin update API would not work if plugins had never been checked for updates
+
+###2019.04.01
+- Fixed: Incompatible applications would appear in New Apps
+- Changed: Display entire Repository name in autocomplete drop down
+
+###2019.03.30
+- Remove animations (firefox fix)
+- Fixed: dockerHub searches
+- Fixed: flick on page navigation butons when switching pages
+
+###2019.03.27
+- Fixed: Clear search bar when going to Stats, changelog, etc
+- Fixed: Apps with branches would only install from the popup
+- Fixed: Renamed applications wouldn't appear in alphabetical order on previous apps
+- Added: API for plugin authors to use for display of plugin update notifications
+- Added: Graphs on app popups for Trends, Downloads per month, total downloads
+- Removed: Ability to search dockerHub by simply clicking on the name of an application
+- Added: Display the rank of an application based on its trend
+- Misc code cleanup, faster internal searches, etc
+- Fixed: Autocomplete box wouldn't close on some types of searches
+- Added: Clicking on the app's icon will bring up it's info popup
+- Fixed: Some bugs with handling of http only icons when https is accessing the server and CA's settings are set to not display http
+- Fixed: More consistent scrolling of displays
+- Added: Animate all page transitions
+- Fixed: Selecting a special category within stats would leave Stats menu selected
+- Updated credits to include 3rd party libraries used
+- Added: Link to dockerHub page for all apps on the popup
+- Fixed: Certain applications would have moderator comments listed twice on the warning icon
+- Fixed: Popup would crash if displaying a plugin and another browser tab had updated the displays
+- Changed: Always show installed applications within available application lists
+- Fixed: Obscenely long search terms would corrupt the display
+- Changed: Move search bar to the title bar
+- Fixed: Sort icons wouldn't disappear when going to a docker search
+- Changed: Multiple warning banners from CA will now all display within same banner
+- Updated: Awesomplete library
+- Fixed: "Flicker" when displaying spinner
+- Changed: Do not display CA itself in the list of updated applications
+- Added: Display if a plugin has an update available on its popup
+
+###2019.02.21
+- Fixed: Under certain circumstances displays could get corrupted
+- Changed: "Reinstall Default" for docker apps optional (enable in settings)
+- Added: When swiping on mobile device to change page, scroll display
+- Changed: Remove "dimming" when spinner displays
+
+###2019.02.18a
+- Fixed: Search box wasn't being cleared when going back to a startup category
+
+###2019.02.18
+- Changed: When running 6.7 begin to utilize new navigation icons
+- Changed: Upgrade available is now a banner
+- Changed: Docker not available is now a banner
+- Enhanced: Better cookie's not enabled warnings
+- Changed: Not agreeing to the startup disclaimer will now allow you to browse applications, but not install any
+- Changed: CSS "Dutchification"
+- Fixed: Suppress PHP errors if a installed / previously installed template is corrupted
+- Changed: Application cards grow / shrink in size to fit browser window (and are always centered)
+- Fixed: Search results message would stay on when going back to a New/Updated/Random/Trending display
+- Fixed: CSS fixes for white theme
+- Fixed: Better method of installing plugin via popup
+- Added: Show spinner on popup if it takes a bit to gather the information
+- Added: Any click outside the popup will now close it
+- Fixed: "Wiggle" when closing popup
+
+###2019.02.16a
+- Fixed: Don't try and display changelog if the entry exists but is blank
+
+###2019.02.16
+- Fixed: Don't display categories on pop up if no categories are present
+- Changed: Identify a private (dockerHub Conversion) app on main displays
+- Changed: Scroll back to top of screen when changing categories, etc
+- Added: Always get the changelog for a plugin via the .plg file
+- OCD Change: When hitting settings on the CA template, go to settings instead of reloading the page
+- Revert back to using tabs instead of spaces (I tried it, and I hate spaces)
+- Fixed: Author would be wrong when displaying a plugin
+- Changed: Don't highlight search results on popup
+- Changed: Display 24 results (12 on mobile) instead of 25/10
+
+###2019.02.08
+- Complete overhaul of UI
+
+###2019.01.24
+- Added ability to mark an app as being incompatible without having FCP trigger an error to prevent installation on incompatible unRaid versions (The system stats upgrade)
+
+###2019.01.20
+- Adjust Help Text
+- Wording changes and Hover text on startup screens
+- Fixed: Inconsistencies in hover time settings
+- Coding optimizations
+
+###2019.01.17
+- CSS fixes for differing Icon styles
+
+###2019.01.06
+- Utilize unRaid's built-in spinner (not that I like it, but by request :( )
+- Reintegrate ability to display the raw appfeed (and backup)
+- Add in hover text to navigation icons
+- Remove the annoying "Shake" of pop-ups
+- Tone down the orange highlights
+- Support new styles for application icons (re: unRaid 6.7)
+- Various minor CSS changes
+
+###2018.12.31
+- Added: Ability to disable mobile UI enhancements
+- Removed: Log entries when converting dockerHub files
+- Fixed: Regression error.  Private repositories weren't getting added to lists
+- Changed: Don't display BaseOS if it is unknown
+- OCD: App popup link was present if initial warning was declined
+- Adjust CSS for unRaid 6.7.0
+- Adjust Icon on Azure / Grey themes unRaid 6.7.0
+
+###2018.12.22
+- Add in automatic switching to backup server if primary offline
+
+###2018.12.09
+- Add in ability to utilize a pre-downloaded application feed for emergencies
+- Startup screens now always show an app if its installed
+- Fixed: Plugins on a startup screen wouldn't show if an update was available
+- Fixed: Somehow the icon in the plugins tab keeps getting reverted to a low res version
+- Fixed: Startup screen remembers random / new / trending even if you close browser tab
+
+###2018.12.01
+- Fixed: After installing an app, autocomplete on searches wouldn't work without reloading.
+
+###2018.11.23
+- Remove startup options from settings.  Now handled on main screen
+- Add in Trending Apps
+- Add in sort by Trending
+- Minor little fixes that no one noticed
+
+###2018.11.17
+- Maintenance release
+- Fixed: Prevent a plugin not present in appfeed from getting a support thread added
+- Fixed: Under certain circumstances, searches wouldn't be in alphabetical order even if set to be
+- Revamp for easier maintenance the CSS
+- Remove manual.  CA's easy enough to use isn't it?
+
+###2018.11.10
+- Minor display changes
+- Fixed: When installing an app identically named to another, both would appear as installed
+- Fixed: Edge case of Previous / Private App not being in appfeed and having formatting present in its description messing up CA's displays
+- Added: Only display Newest added as startup screen in addition to Newest/Updated and Random
+- Fixed: When installing an app from startup page, after installation the order of the apps would change
+- Fixed: Regression Error - CA thought it downloaded an update to the appfeed, but it never actually did
+
+###2018.11.03
+- Fix regression error.  Under certain cirumstances, the wrong repository would be listed in a template
+- Significantly speed up what happens when browser re-sizes
+- Revert back to CA's spinner.  Just cannot stand 6.6's spinner
+
+###2018.10.28a
+- Fix compatibility with unRaid pre 6.6
+
+###2018.10.28
+- Support for Dynamix' Font-Size setting
+- Fix regression error on what happens if browser window is resized
+- Update credits
+- Relocate search for easier CSS maintenance
+- Fixed: Under certain circumstances, Swiping on mobile device to change page would display no results
+- Fixed: Prevent plugins from getting categorized twice
+
+###2018.10.25
+- Fixed Regression: Plugin was saving install file to incorrectly formatted filename negating a change in 2018.10.21
+
+###2018.10.21
+- Remove Legacy mode (pointless as a backup with new appfeed)
+- Remove most post-processing of templates (appfeed now does this automatically)
+- Lower bandwidth requirements
+- Changed: Now passthrough full description to dockerMan
+- Minor template changes when displaying deprecated / blacklisted apps
+- Changed: Blacklisted apps when displayed include ones blacklisted due to template errors
+- Changed: When running on unRaid 6.6.3+, do not modify a system file when doing multiple previous docker installations
+- Changed: Pick up CA update available from appfeed
+- Changed: Don't display download counts if less than 100
+- Remove Developer Mode (related to Legacy Mode removal)
+- Fixed: Prevent edge case of CA installing the same version of a plugin already installed
+
+###2018.10.08
+- Maintenance update
+- Handle slight difference in how 6.6.1 handles templates
+- Fixed: Regression error on searching for authors from popups
+- Distinguish between new apps and updated apps on startup screen
+- Fixed: Stats out to lunch on fixed errors if CPUSet was present in template
+
+###2018.10.02
+REQUIRED UPDATE
+- Change appfeed URL
+
+###2018.09.28
+- Compatibility Fix for unRaid 6.6.2
+
+###2018.09.22
+- Changed: Startup displays now follow settings for including already installed apps
+- Added: Able to start / stop installed docker apps from within Installed Apps section
+- Fixed: If installing a previous app by itself, then don't display checkbox to delete the template after installation finished
+- Changed: Some minor 6.6 code compatibility updates
+- Misc coding optimizations
+- Added: Automatically remove a docker template if it's not a valid repository (ie: it must all be in lowercase)
+- Fixed: Random app of day should not display date updated
+- Added: Always display https images.  (Selectable in options: Abilty to downgrade to http (default) or don't display at all)
+
+###2018.09.01
+- Adjust CSS if unRaid is 6.6+
+- Many code optimizations
+- Remove ability to switch number of results displayed (Computers / Tablets will now display 25 results.  Cellphones will display 10 results)
+- Fixed: Under certain circumstances, a blank category could appear in the popup display
+- Autocomplete searches now include Categories in the list
+- Remove any CPU pinning from a template present in the application feed
+- unRaid 6.6+: Automatically blacklist applications if they violate the new security precautions present in docker on unRaid 6.6+
+- Remove Wide theme
+- Much, much more
+
+###2018.07.22
+- Fixed: PHP errors if no docker containers installed
+
+###2018.07.20
+- Changed: Clicking an autocomplete suggestion will now immediately search
+- Changed: Startup Screen (random / new apps) will now display up to the Max Per Page drop down
+- Changed: Random startup apps will no longer display an installed application
+
+###2018.07.08
+- Fixed: If an app didn't specify an icon, it wouldn't show up as being installed on all screens
+- Fixed: Author would come up incorrect if application wasn't hosted on dockerHub
+- Chenged: Default skin now Narrow
+- Added: Selectable startup screen of either New Apps or Random Apps
+- Changed: New App category will now always display all new apps up to 10 years old
+- Enhanced: Tighten up some rules on when to automatically remove an app from lists due to template errors
+
+###2018.06.24
+- Workaround: Bug in unRaid that under certain circumstances would show previously installed apps as being installed
+- Remove hovering over navigation icons opening up the menu
+- Fixed: Stats were wrong if a deprecated app was added via dockerHub searches
+- Fixed: Searching from within a subcategory would leave the subcategory active
+- Fixed: When installing a container from dockerHub, display aberrations might occur under certain circumstances when re-entering apps tab
+- Fixed: When clicking a searchable link improper search would happen if the link was highlighted from a previous search
+- Misc code and memory optimizations
+- Fixed: Under certain circumstances, previous apps wouldn't display a plugin if the plugin's URL was subject to redirection
+- Added: Adjust .plg files after installation and add support attribute
+
+###2018.06.16
+- CSS adjustments
+- Better warnings if cookies not enabled if feature will not work
+- Autocompletion on searches
+
+###2018.06.03
+- After installing a container, Apps tab when reloading will go back to where it left off
+- Round off download counts in pop ups
+- Misc optimizations
+- CSS fixes
+- Search categories directly from the app's display
+- Remove All option from maximum displayed per page
+
+###2018.05.23
+- Fix compatibility with 6.5.2 (uninstalled applications would still appear to be installed) 
+
+###2018.05.20
+- Major template display redesign
+- Removed: Table Mode
+- Added: Narrow or Wide skin (selectable from settings)
+- Changed: DockerHub searches now utilize the skin settings
+- Added: Mobile Devices can now swipe left / right to change pages when search results are more than a single page
+- Removed: Ability to display all search results at once.  Limited now to 100 per page
+- Removed: Search Bar focus options.  Didn't quite work in practice.
+- Deprecated DonateImg tag in templates.  Always use a stock Donate image
+- Reverted: If display width is less than 1080 pixels, keep templates centered on 1080px
+
+###2018.05.05
+- Fixed: When switching to Legacy Mode from Previous Apps, the install buttons would remain on screen
+- Added: Selectable if search box is always in focus or not
+- Fixed: Search box is disabled when not appropriate to search
+- Remove some excess code for unused skin items
+- Fixed: If favourite repository is enabled, don't display header if no items exist in favourite repository
+- Misc: Skin adjustments
+- Misc: Coding optimizations
+- Fixed: Don't pluralize Random Apps Of Day if viewing width only allows one app to display
+- Fixed: If browser width less than dynamix minimum display width, don't center applications
+- Fixed: Regression error (size of icons) on dockerhub searches
+- Added: Code to detect if running on mobile device and adjust accordingly
+
+###2018.04.22
+- Drop compatibility with unRaid 6.3.x / 6.2 / 6.1.  Minimum OS required now 6.4.0
+- Remove all compatibility code
+- Less annoying highlights on search results
+- Fixed reference to URL for alternative app icon image
+- Removed Icon display mode
+- Always have the apps displayed centered, regardless of browser width or number of results
+- Revamp of 'Searching' info popups
+- Removed link to announcement thread for repositories
+- Added ability to display changelogs on plugins when an update is available
+
+###2018.04.08
+- Fixed: Regression error where if a duplicated plugin was installed (eg: libvirt hotplug), both plugins would display instead of only the proper one
+
+###2018.04.02
+- Revamp of how legacy mode downloads
+- Fix stats display when bouncing back and forth between legacy mode and appfeed mode
+- Suppress PHP errors when appfeed download fails and you display the stats
+- Lower download timeouts from 60 seconds to 45
+- Don't allow CA to operate unless you've accepted the disclaimer
+- Ability to display a Public Service Announcement if the appfeed fails to download
+
+###2018.03.30
+- Support environment variables in dockerhub conversions
+
+###2018.03.14
+- Security Fix: Prevent a malicious template from arbitrarily executing commands
+
+###2018.03.02
+- Fixed: PHP warnings (hidden) being issued in unRaid 6.5.0+
+- Fixed: Apps with special characters in name would not install
+
+###2018.02.19
+- Changed: Don't display previously installed docker apps if docker service isn't running
+- Fixed: Only display incompatible plugins in previous apps section if CA Settings allow display of incompatible apps
+- Fixed: Regression error if docker isn't running (error messages would have appeared)
+- Many Code optimizations
+- Fixed: Minor stats count inconsistencies
+- Fixed: Pinning an app that also had a duplicated (but blacklisted) template wouldn't work
+- Fixed: Previously possible for CA to believe it had downloaded an updated application feed, but due to 3rd party caching the feed may have been an older version
+
+###2018.02.16
+- Code Clean Up
+- Fixed: Official Containers would not appear in installed apps section
+- Fixed: Prevent Previously Installed But Now Blacklisted Apps from throwing out Total # found in Previous Apps
+- Minor changes to links at top right to improve usability
+
+###2018.01.28
+- Minor fixes / skin enhancements
+- More accurate dockerHub conversions for majority of containers
+- Coding improvements / refinements
+- Support for new moderation methods
+
+###2018.01.20a
+- Make get more results from dockerHub more obvious that its a link
+- Fixed: Install / Edit icons from app popups didn't return to apps tab when done
+- Remove some development only code
+- Remove compatibility code for unRaid &lt; 6.3.3 (Now separately downloaded if required)
+- Remove all png icons and switch to font-awesome exclusively (download size now 52k vs 144k)
+- Fixed: New / Updated displaying apps created in 1969
+
+###2018.01.01
+- Fixed: under certain circumstances, a template could be mistakenly deprecated
+
+###2017.12.31
+- Compatibility release for unRaid 6.4RC19+
+- Icon mode skin fix
+
+###2017.12.20
+- Suppress error if moderation changes an applications's repository
+- For new/updated apps, if no Date entry in template, use DateInstalled if available
+- Under certain circumstances, app of the day would not display enough apps to fill screen
+
+###2017.12.09c
+- Fix unRaid 6.3.5 compatibility
+
+###2017.12.09a
+- Changed: Moderation entries regarding compatibility of applications take effect immediately without waiting for an appfeed update
+
+###2017.12.09
+- Numerous optimizations, remove unused code, etc
+- Change how Beta applications are identified / displayed
+- Prevent crash if no applications are eligible for random app of the day
+- Prevent edge case of errors being displayed if docker.img is mounted but docker service is not running
+
+###2017.11.24a
+- Display aberrations when going from Previous Apps To Private Apps
+- Utilize display engine to display blacklisted, deprecated, etc from the stats popup
+
+###2017.11.24
+- Coding improvements
+- Minor CSS changes
+- Fixed: dockerHub conversions will not trigger a template error within statistics
+- Reorganization of files to completely separate other CA plugins from CA proper
+- Changed: Request non-cached version of application feed from appfeed server (Solves edge case of entering Apps tab right after an update has been performed to the appfeed and server delivers a cached version of the feed)
+- Changed: From stats popup, clicking private apps will display all private apps within CA to facilitate easy removal / installation / etc
+- Changed: Prevent edge case of having multiple tabs open to CA while deleting / removing apps from Previously Installed / Private sections and under certain circumstances random apps of the day appear
+- Removed: Debugging lines / extra files long since not needed
+- Changed: Private apps no longer require a description to be managed
+- Fixed: Prevent CA itself from ever being one of the random apps of the day
+
+###2017.11.18
+- Fix CSS on search box when running unRaid 6.4 with White / Black themes
+- If plugin already installed and no changelog in appfeed, display changelog from installed plg
+
+###2017.11.12
+- Fix missing icons in help text
+
+###2017.10.27a
+- Rename certain image files to prevent user from having to clear browser cache to get some icons to display correctly
+
+###2017.10.27
+- Fixed: If author created template on unRaid 6.4, Network mode wouldn't populate correctly
+- Changed: Don't automatically install extra applications on new installation
+- Enhanced: Ability to blacklist a particular template, not just a particular application
+- Removed: CA Modules.  All CA family of plugins now treated equally to other plugins
+- Fixed: Under certain circumstances, stats displays could be wrong
+- Added: Ability to delete any private docker application from available apps
+- Enhanced: Many CSS improvements and coding improvements
+- Changed: Access to CA's settings is now done via the Apps tab instead of Settings tab
+
+###2017.10.19
+- Enhanced: Don't display back to top if dynamix already does
+- Fixed: Remove some excess files when no longer needed
+- Fixed: Don't display get more results from dockerHub when searching if docker is not enabled
+- Under the hood enhancements to the moderation system
+- Coding improvements
+
+###2017.10.07
+- Prevent user changing sections before display is rendered
+
+###2017.10.04
+- Enhanced: Vastly better searching when using multiple search terms
+
+###2017.10.01
+- Fixed: Display abberration when switching from Previous Apps to Pinned Apps / ca Modules
+
+###2017.09.22
+- Fixed: Correctly handle duplicate named plugins within Installed / Previously Installed sections
+- Changed: Relocate data files from docker.img to RAM to handle some edge-cases
+- Changed: Don't show applications within New / Updated section if date modified is in the future
+- Code cleanup, and minor changes to Stats section
+
+###2017.09.13
+- Changed: Clicking Repository from popup will now search for applications contained within the repository
+- Added: App info popup now has link to go directly to docker hub page for application
+- Fixed: Prevent possibility of duplicate app appearing in app of the day.
+- Enhanced: Previously, app of the day would return errors if unRaid CSS and window width support horizontal resolution greater than 5700 pixels.
+- Fixed: If multiple browser tabs opened to apps tab, detect if app database is out of sync between windows and update tab accordingly.
+- Changed: Allow moderation to whitelist an application without appfeed update
+
+###2017.09.04
+- Remove arbitrary limitation of 1920 pixels across for CA (introduced via 6.4-rc8q)  Instead utilize whatever limits unRaid's CSS dictates
+
+###2017.09.03
+- Limit display width to 1920 pixels in accordance with 6.4RC8Q
+- Only display legacy mode option for developers or in case of appfeed download errors
+- Changed: In case of appfeed download failure, only display errors for CA developers
+- Under certain circumstances app of the day could display blacklisted or incompatible applications
+- Minor CSS styling changes
+
+###2017.08.24
+- Improvements to dockerHub conversions
+
+###2017.08.23
+- Fixed: Ability to reselect branches if reinstalling using default values
+
+###2017.08.18
+- Better searching for applications
+
+###2017.07.31
+- Update URL for application feed
+
+###2017.07.24
+- Better enforcement of fatal errors in application templates
+- Code cleanup
+- Fixed: Edge case of being able to search dockerhub if docker is not enabled
+- Fixed: Edge case of app of the day no longer valid app after an update
+
+###2017.07.20
+- Multiple Installation of Previous Apps
+  - Fixed: Clicking outside of the install button would attempt to install
+  - Fixed: Selected Apps would not stay selected following a view or page change
+  - Added: Ability to select apps from different pages and have them all install
+
+###2017.07.16
+- Enhanced: Search box has focus when page loaded (Just start typing instead of clicking within)
+- Enhanced: After installing / editing a docker application, pressing DONE will return to the Apps page (previously blank template would appear)
+- Added: Ability to install multiple applications (docker / plugin) simultaneously from the Previous Apps section without confirming the already filled out template.
+- Changed: Default for Displayed results per page from 10 to 25
+- Removed: Option to open install / edit pages in a new tab
+
+###2017.07.08
+- Minor changes to appfeed statistics displays
+
+###2017.07.02
+- Don't revert to legacy mode automatically if appfeed fails (probably due to DNS failure.  Previously could take an hour to time out in this circumstance.  New method will time out in 2-3 minutes)
+- Fixed: Under certain circumstances with docker service disabled, app pop ups could display errors
+
+###2017.07.01a
+- Fix regression error when updating CA from within CA would not reload the page after installation finished
+
+###2017.07.01
+- Added in sort by date when in New Apps section
+- Fixed Categories not resetting after a search performed
+
+###2017.06.25
+- Remove sort by date and do not display except on plugins (rarely do docker maintainers update it which makes for a lot of confusion)
+- Fixed: Under certain circumstances, app info popups in previous apps would display the incorrect information
+- Add a comment if an app is deprecated
+- Fixed: Prevent apps not in appfeed from displaying a pop up
+- Remove some excess code and files
+- Fix CSS on statistics displays
+
+###2017.06.18
+- Expanded details on statistics
+- Removed resource monitor (see thread for details)
+
+###2017.06.10
+- Adjustable Disappear time on app popups
+
+###2017.06.05
+- Fixed: Regression error in Resource Monitor if no applications running
+
+###2017.05.30
+- Fixed: Display Aberration in Table Mode under certain conditions
+- Enhanced: View Mode and Results per Page saved between instances
+- Enhanced: Increased compatibility with older browsers
+- Added: Statistics Display for appfeed
+- Code cleanup
+
+###2017.05.21
+- Enhanced: Update plugins now refreshes page instead of reloading
+- Enhanced: Install plugins now refreshes page instead of reloading
+- Enhanced: Increase search speed on installed apps
+- Added: Paging when utilizing favourite repositories
+- Code cleanup
+
+###2017.05.19
+- Fixed: Display anomalies introduced by unRaid 6.3.4
+- Fixed: Minor issues with category / subcategory buttons
+
+###2017.05.16
+- Fixed: Under certain circumstances the popup would disappear immediately when moving the mouse
+- Added: More fixes for common template author's mistakes
+- Minor skin changes in Icon Details mode
+
+###2017.05.08
+- Enhanced: Speed up generation of displays
+- Enhanced: Properly handle edge cases of multiple browser tabs open and stale CA sessions displaying popups
+- Added / Restored: Ability to install / edit from Icon mode without hitting popup.
+
+###2017.05.07
+- Fixed: Regression error on apppop up for previous apps
+
+###2017.05.04
+- Add Install / Edit / WebUI icons to icon details mode
+
+###2017.04.30
+- Added: Ability to jump directly to an author / maintainer's profile (to help with selecting whether to install or not)
+
+###2017.04.29a
+- Added: Adjustable setting for "hover time" before a popup appears
+
+###2017.04.29
+- Fix Compatibility with Internet Explorer and Opera
+- Fix Button incorrectly displaying on an installed application utilizing Branches
+- Fix Changelog not displaying for CA when update is available
+
+###2017.04.24a
+- Don't display webUI link if docker app is not running
+
+###2017.04.24
+- Remove legacy UI
+- Revamp GUI
+- All installs / edits / etc handled via hovering over (or clicking on the icon for the app)
+- Fixed: Minor issues with paging
+
+###2017.04.09###
+- Introduce new UI to remove less commonly used buttons from screen.
+
+###2017.04.04###
+- Fix 6.2.x compatibility
+
+###2017.04.02###
+- Implement new features made available by 6.3.3+  (Still fully compatible with older versions of unRaid)
+  - Hovering over app's icon opens up the full description
+  - Hovering over changes icon opens up the change log
+  - Use tooltipster exclusively (tooltips will open after 1.5 seconds, and automaticaly close after 15 seconds)
+
+###2017.03.22###
+- Misc Display Fixes
+
+###2017.03.21###
+- Maintenance update:  Prevent Deprecated apps from appearing on available apps lists
+
+###2017.03.19a###
+- Ability to switch max per page on the fly
+- Unify docker search navigation with appstore navigation
+
+###2017.03.19###
+- Misc improvements to paging
+
+###2017.03.18###
+- Added limit results to "x" per page
+
+###2017.02.25###
+- Update links within plugin screens
+
+###2017.02.12###
+- Maintenance update.  Add more fixes for template errors from authors
+
+###2017.01.29###
+- Added: Automatic Blacklisting if a template poses a security risk
+
+###2017.01.24###
+- Security fix on full description popups
+- Fixed: Show stats on full description popups if app name has been changed
+
+###2016.12.31###
+- Fix permission issues resulting from a migration of development machines
+
+###2016.12.30###
+- Suppress invalid cron job email 
+
+###2016.12.05###
+- Fixed: Stopping array would hang until any calculations of appdata size was completed if CA Backup was not installed
+
+###2016.12.03###
+- Fix pop up descriptions in Previous Apps
+- Don't process blacklisted apps
+
+###2016.11.13###
+- Fixed: CA Modules displaying incompatible add-ons
+
+###2016.11.11###
+- Allow separate installs / removal of included modules
+
+###2016.11.05###
+- Infrastructure changes to ultimately allow separate module installation / deinstallation
+
+###2016.10.30###
+- Fixed: Dynamix Bleeding Edge 2016.10.29c compatibility
+
+###2016.10.26###
+- Allow appdata backup source to be any folder on system
+- Updated routines to handle potential incompatibility with PHP and unRaid's generated comments
+
+###2016.10.12###
+- Handle edge case template creation by dockerMan
+
+###2016.09.28###
+- Force redirection of additional backup scripts output console
+
+###2016.09.25a###
+- Speed up appfeed download
+
+###2016.09.25###
+- Added: Selectable delay in days before autoupdating a plugin
+- Added: Backup of old .plg files prior to backup to support edge-case rollbacks if needed
+- Updated: Manual
+
+###2016.09.23###
+- NOTE: All auto update settings will be reset back to defaults with this update.  IE: Only CA and FCP will autoupdate
+- Fixed: CA under certain circumstances would show as not autoupdating in settings when in fact it would
+- Fixed: Under very specific circumstances, some plugins set to not autoupdate could in fact auto update
+- Fixed: PhAzE plugins would not show up as installed if they were
+
+###2016.09.21###
+- Extra security tests on auto updates
+- Implement autoupdate kill switch
+
+###2016.09.17###
+- Compatibility fix for dynamix.bleeding.edge.plg
+
+###2016.09.15###
+- Fixed minor compatibilty issues with 6.2 Final
+- Changed: Only log maximum 10 rsync errors in backup module
+- Fixed: disallow faster rsync option if days to keep backup sets is disabled (or set to 0)
+- Fixed: backup to flashdrive setting (entry could have been possibly corrupted under 2016.09.03)
+- Added: Script to delete old dated backups in addition to ALL backups and error backups only
+- Changed: Update Apps now called Legacy Mode.  Selecting again goes back to appFeed mode
+- Removed: Private Repositories via a GitHub repo.
+- Added: Selectable notifications on autoupdates of plugins
+- Added: XML Branch support while in Legacy Mode
+- Fixed: Display aberrations while in legacy mode if some repositories didn't download
+- Added: Legacy mode will now display any XML's which failed to parse
+
+###2016.09.07###
+- Fixed VM XML's not backing up under certain circumstances
+- Do not delete XML backups if source is no longer available
+- Added Dynamic adjustment of templates based upon user input
+
+###2016.09.06###
+- Fixed Backup/Restore settings module not working
+- Added Selectable display for Random App Of Day
+
+###2016.09.04###
+- Under certain cirumstances, app of the day could crash CA
+- Download compressed version of appfeed
+
+###2016.09.03###
+- Added in VM XML backups
+- Major rewrite of display engine (faster, far smaller)
+- Fix app of day to not possibly display moderated apps if app feed happened to change during the day
+- Fix various buttons not properly getting disabled when forcing update under certain circumstances
+- Fixed search on author where apps would always display as being installed
+- Far too many coding changes to list
+
+###2016.08.13###
+- Maintenance Update
+- Added Apps of the day
+- Fixed display abnormalities in Table Mode under certain conditions / templates
+- Fixed displayed borders on popups
+- Updated manual
+- Removed extraneous code
+- Fixed base image display when in legacy mode
+
+###2016.08.07###
+- Added in ability to flag / pin apps for later viewing
+
+###2016.08.03###
+- Fixed: Restore appdata when using user shares as a destination
+
+###2016.07.31###
+- Support user shares as source and destination for appdata backup on 6.2-rc3+
+
+###2016.07.23###
+- Major revamp to backup/restore appdata module (see thread for details)
+
+###2016.07.16###
+- Better logging for CA Backup
+
+###2016.07.08###
+- Bug fix on dockerHub searches vs recommended applications
+
+###2016.07.04###
+- Fixed cleanup appdata if an installed app doesn't have any volume mappings
+
+###2016.07.01###
+- Support Separate Destinations for Flash Drive Backup
+
+###2016.06.29###
+- Backup Disk Assignments and super.dat (renamed) as part of USB backup
+
+###2016.06.26###
+- Backup options not displaying the set value for save log to flash
+- Fix improper displaying of source and destination on popup (restore)
+- Suppress errors displayed when selecting a UD mount for backup purposes
+- Added in backup of flash drive (sans super.dat) to docker appdata prior to backing up to array
+
+###2016.06.25k###
+- Add directions for backups for UD mounted shares
+
+###2016.06.13###
+- Fix typos
+- Prevent appdata cleanup from deleting parent folders (due to severely misconfigured previous template)
+- Add support and project links back to table mode (not sure how / when they got removed)
+
+###2016.06.12###
+- Miscellaneous enhancements and fixes
+
+###2016.06.11###
+- Added: New module to delete orphaned appdata folders
+- Better appdata determination if running unRaid 6.2+
+
+###2016.06.05###
+- Fixed: Prevent invalid Support and Project URLs from displaying
+
+###2016.06.02###
+- Add in option to speed up backups when using dated backups with automatic deletions
+
+###2016.05.30###
+- Add in automatic deletion of old dated backup sets
+
+###2016.05.12###
+- Add in dated backup of appdata
+
+###2016.05.08###
+- Fixed some bugs with AutoUpdate displays
+
+###2016.05.05###
+- Enhanced: Backup - better logging into syslog
+- Added: Configurable logging options
+- Fixed: Suppress errors if plugins don't have a readme
+
+###2016.05.01###
+- Added Configurable notifications on apppdata backup
+- Added Exluded folders to appdata backup
+- Updated: CA manual
+- Added rsync errors now logged
+- Lowered memory footprint of program
+
+###2016.04.30###
+- Better warnings on overwrites
+- Added ability to set backup destinations to a subfolder
+- Enhanced script selection / share selection
+- Added ability to skip docker.img file on backups
+- Fix autoupdate of applications would not always only display installed plugins
+
+###2016.04.28###
+- Added: Support for manual / scheduled backups of appData
+
+###2016.04.17###
+- Added: Ability to Auto Update Selected Plugins
+
+###2016.04.16###
+- Fix: PHP exception when only a single Config entry is present
+- Fix: Date application updated when in Legacy mode
+
+###2016.04.10###
+- Enhanced: Further security improvements
+- Enhanced: cAdvisor template is now 6.2 compliant
+- Fix: Suppress error if no docker applications running when in resource monitor
+- Added: Ability to install updates for docker applications
+- Enhanced: Better determination of appFeed failure
+- Added: Confirmation on Update Applications button
+- Updated: Manual, Credits
+
+###2016.04.01###
+- Fix: Under certain circumstances, data structures could get corrupted
+- Enhanced: Further security enhancements
+
+###2016.03.31###
+- Security Fix: Prevent arbitrary execution of code from malicious templates
+- Fix: Sanitize all Overview out of specification
+- Fix: Resource monitor not recognizing cAdvisor installed if name changed
+- Fix: Renamed apps will not display usage stats in popup
+- Added: option to show change log for CA when updating itself
+- Changed: default Host port for cAdvisor to 9243 (something oddball that probably won't conflict with anything else)
+- Added: if cAdvisor installed, but not running, abilty to start it within CA
+- Updated: Manual
+
+###2016.03.28###
+- Coding optimizations
+- Fixed: Don't display a support link if no support link available
+- Fixed: Add web-page link if repository authors have a web page
+- Added: Ability to install updates for plugins
+- Fixed: Resource Monitor not displaying icons for customized appFeed apps
+- Fixed: Determination of appdata is now case-insensitive when looking for /config
+- Fixed: dockerHub conversions now follow settings for new tab or same tab
+- Changed: Default value for new tab or same tab is now same tab
+
+###2016.03.26###
+- Fixed: Customized apps (based upon a default one in appfeed) were being tagged as incompatible
+- Enhanced: Friendly reminder if CA is out of date
+
+###2016.03.24###
+- Fixed: Installing previous apps on unRaid 6.2
+- Enhanced: Now fully generates v6.2 compliant xml files for dockerMan
+
+###2016.03.20###
+- Fixed: readmore on searches (regression error)
+- Fixed: private repositories (dockerHub searches) were being saved into wrong folder (regression error)
+- Enhanced: Update Applications (or reversion to legacy mode) will not fail if a single repository fails to download
+- Enhanced: Now include cAdvisor XML template so as to not rely upon smdion's repository
+- Enhanced: Popup descriptions now include links to go to cAdvisor's page for running docker applications
+- Enhanced: Templates passed through to dockerMan are now Moderated to allow CA to fix any errors, typos, etc in the author's template
+- Enhanced: Major overhaul of the XML template generation
+- Enhanced: Continuing code cleanup
+
+###2016.03.13###
+- Properly regress to legacy mode in case of improperly formed appFeed
+- Overhaul of the javascript
+
+###2016.03.12###
+- Remove option to relocate Users menu (and relocate Apps Tab)  Use webUI's display settings instead
+- Remove option to set appdata share.  CA now always prompts to delete appdata if it sees a /config container path
+- Resource Monitor supports appdata's stored anywhere on your system (and within multiple folders)
+- Fixed: Minor display aberration introduced by unRaid 6.2 beta 18
+- Fixed: If a calculation of appdata size was in progress you could not stop the array
+  
+###2016.03.10###
+- Further enhanced Resource Monitor
+
+###2016.03.06###
+- Fixed: Private Repositories now updated every session
+- Added: Resource Monitor for Docker Applications
+
+###2016.03.04###
+- Added: Running docker applications will now dynamically display CPU and memory utilization statistics
+- Various other fixes / enhancements 
+
+###2016.02.20###
+- Fixed: Under certain circumstances, the domain URL listed in a plugin might not be what the author actually specified  (eg: raw.github.com vs raw.githubusercontent.com) causing some plugins to not display in the previously installed section
+
+###2016.02.19###
+- Hot fix for special characters contained within templates
+
+###2016.02.18###
+- Added: Support Licence (and its mispelling of License) in templates
+- Fixed: Under certain circumstances, Reinstall button could show up instead of Install
+
+###2016.02.14###
+- Code Cleanup
+- Don't display dockerHub stars if not starred
+- Hide search dockerHub if in previous / installed apps
+- Fix error in settings if temp directory didn't exist
+
+###2016.02.10###
+- Suppress stars.sh error message
+
+###2016.02.08###
+- Fixed: Issue with going from dockerHub searches to installed / previously installed
+- Fixed: Disallow dockerHub searches if docker not enabled
+- Fixed: Disallow adding a previously installed docker app if docker not enabled
+- Removed: Legacy Code
+- Removed: dockerHub guess at Icons (api broken)
+- Fixed: Suppress an error message due to a bad template
+- Fixed: Remove some extra temp files once not needed anymore
+
+###2016.02.06###
+- Fixed: display abnormality with Firefox
+- Enhanced: More intelligent determination of d/l counts
+- Enhanced: Rearrange display icons
+- Enhanced: Table Mode
+- Added: Ability to display installed apps within available lists
+
+###2016.02.04###
+- Fix issue with duplicate plugin names
+
+###2016.02.03###
+- Suppress docker error messages if docker not running
+- Full information on an app now displays total downloads
+- Add sort by downloads
+
+###2016.02.01###
+- Going forward, unRaid version 6.1+ compatible only
+- Fixed: Applications with 2 identical names could disappear from the lists
+- Added: Uninstall any application within CA
+- Added: Optional deleting of an application's appdata - see manual for details
+- Added: Favourite Repositories
+- Fixed: Moderator Comments Now only download once per session
+- Removed: Local server caching of icons (made no sense to me)
+
+###2016.01.30###
+- Added: Separate Installed Apps from categories
+- Added: Separate Installed Apps from previously installed
+- Added: Incorporate Plugins to installed / previously installed
+- Updated: Manual
+
+###2016.01.28###
+- Added: Ability to manage previously installed docker apps (my* templates)
+
+###2016.01.24###
+- Fix: Under certain circumstances, blank templates would appear
+
+###2016.01.16###
+- Fix: Under certain circumstances, updated moderator comments were not being downloaded
+- Fix: Under certain circumstances, errors would appear on the popup descriptions
+
+###2016.01.13###
+- Fix: Suppress extraneous message on local console during installation
+
+###2016.01.10b###
+- Change: Appfeed now only downloaded if it has changed
+
+###2016.01.10###
+- Add: Option to not redownload appfeed if reloading apps within a certain time period
+- Fix: Alternate icon wasn't displaying properly if template's icon was unavailable
+- Updated: Help / Manual
+
+###2016.01.02###
+- Fix: Prevent malformed templates from displaying
+- Fix: All private containers were being tagged as being incompatible
+- Change AppStore to Apps
+
+###2015.12.18###
+- Add support for enforcement of application OS requirements (see help thread)
+
+###2015.12.12a###
+- Selectable add/edit/settings windows in new tab or not
+
+###2015.12.12###
+- Fix: Minor Icon Issues
+- Fix: Plugin changelogs now same format as within a .plg file
+- Fix: Not all plugins would properly go to the settings page
+- Fix: Plugins not sorting by Author name
+- Update: Help / Manual
+
+###2015.12.08###
+- Minor Bug Fixes
+- Settings Button for already install plugins will take you to the plugin settings
+
+###2015.12.06a###
+- Disable Update Applications button if an update is in progress NOTE: There is normally zero reason to hit this button anyways
+- Fix: Allow user selectable positioning of the AppStore. (Either on the main menu, within settings, or on main menu and move Users to settings)
+
+###2015.12.06###
+THIS IS A REQUIRED UPDATE
+
+- Relocate plugin from docker tab to its own tab (AppStore)
+- Now able to display and install available plugins
+- Docker no longer required to be enabled to browse applications
+
+###2015.12.05###
+- Fixed: System wouldn't let you add any application if a private repository was present
+
+###2015.10.10###
+- Suppress commands executed with /bin/sh appearing on local monitor
+
+###2015.09.29###
+- Fixed memory leak with application feed
+
+###2015.09.20###
+- Add in super categories for beta and private (selectable from settings)
+- More tweaks to docker conversion engine
+- Sanitize the input on searches
+ relocate temporary files to ram
+- various other fixes and tweaks
+
+###2015.09.15###
+- Remove code for unimplemented features
+- Disallow installing dockerHub result if a recommended application uses the same repository
+- Fix: *.xml not found was appearing on local terminal if no private repositories were found
+
+###2015.09.12###
+- Complete rewrite of dockerHub conversion code, adding more exceptions
+- Fix: Clearing search terms no longer displays all containers
+- Added in support for moderator comments on a container
+- Added in ability to blacklist specific containers
+
+###2015.09.01###
+- Implement change required due to dockerHub changing website again (used in dockerHub search mode)
+- Add suggested searches for dockerHub
+- Numerous under the hood improvements
+
+###2015.08.24###
+- Handle new restrictions introduced in RC6
+
+###2015.08.23###
+- Suppress some spurious status messages on unRaid's attached monitor
+- Expanded manual
+- Display dockerHub star ratings for ALL templates
+
+###2015.08.20###
+- Better search results for icons on dockerHub
+- Search for other containers from author (template mode)
+- Resolved issue with spaces in search parameters
+- Internal reorganization
+
+###2015.08.15###
+- Added in BaseOS display when not in appFeed mode
+- Added in Full GUI for searching and converting non-unRaid containers.  (See support thread for details)
+- Miscellaneous fixes
+
+###2015.08.12###
+- Hot Fix for 6.1RC-3
+
+###2015.08.09###
+- Hot fix for templates with duplicate tags
+- Pop up free in appfeed mode
+
+###2015.08.02###
+- Handle blank descriptions, categories, overviews in appFeed mode
+- Fix not able to show changelog on application names containing spaces
+- Integrate searching (and converting) from dockerHub
+
+###2015.07.26a###
+- Hot fix for 6.1 RC-2
+
+###2015.07.25c###
+- Fixed Internet Explorer crashing
+- Added Icon Details view mode
+
+###2015.07.23###
+- Unified UI between icon and table mode
+- Switch between icon and table mode on the fly
+- Faster sorting in icon mode
+- Add sort by date updated
+
+###Note: you must allow your browser to display popups from your server when in appFeed mode###
+
+###2015.07.20###
+- Code unified between tables and icons
+- Added pop up descriptions to table mode, hover descriptions to icon mode
+- Fix intermittent bug where a blank template could appear
+
+###2015.07.19###
+- 6.1rc-1 Broke Community Applications - Fixed
+
+###2015.07.18###
+- Coding Improvements
+- Revamp Icon Mode Descriptions
+- Add support for Project Home Page links
+
+###2015.07.16###
+- Significantly reduce memory footprint
+- Allow private repositories to be used in conjunction with application feed
+- Force Update in application feed mode will temporarily revert to template mode
+- Failure to download application feed will revert system to template mode
+
+###2015.07.15###
+- Added option to automatically update the application list when entering Docker tab
+- Added in support for Kode's real-time application feed update
+- Remove background table lines in icon mode
+- Removed option to automatically fill out template paths
+
+###2015.07.08###
+- Clicking the repository will now open the announcement thread in a new tab
+
+###2015.07.04###
+- Added in option to display small icons in icon mode
+- Optionally overwrite ALL host paths when in experimental overwrite host path mode
+
+###2015.07.02###
+- Fixed display abberation in table mode when searching for application with change log
+###2015.07.01###
+- Added an experimental option to automatically fill in host paths.  See support thread for details.
+
+###2015.06.21###
+- Table Mode: Repository was not displaying (introduced in 2015.06.14) (my bad - never noticed) 
+
+###2015.06.18###
+- Changed to a more intuitive Apply / Done buttons in settings
+
+###2016.06.17###
+- Fixed table header sometimes displaying in Icon Mode
+- Made settings default values consistent between modules
+- Added help text for Icon Mode 
+- Icon mode now default
+
+###2015.06.15###
+- Expanded descriptions in Icon mode
+- Fixed applications in beta repositories not being flagged correctly
+
+###2015.06.14a###
+- Fixed cursor over information icon and application icon (Icon mode)
+- Fixed applications not displaying description if a space was in the name (Icon mode)
+
+###2015.06.14###
+- Added Icon view mode (more mobile friendly!)
+
+###2015.06.11###
+- Coding optimizations
+- Add help text
+
+###2015.06.08###
+- Added support for new / updated containers
+- Expanded settings section
+
+###2015.06.06###
+- Added a settings section
+
+###2015.06.03a###
+- Optional local caching of application icons
+
+###2015.06.03###
+- Initial display is now blank (faster)
+- Going from subcategory to all categories no longer displays all categories
+
+###2015.06.02###
+- Added support for Changes tag
+- Added non-intrusive reminder to update applications after 14 days
+
+###2015.05.31###
+- Renamed DNS Servers to be DNS Client / Servers
+
+###2015.05.30###
+- Miscellaneous download fixes
+
+###2015.05.28###
+- Initial Release
+</CHANGES>
+
+<!-- The 'pre-install' script. -->
+<FILE Run="/usr/bin/php">
+<INLINE>
+<![CDATA[
+<?
+  $version = parse_ini_file("/etc/unraid-version");
+  
+  if ( version_compare($version['version'],"6.9.0", "<") )
+  {
+    echo "**********************************************************************\n";
+    echo "\n";
+    echo "Community Applications Requires Unraid version 6.9.0 or greater to run\n";
+    echo "\n";
+    echo "**********************************************************************\n";
+    exit(1);
+  }
+  echo "Cleaning Up Old Versions\n";
+  if ( is_file("/usr/local/emhttp/plugins/community.applications/scripts/removeCron.php") ) {
+    exec("/usr/local/emhttp/plugins/community.applications/scripts/removeCron.php");
+  }
+  exec("rm -rf /usr/local/emhttp/plugins/community.applications");
+  @unlink("/etc/cron.daily/updateApplications.sh");
+	
+	exec("rm -rf /tmp/ca_notices");
+
+	echo "Fixing pinned apps\n";
+	if ( is_file("/boot/config/plugins/community.applications/pinned_appsV2.json") ) {
+	  $original = json_decode(file_get_contents("/boot/config/plugins/community.applications/pinned_appsV2.json"),true);
+		if ( is_array($original) ) {
+			foreach ($original as $app) {
+				$amp = strpos($app,"&");
+				$new = substr($app,0,$amp).str_replace("-"," ",substr($app,$amp));
+				$pin[$new]=$new;
+			}
+		}
+		file_put_contents("/boot/config/plugins/community.applications/pinned_appsV2.json",json_encode($pin,JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
+	}
+	
+	echo "Setting up cron for background notifications\n";
+	$cron = rand(0,59)." * * * * php /usr/local/emhttp/plugins/community.applications/scripts/notices.php > /dev/null 2>&1";
+	@file_put_contents("/boot/config/plugins/community.applications/notification_scan.cron","\n# CRON for CA background scanning of applications\n$cron\n\n");
+	exec("/usr/local/sbin/update_cron");
+?>
+]]>
+</INLINE>
+</FILE>
+
+<FILE Run="/bin/bash">
+<INLINE>
+# Remove old 'source' files
+rm -f $(ls /boot/config/plugins/&name;/&name;*.txz 2>/dev/null &#124; grep -v '&version;')
+if [[ -d /boot/config/plugins/repo.update ]]; then rm -rf /boot/config/plugins/repo.update; fi
+if [[ -d /usr/local/emhttp/plugins/repo.update ]]; then rm -rf /usr/local/emhttp/plugins/repo.update; fi
+if [[ -n $(ls /boot/config/plugins/repo.update*.plg 2>/dev/null) ]]; then rm /boot/config/plugins/repo.update*.plg; fi
+
+if [[ -e /tmp/community.applications/tempFiles/templates.json ]]; then rm /tmp/community.applications/tempFiles/templates.json; fi
+/usr/local/sbin/update_cron
+</INLINE>
+</FILE>
+
+<!--
+The 'source' file.
+-->
+<FILE Name="/boot/config/plugins/&name;/&name;-&version;-x86_64-1.txz" Run="upgradepkg --install-new --reinstall">
+<URL>https://raw.githubusercontent.com/&github;/master/archive/&name;-&version;-x86_64-1.txz</URL>
+<MD5>&md5;</MD5>
+</FILE>
+
+<!--
+The 'post-install' script
+-->
+<FILE Run="/bin/bash">
+<INLINE>
+echo "Creating Directories"
+rm -rf /tmp/community.applications/tempFiles
+mkdir -p /tmp/community.applications/tempFiles
+mkdir -p /boot/config/plugins/community.applications
+rm -rf /usr/local/emhttp/plugins/community.applications/CA.page
+echo ""
+# Adjust icon depending on unRaid version
+echo "Adjusting icon for Unraid version"
+if [[ -e /usr/local/emhttp/plugins/dynamix/styles/font-cases.ttf ]]; then sed -i 's/f0db/e942/g' /usr/local/emhttp/plugins/community.applications/Apps.page; fi
+if [[ ! -e /usr/local/emhttp/plugins/dynamix/styles/font-cases.ttf ]]; then sed -i 's/e942/f0db/g' /usr/local/emhttp/plugins/community.applications/Apps.page; fi
+
+echo ""
+echo "----------------------------------------------------"
+echo " &name; has been installed."
+echo " Copyright 2015-2022, Andrew Zawadzki"
+echo " Version: &version;"
+echo "----------------------------------------------------"
+echo ""
+</INLINE>
+</FILE>
+
+<!--
+The 'remove' script.
+-->
+<FILE Run="/bin/bash" Method="remove">
+<INLINE>
+removepkg &name;-&version;-x86_64-1
+rm -rf &plugdir;
+rm -rf /boot/config/plugins/&name;
+rm -rf /var/lib/docker/unraid/templates-community
+/usr/local/sbin/update_cron
+</INLINE>
+</FILE> 
+</PLUGIN>

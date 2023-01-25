@@ -1,0 +1,128 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>NginxProxyManager</Name>
+  <Repository>jlesage/nginx-proxy-manager</Repository>
+  <Registry>https://hub.docker.com/r/jlesage/nginx-proxy-manager/</Registry>
+  <Network>khaneproxy</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://forums.unraid.net/topic/76460-support-nginx-proxy-manager/</Support>
+  <Project>https://nginxproxymanager.jc21.com</Project>
+  <Overview>
+Nginx Proxy Manager enables you to easily forward to your websites running at home or otherwise, including free SSL, without having to know too much about Nginx or Letsencrypt.
+
+
+Also, being based on Alpine Linux, size of this container is very small (less
+than 100MB in download size).
+
+For a complete documentation of this container, see
+https://github.com/jlesage/docker-nginx-proxy-manager/blob/master/README.md
+
+**NOTE**: For this container to be accessible from the internet, make sure ports
+**80** and **443** on the internet side of your router are properly forwarded to
+this container.  See the documentation for more details.
+
+**NOTE**: After a fresh install, the default username/password to connect to the
+management interface are:
+&amp;gt; admin@example.com/changeme.
+  </Overview>
+  <Category>Network:Web Network:Proxy Tools:</Category>
+  <WebUI>http://[IP]:[PORT:8181]</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/jlesage/docker-templates/master/jlesage/nginx-proxy-manager.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/jlesage/docker-templates/master/jlesage/images/nginx-proxy-manager-icon.png</Icon>
+  <ExtraParams>--restart unless-stopped --memory=1G</ExtraParams>
+  <PostArgs/>
+  <CPUset>2,8</CPUset>
+  <DateInstalled>1635446516</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>&#xD;
+Nginx Proxy Manager enables you to easily forward to your websites running at home or otherwise, including free SSL, without having to know too much about Nginx or Letsencrypt.&#xD;
+&#xD;
+&#xD;
+Also, being based on Alpine Linux, size of this container is very small (less&#xD;
+than 100MB in download size).&#xD;
+&#xD;
+For a complete documentation of this container, see&#xD;
+https://github.com/jlesage/docker-nginx-proxy-manager/blob/master/README.md&#xD;
+&#xD;
+**NOTE**: For this container to be accessible from the internet, make sure ports&#xD;
+**80** and **443** on the internet side of your router are properly forwarded to&#xD;
+this container.  See the documentation for more details.&#xD;
+&#xD;
+**NOTE**: After a fresh install, the default username/password to connect to the&#xD;
+management interface are:&#xD;
+&amp;gt; admin@example.com/changeme.&#xD;
+  </Description>
+  <Networking>
+    <Mode>khaneproxy</Mode>
+    <Publish>
+      <Port>
+        <HostPort>7818</HostPort>
+        <ContainerPort>8181</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+      <Port>
+        <HostPort>1880</HostPort>
+        <ContainerPort>8080</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+      <Port>
+        <HostPort>18443</HostPort>
+        <ContainerPort>4443</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/appdata/dmz/goaccess/log</HostDir>
+      <ContainerDir>/config/log</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/appdata/NginxProxyManager</HostDir>
+      <ContainerDir>/config</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment>
+    <Variable>
+      <Value>99</Value>
+      <Name>USER_ID</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>100</Value>
+      <Name>GROUP_ID</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>000</Value>
+      <Name>UMASK</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value/>
+      <Name>APP_NICENESS</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>0</Value>
+      <Name>DISABLE_IPV6</Name>
+      <Mode/>
+    </Variable>
+  </Environment>
+  <Labels/>
+  <Config Name="Web UI Port" Target="8181" Default="7818" Mode="tcp" Description="Port used to access the web interface of the application.&amp;lt;br&amp;gt;&amp;lt;b&amp;gt;NOTE:&amp;lt;/b&amp;gt; This applies only when &amp;lt;i&amp;gt;Network Type&amp;lt;/i&amp;gt; is set to &amp;lt;i&amp;gt;Bridge&amp;lt;/i&amp;gt;.  For other network types, port 8181 should be used instead." Type="Port" Display="always" Required="true" Mask="false">7818</Config>
+  <Config Name="HTTP Port" Target="8080" Default="1880" Mode="tcp" Description="Port used to serve HTTP requests.&amp;lt;br&amp;gt;&amp;lt;b&amp;gt;NOTE:&amp;lt;/b&amp;gt; Your router should be configured to forward port &amp;lt;i&amp;gt;80&amp;lt;/i&amp;gt; to this port.  If your router doesn't allow setting the destination/internal IP address, this &amp;lt;b&amp;gt;&amp;lt;i&amp;gt;must&amp;lt;/i&amp;gt;&amp;lt;/b&amp;gt; be set to &amp;lt;b&amp;gt;80&amp;lt;/b&amp;gt;.&amp;lt;br&amp;gt;&amp;lt;b&amp;gt;NOTE:&amp;lt;/b&amp;gt; This applies only when &amp;lt;i&amp;gt;Network Type&amp;lt;/i&amp;gt; is set to &amp;lt;i&amp;gt;Bridge&amp;lt;/i&amp;gt;.  For other network types, port 8080 should be used instead." Type="Port" Display="always" Required="true" Mask="false">1880</Config>
+  <Config Name="HTTPs Port" Target="4443" Default="18443" Mode="tcp" Description="Port used to serve HTTPs requests.&amp;lt;br&amp;gt;&amp;lt;b&amp;gt;NOTE:&amp;lt;/b&amp;gt; Your router should be configured to forward port &amp;lt;i&amp;gt;443&amp;lt;/i&amp;gt; to this port.  If your router doesn't allow setting the destination/internal IP address, this &amp;lt;b&amp;gt;&amp;lt;i&amp;gt;must&amp;lt;/i&amp;gt;&amp;lt;/b&amp;gt; be set to &amp;lt;b&amp;gt;443&amp;lt;/b&amp;gt;.&amp;lt;br&amp;gt;&amp;lt;b&amp;gt;NOTE:&amp;lt;/b&amp;gt; This applies only when &amp;lt;i&amp;gt;Network Type&amp;lt;/i&amp;gt; is set to &amp;lt;i&amp;gt;Bridge&amp;lt;/i&amp;gt;.  For other network types, port 4443 should be used instead." Type="Port" Display="always" Required="true" Mask="false">18443</Config>
+  <Config Name="Config Log" Target="/config/log" Default="" Mode="rw" Description="Container Path: /config/log" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/dmz/goaccess/log</Config>
+  <Config Name="Config Directory" Target="/config" Default="/mnt/user/appdata/nginx-proxy-manager" Mode="rw" Description="This is where the application stores its configuration, log and any files needing persistency.&amp;lt;br&amp;gt;Container path: /config" Type="Path" Display="advanced-hide" Required="true" Mask="false">/mnt/user/appdata/NginxProxyManager</Config>
+  <Config Name="User ID" Target="USER_ID" Default="99" Mode="" Description="ID of the user the application runs as." Type="Variable" Display="advanced-hide" Required="true" Mask="false">99</Config>
+  <Config Name="Group ID" Target="GROUP_ID" Default="100" Mode="" Description="ID of the group the application runs as." Type="Variable" Display="advanced-hide" Required="true" Mask="false">100</Config>
+  <Config Name="Umask" Target="UMASK" Default="000" Mode="" Description="Mask that controls how file permissions are set for newly created files. The value of the mask is in octal notation." Type="Variable" Display="advanced" Required="false" Mask="false">000</Config>
+  <Config Name="Niceness (priority)" Target="APP_NICENESS" Default="" Mode="" Description="Priority at which the application should run.  A niceness value of -20 is the highest priority and 19 is the lowest priority.&amp;lt;br&amp;gt;&amp;lt;b&amp;gt;NOTE:&amp;lt;/b&amp;gt; Setting a negative value requires additional permissions.  Thus, &amp;lt;i&amp;gt;&amp;lt;b&amp;gt;--cap-add=SYS_NICE&amp;lt;/b&amp;gt;&amp;lt;/i&amp;gt; must be added in &amp;lt;i&amp;gt;Extra Parameters&amp;lt;/i&amp;gt; (shown when &amp;lt;i&amp;gt;Advanced View&amp;lt;/i&amp;gt; is enabled)." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="Disable IPv6" Target="DISABLE_IPV6" Default="0" Mode="" Description="When set to '1', IPv6 support is disabled." Type="Variable" Display="advanced" Required="false" Mask="false">0</Config>
+</Container>

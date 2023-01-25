@@ -1,0 +1,226 @@
+<?xml version="1.0" standalone="yes"?>
+<!DOCTYPE PLUGIN [
+<!ENTITY name "dynamix.cache.dirs">
+<!ENTITY author "Bergware">
+<!ENTITY version "2020.08.03">
+<!ENTITY launch "Settings/FolderCachingSettings">
+<!ENTITY pluginURL "https://raw.githubusercontent.com/bergware/dynamix/master/unRAIDv6/&name;.plg">
+<!ENTITY source "/boot/config/plugins/&name;/&name;">
+<!ENTITY MD5 "6ac7d45b0a76b963713ec7b5487ff234">
+]>
+<PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" min="6.4.0" support="http://lime-technology.com/forum/index.php?topic=36543.0">
+
+<CHANGES>
+##&name;
+
+###&version;
+- fixed regression error in cache_dirs
+
+###2020.08.01
+- fixed multi cache pool support
+- logrotate updates by Alex R. Berg
+- never include Unassigned Devices (UD) shares
+
+###2020.06.17
+- updated multi-language support
+
+###2020.05.10
+- updated multi-language support
+
+###2020.03.31
+- added multi-language support
+- added multi cache pool support
+- updated cache_dirs script by Alex R. Berg
+
+###2018.11.18
+- Merged updates from Alex R. Berg
+
+###2018.11.14
+- Updated help of plugin-page
+
+###2018.10.30
+- Added minDepth parameter to adaptive scan
+
+###2018.10.29
+- Added logrotate for cache-dirs so its crazy spamming debuggingly logs does not overflow user memory-mapped root (when logs are enabled)
+
+###2018.10.14
+- fixed service not starting upon system reboot
+- minimum Unraid version 6.4
+
+###2018.08.27
+- fixed folders with parentheses and brackets in their name not working in include/exclude list
+
+- **next modifications and enhancements are courtesy of Alex R. Berg**
+- updated FolderCaching page with extensive help and new options
+- added cache_dirs directly to txz, to avoid mismatch between plugin and another cache_dirs repository
+
+###2016.08.26
+- fixed folders and files permissions
+- added minimum unRAID version 6.1.9
+
+###2016.01.12
+- changed maxdepth setting to adaptive depth setting
+- updated version of cache_dirs script v2.1.1
+
+###2015.12.17
+- updated version of cache_dirs script v2.1.0
+- removed obsolete v5 options from GUI
+
+###2015.12.14
+- added unRAID version check. Only version 6.1 or higher is allowed
+- updated consistency of PLG file
+
+###2015.12.13
+- changed .txz file naming to support consistent package upgrading
+- updated rc.cache_dirs script (start | stop | restart)
+- moved to cache_dirs script maintained by Alex R. Berg
+
+###2015.12.11
+- more refinement in stopping cache_dirs and its child processes (thanks dlandon)
+
+###2015.12.10
+- kill child processes as needed when cache_dirs script is stopped
+
+###2015.12.09
+- improved stopping of cache_dirs script (thanks dlandon)
+
+###2015.09.23
+- correction in PLG file
+
+###2015.09.04
+- corrected missing folder selection for include and exclude list
+
+###2015.08.14
+- corrected regression error in cache_dirs script path reference
+
+###2015.08.13
+- adhere new security policy in unRAID v6.1 (please reboot after upgrade)
+
+###2015.08.08
+- made plugin compatible with unRAID version 6.0 and 6.1
+
+###2015.06.27
+- introduced new logo (thanks Zonediver)
+- removed utilities page (now standard included with Dynamix webGui)
+- removed Reset button (now controlled by Dynamix webGui)
+- changed behavior of Default button (immediate reset)
+- changed behavior of enable/disable fields
+
+###2015.04.28
+- added Reset button on settings page
+- fixed enabling/disabling of buttons
+
+###2015.04.11
+- included online help information
+- removed 'All' option from excluded/included folder selection
+
+###2015.02.14
+- fixed cache_dirs startup after system reboot
+
+###2015.01.22
+- version update for webGui 2015.01.21
+
+###2014.12.07
+- changed stop event to 'stopping_svcs'
+
+###2014.12.03
+- fixed failed download of cache_dirs upon reboot
+
+###2014.11.28
+- initial release for unRAID v6
+</CHANGES>
+
+<!--
+Copyright 2020, Bergware International
+Dynamix Folder Caching - Store names in memory to avoid disk spin-ups. Makes use of cache_dirs script written by Joe L. and updated by Alex R. Berg
+-->
+
+<!-- PRE-INSTALL SCRIPT -->
+<FILE Run="/bin/bash">
+<INLINE>
+# Stop service
+/usr/local/emhttp/plugins/&name;/scripts/rc.cachedirs stop 2&gt;/dev/null
+
+# Remove old 'source' packages
+MD5=$(md5sum &source;.txz 2&gt;/dev/null|grep -Po '^\S+')
+if [[ $MD5 != &MD5; ]]; then
+  rm -f &source;*.txz
+fi
+</INLINE>
+</FILE>
+
+<!-- SOURCE PACKAGE -->
+<FILE Name="&source;.txz" Run="upgradepkg --install-new --reinstall">
+<URL>https://raw.githubusercontent.com/bergware/dynamix/master/archive/&name;.txz</URL>
+<MD5>&MD5;</MD5>
+</FILE>
+
+<!-- WORKAROUND -->
+<FILE Name="/tmp/start_service" Mode="0770">
+<INLINE>
+#!/bin/bash
+/usr/local/emhttp/plugins/&name;/scripts/rc.cachedirs start
+</INLINE>
+</FILE>
+
+<!-- POST-INSTALL SCRIPT -->
+<FILE Run="/bin/bash">
+<INLINE>
+cfg=&source;.cfg
+if [[ ! -e $cfg ]]; then
+  cfg=/usr/local/emhttp/plugins/&name;/default.cfg
+fi
+
+# get unRAID key
+getkey(){
+  local mdcmd=/proc/mdstat
+  if [[ -e $mdcmd ]]; then
+    local key=$1
+    grep -Po "^$key=\K.*" $mdcmd
+  fi
+}
+
+# Start service
+enable=$(grep -Po '^service="\K[^"]+' $cfg)
+conf=/etc/cache_dirs.conf
+if [[ $enable -eq 1 ]]; then
+  if [[ ! -e $conf ]]; then
+    grep -Po '^options="\K.*' $cfg|sed -n 'G;s:"\n$::;p' &gt;$conf
+  fi
+  if [[ $(getkey mdState) == STARTED ]]; then
+    at -M -f /tmp/start_service now 2&gt;/dev/null
+  fi
+fi
+rm -f /tmp/start_service
+
+echo ""
+echo "-----------------------------------------------------------"
+echo " Plugin &name; is installed."
+echo " This plugin requires Dynamix webGui to operate"
+echo " Copyright 2020, Bergware International"
+echo " Version: &version;"
+echo "-----------------------------------------------------------"
+echo " The included cache_dirs script is a third party script"
+echo " Copyright by the respective owner and maintainers"
+echo "-----------------------------------------------------------"
+echo ""
+</INLINE>
+</FILE>
+
+<!-- REMOVE SCRIPT -->
+<FILE Run="/bin/bash" Method="remove">
+<INLINE>
+# Stop service
+/usr/local/emhttp/plugins/&name;/scripts/rc.cachedirs stop
+
+# Remove plugin related files
+rm -rf /boot/config/plugins/&name;
+rm -f /usr/local/emhttp/plugins/&name;/scripts/cache_dirs
+
+# Uninstall the 'source' package
+removepkg &name;
+</INLINE>
+</FILE>
+
+</PLUGIN>

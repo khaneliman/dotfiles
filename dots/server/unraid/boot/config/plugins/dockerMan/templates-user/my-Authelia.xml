@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>Authelia</Name>
+  <Repository>authelia/authelia</Repository>
+  <Registry>https://hub.docker.com/r/authelia/authelia/</Registry>
+  <Network>khaneproxy</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://discord.gg/VWAG7rZ</Support>
+  <Project>https://github.com/authelia/authelia</Project>
+  <Overview>
+    Authelia is an open-source authentication and authorization server providing 2-factor authentication and single sign-on (SSO) for your applications via a web portal. It acts as a companion of reverse proxies like nginx, Traefik or HAProxy to let them know whether queries should pass through. Instructions: https://github.com/ibracorp/authelia.
+    Our docs can be found at https://docs.ibracorp.io
+  </Overview>
+  <Category>Security: Tools:</Category>
+  <WebUI>http://[IP]:[PORT:9091]/</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/ibracorp/unraid-templates/master/authelia/authelia.xml</TemplateURL>
+  <Icon>https://i.imgur.com/DCn2yiv.png</Icon>
+  <ExtraParams>--restart unless-stopped --memory=100M</ExtraParams>
+  <PostArgs/>
+  <CPUset>2,8</CPUset>
+  <DateInstalled>1635399185</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>&#xD;
+    Authelia is an open-source authentication and authorization server providing 2-factor authentication and single sign-on (SSO) for your applications via a web portal. It acts as a companion of reverse proxies like nginx, Traefik or HAProxy to let them know whether queries should pass through. Instructions: https://github.com/ibracorp/authelia.&#xD;
+    Our docs can be found at https://docs.ibracorp.io&#xD;
+  </Description>
+  <Networking>
+    <Mode>khaneproxy</Mode>
+    <Publish>
+      <Port>
+        <HostPort>9091</HostPort>
+        <ContainerPort>9091</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/appdata/Authelia</HostDir>
+      <ContainerDir>/config</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment>
+    <Variable>
+      <Value>99</Value>
+      <Name>PUID</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>100</Value>
+      <Name>PGID</Name>
+      <Mode/>
+    </Variable>
+  </Environment>
+  <Labels/>
+  <Config Name="Authelia Web UI" Target="9091" Default="9091" Mode="tcp" Description="This is the Web UI Port, and is used to access the server gui." Type="Port" Display="always" Required="true" Mask="{8}">9091</Config>
+  <Config Name="AppData Config Path" Target="/config" Default="/mnt/user/appdata/authelia" Mode="rw" Description="Container Path: /config" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/Authelia</Config>
+  <Config Name="PUID" Target="PUID" Default="" Mode="" Description="PUID" Type="Variable" Display="advanced" Required="false" Mask="false">99</Config>
+  <Config Name="PGID" Target="PGID" Default="" Mode="" Description="PGID" Type="Variable" Display="advanced" Required="false" Mask="false">100</Config>
+</Container>

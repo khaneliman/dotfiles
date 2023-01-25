@@ -1,0 +1,25 @@
+services:
+  TimeMachine:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://upload.wikimedia.org/wikipedia/de/f/f4/Time_Machine_%28Apple%29_Logo.png'
+      net.unraid.docker.webui: ''
+      net.unraid.docker.shell: ''
+  nextcloud:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/nextcloud-icon.png'
+      net.unraid.docker.webui: 'https://[IP]:[PORT:443]/'
+      net.unraid.docker.shell: ''
+  Krusader:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/ich777/docker-templates/master/ich777/images/krusader.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:8080]/vnc.html?autoconnect=true'
+      net.unraid.docker.shell: ''
+  Czkawka:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/jlesage/docker-templates/master/jlesage/images/czkawka-icon.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:5800]'
+      net.unraid.docker.shell: ''

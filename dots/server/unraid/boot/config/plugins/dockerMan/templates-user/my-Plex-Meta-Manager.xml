@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>Plex-Meta-Manager</Name>
+  <Repository>meisnate12/plex-meta-manager</Repository>
+  <Registry>https://hub.docker.com/r/meisnate12/plex-meta-manager/</Registry>
+  <Network>khaneproxy</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/meisnate12/Plex-Meta-Manager/wiki/unRAID-Installation</Support>
+  <Project>https://github.com/meisnate12/Plex-Meta-Manager/wiki/</Project>
+  <Overview>
+    Python script to update metadata and automatically build collections.
+    Follow instructions here to configure and use this docker.
+    https://github.com/meisnate12/Plex-Meta-Manager/wiki/unRAID-Installation
+  </Overview>
+  <Category>Tools: Status:Stable</Category>
+  <WebUI/>
+  <TemplateURL>https://raw.githubusercontent.com/Data-Monkey/docker-templates/master/Data-Monkey/plex-meta-manager.xml</TemplateURL>
+  <Icon/>
+  <ExtraParams/>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1637724177</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>&#xD;
+    Python script to update metadata and automatically build collections.&#xD;
+    Follow instructions here to configure and use this docker.&#xD;
+    https://github.com/meisnate12/Plex-Meta-Manager/wiki/unRAID-Installation&#xD;
+  </Description>
+  <Networking>
+    <Mode>khaneproxy</Mode>
+    <Publish/>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/appdata/Plex-Meta-Manager</HostDir>
+      <ContainerDir>/config</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment>
+    <Variable>
+      <Value>6:00</Value>
+      <Name>PMM_TIME</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>=</Value>
+      <Name>PMM_DIVIDER</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>200</Value>
+      <Name>PMM_WIDTH</Name>
+      <Mode/>
+    </Variable>
+  </Environment>
+  <Labels/>
+  <Config Name="Time to Run" Target="PMM_TIME" Default="6:00" Mode="" Description="Container Variable: PMM_TIME" Type="Variable" Display="always" Required="false" Mask="false">6:00</Config>
+  <Config Name="Divider Character" Target="PMM_DIVIDER" Default="" Mode="" Description="Container Variable: PMM_DIVIDER" Type="Variable" Display="always" Required="false" Mask="false">=</Config>
+  <Config Name="Screen Width" Target="PMM_WIDTH" Default="" Mode="" Description="Container Variable: PMM_WIDTH" Type="Variable" Display="always" Required="false" Mask="false">200</Config>
+  <Config Name="Config" Target="/config" Default="" Mode="rw" Description="Container Path: /config" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/Plex-Meta-Manager</Config>
+</Container>

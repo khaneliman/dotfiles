@@ -1,0 +1,703 @@
+<?xml version="1.0" standalone="yes"?>
+<!DOCTYPE PLUGIN [
+<!ENTITY name "ssh">
+<!ENTITY author "docgyver">
+<!ENTITY version "2022.01.06.1">
+<!ENTITY category "Network Services">
+<!ENTITY pluginURL "https://raw.githubusercontent.com/docgyver/unraid-v6-plugins/master/&name;.plg">
+<!ENTITY packageURL "https://github.com/docgyver/unraid-v6-plugins/releases/download/&name;">
+<!ENTITY devplugin "false">
+]>
+<PLUGIN name="&name;" author="&author;" version="&version;" category="&category;" pluginURL="&pluginURL;" support="http://lime-technology.com/forum/index.php?topic=47289.0">
+
+<CHANGES>
+###2021.10.30###
+- Added code to check for unRaid 6.9 and modify behavior
+###2019.11.26###
+- BugFix: Fixed Display of Online Version in the UI
+- BugFix: Move ssh.cfg initialization to buttonstart() from write_config(). Was causing UI changes to be ignored.
+- Remove ssh.cfg creation from Plugin package. The buttonstart() function now does this.
+- BugFix: Only update sshd_config on lines with Keyword at the begining of the line. (Ignore in Block comments)
+###2019.11.10###
+- Changed rc.ssh:write_config() to read values from /etc/ssh/sshd_config before updating /boot/config/plugins/ssh.cfg
+- Changed default value of PermitRootLogin to "yes" in case it is not set by write_config
+
+</CHANGES>
+
+<!--
+Copyright 2014, Rich Manton (overbyrn)
+Copyright 2016, Todd Pike (docgyver)
+
+This Plugin extends the core SSH support built into unRAID v6.
+
+Plugin file locations:
+ /boot/config/plugins/ssh.plg      			                            # this file
+
+ /boot/config/plugins/ssh/putty-0.64-<plat>-1rj.txz                     # putty package (required for puttygen)
+ /boot/config/plugins/ssh/ssh.cfg                                       # non-volatile configuration
+ /boot/config/plugins/ssh/read_me.txt                                   # Help File
+
+ /etc/rc.d/rc.ssh                                                       # plugin control script
+
+ /usr/local/emhttp/plugins/ssh/ssh.page                                 # page file for webGui menu system
+ /usr/local/emhttp/plugins/ssh/ssh.php                                  # webGui page
+ /usr/local/emhttp/plugins/ssh/ssh.png                                  # plugin icon file
+ /usr/local/emhttp/plugins/ssh/device_status.png                        # plugin webgui image file
+ /usr/local/emhttp/plugins/ssh/new_config.png                           # plugin webgui image file
+ /usr/local/emhttp/plugins/ssh/information.png                          # plugin webgui image file
+
+ /var/run/ssh/ssh.pid                                                   # run-time pid file
+
+-->
+
+<FILE Name="/boot/config/plugins/&name;/read_me.txt">
+<URL>&packageURL;/read_me.txt</URL>
+</FILE>
+
+<FILE Run="/bin/bash" Method="install">
+<INLINE>
+if [ -d /usr/local/emhttp/plugins/&name; ]; then
+  rm -r /usr/local/emhttp/plugins/&name;
+fi;
+if [ -f /etc/rc.d/rc.&name; ]; then
+  rm -f /etc/rc.d/rc.&name;
+fi;
+
+# get a baseline/default sshd_config from bzroot
+mkdir -p /boot/config/plugins/ssh/baseline
+<![CDATA[
+dd if=/boot/bzroot bs=512 skip=$(cpio -ivt -H newc < /boot/bzroot 2>&1 > /dev/null | awk '{print $1}') | xzcat | (cd /boot/config/plugins/ssh/baseline ; cpio -i -d -H newc --no-absolute-filenames etc/ssh/sshd_config )
+]]>
+
+# make setting HOME in /etc/profile contingent on UID less than 1000
+<![CDATA[
+sed -i -e '/^export HOME=\/root$/s/^/[ $(id -u) -lt 1000 ] \&\& /' /etc/profile
+]]>
+
+# add a group to control user login
+groupadd -f ssh-allow
+
+if [ ! -f /boot/config/plugins/&name;/putty-0.64-$(/usr/bin/uname -m)-1rj.txz ]; then
+  NETCHECK=$(timeout 5 wget --no-check-certificate -qST4 --spider &pluginURL; 2&gt;&amp;1 | grep HTTP | tail -1 | cut -f1 | awk '{print $NF}')
+  if [ "$NETCHECK" == "OK" ]; then
+    wget --no-check-certificate -q -P /boot/config/plugins/&name; &packageURL;/putty-0.64-$(/usr/bin/uname -m)-1rj.txz
+  else
+    exit 1
+  fi
+fi
+/sbin/upgradepkg --install-new /boot/config/plugins/&name;/putty-0.64-$(/usr/bin/uname -m)-1rj.txz
+</INLINE>
+</FILE>
+
+<!--The 'remove' script.-->
+<FILE Run="/bin/bash" Method="remove">
+<INLINE>
+rm -r /usr/local/emhttp/plugins/&name;
+rm -f /etc/rc.d/rc.&name;
+rm -rf /boot/config/plugins/&name;
+</INLINE>
+</FILE>
+
+<FILE Name="/usr/local/emhttp/plugins/&name;/&name;.png" Type="base64">
+<INLINE>
+
+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
+</INLINE>
+</FILE>
+
+<FILE Name="/usr/local/emhttp/plugins/&name;/icons/&name;.png" Type="base64">
+<INLINE>
+iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAEnSAABJ0gGoRYr4AAAC0UlEQVR42j2STWhdZRCGn/nOuefcNCZNW67FIloUoWCh/mAXLSoUCVkINitxUxRUKIIIulBC8AasLhVBRAQX7tWNoLgQavzBVcUiGKpttfTG6G2b3JR77jnfNzMuTuhqhlm88847jzh9ZOnboyzeNwdAo4KqkABTISVoRNp+Z6YKFzYblle/E14/9vDgna++nKPc7Ygrboaa4ZZwNcwUM8U1oaq4JVQrYvPQLytv5Jw6vGeO7u7v+ev8/JkXLwFgLuBgtNURAAQnD7a49NzmMicev/OBe3o5dRIHn//xrZ8eWzolG9ys15p/K/64vouLN6ZZH00xnHQZVSWjuiRZ+OL0e7OvfHismmAeABx3suBX2Z58xtMnPy4Wj9Lb1aAqqAtY68oMAsbNWDRoiqgHahXFjXHM/ty6Gg9ffvvzv9kajXpnXubCjVnO/XM7a9f2sT66jSp2CO0tEbUx0QIm4phTWcbvw+kfDr66MKJqZl86fvbgawtXDn307G9sbM8w0Q4uQggGTsQ0op6TEoYbKQYu1dPHPzk54NeNI3RDc/mJ9/dTZIluJ1FkiUKUXBxDIqpMouSoiOFGrYHVKwdYu7af6aKmGyLgFLlShMRU1ooAuNOQlDqGHE0obiQLDLZnmelMCMEoQyIAnUwpgtLNE0EcMwGXBlXGFnJURTGjjoGpLEIWCeKUuYI7eeat9dAu2eFkQkrEKDkKiil3zY2ZKZv2VQHyYASMsANWsnBLYKaolWTU1magmH59YvmRhQPvrjKsCtTkFgONBpIHkgpJAwaPPjNfGXJvm8Gn5wZrTw4Hd7Ond/5Q/6lI0oRqg2mDpoaUIlEnaKpJaUJMFU0aMa755uJQnD5y5IP7eeHBfWxVJZtaUtUlVSypY46FACiFRMqsochqpvKGnwcTP/v8qjh9AFZYCX0IsDeD69leyI2Wu02wHth/kOAOhXV13jSA/wGHsbiARHiEAQAAAABJRU5ErkJggg==
+</INLINE>
+</FILE>
+
+<FILE Name="/usr/local/emhttp/plugins/&name;/device_status.png" Type="base64">
+<INLINE>
+iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAN1wAADdcBQiibeAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAFJSURBVDiNtZI9awJBEIafVctUSv6KvUUCEpPiDhsFsT2CVcSt5OqzlWBvKzb5QDCCvX8lYL2zsm4alTtRMYRM987OPLzzssp7z1+qcKo5m81u8/n8s1KqDuC9nzjnXqvV6vdVAOecds69pFoxcAN0TwKm0+kSWG+326Rer69EpA2glLrbOfgC2kB3MpmUc7mcBophGFZyACKiRYTNZqN3uiQiBEGwCIJgISKISAnAWquNMYiIPjhoNBorINzbMsZkbKZ1s9kM028FgNFo9AE8AJ9RFNVEJANI6+PZAkAURbVzC8f6eLYAMBgMyt57DRS11pVLgCRJlsBaKZX0er3VIURrLcaYfYiZpbQ2xmhrbTbEfr+fCeaSgziOM4Grf/nKnU7nJHU4HKqrACIy997fp3tKqfmp2bMntFqtN+BxJ9/H4/HTrwDX1g/Ee8aNyc3z/wAAAABJRU5ErkJggg==
+</INLINE>
+</FILE>
+
+<FILE Name="/usr/local/emhttp/plugins/&name;/new_config.png" Type="base64">
+<INLINE>
+iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAN1wAADdcBQiibeAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAHcSURBVDiNpdKxa5NhEAbwX4uDUEFEpzo6FNShIohD0SVQwQyVDEJ0MEMxoNiohYIFhUqQYizRLNEPWxyMoGaRKiLBRUUd/AMqOAhVBF1Epd/hUId+FZF0EA9eXu7uuXuf97nrWV5e9j+2bq1Ep9PpQz8+5XK5b51OZwiXcC+Xy11bxfV0YzA/P38Cl/E1u6/jDb5jfz6f/9GVQbvdTrAXO1HD+UKhsNRut3MYwMlCofAjw1ZR+82g1WptwnNsx91isXh4tXGr1dqKRTzDKYzgAnb1zM7O9uIIzmAQd3EII6VS6RHMzc314T02/0H4YqlUOr8uIrbiCrbgeLlcvtFsNs/hfrPZfImx7Fub8Rp3sFAulx//FrFerw8iwb5KpbJUr9fXYyl76QOGMuozlUpl8U/duk4BpqenZ3A6cxcwNDEx8eVvXG/XakTE2Yi4HREiYiAiHk5NTfX9jevKYHJysh83cQy3MJylniBfrVZ/rtlgfHx8g5VxDeKVlZE9wJ4M0sLRWq22TJdVjohmVgy7sREHrezIAIr4jEpXDdI03ZGmqexcbTQabxuNxpc0TYfTNP2YxcdGR0e3dW0QEcci4kVEPI2IqdV4kiTvI+JARCxGxIUkSd6tKeK/2C+l7dZWE4J7LwAAAABJRU5ErkJggg==
+</INLINE>
+</FILE>
+
+<FILE Name="/usr/local/emhttp/plugins/&name;/information.png" Type="base64">
+<INLINE>
+iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAKcSURBVDjLpZPLa9RXHMU/d0ysZEwmMQqZiTaP0agoaKGJUiwIxU0hUjtUQaIuXHSVbRVc+R8ICj5WvrCldJquhVqalIbOohuZxjDVxDSP0RgzyST9zdzvvffrQkh8tBs9yy9fPhw45xhV5X1U8+Yhc3U0LcEdVxdOVq20OA0ooQjhpnfhzuDZTx6++m9edfDFlZGMtXKxI6HJnrZGGtauAWAhcgwVnnB/enkGo/25859l3wIcvpzP2EhuHNpWF9/dWs/UnKW4EOGDkqhbQyqxjsKzMgM/P1ymhlO5C4ezK4DeS/c7RdzQoa3x1PaWenJjJZwT9rQ1gSp/js1jYoZdyfX8M1/mp7uFaTR8mrt29FEMQILr62jQ1I5kA8OF59jIItVA78dJertTiBNs1ZKfLNG+MUHX1oaURtIHEAOw3p/Y197MWHEJEUGCxwfHj8MTZIcnsGKxzrIURYzPLnJgbxvG2hMrKdjItjbV11CYKeG8R7ygIdB3sBMFhkem0RAAQ3Fuka7UZtRHrasOqhYNilOwrkrwnhCU/ON5/q04vHV48ThxOCuoAbxnBQB+am65QnO8FqMxNCjBe14mpHhxBBGCWBLxD3iyWMaYMLUKsO7WYH6Stk1xCAGccmR/Ozs/bKJuXS39R/YgIjgROloSDA39Deit1SZWotsjD8pfp5ONqZ6uTfyWn+T7X0f59t5fqDhUA4ry0fYtjJcWeZQvTBu4/VqRuk9/l9Fy5cbnX+6Od26s58HjWWaflwkusKGxjm1bmhkvLXHvh1+WMbWncgPfZN+qcvex6xnUXkzvSiYP7EvTvH4toDxdqDD4+ygT+cKMMbH+3MCZ7H9uAaDnqytpVX8cDScJlRY0YIwpAjcNcuePgXP/P6Z30QuoP4J7WbYhuQAAAABJRU5ErkJggg==
+</INLINE>
+</FILE>
+
+<FILE Name="/usr/local/emhttp/plugins/&name;/README.md">
+<INLINE>
+**&name; Plugin**
+
+This plugin extends upon the core SSH functionality built into unRAID 6
+</INLINE>
+</FILE>
+
+<FILE Name="/usr/local/emhttp/plugins/&name;/&name;.page">
+<INLINE>
+<![CDATA[
+Menu="NetworkServices"
+Title="SSH"
+Icon="ssh.png"
+---
+<?PHP
+$ssh_cfg = parse_ini_file( "/boot/config/plugins/ssh/ssh.cfg");
+$ssh_running = file_exists( "/var/run/sshd.pid") ? "yes" : "no";
+
+//Get local plugin file version
+$ssh_localplg = shell_exec('grep "<\!ENTITY version" /boot/config/plugins/ssh.plg | cut -d\" -f2');
+
+//Get remote plugin file version.  Uses Limetech plugin php to perform this function
+$ssh_remoteplg = shell_exec("/usr/local/sbin/plugin check ssh.plg | tail -1");
+
+//create array of users from passwd file where their UID is greater than or equal to 1000.  ie. assumed to be non-system users
+$useropts = array();
+$command = "awk -F':' '{ if($3 >= 1000) print $1 }' /etc/passwd";
+exec($command, $useropts);
+
+//create array of users from cfg file. explode handles comma separated in case of multi values
+$selectedsshusers  = explode(',', $ssh_cfg['USERLIST']);
+
+//get version of SSH.  Note: ssh reports version to stderr, so redirect stderr (2) to stdout (1)
+$sshversion = shell_exec("/usr/bin/ssh -V 2>&1");
+
+?>
+
+<html>
+<head></head>
+<body>
+
+<div style="width: 49%; float:left; border: 0px solid black;">
+  <div id="title">
+    <span class="left">Status:&nbsp;<img src='/plugins/ssh/device_status.png'>
+      <?if ($ssh_running=="yes"):?>
+        <span class="green"><b>SSH is RUNNING</b></span>
+      <?else:?>
+        <span class="red"><b>SSH is NOT RUNNING</b></span>
+      <?endif;?>
+    </span>
+  </div>
+
+  <div style="border: 0px solid black;">
+    <span class="left">
+      <p>
+        OpenSSH Application Version: <span class="green-text"><b><?=$sshversion?></b></span>
+      </p>
+	</span>
+  </div>
+
+  <br></br>
+
+  <div style="border: 0px solid black;">
+    <table>
+      <tr style="font-weight:bold; color:#333333; background:#F0F0F0; text-shadow:0 1px 1px #FFFFFF;">
+        <td>Plugin</td>
+        <td>Local Version</td>
+        <td>Online Version</td>
+      </tr>
+      <tr style="font-weight:bold; background:#FFFFFF;">
+        <td>SSH Plugin</td>
+        <td>
+          <span class="green-text"><?=$ssh_localplg?></span>
+        </td>
+        <td>
+          <span class="green-text"><?=$ssh_remoteplg?></span>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <br></br>
+
+  <div>
+    <table>
+      <tr style="font-weight:bold; color:#333333; background:#F0F0F0; text-shadow:0 1px 1px #FFFFFF;">
+        <td colspan="2">Control Actions</td>
+      </tr>
+
+      <?if ($ssh_running=="yes"):?>
+        <tr>
+        <td width="30%">
+          <form name="ssh_start_stop" method="POST" action="/update.htm" target="progressFrame">
+            <input type="hidden" name="cmd" value="/plugins/ssh/scripts/rc.ssh">
+            <input type="hidden" name="arg1" value="stop">
+            <input type="submit" name="runCmd" value="Stop">
+          </form>
+        </td>
+        <td>Stop SSH Daemon</td>
+        </tr>
+        <tr>
+        <td width="30%">
+          <form name="ssh_restart" method="POST" action="/update.htm" target="progressFrame">
+            <input type="hidden" name="cmd" value="/plugins/ssh/scripts/rc.ssh">
+            <input type="hidden" name="arg1" value="restart">
+            <input type="submit" name="runCmd" value="Restart">
+          </form>
+        </td>
+        <td>Restart SSH Daemon</td>
+        </tr>
+      <?else:?>
+        <tr>
+        <td width="30%">
+          <form name="ssh_start" method="POST" action="/update.htm" target="progressFrame">
+            <input type="hidden" name="cmd" value="/plugins/ssh/scripts/rc.ssh">
+            <input type="hidden" name="arg1" value="buttonstart">
+            <input type="submit" name="runCmd" value="Start">
+          </form>
+        </td>
+        <td>Start SSH Daemon</td>
+        </tr>
+      <?endif;?>
+    </table>
+  </div>
+  <br></br>
+
+  <br></br>
+  <br></br>
+</div>
+
+<div style="width: 49%; float:right; border: 0px solid black;">
+  <div id="title">
+    <span class="left">Configuration:&nbsp;<img src='/plugins/ssh/new_config.png'></span>
+  </div>
+  <form name="ssh_settings" id="ssh_settings" method="POST" action="/update.htm" target="progressFrame" onsubmit="return validateForm();">
+  <!--note to self: the /return/ in the onsubmit event is important as without it, the submit action is still processed-->
+    <input type="hidden" name="cmd" value="/plugins/ssh/scripts/rc.ssh">
+    <input type="hidden" name="arg3" id="arg3" maxlength="60" value="wibble">
+
+    <table class="settings">
+      <tr>
+      <td>Enable SSH Service:</td>
+      <td>
+        <select name="arg1" id="arg1" size="1">
+          <?=mk_option($ssh_cfg['SERVICE'], "disable", "No");?>
+          <?=mk_option($ssh_cfg['SERVICE'], "enable", "Yes");?>
+        </select>
+      </td>
+      </tr>
+      <tr>
+      <td>SSH Port:</td>
+      <td>
+        <input type="text" name="arg2" id="arg2" maxlength="5" style="width: 20%;height: 100%;" value="<?=$ssh_cfg['PORT'];?>">
+      </td>
+      </tr>
+      <tr>
+      <td>Available options for SSH Users:</td>
+      <td>
+        <select name="sshusers" id="sshusers" multiple="multiple" size="4" style="width: 50%;height: 100%;">
+          <? foreach ($useropts as $users) { ?>
+          <option <? print (in_array($users,$selectedsshusers)) ? "selected" : "" ; ?> value="<?=$users;?>">
+          <? print $users; ?>
+          </option>
+          <? } ?>
+        </select>
+      </td>
+      </tr>
+      <tr>
+      <td>Permit Root Login:</td>
+      <td>
+        <select name="arg4" id="arg4" size="1">
+          <?=mk_option($ssh_cfg['PERMITROOTLOGIN'], "yes", "Yes");?>
+          <?=mk_option($ssh_cfg['PERMITROOTLOGIN'], "no", "No");?>
+        </select>
+      </td>
+      </tr>
+      <tr>
+      <td>Max Auth Retries:</td>
+      <td>
+        <input type="text" name="arg5" id="arg5" maxlength="5" value="<?=$ssh_cfg['MAXAUTHTRIES'];?>">
+      </td>
+      </tr>
+      <tr>
+      <td>Password Authentication:</td>
+      <td>
+        <select name="arg6" id="arg6" size="1">
+          <?=mk_option($ssh_cfg['PASSWORDAUTHENTICATION'], "yes", "Yes");?>
+          <?=mk_option($ssh_cfg['PASSWORDAUTHENTICATION'], "no", "No");?>
+        </select>
+      </td>
+      </tr>
+      <tr>
+      <td>Permit Empty Passwords:</td>
+      <td>
+        <select name="arg7" id="arg7" size="1">
+          <?=mk_option($ssh_cfg['PERMITEMPTYPASSWORDS'], "yes", "Yes");?>
+          <?=mk_option($ssh_cfg['PERMITEMPTYPASSWORDS'], "no", "No");?>
+        </select>
+      </td>
+      </tr>
+      <tr>
+      <td>Gateway Ports:</td>
+      <td>
+        <select name="arg8" id="arg8" size="1">
+          <?=mk_option($ssh_cfg['GATEWAYPORTS'], "yes", "Yes");?>
+          <?=mk_option($ssh_cfg['GATEWAYPORTS'], "no", "No");?>
+        </select>
+      </td>
+      </tr>
+      <tr>
+    </table>
+
+    <div align="center">
+      <hr size="3" align="center" width="75%" color="grey" style="margin-top:20px;margin-bottom:18px">
+      <input type="submit" name="runCmd" value="Apply"><button type="button" onClick="done();">Done</button>
+    </div>
+  </form>
+  <br></br>
+  <br></br>
+</div>
+
+<script type="text/javascript">
+function onLoad() {
+  // do nothing
+}
+
+function validateForm() {
+  // create comma separated list of users.  empty value if no users selected
+  var sshuserVal = "";
+  var x = 0;
+  for (x = 0; x < document.getElementById('sshusers').length; x++) {
+    if (document.getElementById('sshusers')[x].selected) {
+      sshuserVal = sshuserVal + document.getElementById('sshusers')[x].value + "," ;
+      }
+    }
+  document.getElementById('arg3').value = sshuserVal.replace(/(^\s*,)|(,\s*$)/g, '');  // strip off trailing comma
+  if (document.getElementById('arg3').value == "") {
+	document.getElementById('arg3').value = "-1"
+  }
+
+  document.getElementById('arg2').disabled = false;
+  document.getElementById('arg3').disabled = false;
+  document.getElementById('arg4').disabled = false;
+  document.getElementById('arg5').disabled = false;
+  document.getElementById('arg6').disabled = false;
+  document.getElementById('arg7').disabled = false;
+  document.getElementById('arg8').disabled = false;
+  return(true);
+}
+
+function checkRUNNING(form) {
+    // dont disable arg1 which is the service enable/disable. only disable subsequent fields
+    // note: "disabled" elements do not get submitted. the below will cause these field values to be empty upon apply. a workaround is to
+    //       implement a validation function which is called upon form submit which amongst other things can re-enable the fields
+    if ("<?=$ssh_running;?>" == "yes") {
+    form.arg2.disabled = true;
+    form.arg3.disabled = true;
+    form.arg4.disabled = true;
+    form.arg5.disabled = true;
+    form.arg6.disabled = true;
+    form.arg7.disabled = true;
+    form.arg8.disabled = true;
+  }
+}
+
+onLoad();
+checkRUNNING(document.ssh_settings);
+</script>
+</body>
+</html>
+]]>
+</INLINE>
+</FILE>
+
+<FILE Name="/usr/local/emhttp/plugins/&name;/scripts/rc.&name;" Mode="0755">
+<INLINE>
+<![CDATA[
+#!/bin/bash
+# start|stop|restart|enable|disable|buttonstart ssh.
+
+CONFIG="/boot/config/plugins/ssh/ssh.cfg"
+
+# read our configuration
+source $CONFIG
+
+# get unraid Version
+read verMajor verMinor verPatch < \
+    <(source /etc/unraid-version ; echo $version | sed 's/\./ /g')
+# set version specific flags
+# Greater than 6.9?
+  [ $verMajor -gt 6 ] || [ $verMajor -eq 6 -a $verMinor -ge 9 ]
+  unraid69=$((1-$?))  # change return code so 1 is true
+
+
+ssh_start()
+{
+  # no-op if not enabled
+  if [ $SERVICE != "enable" ]; then
+    #echo "Service is not enabled!"
+    #sleep 1
+    return
+  fi
+
+  # no-op if already running
+  if [ -f /var/run/sshd.pid ]; then
+    #echo "SSH already running"
+    #sleep 1
+    return
+  fi
+
+  echo "Starting SSH..."
+  sleep 1
+
+  /usr/sbin/sshd
+
+  echo "... OK"
+  sleep 1
+}
+
+ssh_stop()
+{
+  # no-op if already running
+  if [ ! -f /var/run/sshd.pid ]; then
+    #echo "SSH already stopped"
+    #sleep 1
+    return
+  fi
+
+  echo "Stopping SSH..."
+  sleep 1
+
+  killall sshd
+
+  echo "... OK"
+  sleep 1
+}
+
+ssh_restart() {
+  if [ -r /var/run/sshd.pid ]; then
+    echo "Restarting parent listener process only. To kill every sshd process, you must use stop"
+    sleep 3
+    kill `cat /var/run/sshd.pid`
+  else
+    echo "Warning: there does not appear to be a parent instance of sshd running."
+    sleep 3
+    exit 1
+  fi
+  sleep 1
+  ssh_start
+}
+
+ssh_buttonstart()
+{
+  SERVICE=enable
+
+  read fill PORT < <(egrep "#?Port " /etc/ssh/sshd_config)
+  read fill PERMITROOTLOGIN < <(egrep "#?PermitRootLogin " /etc/ssh/sshd_config)
+  read fill MAXAUTHTRIES < <(egrep "#?MaxAuthTries " /etc/ssh/sshd_config)
+  read fill PASSWORDAUTHENTICATION < <(egrep "#?PasswordAuthentication " /etc/ssh/sshd_config)
+  read fill PERMITEMPTYPASSWORDS < <(egrep "#?PermitEmptyPasswords " /etc/ssh/sshd_config)
+  read fill GATEWAYPORTS < <(egrep "#?GatewayPorts " /etc/ssh/sshd_config)
+
+  write_config
+  ssh_start
+
+}
+
+write_config()
+{
+  echo "Updating Config..."
+  sleep 1
+
+  echo "# ssh configuration" > /boot/config/plugins/ssh/ssh.cfg
+  echo "SERVICE=\"$SERVICE\"" >> /boot/config/plugins/ssh/ssh.cfg
+  echo "PORT=\"$PORT\"" >> /boot/config/plugins/ssh/ssh.cfg
+  echo "USERLIST=\"$USERLIST\"" >> /boot/config/plugins/ssh/ssh.cfg
+  echo "PERMITROOTLOGIN=\"$PERMITROOTLOGIN\"" >> /boot/config/plugins/ssh/ssh.cfg
+  echo "MAXAUTHTRIES=\"$MAXAUTHTRIES\"" >> /boot/config/plugins/ssh/ssh.cfg
+  echo "PASSWORDAUTHENTICATION=\"$PASSWORDAUTHENTICATION\"" >> /boot/config/plugins/ssh/ssh.cfg
+  echo "PERMITEMPTYPASSWORDS=\"$PERMITEMPTYPASSWORDS\"" >> /boot/config/plugins/ssh/ssh.cfg
+  echo "GATEWAYPORTS=\"$GATEWAYPORTS\"" >> /boot/config/plugins/ssh/ssh.cfg
+  sed -i 's/^#\?AllowUsers .*/AllowUsers root/' /etc/ssh/sshd_config
+
+  # only loop thru userlist if some/one were selected in webgui.  no users selected = -1
+  if [[ $USERLIST != "-1" ]]; then
+    # Account for fact $USERLIST is one or many comma separated user names
+    USERLOOP=${USERLIST},
+    while echo $USERLOOP | grep \, &>/dev/null
+    do
+      USERTEMP=${USERLOOP%%\,*}
+      USERLOOP=${USERLOOP#*\,}
+
+      #echo "Iterating through user: $USERTEMP"
+
+      # Create home directory + .ssh subdirectoy and assign same + shell to user
+      if [ ! -d /home/$USERTEMP ]; then
+        #echo "Creating home dir: {/home/$USERTEMP} for $USERTEMP..."
+        mkdir -p /home/$USERTEMP/.ssh
+      fi
+      chown -R $USERTEMP:users /home/$USERTEMP
+      chmod -R 0755 /home/$USERTEMP
+
+      #echo "Assigning shell {/bin/bash} & home dir: {/home/$USERTEMP} to user $USERTEMP..."
+      usermod -d /home/$USERTEMP -s /bin/bash $USERTEMP 2>/dev/null
+
+      # Check for existance of "authorised_keys" file at /boot/config/plugin/ssh/{someuser}.  Copy to /home/{someuser} if found.  Enables
+      # user to authenticate with private / public key pair.
+      # NB: if file is not found, an empty directory path will be created on the flash drive, thus making it slightly easier for unraid user
+      # to see what/where to maintain key files
+      # ** IT IS CURRENTLY THE USERS RESPONSIBILITY TO PRE-GENERATE A PUBLIC/PRIVATE KEYPAIR **
+      if [ -f /boot/config/plugins/ssh/$USERTEMP/.ssh/authorized_keys ]; then
+        cp --preserve=timestamps -p /boot/config/plugins/ssh/$USERTEMP/.ssh/authorized_keys /home/$USERTEMP/.ssh/authorized_keys
+        chmod 700 /home/$USERTEMP/.ssh
+        chmod 600 /home/$USERTEMP/.ssh/authorized_keys
+        chown $USERTEMP:users /home/$USERTEMP/.ssh/authorized_keys
+      else
+        mkdir -p /boot/config/plugins/ssh/$USERTEMP/.ssh 2>/dev/null
+        # put a lil help file in each user dir, saying what to do
+        cp /boot/config/plugins/ssh/read_me.txt /boot/config/plugins/ssh/$USERTEMP/.ssh/read_me.txt 2>/dev/null
+      fi
+      if [[ $unraid69 = 1 ]]; then
+        sed -i 's/^#\?AllowUsers \(.*\)/AllowUsers \1 '$USERTEMP'/' /etc/ssh/sshd_config
+      fi
+    done
+  fi
+
+  # Pre Unraid 6.9 behavior. Ver6.9+ handles root user .ssh folder
+  if [[ $unraid69 != 1 ]]; then
+    # check if PermitRootLogin came thru as "YES", in which case check for authorized_keys file in plugin sub-dir.
+    if [[ $PERMITROOTLOGIN = "yes" ]]; then
+      [ ! -d /root/.ssh ] && mkdir /root/.ssh
+      if [ -f /boot/config/plugins/ssh/root/.ssh/authorized_keys ]; then
+  	    cp --preserve=timestamps -p /boot/config/plugins/ssh/root/.ssh/authorized_keys /root/.ssh/authorized_keys
+        chmod 700 /root/.ssh
+        chmod 600 /root/.ssh/authorized_keys
+        chown root:root /root/.ssh/authorized_keys
+      fi
+    fi
+  fi
+
+
+  # update sshd_config file with values set in webgui
+  # only update when the Keyword is find at the beginning of the line (^#\?)
+  sed -i 's/^#\?Port .*/Port '$PORT'/' /etc/ssh/sshd_config
+  sed -i 's/^#\?PermitRootLogin .*/PermitRootLogin '$PERMITROOTLOGIN'/' /etc/ssh/sshd_config
+  sed -i 's/^#\?MaxAuthTries .*/MaxAuthTries '$MAXAUTHTRIES'/' /etc/ssh/sshd_config
+  sed -i 's/^#\?PasswordAuthentication .*/PasswordAuthentication '$PASSWORDAUTHENTICATION'/' /etc/ssh/sshd_config
+  sed -i 's/^#\?PermitEmptyPasswords .*/PermitEmptyPasswords '$PERMITEMPTYPASSWORDS'/' /etc/ssh/sshd_config
+  sed -i 's/^#\?GatewayPorts .*/GatewayPorts '$GATEWAYPORTS'/' /etc/ssh/sshd_config
+
+  # preserve live /etc/sshd_config file on flash. When unRAID reboots, the standard ssh startup baked into unRAID v6 will
+  # copy all files from /boot/config/ssh to /etc/ssh. This ensures the correct config is maintained after a reboot. Failure
+  # to do this will result in the user having to go into SSH plugin webgui page, stopping and starting SSH in order to
+  # produce the same effect
+  cp -f /etc/ssh/sshd_config /boot/config/ssh/sshd_config
+
+  echo "... OK"
+  sleep 1
+}
+
+ssh_enable()
+{
+  echo "Applying Settings ($1) ..."
+  sleep 1
+
+  SERVICE="$1" #enable
+  PORT="$2"
+  USERLIST="$3"
+  PERMITROOTLOGIN="$4"
+  MAXAUTHTRIES="$5"
+  PASSWORDAUTHENTICATION="$6"
+  PERMITEMPTYPASSWORDS="$7"
+  GATEWAYPORTS="$8"
+
+  write_config
+  ssh_start
+
+  echo "... OK"
+  sleep 1
+}
+
+ssh_disable()
+{
+  echo "Applying Settings ($1) ..."
+  sleep 1
+
+  SERVICE="$1" #disable
+  PORT="$2"
+  USERLIST="$3"
+  PERMITROOTLOGIN="$4"
+  MAXAUTHTRIES="$5"
+  PASSWORDAUTHENTICATION="$6"
+  PERMITEMPTYPASSWORDS="$7"
+  GATEWAYPORTS="$8"
+
+  write_config
+  ssh_stop
+
+  echo "... OK"
+  sleep 1
+}
+
+case "$1" in
+  'start')
+    ssh_start
+  ;;
+  'stop')
+    ssh_stop
+  ;;
+  'restart')
+    ssh_restart
+  ;;
+  'enable')
+    ssh_enable $1 $2 $3 $4 $5 $6 $7 $8
+  ;;
+  'disable')
+    ssh_disable $1 $2 $3 $4 $5 $6 $7 $8
+  ;;
+  'buttonstart')
+    ssh_buttonstart
+  ;;
+  *)
+    echo "usage $0 start|stop|restart|enable|disable|buttonstart"
+esac
+]]>
+</INLINE>
+</FILE>
+
+<FILE Name="/tmp/plugin-development" Run="/bin/bash">
+<INLINE>
+if [ "&devplugin;" == "true" ]; then
+  if [ -f /boot/config/plugins/&name;.php ]; then
+    rm -f /usr/local/emhttp/plugins/&name;/&name;.php
+    ln -s /boot/config/plugins/&name;.php /usr/local/emhttp/plugins/&name;/&name;.php
+  else
+    mv /usr/local/emhttp/plugins/&name;/&name;.php /boot/config/plugins/&name;.php
+    ln -s /boot/config/plugins/&name;.php /usr/local/emhttp/plugins/&name;/&name;.php
+  fi
+  if [ -f /boot/config/plugins/rc.&name; ]; then
+    rm -f /etc/rc.d/rc.&name;
+    ln -s /boot/config/plugins/rc.&name; /etc/rc.d/rc.&name;
+  else
+    mv /etc/rc.d/rc.&name; /boot/config/plugins/rc.&name;
+    ln -s /boot/config/plugins/rc.&name; /etc/rc.d/rc.&name;
+  fi
+fi
+
+rm /tmp/plugin-development
+</INLINE>
+</FILE>
+
+<!-- POST-INSTALL SCRIPT -->
+<FILE Run="/bin/bash">
+<INLINE>
+# Update folder permissions
+chmod 755 /usr/local/emhttp/plugins/&name;
+chmod 755 /usr/local/emhttp/plugins/&name;/icons
+chmod 755 /usr/local/emhttp/plugins/&name;/scripts
+</INLINE>
+</FILE>
+
+<!--
+on install
+-->
+<FILE Run="/bin/bash">
+<INLINE>
+/usr/local/emhttp/plugins/ssh/scripts/rc.ssh buttonstart
+</INLINE>
+</FILE>
+
+</PLUGIN>

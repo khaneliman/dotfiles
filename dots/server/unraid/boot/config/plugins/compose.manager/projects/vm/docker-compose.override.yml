@@ -1,0 +1,7 @@
+services:
+  Virt-Manager:
+    labels:
+      net.unraid.docker.managed: 'composeman'
+      net.unraid.docker.icon: 'https://raw.githubusercontent.com/redvex2460/docker-templates/master/redvex2460/images/vman.png'
+      net.unraid.docker.webui: 'http://[IP]:[PORT:80]'
+      net.unraid.docker.shell: ''

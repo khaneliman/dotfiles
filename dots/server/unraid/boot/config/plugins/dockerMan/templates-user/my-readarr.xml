@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>readarr</Name>
+  <Repository>hotio/readarr:nightly</Repository>
+  <Registry>https://hub.docker.com/r/hotio/readarr</Registry>
+  <Network>khaneproxy</Network>
+  <MyIP/>
+  <Shell>bash</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://hotio.dev/discord</Support>
+  <Project>https://hotio.dev/containers/readarr</Project>
+  <Overview>Book, Magazine, Comics Ebook and Audiobook Manager and Automation (Sonarr for Ebooks). WARNING: Updates require a fresh database until further notice</Overview>
+  <Category>Downloaders: MediaApp:Books</Category>
+  <WebUI>http://[IP]:[PORT:8787]</WebUI>
+  <TemplateURL/>
+  <Icon>https://hotio.dev/webhook-avatars/readarr.png</Icon>
+  <ExtraParams>-m 500m</ExtraParams>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1635528683</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>Book, Magazine, Comics Ebook and Audiobook Manager and Automation (Sonarr for Ebooks). WARNING: Updates require a fresh database until further notice</Description>
+  <Networking>
+    <Mode>khaneproxy</Mode>
+    <Publish>
+      <Port>
+        <HostPort>8787</HostPort>
+        <ContainerPort>8787</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/appdata/readarr</HostDir>
+      <ContainerDir>/config</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/data/media/books/</HostDir>
+      <ContainerDir>/books</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/data/media/calibre</HostDir>
+      <ContainerDir>/calibre</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/data/torrents/</HostDir>
+      <ContainerDir>/data/torrents</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment>
+    <Variable>
+      <Value>99</Value>
+      <Name>PUID</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>100</Value>
+      <Name>PGID</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>002</Value>
+      <Name>UMASK</Name>
+      <Mode/>
+    </Variable>
+  </Environment>
+  <Labels/>
+  <Config Name="Host Port for 8787" Target="8787" Default="8787" Mode="tcp" Description="Container Port: 8787" Type="Port" Display="always-hide" Required="true" Mask="false">8787</Config>
+  <Config Name="Host Path for /config" Target="/config" Default="/mnt/user/appdata/readarr" Mode="rw" Description="Container Path: /config" Type="Path" Display="always-hide" Required="true" Mask="false">/mnt/user/appdata/readarr</Config>
+  <Config Name="Books" Target="/books" Default="" Mode="rw" Description="Container Path: /books" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/data/media/books/</Config>
+  <Config Name="Calibre library" Target="/calibre" Default="" Mode="rw" Description="Container Path: /calibre" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/data/media/calibre</Config>
+  <Config Name="Host Path 4" Target="/data/torrents" Default="" Mode="rw" Description="Container Path: /data/torrents" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/data/torrents/</Config>
+  <Config Name="PUID" Target="PUID" Default="99" Mode="" Description="Container Variable: PUID" Type="Variable" Display="advanced-hide" Required="false" Mask="false">99</Config>
+  <Config Name="PGID" Target="PGID" Default="100" Mode="" Description="Container Variable: PGID" Type="Variable" Display="advanced-hide" Required="false" Mask="false">100</Config>
+  <Config Name="UMASK" Target="UMASK" Default="002" Mode="" Description="Container Variable: UMASK" Type="Variable" Display="advanced-hide" Required="false" Mask="false">002</Config>
+</Container>

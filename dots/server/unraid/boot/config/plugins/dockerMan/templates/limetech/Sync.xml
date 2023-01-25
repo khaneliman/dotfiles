@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Container version="2">
+  <Date>2018-10-05</Date>
+  <Beta>False</Beta>
+  <Category>Cloud:</Category>
+  <Name>Sync</Name>
+  <Project>https://www.resilio.com/</Project>
+  <Changes>
+[center][img width='155px' src='http://d2631fvi2jdnb6.cloudfront.net/docker/limetech.png'][/center]
+
+[center][font size=4]Sync Change Log[/font][/center]
+
+[font size=3]2018.10.05[/font]
+- Updated Sync to version 2.6.1
+
+[font size=3]2018.06.12[/font]
+- Updated Sync to version 2.5.13
+
+[font size=3]2018.01.27[/font]
+- Updated Sync to version 2.5.12
+
+[font size=3]2017.10.09[/font]
+- Updated Sync to version 2.5.9
+
+[font size=3]2017.07.23[/font]
+- Updated Sync to version 2.5.6
+
+[font size=3]2017.06.12[/font]
+- Updated Sync to version 2.5.3
+
+[font size=3]2016.12.12[/font]
+- Updated Sync to version 2.4.4
+
+[font size=3]2016.12.07[/font]
+- Updated Sync to version 2.4.3
+
+[font size=3]2016.11.11[/font]
+- Updated Sync to version 2.4.2
+
+[font size=3]2016.10.30[/font]
+- Updated Sync to version 2.4.1 (Thanks Mike Weaver)
+
+[font size=3]2016.07.02[/font]
+- Updated Sync to version 2.3.8
+
+[font size=3]2016.05.07[/font]
+- Updated Sync to version 2.3.7
+
+[font size=3]2016.03.31[/font]
+- Updated Sync to version 2.3.6
+- Upgraded template to V2
+
+[font size=3]2016.02.25[/font]
+- Updated Sync to version 2.3.3
+
+[font size=3]2016.02.18[/font]
+- Updated Sync to version 2.3.2
+
+[font size=3]2016.02.04[/font]
+- Updated Sync to version 2.3.1
+- Sync log now outputs to file (/config/btsync.log) instead of docker logs
+- Disabled Debug Logging by default
+
+[font size=3]2016.01.21[/font]
+- Updated Sync to version 2.3.0
+
+[font size=3]2015.12.23[/font]
+- Updated Sync to version 2.2.7
+
+[font size=3]2015.10.31[/font]
+- Updated Sync to version 2.2.5
+
+[font size=3]2015.10.11[/font]
+- Updated Sync to version 2.2.2
+
+[font size=3]2015.06.28[/font]
+- Updated Sync to version 2.0.128
+
+[font size=3]2015.06.15[/font]
+- Initial Release (Sync version 2.0.124)
+  </Changes>
+  <Overview>
+    BitTorrent Sync, or simply - Sync - is an application for data synchronization. Its primary goal is to keep designated folder content same on 2 or more devices / computers. As soon as something changes on one computer, change (would it be changed content of a file, file renaming or deletion, etc.) should be propagated to all other computer(s) that want to keep the folder synchronized. Sync is available for a bunch of platforms, both desktop and mobile, which gives a good usage flexibility.
+  </Overview>
+  <Description>
+    BitTorrent Sync, or simply - Sync - is an application for data synchronization. Its primary goal is to keep designated folder content same on 2 or more devices / computers. As soon as something changes on one computer, change (would it be changed content of a file, file renaming or deletion, etc.) should be propagated to all other computer(s) that want to keep the folder synchronized. Sync is available for a bunch of platforms, both desktop and mobile, which gives a good usage flexibility.[br][br]
+    [b][span style='color: #E80000;']Directions:[/span][/b][br]
+    [b]/config[/b] : this is the path where BitTorrent Sync will store its configuration files.
+  </Description>
+  <Registry>https://registry.hub.docker.com/u/limetech/sync/</Registry>
+  <GitHub>https://github.com/limetech/dockerapp-sync</GitHub>
+  <Repository>limetech/sync</Repository>
+  <Support>https://forums.unraid.net/topic/38974-support-limetechs-docker-repository/</Support>
+  <BindTime>true</BindTime>
+  <Privileged>false</Privileged>
+  <Environment/>
+  <Networking>
+    <Mode>bridge</Mode>
+    <Publish>
+      <Port>
+        <HostPort>8888</HostPort>
+        <ContainerPort>8888</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+      <Port>
+        <HostPort>5555</HostPort>
+        <ContainerPort>5555</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+      <Port>
+        <HostPort>3838</HostPort>
+        <ContainerPort>3838</ContainerPort>
+        <Protocol>udp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/appdata/Sync</HostDir>
+      <ContainerDir>/config</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <WebUI>http://[IP]:[PORT:8888]/</WebUI>
+  <Icon>https://d2631fvi2jdnb6.cloudfront.net/docker/limetech/sync.png</Icon>
+
+  <Network Default="bridge">bridge</Network>
+
+  <Config Type="Port" Name="Web Interface Port" Target="8888" Default="8888" Mode="tcp" Display="always-hide" Required="true"
+       Description="This is Sync's Web UI port you can access via a web browser.">8888</Config>
+
+  <Config Type="Port" Name="TCP Data Transfer Port" Target="5555" Default="5555" Mode="tcp" Display="advanced-hide" Required="true"
+       Description="This is Sync's TCP port for data transfers.">5555</Config>
+
+  <Config Type="Port" Name="UDP Data Transfer Port" Target="3838" Default="3838" Mode="udp" Display="advanced-hide" Required="true"
+       Description="This is Sync's UDP port for data transfers.">3838</Config>
+
+  <Config Type="Path" Name="Config Storage Path" Target="/config" Default="/mnt/user/appdata/Sync" Mode="rw" Display="advanced-hide" Required="true"
+       Description="This is where Sync will store its databases and configuration.">/mnt/user/appdata/Sync</Config>
+</Container>

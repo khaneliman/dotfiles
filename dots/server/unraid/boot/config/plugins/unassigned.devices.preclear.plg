@@ -1,0 +1,290 @@
+<?xml version='1.0' standalone='yes'?>
+<!DOCTYPE PLUGIN [
+<!ENTITY name		"unassigned.devices.preclear">
+<!ENTITY author		"dlandon">
+<!ENTITY version	"2023.01.08">
+<!ENTITY launch		"Tools/Preclear">
+<!ENTITY gitURL		"https://raw.githubusercontent.com/&author;/unassigned.devices/master">
+<!ENTITY pluginURL	"&gitURL;/&name;.plg">
+<!ENTITY supportURL	"https://forums.unraid.net/topic/120567-unassigned-devices-preclear-a-utility-to-preclear-disks-before-adding-them-to-the-array/">
+<!ENTITY MD5		"94198645d0224fc0c7325ed8930ef996">
+]>
+<PLUGIN name="&name;"
+		author="&author;"
+		launch="&launch;"
+		version="&version;"
+		pluginURL="&pluginURL;"
+		support="&supportURL;"
+		icon="icon-preclear"
+		min="6.9.0">
+
+<CHANGES>
+##&name;
+- Fix: Php error in rc.diskinfo.
+- Fix: Situation where all preclear reports appear for a device.
+
+###2022.12.12
+- Fix: Php 8.1 compatibility for Unraid 6.12.
+
+###2022.09.02
+- Fix: Don't allow a preclear on a disk that Unraid does not see as Unassigned.
+
+###2022.08.19
+- Fix: Reference to GitHub repository.
+
+###2022.08.14
+- Fix: Php array error in rc.diskinfo under certain circumstances.
+- Fix: Disk incorrectly shows as 'precleared' when it is not.
+
+###2022.07.29
+- Fix: Use standard Unraid disk size display format.  Fixes where Preclear showed a 1.5TB disk as 2TB because of a rounding up issue in the preclear plugin.
+
+###2022.07.24a
+- Add: Install tmux 3.3a for Unraid 6.11.
+- Fix: Delay when starting a preclear when a disk is spun down.
+- Fix: Remove legacy code from plugin file.  It was causing an error when installing the plugin.
+
+###2022.07.11
+- Fix: Revert tmux to 3.1b for Unraid 6.10.
+
+###2022.07.10a
+- Fix: Remove the SMART self-assessment text from the SMART report.  It is confusing when trying to decide if a disk is failing.
+- Fix: UI appears to hang when stopping a single disk preclear.
+- Fix: Update tmux to 3.3a and add glibc package required by tmux.
+
+###2022.06.10
+- Fix: Preclear fix script not working.
+- Fix: Remove legacy code for language translations.
+
+###2022.05.17
+- Fix: Use the device id from devs.ini and not the id from the udev ID_MODEL and ID_SERIAL_SHORT.
+
+###2022.05.03
+- Fix: Pausing preclears fails to save resume file on flash device.
+
+###2022.04.18
+- Fix: Add additional line to SMART statistics in preclear view.
+
+###2022.03.31
+- Fix: Convert POH values that show as '22h+07m+23.077s' to hours for SMART difference comparison.
+
+###2022.03.15
+- Fix: Only write resume file to flash when absolutely necessary to minimize flash writes.
+
+###2022.03.14
+- Fix: Replace the confusing csrf token error message with fail message.  It's an incorrect message.
+- Fix: Add 'Success' dialogs where missing on certain actions.
+
+###2022.03.07
+- Fix: '/tmp/.preclear/sdX/dd_output_complete: No such file or directory' error message.
+
+###2022.03.06
+- Add: Updated plugin check.
+- Fix: Integer error in prelcear script.
+
+###2022.03.04
+- Add: Remove libevent (it's included in Unraid) and update utempter package.
+- Fix: Right justify the preclear results on the status page.
+
+###2022.02.27
+- Initial release.
+</CHANGES>
+
+<!--
+The 'pre-install' script.
+-->
+<FILE Run="/bin/bash">
+<INLINE>
+# Unassigned Devices must be installed.
+if [ ! -f /boot/config/plugins/unassigned.devices.plg ] ; then
+echo ""
+echo "-----------------------------------------------------------"
+echo " &name; has not been installed!"
+echo " Install the Unassigned Devices plugin first."
+echo "-----------------------------------------------------------"
+echo ""
+exit 1
+fi
+
+# The legacy preclear plug cannot be installed.
+if [ -f /boot/config/plugins/preclear.disk.plg ] ; then
+echo ""
+echo "-----------------------------------------------------------"
+echo " &name; has not been installed!"
+echo ""
+echo " The Preclear Disk plugin is installed."
+echo ""
+echo " You must uninstall the Preclear Disk plugin before"
+echo " installing Unassigned Devices Preclear."
+echo ""
+echo "-----------------------------------------------------------"
+echo ""
+exit 1
+fi
+</INLINE>
+</FILE>
+
+<!--
+Get the plugin bundle.
+-->
+<FILE Name="/boot/config/plugins/&name;/&name;-&version;.tgz">
+<URL>"&gitURL;/&name;-&version;.tgz"</URL>
+<MD5>&MD5;</MD5>
+</FILE>
+
+<!--
+tmux-3.1b-x86_64-1.txz
+-->
+<FILE Name="/boot/config/plugins/&name;/tmux-3.1b-x86_64-1.txz" Run="upgradepkg --install-new">
+<URL>"&gitURL;/packages/tmux-3.1b-x86_64-1.txz"</URL>
+<MD5>c8367090c89d26690be706c7fb3db5fc</MD5>
+</FILE>
+
+<!--
+tmux-3.3a-x86_64-1.txz
+-->
+<FILE Min='6.11.0-rc1' Name="/boot/config/plugins/&name;/tmux-3.3a-x86_64-1.txz" Run="upgradepkg --install-new">
+<URL>"&gitURL;/packages/tmux-3.3a-x86_64-1.txz"</URL>
+<MD5>6f929e52a448007bf5468ae541fda15c</MD5>
+</FILE>
+
+<!--
+utempter-1.2.0-x86_64-3.txz
+-->
+<FILE Name="/boot/config/plugins/&name;/utempter-1.2.0-x86_64-3.txz" Run="upgradepkg --install-new">
+<URL>"&gitURL;/packages/utempter-1.2.0-x86_64-3.txz"</URL>
+<MD5>4cdaf07c99e2264e8b354b23c84b0431</MD5>
+</FILE>
+
+<!--
+The 'pre-install' script.
+-->
+<FILE Run="/bin/bash">
+<INLINE>
+# Remove emhttp files so we can re-install.
+rm -rf /usr/local/emhttp/plugins/&name;/* 2>/dev/null
+
+# Remove old 'bundle' files.
+rm -f $(ls /boot/config/plugins/&name;/&name;*.tgz 2>/dev/null | grep -v '&version;')
+</INLINE>
+</FILE>
+
+<!--
+The 'post-install' script.
+-->
+<FILE Run="/bin/bash">
+<INLINE>
+unsupported="/var/state/&name;/unsupported"
+
+# Creating some directories
+mkdir -p /tmp/preclear/ /tmp/.preclear/ /usr/local/bin/ /var/state/&name;/ /var/log/preclear/
+
+echo "Checking tmux operation..."
+
+# Fix tmux tmp directory if needed
+if [ ! -d "/tmp/tmux-0" ]; then
+	mkdir /tmp/tmux-0
+fi
+chmod 700 /tmp/tmux-0
+chown -R root:root /tmp/tmux-0
+
+# Verify if tmux is working correctly
+/usr/bin/tmux new-session -d -x 140 -y 200 -s "install_test_session" &amp;>/dev/null
+sleep 0.5
+/usr/bin/tmux kill-session -t "install_test_session" &amp;>/dev/null
+if [ $? -ne 0 ]; then
+	echo "tmux is not working properly"
+	echo "tmux is not working properly" | logger -t "root: plugin: &name;.plg"
+	touch "$unsupported"
+fi
+
+# Create plugin directory
+mkdir -p /boot/config/plugins/&name;
+
+# Install the 'bundle'.
+tar -xf /boot/config/plugins/&name;/&name;-&version;.tgz -C /usr/local/emhttp/plugins 2>/dev/null
+
+# Fix permissions of executable files
+chmod +x /usr/local/emhttp/plugins/&name;/scripts/* /usr/local/emhttp/plugins/&name;/event/*
+
+# Create a symlink to readvz
+ln -sf /usr/local/emhttp/plugins/&name;/scripts/readvz /usr/local/sbin/readvz
+
+# Make sure log file exists
+touch /var/log/preclear/preclear.log
+
+# Set correct terminal type for TMUX
+echo "set -g default-terminal 'linux'" > /root/.tmux.conf
+
+# Set default terminal size for TMUX
+echo "set -g default-size 100x50" >> /root/.tmux.conf
+
+# Create a symlink to diskinfo
+ln -sf /usr/local/emhttp/plugins/&name;/scripts/rc.diskinfo /etc/rc.d/rc.diskinfo
+
+# Fix permissions of executable files
+chmod +x /usr/local/emhttp/plugins/&name;/scripts/* /usr/local/emhttp/plugins/&name;/event/*
+
+# Initiate a hot plug event for unassigned devices and preclear
+echo "" > /tmp/unassigned.devices/hotplug_event
+
+# Add ignore rule to Unraid Flash Backup
+echo "*.resume" > /boot/config/plugins/&name;/.gitignore
+
+# Run diskinfo to get the initial unassigned devices information.
+/etc/rc.d/rc.diskinfo force
+
+# Plugin version
+echo "&version;" &gt; /var/state/&name;/version
+
+echo ""
+echo "-----------------------------------------------------------"
+echo " &name; has been installed."
+echo " Copyright 2015-2020, gfjardim"
+echo " Copyright 2023, &author;"
+echo " Version: &version;"
+echo "-----------------------------------------------------------"
+echo ""
+</INLINE>
+</FILE>
+
+<!--
+The 'remove' script.
+-->
+<FILE Run="/bin/bash" Method="remove">
+<INLINE>
+
+# kill all preclear sessions
+/usr/local/emhttp/plugins/&name;/script/clear_preclear.sh
+
+# Remove diskinfo
+rm -rf /var/local/emhttp/plugins/diskinfo/diskinfo.json /etc/rc.d/rc.diskinfo
+
+# Remove plugin
+rm -rf	/boot/config/plugins/&name;/ \
+		/usr/local/emhttp/plugins/&name;/
+
+# Remove plugin related files
+rm -rf	/usr/local/bin/preclear \
+		/var/run/preclear_queue.pid \
+		/var/log/preclear/preclear.log \
+		/usr/local/sbin/readvz
+
+# Remove plugin related directories
+rm -rf	/var/state/&name; \
+		/usr/local/bin/ \
+		/tmp/preclear/ \
+		/tmp/.preclear/
+
+echo ""
+echo "-----------------------------------------------------------"
+echo " &name; has been uninstalled."
+echo " Copyright 2015-2020, gfjardim"
+echo " Copyright 2023, &author;"
+echo " Version: &version;"
+echo "-----------------------------------------------------------"
+echo ""
+</INLINE>
+</FILE>
+
+</PLUGIN>

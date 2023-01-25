@@ -1,0 +1,2591 @@
+version: "3.6"
+services:
+  AH-WebApp:
+    container_name: "AH-WebApp"
+    entrypoint:
+      - "dotnet"
+      - "WebApp.dll"
+    environment:
+      - "HOST_CONTAINERNAME=AH-WebApp"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "ASPNETCORE_URLS=http://+:80"
+      - "DOTNET_RUNNING_IN_CONTAINER=true"
+      - "DOTNET_VERSION=6.0.10"
+      - "ASPNET_VERSION=6.0.10"
+    hostname: "9b240a4deb1d"
+    image: "ghcr.io/khaneliman/austin-horstman-webapp:latest"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://i.imgur.com/nYoosop.jpg"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:8088]/"
+      org.opencontainers.image.created: "2022-10-25T03:50:15.872Z"
+      org.opencontainers.image.description: "Personal website for Austin Horstman."
+      org.opencontainers.image.licenses: ""
+      org.opencontainers.image.revision: "e1151865db136dde4a685295cd79d3c7ee75612c"
+      org.opencontainers.image.source: "https://github.com/khaneliman/Austin-Horstman"
+      org.opencontainers.image.title: "Austin-Horstman"
+      org.opencontainers.image.url: "https://github.com/khaneliman/Austin-Horstman"
+      org.opencontainers.image.version: "v3.0.0"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "17443:443/tcp"
+      - "8088:80/tcp"
+    volumes:
+      - "/mnt/cache/appdata/AH-WebApp/latest:/root/.aspnet/DataProtection-Keys"
+    working_dir: "/app"
+
+  AH-WebApp-Dev:
+    container_name: "AH-WebApp-Dev"
+    entrypoint:
+      - "dotnet"
+      - "WebApp.dll"
+    environment:
+      - "HOST_CONTAINERNAME=AH-WebApp-Dev"
+      - "ASPNETCORE_ENVIRONMENT=Production"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "ASPNETCORE_URLS=http://+:80"
+      - "DOTNET_RUNNING_IN_CONTAINER=true"
+      - "DOTNET_VERSION=6.0.10"
+      - "ASPNET_VERSION=6.0.10"
+    hostname: "5f32693b656d"
+    image: "ghcr.io/khaneliman/austin-horstman-webapp:develop"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://i.imgur.com/nYoosop.jpg"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:8099]/"
+      org.opencontainers.image.created: "2022-10-25T03:37:22.434Z"
+      org.opencontainers.image.description: "Personal website for Austin Horstman."
+      org.opencontainers.image.licenses: ""
+      org.opencontainers.image.revision: "d273c4b0a4d1bec9ee658fcb1dc74502f25bbcac"
+      org.opencontainers.image.source: "https://github.com/khaneliman/Austin-Horstman"
+      org.opencontainers.image.title: "Austin-Horstman"
+      org.opencontainers.image.url: "https://github.com/khaneliman/Austin-Horstman"
+      org.opencontainers.image.version: "develop"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "19443:443/tcp"
+      - "8099:80/tcp"
+    volumes:
+      - "/mnt/cache/appdata/AH-WebApp/dev:/root/.aspnet/DataProtection-Keys"
+    working_dir: "/app"
+
+  Authelia:
+    command:
+      - "--config"
+      - "/config/configuration.yml"
+    container_name: "Authelia"
+    entrypoint:
+      - "/app/entrypoint.sh"
+    environment:
+      - "HOST_CONTAINERNAME=Authelia"
+      - "PUID=99"
+      - "PGID=100"
+      - "PATH=/app:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    hostname: "6b9591f43425"
+    image: "authelia/authelia"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://i.imgur.com/DCn2yiv.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:9091]/"
+      org.opencontainers.image.base.name: "docker.io/library/alpine:3.17.0"
+      org.opencontainers.image.created: "2022-12-21T19:58:21+11:00"
+      org.opencontainers.image.description:
+        "Authelia is an open-source authentication\
+        \ and authorization server providing two-factor authentication and single\
+        \ sign-on (SSO) for your applications via a web portal."
+      org.opencontainers.image.documentation: "https://www.authelia.com"
+      org.opencontainers.image.licenses: "Apache-2.0"
+      org.opencontainers.image.revision: "566a0d7fc71b450123ad33d350cd3890d311da82"
+      org.opencontainers.image.source: "https://github.com/authelia/authelia/tree/566a0d7fc71b450123ad33d350cd3890d311da82"
+      org.opencontainers.image.title: "authelia"
+      org.opencontainers.image.url: "https://github.com/authelia/authelia/pkgs/container/authelia"
+      org.opencontainers.image.vendor: "Authelia"
+      org.opencontainers.image.version: "4.37.5"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "9091:9091/tcp"
+    restart: "unless-stopped"
+    volumes:
+      - "/mnt/cache/appdata/Authelia:/config"
+    working_dir: "/app"
+
+  Cleanarr:
+    command:
+      - "/start.sh"
+    container_name: "Cleanarr"
+    entrypoint:
+      - "/entrypoint.sh"
+    environment:
+      - "LIBRARY_NAMES="
+      - "BYPASS_SSL_VERIFY="
+      - "HOST_CONTAINERNAME=Cleanarr"
+      - "PLEX_BASE_URL=http://192.168.1.37:32400"
+      - "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "GPG_KEY=${CLEANARR_GPG_KEY}"
+      - "PYTHON_VERSION=3.7.13"
+      - "PYTHON_PIP_VERSION=22.0.4"
+      - "PYTHON_SETUPTOOLS_VERSION=57.5.0"
+      - "PYTHON_GET_PIP_URL=https://github.com/pypa/get-pip/raw/38e54e5de07c66e875c11a1ebbdb938854625dd8/public/get-pip.py"
+      - "PYTHON_GET_PIP_SHA256=e235c437e5c7d7524fbce3880ca39b917a73dc565e0c813465b7a7a329bb279a"
+      - "UWSGI_INI=/app/uwsgi.ini"
+      - "UWSGI_CHEAPER=2"
+      - "UWSGI_PROCESSES=16"
+      - "NGINX_MAX_UPLOAD=0"
+      - "NGINX_WORKER_PROCESSES=1"
+      - "LISTEN_PORT=80"
+      - "STATIC_URL=/static"
+      - "STATIC_PATH=/app/static"
+      - "STATIC_INDEX=1"
+      - "PYTHONPATH=/app"
+      - "CONFIG_DIR=/config"
+    hostname: "ec6a24ce59b6"
+    image: "selexin/cleanarr"
+    ipc: "private"
+    labels:
+      maintainer: "Sebastian Ramirez <tiangolo@gmail.com>"
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/Alphacosmos/unraid-templetes/main/Images/plex-library-cleaner.ico"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:80]/"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "100m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "5001:80/tcp"
+    volumes:
+      - "/mnt/user/appdata/plex-library-cleaner:/config"
+    working_dir: "/app"
+
+  CloudBeaver:
+    container_name: "CloudBeaver"
+    entrypoint:
+      - "./run-server.sh"
+    environment:
+      - "HOST_CONTAINERNAME=CloudBeaver"
+      - "PATH=/opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "JAVA_HOME=/opt/java/openjdk"
+      - "JAVA_VERSION=jdk-17.0.4.1+1"
+    hostname: "d7359979a409"
+    image: "dbeaver/cloudbeaver"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/CorneliousJD/Docker-Templates/master/icons/cloudbeaver.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:8978]/"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "8978:8978/tcp"
+    volumes:
+      - "/mnt/user/appdata/cloudbeaver:/opt/cloudbeaver/workspace"
+    working_dir: "/opt/cloudbeaver"
+
+  Czkawka:
+    command:
+      - "/init"
+    container_name: "Czkawka"
+    environment:
+      - "HOST_CONTAINERNAME=Czkawka"
+      - "USER_ID=99"
+      - "DISPLAY_WIDTH=1280"
+      - "SECURE_CONNECTION=0"
+      - "GROUP_ID=100"
+      - "UMASK=000"
+      - "APP_NICENESS="
+      - "DISPLAY_HEIGHT=768"
+      - "X11VNC_EXTRA_OPTS="
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/base/sbin:/opt/base/bin"
+      - "ENV=/root/.docker_rc"
+      - "SUP_GROUP_IDS="
+      - "KEEP_APP_RUNNING=0"
+      - "INSTALL_PACKAGES="
+      - "CONTAINER_DEBUG=0"
+      - "DARK_MODE=0"
+      - "SECURE_CONNECTION_VNC_METHOD=SSL"
+      - "SECURE_CONNECTION_CERTS_CHECK_INTERVAL=60"
+      - "WEB_LISTENING_PORT=5800"
+      - "VNC_LISTENING_PORT=5900"
+      - "VNC_PASSWORD="
+      - "ENABLE_CJK_FONT=0"
+    hostname: "8001f90d6dcc"
+    image: "jlesage/czkawka"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/jlesage/docker-templates/master/jlesage/images/czkawka-icon.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:5800]"
+      org.label-schema.description: "Docker container for Czkawka"
+      org.label-schema.name: "czkawka"
+      org.label-schema.schema-version: "1.0"
+      org.label-schema.vcs-url: "https://github.com/jlesage/docker-czkawka"
+      org.label-schema.version: "22.12.1"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "7821:5800/tcp"
+      - "7921:5900/tcp"
+    volumes:
+      - "/mnt/cache/appdata/Czkawka:/config"
+      - "/mnt/user:/storage"
+      - "/mnt/user/temp:/trash"
+    working_dir: "/tmp"
+
+  DiskSpeed:
+    command:
+      - "catalina.sh"
+      - "run"
+    container_name: "DiskSpeed"
+    environment:
+      - "HOST_CONTAINERNAME=DiskSpeed"
+      - "PATH=/usr/local/tomcat/bin:/usr/local/openjdk-11/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "JAVA_HOME=/usr/local/openjdk-11"
+      - "JAVA_VERSION=11.0.16"
+      - "CATALINA_HOME=/usr/local/tomcat"
+      - "TOMCAT_NATIVE_LIBDIR=/usr/local/tomcat/native-jni-lib"
+      - "LD_LIBRARY_PATH=/usr/local/tomcat/native-jni-lib"
+      - "TOMCAT_MAJOR=9"
+      - "TOMCAT_VERSION=9.0.65"
+      - "TOMCAT_SHA512=2ae846848b8436856be11cfa18d9c62caa06ca7d3134012b2e10cbf6078753c4af20cc5d37f7dc75f1779f5c59d7c033850b8626534c3ce7e389641a67963cf6"
+      - "LUCEE_JAVA_OPTS=-Xms64m -Xmx512m"
+    hostname: "2d7679fc5fb4"
+    image: "jbartlett777/diskspeed"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/jbartlett777/DiskSpeed/master/DiskSpeed.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:8888]/"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    network_mode: "bridge"
+    ports:
+      - "18888:8888/tcp"
+    privileged: true
+    security_opt:
+      - "label=disable"
+    volumes:
+      - "/var/local/emhttp:/var/local/emhttp:ro"
+      - "/mnt/cache/appdata/DiskSpeed:/tmp/DiskSpeed"
+    working_dir: "/usr/local/tomcat"
+
+  DockerRegistry:
+    command:
+      - "/etc/docker/registry/config.yml"
+    container_name: "DockerRegistry"
+    entrypoint:
+      - "/entrypoint.sh"
+    environment:
+      - "HOST_CONTAINERNAME=DockerRegistry"
+      - "REGISTRY_AUTH=htpasswd"
+      - "REGISTRY_AUTH_HTPASSWD_REALM=Registry Realm"
+      - "REGISTRY_AUTH_HTPASSWD_PATH=/auth/htpasswd"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    hostname: "4ada41613234"
+    image: "registry"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://github.com/juusujanar/unraid-templates/raw/master/img/DockerRegistry-logo.png"
+      net.unraid.docker.managed: "dockerman"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "5000:5000/tcp"
+    volumes:
+      - "/mnt/cache/appdata/registry/auth:/auth"
+      - "/mnt/user/appdata/registry:/var/lib/registry"
+
+  Dozzle:
+    container_name: "Dozzle"
+    entrypoint:
+      - "/dozzle"
+    environment:
+      - "DOZZLE_TAILSIZE=300"
+      - "DOZZLE_USERNAME="
+      - "DOZZLE_NO_ANALYTICS=true"
+      - "HOST_CONTAINERNAME=Dozzle"
+      - "DOZZLE_BASE=/"
+      - "DOZZLE_LEVEL=info"
+      - "DOZZLE_PASSWORD="
+      - "PATH=/bin"
+    hostname: "ec9895144176"
+    image: "amir20/dozzle"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/selfhosters/unRAID-CA-templates/master/templates/img/dozzle.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:8080]/"
+      org.opencontainers.image.created: "2023-01-02T18:10:21.262Z"
+      org.opencontainers.image.description: "Realtime log viewer for docker containers."
+      org.opencontainers.image.licenses: "MIT"
+      org.opencontainers.image.revision: "ce39d3837fa57e9c77e374ed839667ba8f85fb85"
+      org.opencontainers.image.source: "https://github.com/amir20/dozzle"
+      org.opencontainers.image.title: "dozzle"
+      org.opencontainers.image.url: "https://github.com/amir20/dozzle"
+      org.opencontainers.image.version: "v4.6.2"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "8888:8080/tcp"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    working_dir: "/"
+
+  Full-Text-RSS:
+    command:
+      - "apache2-foreground"
+    container_name: "Full-Text-RSS"
+    entrypoint:
+      - "docker-php-entrypoint"
+    environment:
+      - "HOST_CONTAINERNAME=Full-Text-RSS"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "PHPIZE_DEPS=autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\
+        \tmake \t\tpkg-config \t\tre2c"
+      - "PHP_INI_DIR=/usr/local/etc/php"
+      - "APACHE_CONFDIR=/etc/apache2"
+      - "APACHE_ENVVARS=/etc/apache2/envvars"
+      - "PHP_EXTRA_BUILD_DEPS=apache2-dev"
+      - "PHP_EXTRA_CONFIGURE_ARGS=--with-apxs2 --disable-cgi"
+      - "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2"
+      - "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2"
+      - "PHP_LDFLAGS=-Wl,-O1 -Wl,--hash-style=both -pie"
+      - "PHP_VERSION=5.6.40"
+      - "PHP_URL=https://secure.php.net/get/php-5.6.40.tar.xz/from/this/mirror"
+      - "PHP_ASC_URL=https://secure.php.net/get/php-5.6.40.tar.xz.asc/from/this/mirror"
+      - "PHP_SHA256=1369a51eee3995d7fbd1c5342e5cc917760e276d561595b6052b21ace2656d1c"
+      - "PHP_MD5="
+    hostname: "8eee2fb2ed43"
+    image: "heussd/fivefilters-full-text-rss:latest"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://github.com/imTHAI/unraid-templates/raw/main/rss.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:8081]"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "8081:80/tcp"
+    volumes:
+      - "2f61d5237e670c17a851f4463b70f1d144cc3b5fb0acf2619e6d8decf7f6f265:/var/www/html/cache"
+    working_dir: "/var/www/html"
+
+  Grafana-Unraid-Stack:
+    container_name: "Grafana-Unraid-Stack"
+    entrypoint:
+      - "tini"
+      - "--"
+      - "/static-ubuntu/grafana-unraid-stack/entrypoint.sh"
+    environment:
+      - "HOST_SYS=/rootfs/sys"
+      - "PROMTAIL_PORT=9086"
+      - "HOST_ETC=/rootfs/etc"
+      - "USE_HDDTEMP=no"
+      - "INFLUXDB_HTTP_PORT=8086"
+      - "LOKI_PORT=3100"
+      - "GRAFANA_PORT=3006"
+      - "HOST_PROC=/rootfs/proc"
+      - "HOST_CONTAINERNAME=Grafana-Unraid-Stack"
+      - "HOST_MOUNT_PREFIX=/rootfs"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "INFLUXDB_RPC_PORT=58083"
+    expose:
+      - "3006/tcp"
+      - "3100/tcp"
+      - "58083/tcp"
+      - "8086/tcp"
+      - "9086/tcp"
+    hostname: "AustinServer"
+    image: "testdasi/grafana-unraid-stack:latest"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/testdasi/grafana-unraid-stack-base/master/grafana-unraid-stack.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:3006]/"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    network_mode: "host"
+    privileged: true
+    security_opt:
+      - "label=disable"
+    volumes:
+      - "/:/rootfs:ro"
+      - "/etc:/rootfs/etc:ro"
+      - "/var/run/utmp:/var/run/utmp:ro"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "/mnt/cache/appdata/Grafana-Unraid-Stack:/config"
+      - "/mnt/cache/appdata/Grafana-Unraid-Stack/data:/data"
+      - "/proc:/rootfs/proc:ro"
+      - "/sys:/rootfs/sys:ro"
+      - "/run/udev:/run/udev:ro"
+
+  Kavita:
+    command:
+      - "/entrypoint.sh"
+    container_name: "Kavita"
+    entrypoint:
+      - "/bin/bash"
+    environment:
+      - "HOST_CONTAINERNAME=Kavita"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    hostname: "ad5cde491050"
+    image: "kizaing/kavita"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/Kareadita/Kavita/develop/UI/Web/src/assets/icons/android-chrome-192x192.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:5000]"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "5002:5000/tcp"
+    volumes:
+      - "/mnt/cache/appdata/kavita:/kavita/config"
+      - "/mnt/user/data/media/books:/library"
+    working_dir: "/kavita"
+
+  Krusader:
+    container_name: "Krusader"
+    entrypoint:
+      - "/opt/scripts/start.sh"
+    environment:
+      - "RUNASROOT=false"
+      - "NOVNC_RESIZE=remote"
+      - "CUSTOM_RES_W=1280"
+      - "HOST_CONTAINERNAME=Krusader"
+      - "CUSTOM_RES_H=768"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "DATA_DIR=/krusader"
+      - "CUSTOM_DEPTH=16"
+      - "NOVNC_PORT=8080"
+      - "RFB_PORT=5900"
+      - "TURBOVNC_PARAMS=-securitytypes none"
+      - "UMASK=000"
+      - "UID=99"
+      - "GID=100"
+      - "DATA_PERM=770"
+      - "USER=krusader"
+    hostname: "b54e04622661"
+    image: "ich777/krusader"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/ich777/docker-templates/master/ich777/images/krusader.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:8080]/vnc.html?autoconnect=true"
+      org.opencontainers.image.authors: "admin@minenet.at"
+      org.opencontainers.image.source: "https://github.com/ich777/docker-krusader"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "8080:8080/tcp"
+    restart: "unless-stopped"
+    volumes:
+      - "/mnt:/UNRAID"
+      - "/mnt/cache/appdata/krusader:/krusader"
+      - "/mnt/user:/mnt/user"
+
+  MongoDB:
+    command:
+      - "mongod"
+    container_name: "MongoDB"
+    entrypoint:
+      - "docker-entrypoint.sh"
+    environment:
+      - "HOST_CONTAINERNAME=MongoDB"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "GOSU_VERSION=1.12"
+      - "JSYAML_VERSION=3.13.1"
+      - "MONGO_PACKAGE=mongodb-org"
+      - "MONGO_REPO=repo.mongodb.org"
+      - "MONGO_MAJOR=6.0"
+      - "MONGO_VERSION=6.0.3"
+      - "HOME=/data/db"
+    hostname: "fef16130c0ca"
+    image: "mongo"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/jason-bean/docker-templates/master/jasonbean-repo/mongo.sh-600x600.png"
+      net.unraid.docker.managed: "dockerman"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "27017:27017/tcp"
+    restart: "unless-stopped"
+    volumes:
+      - "8421139ee4fc3ad24cd921057458ec110736bc4c11a747fa791cb69c581fec73:/data/configdb"
+      - "/mnt/cache/appdata/mongodb:/data/db"
+
+  NginxProxyManager:
+    command:
+      - "/init"
+    container_name: "NginxProxyManager"
+    environment:
+      - "USER_ID=99"
+      - "GROUP_ID=100"
+      - "APP_NICENESS="
+      - "HOST_CONTAINERNAME=NginxProxyManager"
+      - "UMASK=000"
+      - "DISABLE_IPV6=0"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "LANG=en_US.UTF-8"
+      - "S6_BEHAVIOUR_IF_STAGE2_FAILS=3"
+      - "S6_SERVICE_DEPS=1"
+      - "APP_NAME=Nginx Proxy Manager"
+      - "APP_USER=app"
+      - "XDG_DATA_HOME=/config/xdg/data"
+      - "XDG_CONFIG_HOME=/config/xdg/config"
+      - "XDG_CACHE_HOME=/config/xdg/cache"
+      - "XDG_RUNTIME_DIR=/tmp/run/user/app"
+    hostname: "06858a59d51e"
+    image: "jlesage/nginx-proxy-manager"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/jlesage/docker-templates/master/jlesage/images/nginx-proxy-manager-icon.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:8181]"
+      org.label-schema.description: "Docker container for Nginx Proxy Manager"
+      org.label-schema.name: "nginx-proxy-manager"
+      org.label-schema.schema-version: "1.0"
+      org.label-schema.vcs-url: "https://github.com/jlesage/docker-nginx-proxy-manager"
+      org.label-schema.version: "1.26.1"
+      org.opencontainers.image.created: "2022-06-02T16:36:51Z"
+      org.opencontainers.image.revision: "1dba3108f2f6715c762b86308b5256d92b5d1aeb"
+      org.opencontainers.image.source: "https://github.com/jlesage/docker-nginx-proxy-manager.git"
+      org.opencontainers.image.url: "https://github.com/jlesage/docker-nginx-proxy-manager"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "18443:4443/tcp"
+      - "1880:8080/tcp"
+      - "7818:8181/tcp"
+    restart: "unless-stopped"
+    volumes:
+      - "/mnt/cache/appdata/NginxProxyManager:/config"
+      - "/mnt/cache/appdata/dmz/goaccess/log:/config/log"
+    working_dir: "/tmp"
+
+  PhotoPrism:
+    command:
+      - "/opt/photoprism/bin/photoprism"
+      - "start"
+    container_name: "PhotoPrism"
+    entrypoint:
+      - "/scripts/entrypoint.sh"
+    environment:
+      - "PHOTOPRISM_AUTO_IMPORT=180"
+      - "PHOTOPRISM_JPEG_QUALITY=90"
+      - "PHOTOPRISM_STORAGE_PATH=/photoprism/storage"
+      - "PHOTOPRISM_SITE_TITLE=PhotoPrism"
+      - "PHOTOPRISM_SITE_DESCRIPTION="
+      - "PHOTOPRISM_SITE_AUTHOR="
+      - "PHOTOPRISM_THUMB_FILTER=lanczos"
+      - "PHOTOPRISM_EXPERIMENTAL=false"
+      - "PHOTOPRISM_UID=99"
+      - "PHOTOPRISM_SITE_CAPTION=Browse Your Life"
+      - "PHOTOPRISM_JPEG_SIZE=7680"
+      - "PHOTOPRISM_THUMB_UNCACHED=false"
+      - "PHOTOPRISM_THUMB_SIZE=2048"
+      - "PHOTOPRISM_THUMB_SIZE_UNCACHED=7680"
+      - "PHOTOPRISM_DATABASE_DSN=photoprism:ant*ctv6pkv5GDK-akt@tcp(mariadb:3306)/photoprism?parseTime=true"
+      - "PHOTOPRISM_AUTO_INDEX=180"
+      - "PHOTOPRISM_GID=100"
+      - "PHOTOPRISM_UPLOAD_NSFW=true"
+      - "PHOTOPRISM_DATABASE_DRIVER=mysql"
+      - "PHOTOPRISM_DARKTABLE_PRESETS=false"
+      - "HOST_CONTAINERNAME=PhotoPrism"
+      - "PHOTOPRISM_DETECT_NSFW=false"
+      - "PHOTOPRISM_SETTINGS_HIDDEN=false"
+      - "PATH=/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin:/scripts:/opt/photoprism/bin"
+      - "PHOTOPRISM_ARCH=amd64"
+      - "DOCKER_TAG=221118-jammy"
+      - "DOCKER_ENV=prod"
+      - "PS1=\\u@:\\w$ "
+      - "LD_LIBRARY_PATH=/usr/local/lib:/usr/lib"
+      - "TMPDIR=/tmp"
+      - "DEBIAN_FRONTEND=noninteractive"
+      - "TF_CPP_MIN_LOG_LEVEL=2"
+      - "PROG=photoprism"
+      - "PHOTOPRISM_ASSETS_PATH=/opt/photoprism/assets"
+      - "PHOTOPRISM_IMPORT_PATH=/photoprism/import"
+      - "PHOTOPRISM_ORIGINALS_PATH=/photoprism/originals"
+      - "PHOTOPRISM_BACKUP_PATH=/photoprism/storage/backups"
+      - "PHOTOPRISM_LOG_FILENAME=/photoprism/storage/photoprism.log"
+      - "PHOTOPRISM_PID_FILENAME=/photoprism/storage/photoprism.pid"
+      - "PHOTOPRISM_DEBUG=false"
+      - "PHOTOPRISM_PUBLIC=false"
+      - "PHOTOPRISM_READONLY=false"
+      - "PHOTOPRISM_SITE_URL=http://photoprism.me:2342/"
+      - "PHOTOPRISM_HTTP_HOST=0.0.0.0"
+      - "PHOTOPRISM_HTTP_PORT=2342"
+      - "PHOTOPRISM_DATABASE_SERVER="
+      - "PHOTOPRISM_DATABASE_NAME=photoprism"
+      - "PHOTOPRISM_DATABASE_USER=photoprism"
+      - "PHOTOPRISM_DATABASE_PASSWORD="
+      - "PHOTOPRISM_DISABLE_CHOWN=false"
+      - "PHOTOPRISM_DISABLE_WEBDAV=false"
+      - "PHOTOPRISM_DISABLE_SETTINGS=false"
+      - "PHOTOPRISM_DISABLE_BACKUPS=false"
+      - "PHOTOPRISM_DISABLE_EXIFTOOL=false"
+      - "PHOTOPRISM_DISABLE_PLACES=false"
+      - "PHOTOPRISM_DISABLE_TENSORFLOW=false"
+      - "PHOTOPRISM_DISABLE_FACES=false"
+      - "PHOTOPRISM_DISABLE_CLASSIFICATION=false"
+      - "PHOTOPRISM_RAW_PRESETS=false"
+      - "PHOTOPRISM_WORKERS=0"
+      - "PHOTOPRISM_WAKEUP_INTERVAL=900"
+    hostname: "ab5d1237ef13"
+    image: "photoprism/photoprism"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/ich777/docker-templates/master/ich777/images/photoprism.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:2342]/"
+      org.opencontainers.image.authors: "Michael Mayer <hello@photoprism.app>"
+      org.opencontainers.image.description: "Ubuntu 22.04 LTS (Jammy Jellyfish)"
+      org.opencontainers.image.documentation: "https://docs.photoprism.app/getting-started/"
+      org.opencontainers.image.source: "https://github.com/photoprism/photoprism"
+      org.opencontainers.image.title:
+        "PhotoPrism® Community Edition (Ubuntu 22.04\
+        \ LTS)"
+      org.opencontainers.image.url: "https://hub.docker.com/repository/docker/photoprism/photoprism"
+      org.opencontainers.image.vendor: "PhotoPrism UG"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "2342:2342/tcp"
+    restart: "unless-stopped"
+    volumes:
+      - "/mnt/user/backup/Photos:/backupphotos"
+      - "/mnt/user/data/media/familyphotos:/photoprism/import"
+      - "/mnt/user/data/media/photoprism:/photoprism/originals"
+      - "/mnt/cache/appdata/photoprism:/photoprism/storage"
+    working_dir: "/photoprism"
+
+  PhotoStructure:
+    container_name: "PhotoStructure"
+    entrypoint:
+      - "/sbin/tini"
+      - "--"
+      - "/ps/app/docker-entrypoint.sh"
+    environment:
+      - "PGID=100"
+      - "PS_LOG_LEVEL=error"
+      - "HOST_CONTAINERNAME=PhotoStructure"
+      - "PUID=99"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "NODE_VERSION=16.2.0"
+      - "YARN_VERSION=1.22.5"
+    hostname: "d98e723a9754"
+    image: "photostructure/server:stable"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://photostructure.com/img/logo-circle-gradient-256.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:1787]"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "100m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "1787:1787/tcp"
+    volumes:
+      - "/mnt/user/appdata/photostructure/config:/ps/config"
+      - "/mnt/user/data/media/pictures:/ps/library"
+      - "/mnt/user/appdata/photostructure/logs:/ps/logs"
+      - "/mnt/cache/appdata/photostructure/tmp:/ps/tmp"
+      - "/mnt/user/backup/Photos:/backupphotos"
+      - "/mnt/disks/dropbox/Pictures/Austins Photos:/dropboxphotos"
+      - "/mnt/user/data/media/familyphotos:/familyphotos"
+    working_dir: "/ps/app"
+
+  Plex-Meta-Manager:
+    container_name: "Plex-Meta-Manager"
+    entrypoint:
+      - "/tini"
+      - "-s"
+      - "python3"
+      - "plex_meta_manager.py"
+      - "--"
+    environment:
+      - "HOST_CONTAINERNAME=Plex-Meta-Manager"
+      - "PMM_TIME=6:00"
+      - "PMM_DIVIDER=="
+      - "PMM_WIDTH=200"
+      - "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "GPG_KEY=${PLEX_META_MANAGER_GPG_KEY}"
+      - "PYTHON_VERSION=3.11.1"
+      - "PYTHON_PIP_VERSION=22.3.1"
+      - "PYTHON_SETUPTOOLS_VERSION=65.5.1"
+      - "PYTHON_GET_PIP_URL=https://github.com/pypa/get-pip/raw/66030fa03382b4914d4c4d0896961a0bdeeeb274/public/get-pip.py"
+      - "PYTHON_GET_PIP_SHA256=1e501cf004eac1b7eb1f97266d28f995ae835d30250bec7f8850562703067dc6"
+      - "TINI_VERSION=v0.19.0"
+      - "PMM_DOCKER=True"
+    hostname: "ccb81b85b634"
+    image: "meisnate12/plex-meta-manager"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://metamanager.wiki/en/latest/_static/pmm.png"
+      net.unraid.docker.managed: "dockerman"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    volumes:
+      - "/mnt/cache/appdata/Plex-Meta-Manager:/config"
+
+  Postgres11:
+    command:
+      - "postgres"
+    container_name: "Postgres11"
+    entrypoint:
+      - "docker-entrypoint.sh"
+    environment:
+      - "HOST_CONTAINERNAME=Postgres11"
+      - "POSTGRES_USER=postgres"
+      - "POSTGRES_DB=postgres"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/postgresql/11/bin"
+      - "GOSU_VERSION=1.14"
+      - "PG_MAJOR=11"
+      - "PG_VERSION=11.16-1.pgdg90+1"
+      - "PGDATA=/var/lib/postgresql/data"
+    hostname: "c04061de28dd"
+    image: "postgres:11"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://github.com/juusujanar/unraid-templates/raw/master/img/PostgreSQL-logo.png"
+      net.unraid.docker.managed: "dockerman"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "100m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "5432:5432/tcp"
+    volumes:
+      - "/mnt/cache/appdata/postgres:/var/lib/postgresql/data"
+
+  RustDeskServer:
+    command:
+      - "/usr/bin/hbbs"
+    container_name: "RustDeskServer"
+    environment:
+      - "HOST_CONTAINERNAME=RustDeskServer"
+      - "TCP_PORT_21115=21115"
+      - "TCP_PORT_21116=21116"
+      - "UDP_PORT_21116=21116"
+      - "TCP_PORT_21118=21118"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    hostname: "d650f5a2c5f8"
+    image: "rustdesk/rustdesk-server"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://github.com/JmzTaylor/unraid_templates/raw/master/rustserver.png"
+      net.unraid.docker.managed: "dockerman"
+      org.opencontainers.image.created: "2023-01-11T03:49:09.196Z"
+      org.opencontainers.image.description: "RustDesk Server Program"
+      org.opencontainers.image.licenses: "AGPL-3.0"
+      org.opencontainers.image.revision: "accd96f1d84b43af5934a859a028fc70640a6317"
+      org.opencontainers.image.source: "https://github.com/rustdesk/rustdesk-server"
+      org.opencontainers.image.title: "rustdesk-server"
+      org.opencontainers.image.url: "https://github.com/rustdesk/rustdesk-server"
+      org.opencontainers.image.version: "1.1.7"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "br0"
+    volumes:
+      - "/mnt/cache/appdata/rustdesk-hbbs:/root"
+    working_dir: "/root"
+
+  RustDeskServer-Relay:
+    command:
+      - "/usr/bin/hbbr"
+    container_name: "RustDeskServer-Relay"
+    environment:
+      - "TCP_PORT_21119=21119"
+      - "HOST_CONTAINERNAME=RustDeskServer-Relay"
+      - "TCP_PORT_21117=21117"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    hostname: "efdcfcb6aeee"
+    image: "rustdesk/rustdesk-server"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://github.com/JmzTaylor/unraid_templates/raw/master/rustserver.png"
+      net.unraid.docker.managed: "dockerman"
+      org.opencontainers.image.created: "2023-01-11T03:49:09.196Z"
+      org.opencontainers.image.description: "RustDesk Server Program"
+      org.opencontainers.image.licenses: "AGPL-3.0"
+      org.opencontainers.image.revision: "accd96f1d84b43af5934a859a028fc70640a6317"
+      org.opencontainers.image.source: "https://github.com/rustdesk/rustdesk-server"
+      org.opencontainers.image.title: "rustdesk-server"
+      org.opencontainers.image.url: "https://github.com/rustdesk/rustdesk-server"
+      org.opencontainers.image.version: "1.1.7"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "br0"
+    volumes:
+      - "/mnt/cache/appdata/rustdesk-hbbr:/root"
+    working_dir: "/root"
+
+  Stash:
+    command:
+      - "stash"
+    container_name: "Stash"
+    environment:
+      - "HOST_CONTAINERNAME=Stash"
+      - "STASH_CACHE=/cache/"
+      - "STASH_METADATA=/metadata/"
+      - "STASH_GENERATED=/generated/"
+      - "STASH_STASH=/data/"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "STASH_CONFIG_FILE=/root/.stash/config.yml"
+    hostname: "c6939c7be73d"
+    image: "stashapp/stash"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/CorneliousJD/Docker-Templates/master/icons/stash.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:9999]"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "6969:9999/tcp"
+    volumes:
+      - "/mnt/user/data/media/shadowplay/temp/local/AppData/temp2:/data2"
+      - "/mnt/cache/appdata/stash/generated:/generated"
+      - "/mnt/cache/appdata/stash/metadata:/metadata"
+      - "/mnt/cache/appdata/stash/config:/root/.stash"
+      - "/mnt/cache/appdata/stash/cache:/cache"
+      - "/mnt/user/data/media/shadowplay/temp/local/AppData/temp:/data"
+
+  Tailscale:
+    container_name: "Tailscale"
+    entrypoint:
+      - "/app/docker-entrypoint.sh"
+    environment:
+      - "UP_FLAGS=--advertise-exit-node"
+      - "HOST_CONTAINERNAME=Tailscale"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    hostname: "unraid"
+    image: "deasmi/unraid-tailscale:latest"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/deasmi/unraid-tailscale/master/logo.png"
+      net.unraid.docker.managed: "dockerman"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    network_mode: "host"
+    privileged: true
+    security_opt:
+      - "label=disable"
+    volumes:
+      - "/mnt/cache/appdata/tailscale:/state"
+    working_dir: "/app"
+
+  TimeMachine:
+    command:
+      - "s6-svscan"
+      - "/etc/s6"
+    container_name: "TimeMachine"
+    entrypoint:
+      - "/entrypoint.sh"
+    environment:
+      - "DEBUG_LEVEL=1"
+      - "SET_PERMISSIONS=false"
+      - "SMB_NFS_ACES=yes"
+      - "SMB_VFS_OBJECTS=acl_xattr fruit streams_xattr"
+      - "TM_GID=1000"
+      - "HOST_CONTAINERNAME=TimeMachine"
+      - "VOLUME_SIZE_LIMIT=1 T"
+      - "ADVERTISED_HOSTNAME=timemachine"
+      - "CUSTOM_USER=false"
+      - "TM_GROUPNAME=timemachine"
+      - "TM_UID=1000"
+      - "CUSTOM_SMB_CONF=false"
+      - "EXTERNAL_CONF="
+      - "SMB_PORT=445"
+      - "WORKGROUP=WORKGROUP"
+      - "MIMIC_MODEL=TimeCapsule8,119"
+      - "HIDE_SHARES=no"
+      - "SMB_INHERIT_PERMISSIONS=no"
+      - "SMB_METADATA=stream"
+      - "SHARE_NAME=TimeMachine"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    hostname: "timemachine"
+    image: "mbentley/timemachine"
+    ipc: "private"
+    labels:
+      maintainer: "Matt Bentley <mbentley@mbentley.net>"
+      net.unraid.docker.icon: "https://upload.wikimedia.org/wikipedia/de/f/f4/Time_Machine_%28Apple%29_Logo.png"
+      net.unraid.docker.managed: "dockerman"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "br0"
+    volumes:
+      - "8fe2e2394d8c8d2a0dd3afdb7ec33b7092d53010eab53cf3317f57b7feb20a08:/run/samba"
+      - "ef9cf24bea51f4fb04afc6cf1ea059e8c926d938d5ffe18acb0d55f180d31258:/var/cache/samba"
+      - "697744c7847508a1454454aad57d5870c67d7934fb068642cc4be988c093866d:/var/lib/samba"
+      - "/mnt/user/timemachine:/opt/timemachine"
+    working_dir: "/"
+
+  Virt-Manager:
+    command:
+      - "/usr/local/bin/startapp"
+    container_name: "Virt-Manager"
+    environment:
+      - "HOSTS=['qemu:///system']"
+      - "USER_ID=99"
+      - "GROUP_ID=100"
+      - "UMASK=000"
+      - "HOST_CONTAINERNAME=Virt-Manager"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "GDK_BACKEND=broadway"
+      - "BROADWAY_DISPLAY=:5"
+      - "DARK_MODE=false"
+      - "GTK_THEME=Materia"
+      - "BG_GRADIENT=#ddd, #999"
+      - "FAVICON_URL=https://raw.githubusercontent.com/virt-manager/virt-manager/931936a328d22413bb663e0e21d2f7bb111dbd7c/data/icons/256x256/apps/virt-manager.png"
+      - "APP_TITLE=Virtual Machine Manager"
+      - "CORNER_IMAGE_URL=https://raw.githubusercontent.com/virt-manager/virt-manager/931936a328d22413bb663e0e21d2f7bb111dbd7c/data/icons/256x256/apps/virt-manager.png"
+    hostname: "3befe5290532"
+    image: "mber5/virt-manager:latest"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/redvex2460/docker-templates/master/redvex2460/images/vman.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:80]"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "8185:80/tcp"
+    volumes:
+      - "/mnt/cache/appdata/vman/root:/root"
+      - "/mnt/user/isos:/mnt/isos"
+      - "/var/run/libvirt/libvirt-sock:/var/run/libvirt/libvirt-sock"
+      - "/mnt/user/domains:/var/lib/libvirt/images"
+      - "/dev/kvm:/dev/kvm"
+
+  adminer:
+    command:
+      - "php"
+      - "-S"
+      - "[::]:8080"
+      - "-t"
+      - "/var/www/html"
+    container_name: "adminer"
+    entrypoint:
+      - "entrypoint.sh"
+    environment:
+      - "HOST_CONTAINERNAME=adminer"
+      - "ADMINER_DESIGN=dracula"
+      - "ADMINER_PLUGINS="
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "ADMINER_VERSION=4.8.1"
+      - "ADMINER_DOWNLOAD_SHA256=2fd7e6d8f987b243ab1839249551f62adce19704c47d3d0c8dd9e57ea5b9c6b3"
+      - "ADMINER_COMMIT=1f173e18bdf0be29182e0d67989df56eadea4754"
+    hostname: "d962fc1ed7f8"
+    image: "adminer"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/selfhosters/unRAID-CA-templates/master/templates/img/adminer.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:8080]"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "8585:8080/tcp"
+    user: "adminer"
+    working_dir: "/var/www/html"
+
+  bazarr:
+    container_name: "bazarr"
+    entrypoint:
+      - "/init"
+    environment:
+      - "HOST_CONTAINERNAME=bazarr"
+      - "PUID=99"
+      - "PGID=100"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "PS1=$(whoami)@$(hostname):$(pwd)\\$ "
+      - "HOME=/root"
+      - "TERM=xterm"
+      - "S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0"
+      - "S6_VERBOSITY=1"
+      - "S6_STAGE2_HOOK=/docker-mods"
+    hostname: "bd6e158230b4"
+    image: "linuxserver/bazarr"
+    ipc: "private"
+    labels:
+      build_version: "Linuxserver.io version:- v1.1.4-ls177 Build-date:- 2022-12-31T17:57:41+01:00"
+      maintainer: "chbmb"
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/bazarr.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:6767]"
+      org.opencontainers.image.authors: "linuxserver.io"
+      org.opencontainers.image.created: "2022-12-31T17:57:41+01:00"
+      org.opencontainers.image.description:
+        "[Bazarr](https://www.bazarr.media/) is\
+        \ a companion application to Sonarr and Radarr. It can manage and download\
+        \ subtitles based on your requirements. You define your preferences by TV\
+        \ show or movie and Bazarr takes care of everything for you."
+      org.opencontainers.image.documentation: "https://docs.linuxserver.io/images/docker-bazarr"
+      org.opencontainers.image.licenses: "GPL-3.0-only"
+      org.opencontainers.image.ref.name: "9b1384c89d1499f86dfb4219b3c55477d139275f"
+      org.opencontainers.image.revision: "9b1384c89d1499f86dfb4219b3c55477d139275f"
+      org.opencontainers.image.source: "https://github.com/linuxserver/docker-bazarr"
+      org.opencontainers.image.title: "Bazarr"
+      org.opencontainers.image.url: "https://github.com/linuxserver/docker-bazarr/packages"
+      org.opencontainers.image.vendor: "linuxserver.io"
+      org.opencontainers.image.version: "v1.1.4-ls177"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "6767:6767/tcp"
+    volumes:
+      - "/mnt/user/data/media/tv:/tv"
+      - "/mnt/user/data/torrents:/data/torrents"
+      - "/mnt/cache/appdata/bazarr:/config"
+      - "/mnt/user/data/media/movies:/movies"
+    working_dir: "/"
+
+  binhex-jellyfin:
+    command:
+      - "/bin/bash"
+      - "/usr/local/bin/init.sh"
+    container_name: "binhex-jellyfin"
+    entrypoint:
+      - "/usr/bin/dumb-init"
+      - "--"
+    environment:
+      - "HOST_CONTAINERNAME=binhex-jellyfin"
+      - "UMASK=000"
+      - "PUID=99"
+      - "PGID=100"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "HOME=/home/nobody"
+      - "TERM=xterm"
+    hostname: "8f3bc44f34da"
+    image: "binhex/arch-jellyfin"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/binhex/docker-templates/master/binhex/images/jellyfin-icon.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:8096]/"
+      org.opencontainers.image.authors: "= binhex"
+      org.opencontainers.image.source: "= https://github.com/binhex/arch-jellyfin"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "8096:8096/tcp"
+    volumes:
+      - "/mnt/cache/appdata/binhex-jellyfin:/config"
+      - "/mnt/user/data/media:/media"
+
+  binhex-jenkins:
+    command:
+      - "/bin/bash"
+      - "/usr/local/bin/init.sh"
+    container_name: "binhex-jenkins"
+    entrypoint:
+      - "/usr/bin/dumb-init"
+      - "--"
+    environment:
+      - "PUID=99"
+      - "PGID=100"
+      - "HOST_CONTAINERNAME=binhex-jenkins"
+      - "JAVA_ARGS=-Xmx512m"
+      - "JAVA_OPTS=-Dhudson.footerURL=https://khaneliman.com"
+      - "UMASK=000"
+      - "DOCKER_HOST=tcp://dockersocket:2375"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "HOME=/home/nobody"
+      - "TERM=xterm"
+    hostname: "eaba27db50a4"
+    image: "binhex/arch-jenkins"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/binhex/docker-templates/master/binhex/images/jenkins-icon.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:8090]/"
+      org.opencontainers.image.authors: "= binhex"
+      org.opencontainers.image.source: "= https://github.com/binhex/arch-jenkins"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "4243:4243/tcp"
+      - "8090:8090/tcp"
+    privileged: true
+    security_opt:
+      - "label=disable"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "/usr/bin/docker:/usr/bin/docker"
+      - "/mnt/user/Downloads:/mnt/downloads"
+      - "/mnt/user/appdata/binhex-jenkins:/config"
+
+  binhex-nzbget:
+    command:
+      - "/bin/bash"
+      - "/usr/local/bin/init.sh"
+    container_name: "binhex-nzbget"
+    entrypoint:
+      - "/usr/bin/tini"
+      - "-g"
+      - "--"
+    environment:
+      - "HOST_CONTAINERNAME=binhex-nzbget"
+      - "UMASK=000"
+      - "PUID=99"
+      - "PGID=100"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "HOME=/home/nobody"
+      - "TERM=xterm"
+    hostname: "c26d97086419"
+    image: "binhex/arch-nzbget"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/binhex/docker-templates/master/binhex/images/nzbget-icon.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:6789]/"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "100m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "6789:6789/tcp"
+    volumes:
+      - "96e3ee4889f8dfc2ed4474e514b938365558420da2b756a1c085f9d53673a5ba:/media"
+      - "/mnt/user/appdata/binhex-nzbget:/config"
+      - "/mnt/user/data/usenet:/data"
+
+  cloudflared:
+    command:
+      - "tunnel"
+      - "run"
+      - "9271e587-a647-4bc5-ac55-b5664d4a90a8"
+    container_name: "cloudflared"
+    entrypoint:
+      - "cloudflared"
+      - "--no-autoupdate"
+    environment:
+      - "HOST_CONTAINERNAME=cloudflared"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt"
+    hostname: "e543e0cc0861"
+    image: "cloudflare/cloudflared:latest"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/aeleos/cloudflared/main/cloudflare-icon.png"
+      net.unraid.docker.managed: "dockerman"
+      org.opencontainers.image.source: "https://github.com/cloudflare/cloudflared"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    restart: "unless-stopped"
+    user: "nonroot"
+    volumes:
+      - "/mnt/cache/appdata/cloudflared:/home/nonroot/.cloudflared"
+    working_dir: "/home/nonroot"
+
+  dockersocket:
+    command:
+      - "haproxy"
+      - "-f"
+      - "/usr/local/etc/haproxy/haproxy.cfg"
+    container_name: "dockersocket"
+    entrypoint:
+      - "/docker-entrypoint.sh"
+    environment:
+      - "PUSH=1"
+      - "PULL=1"
+      - "HOST_CONTAINERNAME=dockersocket"
+      - "CONTAINERS=0"
+      - "POST=1"
+      - "BUILD=1"
+      - "DISTRIBUTION=1"
+      - "IMAGES=1"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "HAPROXY_VERSION=1.9.16"
+      - "HAPROXY_URL=https://www.haproxy.org/download/1.9/src/haproxy-1.9.16.tar.gz"
+      - "HAPROXY_SHA256=47174becf7c641c837b7338210f6194f266de45c49a38b68655fcd980f95bdbf"
+      - "ALLOW_RESTARTS=0"
+      - "AUTH=0"
+      - "COMMIT=0"
+      - "CONFIGS=0"
+      - "EVENTS=1"
+      - "EXEC=0"
+      - "INFO=0"
+      - "LOG_LEVEL=info"
+      - "NETWORKS=0"
+      - "NODES=0"
+      - "PING=1"
+      - "PLUGINS=0"
+      - "SECRETS=0"
+      - "SERVICES=0"
+      - "SESSION=0"
+      - "SWARM=0"
+      - "SYSTEM=0"
+      - "TASKS=0"
+      - "VERSION=1"
+      - "VOLUMES=0"
+    hostname: "d6664dc1c712"
+    image: "ghcr.io/tecnativa/docker-socket-proxy:latest"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/ibracorp/app-logos/main/docker/docker-logo.png"
+      net.unraid.docker.managed: "dockerman"
+      org.opencontainers.image.created: "2021-01-26T10:32:59.090Z"
+      org.opencontainers.image.description:
+        "Proxy over your Docker socket to restrict\
+        \ which requests it accepts"
+      org.opencontainers.image.licenses: "Apache-2.0"
+      org.opencontainers.image.revision: "b911e572d0d65c672f4da6d2ef06d7d95c89de6d"
+      org.opencontainers.image.source: "https://github.com/Tecnativa/docker-socket-proxy"
+      org.opencontainers.image.title: "docker-socket-proxy"
+      org.opencontainers.image.url: "https://github.com/Tecnativa/docker-socket-proxy"
+      org.opencontainers.image.vendor: "Tecnativa"
+      org.opencontainers.image.version: "0.1.1"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "100m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "2375:2375/tcp"
+    restart: "unless-stopped"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+
+  freshrss:
+    container_name: "freshrss"
+    entrypoint:
+      - "/init"
+    environment:
+      - "HOST_CONTAINERNAME=freshrss"
+      - "PUID=99"
+      - "PGID=100"
+      - "UMASK=022"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "PS1=$(whoami)@$(hostname):$(pwd)\\$ "
+      - "HOME=/root"
+      - "TERM=xterm"
+      - "S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0"
+    hostname: "963e226685cf"
+    image: "lscr.io/linuxserver/freshrss"
+    ipc: "private"
+    labels:
+      build_version: "Linuxserver.io version:- 1.20.2-ls158 Build-date:- 2022-12-29T06:44:01-06:00"
+      maintainer: "aptalca"
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/freshrss-logo.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:8084]"
+      org.opencontainers.image.authors: "linuxserver.io"
+      org.opencontainers.image.created: "2022-12-29T06:44:01-06:00"
+      org.opencontainers.image.description:
+        "[Freshrss](https://freshrss.org/) is\
+        \ a free, self-hostable aggregator for rss feeds."
+      org.opencontainers.image.documentation: "https://docs.linuxserver.io/images/docker-freshrss"
+      org.opencontainers.image.licenses: "GPL-3.0-only"
+      org.opencontainers.image.ref.name: "72e6e737f805710786fb0d4d08c28565e9425bba"
+      org.opencontainers.image.revision: "72e6e737f805710786fb0d4d08c28565e9425bba"
+      org.opencontainers.image.source: "https://github.com/linuxserver/docker-freshrss"
+      org.opencontainers.image.title: "Freshrss"
+      org.opencontainers.image.url: "https://github.com/linuxserver/docker-freshrss/packages"
+      org.opencontainers.image.vendor: "linuxserver.io"
+      org.opencontainers.image.version: "1.20.2-ls158"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "8084:80/tcp"
+    volumes:
+      - "/mnt/cache/appdata/freshrss:/config"
+    working_dir: "/"
+
+  goaccess:
+    command:
+      - "sh"
+      - "/usr/local/bin/goaccess.sh"
+    container_name: "goaccess"
+    entrypoint:
+      - "/usr/local/bin/entrypoint.sh"
+    environment:
+      - "HOST_CONTAINERNAME=goaccess"
+      - "PUID=99"
+      - "PGID=100"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    hostname: "3f144af284a6"
+    image: "gregyankovoy/goaccess"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/gregyankovoy/docker-templates/master/greg/img/goaccess-logo.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:7889]/"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    mac_address: "02:42:ac:11:00:02"
+    network_mode: "bridge"
+    ports:
+      - "7889:7889/tcp"
+    volumes:
+      - "/mnt/user/appdata/goaccess:/config"
+      - "/mnt/cache/appdata/dmz/goaccess/log:/opt/log"
+    working_dir: "/goaccess"
+
+  lidarr:
+    container_name: "lidarr"
+    entrypoint:
+      - "/init"
+    environment:
+      - "HOST_CONTAINERNAME=lidarr"
+      - "PUID=99"
+      - "PGID=100"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "PS1=$(whoami)@$(hostname):$(pwd)\\$ "
+      - "HOME=/root"
+      - "TERM=xterm"
+      - "S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0"
+      - "XDG_CONFIG_HOME=/config/xdg"
+    hostname: "422f7f819702"
+    image: "linuxserver/lidarr"
+    ipc: "private"
+    labels:
+      build_version: "Linuxserver.io version:- 1.0.2.2592-ls106 Build-date:- 2022-12-24T08:59:46-06:00"
+      maintainer: "thelamer"
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/lidarr.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:8686]"
+      org.opencontainers.image.authors: "linuxserver.io"
+      org.opencontainers.image.created: "2022-12-24T08:59:46-06:00"
+      org.opencontainers.image.description:
+        "[Lidarr](https://github.com/lidarr/Lidarr)\
+        \ is a music collection manager for Usenet and BitTorrent users. It can monitor\
+        \ multiple RSS feeds for new tracks from your favorite artists and will grab,\
+        \ sort and rename them. It can also be configured to automatically upgrade\
+        \ the quality of files already downloaded when a better quality format becomes\
+        \ available."
+      org.opencontainers.image.documentation: "https://docs.linuxserver.io/images/docker-lidarr"
+      org.opencontainers.image.licenses: "GPL-3.0-only"
+      org.opencontainers.image.ref.name: "c79d880f06af559ccb4a979fd18f83d45d31938c"
+      org.opencontainers.image.revision: "c79d880f06af559ccb4a979fd18f83d45d31938c"
+      org.opencontainers.image.source: "https://github.com/linuxserver/docker-lidarr"
+      org.opencontainers.image.title: "Lidarr"
+      org.opencontainers.image.url: "https://github.com/linuxserver/docker-lidarr/packages"
+      org.opencontainers.image.vendor: "linuxserver.io"
+      org.opencontainers.image.version: "1.0.2.2592-ls106"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "8686:8686/tcp"
+    volumes:
+      - "/mnt/cache/appdata/lidarr:/config"
+      - "/mnt/user/data:/data"
+    working_dir: "/"
+
+  mariadb:
+    container_name: "mariadb"
+    entrypoint:
+      - "/init"
+    environment:
+      - "HOST_CONTAINERNAME=mariadb"
+      - "PUID=99"
+      - "PGID=100"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "PS1=$(whoami)@$(hostname):$(pwd)\\$ "
+      - "HOME=/root"
+      - "TERM=xterm"
+      - "S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0"
+      - "S6_VERBOSITY=1"
+      - "S6_STAGE2_HOOK=/docker-mods"
+      - "MYSQL_DIR=/config"
+      - "DATADIR=/config/databases"
+    hostname: "30dee00a70e0"
+    image: "linuxserver/mariadb"
+    ipc: "private"
+    labels:
+      build_version: "Linuxserver.io version:- 10.6.10-r0-ls79 Build-date:- 2022-12-30T23:46:51-06:00"
+      maintainer: "thelamer,nemchik"
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/mariadb-icon.png"
+      net.unraid.docker.managed: "dockerman"
+      org.opencontainers.image.authors: "linuxserver.io"
+      org.opencontainers.image.created: "2022-12-30T23:46:51-06:00"
+      org.opencontainers.image.description:
+        "[Mariadb](https://mariadb.org/) is one\
+        \ of the most popular database servers. Made by the original developers of\
+        \ MySQL."
+      org.opencontainers.image.documentation: "https://docs.linuxserver.io/images/docker-mariadb"
+      org.opencontainers.image.licenses: "GPL-3.0-only"
+      org.opencontainers.image.ref.name: "f495d83ec26d6d21357c3943f997c2dc1b196a31"
+      org.opencontainers.image.revision: "f495d83ec26d6d21357c3943f997c2dc1b196a31"
+      org.opencontainers.image.source: "https://github.com/linuxserver/docker-mariadb"
+      org.opencontainers.image.title: "Mariadb"
+      org.opencontainers.image.url: "https://github.com/linuxserver/docker-mariadb/packages"
+      org.opencontainers.image.vendor: "linuxserver.io"
+      org.opencontainers.image.version: "10.6.10-r0-ls79"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "3306:3306/tcp"
+    restart: "unless-stopped"
+    volumes:
+      - "/mnt/cache/appdata/mariadb:/config"
+    working_dir: "/"
+
+  nextcloud:
+    container_name: "nextcloud"
+    entrypoint:
+      - "/init"
+    environment:
+      - "PUID=99"
+      - "PGID=100"
+      - "HOST_CONTAINERNAME=nextcloud"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "PS1=$(whoami)@$(hostname):$(pwd)\\$ "
+      - "HOME=/root"
+      - "TERM=xterm"
+      - "S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0"
+      - "NEXTCLOUD_PATH=/config/www/nextcloud"
+      - "LD_PRELOAD=/usr/lib/preloadable_libiconv.so"
+    hostname: "bde486b2ee1e"
+    image: "linuxserver/nextcloud"
+    ipc: "private"
+    labels:
+      build_version: "Linuxserver.io version:- 25.0.3-ls217 Build-date:- 2023-01-17T06:26:52-06:00"
+      maintainer: "aptalca"
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/nextcloud-icon.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "https://[IP]:[PORT:443]/"
+      org.opencontainers.image.authors: "linuxserver.io"
+      org.opencontainers.image.created: "2023-01-17T06:26:52-06:00"
+      org.opencontainers.image.description:
+        "[Nextcloud](https://nextcloud.com/) gives\
+        \ you access to all your files wherever you are.    Where are your photos\
+        \ and documents? With Nextcloud you pick a server of your choice, at home,\
+        \ in a data center or at a provider. And that is where your files will be.\
+        \ Nextcloud runs on that server, protecting your data and giving you access\
+        \ from your desktop or mobile devices. Through Nextcloud you also access,\
+        \ sync and share your existing data on that FTP drive at the office, a Dropbox\
+        \ or a NAS you have at home.  "
+      org.opencontainers.image.documentation: "https://docs.linuxserver.io/images/docker-nextcloud"
+      org.opencontainers.image.licenses: "GPL-3.0-only"
+      org.opencontainers.image.ref.name: "8c36f67e537a52c14abcb3cb5e1f871053e2968e"
+      org.opencontainers.image.revision: "8c36f67e537a52c14abcb3cb5e1f871053e2968e"
+      org.opencontainers.image.source: "https://github.com/linuxserver/docker-nextcloud"
+      org.opencontainers.image.title: "Nextcloud"
+      org.opencontainers.image.url: "https://github.com/linuxserver/docker-nextcloud/packages"
+      org.opencontainers.image.vendor: "linuxserver.io"
+      org.opencontainers.image.version: "25.0.3-ls217"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "444:443/tcp"
+    volumes:
+      - "/mnt/cache/appdata/nextcloud:/config"
+      - "/mnt/user/data/nextcloud:/data"
+    working_dir: "/"
+
+  ombi:
+    container_name: "ombi"
+    entrypoint:
+      - "/init"
+    environment:
+      - "HOST_CONTAINERNAME=ombi"
+      - "PUID=99"
+      - "PGID=100"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "HOME=/config"
+      - "TERM=xterm"
+      - "S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0"
+      - "S6_VERBOSITY=1"
+      - "S6_STAGE2_HOOK=/docker-mods"
+      - "DEBIAN_FRONTEND=noninteractive"
+    hostname: "5e16ed1d53b8"
+    image: "linuxserver/ombi"
+    ipc: "private"
+    labels:
+      build_version: "Linuxserver.io version:- v4.22.5-ls148 Build-date:- 2023-01-10T02:32:02-06:00"
+      maintainer: "aptalca"
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/ombi.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:3579]/"
+      org.opencontainers.image.authors: "linuxserver.io"
+      org.opencontainers.image.created: "2023-01-10T02:32:02-06:00"
+      org.opencontainers.image.description:
+        "[Ombi](https://ombi.io) allows you to\
+        \ host your own Plex Request and user management system.  If you are sharing\
+        \ your Plex server with other users, allow them to request new content using\
+        \ an easy to manage interface!  Manage all your requests for Movies and TV\
+        \ with ease, leave notes for the user and get notification when a user requests\
+        \ something.  Allow your users to post issues against their requests so you\
+        \ know there is a problem with the audio etc.  Even automatically send them\
+        \ weekly newsletters of new content that has been added to your Plex server!"
+      org.opencontainers.image.documentation: "https://docs.linuxserver.io/images/docker-ombi"
+      org.opencontainers.image.licenses: "GPL-3.0-only"
+      org.opencontainers.image.ref.name: "f15fcb2edbd1ffbc8a9e78005a68140b00d2a9e8"
+      org.opencontainers.image.revision: "f15fcb2edbd1ffbc8a9e78005a68140b00d2a9e8"
+      org.opencontainers.image.source: "https://github.com/linuxserver/docker-ombi"
+      org.opencontainers.image.title: "Ombi"
+      org.opencontainers.image.url: "https://github.com/linuxserver/docker-ombi/packages"
+      org.opencontainers.image.vendor: "linuxserver.io"
+      org.opencontainers.image.version: "v4.22.5-ls148"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "3579:3579/tcp"
+    volumes:
+      - "/mnt/cache/appdata/ombi:/config"
+    working_dir: "/"
+
+  organizr:
+    container_name: "organizr"
+    entrypoint:
+      - "/init"
+    environment:
+      - "HOST_CONTAINERNAME=organizr"
+      - "branch=develop"
+      - "PUID=99"
+      - "PGID=100"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "S6_REL=2.2.0.3"
+      - "S6_ARCH=amd64"
+      - "S6_BEHAVIOUR_IF_STAGE2_FAILS=2"
+      - "PS1=$(whoami)@$(hostname):$(pwd)$ "
+      - "HOME=/root"
+      - "TERM=xterm"
+      - "fpm=false"
+    hostname: "1bda5f97d56b"
+    image: "organizr/organizr"
+    ipc: "private"
+    labels:
+      base.maintainer: "christronyxyocum,Roxedus"
+      base.s6.arch: "amd64"
+      base.s6.rel: "2.2.0.3"
+      maintainer: "christronyxyocum,Roxedus"
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/causefx/Organizr/v2-master/plugins/images/organizr/logo-no-border.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:80]/"
+      org.label-schema.description: "Baseimage for Organizr"
+      org.label-schema.name: "organizr/base"
+      org.label-schema.schema-version: "1.0"
+      org.label-schema.url: "https://organizr.app/"
+      org.label-schema.vcs-url: "https://github.com/organizr/docker-base"
+      org.opencontainers.image.created: "2022-05-08_15"
+      org.opencontainers.image.source: "https://github.com/Organizr/docker-organizr/tree/master"
+      org.opencontainers.image.title: "organizr/base"
+      org.opencontainers.image.url: "https://github.com/Organizr/docker-organizr/blob/master/README.md"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "280:80/tcp"
+    volumes:
+      - "/mnt/cache/appdata/organizrv2:/config"
+
+  overseerr:
+    container_name: "overseerr"
+    entrypoint:
+      - "/init"
+    environment:
+      - "HOST_CONTAINERNAME=overseerr"
+      - "PUID=99"
+      - "PGID=100"
+      - "UMASK=002"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "APP_DIR=/app"
+      - "CONFIG_DIR=/config"
+      - "ARGS="
+      - "XDG_CONFIG_HOME=/config/.config"
+      - "XDG_CACHE_HOME=/config/.cache"
+      - "XDG_DATA_HOME=/config/.local/share"
+      - "LANG=C.UTF-8"
+      - "LC_ALL=C.UTF-8"
+      - "S6_BEHAVIOUR_IF_STAGE2_FAILS=2"
+      - "S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0"
+      - "BUILD_ARCHITECTURE=linux-amd64"
+    hostname: "a765fe876133"
+    image: "cr.hotio.dev/hotio/overseerr"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://hotio.dev/webhook-avatars/overseerr.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:5055]"
+      org.opencontainers.image.created: "2022-12-20T10:49:54Z"
+      org.opencontainers.image.revision: "31407c3143b041de8ce514d464fc74d754fd968a"
+      org.opencontainers.image.source: "https://github.com/hotio/overseerr/tree/release"
+      org.opencontainers.image.title: "hotio/overseerr:release"
+      org.opencontainers.image.url: "https://github.com/hotio/overseerr/blob/master/README.md"
+      org.opencontainers.image.vendor: "hotio"
+      org.opencontainers.image.version: "1.31.0"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "5055:5055/tcp"
+    volumes:
+      - "/mnt/cache/appdata/overseerr:/config"
+
+  petio:
+    container_name: "petio"
+    entrypoint:
+      - "/init"
+    environment:
+      - "HOST_CONTAINERNAME=petio"
+      - "PUID=99"
+      - "PGID=100"
+      - "UMASK=002"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "APP_DIR=/app"
+      - "CONFIG_DIR=/config"
+      - "ARGS="
+      - "XDG_CONFIG_HOME=/config/.config"
+      - "XDG_CACHE_HOME=/config/.cache"
+      - "XDG_DATA_HOME=/config/.local/share"
+      - "S6_BEHAVIOUR_IF_STAGE2_FAILS=2"
+      - "BUILD_ARCHITECTURE=linux-amd64"
+    hostname: "1e013c4dd287"
+    image: "hotio/petio"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://hotio.dev/webhook-avatars/petio.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:7777]"
+      org.opencontainers.image.created: "2022-04-03T00:13:16Z"
+      org.opencontainers.image.revision: "90ee60ae6f22485140334a7981469193e9d1cb0c"
+      org.opencontainers.image.source: "https://github.com/hotio/petio/tree/release"
+      org.opencontainers.image.title: "hotio/petio:release"
+      org.opencontainers.image.url: "https://github.com/hotio/petio/blob/master/README.md"
+      org.opencontainers.image.vendor: "hotio"
+      org.opencontainers.image.version: "0.5.4"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "7777:7777/tcp"
+    volumes:
+      - "/mnt/cache/appdata/petio:/config"
+
+  pihole-template:
+    container_name: "pihole-template"
+    entrypoint:
+      - "/s6-init"
+    environment:
+      - "UDP_PORT_53=53"
+      - "TCP_PORT_443=443"
+      - "ServerIPv6="
+      - "ServerIP=192.168.1.181"
+      - "WEBUIBOXEDLAYOUT=boxed"
+      - "TCP_PORT_53=53"
+      - "INTERFACE=br0"
+      - "IPv6=False"
+      - "DNS2=1.0.0.1"
+      - "DNSMASQ_LISTENING=all"
+      - "PIHOLE_DNS_=8.8.8.8;8.8.4.4"
+      - "HOST_CONTAINERNAME=pihole-template"
+      - "UDP_PORT_67=67"
+      - "TCP_PORT_80=80"
+      - "DNS1=1.1.1.1"
+      - "PATH=/opt/pihole:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "phpver=php"
+      - "PHP_ENV_CONFIG=/etc/lighttpd/conf-enabled/15-pihole-admin.conf"
+      - "PHP_ERROR_LOG=/var/log/lighttpd/error-pihole.log"
+      - "S6_KEEP_ENV=1"
+      - "S6_BEHAVIOUR_IF_STAGE2_FAILS=2"
+      - "S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0"
+      - "FTLCONF_LOCAL_IPV4=0.0.0.0"
+      - "VIRTUAL_HOST="
+      - "FTL_CMD=no-daemon"
+      - "DNSMASQ_USER=pihole"
+    expose:
+      - "53/tcp"
+      - "53/udp"
+      - "67/udp"
+      - "80/tcp"
+    hostname: "4c8cff056222"
+    image: "pihole/pihole:latest"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://i.imgur.com/OWkNcEn.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:80]/admin"
+      org.opencontainers.image.created: "2023-01-16T08:47:31.607Z"
+      org.opencontainers.image.description: "Pi-hole in a docker container"
+      org.opencontainers.image.licenses: ""
+      org.opencontainers.image.revision: "45d5fa753a0dcd6f31687aeaa8f63f7a0ab7cd7c"
+      org.opencontainers.image.source: "https://github.com/pi-hole/docker-pi-hole"
+      org.opencontainers.image.title: "docker-pi-hole"
+      org.opencontainers.image.url: "https://github.com/pi-hole/docker-pi-hole"
+      org.opencontainers.image.version: "2023.01"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "br0"
+    restart: "unless-stopped"
+    volumes:
+      - "/mnt/cache/appdata/pihole/dnsmasq.d:/etc/dnsmasq.d"
+      - "/mnt/cache/appdata/pihole/pihole:/etc/pihole"
+
+  plex:
+    container_name: "plex"
+    devices:
+      - "/dev/dri:/dev/dri"
+    entrypoint:
+      - "/init"
+    environment:
+      - "HOST_CONTAINERNAME=plex"
+      - "UMASK=022"
+      - "VERSION=docker"
+      - "PUID=99"
+      - "PGID=100"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "HOME=/root"
+      - "TERM=xterm"
+      - "S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0"
+      - "S6_VERBOSITY=1"
+      - "S6_STAGE2_HOOK=/docker-mods"
+      - "NVIDIA_DRIVER_CAPABILITIES=compute,video,utility"
+      - "DEBIAN_FRONTEND=noninteractive"
+      - "PLEX_DOWNLOAD=https://downloads.plex.tv/plex-media-server-new"
+      - "PLEX_ARCH=amd64"
+      - "PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR=/config/Library/Application Support"
+      - "PLEX_MEDIA_SERVER_HOME=/usr/lib/plexmediaserver"
+      - "PLEX_MEDIA_SERVER_MAX_PLUGIN_PROCS=6"
+      - "PLEX_MEDIA_SERVER_USER=abc"
+      - "PLEX_MEDIA_SERVER_INFO_VENDOR=Docker"
+      - "PLEX_MEDIA_SERVER_INFO_DEVICE=Docker Container (LinuxServer.io)"
+    expose:
+      - "1900/udp"
+      - "3005/tcp"
+      - "32400/tcp"
+      - "32410/udp"
+      - "32412/udp"
+      - "32413/udp"
+      - "32414/udp"
+      - "32469/tcp"
+      - "5353/udp"
+      - "8324/tcp"
+    hostname: "AustinServer"
+    image: "lscr.io/linuxserver/plex"
+    ipc: "private"
+    labels:
+      build_version:
+        "Linuxserver.io version:- 1.30.1.6562-915986d62-ls148 Build-date:-\
+        \ 2023-01-10T21:49:53+01:00"
+      maintainer: "thelamer"
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/plex-logo.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:32400]/web/index.html"
+      org.opencontainers.image.authors: "linuxserver.io"
+      org.opencontainers.image.created: "2023-01-10T21:49:53+01:00"
+      org.opencontainers.image.description:
+        "[Plex](https://plex.tv) organizes video,\
+        \ music and photos from personal media libraries and streams them to smart\
+        \ TVs, streaming boxes and mobile devices. This container is packaged as a\
+        \ standalone Plex Media Server. has always been a top priority. Straightforward\
+        \ design and bulk actions mean getting things done faster."
+      org.opencontainers.image.documentation: "https://docs.linuxserver.io/images/docker-plex"
+      org.opencontainers.image.licenses: "GPL-3.0-only"
+      org.opencontainers.image.ref.name: "8d73aa5c12d2eb00438f9cbf05bae0bbc6463840"
+      org.opencontainers.image.revision: "8d73aa5c12d2eb00438f9cbf05bae0bbc6463840"
+      org.opencontainers.image.source: "https://github.com/linuxserver/docker-plex"
+      org.opencontainers.image.title: "Plex"
+      org.opencontainers.image.url: "https://github.com/linuxserver/docker-plex/packages"
+      org.opencontainers.image.vendor: "linuxserver.io"
+      org.opencontainers.image.version: "1.30.1.6562-915986d62-ls148"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    network_mode: "host"
+    volumes:
+      - "/mnt/user/temp/Transcode:/transcode"
+      - "/mnt/cache/appdata/plex:/config"
+      - "/mnt/user/data/media:/data"
+    working_dir: "/"
+
+  prowlarr:
+    container_name: "prowlarr"
+    entrypoint:
+      - "/init"
+    environment:
+      - "PUID=99"
+      - "PGID=100"
+      - "UMASK=022"
+      - "HOST_CONTAINERNAME=prowlarr"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "PS1=$(whoami)@$(hostname):$(pwd)\\$ "
+      - "HOME=/root"
+      - "TERM=xterm"
+      - "S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0"
+      - "S6_VERBOSITY=1"
+      - "S6_STAGE2_HOOK=/docker-mods"
+      - "XDG_CONFIG_HOME=/config/xdg"
+    hostname: "2890abe72ad6"
+    image: "ghcr.io/linuxserver/prowlarr:develop"
+    ipc: "private"
+    labels:
+      build_version: "Linuxserver.io version:- 1.1.0.2322-ls85 Build-date:- 2023-01-16T20:46:00-06:00"
+      maintainer: "Roxedus,thespad"
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/prowlarr-logo.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:9696]"
+      org.opencontainers.image.authors: "linuxserver.io"
+      org.opencontainers.image.created: "2023-01-16T20:46:00-06:00"
+      org.opencontainers.image.description:
+        "[Prowlarr](https://github.com/Prowlarr/Prowlarr)\
+        \ is a indexer manager/proxy built on the popular arr .net/reactjs base stack\
+        \ to integrate with your various PVR apps. Prowlarr supports both Torrent\
+        \ Trackers and Usenet Indexers. It integrates seamlessly with Sonarr, Radarr,\
+        \ Lidarr, and Readarr offering complete management of your indexers with no\
+        \ per app Indexer setup required (we do it all).  "
+      org.opencontainers.image.documentation: "https://docs.linuxserver.io/images/docker-prowlarr"
+      org.opencontainers.image.licenses: "GPL-3.0-only"
+      org.opencontainers.image.ref.name: "ae5d139546a0445844fee205fd3de89f152f47c4"
+      org.opencontainers.image.revision: "ae5d139546a0445844fee205fd3de89f152f47c4"
+      org.opencontainers.image.source: "https://github.com/linuxserver/docker-prowlarr"
+      org.opencontainers.image.title: "Prowlarr"
+      org.opencontainers.image.url: "https://github.com/linuxserver/docker-prowlarr/packages"
+      org.opencontainers.image.vendor: "linuxserver.io"
+      org.opencontainers.image.version: "1.1.0.2322-ls85"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "9696:9696/tcp"
+    volumes:
+      - "/mnt/cache/appdata/prowlarr:/config"
+    working_dir: "/"
+
+  pwm:
+    command:
+      - "catalina.sh"
+      - "run"
+    container_name: "pwm"
+    environment:
+      - "HOST_CONTAINERNAME=pwm"
+      - "PWM_APPLICATIONFLAGS=NoFileLock"
+      - "PATH=/usr/local/tomcat/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "JAVA_HOME=/docker-java-home"
+      - "JAVA_VERSION=11.0.3"
+      - "JAVA_DEBIAN_VERSION=11.0.3+1-1~bpo9+1"
+      - "CATALINA_HOME=/usr/local/tomcat"
+      - "TOMCAT_NATIVE_LIBDIR=/usr/local/tomcat/native-jni-lib"
+      - "LD_LIBRARY_PATH=/usr/local/tomcat/native-jni-lib"
+      - "OPENSSL_VERSION=1.1.0j-1~deb9u1"
+      - "TOMCAT_MAJOR=9"
+      - "TOMCAT_VERSION=9.0.20"
+      - "TOMCAT_SHA512=6d2df51f0bfc6a90cfca61c86473b8843da4162c430ab06b8f66f364931f3d8a3ad399703acdd600ff4f633d7d6725edf05d5d5d19534716a2f3f9f5238a32a0"
+      - "TOMCAT_TGZ_URLS=https://www.apache.org/dyn/closer.cgi?action=download&filename=tomcat/tomcat-9/v9.0.20/bin/apache-tomcat-9.0.20.tar.gz\
+        \ \thttps://www-us.apache.org/dist/tomcat/tomcat-9/v9.0.20/bin/apache-tomcat-9.0.20.tar.gz\
+        \ \thttps://www.apache.org/dist/tomcat/tomcat-9/v9.0.20/bin/apache-tomcat-9.0.20.tar.gz\
+        \ \thttps://archive.apache.org/dist/tomcat/tomcat-9/v9.0.20/bin/apache-tomcat-9.0.20.tar.gz"
+      - "TOMCAT_ASC_URLS=https://www.apache.org/dyn/closer.cgi?action=download&filename=tomcat/tomcat-9/v9.0.20/bin/apache-tomcat-9.0.20.tar.gz.asc\
+        \ \thttps://www-us.apache.org/dist/tomcat/tomcat-9/v9.0.20/bin/apache-tomcat-9.0.20.tar.gz.asc\
+        \ \thttps://www.apache.org/dist/tomcat/tomcat-9/v9.0.20/bin/apache-tomcat-9.0.20.tar.gz.asc\
+        \ \thttps://archive.apache.org/dist/tomcat/tomcat-9/v9.0.20/bin/apache-tomcat-9.0.20.tar.gz.asc"
+      - "MYSQL_DRIVER_VERSION=8.0.15"
+      - "POSTGRES_DRIVER_VERSION=42.2.5"
+      - "MONGODB_DRIVER_VERSION=3.9.1"
+      - "MARIADB_DRIVER_VERSION=2.4.0"
+      - "PWM_HOME=/usr/local/tomcat/webapps/pwm"
+      - "PWM_APPLICATIONPATH=/usr/share/pwm"
+    hostname: "15f7294b1302"
+    image: "fjudith/pwm"
+    ipc: "private"
+    labels:
+      maintainer: "Florian JUDITH <florian.judith.b@gmail.com>"
+      net.unraid.docker.icon: "https://i.imgur.com/dAMqu51.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:8282]/"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "8282:8080/tcp"
+    restart: "unless-stopped"
+    user: "pwm"
+    volumes:
+      - "/mnt/cache/appdata/pwm:/usr/share/pwm"
+    working_dir: "/usr/local/tomcat"
+
+  qbittorrentvpn:
+    command:
+      - "/bin/bash"
+      - "/usr/local/bin/init.sh"
+    container_name: "qbittorrentvpn"
+    entrypoint:
+      - "/usr/bin/dumb-init"
+      - "--"
+    environment:
+      - "WEBUI_PORT=8082"
+      - "LAN_NETWORK=192.168.1.0/24"
+      - "VPN_INPUT_PORTS="
+      - "HOST_CONTAINERNAME=qbittorrentvpn"
+      - "VPN_PROV=pia"
+      - "STRICT_PORT_FORWARD=yes"
+      - "ENABLE_PRIVOXY=no"
+      - "UMASK=000"
+      - "PGID=100"
+      - "VPN_ENABLED=yes"
+      - "VPN_CLIENT=wireguard"
+      - "PUID=99"
+      - "VPN_OPTIONS="
+      - "NAME_SERVERS=209.222.18.222,84.200.69.80,37.235.1.174,1.1.1.1,209.222.18.218,37.235.1.177,84.200.70.40,1.0.0.1"
+      - "DEBUG=false"
+      - "VPN_OUTPUT_PORTS="
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "HOME=/home/nobody"
+      - "TERM=xterm"
+    hostname: "a6f044785dfc"
+    image: "binhex/arch-qbittorrentvpn:4.4.5-2-02"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/binhex/docker-templates/master/binhex/images/qbittorrent-icon.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:8082]/"
+      org.opencontainers.image.authors: "= binhex"
+      org.opencontainers.image.source: "= https://github.com/binhex/arch-qbittorrentvpn"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "6881:6881/tcp"
+      - "6881:6881/udp"
+      - "8082:8082/tcp"
+      - "8118:8118/tcp"
+    privileged: true
+    security_opt:
+      - "label=disable"
+    volumes:
+      - "/mnt/user/appdata/binhex-qbittorrentvpn:/config"
+      - "/mnt/user/data:/data"
+      - "/mnt/cache/appdata/binhex-qbittorrentvpn/vuetorrent:/vuetorrent"
+
+  radarr:
+    container_name: "radarr"
+    entrypoint:
+      - "/init"
+    environment:
+      - "HOST_CONTAINERNAME=radarr"
+      - "PUID=99"
+      - "PGID=100"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "PS1=$(whoami)@$(hostname):$(pwd)\\$ "
+      - "HOME=/root"
+      - "TERM=xterm"
+      - "S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0"
+      - "XDG_CONFIG_HOME=/config/xdg"
+    hostname: "0fa819aed414"
+    image: "linuxserver/radarr"
+    ipc: "private"
+    labels:
+      build_version: "Linuxserver.io version:- 4.3.2.6857-ls159 Build-date:- 2023-01-03T18:47:20-06:00"
+      maintainer: "thelamer"
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/radarr.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:7878]"
+      org.opencontainers.image.authors: "linuxserver.io"
+      org.opencontainers.image.created: "2023-01-03T18:47:20-06:00"
+      org.opencontainers.image.description:
+        "[Radarr](https://github.com/Radarr/Radarr)\
+        \ - A fork of Sonarr to work with movies à la Couchpotato.  "
+      org.opencontainers.image.documentation: "https://docs.linuxserver.io/images/docker-radarr"
+      org.opencontainers.image.licenses: "GPL-3.0-only"
+      org.opencontainers.image.ref.name: "ce75c340c7332cbfea6836b8302d1c54d330471f"
+      org.opencontainers.image.revision: "ce75c340c7332cbfea6836b8302d1c54d330471f"
+      org.opencontainers.image.source: "https://github.com/linuxserver/docker-radarr"
+      org.opencontainers.image.title: "Radarr"
+      org.opencontainers.image.url: "https://github.com/linuxserver/docker-radarr/packages"
+      org.opencontainers.image.vendor: "linuxserver.io"
+      org.opencontainers.image.version: "4.3.2.6857-ls159"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "7878:7878/tcp"
+    volumes:
+      - "/mnt/cache/appdata/radarr:/config"
+      - "/mnt/user/data:/data"
+    working_dir: "/"
+
+  readarr:
+    container_name: "readarr"
+    entrypoint:
+      - "/init"
+    environment:
+      - "PGID=100"
+      - "UMASK=002"
+      - "HOST_CONTAINERNAME=readarr"
+      - "PUID=99"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "APP_DIR=/app"
+      - "CONFIG_DIR=/config"
+      - "ARGS="
+      - "XDG_CONFIG_HOME=/config/.config"
+      - "XDG_CACHE_HOME=/config/.cache"
+      - "XDG_DATA_HOME=/config/.local/share"
+      - "S6_BEHAVIOUR_IF_STAGE2_FAILS=2"
+      - "S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0"
+      - "BUILD_ARCHITECTURE=linux-amd64"
+    hostname: "9b9fc1246c4b"
+    image: "hotio/readarr:nightly"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://hotio.dev/webhook-avatars/readarr.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:8787]"
+      org.opencontainers.image.created: "2023-01-17T14:58:23Z"
+      org.opencontainers.image.revision: "11e33d6d96e045f6b9f547ae12e4e673a7234ce9"
+      org.opencontainers.image.source: "https://github.com/hotio/readarr/tree/nightly"
+      org.opencontainers.image.title: "hotio/readarr:nightly"
+      org.opencontainers.image.url: "https://github.com/hotio/readarr/blob/master/README.md"
+      org.opencontainers.image.vendor: "hotio"
+      org.opencontainers.image.version: "0.1.1.1527"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "8787:8787/tcp"
+    volumes:
+      - "/mnt/cache/appdata/readarr:/config"
+      - "/mnt/user/data/media/books:/books"
+      - "/mnt/user/data/media/calibre:/calibre"
+      - "/mnt/user/data/torrents:/data/torrents"
+
+  redis:
+    command:
+      - "/opt/bitnami/scripts/redis/run.sh"
+    container_name: "redis"
+    entrypoint:
+      - "/opt/bitnami/scripts/redis/entrypoint.sh"
+    environment:
+      - "HOST_CONTAINERNAME=redis"
+      - "ALLOW_EMPTY_PASSWORD=no"
+      - "PATH=/opt/bitnami/common/bin:/opt/bitnami/redis/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "HOME=/"
+      - "OS_ARCH=amd64"
+      - "OS_FLAVOUR=debian-11"
+      - "OS_NAME=linux"
+      - "APP_VERSION=7.0.8"
+      - "BITNAMI_APP_NAME=redis"
+    hostname: "4c0046597c1d"
+    image: "bitnami/redis:latest"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/A75G/docker-templates/master/templates/icons/redis.png"
+      net.unraid.docker.managed: "dockerman"
+      org.opencontainers.image.authors: "https://bitnami.com/contact"
+      org.opencontainers.image.description: "Application packaged by Bitnami"
+      org.opencontainers.image.licenses: "Apache-2.0"
+      org.opencontainers.image.ref.name: "7.0.8-debian-11-r1"
+      org.opencontainers.image.source: "https://github.com/bitnami/containers/tree/main/bitnami/redis"
+      org.opencontainers.image.title: "redis"
+      org.opencontainers.image.vendor: "VMware, Inc."
+      org.opencontainers.image.version: "7.0.8"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "6379:6379/tcp"
+    restart: "unless-stopped"
+    user: "1001"
+
+  requestrr:
+    container_name: "requestrr"
+    entrypoint:
+      - "/init"
+    environment:
+      - "HOST_CONTAINERNAME=requestrr"
+      - "PUID=99"
+      - "PGID=100"
+      - "UMASK=002"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "APP_DIR=/app"
+      - "CONFIG_DIR=/config"
+      - "ARGS="
+      - "XDG_CONFIG_HOME=/config/.config"
+      - "XDG_CACHE_HOME=/config/.cache"
+      - "XDG_DATA_HOME=/config/.local/share"
+      - "S6_BEHAVIOUR_IF_STAGE2_FAILS=2"
+      - "BUILD_ARCHITECTURE=linux-amd64"
+    hostname: "ca5a65c8db35"
+    image: "hotio/requestrr"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://hotio.dev/webhook-avatars/requestrr.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:4545]"
+      org.opencontainers.image.created: "2022-09-02T14:09:10Z"
+      org.opencontainers.image.revision: "4d1f0c9e29bb1b97d0d0fc007d306a1fb0c9ceca"
+      org.opencontainers.image.source: "https://github.com/hotio/requestrr/tree/release"
+      org.opencontainers.image.title: "hotio/requestrr:release"
+      org.opencontainers.image.url: "https://github.com/hotio/requestrr/blob/master/README.md"
+      org.opencontainers.image.vendor: "hotio"
+      org.opencontainers.image.version: "2.1.2"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "4545:4545/tcp"
+    volumes:
+      - "/mnt/cache/appdata/requestrr:/config"
+
+  scrutiny:
+    command:
+      - "/init"
+    container_name: "scrutiny"
+    environment:
+      - "HOST_CONTAINERNAME=scrutiny"
+      - "PATH=/opt/scrutiny/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "INFLUXD_CONFIG_PATH=/opt/scrutiny/influxdb"
+    hostname: "7c28a36610b5"
+    image: "ghcr.io/analogj/scrutiny:master-omnibus"
+    ipc: "private"
+    labels:
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/selfhosters/unRAID-CA-templates/master/templates/img/scrutiny.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:8083]"
+      org.opencontainers.image.created: "2023-01-12T02:07:59.961Z"
+      org.opencontainers.image.description:
+        "Hard Drive S.M.A.R.T Monitoring, Historical\
+        \ Trends & Real World Failure Thresholds"
+      org.opencontainers.image.licenses: "MIT"
+      org.opencontainers.image.revision: "d49497da805327dec2a6dc33010676b260188e5a"
+      org.opencontainers.image.source: "https://github.com/AnalogJ/scrutiny"
+      org.opencontainers.image.title: "scrutiny"
+      org.opencontainers.image.url: "https://github.com/AnalogJ/scrutiny"
+      org.opencontainers.image.version: "master-omnibus"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "8083:8080/tcp"
+    privileged: true
+    security_opt:
+      - "label=disable"
+    volumes:
+      - "/mnt/cache/appdata/scrutiny:/opt/scrutiny/influxdb"
+      - "/run/udev:/run/udev:ro"
+      - "/dev/disk:/dev/disk:ro"
+      - "/mnt/cache/appdata/scrutiny:/opt/scrutiny/config"
+    working_dir: "/opt/scrutiny"
+
+  sonarr:
+    container_name: "sonarr"
+    entrypoint:
+      - "/init"
+    environment:
+      - "HOST_CONTAINERNAME=sonarr"
+      - "PUID=99"
+      - "PGID=100"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "HOME=/root"
+      - "TERM=xterm"
+      - "S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0"
+      - "XDG_CONFIG_HOME=/config/xdg"
+      - "SONARR_BRANCH=main"
+    hostname: "9485efda5f60"
+    image: "linuxserver/sonarr"
+    ipc: "private"
+    labels:
+      build_version: "Linuxserver.io version:- 3.0.9.1549-ls173 Build-date:- 2023-01-17T14:41:36+01:00"
+      maintainer: "aptalca"
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/sonarr-icon.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:8989]/"
+      org.opencontainers.image.authors: "linuxserver.io"
+      org.opencontainers.image.created: "2023-01-17T14:41:36+01:00"
+      org.opencontainers.image.description:
+        "[Sonarr](https://sonarr.tv/) (formerly\
+        \ NZBdrone) is a PVR for usenet and bittorrent users. It can monitor multiple\
+        \ RSS feeds for new episodes of your favorite shows and will grab, sort and\
+        \ rename them. It can also be configured to automatically upgrade the quality\
+        \ of files already downloaded when a better quality format becomes available.\
+        \  "
+      org.opencontainers.image.documentation: "https://docs.linuxserver.io/images/docker-sonarr"
+      org.opencontainers.image.licenses: "GPL-3.0-only"
+      org.opencontainers.image.ref.name: "dc0f2800cdf765afd9bde5a22feeb882da5eec1f"
+      org.opencontainers.image.revision: "dc0f2800cdf765afd9bde5a22feeb882da5eec1f"
+      org.opencontainers.image.source: "https://github.com/linuxserver/docker-sonarr"
+      org.opencontainers.image.title: "Sonarr"
+      org.opencontainers.image.url: "https://github.com/linuxserver/docker-sonarr/packages"
+      org.opencontainers.image.vendor: "linuxserver.io"
+      org.opencontainers.image.version: "3.0.9.1549-ls173"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "8989:8989/tcp"
+    volumes:
+      - "/mnt/user/data:/data"
+      - "/mnt/cache/appdata/sonarr:/config"
+      - "/dev/rtc:/dev/rtc:ro"
+    working_dir: "/"
+
+  tautulli:
+    command:
+      - "python"
+      - "Tautulli.py"
+      - "--datadir"
+      - "/config"
+    container_name: "tautulli"
+    entrypoint:
+      - "./start.sh"
+    environment:
+      - "HOST_CONTAINERNAME=tautulli"
+      - "PUID=99"
+      - "PGID=100"
+      - "TZ=UTC"
+      - "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "GPG_KEY=${TAUTULLI_GPG_KEY}"
+      - "PYTHON_VERSION=3.9.16"
+      - "PYTHON_PIP_VERSION=22.0.4"
+      - "PYTHON_SETUPTOOLS_VERSION=58.1.0"
+      - "PYTHON_GET_PIP_URL=https://github.com/pypa/get-pip/raw/66030fa03382b4914d4c4d0896961a0bdeeeb274/public/get-pip.py"
+      - "PYTHON_GET_PIP_SHA256=1e501cf004eac1b7eb1f97266d28f995ae835d30250bec7f8850562703067dc6"
+      - "TAUTULLI_DOCKER=True"
+    hostname: "18dfef11326e"
+    image: "tautulli/tautulli:latest"
+    ipc: "private"
+    labels:
+      maintainer: "Tautulli"
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/Tautulli/Tautulli-Unraid-Template/master/img/logo-circle.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:8181]/"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "8181:8181/tcp"
+    volumes:
+      - "/mnt/cache/appdata/plex/Library/Application Support/Plex Media Server/Logs:/plexlogs"
+      - "/mnt/cache/appdata/tautulli:/config"
+    working_dir: "/app"
+
+  unmanic:
+    container_name: "unmanic"
+    devices:
+      - "/dev/dri:/dev/dri"
+    entrypoint:
+      - "/init"
+    environment:
+      - "NVIDIA_PATCH_VERSION="
+      - "HOST_CONTAINERNAME=unmanic"
+      - "PUID=99"
+      - "PGID=100"
+      - "NVIDIA_VISIBLE_DEVICES=all"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "HOME=/root"
+      - "TERM=xterm"
+      - "LIBVA_DRIVERS_PATH=/usr/lib/x86_64-linux-gnu/dri"
+      - "NVIDIA_DRIVER_CAPABILITIES=compute,video,utility"
+    hostname: "0710a075ff90"
+    image: "josh5/unmanic:latest"
+    ipc: "private"
+    labels:
+      build_version: "Linuxserver.io version:- bcd93376-ls76 Build-date:- 2022-05-24T07:06:17+02:00"
+      maintainer: "Josh.5 <jsunnex@gmail.com>"
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/Unmanic/unmanic/master/icon.png"
+      net.unraid.docker.managed: "dockerman"
+      net.unraid.docker.webui: "http://[IP]:[PORT:8889]/"
+      org.opencontainers.image.authors: "linuxserver.io"
+      org.opencontainers.image.created: "2022-05-24T07:06:17+02:00"
+      org.opencontainers.image.description: "baseimage-ubuntu image by linuxserver.io"
+      org.opencontainers.image.documentation: "https://docs.linuxserver.io/images/docker-baseimage-ubuntu"
+      org.opencontainers.image.licenses: "GPL-3.0-only"
+      org.opencontainers.image.ref.name: "ad251d995a46272992e8f464e234c0f149d60f23"
+      org.opencontainers.image.revision: "ad251d995a46272992e8f464e234c0f149d60f23"
+      org.opencontainers.image.source: "https://github.com/linuxserver/docker-baseimage-ubuntu"
+      org.opencontainers.image.title: "Baseimage-ubuntu"
+      org.opencontainers.image.url: "https://github.com/linuxserver/docker-baseimage-ubuntu/packages"
+      org.opencontainers.image.vendor: "linuxserver.io"
+      org.opencontainers.image.version: "bcd93376-ls76"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "500m"
+    networks:
+      - "khaneproxy"
+    ports:
+      - "8889:8888/tcp"
+    volumes:
+      - "/mnt/user/data/media/pictures:/library/pictures"
+      - "/mnt/user/data/media/tv:/library/tv"
+      - "/mnt/user/temp:/tmp/unmanic"
+      - "/mnt/cache/appdata/unmanic:/config"
+      - "/mnt/user/data/media/movies:/library/movies"
+      - "/mnt/user/data/media/music:/library/music"
+
+  # hbbs:
+  #   container_name: hbbs
+  #   ports:
+  #     - 21115:21115
+  #     - 21116:21116
+  #     - 21116:21116/udp
+  #     - 21118:21118
+  #   image: rustdesk/rustdesk-server:latest
+  #   command: hbbs -r example.com:21117
+  #   volumes:
+  #     - /mnt/cache/appdata/rustdesk-hbbs/:/root
+  #   networks:
+  #     - "khaneproxy"
+  #   depends_on:
+  #     - hbbr
+  #   restart: unless-stopped
+  #
+  # hbbr:
+  #   container_name: hbbr
+  #   ports:
+  #     - 21117:21117
+  #     - 21119:21119
+  #   image: rustdesk/rustdesk-server:latest
+  #   command: hbbr
+  #   volumes:
+  #     - /mnt/cache/appdata/rustdesk-hbbr:/root
+  #   networks:
+  #     - "khaneproxy"
+  #   restart: unless-stopped
+
+networks:
+  br0:
+    external: true
+    name: "br0"
+  khaneproxy:
+    external: true
+    name: "khaneproxy"
+
+volumes:
+  2f61d5237e670c17a851f4463b70f1d144cc3b5fb0acf2619e6d8decf7f6f265:
+    external: true
+  697744c7847508a1454454aad57d5870c67d7934fb068642cc4be988c093866d:
+    external: true
+  8421139ee4fc3ad24cd921057458ec110736bc4c11a747fa791cb69c581fec73:
+    external: true
+  8fe2e2394d8c8d2a0dd3afdb7ec33b7092d53010eab53cf3317f57b7feb20a08:
+    external: true
+  96e3ee4889f8dfc2ed4474e514b938365558420da2b756a1c085f9d53673a5ba:
+    external: true
+  ef9cf24bea51f4fb04afc6cf1ea059e8c926d938d5ffe18acb0d55f180d31258:
+    external: true

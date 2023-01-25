@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>calibre</Name>
+  <Repository>lscr.io/linuxserver/calibre</Repository>
+  <Registry>https://github.com/orgs/linuxserver/packages/container/package/calibre</Registry>
+  <Network>khaneproxy</Network>
+  <MyIP/>
+  <Shell>bash</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/linuxserver/docker-calibre/issues/new/choose</Support>
+  <Project>https://calibre-ebook.com/</Project>
+  <Overview>Calibre(https://calibre-ebook.com/) is a powerful and easy to use e-book manager. Users say it&#x2019;s outstanding and a must-have. It&#x2019;ll allow you to do nearly everything and it takes things a step beyond normal e-book software. It&#x2019;s also completely free and open source and great for both casual users and computer experts.</Overview>
+  <Category/>
+  <WebUI>http://[IP]:[PORT:8080]</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/linuxserver/templates/main/unraid/calibre.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/calibre-logo.png</Icon>
+  <ExtraParams>-m 1G</ExtraParams>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1635529562</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>Calibre(https://calibre-ebook.com/) is a powerful and easy to use e-book manager. Users say it&#x2019;s outstanding and a must-have. It&#x2019;ll allow you to do nearly everything and it takes things a step beyond normal e-book software. It&#x2019;s also completely free and open source and great for both casual users and computer experts.</Description>
+  <Networking>
+    <Mode>khaneproxy</Mode>
+    <Publish>
+      <Port>
+        <HostPort>8084</HostPort>
+        <ContainerPort>8080</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+      <Port>
+        <HostPort>8085</HostPort>
+        <ContainerPort>8081</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/data/media/books/</HostDir>
+      <ContainerDir>/books</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/appdata/calibre</HostDir>
+      <ContainerDir>/config</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment>
+    <Variable>
+      <Value/>
+      <Name>CLI_ARGS</Name>
+      <Mode>{3}</Mode>
+    </Variable>
+    <Variable>
+      <Value>TRUE</Value>
+      <Name>DISABLE_AUTH </Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>99</Value>
+      <Name>PUID</Name>
+      <Mode>{3}</Mode>
+    </Variable>
+    <Variable>
+      <Value>100</Value>
+      <Name>PGID</Name>
+      <Mode>{3}</Mode>
+    </Variable>
+    <Variable>
+      <Value>022</Value>
+      <Name>UMASK</Name>
+      <Mode>{3}</Mode>
+    </Variable>
+  </Environment>
+  <Labels/>
+  <Config Name="WebUI" Target="8080" Default="8080" Mode="tcp" Description="Calibre desktop gui." Type="Port" Display="always" Required="true" Mask="false">8084</Config>
+  <Config Name="Port: 8081" Target="8081" Default="8081" Mode="tcp" Description="Calibre webserver gui." Type="Port" Display="always" Required="true" Mask="false">8085</Config>
+  <Config Name="CLI_ARGS" Target="CLI_ARGS" Default="" Mode="{3}" Description="Optionally pass cli start arguments to calibre." Type="Variable" Display="always" Required="false" Mask="false"/>
+  <Config Name="Books" Target="/books" Default="" Mode="rw" Description="Container Path: /books" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/data/media/books/</Config>
+  <Config Name="Host Key 2" Target="DISABLE_AUTH " Default="" Mode="" Description="Container Variable: DISABLE_AUTH " Type="Variable" Display="always" Required="false" Mask="false">TRUE</Config>
+  <Config Name="Appdata" Target="/config" Default="" Mode="rw" Description="Where calibre should store its database and library." Type="Path" Display="advanced" Required="true" Mask="false">/mnt/user/appdata/calibre</Config>
+  <Config Name="PUID" Target="PUID" Default="99" Mode="{3}" Description="Container Variable: PUID" Type="Variable" Display="advanced" Required="true" Mask="false">99</Config>
+  <Config Name="PGID" Target="PGID" Default="100" Mode="{3}" Description="Container Variable: PGID" Type="Variable" Display="advanced" Required="true" Mask="false">100</Config>
+  <Config Name="UMASK" Target="UMASK" Default="022" Mode="{3}" Description="Container Variable: UMASK" Type="Variable" Display="advanced" Required="false" Mask="false">022</Config>
+</Container>
