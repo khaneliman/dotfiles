@@ -1,14 +1,20 @@
+[init]
+	defaultBranch = main
+
+[pull]
+	rebase = true
+
+[fetch]
+	prune = true
+
+[diff]
+	colorMoved = zebra
+
 [filter "lfs"]
 	process = git-lfs filter-process
 	required = true
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
-
-# Set up user commit info
-# [user]
-# 	name = Austin Horstman
-# 	email = khaneliman12@gmail.com
-# 	signingkey = ssh-ed25519 
 
 [alias]
 	# Shortening aliases
@@ -143,6 +149,20 @@
 ### Random dad joke if typo on git add
 	dad = !curl https://icanhazdadjoke.com/ && echo
 
+[gpg]
+	format = ssh
+# Uncomment if 1password ssh agent set up
+#[gpg "ssh"]
+#	program = /opt/1Password/op-ssh-sign
+[commit]
+	gpgsign = true
+
+# Set up user commit info
+# [user]
+# 	name = Austin Horstman
+# 	email = khaneliman12@gmail.com
+# 	signingkey = ssh-ed25519
+
 # Uncomment on linux with github desktop cli
 # [credential "https://github.com"]
 # 	helper =
@@ -158,11 +178,3 @@
 # [credential "https://gist.github.com"]
 # 	helper =
 # 	helper = !/opt/homebrew/bin/gh auth git-credential
-
-[gpg]
-	format = ssh
-# Uncomment if 1password ssh agent set up
-#[gpg "ssh"]
-#	program = /opt/1Password/op-ssh-sign
-[commit]
-	gpgsign = true
