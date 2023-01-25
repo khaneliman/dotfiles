@@ -71,6 +71,10 @@ mac_copy_configuration() {
 	cp -r "$DOTS_DIR"/macos/yabai/home/. ~
 }
 
+1password_ssh_link() {
+	mkdir -p ~/.1password && ln -s ~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock ~/.1password/agent.sock
+}
+
 mac_install() {
 
 	# Configure macOS
@@ -83,6 +87,8 @@ mac_install() {
 	# Installs
 	brew_install
 	bundle_install
+
+	1password_ssh_link
 
 	cat_theme_all
 

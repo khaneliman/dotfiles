@@ -3,6 +3,10 @@ fish_add_path "/opt/local/bin" "/opt/local/sbin" # Homebrew applications
 fish_add_path "$HOME"/kde/src/kdesrc-build # KDE src location
 fish_add_path /usr/lib/jvm/default/bin # java bin
 
+if [ -f ~/.config/op/plugins.sh ];
+    source ~/.config/op/plugins.sh
+end
+
 # pnpm
 set -gx PNPM_HOME "$HOME/.local/share/pnpm"
 set -gx PATH "$PNPM_HOME" $PATH
@@ -139,10 +143,10 @@ switch (uname)
     case Darwin
         eval $("/opt/homebrew/bin/brew" shellenv)
         
-            # Fetch on terminal open
-            if status is-interactive
-                fastfetch
-            end
+        # Fetch on terminal open
+        if status is-interactive
+            fastfetch
+        end
 
     case '*'
             echo Hi, stranger!
