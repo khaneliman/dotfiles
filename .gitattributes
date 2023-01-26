@@ -12,6 +12,8 @@ dots/server/docker/secrets.env filter=git-crypt diff=git-crypt
 
 dots/server/unraid/boot/config/plugins/compose.manager/projects/**/*.env filter=git-crypt diff=git-crypt
 
+dots/server/unraid/mnt/user/appdata/** filter=git-crypt diff=git-crypt
+
 dots/server/unraid/boot/config/plugins/dockerMan/templates-user/my-redis.xml filter=git-crypt diff=git-crypt
 dots/server/unraid/boot/config/plugins/dockerMan/templates-user/my-qbittorrentvpn.xml filter=git-crypt diff=git-crypt
 dots/server/unraid/boot/config/plugins/dockerMan/templates-user/my-Postgres11.xml filter=git-crypt diff=git-crypt
