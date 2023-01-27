@@ -1,0 +1,3 @@
+GO111MODULE=on
+GOMODCACHE=/home/khaneliman/Codelearning/go/pkg/mod
+GOPATH=/home/khaneliman/Codelearning/go
