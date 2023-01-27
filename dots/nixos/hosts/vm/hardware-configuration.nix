@@ -6,10 +6,10 @@
 {
   imports =
     [
-      (modulesPath + "/installer/scan/not-detected.nix")
+      (modulesPath + "/profiles/qemu-guest.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
+  boot.initrd.availableKernelModules = [ "ahci" "xhci_pci" "virtio_pci" "virtio_blk" "sr_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
@@ -23,13 +23,13 @@
 
   fileSystems."/nix" =
     {
-      device = "/dev/disk/by-uuid/b0f7587b-1eb4-43ad-b4a1-e6385b8511ae";
+      device = "/dev/disk/by-uuid/65a7a80c-3ba7-49b7-892b-0a64f63011d3";
       fsType = "ext4";
     };
 
-  fileSystems."/boot" =
+  fileSystems."/boot/efi" =
     {
-      device = "/dev/disk/by-uuid/3C0D-7D32";
+      device = "/dev/disk/by-uuid/F653-B6A3";
       fsType = "vfat";
     };
 
