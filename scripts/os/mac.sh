@@ -51,6 +51,7 @@ change_defaults() {
 	defaults write com.apple.screencapture location -string "$HOME/Pictures/screenshots/"
 	defaults write com.apple.screencapture type -string "png"
 	defaults write com.apple.spaces spans-displays -bool false
+	defaults write com.apple.finder CreateDesktop false
 }
 
 enable_brew_servies() {
