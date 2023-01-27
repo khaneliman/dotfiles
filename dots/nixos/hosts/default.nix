@@ -11,12 +11,12 @@ let
   lib = nixpkgs.lib;
 in
 {
-  laptop = lib.nixosSystem {
-    # Laptop profile
+  vm = lib.nixosSystem {
+    # vm profile
     inherit system;
     specialArgs = { inherit inputs user; };
     modules = [
-      ./laptop
+      ./vm
       impermanence.nixosModules.impermanence
       ./system.nix
       nur.nixosModules.nur
@@ -29,7 +29,7 @@ in
         home-manager.useUserPackages = true;
         home-manager.extraSpecialArgs = { inherit user; };
         home-manager.users.${user} = {
-          imports = [ (import ./laptop/home.nix) ];
+          imports = [ (import ./vm/home.nix) ];
         };
         nixpkgs = {
           overlays = [
