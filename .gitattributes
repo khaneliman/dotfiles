@@ -3,6 +3,7 @@ dots/linux/hyprland/home/.config/aconfmgr/files/etc/davmail.properties filter=gi
 dots/linux/hyprland/home/.config/aconfmgr/files/etc/NetworkManager/system-connections/* filter=git-crypt diff=git-crypt
 
 dots/shared/home/.wakatime.cfg filter=git-crypt diff=git-crypt
+dots/shared/home/.wegorc filter=git-crypt diff=git-crypt
 
 dots/shared/home/.ssh/** filter=git-crypt diff=git-crypt
 dots/shared/home/.gnupg/** filter=git-crypt diff=git-crypt
