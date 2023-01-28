@@ -189,11 +189,3 @@ services:
       - "4545:4545/tcp"
     volumes:
       - "/mnt/cache/appdata/requestrr:/config"
-
-networks:
-  br0:
-    external: true
-    name: "br0"
-  khaneproxy:
-    external: true
-    name: "khaneproxy"

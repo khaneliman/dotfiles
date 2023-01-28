@@ -41,8 +41,6 @@ services:
       - "khaneproxy"
     ports:
       - "8081:80/tcp"
-    volumes:
-      - "2f61d5237e670c17a851f4463b70f1d144cc3b5fb0acf2619e6d8decf7f6f265:/var/www/html/cache"
     working_dir: "/var/www/html"
 
   freshrss:
@@ -94,11 +92,3 @@ services:
     volumes:
       - "/mnt/cache/appdata/freshrss:/config"
     working_dir: "/"
-
-networks:
-  br0:
-    external: true
-    name: "br0"
-  khaneproxy:
-    external: true
-    name: "khaneproxy"

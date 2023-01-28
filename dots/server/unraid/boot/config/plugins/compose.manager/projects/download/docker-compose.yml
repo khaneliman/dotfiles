@@ -34,7 +34,6 @@ services:
     ports:
       - "6789:6789/tcp"
     volumes:
-      - "96e3ee4889f8dfc2ed4474e514b938365558420da2b756a1c085f9d53673a5ba:/media"
       - "/mnt/user/appdata/binhex-nzbget:/config"
       - "/mnt/user/data/usenet:/data"
 

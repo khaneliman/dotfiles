@@ -103,11 +103,3 @@ services:
     volumes:
       - "/mnt/cache/appdata/pwm:/usr/share/pwm"
     working_dir: "/usr/local/tomcat"
-
-networks:
-  br0:
-    external: true
-    name: "br0"
-  khaneproxy:
-    external: true
-    name: "khaneproxy"

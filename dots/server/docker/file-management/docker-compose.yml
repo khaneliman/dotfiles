@@ -44,10 +44,7 @@ services:
     networks:
       - "br0"
     volumes:
-      - "8fe2e2394d8c8d2a0dd3afdb7ec33b7092d53010eab53cf3317f57b7feb20a08:/run/samba"
-      - "ef9cf24bea51f4fb04afc6cf1ea059e8c926d938d5ffe18acb0d55f180d31258:/var/cache/samba"
-      - "697744c7847508a1454454aad57d5870c67d7934fb068642cc4be988c093866d:/var/lib/samba"
-      - "/mnt/user/timemachine:/opt/timemachine"
+      - "/mnt/user/timemachine:/opt/khaneliman"
     working_dir: "/"
 
   nextcloud:
@@ -208,11 +205,3 @@ services:
       - "/mnt/user:/storage"
       - "/mnt/user/temp:/trash"
     working_dir: "/tmp"
-
-networks:
-  br0:
-    external: true
-    name: "br0"
-  khaneproxy:
-    external: true
-    name: "khaneproxy"

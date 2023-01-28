@@ -75,7 +75,6 @@ services:
       - "27017:27017/tcp"
     restart: "unless-stopped"
     volumes:
-      - "8421139ee4fc3ad24cd921057458ec110736bc4c11a747fa791cb69c581fec73:/data/configdb"
       - "/mnt/cache/appdata/mongodb:/data/db"
 
   mariadb:

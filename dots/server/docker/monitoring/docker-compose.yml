@@ -254,11 +254,3 @@ services:
       - "/var/local/emhttp:/var/local/emhttp:ro"
       - "/mnt/cache/appdata/DiskSpeed:/tmp/DiskSpeed"
     working_dir: "/usr/local/tomcat"
-
-networks:
-  br0:
-    external: true
-    name: "br0"
-  khaneproxy:
-    external: true
-    name: "khaneproxy"

@@ -89,11 +89,3 @@ services:
       - "/mnt/disks/dropbox/Pictures/Austins Photos:/dropboxphotos"
       - "/mnt/user/data/media/familyphotos:/familyphotos"
     working_dir: "/ps/app"
-
-networks:
-  br0:
-    external: true
-    name: "br0"
-  khaneproxy:
-    external: true
-    name: "khaneproxy"
