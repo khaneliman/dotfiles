@@ -14,69 +14,70 @@ yabai -m signal --add event=window_destroyed action="sketchybar --trigger window
 "$HOME"/.config/yabai/create_spaces.sh
 
 # Exclude problematic apps from being managed:
-yabai -m rule --add app="^(LuLu|Vimac|Calculator|Software Update|Dictionary|VLC|System Preferences|zoom.us|Photo Booth|Archive Utility|Python|LibreOffice|App Store|Steam|Alfred|Activity Monitor)$" manage=off
+yabai -m rule --add app="^(LuLu|Vimac|Calculator|Software Update|Dictionary|VLC|System Preferences|zoom.us|Photo Booth|Archive Utility|Python|LibreOffice)$" manage=off
+yabai -m rule --add app="^(iStat Menus|Stats|FaceTime|App Store|Steam|Alfred|Activity Monitor)$" manage=off
 yabai -m rule --add label="Finder" app="^Finder$" title="(Co(py|nnect)|Move|Info|Pref)" manage=off
 yabai -m rule --add label="Safari" app="^Safari$" title="^(General|(Tab|Password|Website|Extension)s|AutoFill|Se(arch|curity)|Privacy|Advance)$" manage=off
 yabai -m rule --add label="About This Mac" app="System Information" title="About This Mac" manage=off
 yabai -m rule --add label="Select file to save to" app="^Inkscape$" title="Select file to save to" manage=off
 
 # Rules for specific apps to launch and be managed by yabai
-yabai -m rule --add app="^Mail$" --space 1
 yabai -m rule --add app="^Calendar$" --space 1
 yabai -m rule --add app="^Fantastical$" --space 1
+yabai -m rule --add app="^Mail$" --space 1
 yabai -m rule --add app="Discord" --space 2
 yabai -m rule --add app="Messenger" --space 2
-yabai -m rule --add app="^Microsoft Teams$" --space 2
-yabai -m rule --add app="^Telegram$" --space 2
-yabai -m rule --add app="^Slack$" --space 2
 yabai -m rule --add app="^Messages$" --space 2
+yabai -m rule --add app="^Microsoft Teams$" --space 2
+yabai -m rule --add app="^Slack$" --space 2
+yabai -m rule --add app="^Telegram$" --space 2
 yabai -m rule --add app="^Firefox Developer Edition$" --space 3
 yabai -m rule --add app="^Firefox$" --space 3
 yabai -m rule --add app="^Google Chrome$" --space 3
 yabai -m rule --add app="^Safari$" --space 3
-yabai -m rule --add app="^Visual Studio Code$" --space 4
-yabai -m rule --add app="^XCode$" --space 4
-yabai -m rule --add app="^Visual Studio$" --space 4
 yabai -m rule --add app="^Qt Creator$" --space 4
+yabai -m rule --add app="^Visual Studio Code$" --space 4
+yabai -m rule --add app="^Visual Studio$" --space 4
+yabai -m rule --add app="^XCode$" --space 4
 yabai -m rule --add app="^GitHub$" --space 5
 yabai -m rule --add app="^GitKraken$" --space 5
 yabai -m rule --add app="^Notes$" --space 5
 yabai -m rule --add app="^Reminders$" --space 5
-yabai -m rule --add app="^VLC$" --space 6
 yabai -m rule --add app="^Music$" --space 6
-yabai -m rule --add app="Spotify" --space 6
 yabai -m rule --add app="^Plex$" --space 6
+yabai -m rule --add app="Spotify" --space 6
+yabai -m rule --add app="^VLC$" --space 6
 
 # Config rules
-yabai -m config external_bar               all:39:0     \
-                window_border              on           \
-                mouse_follows_focus        off          \
-                focus_follows_mouse        autofocus    \
-                window_placement           second_child \
-                window_topmost             off          \
-                window_shadow              float        \
-                window_opacity             on           \
-                window_opacity_duration    0.15         \
-                active_window_opacity      1.0          \
-                normal_window_opacity      0.95         \
-                window_border_width        2            \
-                window_border_radius       11           \
-                window_animation_duration  0.15         \
-                active_window_border_color 0xff7793d1   \
-                normal_window_border_color 0xff5e6798   \
-                insert_feedback_color      0xff7793d1   \
-                split_ratio                0.50         \
-                auto_balance               off          \
-                mouse_modifier             super        \
-                mouse_action1              move         \
-                mouse_action2              resize       \
-                mouse_drop_action          swap         \
-                layout                     bsp          \
-                top_padding                20           \
-                bottom_padding             10           \
-                left_padding               10           \
-                right_padding              10           \
-                window_gap                 8
+yabai -m config external_bar all:39:0 \
+	window_border on \
+	mouse_follows_focus off \
+	focus_follows_mouse autofocus \
+	window_placement second_child \
+	window_topmost off \
+	window_shadow float \
+	window_opacity on \
+	window_opacity_duration 0.15 \
+	active_window_opacity 1.0 \
+	normal_window_opacity 0.95 \
+	window_border_width 2 \
+	window_border_radius 11 \
+	window_animation_duration 0.15 \
+	active_window_border_color 0xff7793d1 \
+	normal_window_border_color 0xff5e6798 \
+	insert_feedback_color 0xff7793d1 \
+	split_ratio 0.50 \
+	auto_balance off \
+	mouse_modifier super \
+	mouse_action1 move \
+	mouse_action2 resize \
+	mouse_drop_action swap \
+	layout bsp \
+	top_padding 20 \
+	bottom_padding 10 \
+	left_padding 10 \
+	right_padding 10 \
+	window_gap 8
 
 # Keep yabai up to date automatically
 YABAI_CERT=yabai-cert sh -c ~/.config/yabai/update.sh &

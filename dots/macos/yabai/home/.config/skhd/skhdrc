@@ -1,5 +1,14 @@
+# hyper (cmd + shift + alt + ctrl)
+# meh (shift + alt + ctrl)
+
+# Application launchers
 cmd + shift - return : alacritty #open over top
 cmd - return : /Applications/kitty.app/Contents/MacOS/kitty --single-instance -d ~
+cmd + alt + ctrl - v : open /Applications/Visual\ Studio\ Code.app
+cmd + alt + ctrl - o : open /Applications/Microsoft\ Outlook.app
+cmd + alt + ctrl - p : open /Applications/Microsoft\ PowerPoint.app
+cmd + alt + ctrl - f : open /Applications/Firefox\ Developer\ Edition.app 
+cmd + alt + ctrl - t : /Applications/kitty.app/Contents/MacOS/kitty --single-instance -d ~
 
 # Reload yabai 
 ctrl + lalt + cmd - r : bash -c 'launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"'
@@ -117,3 +126,4 @@ lalt - p : yabai -m window --toggle sticky; \
 shift + lalt - z : yabai -m space --layout bsp
 shift + lalt - x : yabai -m space --layout float
 shift + lalt - c : yabai -m space --layout stack
+
