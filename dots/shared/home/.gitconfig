@@ -1,3 +1,6 @@
+[include]
+  path = ~/.gitconfig.local
+
 [init]
 	defaultBranch = main
 
@@ -103,47 +106,46 @@
 
 ### Forced Pull:
 #> You have a local branch (e.g. for reviewing), but someone else did a forced push update on the remote branch. A regular git pull will fail, but this will just set the local branch to match the remote branch. BEWARE: this will overwrite any local commits you have made on this branch that haven't been pushed.
-	pullf = !sh -c \"git reset --hard origin/$(git rev-parse --abbrev-ref HEAD)\"
-
+	pullf = !bash -c \"git reset --hard origin/$(git rev-parse --abbrev-ref HEAD)\"
 # Complex aliases
 ### Pull only the current branch and dont update refs of all remotes
-	pullhead = "!f() { \
-	local b=${1:-$(git rev-parse --abbrev-ref HEAD)}; \
-	git pull origin $b; \
-	}; f"
+	pullhead = "!f() { 																	\
+		local b=${1:-$(git rev-parse --abbrev-ref HEAD)}; \
+		git pull origin $b; 															\
+	}; "
 
 ### Blow up local branch and repull from remote
-	smash = "!f() { \
-	local b=${1:-$(git rev-parse --abbrev-ref HEAD)}; \
-	echo 'Are you sure you want to run this? It will delete your current '$b'.'; \
-	read -p 'Enter to continue, ctrl-C to quit: ' response; \
-	git checkout master; \
-	git branch -D $b; \
-	git fetch origin $b; \
-	git checkout $b; \
-	}; f"
+	smash = "!f() { 																																\
+		local b=${1:-$(git rev-parse --abbrev-ref HEAD)}; 														\
+		echo 'Are you sure you want to run this? It will delete your current '$b'.'; 	\
+		read -p 'Enter to continue, ctrl-C to quit: ' response; 											\
+		git checkout master; 																													\
+		git branch -D $b; 																														\
+		git fetch origin $b; 																													\
+		git checkout $b; 																															\
+	}; "
 
 ### Rebase current branch off master
-	rbm = "!f() { \
-	local b=${1:-$(git rev-parse --abbrev-ref HEAD)}; \
-	echo 'Are you sure you want to run this? It will delete your current '$b'.'; \
-	read -p 'Enter to continue, ctrl-C to quit: ' response; \
-	git checkout master; \
-	git pull origin master; \
-	git checkout $b; \
-	git rebase master; \
-	}; f"
+	rbm = "!f() { 																																	\
+		local b=${1:-$(git rev-parse --abbrev-ref HEAD)}; 														\
+		echo 'Are you sure you want to run this? It will delete your current '$b'.'; 	\
+		read -p 'Enter to continue, ctrl-C to quit: ' response; 											\
+		git checkout master; 																													\
+		git pull origin master; 																											\
+		git checkout $b; 																															\
+		git rebase master; 																														\
+	}; "
 
 ### Rebase current branch off develop
-	rbd = "!f() { \
-	local b=${1:-$(git rev-parse --abbrev-ref HEAD)}; \
-	echo 'Are you sure you want to run this? It will delete your current '$b'.'; \
-	read -p 'Enter to continue, ctrl-C to quit: ' response; \
-	git checkout develop; \
-	git pull origin develop; \
-	git checkout $b; \
-	git rebase develop; \
-	}; f"
+	rbd = "!f() { 																																	\
+		local b=${1:-$(git rev-parse --abbrev-ref HEAD)}; 														\
+		echo 'Are you sure you want to run this? It will delete your current '$b'.'; 	\
+		read -p 'Enter to continue, ctrl-C to quit: ' response; 											\
+		git checkout develop; 																												\
+		git pull origin develop; 																											\
+		git checkout $b; 																															\
+		git rebase develop; 																													\
+	}; "
 
 # Random
 ### Random dad joke if typo on git add
@@ -151,9 +153,7 @@
 
 [gpg]
 	format = ssh
-# Uncomment if 1password ssh agent set up
-#[gpg "ssh"]
-#	program = /opt/1Password/op-ssh-sign
+
 [commit]
 	gpgsign = true
 
@@ -163,18 +163,3 @@
 # 	email = khaneliman12@gmail.com
 # 	signingkey = ssh-ed25519
 
-# Uncomment on linux with github desktop cli
-# [credential "https://github.com"]
-# 	helper =
-# 	helper = !/usr/bin/gh auth git-credential
-# [credential "https://gist.github.com"]
-# 	helper =
-# 	helper = !/usr/bin/gh auth git-credential
-
-# Uncomment on mac with github desktop cli
-# [credential "https://github.com"]
-# 	helper =
-# 	helper = !/opt/homebrew/bin/gh auth git-credential
-# [credential "https://gist.github.com"]
-# 	helper =
-# 	helper = !/opt/homebrew/bin/gh auth git-credential

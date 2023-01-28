@@ -1,0 +1,10 @@
+[gpg "ssh"]
+  program = /opt/1Password/op-ssh-sign
+
+[credential "https://github.com"]
+ 	helper =
+ 	helper = !/usr/bin/gh auth git-credential
+
+[credential "https://gist.github.com"]
+ 	helper =
+ 	helper = !/usr/bin/gh auth git-credential
