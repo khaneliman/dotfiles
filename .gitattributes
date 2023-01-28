@@ -17,7 +17,7 @@ dots/server/unraid/mnt/user/appdata/** filter=git-crypt diff=git-crypt
 dots/server/unraid/boot/config/plugins/dockerMan/templates-user/my-redis.xml filter=git-crypt diff=git-crypt
 dots/server/unraid/boot/config/plugins/dockerMan/templates-user/my-qbittorrentvpn.xml filter=git-crypt diff=git-crypt
 dots/server/unraid/boot/config/plugins/dockerMan/templates-user/my-Postgres11.xml filter=git-crypt diff=git-crypt
-dots/server/unraid/boot/config/plugins/dockerMan/templates-user/my-Plex-Media-Server.xml filter=git-crypt diff=git-crypt
+dots/server/unraid/boot/config/plugins/dockerMan/templates-user/my-plex.xml filter=git-crypt diff=git-crypt
 dots/server/unraid/boot/config/plugins/dockerMan/templates-user/my-pihole-template.xml filter=git-crypt diff=git-crypt
 dots/server/unraid/boot/config/plugins/dockerMan/templates-user/my-PhotoPrism.xml filter=git-crypt diff=git-crypt
 dots/server/unraid/boot/config/plugins/dockerMan/templates-user/my-Notifiarr.xml filter=git-crypt diff=git-crypt
@@ -25,7 +25,7 @@ dots/server/unraid/boot/config/plugins/dockerMan/templates-user/my-mariadb.xml f
 dots/server/unraid/boot/config/plugins/dockerMan/templates-user/my-Cleanarr.xml filter=git-crypt diff=git-crypt
 dots/server/unraid/boot/config/plugins/dockerMan/templates-user/my-binhex-delugevpn.xml filter=git-crypt diff=git-crypt
 dots/server/unraid/boot/config/plugins/dockerMan/templates-user/my-binhex-code-server.xml filter=git-crypt diff=git-crypt
-dots/server/unraid/boot/config/plugins/dockerMan/templates-user/my-.xml filter=git-crypt diff=git-crypt
+dots/server/unraid/boot/config/plugins/dockerMan/templates-user/my-TimeMachine.xml filter=git-crypt diff=git-crypt
 
 dots/server/unraid/boot/config/plugins/dockerMan/config.json filter=git-crypt diff=git-crypt
 dots/server/unraid/boot/config/plugins/dynamix.my.servers/myservers.cfg filter=git-crypt diff=git-crypt

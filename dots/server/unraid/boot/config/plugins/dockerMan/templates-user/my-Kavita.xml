@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>Kavita</Name>
+  <Repository>kizaing/kavita</Repository>
+  <Registry>https://hub.docker.com/r/kizaing/kavita</Registry>
+  <Network>khaneproxy</Network>
+  <MyIP/>
+  <Shell>bash</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://forums.unraid.net/topic/112111-support-kizaing-kavita/</Support>
+  <Project>https://github.com/Kareadita/Kavita</Project>
+  <Overview>Lightning fast with a slick design, Kavita is a rocket fueled self-hosted digital library which supports a vast array of file formats. Install to start reading comics, books and manga. You can also share your server with your friends!</Overview>
+  <Category>MediaApp:Books MediaServer:Books</Category>
+  <WebUI>http://[IP]:[PORT:5000]</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/Kizaing/Unraid-Templates/master/kavita-unraid.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/Kareadita/Kavita/develop/UI/Web/src/assets/icons/android-chrome-192x192.png</Icon>
+  <ExtraParams/>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1674884724</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Requires/>
+  <Config Name="Web App Port" Target="5000" Default="5000" Mode="tcp" Description="" Type="Port" Display="always" Required="false" Mask="false">5002</Config>
+  <Config Name="Data Directory" Target="/kavita/config" Default="" Mode="rw" Description="" Type="Path" Display="always" Required="false" Mask="false">/mnt/cache/appdata/kavita</Config>
+  <Config Name="Book Library" Target="/library" Default="" Mode="rw" Description="" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/data/media/books</Config>
+</Container>
