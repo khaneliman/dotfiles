@@ -1,5 +1,6 @@
 [include]
   path = ~/.gitconfig.local
+  path = ~/.gitconfig.signing
 
 [init]
 	defaultBranch = main
@@ -150,16 +151,4 @@
 # Random
 ### Random dad joke if typo on git add
 	dad = !curl https://icanhazdadjoke.com/ && echo
-
-[gpg]
-	format = ssh
-
-[commit]
-	gpgsign = true
-
-# Set up user commit info
-# [user]
-# 	name = Austin Horstman
-# 	email = khaneliman12@gmail.com
-# 	signingkey = ssh-ed25519
 
