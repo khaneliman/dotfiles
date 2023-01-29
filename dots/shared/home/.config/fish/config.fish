@@ -56,7 +56,9 @@ alias ips='ip link show' # Get network interfaces information
 alias wloff='rfkill block wlan' # Block wlan, killing wifi connection
 alias wlon='rfkill unblock wlan' # Unblock wlan, start wifi connection
 
+# program shortcuts
 [ $(command -v topgrade) ] && alias upd="topgrade $argv"
+[ $(command -v lazygit) ] && alias lg="lazygit $argv"
 
 # OS Dependent config
 switch (uname)
