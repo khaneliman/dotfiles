@@ -101,6 +101,14 @@ handle_extension() {
 		exit 1
 		;;
 
+		# Markdown
+	md)
+		highlight --syntax=markdown --out-format=ansi "${FILE_PATH}" && exit 5
+		glow -s dark "${FILE_PATH}" && exit 5
+		bat "${FILE_PATH}" && exit 5
+		exit 1
+		;;
+
 	## HTML
 	htm | html | xhtml)
 		## Preview as text conversion
@@ -116,19 +124,13 @@ handle_extension() {
 		python -m json.tool -- "$FILE_PATH" && exit 5
 		;;
 
-	md)
-		# glow -s dark "${FILE_PATH}" && exit 5
-		# glow -s "~/Library/Preferences/glow/catppuccin.json" "${FILE_PATH}" && exit 5
-		mdcat -l -- "$FILE_PATH" && exit 5
-		exit 1
-		;;
-
 	## Direct Stream Digital/Transfer (DSDIFF) and wavpack aren't detected
 	## by file(1).
 	dff | dsf | wv | wvc)
 		mediainfo "$FILE_PATH" && exit 5
 		exiftool "$FILE_PATH" && exit 5
 		;; # Continue with next handler on failure
+
 	ini)
 		cat "$FILE_PATH" && exit 5
 		;;
