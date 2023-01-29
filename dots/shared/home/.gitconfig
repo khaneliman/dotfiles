@@ -1,6 +1,7 @@
 [include]
   path = ~/.gitconfig.local
   path = ~/.gitconfig.signing
+  path = ~/.gitconfig.functions
 
 [init]
 	defaultBranch = main
@@ -26,11 +27,11 @@
 	a = add
 	ap = add -p
 ### Commit, checkout, and push
-	c = commit --verbose
+  c = commit --verbose
 	co = checkout
-	p = push
+  p = push
 ### Status
-	s = status -sb
+  s = status -sb
 ### Stash and list stashes
 	st = stash
 	stl = stash list
@@ -40,7 +41,6 @@
 	dc = diff --cached
 ### Add remote origin
 	rao = remote add origin
-# Feature improving aliases
 
 ## Git Flow Operations
 ### Commit all, commit all with message, add and commit all, amend commit
@@ -74,7 +74,6 @@
 ### Branch Delete:
 #>This checks out your local master branch and deletes all local branches that have already been merged to master
 	brd = !sh -c \"git checkout master && git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d\"
-
 ### Branch Delete Here:
 #> Deletes all local branches that have already been merged to the branch that you're currently on
 	brdhere = !sh -c \"git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d\"
@@ -86,7 +85,7 @@
 	mergetest = "!f(){ git merge --no-commit --no-ff \"$1\"; git merge --abort; echo \"Merge aborted\"; };f "
 ### Rebase interactive against master and dev
 	ria = !git rebase -i $(git merge-base HEAD master)
-	rid = !git rebase -i $(git merge-base HEAD develop)
+  rid = !git rebase -i $(git merge-base HEAD develop)
 
 ## History / Listing
 
@@ -104,49 +103,6 @@
 	b = rev-parse --abbrev-ref HEAD
 ### Aside from providing one-line logs, it also shows the branching in/out
 	hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
-
-### Forced Pull:
-#> You have a local branch (e.g. for reviewing), but someone else did a forced push update on the remote branch. A regular git pull will fail, but this will just set the local branch to match the remote branch. BEWARE: this will overwrite any local commits you have made on this branch that haven't been pushed.
-	pullf = !bash -c \"git reset --hard origin/$(git rev-parse --abbrev-ref HEAD)\"
-# Complex aliases
-### Pull only the current branch and dont update refs of all remotes
-	pullhead = "!f() { 																	\
-		local b=${1:-$(git rev-parse --abbrev-ref HEAD)}; \
-		git pull origin $b; 															\
-	}; "
-
-### Blow up local branch and repull from remote
-	smash = "!f() { 																																\
-		local b=${1:-$(git rev-parse --abbrev-ref HEAD)}; 														\
-		echo 'Are you sure you want to run this? It will delete your current '$b'.'; 	\
-		read -p 'Enter to continue, ctrl-C to quit: ' response; 											\
-		git checkout master; 																													\
-		git branch -D $b; 																														\
-		git fetch origin $b; 																													\
-		git checkout $b; 																															\
-	}; "
-
-### Rebase current branch off master
-	rbm = "!f() { 																																	\
-		local b=${1:-$(git rev-parse --abbrev-ref HEAD)}; 														\
-		echo 'Are you sure you want to run this? It will delete your current '$b'.'; 	\
-		read -p 'Enter to continue, ctrl-C to quit: ' response; 											\
-		git checkout master; 																													\
-		git pull origin master; 																											\
-		git checkout $b; 																															\
-		git rebase master; 																														\
-	}; "
-
-### Rebase current branch off develop
-	rbd = "!f() { 																																	\
-		local b=${1:-$(git rev-parse --abbrev-ref HEAD)}; 														\
-		echo 'Are you sure you want to run this? It will delete your current '$b'.'; 	\
-		read -p 'Enter to continue, ctrl-C to quit: ' response; 											\
-		git checkout develop; 																												\
-		git pull origin develop; 																											\
-		git checkout $b; 																															\
-		git rebase develop; 																													\
-	}; "
 
 # Random
 ### Random dad joke if typo on git add

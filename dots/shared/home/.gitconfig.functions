@@ -1,0 +1,101 @@
+[alias]
+
+### Forced Pull:
+#> You have a local branch (e.g. for reviewing), but someone else did a forced push update on the remote branch. A regular git pull will fail, but this will just set the local branch to match the remote branch. BEWARE: this will overwrite any local commits you have made on this branch that haven't been pushed.
+	pullf = !bash -c "git reset --hard origin/$(git rev-parse --abbrev-ref HEAD)"
+
+### Pull only the current branch and dont update refs of all remotes
+	pullhead = "!f() {                                      \
+		local b=${1:-$(git rev-parse --abbrev-ref HEAD)};   \
+		git pull origin $b;                                 \
+	}; f"
+
+### Blow up local branch and repull from remote
+	smash = "!f() {                                                                     \
+		local b=${1:-$(git rev-parse --abbrev-ref HEAD)};                               \
+		echo 'Are you sure you want to run this? It will delete your current '$b'.';    \
+		read -p 'Enter to continue, ctrl-C to quit: ' response;                         \
+		git checkout master;                                                            \
+		git branch -D $b;                                                               \
+		git fetch origin $b;                                                            \
+		git checkout $b;                                                                \
+	}; f"
+
+### Rebase current branch off master
+	rbm = "!f() {                                                                       \
+		local b=${1:-$(git rev-parse --abbrev-ref HEAD)};                               \
+		echo 'Are you sure you want to run this? It will delete your current '$b'.';    \
+		read -p 'Enter to continue, ctrl-C to quit: ' response;                         \
+		git checkout master;                                                            \
+		git pull origin master;                                                         \
+		git checkout $b;                                                                \
+		git rebase master;                                                              \
+	}; f"
+
+### Rebase current branch off develop
+	rbd = "!f() {                                                                       \
+		local b=${1:-$(git rev-parse --abbrev-ref HEAD)};                               \
+		echo 'Are you sure you want to run this? It will delete your current '$b'.';    \
+		read -p 'Enter to continue, ctrl-C to quit: ' response;                         \
+		git checkout develop;                                                           \
+		git pull origin develop;                                                        \
+		git checkout $b;                                                                \
+		git rebase develop;                                                             \
+	}; f"
+
+# Sort branch by date
+# Usage: git bd [-a] [-<line_limit>]
+#     -a             include remote branches and tags
+#     -<line_limit>  number of lines to tail
+# Example: git bd
+# Example: git bd -3
+# Example: git bd -a
+# Example: git bd -a -20
+# Example: git bd -a20
+  bd = "!f() {                                                                  \
+    case '$1' in                                                                \
+        -a) refs='--'; shift;;                                                  \
+        -a*) refs='--'; one='${1/-a/-}'; shift; set -- $one $@;;            \
+        *) refs='refs/heads/';;                                                 \
+    esac;                                                                       \
+    git for-each-ref --color --count=1 1>/dev/null 2>&1 && color_flag=yes;      \
+    format='--format=%(refname) %00%(committerdate:format:%s)%(taggerdate:format:%s) %(color:red)%(committerdate:relative)%(taggerdate:relative)%(color:reset)%09%00%(color:yellow)%(refname:short)%(color:reset) %00%(subject)%00 %(color:reset)%(color:dim cyan)<%(color:reset)%(color:cyan)%(authorname)%(taggername)%(color:reset)%(color:dim cyan)>%(color:reset)'; \
+    {                                                                           \
+        {                                                                       \
+            [ '$color_flag' = yes ] &&                                          \
+                git for-each-ref --color '$format' "$refs" ||                   \
+                git -c color.ui=always for-each-ref '$format' "$refs";          \
+        } |                                                                     \
+            perl -ne 'print unless /^refs/stash /';                            \
+        [ '$refs' = "--" ] &&                                                   \
+            git show-ref -q --verify refs/stash &&                              \
+            git log --color --walk-reflogs --format='%gd %x00%ct %C(red)%cr%C(reset)%x09%x00%C(yellow)%gd%C(reset) %x00%s%x00 %C(reset)%C(dim cyan)<%C(reset)%C(cyan)%an%C(reset)%C(dim cyan)>%C(reset)' refs/stash; \
+    } |                                                                         \
+        perl -pe 's/^refs/tags/[^x00]*x00([^x00]*)x00([^x00]*)/$1(tag) $2/ || s/^[^x00]*x00([^x00]*)x00/$1/; s/x00([^x00]{0,50})([^x00]*)x00/$1x1b[1;30m$2x1b[0m/' | \
+        sort -n -k1,1 |                                                         \
+        cut -d' ' -f2- |                                                        \
+        tail '${@:--n+0}';                                                      \
+}; f"
+
+  l = "!f() { : git log ;                                                                   \
+    commit_count='$(git rev-list --count HEAD@{upstream}..HEAD 2>/dev/null || echo 2)';     \
+    commit_count=$(( commit_count + 3 ))                                                    \
+    [ '$commit_count' -lt 5 ] && commit_count=5;                                            \
+    [ '$commit_count' -gt 20 ] && commit_count=20;                                          \
+    git --no-pager log                                                                      \
+        --format='%C(auto)%h %C(reset)%C(dim red)[%C(reset)%C(red)%cr%C(reset)%C(dim red)]%C(reset)%C(auto) %x02%s%x03 %C(reset)%C(dim cyan)<%C(reset)%C(cyan)%an%C(reset)%C(dim cyan)>%C(reset)%C(auto)%d%C(reset)' \
+        --color --graph '-$commit_count' '$@' |                                             \
+        perl -pe '                                                                          \
+            s/ seconds? ago/s/ ||                                                           \
+            s/ minutes? ago/m/ ||                                                           \
+            s/ hours? ago/h/ ||                                                             \
+            s/ days? ago/d/ ||                                                              \
+            s/ weeks? ago/w/ ||                                                             \
+            s/(d+) years?, (d+) months? ago/$1y$2m/ ||                                  \
+            s/ months? ago/mo/ ||                                                           \
+            s/ years? ago/y/;                                                               \
+            s/([^x1b][)(.*?)]/sprintf('%s%21s]',$1,$2)/e;                             \
+            s/x02([^x03]{0,50})([^x03]*)x03/length $2?$1.'x1b[1;30m'.$2:$1/e     \
+        '; |                                                                                \
+        less -RFX;                                                                          \
+}; f"
