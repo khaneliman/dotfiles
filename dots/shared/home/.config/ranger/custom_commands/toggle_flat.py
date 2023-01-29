@@ -1,5 +1,6 @@
 from ranger.api.commands import Command
 
+
 class toggle_flat(Command):
     """
     :toggle_flat

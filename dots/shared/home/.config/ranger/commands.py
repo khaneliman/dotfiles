@@ -1,6 +1,8 @@
 from __future__ import absolute_import, division, print_function
 
+from custom_commands.compress import *
 from custom_commands.dir_history_navigate import *
+from custom_commands.extract_here import *
 from custom_commands.fasd import *
 from custom_commands.fasd_dir import *
 from custom_commands.fd_search import *

@@ -1,11 +1,13 @@
 from ranger.api.commands import Command
 
+
 class fasd(Command):
     """
     :fasd
 
     Jump to directory using fasd
     """
+
     def execute(self):
         args = self.rest(1).split()
         if args:
@@ -23,7 +25,10 @@ class fasd(Command):
     @staticmethod
     def _get_directories(*args):
         import subprocess
-        output = subprocess.check_output(["fasd", "-dl"] + list(args), universal_newlines=True)
+
+        output = subprocess.check_output(
+            ["fasd", "-dl"] + list(args), universal_newlines=True
+        )
         dirs = output.strip().split("\n")
         dirs.sort(reverse=True)  # Listed in ascending frecency
         return dirs
