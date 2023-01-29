@@ -10,6 +10,7 @@ set -g VISUAL "nvim"
 set -g EDITOR "$VISUAL"
 set -g MICRO_TRUECOLOR "1"
 set -g GIT_EDITOR 'nvim'
+set -g RANGER_LOAD_DEFAULT_RC FALSE
 
 # Git config
 set -g __fish_git_prompt_show_informative_status 1
