@@ -3,6 +3,8 @@
 MAC_HOME="$DOTS_DIR"/macos/yabai/home/
 
 mac_backup_existing() {
+	message "[>>] Backing up existing dotfiles to $BACKUP_LOCATION"
+
 	mv ~/.config/sketchybar "$BACKUP_LOCATION"/.config/
 	mv ~/.config/skhd "$BACKUP_LOCATION"/.config/
 	mv ~/.config/yabai "$BACKUP_LOCATION"/.config/
