@@ -55,7 +55,7 @@ Plugins: https://github.com/vrana/adminer/tree/master/plugins</Description>
     </Variable>
   </Environment>
   <Labels/>
-  <Config Name="WebUI Port" Target="8080" Default="8080" Mode="tcp" Description="Container Port: 8080" Type="Port" Display="always" Required="true" Mask="false">8585</Config>
-  <Config Name="Theme" Target="ADMINER_DESIGN" Default="flat" Mode="{3}" Description="Container Variable: ADMINER_DESIGN" Type="Variable" Display="always" Required="false" Mask="false">dracula</Config>
+  <Config Name="WebUI Port" Target="8080" Default="8080" Mode="tcp" Description="" Type="Port" Display="always" Required="true" Mask="false">8585</Config>
+  <Config Name="Theme" Target="ADMINER_DESIGN" Default="flat" Mode="{3}" Description="" Type="Variable" Display="always" Required="false" Mask="false">dracula</Config>
   <Config Name="Plugins" Target="ADMINER_PLUGINS" Default="" Mode="{3}" Description="e.g. ADMINER_PLUGINS='tables-filter tinymce'" Type="Variable" Display="always" Required="false" Mask="false"/>
 </Container>

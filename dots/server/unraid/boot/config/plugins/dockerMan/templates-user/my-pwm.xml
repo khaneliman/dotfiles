@@ -46,7 +46,7 @@
     </Variable>
   </Environment>
   <Labels/>
-  <Config Name="Host Port 1" Target="8080" Default="" Mode="tcp" Description="Container Port: 8080" Type="Port" Display="always" Required="false" Mask="false">8282</Config>
-  <Config Name="File Lock Bypass" Target="PWM_APPLICATIONFLAGS" Default="PWM_APPLICATIONFLAGS" Mode="" Description="Container Variable: PWM_APPLICATIONFLAGS" Type="Variable" Display="always" Required="false" Mask="false">NoFileLock</Config>
-  <Config Name="appdata" Target="/usr/share/pwm" Default="" Mode="rw" Description="Container Path: /usr/share/pwm" Type="Path" Display="advanced" Required="true" Mask="false">/mnt/user/appdata/pwm</Config>
+  <Config Name="Host Port 1" Target="8080" Default="" Mode="tcp" Description="" Type="Port" Display="always" Required="false" Mask="false">8282</Config>
+  <Config Name="File Lock Bypass" Target="PWM_APPLICATIONFLAGS" Default="PWM_APPLICATIONFLAGS" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">NoFileLock</Config>
+  <Config Name="appdata" Target="/usr/share/pwm" Default="" Mode="rw" Description="" Type="Path" Display="advanced" Required="true" Mask="false">/mnt/user/appdata/pwm</Config>
 </Container>

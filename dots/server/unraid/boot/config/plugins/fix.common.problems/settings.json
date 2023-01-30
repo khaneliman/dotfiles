@@ -1,0 +1,8 @@
+{
+    "frequency": "hourly",
+    "notifications": "all",
+    "disableSpinUp": "true",
+    "hacksPerDay": "10",
+    "logIgnored": "yes",
+    "excludedPerms": ""
+}

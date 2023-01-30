@@ -46,7 +46,7 @@
     </Variable>
   </Environment>
   <Labels/>
-  <Config Name="EXTRA_JAVA_OPTIONS" Target="EXTRA_JAVA_OPTIONS" Default="-Xmx512m" Mode="" Description="Container Variable: EXTRA_JAVA_OPTIONS" Type="Variable" Display="always" Required="false" Mask="false">-Xms512m -Xmx4g</Config>
-  <Config Name="Port 8081" Target="8081" Default="" Mode="tcp" Description="Container Port: 8081" Type="Port" Display="always" Required="false" Mask="false">8182</Config>
+  <Config Name="EXTRA_JAVA_OPTIONS" Target="EXTRA_JAVA_OPTIONS" Default="-Xmx512m" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">-Xms512m -Xmx4g</Config>
+  <Config Name="Port 8081" Target="8081" Default="" Mode="tcp" Description="" Type="Port" Display="always" Required="false" Mask="false">8182</Config>
   <Config Name="/var/opt/jfrog/artifactory" Target="/var/opt/jfrog/artifactory" Default="" Mode="rw" Description="/var/opt/jfrog/artifactory" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/artifactory-oss</Config>
 </Container>

@@ -78,11 +78,11 @@
     </Variable>
   </Environment>
   <Labels/>
-  <Config Name="Host Port 1" Target="6767" Default="6767" Mode="tcp" Description="Container Port: 6767" Type="Port" Display="always" Required="true" Mask="false">6767</Config>
+  <Config Name="Host Port 1" Target="6767" Default="6767" Mode="tcp" Description="" Type="Port" Display="always" Required="true" Mask="false">6767</Config>
   <Config Name="Host Path 2" Target="/movies" Default="" Mode="rw" Description="Movies" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/data/media/movies/</Config>
   <Config Name="Host Path 3" Target="/tv" Default="" Mode="rw" Description="TV" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/data/media/tv/</Config>
-  <Config Name="Host Path 3" Target="/data/torrents" Default="" Mode="rw" Description="Container Path: /torrents" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/data/torrents/</Config>
-  <Config Name="PUID" Target="PUID" Default="" Mode="" Description="Container Variable: PUID" Type="Variable" Display="advanced-hide" Required="false" Mask="false">99</Config>
-  <Config Name="PGID" Target="PGID" Default="" Mode="" Description="Container Variable: PGID" Type="Variable" Display="advanced-hide" Required="false" Mask="false">100</Config>
+  <Config Name="Host Path 3" Target="/data/torrents" Default="" Mode="rw" Description="" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/data/torrents/</Config>
+  <Config Name="PUID" Target="PUID" Default="" Mode="" Description="" Type="Variable" Display="advanced-hide" Required="false" Mask="false">99</Config>
+  <Config Name="PGID" Target="PGID" Default="" Mode="" Description="" Type="Variable" Display="advanced-hide" Required="false" Mask="false">100</Config>
   <Config Name="AppData Config Path" Target="/config" Default="" Mode="rw" Description="Appdata" Type="Path" Display="advanced-hide" Required="true" Mask="false">/mnt/user/appdata/bazarr</Config>
 </Container>

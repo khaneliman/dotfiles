@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>Plex-Media-Server</Name>
+  <Repository>plexinc/pms-docker</Repository>
+  <Registry>https://hub.docker.com/r/plexinc/pms-docker/</Registry>
+  <Network>host</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://forums.plex.tv/categories/docker</Support>
+  <Project>https://plex.tv/</Project>
+  <Overview>&#xD;
+    [b]Plex Media Server[/b][br][br]&#xD;
+ &#xD;
+    Enjoy your media on all your devices.[br]&#xD;
+    All your movie, TV Show, music, and photo collections at your fingertips, anywhere you go on all the devices you love. &#xD;
+  </Overview>
+  <Category>MediaServer:Video MediaServer:Music MediaServer:Photos</Category>
+  <WebUI>http://[IP]:[PORT:32400]/web</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/plexinc/pms-docker/master/plex-unRAID.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/plexinc/pms-docker/master/img/plex-server.png</Icon>
+  <ExtraParams>--memory=16G --mount type=tmpfs,destination=/tmp,tmpfs-size=4G --no-healthcheck </ExtraParams>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1638131809</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>&#xD;
+    [b]Plex Media Server[/b][br][br]&#xD;
+ &#xD;
+    Enjoy your media on all your devices.[br]&#xD;
+    All your movie, TV Show, music, and photo collections at your fingertips, anywhere you go on all the devices you love. &#xD;
+  </Description>
+  <Networking>
+    <Mode>host</Mode>
+    <Publish/>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/temp/Transcode/</HostDir>
+      <ContainerDir>/transcode</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/data/media/</HostDir>
+      <ContainerDir>/data</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/appdata/Plex-Media-Server</HostDir>
+      <ContainerDir>/config</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment>
+    <Variable>
+      <Value>claim-bVRvUtuPLUu9cLwx7xZB</Value>
+      <Name>PLEX_CLAIM</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>99</Value>
+      <Name>PLEX_UID</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>100</Value>
+      <Name>PLEX_GID</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>latest</Value>
+      <Name>VERSION</Name>
+      <Mode/>
+    </Variable>
+  </Environment>
+  <Labels/>
+  <Config Name="Host Path 2" Target="/transcode" Default="" Mode="rw" Description="" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/temp/Transcode/</Config>
+  <Config Name="Key 1" Target="PLEX_CLAIM" Default="Insert Token from https://plex.tv/claim" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">claim-bVRvUtuPLUu9cLwx7xZB</Config>
+  <Config Name="Key 2" Target="PLEX_UID" Default="99" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">99</Config>
+  <Config Name="Key 3" Target="PLEX_GID" Default="100" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">100</Config>
+  <Config Name="Key 4" Target="VERSION" Default="latest" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">latest</Config>
+  <Config Name="data" Target="/data" Default="" Mode="rw" Description="" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/data/media/</Config>
+  <Config Name="/dev/dri/" Target="" Default="" Mode="" Description="Intel Quick Sync" Type="Device" Display="always" Required="false" Mask="false">/dev/dri/</Config>
+  <Config Name="AppData Config Path" Target="/config" Default="/mnt/user/appdata/Plex-Media-Server" Mode="rw" Description="" Type="Path" Display="advanced-hide" Required="true" Mask="false">/mnt/user/appdata/Plex-Media-Server</Config>
+</Container>

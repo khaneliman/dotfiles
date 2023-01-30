@@ -56,9 +56,9 @@
     </Variable>
   </Environment>
   <Labels/>
-  <Config Name="Host Port for 7777" Target="7777" Default="7777" Mode="tcp" Description="Container Port: 7777" Type="Port" Display="always-hide" Required="true" Mask="false">7777</Config>
-  <Config Name="Host Path for /config" Target="/config" Default="/mnt/user/appdata/petio" Mode="rw" Description="Container Path: /config" Type="Path" Display="always-hide" Required="true" Mask="false">/mnt/user/appdata/petio</Config>
-  <Config Name="PUID" Target="PUID" Default="99" Mode="" Description="Container Variable: PUID" Type="Variable" Display="advanced-hide" Required="false" Mask="false">99</Config>
-  <Config Name="PGID" Target="PGID" Default="100" Mode="" Description="Container Variable: PGID" Type="Variable" Display="advanced-hide" Required="false" Mask="false">100</Config>
-  <Config Name="UMASK" Target="UMASK" Default="002" Mode="" Description="Container Variable: UMASK" Type="Variable" Display="advanced-hide" Required="false" Mask="false">002</Config>
+  <Config Name="Host Port for 7777" Target="7777" Default="7777" Mode="tcp" Description="" Type="Port" Display="always-hide" Required="true" Mask="false">7777</Config>
+  <Config Name="Host Path for /config" Target="/config" Default="/mnt/user/appdata/petio" Mode="rw" Description="" Type="Path" Display="always-hide" Required="true" Mask="false">/mnt/user/appdata/petio</Config>
+  <Config Name="PUID" Target="PUID" Default="99" Mode="" Description="" Type="Variable" Display="advanced-hide" Required="false" Mask="false">99</Config>
+  <Config Name="PGID" Target="PGID" Default="100" Mode="" Description="" Type="Variable" Display="advanced-hide" Required="false" Mask="false">100</Config>
+  <Config Name="UMASK" Target="UMASK" Default="002" Mode="" Description="" Type="Variable" Display="advanced-hide" Required="false" Mask="false">002</Config>
 </Container>

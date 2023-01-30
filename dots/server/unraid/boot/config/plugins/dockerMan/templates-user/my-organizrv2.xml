@@ -9,56 +9,21 @@
   <Privileged>false</Privileged>
   <Support>https://forums.unraid.net/topic/95443-support-organzir-organizr/</Support>
   <Project>https://github.com/causefx/Organizr</Project>
-  <Overview>Your Media Server's one-stop shop! HTPC/Homelab services organizer, written in PHP. The new, upgraded official image for Organzir v2. </Overview>
-  <Category>HomeAutomation: Network:Management MediaApp:Other MediaServer:Other Productivity: Tools:</Category>
+  <Overview>Your Media Server's one-stop shop! HTPC/Homelab services organizer, written in PHP. The new, upgraded official image for Organzir v2.</Overview>
+  <Category>HomeAutomation: Network:Management MediaApp:Other MediaServer:Other Productivity: Tools:Utilities</Category>
   <WebUI>http://[IP]:[PORT:80]/</WebUI>
   <TemplateURL>https://raw.githubusercontent.com/Organizr/docker-organizr/master/organizr.xml</TemplateURL>
   <Icon>https://raw.githubusercontent.com/causefx/Organizr/v2-master/plugins/images/organizr/logo-no-border.png</Icon>
-  <ExtraParams>--memory=500M</ExtraParams>
+  <ExtraParams/>
   <PostArgs/>
   <CPUset/>
-  <DateInstalled>1635448595</DateInstalled>
-  <DonateText/>
-  <DonateLink/>
-  <Description>Your Media Server's one-stop shop! HTPC/Homelab services organizer, written in PHP. The new, upgraded official image for Organzir v2. </Description>
-  <Networking>
-    <Mode>khaneproxy</Mode>
-    <Publish>
-      <Port>
-        <HostPort>280</HostPort>
-        <ContainerPort>80</ContainerPort>
-        <Protocol>tcp</Protocol>
-      </Port>
-    </Publish>
-  </Networking>
-  <Data>
-    <Volume>
-      <HostDir>/mnt/user/appdata/organizrv2</HostDir>
-      <ContainerDir>/config</ContainerDir>
-      <Mode>rw</Mode>
-    </Volume>
-  </Data>
-  <Environment>
-    <Variable>
-      <Value>master</Value>
-      <Name>branch</Name>
-      <Mode>{3}</Mode>
-    </Variable>
-    <Variable>
-      <Value>99</Value>
-      <Name>PUID</Name>
-      <Mode/>
-    </Variable>
-    <Variable>
-      <Value>100</Value>
-      <Name>PGID</Name>
-      <Mode/>
-    </Variable>
-  </Environment>
-  <Labels/>
+  <DateInstalled>1674958529</DateInstalled>
+  <DonateText>Donations</DonateText>
+  <DonateLink>https://paypal.me/causefx</DonateLink>
+  <Requires/>
   <Config Name="Branch" Target="branch" Default="master|develop" Mode="{3}" Description="Chooses which branch of organizr you wish to use" Type="Variable" Display="always" Required="false" Mask="false">master</Config>
-  <Config Name="WebUI" Target="80" Default="" Mode="tcp" Description="Container Port: 80" Type="Port" Display="always" Required="false" Mask="false">280</Config>
-  <Config Name="AppData Config Path" Target="/config" Default="/mnt/user/appdata/organizr" Mode="rw" Description="Container Path: /config" Type="Path" Display="advanced" Required="true" Mask="false">/mnt/user/appdata/organizrv2</Config>
+  <Config Name="WebUI" Target="80" Default="" Mode="tcp" Description="" Type="Port" Display="always" Required="false" Mask="false">280</Config>
+  <Config Name="AppData Config Path" Target="/config" Default="/mnt/user/appdata/organizrv2" Mode="rw" Description="" Type="Path" Display="advanced" Required="true" Mask="false">/mnt/cache/appdata/organizrv2</Config>
   <Config Name="PUID" Target="PUID" Default="99" Mode="" Description="Variable: PUID" Type="Variable" Display="advanced-hide" Required="true" Mask="false">99</Config>
   <Config Name="PGID" Target="PGID" Default="100" Mode="" Description="Variable: PGID" Type="Variable" Display="advanced-hide" Required="true" Mask="false">100</Config>
 </Container>

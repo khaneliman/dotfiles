@@ -95,16 +95,16 @@
     </Variable>
   </Environment>
   <Labels/>
-  <Config Name="Host Port 1" Target="8090" Default="8090" Mode="tcp" Description="Container Port: 8090" Type="Port" Display="always" Required="true" Mask="false">8090</Config>
-  <Config Name="Host Port 2" Target="4243" Default="4243" Mode="tcp" Description="Container Port: 4243" Type="Port" Display="always" Required="true" Mask="false">4243</Config>
-  <Config Name="Key 1" Target="JAVA_ARGS" Default="-Xmx512m" Mode="" Description="Container Variable: JAVA_ARGS" Type="Variable" Display="always" Required="false" Mask="false">-Xmx512m</Config>
-  <Config Name="Key 2" Target="JAVA_OPTS" Default="-Dhudson.footerURL=http://mycompany.com" Mode="" Description="Container Variable: JAVA_OPTS" Type="Variable" Display="always" Required="false" Mask="false">-Dhudson.footerURL=https://khaneliman.com</Config>
-  <Config Name="Key 3" Target="UMASK" Default="000" Mode="" Description="Container Variable: UMASK" Type="Variable" Display="always" Required="false" Mask="false">000</Config>
-  <Config Name="Key 4" Target="PUID" Default="99" Mode="" Description="Container Variable: PUID" Type="Variable" Display="always" Required="false" Mask="false">99</Config>
-  <Config Name="Key 5" Target="PGID" Default="100" Mode="" Description="Container Variable: PGID" Type="Variable" Display="always" Required="false" Mask="false">100</Config>
-  <Config Name="Docker Sock" Target="/var/run/docker.sock" Default="" Mode="rw" Description="Container Path: /var/run/docker.sock" Type="Path" Display="always" Required="false" Mask="false">/var/run/docker.sock</Config>
-  <Config Name="Docker" Target="/usr/bin/docker" Default="" Mode="rw" Description="Container Path: /usr/bin/docker" Type="Path" Display="always" Required="false" Mask="false">/usr/bin/docker</Config>
-  <Config Name="DOCKER_HOST" Target="DOCKER_HOST" Default="" Mode="" Description="Container Variable: DOCKER_HOST" Type="Variable" Display="always" Required="false" Mask="false">tcp://dockersocket:2375</Config>
-  <Config Name="Host Path 3" Target="/mnt/downloads" Default="" Mode="rw" Description="Container Path: /mnt/downloads" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/Downloads/</Config>
-  <Config Name="AppData Config Path" Target="/config" Default="/mnt/user/appdata/binhex-jenkins" Mode="rw" Description="Container Path: /config" Type="Path" Display="advanced-hide" Required="true" Mask="false">/mnt/user/appdata/binhex-jenkins</Config>
+  <Config Name="Host Port 1" Target="8090" Default="8090" Mode="tcp" Description="" Type="Port" Display="always" Required="true" Mask="false">8090</Config>
+  <Config Name="Host Port 2" Target="4243" Default="4243" Mode="tcp" Description="" Type="Port" Display="always" Required="true" Mask="false">4243</Config>
+  <Config Name="Key 1" Target="JAVA_ARGS" Default="-Xmx512m" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">-Xmx512m</Config>
+  <Config Name="Key 2" Target="JAVA_OPTS" Default="-Dhudson.footerURL=http://mycompany.com" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">-Dhudson.footerURL=https://khaneliman.com</Config>
+  <Config Name="Key 3" Target="UMASK" Default="000" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">000</Config>
+  <Config Name="Key 4" Target="PUID" Default="99" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">99</Config>
+  <Config Name="Key 5" Target="PGID" Default="100" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">100</Config>
+  <Config Name="Docker Sock" Target="/var/run/docker.sock" Default="" Mode="rw" Description="" Type="Path" Display="always" Required="false" Mask="false">/var/run/docker.sock</Config>
+  <Config Name="Docker" Target="/usr/bin/docker" Default="" Mode="rw" Description="" Type="Path" Display="always" Required="false" Mask="false">/usr/bin/docker</Config>
+  <Config Name="DOCKER_HOST" Target="DOCKER_HOST" Default="" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">tcp://dockersocket:2375</Config>
+  <Config Name="Host Path 3" Target="/mnt/downloads" Default="" Mode="rw" Description="" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/Downloads/</Config>
+  <Config Name="AppData Config Path" Target="/config" Default="/mnt/user/appdata/binhex-jenkins" Mode="rw" Description="" Type="Path" Display="advanced-hide" Required="true" Mask="false">/mnt/user/appdata/binhex-jenkins</Config>
 </Container>

@@ -1,0 +1,470 @@
+<?xml version="1.0" standalone="yes"?>
+<!DOCTYPE PLUGIN [
+<!ENTITY name "parity.check.tuning">
+<!ENTITY author "Dave Walker (itimpi)">
+<!ENTITY version "2022.12.05">
+<!ENTITY md5 "b75aad53399adb8a188eb9583d87219f">
+<!ENTITY launch "Settings/Scheduler">
+<!ENTITY plugin "parity.check.tuning">
+<!ENTITY plugdir "/usr/local/emhttp/plugins/&name;">
+<!ENTITY github "itimpi/parity.check.tuning">
+<!ENTITY pluginURL "https://raw.githubusercontent.com/&github;/master/&plugin;.plg">
+<!ENTITY emhttp "/usr/local/emhttp/plugins/&plugin;">
+]>
+<PLUGIN name="&name;" 
+	author="&author;" 
+	version="&version;" 
+	launch="&launch;" 
+	pluginURL="&pluginURL;" 
+	min="6.7.0"
+	icon="wrench"
+	support="https://lime-technology.com/forums/topic/78394-parity-check-tuning/">
+
+<multiLanguage>true</multiLanguage>
+
+<CHANGES>
+TODO
+ - Update master translation file for latest version of plugin
+ - Add more flexible scheduling options (e.g. different by day of week)
+ - Improve suppression of misleading Unraid messages about parity operations
+ 
+###2022.12.05
+ - Fix: Restart of parity checks not working
+ - New: Restart all array operations, not just parity checks
+ - New: More detail in notifications if restart has to be abandoned.
+ - New: Remove spurious Cancel entries from Parity History file that were
+		occurring if an array operation was restarted.
+
+###2022.05.05
+ - Fix: Minor internal tweaks to improve logging
+ - New: Syslog entries when notifications are (potentially) generated
+ - Fix: Updates to translations file
+ - New: Generate notification if temperature pause exceeds 30 minutes
+	    (tunable via hidden setting in parity.check.tuning.cfg file)
+ 
+###2022.04.12
+ - Fix: Scheduled checks incorrectly being treated as manual checks
+ - Fix: Pause/resume notifications omitting operation type
+ - New: Handle active drives being spundown if paused during array
+         operation (due to drive(s) overheating)
+ 
+###2022.04.07
+ - New: Adjust monitor task frequency
+	    (tunable via hidden settings in parity.check.tuning.cfg file)
+ 
+###2022.04.05
+ - New: Button to reset plugin settings to issued defaults
+ - Fix: Plugin was losing track of fact a pause had been temperature related
+ - Fix: Some anomolies in Testing log mode messages for temperatures 
+ 
+###2022.04.02
+ - Fix: Previous release not containing updated defaults file as intended.
+ 
+###2022.03.31
+ - Fix: Improve defaults for settings not found in configuration file
+        (will also apply to new installs)
+ 
+###2022.03.30
+ - Fix: Centigrade temperatures being displayed as Fahrenheit value.
+ - Fix: Resume temperature setting value saving incorrectly
+ 
+###2022.03.29
+ - Fix: Invalid cron entry being generated for weekly increments
+ 
+###2022.03.23
+ - Fix: Regression that caused some settings fields to display incorrectly (although they were saving correctly)
+ - Fix: Regression that caused PHP error reporting level to be logged when log level not set to Testing
+ - Fix: Remove 'Start Check' button on Parity Problems Assistant page and relabel 'Apply' button to 'Check' as it now initiates the check
+ - Fix: Internal changes to improve logging (especially with Testing or Debug log level set)
+ - New: Paused, Resumed and Completed messages in syslog even at Basic log level
+ 
+###2022.03.20
+ - New: Option to pause parity checks while CA Backup (if installed) is running a backup or restore.
+ - Fix: Regression that stopped Tools->Parity Problems Assisitant page showing
+ - New: An option to run increments weekly for better alignment with 6.10.0-rc3
+ - Fix: More 6.10.0-rc3 related changes and internal code tidying
+ - Fix: Improvements in notification messages
+ 
+###2022.02.18
+ - Fix: Compatibility with new parity history record format introduced with Unraid 6.10.0rc3.
+ - New: Include all array operation types in history (not just parity checks).
+ - New: Option to pause parity checks while mover running.
+ - Fix: Incorrect resume after end of scheduled increment if was paused due to disks overheating.
+ - Fix: Setting for Notifications always being shown as No (even when set to Yes in stored settings).
+ - Fix: Minor internal code tidying to help with future maintenance.
+ 
+###2021.10.10
+ - New: Display plugin version in the plugin's GUI pages (top right)
+ 
+###2021.09.21
+ - Fix: The Minutes field for Pause/Resume would not display correctly if set to 0
+ 
+###2021.09.17
+ - Fix: Warning being generated in GUI from multi-language support code on Unraid 6.9.2
+ - New: Check Pause and Resume times are not identical as this leads to unpredictable behavior.
+ 
+###2021.09.14
+ - Fix: Multi-language support code generating errors in GUI or syslog.
+ 
+###2021.09.10
+ - Fix: Regression that could an error message to be displayed on settings page.
+  
+###2021.09.09
+ - Fix: Get multi-language support working for messages from background scripts (such as notifications and syslog messages)
+ 
+###2021.08.24
+ - New: Add some missing translations to the multi-language support
+ - Fix: translation files not being picked up correctly resulting in English text instead.
+ 
+###2021.06.15
+ - Fix: Problems Assistant popup corrected to give correct count of lines in log even when Testing logging active.
+ 
+###2021.06.15
+ - New: Parity Problems Assistant can now show dialog with parity check related entries from syslog.
+ - Fix: Apply default value if Disk Warning/Critical temperature values have never been explicitly set
+ 
+###2021.06.04
+ - New: Initial changes towards better sector selection in Parity Problem Assistant
+ - Fix: Parity Problem Assistant was not converting parity disk size to sectors correctly.
+ 
+###2021.06.01
+ - Fix: Error messages were shown when trying to display Parity Problems Assistant page
+		(These were actually non-fatal but this was not obvious to the end-user)
+ 
+###2021.05.14
+ - Fix: Default to Celsius for temperatures if not explicitly set at Unraid level.
+ - Fix: Disable user being able to hit Apply if a Custom entry has just been flagged as invalid 
+		(as it will later cause cron scheduling errors for the plugin entries).
+ 
+###2021.04.19
+ - New: Added warning if temperature pause/resume values > 20 to pick up user entering actual temperatures by mistake.
+ 
+###2021.04.13
+ - Fix: Translation text related fixes (no functional changes)
+ 
+###2021.04.06
+ - Fix: Regression that could trigger error message when displaying Parity Historyi
+ - Fix: Incorrect action type being written to parity history records
+ - New: Added trigger type (automatic/scheduled/manual) to Parity History records
+
+###2021.04.02
+ - Fix: Updates to align with translation file for multi-language support
+ - New: Option to send plugin log messages to flash either instead of syslog or in addition to syslog 
+		(currently only allowed when logging level set to Testing)
+ 
+###2021.03.30
+ - Fix: Syntax error being thrown in plugin main script on all unRraid versions
+ - Fix: Syntax error on 6.8.3 (or earlier) systems on settings page and assistant page
+ - New: Parity Problems Assistant page to show error notice if array not started
+ 
+###2021.03.29
+ - New: Setting added for specifying automatic parity checks after unclean shutdown to be run in increments.
+ - New: Add number of errors so far to Pause notifications when not zero.
+ - New: Updated Help text to cover new option for pausing Automatic checks.
+ - New: Give detailed notification at end of Parity Sync/Rebuild and Clear operations.
+ - New: Improved output from CLI 'status' option.
+ - Fix: Was incorrectly pausing manual checks when option only set for scheduled checks.
+ - Fix: An empty plugin setting could cause (non-fatal) parse error in monitor operation.
+ - Fix: Internal code reorganization to better handle state after an unclean shutdown.
+ - Fix: Updated Help text (primarily to use markdown syntax more extensively instead of embedded HTML).
+ - Issue:  Translations file has not yet been updated to reflect changes in this release - will happen later.
+ 
+###2021.02.28
+ - New: Updates to description file to mention newest facilities.
+ - Fix: Various spelling mistakes in Release notes (thanks to techie2000).
+ - Fix: Re-ordered fields on Settings page.
+ - Fix: Manually initiated parity reads/checks could incorrectly be treated as scheduled ones for pause/resume.
+ 
+###2021.02.14
+ - Fix: Pause/Resume to be scheduled for unscheduled array operations even if standard increments not also enabled.
+ - Fix: Changes to logging level were not being remembered when settings screen next shown.
+ - Fix: Make sure packaging not done on network share as can mean unexpected nobody/users on files/folders instead of root.
+ - Fix: Output a syslog entry for pause/resume even when notifications disabled.
+
+###2021.02.09
+ - New: Display notice and disable options for Parity Problems Assistant if no parity disk present
+ - Fix: Invalid cron entries could be generated due to incomplete migration of plugin settings to new format
+        (temporary workaround was to resave settings from plugin Settings page)
+ 
+###2021.02.07
+ - New: Add new experimental Parity Problems Assistant page to Tools page in unRaid GUI
+ - Fix: A number of notifications were not displaying correct status information
+ - Fix: Correct average speed calculation for parity checks that do not complete
+ - New: Improve suppression of superfluous notifications from monitor task
+ - New: Use a default of hourly monitoring even if no options explicitly set to ensure parity history updated
+ - Fix: Internal refactoring of code to aid with future maintenance
+ 
+###2021.01.19
+ - Fix: Regression that stopped the Apply button working on the plugin's Settings page
+        (appears to have been a variable name collision with some other Unraid component)
+ - New: Escape arguments for better behaviour when using CLI
+ 
+###2021.01.18
+ - Fix: Regression that would cause an exception when checking if a valid action was requested
+ - New: Add server name to notifications
+ 
+###2021.01.16
+ - New: Suppress Unraid built-in notifications for array operations start/finish when plugin issues better equivalent
+ - Fix: PHP parsing error when checking Unraid version for notifications
+ - Fix: Correcting checks could be displayed or logged as non-correcting
+ - Fix: Tidying up of code internal to plugin
+ - New: More detail in text of notifications
+ 
+###2021.01.03
+ - Fix: Regression that could stop notifications appearing (or displaying with no content) on Unraid 6.8.3 and earlier.
+
+###2021.01.02
+ - Fix: Regression to force execute permission on files used internally by plugin
+        (although not clear why this changed as should have been set correctly as part of package build)
+   Fix: Suppress all notifications if system notifications not enabled.
+ 
+###2021.01.01
+ - New: Resume previously running array operations when array started after a reboot or array stop/start (requires Unraid 6.9.0 rc1 or higher)
+ - New: Add pause/resume for read checks when no parity disk present
+ - New: Notification if parity check started due to unclean shutdown
+ - Fix: Regression where notifications were not displaying description text on Unraid releases earlier than 6.9.0
+ - Fix: Major overhaul of translations file for multi-language support
+ 
+###2020.11.19
+ - Fix: Typo that could cause a PHP warning to be issued.
+ 
+###2020.11.15
+ - Fix: Regression that caused a crontab parsing error.
+ 
+###2020.11.14
+ - Fix: Improve setting of configuration defaults to make them more robust for the future.
+ - Fix: Improve reporting of action type in messages.
+ - New: Added configured unit type for temperatures in messages.
+ - Fix: Settings page displaying wrong value for the option to shutdown the server (although it was still being set correctly).
+ - Fix: Typos in help text.
+ 
+###2020.10.28
+ - Fix: Debug level logging was running when it should not.
+ - Fix: Default for Shutdown option was set to be 'yes' (when it should have been 'no') for existing users of the plugin
+ 
+###2020.10.23
+ - New: Option to shudown server if disks heat above user defined thresholds.
+ - Fix: correct regression in description displayed in notifications.
+ - Fix: link to wiki page for crontab was not working correctly (for custom formats)
+ - New: GUI improvements to disallow invalid combinations of settings
+ - Fix: Fixes to  multi-language support
+ - New: Additional (and updated strings) added to translation file for multi-language support
+ 
+###2020.10.01
+ - New: When running 6.9 Beta 27+, clicking on an alert from Parity Check Tuning will take you to the Scheduler settings page.
+ - New: Added check that temperature resume value is larger than pause value.
+
+###2020.09.10
+ - New: Increase logging detail on temperature monitoring to help diagnose problem cases.
+ - Fix: Listing of drives that overheated was not correct.
+ 
+###2020.09.08
+ - Fix: Resume on drives cooling after overheating was not working as expected.
+ 
+###2020.08.03
+- Fix: Resume on temperature was not waiting until drives cooled enough - only that they were no longer classed as 'hot'
+
+###2020.08.01
+- Fix: Incorrect reporting of number of drives if no parity2 present.
+- Fix: 'hot' drive(s) listed with name of 'temp' instead of correct name.
+- Fix: Resume happening before drives cooled sufficiently.
+- New  Log level of 'testing' can now be activated from the plugins settings.
+- Fix  Minor changes to English translation file.
+
+###2020.07.21
+- Fix: Settings page was not always correctly switching GUI display between custom and daily scheduling options
+- Fix: Some missing translation texts enabled
+
+###2020-07-19
+- New: Changes in preparation for multi-language support.
+- Fix: Pause not working when drives over-heat when temperature pause/resume active.
+- Fix: Incorrect number of drives shown in summary message for drive temperature monitoring.
+- New: Add detected temperature when listing over-heated drives in syslog.
+
+###2020-04-09
+- Fix: divide by zero error logged during startup
+
+###2020-02-15
+- New: add handling of 'starting' event
+
+###2019.11.30
+- New: add a hourly monitor check to better handle manual parity check pause/resumes
+- New: add appropriate icons to alerts
+
+###2019.10.26
+- Fix: make sure parity history updated correctly if array stopped before a scheduled run of plugin.
+
+###2019.10.22
+- Fix; the parity history and notifications would erroneously show correcting parity checks as being non-correcting.
+- Fix: parity history would not be updated if a second check started within timeslot for a single increment
+
+###2019.10.12
+- Fix: too many increments shown in parity history if system rebooted/shutdown with a check active
+
+###2019.09.10
+- Fix: parity history update changed to stop last increment being logged as well as summary for whole run
+
+###2019.08.01
+- Fix: parity history update was not terminating record correctly
+- New: type of check now being tracked in history 
+- New: Reworked CLI parity.check command and 'start' option removed
+
+###2019.07.18
+- Fix: Error count updated incorrectly in parity history file (was always set to 0 even when errors occurred)
+- New: Keep some extra diagnostics for when errors reported to help diagnose cause
+- New: Added 'parity.check' command for functionality via the CLI
+
+###2019.05.01
+- Fix: Regression that broke pause/resume of scheduled parity checks
+- Fix: Regression that broke updating parity history
+
+###2019.04.30
+- Fix: Do not create entries in parity-history log for array operations that are not a parity check
+- Fix: Corrected handling of non-scheduled checks to match user settings.
+- New: Simple validation on custom entries
+
+###2019.04.24
+- New: Slight rework of Parity History display to only display extra columns if some entries have
+  values for them (so if pause/resume never used display stays same as it used to be).
+  Additional fields (if present) are now always last two columns)
+- Fix: Removed GUI option for scheduled hourly pause/resume.
+- New: Added GUI option for custom pause/resume schedule using crontab style entry.
+
+###2019.04.16
+- New: Add a History button to the plugin's settings page (functionally equivalent to History button on Main tab).
+- New: Provide a patched ParityHistory.php file to display extra fields when displaying parity-check history.
+
+###2019.04.15
+- Fix: Various internal changes to improve efficiency and improve debug logging
+- Fix: Changes to support collecting history correctly and upbating standard parity-checks.log with results
+- Fix: Removed internal 'tidy' option as internal design changes means no longer needed.
+
+###2019-04-02
+- New: Added Unraid version check in case plugin installed somehow on version earlier than 6.7
+- New: Added check that parity drive is present as without it plugin should always be disabled.
+
+###2019-03-30
+- Fix: spelling mistakes in GUI Help on settings page
+- Fix: icon on Plugins tab to use a FA 4.7 icon rather than a FA 5 one (which is not available on Unraid).
+- Fix: wrong URL for support thread on Plugins page
+- New: Added PayPal Donate buttong to Settings page for plugin
+- Fix: Reverted CA template to using PNG icon rather than a FA one.
+- Fix: Updated description of the plugin for both Plugins and Apps pages
+
+###2019.03.28
+- New: Added new CA plugin update feature
+- New: Improved GUI on Settings page with more extensive help and better checks on settings
+- New: Added option to Pause/Resume array operations if disks overheat
+- New: Added option to Pause/Resume of paritySync/Disk Rebuild and disk Clear operations
+- New: Added option to send notifications on Pause/Resume
+- New: Added sending a notification if its detected the array was stopped while an array operation was in progress
+- New: Added a Paypal donate option to Apps page (be interesting to see if any actually happen!).
+
+###2019.03.15
+- New: Improvements to the help text built into the GUI as a result of questions from users
+- Fix: fixed some minor GUI display glitches.
+
+###2019.03.13
+- First official Beta version.
+
+###2019.03.08
+- Version for alpha testing.
+</CHANGES>
+
+<FILE Run="/bin/bash">
+  <INLINE>
+    # Remove old 'source' files
+      rm -f $(ls /boot/config/plugins/&plugin;/&plugin;*.txz 2&gt;/dev/null | grep -v '&version;')
+  </INLINE>
+</FILE>
+  
+<!--
+The 'source' file. 
+-->
+  <FILE Name="/boot/config/plugins/&plugin;/&plugin;-&version;.txz" Run="upgradepkg --install-new">
+    <!--      <URL>/mnt/cache/Dropbox/Projects/&plugin;/archives/&plugin;-&version;.txz</URL>     --> 
+    <URL>https://raw.githubusercontent.com/&github;/master/archives/&plugin;-&version;.txz</URL>
+  </FILE>
+ 
+<!--
+The 'post-install' script
+-->
+<FILE Run="/bin/bash">
+  <INLINE>
+    # Ensure permissions correct (not sure why needed as should already be OK, but apparently not always the case)
+    chmod -R 755 /usr/local/emhttp/plugins/&plugin;
+    chown -R root /usr/local/emhttp/plugins/&plugin;
+    chgrp -R root /usr/local/emhttp/plugins/&plugin;
+    # Set up option for CLI usage
+    ln -s /usr/local/emhttp/plugins/&plugin;/&plugin;.php /usr/local/bin/parity.check
+	# If necesserary set plugin cfg file to defaults
+	if [ ! -f /boot/config/plugins/&plugin;/&plugin;.cfg ]; then
+		cp /usr/local/emhttp/plugins/&plugin;/&plugin;.defaults /boot/config/plugins/&plugin;/&plugin;.cfg
+		echo "default settings installed"
+	fi
+    # set up intial cron schedules
+    /usr/local/emhttp/plugins/&plugin;/&plugin;.php "updatecron"
+    # Replace the standard mdcmd one with our custom version
+    if [ -f /usr/local/sbin/mdcmd ]; then
+      mv -f /usr/local/sbin/mdcmd /usr/local/sbin/mdcmd.orig
+      ln -s /usr/local/emhttp/plugins/&plugin;/&plugin;.mdcmd /usr/local/sbin/mdcmd
+    fi
+    # Replace the standard ParityHistory.php scrip with our custom version
+    if [ -f /usr/local/emhttp/plugins/dynamix/include/ParityHistory.php ]; then
+          mv -f /usr/local/emhttp/plugins/dynamix/include/ParityHistory.php /usr/local/emhttp/plugins/dynamix/include/ParityHistory.php.orig
+          ln -s /usr/local/emhttp/plugins/&plugin;/ParityHistory.php /usr/local/emhttp/plugins/dynamix/include/ParityHistory.php
+    fi
+	echo &version; > /boot/config/plugins/&plugin;/&plugin;.version;
+	# rm -rf /boot/config/plugins/&plugin;/&plugin;.log
+    echo ""
+    echo "----------------------------------------------------"
+    echo " &name; has been installed."
+    echo " Copyright 2019-2022, Dave Walker (itimpi)"
+    echo " Version: &version;"
+    echo "----------------------------------------------------"
+    echo ""
+  </INLINE>
+</FILE>
+
+<!--
+The 'remove' script.
+-->
+<FILE Run="/bin/bash" Method="remove">
+  <INLINE>
+    # Remove option for CLI usage
+    rm -v /usr/local/bin/parity.check
+    # We need to replace our customised mdcmd with the original version
+    if [ -h /usr/local/sbin/mdcmd ]; then
+      if [ -e /usr/local/sbin/mdcmd.orig ]; then
+        rm /usr/local/sbin/mdcmd
+        mv /usr/local/sbin/mdcmd.orig /usr/local/sbin/mdcmd
+      else
+        # Should not be possible to get here but lets play safe!
+        echo ""
+        echo "--------------------------------------"
+        echo " ERROR:  saved mdcmd command not found"
+        echo "--------------------------------------"
+      fi
+    fi
+    # We need to replace our customised ParityHistory.php with the original version
+    if [ -h /usr/local/emhttp/plugins/dynamix/include/ParityHistory.php ]; then
+      if [ -e /usr/local/emhttp/plugins/dynamix/include/ParityHistory.php.orig ]; then
+        rm /usr/local/emhttp/plugins/dynamix/include/ParityHistory.php
+        mv /usr/local/emhttp/plugins/dynamix/include/ParityHistory.php.orig /usr/local/emhttp/plugins/dynamix/include/ParityHistory.php
+      else
+        # Should not be possible to get here but lets play safe!
+        echo ""
+        echo "------------------------------------------"
+        echo " ERROR:  saved ParityHistory.php not found"
+        echo "------------------------------------------"
+      fi
+    fi
+    # final tidy up to remove last traces of plugin
+    removepkg &plugin;-&version;
+    rm -rf &plugdir;
+    rm -rf /boot/config/plugins/&plugin;
+    /usr/local/sbin/update_cron
+  </INLINE>
+</FILE>
+
+</PLUGIN>

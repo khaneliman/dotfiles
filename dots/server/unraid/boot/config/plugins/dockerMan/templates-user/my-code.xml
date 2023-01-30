@@ -70,7 +70,7 @@
   <Config Name="Appdata" Target="/config" Default="" Mode="rw" Description="Appdata - /config" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/code-server</Config>
   <Config Name="Password" Target="PASSWORD" Default="" Mode="" Description="Optional web gui password, if not provided, there will be no auth" Type="Variable" Display="always" Required="false" Mask="true"/>
   <Config Name="Sudo Password" Target="SUDO_PASSWORD" Default="" Mode="" Description="If this optional variable is set, user will have sudo access in the code-server terminal with the specified password." Type="Variable" Display="always" Required="false" Mask="true"/>
-  <Config Name="GitHub Repos" Target="/source/GitHub/" Default="" Mode="rw" Description="Container Path: /source/GitHub/" Type="Path" Display="always" Required="false" Mask="false">/mnt/disks/dropbox/Development/SCM/Github/</Config>
+  <Config Name="GitHub Repos" Target="/source/GitHub/" Default="" Mode="rw" Description="" Type="Path" Display="always" Required="false" Mask="false">/mnt/disks/dropbox/Development/SCM/Github/</Config>
   <Config Name="PUID" Target="PUID" Default="" Mode="" Description="PUID" Type="Variable" Display="advanced" Required="false" Mask="false">99</Config>
   <Config Name="PGID" Target="PGID" Default="" Mode="" Description="PGID" Type="Variable" Display="advanced" Required="false" Mask="false">100</Config>
 </Container>

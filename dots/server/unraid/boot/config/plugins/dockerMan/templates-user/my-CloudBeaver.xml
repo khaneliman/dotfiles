@@ -42,6 +42,6 @@ As an open-source product it already supports the most popular open source datab
   </Data>
   <Environment/>
   <Labels/>
-  <Config Name="Web Interface Port" Target="8978" Default="8978" Mode="tcp" Description="Container Port: 8080" Type="Port" Display="always" Required="true" Mask="false">8978</Config>
-  <Config Name="AppData" Target="/opt/cloudbeaver/workspace" Default="/mnt/user/appdata/cloudbeaver" Mode="rw" Description="Container Path: /opt/cloudbeaver/workspace" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/cloudbeaver</Config>
+  <Config Name="Web Interface Port" Target="8978" Default="8978" Mode="tcp" Description="" Type="Port" Display="always" Required="true" Mask="false">8978</Config>
+  <Config Name="AppData" Target="/opt/cloudbeaver/workspace" Default="/mnt/user/appdata/cloudbeaver" Mode="rw" Description="" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/cloudbeaver</Config>
 </Container>

@@ -73,10 +73,10 @@
   <Labels/>
   <Config Name="Netdata Web UI Port" Target="19999" Default="19999" Mode="tcp" Description="Netdata Web UI Port" Type="Port" Display="always" Required="true" Mask="false">19999</Config>
   <Config Name="Anonymous Statistics" Target="DO_NOT_TRACK" Default="" Mode="" Description="Set to 1 to disable anonymous statistics." Type="Variable" Display="always" Required="false" Mask="false"/>
-  <Config Name="Netdata Override" Target="/etc/netdata" Default="/mnt/user/appdata/netdata/override" Mode="rw" Description="Container Path: /etc/netdata" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/netdata/override</Config>
-  <Config Name="Host /proc" Target="/host/proc" Default="/proc" Mode="ro" Description="Container Path: /host/proc" Type="Path" Display="advanced" Required="true" Mask="false">/proc</Config>
-  <Config Name="Host /sys" Target="/host/sys" Default="/sys" Mode="ro" Description="Container Path: /host/sys" Type="Path" Display="advanced" Required="true" Mask="false">/sys</Config>
-  <Config Name="doker.sock" Target="/var/run/docker.sock" Default="/var/run/docker.sock" Mode="ro" Description="Container Path: /var/run/docker.sock" Type="Path" Display="advanced" Required="true" Mask="false">/var/run/docker.sock</Config>
+  <Config Name="Netdata Override" Target="/etc/netdata" Default="/mnt/user/appdata/netdata/override" Mode="rw" Description="" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/netdata/override</Config>
+  <Config Name="Host /proc" Target="/host/proc" Default="/proc" Mode="ro" Description="" Type="Path" Display="advanced" Required="true" Mask="false">/proc</Config>
+  <Config Name="Host /sys" Target="/host/sys" Default="/sys" Mode="ro" Description="" Type="Path" Display="advanced" Required="true" Mask="false">/sys</Config>
+  <Config Name="doker.sock" Target="/var/run/docker.sock" Default="/var/run/docker.sock" Mode="ro" Description="" Type="Path" Display="advanced" Required="true" Mask="false">/var/run/docker.sock</Config>
   <Config Name="Docker PGID" Target="PGID" Default="281" Mode="" Description="Host docker user gid. Required for container name resolution." Type="Variable" Display="advanced" Required="true" Mask="false">281</Config>
   <Config Name="NVIDIA_VISIBLE_DEVICES" Target="NVIDIA_VISIBLE_DEVICES" Default="all" Mode="" Description="Valid options: 0,1,2, GPU-fef8089b, all, none, void" Type="Variable" Display="advanced" Required="false" Mask="false">all</Config>
 </Container>

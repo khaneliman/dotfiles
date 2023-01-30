@@ -44,6 +44,6 @@
   </Data>
   <Environment/>
   <Labels/>
-  <Config Name="Host Port 1" Target="27017" Default="27017" Mode="tcp" Description="Container Port: 27017" Type="Port" Display="always" Required="true" Mask="false">27017</Config>
-  <Config Name="Host Path 1" Target="/data/db" Default="/mnt/user/appdata/mongodb/" Mode="rw" Description="Container Path: /data/db" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/mongodb/</Config>
+  <Config Name="Host Port 1" Target="27017" Default="27017" Mode="tcp" Description="" Type="Port" Display="always" Required="true" Mask="false">27017</Config>
+  <Config Name="Host Path 1" Target="/data/db" Default="/mnt/user/appdata/mongodb/" Mode="rw" Description="" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/mongodb/</Config>
 </Container>

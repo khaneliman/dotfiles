@@ -56,9 +56,9 @@
     </Variable>
   </Environment>
   <Labels/>
-  <Config Name="Host Port 1" Target="7889" Default="7889" Mode="tcp" Description="Container Port: 7889" Type="Port" Display="always" Required="true" Mask="false">7889</Config>
-  <Config Name="Host Path 2" Target="/opt/log" Default="" Mode="rw" Description="Container Path: /opt/log" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/dmz/goaccess/log</Config>
-  <Config Name="Key 1" Target="PUID" Default="99" Mode="" Description="Container Variable: PUID" Type="Variable" Display="always" Required="false" Mask="false">99</Config>
-  <Config Name="Key 2" Target="PGID" Default="100" Mode="" Description="Container Variable: PGID" Type="Variable" Display="always" Required="false" Mask="false">100</Config>
-  <Config Name="AppData Config Path" Target="/config" Default="/mnt/user/appdata/goaccess" Mode="rw" Description="Container Path: /config" Type="Path" Display="advanced-hide" Required="true" Mask="false">/mnt/user/appdata/goaccess</Config>
+  <Config Name="Host Port 1" Target="7889" Default="7889" Mode="tcp" Description="" Type="Port" Display="always" Required="true" Mask="false">7889</Config>
+  <Config Name="Host Path 2" Target="/opt/log" Default="" Mode="rw" Description="" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/dmz/goaccess/log</Config>
+  <Config Name="Key 1" Target="PUID" Default="99" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">99</Config>
+  <Config Name="Key 2" Target="PGID" Default="100" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">100</Config>
+  <Config Name="AppData Config Path" Target="/config" Default="/mnt/user/appdata/goaccess" Mode="rw" Description="" Type="Path" Display="advanced-hide" Required="true" Mask="false">/mnt/user/appdata/goaccess</Config>
 </Container>

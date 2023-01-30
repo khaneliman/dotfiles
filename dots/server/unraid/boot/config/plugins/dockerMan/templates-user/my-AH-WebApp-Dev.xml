@@ -51,8 +51,8 @@
     </Variable>
   </Environment>
   <Labels/>
-  <Config Name="Web UI Port" Target="80" Default="" Mode="tcp" Description="Container Port: 80" Type="Port" Display="always" Required="false" Mask="false">8099</Config>
-  <Config Name="Data Protection Keys" Target="/root/.aspnet/DataProtection-Keys" Default="" Mode="rw" Description="Container Path: /root/.aspnet/DataProtection-Keys" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/AH-WebApp/dev</Config>
-  <Config Name="ASPNETCORE_ENVIRONMENT" Target="ASPNETCORE_ENVIRONMENT" Default="" Mode="" Description="Container Variable: ASPNETCORE_ENVIRONMENT" Type="Variable" Display="always" Required="false" Mask="false">Production</Config>
-  <Config Name="Host Port 2" Target="443" Default="" Mode="tcp" Description="Container Port: 443" Type="Port" Display="always" Required="false" Mask="false">19443</Config>
+  <Config Name="Web UI Port" Target="80" Default="" Mode="tcp" Description="" Type="Port" Display="always" Required="false" Mask="false">8099</Config>
+  <Config Name="Data Protection Keys" Target="/root/.aspnet/DataProtection-Keys" Default="" Mode="rw" Description="" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/AH-WebApp/dev</Config>
+  <Config Name="ASPNETCORE_ENVIRONMENT" Target="ASPNETCORE_ENVIRONMENT" Default="" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">Production</Config>
+  <Config Name="Host Port 2" Target="443" Default="" Mode="tcp" Description="" Type="Port" Display="always" Required="false" Mask="false">19443</Config>
 </Container>

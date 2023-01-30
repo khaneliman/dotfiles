@@ -66,11 +66,11 @@
     </Variable>
   </Environment>
   <Labels/>
-  <Config Name="Host Port 1" Target="8200" Default="8200" Mode="tcp" Description="Container Port: 8200" Type="Port" Display="always" Required="true" Mask="false">8200</Config>
-  <Config Name="Host Path 2" Target="/tmp" Default="" Mode="rw" Description="Container Path: /tmp" Type="Path" Display="always" Required="true" Mask="false">/tmp/</Config>
-  <Config Name="Host Path 3" Target="/backups" Default="" Mode="rw" Description="Container Path: /backups" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/Backups/</Config>
-  <Config Name="Host Path 4" Target="/source" Default="" Mode="rw" Description="Container Path: /source" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/</Config>
-  <Config Name="Key 1" Target="PUID" Default="99" Mode="" Description="Container Variable: PUID" Type="Variable" Display="always" Required="false" Mask="false">99</Config>
-  <Config Name="Key 2" Target="PGID" Default="100" Mode="" Description="Container Variable: PGID" Type="Variable" Display="always" Required="false" Mask="false">100</Config>
-  <Config Name="AppData Config Path" Target="/config" Default="/mnt/user/appdata/duplicati" Mode="rw" Description="Container Path: /config" Type="Path" Display="advanced-hide" Required="true" Mask="false">/mnt/user/appdata/duplicati</Config>
+  <Config Name="Host Port 1" Target="8200" Default="8200" Mode="tcp" Description="" Type="Port" Display="always" Required="true" Mask="false">8200</Config>
+  <Config Name="Host Path 2" Target="/tmp" Default="" Mode="rw" Description="" Type="Path" Display="always" Required="true" Mask="false">/tmp/</Config>
+  <Config Name="Host Path 3" Target="/backups" Default="" Mode="rw" Description="" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/Backups/</Config>
+  <Config Name="Host Path 4" Target="/source" Default="" Mode="rw" Description="" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/</Config>
+  <Config Name="Key 1" Target="PUID" Default="99" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">99</Config>
+  <Config Name="Key 2" Target="PGID" Default="100" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">100</Config>
+  <Config Name="AppData Config Path" Target="/config" Default="/mnt/user/appdata/duplicati" Mode="rw" Description="" Type="Path" Display="advanced-hide" Required="true" Mask="false">/mnt/user/appdata/duplicati</Config>
 </Container>

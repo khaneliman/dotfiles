@@ -38,5 +38,5 @@ Instructions for installation can be found at https://github.com/aeleos/cloudfla
   </Data>
   <Environment/>
   <Labels/>
-  <Config Name="data" Target="/home/nonroot/.cloudflared/" Default="" Mode="rw" Description="Container Path: /home/nonroot/.cloudflared/" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/cloudflared</Config>
+  <Config Name="data" Target="/home/nonroot/.cloudflared/" Default="" Mode="rw" Description="" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/cloudflared</Config>
 </Container>

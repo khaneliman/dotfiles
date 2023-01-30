@@ -51,8 +51,8 @@
     </Variable>
   </Environment>
   <Labels/>
-  <Config Name="Host Port 1" Target="3579" Default="3579" Mode="tcp" Description="Container Port: 3579" Type="Port" Display="always" Required="true" Mask="false">3579</Config>
-  <Config Name="Key 1" Target="PUID" Default="99" Mode="" Description="Container Variable: PUID" Type="Variable" Display="always" Required="false" Mask="false">99</Config>
-  <Config Name="Key 2" Target="PGID" Default="100" Mode="" Description="Container Variable: PGID" Type="Variable" Display="always" Required="false" Mask="false">100</Config>
-  <Config Name="AppData Config Path" Target="/config" Default="/mnt/user/appdata/ombi" Mode="rw" Description="Container Path: /config" Type="Path" Display="advanced-hide" Required="true" Mask="false">/mnt/user/appdata/ombi</Config>
+  <Config Name="Host Port 1" Target="3579" Default="3579" Mode="tcp" Description="" Type="Port" Display="always" Required="true" Mask="false">3579</Config>
+  <Config Name="Key 1" Target="PUID" Default="99" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">99</Config>
+  <Config Name="Key 2" Target="PGID" Default="100" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">100</Config>
+  <Config Name="AppData Config Path" Target="/config" Default="/mnt/user/appdata/ombi" Mode="rw" Description="" Type="Path" Display="advanced-hide" Required="true" Mask="false">/mnt/user/appdata/ombi</Config>
 </Container>

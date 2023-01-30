@@ -64,6 +64,6 @@ Do not do this if you do not understand what that means.</Description>
     </Variable>
   </Environment>
   <Labels/>
-  <Config Name="Appdata path" Target="/state" Default="" Mode="rw" Description="Container Path: /state" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/tailscale</Config>
+  <Config Name="Appdata path" Target="/state" Default="" Mode="rw" Description="" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/tailscale</Config>
   <Config Name="UP_FLAGS" Target="UP_FLAGS" Default="" Mode="" Description="Additional flags to pass to tailscale on startup" Type="Variable" Display="always" Required="false" Mask="false">--advertise-exit-node</Config>
 </Container>

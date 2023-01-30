@@ -61,10 +61,10 @@
     </Variable>
   </Environment>
   <Labels/>
-  <Config Name="WebUI" Target="80" Default="" Mode="tcp" Description="Container Port: 80" Type="Port" Display="always" Required="true" Mask="false">281</Config>
-  <Config Name="Var Logs" Target="/varlog" Default="" Mode="ro" Description="Container Path: /varlog" Type="Path" Display="always" Required="false" Mask="false">/var/log/</Config>
-  <Config Name="AppData" Target="/userappdata" Default="" Mode="ro" Description="Container Path: /userappdata" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/</Config>
-  <Config Name="Config" Target="/app" Default="/mnt/user/appdata/Logarr" Mode="rw" Description="Container Path: /app" Type="Path" Display="advanced" Required="true" Mask="false">/mnt/user/appdata/Logarr</Config>
-  <Config Name="PUID" Target="PUID" Default="99" Mode="{3}" Description="Container Variable: PUID" Type="Variable" Display="advanced" Required="false" Mask="false">99</Config>
-  <Config Name="PGID" Target="PGID" Default="100" Mode="{3}" Description="Container Variable: PGID" Type="Variable" Display="advanced" Required="false" Mask="false">100</Config>
+  <Config Name="WebUI" Target="80" Default="" Mode="tcp" Description="" Type="Port" Display="always" Required="true" Mask="false">281</Config>
+  <Config Name="Var Logs" Target="/varlog" Default="" Mode="ro" Description="" Type="Path" Display="always" Required="false" Mask="false">/var/log/</Config>
+  <Config Name="AppData" Target="/userappdata" Default="" Mode="ro" Description="" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/</Config>
+  <Config Name="Config" Target="/app" Default="/mnt/user/appdata/Logarr" Mode="rw" Description="" Type="Path" Display="advanced" Required="true" Mask="false">/mnt/user/appdata/Logarr</Config>
+  <Config Name="PUID" Target="PUID" Default="99" Mode="{3}" Description="" Type="Variable" Display="advanced" Required="false" Mask="false">99</Config>
+  <Config Name="PGID" Target="PGID" Default="100" Mode="{3}" Description="" Type="Variable" Display="advanced" Required="false" Mask="false">100</Config>
 </Container>

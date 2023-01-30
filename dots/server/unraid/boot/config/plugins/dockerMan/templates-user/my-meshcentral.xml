@@ -80,13 +80,13 @@
     </Variable>
   </Environment>
   <Labels/>
-  <Config Name="443" Target="443" Default="" Mode="tcp" Description="Container Port: 443" Type="Port" Display="always" Required="false" Mask="false">8086</Config>
-  <Config Name="HOSTNAME" Target="HOSTNAME" Default="" Mode="" Description="Container Variable: HOSTNAME" Type="Variable" Display="always" Required="false" Mask="false">mesh.khaneliman.com</Config>
-  <Config Name="REVERSE_PROXY" Target="REVERSE_PROXY" Default="" Mode="" Description="Container Variable: REVERSE_PROXY" Type="Variable" Display="always" Required="false" Mask="false">khaneliman.com</Config>
-  <Config Name="REVERSE_PROXY_TLS_PORT" Target="REVERSE_PROXY_TLS_PORT" Default="" Mode="" Description="Container Variable: REVERSE_PROXY_TLS_PORT" Type="Variable" Display="always" Required="false" Mask="false">443</Config>
+  <Config Name="443" Target="443" Default="" Mode="tcp" Description="" Type="Port" Display="always" Required="false" Mask="false">8086</Config>
+  <Config Name="HOSTNAME" Target="HOSTNAME" Default="" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">mesh.khaneliman.com</Config>
+  <Config Name="REVERSE_PROXY" Target="REVERSE_PROXY" Default="" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">khaneliman.com</Config>
+  <Config Name="REVERSE_PROXY_TLS_PORT" Target="REVERSE_PROXY_TLS_PORT" Default="" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">443</Config>
   <Config Name="IFRAME" Target="IFRAME" Default="" Mode="" Description="Container Path: IFRAME" Type="Variable" Display="always" Required="false" Mask="false">false</Config>
-  <Config Name="ALLOW_NEW_ACCOUNTS" Target="ALLOW_NEW_ACCOUNTS" Default="" Mode="" Description="Container Variable: ALLOW_NEW_ACCOUNTS" Type="Variable" Display="always" Required="false" Mask="false">false</Config>
-  <Config Name="WEBRTC" Target="WEBRTC" Default="" Mode="" Description="Container Variable: WEBRTC" Type="Variable" Display="always" Required="false" Mask="false">true</Config>
-  <Config Name="/opt/meshcentral/meshcentral-data" Target="/opt/meshcentral/meshcentral-data" Default="" Mode="rw" Description="Container Path: /opt/meshcentral/meshcentral-data" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/meshcentral/meshcentral-data</Config>
+  <Config Name="ALLOW_NEW_ACCOUNTS" Target="ALLOW_NEW_ACCOUNTS" Default="" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">false</Config>
+  <Config Name="WEBRTC" Target="WEBRTC" Default="" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">true</Config>
+  <Config Name="/opt/meshcentral/meshcentral-data" Target="/opt/meshcentral/meshcentral-data" Default="" Mode="rw" Description="" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/meshcentral/meshcentral-data</Config>
   <Config Name="/opt/meshcentral/meshcentral-files" Target="/opt/meshcentral/meshcentral-files " Default="" Mode="rw" Description="Container Variable: /opt/meshcentral/meshcentral-files " Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/meshcentral/meshcentral-files </Config>
 </Container>

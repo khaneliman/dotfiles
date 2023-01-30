@@ -1,0 +1,122 @@
+<?xml version="1.0" standalone="yes"?>
+<!DOCTYPE PLUGIN [
+<!ENTITY name "ca.mover.tuning">
+<!ENTITY author "Andrew Zawadzki Modified by hugenbdd">
+<!ENTITY version "2022.04.13">
+<!ENTITY md5 "b188a114d0928f7290f2e3e74fa3425f">
+<!ENTITY launch "Settings/Scheduler">
+<!ENTITY plugdir "/usr/local/emhttp/plugins/&name;">
+<!ENTITY github "hugenbd/ca.mover.tuning">
+<!ENTITY pluginURL "https://raw.githubusercontent.com/&github;/master/plugins/&name;.plg">
+]>
+<PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" icon="music" min="6.9.0-rc2" support="https://lime-technology.com/forums/topic/70783-plugin-mover-tuning/">
+
+<CHANGES>
+###2022.04.13
+- Fixed move all when failed with space in share name.
+	
+###2021.11.28
+- Fixed Share Mover GUI error when creating new share.
+	
+###2021.11.23
+- Add GUI button in individual shares to move just that shares files from the cache. Must be cache yes
+- Fixed bug where original mover would overwrite syslog instead of append.
+	
+###2021.11.12
+- Remove sizing from test mode, as it breaks when using exclude grep.
+- Test ignore file list.
+	
+###2021.11.08
+- Actually subtract 1 from the age of files for 3rd item in 11-07 release.
+- uncomment commented out eval string for mover. (To actually move files.)
+
+###2021.11.07
+- Updated "move all" code to fix wrong variable and script error.
+- Removed 0 from days old drop down
+- Updated age_mover to day - 1 to be able to move files 24 hours old instead of 48. (See post from captaincu on 11/3/2021)
+	
+### See previous releases for earlier notes...	
+     
+###2021.01.08
+- Added version check to Install script.
+- Removed threshold percent check in mover perl script.
+- Added threshold percent check to age_mover bash script.
+- age_mover bash script now check for global threshold percent or the a manual entry in the ca.mover.tuning.cfg file. (example: /boot/config/plugins/ca.mover.tuning   cachetv="65")  
+     - "cachetv" being the name of the pool.
+     - if using single digits leading zero required. (i.e. cachetv="01" for 1 percent)
+- Removed cache disk check in perl script to remove warning on scheduler page.
+- Several hard coded echo statements to help in trouble shooting/debug.  These will be removed later but may cause an email to be generated and sent to you.
+
+### See previous releases for earlier notes...
+
+</CHANGES>
+
+<!-- The 'pre-install' script. -->
+<FILE Run="/usr/bin/php">
+<INLINE>
+<![CDATA[
+<?
+  $version = parse_ini_file("/etc/unraid-version");
+  $displayversion = $version['version'];
+  echo "$displayversion \n";
+
+  if ( version_compare($version['version'],"6.9.0-rc2", "<") )
+  {
+    echo "********************************************************************\n";
+    echo "\n";
+    echo "CA Mover Tuning Requires unRaid version 6.9.0-rc2 or greater to run\n";
+    echo "\n";
+    echo "********************************************************************\n";
+    exit(1);
+  }
+ ?>
+]]>
+</INLINE>
+</FILE>
+ 
+ 
+<FILE Run="/bin/bash">
+<INLINE>
+# Remove old 'source' files
+rm -f $(ls /boot/config/plugins/&name;/&name;*.txz 2&gt;/dev/null | grep -v '&version;')
+</INLINE>
+</FILE>
+
+<!--
+The 'source' file.
+-->
+<FILE Name="/boot/config/plugins/&name;/&name;-&version;-x86_64-1.txz" Run="upgradepkg --install-new">
+<URL>https://raw.github.com/&github;/master/archive/&name;-&version;-x86_64-1.txz</URL>
+<MD5>&md5;</MD5>
+</FILE>
+
+<!--
+The 'post-install' script
+-->
+<FILE Run="/bin/bash">
+<INLINE>
+if [[ ! -f /usr/local/sbin/mover.old ]]; then mv /usr/local/sbin/mover /usr/local/sbin/mover.old; fi
+cp /usr/local/emhttp/plugins/&name;/mover /usr/local/sbin/mover
+echo ""
+echo "----------------------------------------------------"
+echo " &name; has been installed."
+echo " Copyright 2018, Andrew Zawadzki"
+echo " Version: &version;"
+echo "----------------------------------------------------"
+echo ""
+</INLINE>
+</FILE>
+
+<!--
+The 'remove' script.
+-->
+<FILE Run="/bin/bash" Method="remove">
+<INLINE>
+mv /usr/local/sbin/mover.old /usr/local/sbin/mover
+removepkg &name;-&version;-x86_64-1
+rm -rf &plugdir;
+rm -rf /boot/config/plugins/&name;
+/usr/local/sbin/update_cron
+</INLINE>
+</FILE> 
+</PLUGIN>

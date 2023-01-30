@@ -58,8 +58,8 @@
     </Variable>
   </Environment>
   <Labels/>
-  <Config Name="Time to Run" Target="PMM_TIME" Default="6:00" Mode="" Description="Container Variable: PMM_TIME" Type="Variable" Display="always" Required="false" Mask="false">6:00</Config>
-  <Config Name="Divider Character" Target="PMM_DIVIDER" Default="" Mode="" Description="Container Variable: PMM_DIVIDER" Type="Variable" Display="always" Required="false" Mask="false">=</Config>
-  <Config Name="Screen Width" Target="PMM_WIDTH" Default="" Mode="" Description="Container Variable: PMM_WIDTH" Type="Variable" Display="always" Required="false" Mask="false">200</Config>
-  <Config Name="Config" Target="/config" Default="" Mode="rw" Description="Container Path: /config" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/Plex-Meta-Manager</Config>
+  <Config Name="Time to Run" Target="PMM_TIME" Default="6:00" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">6:00</Config>
+  <Config Name="Divider Character" Target="PMM_DIVIDER" Default="" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">=</Config>
+  <Config Name="Screen Width" Target="PMM_WIDTH" Default="" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">200</Config>
+  <Config Name="Config" Target="/config" Default="" Mode="rw" Description="" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/Plex-Meta-Manager</Config>
 </Container>

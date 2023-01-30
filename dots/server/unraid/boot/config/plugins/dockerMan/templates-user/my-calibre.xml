@@ -79,10 +79,10 @@
   <Config Name="WebUI" Target="8080" Default="8080" Mode="tcp" Description="Calibre desktop gui." Type="Port" Display="always" Required="true" Mask="false">8084</Config>
   <Config Name="Port: 8081" Target="8081" Default="8081" Mode="tcp" Description="Calibre webserver gui." Type="Port" Display="always" Required="true" Mask="false">8085</Config>
   <Config Name="CLI_ARGS" Target="CLI_ARGS" Default="" Mode="{3}" Description="Optionally pass cli start arguments to calibre." Type="Variable" Display="always" Required="false" Mask="false"/>
-  <Config Name="Books" Target="/books" Default="" Mode="rw" Description="Container Path: /books" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/data/media/books/</Config>
-  <Config Name="Host Key 2" Target="DISABLE_AUTH " Default="" Mode="" Description="Container Variable: DISABLE_AUTH " Type="Variable" Display="always" Required="false" Mask="false">TRUE</Config>
+  <Config Name="Books" Target="/books" Default="" Mode="rw" Description="" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/data/media/books/</Config>
+  <Config Name="Host Key 2" Target="DISABLE_AUTH " Default="" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">TRUE</Config>
   <Config Name="Appdata" Target="/config" Default="" Mode="rw" Description="Where calibre should store its database and library." Type="Path" Display="advanced" Required="true" Mask="false">/mnt/user/appdata/calibre</Config>
-  <Config Name="PUID" Target="PUID" Default="99" Mode="{3}" Description="Container Variable: PUID" Type="Variable" Display="advanced" Required="true" Mask="false">99</Config>
-  <Config Name="PGID" Target="PGID" Default="100" Mode="{3}" Description="Container Variable: PGID" Type="Variable" Display="advanced" Required="true" Mask="false">100</Config>
-  <Config Name="UMASK" Target="UMASK" Default="022" Mode="{3}" Description="Container Variable: UMASK" Type="Variable" Display="advanced" Required="false" Mask="false">022</Config>
+  <Config Name="PUID" Target="PUID" Default="99" Mode="{3}" Description="" Type="Variable" Display="advanced" Required="true" Mask="false">99</Config>
+  <Config Name="PGID" Target="PGID" Default="100" Mode="{3}" Description="" Type="Variable" Display="advanced" Required="true" Mask="false">100</Config>
+  <Config Name="UMASK" Target="UMASK" Default="022" Mode="{3}" Description="" Type="Variable" Display="advanced" Required="false" Mask="false">022</Config>
 </Container>

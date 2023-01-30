@@ -1,0 +1,3 @@
+# Generated Unraid OS update check schedule:
+11 0,12 * * * /usr/local/emhttp/plugins/dynamix.plugin.manager/scripts/unraidcheck &> /dev/null
+

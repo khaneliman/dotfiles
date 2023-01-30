@@ -1,0 +1,3 @@
+# Generated array status check schedule:
+20 */6 * * * /usr/local/emhttp/plugins/dynamix/scripts/statuscheck &> /dev/null
+

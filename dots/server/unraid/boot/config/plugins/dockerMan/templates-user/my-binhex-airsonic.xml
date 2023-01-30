@@ -83,12 +83,12 @@
     </Variable>
   </Environment>
   <Labels/>
-  <Config Name="Host Port 1" Target="4040" Default="4040" Mode="tcp" Description="Container Port: 4040" Type="Port" Display="always" Required="true" Mask="false">4040</Config>
-  <Config Name="Host Path 2" Target="/media" Default="/mnt/user" Mode="rw" Description="Container Path: /media" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/data/media/music/</Config>
-  <Config Name="Key 1" Target="CONTEXT_PATH" Default="/" Mode="" Description="Container Variable: CONTEXT_PATH" Type="Variable" Display="always" Required="false" Mask="false">/</Config>
-  <Config Name="Key 2" Target="MAX_MEMORY" Default="2046" Mode="" Description="Container Variable: MAX_MEMORY" Type="Variable" Display="always" Required="false" Mask="false">2046</Config>
-  <Config Name="Key 3" Target="UMASK" Default="000" Mode="" Description="Container Variable: UMASK" Type="Variable" Display="always" Required="false" Mask="false">000</Config>
-  <Config Name="Key 4" Target="PUID" Default="99" Mode="" Description="Container Variable: PUID" Type="Variable" Display="always" Required="false" Mask="false">99</Config>
-  <Config Name="Key 5" Target="PGID" Default="100" Mode="" Description="Container Variable: PGID" Type="Variable" Display="always" Required="false" Mask="false">100</Config>
-  <Config Name="AppData Config Path" Target="/config" Default="/mnt/user/appdata/binhex-airsonic" Mode="rw" Description="Container Path: /config" Type="Path" Display="advanced-hide" Required="true" Mask="false">/mnt/user/appdata/binhex-airsonic</Config>
+  <Config Name="Host Port 1" Target="4040" Default="4040" Mode="tcp" Description="" Type="Port" Display="always" Required="true" Mask="false">4040</Config>
+  <Config Name="Host Path 2" Target="/media" Default="/mnt/user" Mode="rw" Description="" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/data/media/music/</Config>
+  <Config Name="Key 1" Target="CONTEXT_PATH" Default="/" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">/</Config>
+  <Config Name="Key 2" Target="MAX_MEMORY" Default="2046" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">2046</Config>
+  <Config Name="Key 3" Target="UMASK" Default="000" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">000</Config>
+  <Config Name="Key 4" Target="PUID" Default="99" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">99</Config>
+  <Config Name="Key 5" Target="PGID" Default="100" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">100</Config>
+  <Config Name="AppData Config Path" Target="/config" Default="/mnt/user/appdata/binhex-airsonic" Mode="rw" Description="" Type="Path" Display="advanced-hide" Required="true" Mask="false">/mnt/user/appdata/binhex-airsonic</Config>
 </Container>

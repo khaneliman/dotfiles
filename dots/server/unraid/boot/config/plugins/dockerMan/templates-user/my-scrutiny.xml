@@ -71,12 +71,12 @@
     </Variable>
   </Environment>
   <Labels/>
-  <Config Name="Host Port for 8080" Target="8080" Default="8080" Mode="tcp" Description="Container Port: 8080" Type="Port" Display="always-hide" Required="true" Mask="false">8083</Config>
-  <Config Name="Host Path for /config" Target="/config" Default="/mnt/user/appdata/scrutiny" Mode="rw" Description="Container Path: /config" Type="Path" Display="always-hide" Required="true" Mask="false">/mnt/user/appdata/scrutiny</Config>
-  <Config Name="INTERVAL" Target="INTERVAL" Default="86400" Mode="" Description="Container Variable: INTERVAL" Type="Variable" Display="always-hide" Required="false" Mask="false">86400</Config>
-  <Config Name="API_ENDPOINT" Target="API_ENDPOINT" Default="http://localhost:8080" Mode="" Description="Container Variable: API_ENDPOINT" Type="Variable" Display="always-hide" Required="false" Mask="false">http://localhost:8080</Config>
-  <Config Name="MODE" Target="MODE" Default="both|web|collector" Mode="" Description="Container Variable: MODE" Type="Variable" Display="always-hide" Required="false" Mask="false">both</Config>
-  <Config Name="PUID" Target="PUID" Default="99" Mode="" Description="Container Variable: PUID" Type="Variable" Display="advanced-hide" Required="false" Mask="false">99</Config>
-  <Config Name="PGID" Target="PGID" Default="100" Mode="" Description="Container Variable: PGID" Type="Variable" Display="advanced-hide" Required="false" Mask="false">100</Config>
-  <Config Name="UMASK" Target="UMASK" Default="002" Mode="" Description="Container Variable: UMASK" Type="Variable" Display="advanced-hide" Required="false" Mask="false">002</Config>
+  <Config Name="Host Port for 8080" Target="8080" Default="8080" Mode="tcp" Description="" Type="Port" Display="always-hide" Required="true" Mask="false">8083</Config>
+  <Config Name="Host Path for /config" Target="/config" Default="/mnt/user/appdata/scrutiny" Mode="rw" Description="" Type="Path" Display="always-hide" Required="true" Mask="false">/mnt/user/appdata/scrutiny</Config>
+  <Config Name="INTERVAL" Target="INTERVAL" Default="86400" Mode="" Description="" Type="Variable" Display="always-hide" Required="false" Mask="false">86400</Config>
+  <Config Name="API_ENDPOINT" Target="API_ENDPOINT" Default="http://localhost:8080" Mode="" Description="" Type="Variable" Display="always-hide" Required="false" Mask="false">http://localhost:8080</Config>
+  <Config Name="MODE" Target="MODE" Default="both|web|collector" Mode="" Description="" Type="Variable" Display="always-hide" Required="false" Mask="false">both</Config>
+  <Config Name="PUID" Target="PUID" Default="99" Mode="" Description="" Type="Variable" Display="advanced-hide" Required="false" Mask="false">99</Config>
+  <Config Name="PGID" Target="PGID" Default="100" Mode="" Description="" Type="Variable" Display="advanced-hide" Required="false" Mask="false">100</Config>
+  <Config Name="UMASK" Target="UMASK" Default="002" Mode="" Description="" Type="Variable" Display="advanced-hide" Required="false" Mask="false">002</Config>
 </Container>

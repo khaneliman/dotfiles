@@ -1,0 +1,4 @@
+
+# CRON for CA background scanning of applications
+11 * * * * php /usr/local/emhttp/plugins/community.applications/scripts/notices.php > /dev/null 2>&1
+

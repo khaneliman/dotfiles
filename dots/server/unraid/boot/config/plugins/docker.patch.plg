@@ -1,0 +1,39 @@
+<?xml version="1.0" standalone="yes"?>
+<!DOCTYPE PLUGIN [
+<!ENTITY name "docker.patch">
+<!ENTITY author "Andrew Zawadzki">
+<!ENTITY version "2023.01.28">
+<!ENTITY github "Squidly271/docker.patch">
+<!ENTITY pluginURL "https://raw.githubusercontent.com/Squidly271/docker.patch/main/plugins/docker.patch.plg">
+]>
+<PLUGIN name="&name;" author="&author;" version="&version;" pluginURL="&pluginURL;" icon="bug" min="6.11.0" max="6.11.5" support="https://forums.unraid.net/topic/134016-fix-to-a-small-issue-with-updating-oci-docker-images/">
+  <CHANGES>
+###2023.01.28
+- Initial Release
+</CHANGES>
+
+<FILE Run="/bin/bash">
+<INLINE>
+
+echo "Patching Docker Client"
+sed -i 's/application\/vnd.docker.distribution.manifest.list.v2+json,application\/vnd.docker.distribution.manifest.v2+json/application\/vnd.docker.distribution.manifest.list.v2+json,application\/vnd.docker.distribution.manifest.v2+json,application\/vnd.oci.image.index.v1+json/g' /usr/local/emhttp/plugins/dynamix.docker.manager/include/DockerClient.php
+
+echo "----------------------------------------------------"
+echo " &name; has been installed."
+echo " Copyright 2023, Andrew Zawadzki"
+echo " Version: &version;"
+echo "----------------------------------------------------"
+echo ""
+</INLINE>
+  </FILE>
+  <!--
+The 'remove' script.
+-->
+  <FILE Run="/bin/bash" Method="remove">
+    <INLINE>
+		echo ""
+echo "You must reboot for the changes to take effect"
+echo ""
+</INLINE>
+  </FILE>
+</PLUGIN>

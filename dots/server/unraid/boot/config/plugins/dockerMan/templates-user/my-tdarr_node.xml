@@ -109,14 +109,14 @@ Plugins here: https://github.com/HaveAGitGat/Tdarr_Plugins&#xD;
   </Environment>
   <Labels/>
   <Config Name="Server IP" Target="serverIP" Default="0.0.0.0" Mode="" Description="Server IP. Required if using Tdarr Nodes across your local network" Type="Variable" Display="always" Required="false" Mask="false">192.168.1.37</Config>
-  <Config Name="Server Port" Target="serverPort" Default="8266" Mode="" Description="Container Variable: serverPort" Type="Variable" Display="always" Required="false" Mask="false">8266</Config>
+  <Config Name="Server Port" Target="serverPort" Default="8266" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">8266</Config>
   <Config Name="Node IP" Target="nodeIP" Default="0.0.0.0" Mode="" Description="Node IP. Required if using Tdarr Nodes across your local network" Type="Variable" Display="always" Required="false" Mask="false">192.168.1.37</Config>
   <Config Name="Node ID" Target="nodeID" Default="Node Name" Mode="" Description="Node ID Name" Type="Variable" Display="always" Required="false" Mask="false">AustinPlexServer</Config>
   <Config Name="Node Port" Target="8267" Default="8267" Mode="tcp" Description="Node Port" Type="Port" Display="always" Required="false" Mask="false">8267</Config>
-  <Config Name="PUID" Target="PUID" Default="99" Mode="" Description="Container Variable: PUID" Type="Variable" Display="always" Required="false" Mask="false">99</Config>
-  <Config Name="PGID" Target="PGID" Default="100" Mode="" Description="Container Variable: PGID" Type="Variable" Display="always" Required="false" Mask="false">100</Config>
-  <Config Name="Configs" Target="/app/configs" Default="/mnt/user/appdata/tdarr/configs" Mode="rw" Description="Container Path: /app/configs" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/tdarr/configs</Config>
-  <Config Name="Logs" Target="/app/logs" Default="/mnt/user/appdata/tdarr/logs" Mode="rw" Description="Container Path: /app/logs" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/tdarr/logs</Config>
-  <Config Name="Media Library" Target="/mnt/media" Default="" Mode="rw" Description="Container Path: /mnt/media" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/data/media/</Config>
-  <Config Name="Transcode Cache" Target="/temp" Default="" Mode="rw" Description="Container Path: /temp" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/temp</Config>
+  <Config Name="PUID" Target="PUID" Default="99" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">99</Config>
+  <Config Name="PGID" Target="PGID" Default="100" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">100</Config>
+  <Config Name="Configs" Target="/app/configs" Default="/mnt/user/appdata/tdarr/configs" Mode="rw" Description="" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/tdarr/configs</Config>
+  <Config Name="Logs" Target="/app/logs" Default="/mnt/user/appdata/tdarr/logs" Mode="rw" Description="" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/tdarr/logs</Config>
+  <Config Name="Media Library" Target="/mnt/media" Default="" Mode="rw" Description="" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/data/media/</Config>
+  <Config Name="Transcode Cache" Target="/temp" Default="" Mode="rw" Description="" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/temp</Config>
 </Container>

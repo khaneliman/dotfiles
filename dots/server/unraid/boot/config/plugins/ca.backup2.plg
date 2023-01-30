@@ -2,8 +2,8 @@
 <!DOCTYPE PLUGIN [
 <!ENTITY name "ca.backup2">
 <!ENTITY author "Robin Kluth">
-<!ENTITY version "2023.01.11">
-<!ENTITY md5 "380090359a8ced1f18b930c945a91a92">
+<!ENTITY version "2023.01.28">
+<!ENTITY md5 "4855fa5cba9d12754b42d55f56d9ee38">
 <!ENTITY launch "Settings/BackupMainV2">
 <!ENTITY plugdir "/usr/local/emhttp/plugins/&name;">
 <!ENTITY github "Commifreak/ca.backup2">
@@ -13,6 +13,9 @@
 
 <CHANGES>
 <![CDATA[
+###2023.01.28
+- Fixed Array state detection - now works the Unraid way
+
 ###2023.01.11
 - 🚀 Happy new year!
 - Added an option, to disable backup error detection.

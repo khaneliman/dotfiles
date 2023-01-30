@@ -142,22 +142,22 @@ For more detailed instructions, refer to the support thread (https://forums.unra
     </Variable>
   </Environment>
   <Labels/>
-  <Config Name="Config" Target="/config" Default="/mnt/user/appdata/Grafana-Unraid-Stack/config" Mode="rw" Description="Container Path: /config" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/Grafana-Unraid-Stack</Config>
-  <Config Name="Data (db)" Target="/data" Default="/mnt/user/appdata/Grafana-Unraid-Stack/data" Mode="rw" Description="Container Path: /data" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/Grafana-Unraid-Stack/data</Config>
-  <Config Name="USE_HDDTEMP" Target="USE_HDDTEMP" Default="yes|no" Mode="" Description="Container Variable: USE_HDDTEMP" Type="Variable" Display="always" Required="false" Mask="false">no</Config>
-  <Config Name="INFLUXDB_HTTP_PORT" Target="INFLUXDB_HTTP_PORT" Default="8086" Mode="" Description="Container Variable: INFLUXDB_HTTP_PORT" Type="Variable" Display="advanced-hide" Required="false" Mask="false">8086</Config>
-  <Config Name="LOKI_PORT" Target="LOKI_PORT" Default="3100" Mode="" Description="Container Variable: LOKI_PORT" Type="Variable" Display="advanced-hide" Required="false" Mask="false">3100</Config>
-  <Config Name="PROMTAIL_PORT" Target="PROMTAIL_PORT" Default="9086" Mode="" Description="Container Variable: PROMTAIL_PORT" Type="Variable" Display="advanced-hide" Required="false" Mask="false">9086</Config>
-  <Config Name="GRAFANA_PORT" Target="GRAFANA_PORT" Default="3006" Mode="" Description="Container Variable: GRAFANA_PORT" Type="Variable" Display="advanced-hide" Required="false" Mask="false">3006</Config>
-  <Config Name="Telegraf 1" Target="/rootfs" Default="/" Mode="ro" Description="Container Path: /rootfs" Type="Path" Display="advanced-hide" Required="false" Mask="false">/</Config>
-  <Config Name="Telegraf 2" Target="/rootfs/etc" Default="/etc" Mode="ro" Description="Container Path: /rootfs/etc" Type="Path" Display="advanced-hide" Required="false" Mask="false">/etc</Config>
-  <Config Name="Telegraf 3" Target="/rootfs/proc" Default="/proc" Mode="ro" Description="Container Path: /rootfs/proc" Type="Path" Display="advanced-hide" Required="false" Mask="false">/proc</Config>
-  <Config Name="Telegraf 4" Target="/rootfs/sys" Default="/sys" Mode="ro" Description="Container Path: /rootfs/sys" Type="Path" Display="advanced-hide" Required="false" Mask="false">/sys</Config>
-  <Config Name="Telegraf 5" Target="/var/run/docker.sock" Default="/var/run/docker.sock" Mode="ro" Description="Container Path: /var/run/docker.sock" Type="Path" Display="advanced-hide" Required="false" Mask="false">/var/run/docker.sock</Config>
-  <Config Name="Telegraf 6" Target="/var/run/utmp" Default="/var/run/utmp" Mode="ro" Description="Container Path: /var/run/utmp" Type="Path" Display="advanced-hide" Required="false" Mask="false">/var/run/utmp</Config>
-  <Config Name="Telegraf 7" Target="/run/udev" Default="/run/udev" Mode="ro" Description="Container Path: /run/udev" Type="Path" Display="advanced-hide" Required="false" Mask="false">/run/udev</Config>
-  <Config Name="HOST_ETC" Target="HOST_ETC" Default="/rootfs/etc" Mode="" Description="Container Variable: HOST_ETC" Type="Variable" Display="advanced-hide" Required="false" Mask="false">/rootfs/etc</Config>
-  <Config Name="HOST_PROC" Target="HOST_PROC" Default="/rootfs/proc" Mode="" Description="Container Variable: HOST_PROC" Type="Variable" Display="advanced-hide" Required="false" Mask="false">/rootfs/proc</Config>
-  <Config Name="HOST_SYS" Target="HOST_SYS" Default="/rootfs/sys" Mode="" Description="Container Variable: HOST_SYS" Type="Variable" Display="advanced-hide" Required="false" Mask="false">/rootfs/sys</Config>
-  <Config Name="HOST_MOUNT_PREFIX" Target="HOST_MOUNT_PREFIX" Default="/rootfs" Mode="" Description="Container Variable: HOST_MOUNT_PREFIX" Type="Variable" Display="advanced-hide" Required="false" Mask="false">/rootfs</Config>
+  <Config Name="Config" Target="/config" Default="/mnt/user/appdata/Grafana-Unraid-Stack/config" Mode="rw" Description="" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/Grafana-Unraid-Stack</Config>
+  <Config Name="Data (db)" Target="/data" Default="/mnt/user/appdata/Grafana-Unraid-Stack/data" Mode="rw" Description="" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/Grafana-Unraid-Stack/data</Config>
+  <Config Name="USE_HDDTEMP" Target="USE_HDDTEMP" Default="yes|no" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">no</Config>
+  <Config Name="INFLUXDB_HTTP_PORT" Target="INFLUXDB_HTTP_PORT" Default="8086" Mode="" Description="" Type="Variable" Display="advanced-hide" Required="false" Mask="false">8086</Config>
+  <Config Name="LOKI_PORT" Target="LOKI_PORT" Default="3100" Mode="" Description="" Type="Variable" Display="advanced-hide" Required="false" Mask="false">3100</Config>
+  <Config Name="PROMTAIL_PORT" Target="PROMTAIL_PORT" Default="9086" Mode="" Description="" Type="Variable" Display="advanced-hide" Required="false" Mask="false">9086</Config>
+  <Config Name="GRAFANA_PORT" Target="GRAFANA_PORT" Default="3006" Mode="" Description="" Type="Variable" Display="advanced-hide" Required="false" Mask="false">3006</Config>
+  <Config Name="Telegraf 1" Target="/rootfs" Default="/" Mode="ro" Description="" Type="Path" Display="advanced-hide" Required="false" Mask="false">/</Config>
+  <Config Name="Telegraf 2" Target="/rootfs/etc" Default="/etc" Mode="ro" Description="" Type="Path" Display="advanced-hide" Required="false" Mask="false">/etc</Config>
+  <Config Name="Telegraf 3" Target="/rootfs/proc" Default="/proc" Mode="ro" Description="" Type="Path" Display="advanced-hide" Required="false" Mask="false">/proc</Config>
+  <Config Name="Telegraf 4" Target="/rootfs/sys" Default="/sys" Mode="ro" Description="" Type="Path" Display="advanced-hide" Required="false" Mask="false">/sys</Config>
+  <Config Name="Telegraf 5" Target="/var/run/docker.sock" Default="/var/run/docker.sock" Mode="ro" Description="" Type="Path" Display="advanced-hide" Required="false" Mask="false">/var/run/docker.sock</Config>
+  <Config Name="Telegraf 6" Target="/var/run/utmp" Default="/var/run/utmp" Mode="ro" Description="" Type="Path" Display="advanced-hide" Required="false" Mask="false">/var/run/utmp</Config>
+  <Config Name="Telegraf 7" Target="/run/udev" Default="/run/udev" Mode="ro" Description="" Type="Path" Display="advanced-hide" Required="false" Mask="false">/run/udev</Config>
+  <Config Name="HOST_ETC" Target="HOST_ETC" Default="/rootfs/etc" Mode="" Description="" Type="Variable" Display="advanced-hide" Required="false" Mask="false">/rootfs/etc</Config>
+  <Config Name="HOST_PROC" Target="HOST_PROC" Default="/rootfs/proc" Mode="" Description="" Type="Variable" Display="advanced-hide" Required="false" Mask="false">/rootfs/proc</Config>
+  <Config Name="HOST_SYS" Target="HOST_SYS" Default="/rootfs/sys" Mode="" Description="" Type="Variable" Display="advanced-hide" Required="false" Mask="false">/rootfs/sys</Config>
+  <Config Name="HOST_MOUNT_PREFIX" Target="HOST_MOUNT_PREFIX" Default="/rootfs" Mode="" Description="" Type="Variable" Display="advanced-hide" Required="false" Mask="false">/rootfs</Config>
 </Container>

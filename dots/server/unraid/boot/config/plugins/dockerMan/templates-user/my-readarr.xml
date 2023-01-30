@@ -71,12 +71,12 @@
     </Variable>
   </Environment>
   <Labels/>
-  <Config Name="Host Port for 8787" Target="8787" Default="8787" Mode="tcp" Description="Container Port: 8787" Type="Port" Display="always-hide" Required="true" Mask="false">8787</Config>
-  <Config Name="Host Path for /config" Target="/config" Default="/mnt/user/appdata/readarr" Mode="rw" Description="Container Path: /config" Type="Path" Display="always-hide" Required="true" Mask="false">/mnt/user/appdata/readarr</Config>
-  <Config Name="Books" Target="/books" Default="" Mode="rw" Description="Container Path: /books" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/data/media/books/</Config>
-  <Config Name="Calibre library" Target="/calibre" Default="" Mode="rw" Description="Container Path: /calibre" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/data/media/calibre</Config>
-  <Config Name="Host Path 4" Target="/data/torrents" Default="" Mode="rw" Description="Container Path: /data/torrents" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/data/torrents/</Config>
-  <Config Name="PUID" Target="PUID" Default="99" Mode="" Description="Container Variable: PUID" Type="Variable" Display="advanced-hide" Required="false" Mask="false">99</Config>
-  <Config Name="PGID" Target="PGID" Default="100" Mode="" Description="Container Variable: PGID" Type="Variable" Display="advanced-hide" Required="false" Mask="false">100</Config>
-  <Config Name="UMASK" Target="UMASK" Default="002" Mode="" Description="Container Variable: UMASK" Type="Variable" Display="advanced-hide" Required="false" Mask="false">002</Config>
+  <Config Name="Host Port for 8787" Target="8787" Default="8787" Mode="tcp" Description="" Type="Port" Display="always-hide" Required="true" Mask="false">8787</Config>
+  <Config Name="Host Path for /config" Target="/config" Default="/mnt/user/appdata/readarr" Mode="rw" Description="" Type="Path" Display="always-hide" Required="true" Mask="false">/mnt/user/appdata/readarr</Config>
+  <Config Name="Books" Target="/books" Default="" Mode="rw" Description="" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/data/media/books/</Config>
+  <Config Name="Calibre library" Target="/calibre" Default="" Mode="rw" Description="" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/data/media/calibre</Config>
+  <Config Name="Host Path 4" Target="/data/torrents" Default="" Mode="rw" Description="" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/data/torrents/</Config>
+  <Config Name="PUID" Target="PUID" Default="99" Mode="" Description="" Type="Variable" Display="advanced-hide" Required="false" Mask="false">99</Config>
+  <Config Name="PGID" Target="PGID" Default="100" Mode="" Description="" Type="Variable" Display="advanced-hide" Required="false" Mask="false">100</Config>
+  <Config Name="UMASK" Target="UMASK" Default="002" Mode="" Description="" Type="Variable" Display="advanced-hide" Required="false" Mask="false">002</Config>
 </Container>

@@ -56,9 +56,9 @@
     </Variable>
   </Environment>
   <Labels/>
-  <Config Name="Host Port for 4545" Target="4545" Default="4545" Mode="tcp" Description="Container Port: 4545" Type="Port" Display="always-hide" Required="true" Mask="false">4545</Config>
-  <Config Name="Host Path for /config" Target="/config" Default="/mnt/user/appdata/requestrr" Mode="rw" Description="Container Path: /config" Type="Path" Display="always-hide" Required="true" Mask="false">/mnt/user/appdata/requestrr</Config>
-  <Config Name="PUID" Target="PUID" Default="99" Mode="" Description="Container Variable: PUID" Type="Variable" Display="advanced-hide" Required="false" Mask="false">99</Config>
-  <Config Name="PGID" Target="PGID" Default="100" Mode="" Description="Container Variable: PGID" Type="Variable" Display="advanced-hide" Required="false" Mask="false">100</Config>
-  <Config Name="UMASK" Target="UMASK" Default="002" Mode="" Description="Container Variable: UMASK" Type="Variable" Display="advanced-hide" Required="false" Mask="false">002</Config>
+  <Config Name="Host Port for 4545" Target="4545" Default="4545" Mode="tcp" Description="" Type="Port" Display="always-hide" Required="true" Mask="false">4545</Config>
+  <Config Name="Host Path for /config" Target="/config" Default="/mnt/user/appdata/requestrr" Mode="rw" Description="" Type="Path" Display="always-hide" Required="true" Mask="false">/mnt/user/appdata/requestrr</Config>
+  <Config Name="PUID" Target="PUID" Default="99" Mode="" Description="" Type="Variable" Display="advanced-hide" Required="false" Mask="false">99</Config>
+  <Config Name="PGID" Target="PGID" Default="100" Mode="" Description="" Type="Variable" Display="advanced-hide" Required="false" Mask="false">100</Config>
+  <Config Name="UMASK" Target="UMASK" Default="002" Mode="" Description="" Type="Variable" Display="advanced-hide" Required="false" Mask="false">002</Config>
 </Container>

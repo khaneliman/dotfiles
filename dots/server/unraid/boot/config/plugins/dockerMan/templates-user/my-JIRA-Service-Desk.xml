@@ -61,8 +61,8 @@
   </Environment>
   <Labels/>
   <Config Name="ATL_PROXY_NAME" Target="ATL_PROXY_NAME" Default="" Mode="" Description="If behind a reverse proxy, what's the root address. i.e. jira.example.com" Type="Variable" Display="always" Required="false" Mask="false">jira.khaneliman.com</Config>
-  <Config Name="ATL_PROXY_PORT" Target="ATL_PROXY_PORT" Default="" Mode="" Description="Container Variable: ATL_PROXY_PORT" Type="Variable" Display="always" Required="false" Mask="false">443</Config>
-  <Config Name="ATL_TOMCAT_SCHEME" Target="ATL_TOMCAT_SCHEME" Default="" Mode="" Description="Container Variable: ATL_TOMCAT_SCHEME" Type="Variable" Display="always" Required="false" Mask="false">https</Config>
-  <Config Name="Host Port 1" Target="8080" Default="8080" Mode="tcp" Description="Container Port: 8080" Type="Port" Display="always" Required="true" Mask="false">8089</Config>
-  <Config Name="Host Path 1" Target="/var/atlassian/application-data/jira" Default="" Mode="rw" Description="Container Path: /var/atlassian/application-data/jira" Type="Path" Display="advanced-hide" Required="true" Mask="false">/mnt/user/appdata/JiraServiceDesk</Config>
+  <Config Name="ATL_PROXY_PORT" Target="ATL_PROXY_PORT" Default="" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">443</Config>
+  <Config Name="ATL_TOMCAT_SCHEME" Target="ATL_TOMCAT_SCHEME" Default="" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">https</Config>
+  <Config Name="Host Port 1" Target="8080" Default="8080" Mode="tcp" Description="" Type="Port" Display="always" Required="true" Mask="false">8089</Config>
+  <Config Name="Host Path 1" Target="/var/atlassian/application-data/jira" Default="" Mode="rw" Description="" Type="Path" Display="advanced-hide" Required="true" Mask="false">/mnt/user/appdata/JiraServiceDesk</Config>
 </Container>

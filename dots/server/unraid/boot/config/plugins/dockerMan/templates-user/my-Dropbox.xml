@@ -89,7 +89,7 @@ You could even use "/mnt/disk1/Dropbox" with the cache Option "Yes", but if you 
   </Environment>
   <Labels/>
   <Config Name="Dropbox user files" Target="/opt/dropbox/Dropbox" Default="" Mode="rw" Description="Read the description! Do not set this path to /mnt/user..." Type="Path" Display="always" Required="false" Mask="false">/mnt/disk1/Dropbox</Config>
-  <Config Name="Dropbox settings" Target="/opt/dropbox/.dropbox" Default="" Mode="rw" Description="Container Path: /opt/dropbox/.dropbox" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/Dropbox</Config>
-  <Config Name="Host Key 1" Target="DROPBOX_UID" Default="" Mode="" Description="Container Variable: DROPBOX_UID" Type="Variable" Display="always" Required="false" Mask="false">99</Config>
-  <Config Name="Host Key 2" Target="DROPBOX_GID" Default="" Mode="" Description="Container Variable: DROPBOX_GID" Type="Variable" Display="always" Required="false" Mask="false">100</Config>
+  <Config Name="Dropbox settings" Target="/opt/dropbox/.dropbox" Default="" Mode="rw" Description="" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/Dropbox</Config>
+  <Config Name="Host Key 1" Target="DROPBOX_UID" Default="" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">99</Config>
+  <Config Name="Host Key 2" Target="DROPBOX_GID" Default="" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">100</Config>
 </Container>

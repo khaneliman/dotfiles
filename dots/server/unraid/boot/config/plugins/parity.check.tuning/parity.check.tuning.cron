@@ -1,0 +1,5 @@
+
+# Generated schedules for parity.check.tuning
+15 0 * * * /usr/local/emhttp/plugins/parity.check.tuning/parity.check.tuning.php "resume" &> /dev/null
+30 3 * * * /usr/local/emhttp/plugins/parity.check.tuning/parity.check.tuning.php "pause" &> /dev/null
+*/17 * * * * /usr/local/emhttp/plugins/parity.check.tuning/parity.check.tuning.php "monitor" &>/dev/null

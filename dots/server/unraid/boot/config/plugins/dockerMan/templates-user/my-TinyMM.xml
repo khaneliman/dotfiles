@@ -90,15 +90,15 @@
     </Variable>
   </Environment>
   <Labels/>
-  <Config Name="Host Port 1" Target="5800" Default="5800" Mode="tcp" Description="Container Port: 5800" Type="Port" Display="always" Required="true" Mask="false">5800</Config>
-  <Config Name="Host Port 2" Target="5900" Default="5900" Mode="tcp" Description="Container Port: 5900" Type="Port" Display="always" Required="true" Mask="false">5900</Config>
-  <Config Name="Host Path 1" Target="/media" Default="/mnt/user/Media/" Mode="rw" Description="Container Path: /media" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/data/media/</Config>
-  <Config Name="Key 1" Target="USER_ID" Default="0" Mode="" Description="Container Variable: USER_ID" Type="Variable" Display="always" Required="false" Mask="false">0</Config>
-  <Config Name="Key 2" Target="TZ" Default="America/NewYork" Mode="" Description="Container Variable: TZ" Type="Variable" Display="always" Required="false" Mask="false">America/Chicago</Config>
-  <Config Name="Key 3" Target="DISPLAY_HEIGHT" Default="1380" Mode="" Description="Container Variable: DISPLAY_HEIGHT" Type="Variable" Display="always" Required="false" Mask="false">1380</Config>
-  <Config Name="Key 4" Target="DISPLAY_WIDTH" Default="1200" Mode="" Description="Container Variable: DISPLAY_WIDTH" Type="Variable" Display="always" Required="false" Mask="false">1200</Config>
-  <Config Name="Key 5" Target="PUID" Default="99" Mode="" Description="Container Variable: PUID" Type="Variable" Display="always" Required="false" Mask="false">99</Config>
-  <Config Name="Key 6" Target="GUID" Default="100" Mode="" Description="Container Variable: GUID" Type="Variable" Display="always" Required="false" Mask="false">100</Config>
-  <Config Name="Key 7" Target="UMASK" Default="000" Mode="" Description="Container Variable: UMASK" Type="Variable" Display="always" Required="false" Mask="false">000</Config>
-  <Config Name="AppData Config Path" Target="/config" Default="/mnt/user/appdata/TinyMM" Mode="rw" Description="Container Path: /config" Type="Path" Display="advanced-hide" Required="true" Mask="false">/mnt/user/appdata/TinyMM</Config>
+  <Config Name="Host Port 1" Target="5800" Default="5800" Mode="tcp" Description="" Type="Port" Display="always" Required="true" Mask="false">5800</Config>
+  <Config Name="Host Port 2" Target="5900" Default="5900" Mode="tcp" Description="" Type="Port" Display="always" Required="true" Mask="false">5900</Config>
+  <Config Name="Host Path 1" Target="/media" Default="/mnt/user/Media/" Mode="rw" Description="" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/data/media/</Config>
+  <Config Name="Key 1" Target="USER_ID" Default="0" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">0</Config>
+  <Config Name="Key 2" Target="TZ" Default="America/NewYork" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">America/Chicago</Config>
+  <Config Name="Key 3" Target="DISPLAY_HEIGHT" Default="1380" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">1380</Config>
+  <Config Name="Key 4" Target="DISPLAY_WIDTH" Default="1200" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">1200</Config>
+  <Config Name="Key 5" Target="PUID" Default="99" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">99</Config>
+  <Config Name="Key 6" Target="GUID" Default="100" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">100</Config>
+  <Config Name="Key 7" Target="UMASK" Default="000" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">000</Config>
+  <Config Name="AppData Config Path" Target="/config" Default="/mnt/user/appdata/TinyMM" Mode="rw" Description="" Type="Path" Display="advanced-hide" Required="true" Mask="false">/mnt/user/appdata/TinyMM</Config>
 </Container>

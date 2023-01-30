@@ -138,5 +138,5 @@ Other options dont change&#xD;
   <Config Name="Time to wait before exit" Target="sleeptimehuman" Default="30 seconds|1 minute|2 minutes|5 minutes|10 minutes" Mode="" Description="Time to wait before stopping container after syncing icons " Type="Variable" Display="advanced" Required="false" Mask="false">30 seconds</Config>
   <Config Name="vm manager icon location" Target="/unraid_vm_icons" Default="" Mode="rw" Description="location on server where Unraid stores vm icons (dont change this)" Type="Path" Display="advanced" Required="false" Mask="false">/usr/local/emhttp/plugins/dynamix.vm.manager/templates/images</Config>
   <Config Name="appdata" Target="/config" Default="" Mode="rw" Description="appdata" Type="Path" Display="advanced" Required="false" Mask="false">/mnt/user/appdata/vm_custom_icons</Config>
-  <Config Name="beep speaker" Target="" Default="" Mode="" Description="Container Device: " Type="Device" Display="advanced" Required="false" Mask="false">/dev/tty0</Config>
+  <Config Name="beep speaker" Target="" Default="" Mode="" Description="" Type="Device" Display="advanced" Required="false" Mask="false">/dev/tty0</Config>
 </Container>

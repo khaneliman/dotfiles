@@ -47,7 +47,7 @@
   </Data>
   <Environment/>
   <Labels/>
-  <Config Name="Host Port 1" Target="10001" Default="10001" Mode="tcp" Description="Container Port: 10001" Type="Port" Display="always" Required="true" Mask="false">10001</Config>
-  <Config Name="Host Path 2" Target="/unRAID" Default="/mnt/user" Mode="rw" Description="Container Path: /unRAID" Type="Path" Display="always" Required="true" Mask="false">/mnt/user</Config>
-  <Config Name="AppData Config Path" Target="/config" Default="/mnt/user/appdata/Tonido" Mode="rw" Description="Container Path: /config" Type="Path" Display="advanced-hide" Required="true" Mask="false">/mnt/user/appdata/Tonido</Config>
+  <Config Name="Host Port 1" Target="10001" Default="10001" Mode="tcp" Description="" Type="Port" Display="always" Required="true" Mask="false">10001</Config>
+  <Config Name="Host Path 2" Target="/unRAID" Default="/mnt/user" Mode="rw" Description="" Type="Path" Display="always" Required="true" Mask="false">/mnt/user</Config>
+  <Config Name="AppData Config Path" Target="/config" Default="/mnt/user/appdata/Tonido" Mode="rw" Description="" Type="Path" Display="advanced-hide" Required="true" Mask="false">/mnt/user/appdata/Tonido</Config>
 </Container>

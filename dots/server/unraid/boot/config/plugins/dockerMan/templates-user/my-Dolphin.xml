@@ -70,11 +70,11 @@
     </Variable>
   </Environment>
   <Labels/>
-  <Config Name="Host Port 1" Target="8080" Default="" Mode="tcp" Description="Container Port: 8080" Type="Port" Display="always" Required="true" Mask="false">8087</Config>
-  <Config Name="Host Path 2" Target="/mnt" Default="/mnt/" Mode="rw" Description="Container Path: /mnt" Type="Path" Display="always" Required="true" Mask="false">/mnt/</Config>
-  <Config Name="Key 1" Target="USER_ID" Default="99" Mode="" Description="Container Variable: USER_ID" Type="Variable" Display="always" Required="false" Mask="false">99</Config>
-  <Config Name="Key 2" Target="GROUP_ID" Default="100" Mode="" Description="Container Variable: GROUP_ID" Type="Variable" Display="always" Required="false" Mask="false">100</Config>
-  <Config Name="Key 3" Target="WIDTH" Default="1280" Mode="" Description="Container Variable: WIDTH" Type="Variable" Display="always" Required="false" Mask="false">1280</Config>
-  <Config Name="Key 4" Target="HEIGHT" Default="720" Mode="" Description="Container Variable: HEIGHT" Type="Variable" Display="always" Required="false" Mask="false">720</Config>
-  <Config Name="AppData Config Path" Target="/config" Default="/mnt/user/appdata/Dolphin" Mode="rw" Description="Container Path: /config" Type="Path" Display="advanced-hide" Required="true" Mask="false">/mnt/user/appdata/Dolphin</Config>
+  <Config Name="Host Port 1" Target="8080" Default="" Mode="tcp" Description="" Type="Port" Display="always" Required="true" Mask="false">8087</Config>
+  <Config Name="Host Path 2" Target="/mnt" Default="/mnt/" Mode="rw" Description="" Type="Path" Display="always" Required="true" Mask="false">/mnt/</Config>
+  <Config Name="Key 1" Target="USER_ID" Default="99" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">99</Config>
+  <Config Name="Key 2" Target="GROUP_ID" Default="100" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">100</Config>
+  <Config Name="Key 3" Target="WIDTH" Default="1280" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">1280</Config>
+  <Config Name="Key 4" Target="HEIGHT" Default="720" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">720</Config>
+  <Config Name="AppData Config Path" Target="/config" Default="/mnt/user/appdata/Dolphin" Mode="rw" Description="" Type="Path" Display="advanced-hide" Required="true" Mask="false">/mnt/user/appdata/Dolphin</Config>
 </Container>

@@ -50,6 +50,6 @@ Fast 20 second inverval checks.&#xD;
   </Data>
   <Environment/>
   <Labels/>
-  <Config Name="Web Interface" Target="3001" Default="3001" Mode="tcp" Description="Container Port: 3001" Type="Port" Display="always" Required="false" Mask="false">3001</Config>
-  <Config Name="AppData" Target="/app/data" Default="/mnt/user/appdata/uptimekuma" Mode="rw" Description="Container Path: /app/data" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/uptimekuma</Config>
+  <Config Name="Web Interface" Target="3001" Default="3001" Mode="tcp" Description="" Type="Port" Display="always" Required="false" Mask="false">3001</Config>
+  <Config Name="AppData" Target="/app/data" Default="/mnt/user/appdata/uptimekuma" Mode="rw" Description="" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/uptimekuma</Config>
 </Container>

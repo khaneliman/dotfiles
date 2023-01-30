@@ -2,8 +2,8 @@
 <!DOCTYPE PLUGIN [
 <!ENTITY name      "community.applications">
 <!ENTITY author    "Andrew Zawadzki">
-<!ENTITY version   "2022.12.29">
-<!ENTITY md5       "7796f6fb9aed632b7803ff8b4aebcfd1">
+<!ENTITY version   "2023.01.28">
+<!ENTITY md5       "144a2845ae56d9b55069b07bbb404105">
 <!ENTITY launch    "Apps">
 <!ENTITY plugdir   "/usr/local/emhttp/plugins/&name;">
 <!ENTITY github    "Squidly271/community.applications">
@@ -13,6 +13,18 @@
 <PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" min="6.9.0" support="https://lime-technology.com/forums/topic/38582-plug-in-community-applications/" icon="users">
 
 <CHANGES>
+###2023.01.28
+- Fixed: Don't allow dockerHub searches if the initial CYA disclaimer was dismissed
+- Fixed: Exceeded PHP memory limit when displaying template errors in Statistics
+- Fixed: Run on sentences displayed when displaying multiple note on the sidebar
+- Fixed: Privileged warning could appear twice in the sidebar
+- Fixed: Many / most applications would fail to display the correct last updated time in the sidebar
+- Fixed: Setting a favourite repository wouldn't display the hearts until a refresh of the page
+- Updated: Copyright
+- Code Cleanup
+- Updated: PHP8 compliance
+- Maybe fixed: On occasion Home would be highlighted under certain circumstances
+
 ###2022.12.29
 - Fixed: Private App Category was not displaying
 - Fixed: First load of Apps after a application feed download would result in system thinking no docker apps installed

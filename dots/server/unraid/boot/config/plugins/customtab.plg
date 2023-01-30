@@ -1,0 +1,116 @@
+<?xml version="1.0" standalone="yes"?>
+<!DOCTYPE PLUGIN [
+<!ENTITY name "customtab">
+<!ENTITY author "Andrew Zawadzki">
+<!ENTITY version "2021.03.10">
+<!ENTITY md5 "92954b3528f0a7bb2e5e6b958370af22">
+<!ENTITY launch "Utilities/Customtab">
+<!ENTITY plugdir "/usr/local/emhttp/plugins/&name;">
+<!ENTITY github "Squidly271/customtab">
+<!ENTITY pluginURL "https://raw.githubusercontent.com/&github;/master/plugins/&name;.plg">
+]>
+<PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" icon="edit" support="https://forums.lime-technology.com/topic/57109-plugin-custom-tab/">
+
+<CHANGES>
+###2021.03.10
+- Permission Fix
+
+###2020.10.21
+- Compatibility Fixes
+
+###2019.11.10
+- Make built-in page dropdown selection readable
+
+###2019.06.30
+- Display alert if a custom tab set to URL, Blank tab is clicked, but pop ups are disabled on browser.
+* A change (any change) to the settings or a reboot will be required for this update to take effect
+
+###2019.06.16
+- Add note regarding adding updates to a plugin with a custom tab
+- Utilize CA's update API
+
+###2019.01.13
+- Adjust icon
+
+###2018.12.09
+- Add in ability to open URL in new tab
+
+###2018.11.11
+- Fixed: Position wouldn't work on URL tabs
+
+###2018.10.19
+- Fix broken pipe
+
+###2018.10.08
+- Add ability to open a url in same tab instead of frame (ie: bookmark)
+
+###2018.04.14
+- Added in ability to place tabs anywhere on the tab bar.
+
+###2017.12.13
+- Added note warning if using HTTPS to access server that all URLs must also use HTTPS
+
+###2017.11.23
+- Fixed: Settings Icon on 6.4
+
+###2017.09.23
+- Fixed: Change focus to iframe when loaded (IE: Keyboard now works on URL tabs)
+* A change (any change) to the settings or a reboot will be required for this update to take effect
+
+###2017.06.24
+- Support Adding any unRaid page file as a custom tab
+
+###2017.06.18
+- Support custom icons on 6.4 - Azure / Gray themes
+
+###2017.05.14
+- Support Multiple Custom Tabs
+
+###2017.05.06
+- Initial Release
+</CHANGES>
+
+<FILE Run="/bin/bash">
+<INLINE>
+# Remove old 'source' files
+rm -f $(ls /boot/config/plugins/&name;/&name;*.txz 2&gt;/dev/null | grep -v '&version;')
+</INLINE>
+</FILE>
+
+<!--
+The 'source' file.
+-->
+<FILE Name="/boot/config/plugins/&name;/&name;-&version;-x86_64-1.txz" Run="upgradepkg --install-new">
+<URL>https://raw.github.com/&github;/master/archive/&name;-&version;-x86_64-1.txz</URL>
+<MD5>&md5;</MD5>
+</FILE>
+
+<!--
+The 'post-install' script
+-->
+<FILE Run="/bin/bash">
+<INLINE>
+echo ""
+echo "----------------------------------------------------"
+echo " &name; has been installed."
+echo " Copyright 2015-2017, Squid"
+echo " Version: &version;"
+echo "----------------------------------------------------"
+echo ""
+echo "Converting old configuration file"
+/usr/local/emhttp/plugins/customtab/scripts/convert.php
+</INLINE>
+</FILE>
+
+<!--
+The 'remove' script.
+-->
+<FILE Run="/bin/bash" Method="remove">
+<INLINE>
+removepkg &name;-&version;-x86_64-1
+rm -rf &plugdir;
+rm -rf /boot/config/plugins/&name;
+rm -rf /usr/local/emhttp/plugins/customtabtemp
+</INLINE>
+</FILE> 
+</PLUGIN>
