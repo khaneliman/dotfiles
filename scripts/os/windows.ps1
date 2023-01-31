@@ -44,19 +44,39 @@ Installing fonts'
 # Install software
 ##
 
-# install winget
+## 
+# Install scoop
+##
+if (!(Test-Path -Path "$($env:USERPROFILE)/scoop/shims/scoop" -PathType Leaf)) {
+    irm get.scoop.sh | iex
+} else {
+    write-host ""
+    write-host "Scoop already installed. skipping..."
+}
+
+#buckets
+scoop bucket add main
+scoop bucket add extras
+
+# scoops
+scoop install sudo
+scoop install msys2
+scoop install secureuxtheme
+scoop install fastfetch
+scoop install oh-my-posh
+scoop install git
+scoop install github
+scoop install git-crypt
+
+##
+# Install winget
+##
 # Invoke-WebRequest -Uri https://github.com/microsoft/winget-cli/releases/download/v1.4.10173/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle -OutFile $($env:USERPROFILE)\Downloads\MicrosoftDesktopAppInstaller_8wekyb3d8bbwe.msixbundle
 # Add-AppXPackage -Path $($env:USERPROFILE)\Downloads\MicrosoftDesktopAppInstaller_8wekyb3d8bbwe.msixbundle
 
 # Program installations
-# winget install --id MSYS2.MSYS2
-# winget install --id git.git
 # winget install --id Microsoft.Powershell.Preview
 # winget install --id Microsoft.WindowsTerminal.Preview
-# winget install --id JanDeDobbeleer.OhMyPosh -s winget
-# winget install --id GitHub.GitHubDesktop
-
-# git clone --recurse-submodules https://github.com/khaneliman/dotfiles.git ~/.config/.dotfiles
 
 # Win 11 Theme Patcher
 if (!(Test-Path -Path "$($env:USERPROFILE)\Downloads\UltraUXThemePatcher.exe" -PathType Leaf)) {
@@ -65,9 +85,14 @@ if (!(Test-Path -Path "$($env:USERPROFILE)\Downloads\UltraUXThemePatcher.exe" -P
     Invoke-WebRequest -Uri https://mhoefs.eu/software_count.php -OutFile "$($env:USERPROFILE)\Downloads\UltraUXThemePatcher.exe" -Method POST -Body $postParams
     write-host "Downloaded to $($env:USERPROFILE)\Downloads\UltraUXThemePatcher.exe"
     write-host "Patch OS to apply themes"
+} else {
+    write-host ""
+    write-host "UltraUXThemePatcher already downloaded. skipping..."
+    write-host "Patch OS to apply custom themes"
 }
 
-# Update windows theme
-# start-process -filepath "C:\Windows\Resources\Themes\dark.theme"; timeout /t 3; taskkill /im "systemsettings.exe" /f
+# Customize windows taskbar
+./windows/customize_taskbar.ps1
 
-./windows/taskbar_customization.ps1
+# Update windows theme
+start-process -filepath "C:\Windows\Resources\Themes\dark.theme"; timeout /t 3; taskkill /im "systemsettings.exe" /f
