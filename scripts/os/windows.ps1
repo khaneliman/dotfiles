@@ -58,5 +58,16 @@ Installing fonts'
 
 # git clone --recurse-submodules https://github.com/khaneliman/dotfiles.git ~/.config/.dotfiles
 
+# Win 11 Theme Patcher
+if (!(Test-Path -Path "$($env:USERPROFILE)\Downloads\UltraUXThemePatcher.exe" -PathType Leaf)) {
+    write-host "Downloading UltraUXThemePatcher..."
+    $postParams = @{Uxtheme='UltraUXThemePatcher';id='Uxtheme'}
+    Invoke-WebRequest -Uri https://mhoefs.eu/software_count.php -OutFile "$($env:USERPROFILE)\Downloads\UltraUXThemePatcher.exe" -Method POST -Body $postParams
+    write-host "Downloaded to $($env:USERPROFILE)\Downloads\UltraUXThemePatcher.exe"
+    write-host "Patch OS to apply themes"
+}
+
 # Update windows theme
 # start-process -filepath "C:\Windows\Resources\Themes\dark.theme"; timeout /t 3; taskkill /im "systemsettings.exe" /f
+
+./windows/taskbar_customization.ps1

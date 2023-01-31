@@ -31,7 +31,10 @@
     "defaultProfile": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
     "profiles": {
         "defaults": {
-            "colorScheme": "Catppuccin Macchiato"
+            "colorScheme": "Catppuccin Macchiato",
+            "font": {
+                "face": "Liga SFMono Nerd Font"
+            }
         },
         "list": [
             {
@@ -51,9 +54,6 @@
                 "source": "Windows.Terminal.Azure"
             },
             {
-                "font": {
-                    "face": "Liga SFMono Nerd Font"
-                },
                 "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
                 "hidden": false,
                 "name": "PowerShell",
