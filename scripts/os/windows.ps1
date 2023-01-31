@@ -1,12 +1,48 @@
-# Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope CurrentUser
+# Variables setup
+$GIT_DIR = git rev-parse --show-toplevel
+$DOTS_DIR = $GIT_DIR+"/dots"
+$SCRIPTS_DIR = $GIT_DIR+"/scripts"
 
+echo 'Setting powershell to allow execution of scripts'
+Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope CurrentUser
+
+##
 # Check path and Update path if needed
+#
+echo '
+Adding to user path, as needed.'
 $PATH = [Environment]::GetEnvironmentVariable("PATH", "User")
+
+# local bin
 $local_bin = "$($env:USERPROFILE)\.local\bin\"
 if( $PATH -notlike "*"+$local_bin+"*" ){
-    echo 'Adding ~/.local/bin to path'
+    echo '  Adding ~/.local/bin to path'
     ./windows/append_user_path.cmd %USERPROFILE%\.local\bin\
+} else {
+    echo '  ~/.local/bin already in path. Skipping.'
 }
+
+# msys bin
+$msys_bin = "C:\msys64\usr\bin"
+if( $PATH -notlike "*"+$msys_bin+"*" ){
+    echo '  Adding C:\msys64\usr\bin to path'
+    ./windows/append_user_path.cmd C:\msys64\usr\bin
+} else {
+    echo '  C:\msys64\usr\bin already in path. Skipping.'
+}
+
+##
+# Install fonts
+##
+echo '
+Installing fonts'
+./windows/install_fonts.ps1 $DOTS_DIR"/shared/home/.fonts/SanFransisco"
+# $fonts = (New-Object -ComObject Shell.Application).Namespace(0x14)
+# Get-ChildItem -Recurse -Path $DOTS_DIR"/shared/home/.fonts/SanFransisco" -Include *.otf | % { $fonts.CopyHere($_.fullname) }
+
+##
+# Install software
+##
 
 # install winget
 # Invoke-WebRequest -Uri https://github.com/microsoft/winget-cli/releases/download/v1.4.10173/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle -OutFile $($env:USERPROFILE)\Downloads\MicrosoftDesktopAppInstaller_8wekyb3d8bbwe.msixbundle

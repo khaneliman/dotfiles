@@ -1,1 +1,0 @@
-%path%;C:\Users\khane\AppData\Local\Microsoft\WindowsApps;C:\Users\khane\AppData\Local\Programs\oh-my-posh\bin; 
