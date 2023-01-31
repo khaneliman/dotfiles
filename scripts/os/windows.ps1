@@ -94,5 +94,10 @@ if (!(Test-Path -Path "$($env:USERPROFILE)\Downloads\UltraUXThemePatcher.exe" -P
 # Customize windows taskbar
 ./windows/customize_taskbar.ps1
 
+# Customize cursor
+write-host "
+Installing Catppuccin-Mocha-Blue-Cursors"
+./windows/customize_cursor.ps1 "$DOTS_DIR/windows/themes/Catppuccin-Mocha-Blue-Cursors/install.inf" | Tee-Object -Variable cursor
+
 # Update windows theme
 start-process -filepath "C:\Windows\Resources\Themes\dark.theme"; timeout /t 3; taskkill /im "systemsettings.exe" /f
