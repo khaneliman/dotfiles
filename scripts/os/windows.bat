@@ -1,0 +1,1 @@
+type windows.ps1 | powershell -
