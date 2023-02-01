@@ -11,19 +11,24 @@ if (!(Test-Path -Path "$($env:USERPROFILE)/scoop/shims/scoop" -PathType Leaf)) {
 }
 
 if (Test-CommandExists scoop) {
-
+    
     # buckets
-    scoop bucket add main
-    scoop bucket add extras
-    scoop bucket add versions
+    $scoop_buckets = @(
+        'main', 'extras', 'versions'
+    )
+
+    foreach ($bucket in $scoop_buckets) {
+        scoop bucket add $bucket
+    }
 
     # scoops
-    scoop install sudo
-    scoop install fastfetch pshazz
-    scoop install git-crypt
-    scoop install vcredist
-    scoop install 1password-cli
-    scoop install secureuxtheme 7tsp
+    $scoop_apps = @(
+        'sudo', 'fastfetch', 'pshazz', 'git-crypt', 'vcredist', '1password-cli', 'secureuxtheme', '7tsp', 'archwsl'
+    )
+
+    foreach ($app in $scoop_apps) {
+        scoop install $app
+    }
 
     # elevated installs
     sudo scoop install windowsdesktop-runtime-lts
