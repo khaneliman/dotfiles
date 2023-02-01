@@ -7,7 +7,7 @@ if (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
     }
 }
 
-infdefaultinstall.exe $args
+infdefaultinstall.exe $args | Out-Null
 
 Set-itemproperty "HKCU:\Control Panel\Cursors" -Name "(Default)" -Value "Catppuccin-Mocha-Blue-Cursors"
 
@@ -17,6 +17,8 @@ $RegConnect = [Microsoft.Win32.RegistryKey]::OpenRemoteBaseKey([Microsoft.Win32.
 $RegCursors = $RegConnect.OpenSubKey("Control Panel\Cursors",$true)
 
 $RegCursors.SetValue("","Catppuccin-Mocha-Blue-Cursors")
+
+$RegCursors.SetValue("Scheme Source","1")
 
 # $RegCursors.SetValue("CursorBaseSize",0x20)
 

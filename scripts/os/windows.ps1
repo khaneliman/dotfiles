@@ -3,6 +3,9 @@ $GIT_DIR = git rev-parse --show-toplevel
 $DOTS_DIR = $GIT_DIR+"/dots"
 $SCRIPTS_DIR = $GIT_DIR+"/scripts"
 
+# Source functions
+.$SCRIPTS_DIR/os/windows/test_command_exists.ps1
+
 echo 'Setting powershell to allow execution of scripts'
 Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope CurrentUser
 
@@ -37,8 +40,6 @@ if( $PATH -notlike "*"+$msys_bin+"*" ){
 echo '
 Installing fonts'
 .$SCRIPTS_DIR/os/windows/install_fonts.ps1 $DOTS_DIR"/shared/home/.fonts/SanFransisco"
-# $fonts = (New-Object -ComObject Shell.Application).Namespace(0x14)
-# Get-ChildItem -Recurse -Path $DOTS_DIR"/shared/home/.fonts/SanFransisco" -Include *.otf | % { $fonts.CopyHere($_.fullname) }
 
 ##
 # Install software
@@ -71,8 +72,13 @@ scoop install git-crypt
 ##
 # Install winget
 ##
-# Invoke-WebRequest -Uri https://github.com/microsoft/winget-cli/releases/download/v1.4.10173/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle -OutFile $($env:USERPROFILE)\Downloads\MicrosoftDesktopAppInstaller_8wekyb3d8bbwe.msixbundle
-# Add-AppXPackage -Path $($env:USERPROFILE)\Downloads\MicrosoftDesktopAppInstaller_8wekyb3d8bbwe.msixbundle
+If(!(Test-CommandExists winget)) {
+    write-host "Installing winget"
+    Invoke-WebRequest -Uri https://github.com/microsoft/winget-cli/releases/download/v1.4.10173/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle -OutFile $($env:USERPROFILE)\Downloads\MicrosoftDesktopAppInstaller_8wekyb3d8bbwe.msixbundle
+    Add-AppXPackage -Path $($env:USERPROFILE)\Downloads\MicrosoftDesktopAppInstaller_8wekyb3d8bbwe.msixbundle
+} else {
+    write-host "Winget already installed. Skipping..."
+}
 
 # Program installations
 # winget install --id Microsoft.Powershell.Preview
@@ -92,12 +98,14 @@ if (!(Test-Path -Path "$($env:USERPROFILE)\Downloads\UltraUXThemePatcher.exe" -P
 }
 
 # Customize windows taskbar
-.$SCRIPTS_DIR/os/windows/customize_taskbar.ps1
+.$SCRIPTS_DIR/os/windows/customize_taskbar.ps1 | Out-Null
+
+# Update windows theme
+write-host "
+Installing Explorer Themes" 
+.$SCRIPTS_DIR/os/windows/customize_explorer.ps1 "$DOTS_DIR/windows/themes/Explorer/" "$DOTS_DIR/windows/themes/Explorer/catppuccin" | Out-Null
 
 # Customize cursor
 write-host "
 Installing Catppuccin-Mocha-Blue-Cursors"
-.$SCRIPTS_DIR/os/windows/customize_cursor.ps1 "$DOTS_DIR/windows/themes/Catppuccin-Mocha-Blue-Cursors/install.inf" | Tee-Object -Variable cursor
-
-# Update windows theme
-start-process -filepath "C:\Windows\Resources\Themes\dark.theme"; timeout /t 3; taskkill /im "systemsettings.exe" /f
+.$SCRIPTS_DIR/os/windows/customize_cursor.ps1 "$DOTS_DIR/windows/themes/Cursor/Catppuccin-Mocha-Blue-Cursors/install.inf" | Out-Null
