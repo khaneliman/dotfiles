@@ -56,7 +56,7 @@ if (!(Test-Path -Path "$($env:USERPROFILE)/scoop/shims/scoop" -PathType Leaf)) {
     write-host "Scoop already installed. skipping..."
 }
 
-#buckets
+# buckets
 scoop bucket add main
 scoop bucket add extras
 scoop bucket add versions
@@ -70,9 +70,12 @@ scoop install oh-my-posh
 scoop install git
 scoop install github
 scoop install git-crypt
-# scoop install micaforeveryone
+scoop install micaforeveryone
 sudo scoop install windowsdesktop-runtime-lts
 scoop install dotnet-sdk
+scoop install vcredist2022
+scoop install vcredist
+scoop install pshazz
 
 ##
 # Install winget
