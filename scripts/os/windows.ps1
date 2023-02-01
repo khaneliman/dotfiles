@@ -12,31 +12,6 @@ echo 'Setting powershell to allow execution of scripts'
 Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope CurrentUser
 
 ##
-# Check path and Update path if needed
-#
-echo '
-Adding to user path, as needed.'
-$PATH = [Environment]::GetEnvironmentVariable("PATH", "User")
-
-# local bin
-$local_bin = "$($env:USERPROFILE)\.local\bin\"
-if( $PATH -notlike "*"+$local_bin+"*" ){
-    echo '  Adding ~/.local/bin to path'
-    .$SCRIPTS_DIR/os/windows/utils/append_user_path.cmd %USERPROFILE%\.local\bin\
-} else {
-    echo '  ~/.local/bin already in path. Skipping.'
-}
-
-# msys bin
-$msys_bin = "C:\msys64\usr\bin"
-if( $PATH -notlike "*"+$msys_bin+"*" ){
-    echo '  Adding C:\msys64\usr\bin to path'
-    .$SCRIPTS_DIR/os/windows/utils/append_user_path.cmd C:\msys64\usr\bin
-} else {
-    echo '  C:\msys64\usr\bin already in path. Skipping.'
-}
-
-##
 # Install fonts
 ##
 echo '
