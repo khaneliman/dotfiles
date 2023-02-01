@@ -19,19 +19,14 @@ if (Test-CommandExists scoop) {
 
     # scoops
     scoop install sudo
-    scoop install msys2
-    scoop install secureuxtheme
-    scoop install fastfetch
-    scoop install oh-my-posh
-    scoop install git
-    scoop install github
+    scoop install fastfetch pshazz
     scoop install git-crypt
-    scoop install micaforeveryone
-    sudo scoop install windowsdesktop-runtime-lts
-    scoop install dotnet-sdk
     scoop install vcredist
-    scoop install pshazz
-    scoop install 7tsp
+    scoop install 1password-cli
+    scoop install secureuxtheme 7tsp
+
+    # elevated installs
+    sudo scoop install windowsdesktop-runtime-lts
 }
 
 ##
@@ -50,9 +45,37 @@ if ( !(Test-CommandExists winget)) {
     write-host "Winget already installed. Skipping..."
 }
 
-# Program installations
-# winget install --id Microsoft.Powershell.Preview
-# winget install --id Microsoft.WindowsTerminal.Preview
+##
+# Winget installations
+# Doesn't elegantly handle skipping already installed programs, uncomment if you want them.
+##
+$winget_apps = @(
+    'MSYS2.MSYS2',
+    'JanDeDobbeleer.OhMyPosh',
+    'Microsoft.Powershell.Preview',
+    'Microsoft.WindowsTerminalPreview',
+    'Bitsum.ProcessLasso',
+    'Git.Git',
+    'GitHub.GitHubDesktop',
+    'Microsoft.VisualStudioCode',
+    'Neovim.Neovim',
+    'Microsoft.DotNet.SDK.7',
+    'Mozilla.Firefox.DeveloperEdition',
+    'AgileBits.1Password',
+    'Microsoft.Teams',
+    'MicaForEveryone.MicaForEveryone',
+    'Rainmeter.Rainmeter',
+    'AntibodySoftware.WizTree',
+    'Notepad++.Notepad++',
+    'Microsoft.Sysinternals.Autoruns',
+    'Valve.Steam',
+    'HeroicGamesLauncher.HeroicGamesLauncher'
+)
+
+foreach ($app in $winget_apps) {
+    write-host "    Installing $app..."
+    winget install --accept-package-agreements --accept-source-agreements --silent --no-upgrade --id $app
+}
 
 ##
 # Win 11 Theme Patcher
@@ -69,21 +92,4 @@ if (!(Test-Path -Path "$($env:USERPROFILE)\Downloads\UltraUXThemePatcher.exe" -P
     write-host ""
     write-host "UltraUXThemePatcher already downloaded. skipping..."
     write-host "Patch OS to apply custom themes"
-}
-
-##
-# Mica for Everyone
-# https://github.com/MicaForEveryone/MicaForEveryone/releases/latest
-##
-if (!(Test-Path -Path "$($env:USERPROFILE)\Downloads\MicaForEveryone-x64-Release.msix" -PathType Leaf)) {
-    write-host "
-Downloading MicaForEveryone..."
-    $download_url = "https://github.com/MicaForEveryone/MicaForEveryone/releases/download/v1.3.0.0/MicaForEveryone-x64-Release.msix"
-    $download_save_file = "$($env:USERPROFILE)\Downloads\MicaForEveryone-x64-Release.msix"
-    $wc.Downloadfile($download_url, $download_save_file)
-    write-host "Downloaded to $($env:USERPROFILE)\Downloads\MicaForEveryone-x64-Release.msix. Installing..."
-    Add-AppxPackage -Path "$($env:USERPROFILE)\Downloads\MicaForEveryone-x64-Release.msix" -AllowUnsigned
-} else {
-    write-host ""
-    write-host "MicaForEveryone already downloaded. Skipping..."
 }
