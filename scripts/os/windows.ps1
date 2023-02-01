@@ -65,15 +65,15 @@ Customizing the taskbar"
 .$SCRIPTS_DIR/os/windows/customize_taskbar.ps1
 
 ##
-# Update windows theme
-##
-write-host "
-Installing Explorer Themes" 
-.$SCRIPTS_DIR/os/windows/customize_explorer.ps1 "$DOTS_DIR/windows/themes/Explorer/" "$DOTS_DIR/windows/themes/Explorer/catppuccin"
-
-##
 # Customize cursor
 ##
 write-host "
 Installing Catppuccin-Mocha-Blue-Cursors"
 .$SCRIPTS_DIR/os/windows/customize_cursor.ps1 "$DOTS_DIR/windows/themes/Cursor/Catppuccin-Mocha-Blue-Cursors/install.inf"
+
+##
+# Update windows theme
+##
+write-host "
+Installing Explorer Themes" 
+.$SCRIPTS_DIR/os/windows/customize_explorer.ps1 "$DOTS_DIR/windows/themes/Explorer/" "$DOTS_DIR/windows/themes/Explorer/catppuccin" "$DOTS_DIR/windows/themes/Explorer/catppuccin/Shell/NormalColor" "$DOTS_DIR/windows/themes/Explorer/catppuccin/wallpapers"

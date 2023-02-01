@@ -13,13 +13,13 @@ $objShell = New-Object -ComObject Shell.Application
 
 # Loop through provided input directories
 for ( $i = 0; $i -lt $args.count; $i++ ) {
-    write-host "    Checking $($args[$i]) for themes that need to be installed..."
+    write-host "    Checking $($args[$i]) for files that need to be installed..."
     
     # Current directory being checked
     $Path=$($args[$i])
     $Theme = Get-Item -Path $Path
     
-    $ThemeList = Get-ChildItem -Path "$Theme\*" -Include ('*.theme', '*.msstyles')
+    $ThemeList = Get-ChildItem -Path "$Theme\*" -Include ('*.theme', '*.msstyles', '*.dll', '*.png')
     $Fontdir = dir $Path
 
     foreach($File in $ThemeList) {
@@ -28,7 +28,7 @@ for ( $i = 0; $i -lt $args.count; $i++ ) {
 
         $try = $true
         $objFolder = $objShell.Namespace($RESOURCES)
-        $installedThemes = @(Get-ChildItem $RESOURCES | Where-Object {$_.PSIsContainer -eq $false} | Select-Object basename)
+        $installedItems = @(Get-ChildItem $RESOURCES | Where-Object {$_.PSIsContainer -eq $false} | Select-Object basename)
 
         if ($extension -eq ".msstyles") {
             $objFolder = $objShell.Namespace("$RESOURCES\catppuccin")
@@ -37,22 +37,42 @@ for ( $i = 0; $i -lt $args.count; $i++ ) {
                 New-Item -ItemType Directory -Path "$RESOURCES\catppuccin"
             }
             
-            $installedThemes = @(Get-ChildItem "$RESOURCES\catppuccin" | Where-Object {$_.PSIsContainer -eq $false} | Select-Object basename)
+            $installedItems = @(Get-ChildItem "$RESOURCES\catppuccin" | Where-Object {$_.PSIsContainer -eq $false} | Select-Object basename)
+        }
+
+		if ($extension -eq ".dll") {
+            $objFolder = $objShell.Namespace("$RESOURCES\catppuccin\Shell\NormalColor")
+            
+            If(!(test-path -PathType container "$RESOURCES\catppuccin\Shell\NormalColor")) {
+                New-Item -ItemType Directory -Path "$RESOURCES\catppuccin\Shell\NormalColor"
+            }
+            
+            $installedItems = @(Get-ChildItem "$RESOURCES\catppuccin\Shell\NormalColor" | Where-Object {$_.PSIsContainer -eq $false} | Select-Object basename)
         }
     
-        foreach($theme in $installedThemes)
+		if ($extension -eq ".png") {
+            $objFolder = $objShell.Namespace("$RESOURCES\catppuccin\wallpapers")
+            
+            If(!(test-path -PathType container "$RESOURCES\catppuccin\wallpapers")) {
+                New-Item -ItemType Directory -Path "$RESOURCES\catppuccin\wallpapers"
+            }
+            
+            $installedItems = @(Get-ChildItem "$RESOURCES\catppuccin\wallpapers" | Where-Object {$_.PSIsContainer -eq $false} | Select-Object basename)
+        }
+
+        foreach($item in $installedItems)
         {
-            $theme = $theme -replace "_", ""
+            $item = $item -replace "_", ""
             $name = $name -replace "_", ""
 
-            if ($theme -match $name)
+            if ($item -match $name)
             {
                 $try = $false
             }
         }
         if ($try)
         {
-            write-host "    Installing $name"
+            write-host "    Installing $name from $File"
             $objFolder.CopyHere($File.fullname)
         }
     }
@@ -128,7 +148,7 @@ Else
 $StartMenuKey = @{
 	Key   = 'StartColorMenu';
 	Type  = "DWORD";
-	Value = '0xff3f2a26'
+	Value = '0xff4e3430'
 }
 
 write-host "
@@ -148,7 +168,6 @@ Else
 ##
 $RegPath = "HKCU:\Software\Microsoft\Windows\DWM"
 
-# Disable automatic color management
 $ColorizationColorBalance = @{
 	Key   = 'ColorizationColorBalance';
 	Type  = "DWORD";
@@ -167,7 +186,6 @@ Else
 	Set-ItemProperty -Path $RegPath -Name $ColorizationColorBalance.Key -Value $ColorizationColorBalance.Value -Force
 }
 
-# Disable automatic color management
 $ColorizationBlurBalance = @{
 	Key   = 'ColorizationBlurBalance';
 	Type  = "DWORD";
@@ -186,6 +204,59 @@ Else
 	Set-ItemProperty -Path $RegPath -Name $ColorizationBlurBalance.Key -Value $ColorizationBlurBalance.Value -Force
 }
 
+$AccentColor = @{
+	Key   = 'AccentColor';
+	Type  = "DWORD";
+	Value = '0xff4e3430'
+}
+
+write-host "
+Setting AccentColor" $AccentColor.Value
+
+If ($Null -eq (Get-ItemProperty -Path $RegPath -Name $AccentColor.Key -ErrorAction SilentlyContinue))
+{
+	New-ItemProperty -Path $RegPath -Name $AccentColor.Key -Value $AccentColor.Value -PropertyType $AccentColor.Type -Force
+}
+Else
+{
+	Set-ItemProperty -Path $RegPath -Name $AccentColor.Key -Value $AccentColor.Value -Force
+}
+
+$ColorizationColor = @{
+	Key   = 'ColorizationColor';
+	Type  = "DWORD";
+	Value = '0xff4e3430'
+}
+
+write-host "
+Setting ColorizationColor" $ColorizationColor.Value
+
+If ($Null -eq (Get-ItemProperty -Path $RegPath -Name $ColorizationColor.Key -ErrorAction SilentlyContinue))
+{
+	New-ItemProperty -Path $RegPath -Name $ColorizationColor.Key -Value $ColorizationColor.Value -PropertyType $ColorizationColor.Type -Force
+}
+Else
+{
+	Set-ItemProperty -Path $RegPath -Name $ColorizationColor.Key -Value $ColorizationColor.Value -Force
+}
+
+$ColorizationAfterglow = @{
+	Key   = 'ColorizationAfterglow';
+	Type  = "DWORD";
+	Value = '0xff4e3430'
+}
+
+write-host "
+Setting ColorizationAfterglow" $ColorizationAfterglow.Value
+
+If ($Null -eq (Get-ItemProperty -Path $RegPath -Name $ColorizationAfterglow.Key -ErrorAction SilentlyContinue))
+{
+	New-ItemProperty -Path $RegPath -Name $ColorizationAfterglow.Key -Value $ColorizationAfterglow.Value -PropertyType $ColorizationAfterglow.Type -Force
+}
+Else
+{
+	Set-ItemProperty -Path $RegPath -Name $ColorizationAfterglow.Key -Value $ColorizationAfterglow.Value -Force
+}
 
 ##
 # Themes Personalize Reg Path
@@ -216,9 +287,15 @@ Else
 # New-Item $regPath -Force | Out-Null
 # New-ItemProperty $regPath -Name NoThemesTab -Value 0 -Force | Out-Null
 
-if (Test-Path -Path "C:\Windows\Resources\Themes\catppuccin Mocha Win.theme" -PathType Leaf) {
-    write-host "Setting theme to Catppuccin Mocha"
-    start-process -filepath "C:\Windows\Resources\Themes\catppuccin Mocha Win.theme"; timeout /t 3; taskkill /im "systemsettings.exe" /f
+if (Test-Path -Path "C:\Windows\Resources\Themes\Catppuccin-Mocha.theme" -PathType Leaf) {
+    $currentTheme=(Get-ItemProperty -path HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\ -Name "CurrentTheme").CurrentTheme
+    if ($currentTheme -eq "C:\Windows\resources\Themes\Catppuccin-Mocha.theme") {
+        write-host "Theme already set to Catppuccin Mocha. Skipping..."
+    } else {
+        write-host "Setting theme to Catppuccin Mocha"
+        start-process -filepath "C:\Windows\Resources\Themes\Catppuccin-Mocha.theme"; timeout /t 3; taskkill /im "systemsettings.exe" /f
+    }
+    
 } else {
     write-host "Catppuccin Mocha not found in C:\Windows\Resources\Themes\. Skipping..."
 }

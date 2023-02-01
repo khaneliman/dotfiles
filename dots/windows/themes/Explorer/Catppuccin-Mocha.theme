@@ -1,8 +1,6 @@
-; Copyright � niivu DESIGNS.
-
 [Theme]
-; Windows - IDS_THEME_DISPLAYNAME_catppuccin Mocha Night Win
-DisplayName=catppuccin Mocha Night Win
+; Windows - IDS_THEME_DISPLAYNAME_Catppuccin_Mocha
+DisplayName=Catppuccin Mocha
 SetLogonBackground=0
 
 ; Computer - SHIDI_SERVER
@@ -42,19 +40,19 @@ DefaultValue=Catppuccin-Mocha-Blue-Cursors
 DefaultValue.MUI=@main.cpl,-1020
 
 [Control Panel\Desktop]
-Wallpaper=%SystemRoot%\Resources\Themes\catppuccin\Wallpapers\Mocha\Blue Mocha.png
+Wallpaper=%SystemRoot%\Resources\Themes\catppuccin\wallpapers\cat-sound.png
 TileWallpaper=0
 WallpaperStyle=10
 Pattern=
 
 [VisualStyles]
-Path=%ResourceDir%\Themes\catppuccin\catppuccin Mocha Night Win.msstyles
+Path=%ResourceDir%\Themes\catppuccin\Catppuccin-Mocha.msstyles
 ColorStyle=NormalColor
 Size=NormalSize
-AutoColorization=1
-ColorizationColor=0XFFDCE0E8
+AutoColorization=0
 SystemMode=Dark
 AppMode=Dark
+Transparency=1
 
 [boot]
 SCRNSAVE.EXE=
@@ -69,11 +67,13 @@ SchemeName=@%SystemRoot%\System32\mmres.dll,-800
 [Slideshow]
 Interval=1800000
 Shuffle=0
-ImagesRootPath=%SystemRoot%\Resources\Themes\catppuccin\Wallpapers\Mocha\
-Item0Path=%SystemRoot%\Resources\Themes\catppuccin\Wallpapers\Mocha\Blue Mocha.png
-Item1Path=%SystemRoot%\Resources\Themes\catppuccin\Wallpapers\Mocha\Flamingo Mocha.png
-Item2Path=%SystemRoot%\Resources\Themes\catppuccin\Wallpapers\Mocha\Peach Mocha.png
-Item3Path=%SystemRoot%\Resources\Themes\catppuccin\Wallpapers\Mocha\Red Mocha.png
-Item4Path=%SystemRoot%\Resources\Themes\catppuccin\Wallpapers\Mocha\Sapphire Mocha.png
-Item5Path=%SystemRoot%\Resources\Themes\catppuccin\Wallpapers\Mocha\Teal Mocha.png
-Item6Path=%SystemRoot%\Resources\Themes\catppuccin\Wallpapers\Mocha\Yellow Mocha.png
+ImagesRootPath=%SystemRoot%\Resources\Themes\catppuccin\wallpapers\
+Item0Path=%SystemRoot%\Resources\Themes\catppuccin\wallpapers\butons.png
+Item1Path=%SystemRoot%\Resources\Themes\catppuccin\wallpapers\cat_pacman.png
+Item2Path=%SystemRoot%\Resources\Themes\catppuccin\wallpapers\cat-sound.png
+Item3Path=%SystemRoot%\Resources\Themes\catppuccin\wallpapers\flatppuccin-4k_macchiato.png
+Item4Path=%SystemRoot%\Resources\Themes\catppuccin\wallpapers\hashtags-black.png
+Item5Path=%SystemRoot%\Resources\Themes\catppuccin\wallpapers\hashtags-new.png
+Item6Path=%SystemRoot%\Resources\Themes\catppuccin\wallpapers\hearts.png
+Item7Path=%SystemRoot%\Resources\Themes\catppuccin\wallpapers\arch-rainbow-1920x1080.png
+Item8Path=%SystemRoot%\Resources\Themes\catppuccin\wallpapers\tetris.png
