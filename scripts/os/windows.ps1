@@ -17,7 +17,7 @@ $PATH = [Environment]::GetEnvironmentVariable("PATH", "User")
 $local_bin = "$($env:USERPROFILE)\.local\bin\"
 if( $PATH -notlike "*"+$local_bin+"*" ){
     echo '  Adding ~/.local/bin to path'
-    ./windows/append_user_path.cmd %USERPROFILE%\.local\bin\
+    .$SCRIPTS_DIR/os/windows/append_user_path.cmd %USERPROFILE%\.local\bin\
 } else {
     echo '  ~/.local/bin already in path. Skipping.'
 }
@@ -26,7 +26,7 @@ if( $PATH -notlike "*"+$local_bin+"*" ){
 $msys_bin = "C:\msys64\usr\bin"
 if( $PATH -notlike "*"+$msys_bin+"*" ){
     echo '  Adding C:\msys64\usr\bin to path'
-    ./windows/append_user_path.cmd C:\msys64\usr\bin
+    .$SCRIPTS_DIR/os/windows/append_user_path.cmd C:\msys64\usr\bin
 } else {
     echo '  C:\msys64\usr\bin already in path. Skipping.'
 }
@@ -36,7 +36,7 @@ if( $PATH -notlike "*"+$msys_bin+"*" ){
 ##
 echo '
 Installing fonts'
-./windows/install_fonts.ps1 $DOTS_DIR"/shared/home/.fonts/SanFransisco"
+.$SCRIPTS_DIR/os/windows/install_fonts.ps1 $DOTS_DIR"/shared/home/.fonts/SanFransisco"
 # $fonts = (New-Object -ComObject Shell.Application).Namespace(0x14)
 # Get-ChildItem -Recurse -Path $DOTS_DIR"/shared/home/.fonts/SanFransisco" -Include *.otf | % { $fonts.CopyHere($_.fullname) }
 
@@ -92,12 +92,12 @@ if (!(Test-Path -Path "$($env:USERPROFILE)\Downloads\UltraUXThemePatcher.exe" -P
 }
 
 # Customize windows taskbar
-./windows/customize_taskbar.ps1
+.$SCRIPTS_DIR/os/windows/customize_taskbar.ps1
 
 # Customize cursor
 write-host "
 Installing Catppuccin-Mocha-Blue-Cursors"
-./windows/customize_cursor.ps1 "$DOTS_DIR/windows/themes/Catppuccin-Mocha-Blue-Cursors/install.inf" | Tee-Object -Variable cursor
+.$SCRIPTS_DIR/os/windows/customize_cursor.ps1 "$DOTS_DIR/windows/themes/Catppuccin-Mocha-Blue-Cursors/install.inf" | Tee-Object -Variable cursor
 
 # Update windows theme
 start-process -filepath "C:\Windows\Resources\Themes\dark.theme"; timeout /t 3; taskkill /im "systemsettings.exe" /f
