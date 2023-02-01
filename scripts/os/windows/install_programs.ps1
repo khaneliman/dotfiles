@@ -32,6 +32,8 @@ if (Test-CommandExists scoop) {
 
     # elevated installs
     sudo scoop install windowsdesktop-runtime-lts
+} else {
+    write-host "    Scoop not installed. Skipping scoop installs..."
 }
 
 ##
@@ -52,34 +54,37 @@ if ( !(Test-CommandExists winget)) {
 
 ##
 # Winget installations
-# Doesn't elegantly handle skipping already installed programs, uncomment if you want them.
 ##
-$winget_apps = @(
-    'MSYS2.MSYS2',
-    'JanDeDobbeleer.OhMyPosh',
-    'Microsoft.Powershell.Preview',
-    'Microsoft.WindowsTerminalPreview',
-    'Bitsum.ProcessLasso',
-    'Git.Git',
-    'GitHub.GitHubDesktop',
-    'Microsoft.VisualStudioCode',
-    'Neovim.Neovim',
-    'Microsoft.DotNet.SDK.7',
-    'Mozilla.Firefox.DeveloperEdition',
-    'AgileBits.1Password',
-    'Microsoft.Teams',
-    'MicaForEveryone.MicaForEveryone',
-    'Rainmeter.Rainmeter',
-    'AntibodySoftware.WizTree',
-    'Notepad++.Notepad++',
-    'Microsoft.Sysinternals.Autoruns',
-    'Valve.Steam',
-    'HeroicGamesLauncher.HeroicGamesLauncher'
-)
+if (Test-CommandExists winget) {
+    $winget_apps = @(
+        'MSYS2.MSYS2',
+        'JanDeDobbeleer.OhMyPosh',
+        'Microsoft.Powershell.Preview',
+        'Microsoft.WindowsTerminalPreview',
+        'Bitsum.ProcessLasso',
+        'Git.Git',
+        'GitHub.GitHubDesktop',
+        'Microsoft.VisualStudioCode',
+        'Neovim.Neovim',
+        'Microsoft.DotNet.SDK.7',
+        'Mozilla.Firefox.DeveloperEdition',
+        'AgileBits.1Password',
+        'Microsoft.Teams',
+        'MicaForEveryone.MicaForEveryone',
+        'Rainmeter.Rainmeter',
+        'AntibodySoftware.WizTree',
+        'Notepad++.Notepad++',
+        'Microsoft.Sysinternals.Autoruns',
+        'Valve.Steam',
+        'HeroicGamesLauncher.HeroicGamesLauncher'
+    )
 
-foreach ($app in $winget_apps) {
-    write-host "    Installing $app..."
-    winget install --accept-package-agreements --accept-source-agreements --silent --no-upgrade --id $app
+    foreach ($app in $winget_apps) {
+        write-host "    Installing $app..."
+        winget install --accept-package-agreements --accept-source-agreements --silent --no-upgrade --id $app
+    }
+} else {
+    write-host "    Winget not installed. Skipping winget installs..."
 }
 
 ##
