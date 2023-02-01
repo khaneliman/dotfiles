@@ -29,6 +29,19 @@ if ($myWindowsPrincipal.IsInRole($adminRole))
     {
         Enable-WindowsOptionalFeature -FeatureName Microsoft-Windows-Subsystem-Linux -Online -All -LimitAccess -NoRestart
     }
+
+    $feature = Get-WindowsOptionalFeature -FeatureName VirtualMachinePlatform -Online
+    if ($feature -and ($feature.State -eq "Disabled"))
+    {
+        Enable-WindowsOptionalFeature -FeatureName VirtualMachinePlatform -Online -All -LimitAccess -NoRestart
+    }
+
+    $feature = Get-WindowsOptionalFeature -FeatureName Microsoft-Hyper-V -Online
+    if ($feature -and ($feature.State -eq "Disabled"))
+    {
+        Enable-WindowsOptionalFeature -FeatureName Microsoft-Hyper-V -Online -All -LimitAccess -NoRestart
+    }
+
 }
 else
 {
