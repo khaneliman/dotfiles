@@ -65,7 +65,7 @@ for ( $i = 0; $i -lt $args.count; $i++ ) {
 
 if (Test-Path -Path "C:\Windows\Resources\Themes\catppuccin Mocha Win.theme" -PathType Leaf) {
     write-host "Setting theme to Catppuccin Mocha"
-    start-process -filepath "C:\Windows\Resources\Themes\catppuccin Mocha Win.theme" -Wait; timeout /t 3; taskkill /im "systemsettings.exe" /f
+    start-process -filepath "C:\Windows\Resources\Themes\catppuccin Mocha Win.theme"; timeout /t 3; taskkill /im "systemsettings.exe" /f
 } else {
     write-host "Catppuccin Mocha not found in C:\Windows\Resources\Themes\. Skipping..."
 }

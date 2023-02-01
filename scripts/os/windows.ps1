@@ -59,6 +59,7 @@ if (!(Test-Path -Path "$($env:USERPROFILE)/scoop/shims/scoop" -PathType Leaf)) {
 #buckets
 scoop bucket add main
 scoop bucket add extras
+scoop bucket add versions
 
 # scoops
 scoop install sudo
@@ -69,6 +70,9 @@ scoop install oh-my-posh
 scoop install git
 scoop install github
 scoop install git-crypt
+# scoop install micaforeveryone
+sudo scoop install windowsdesktop-runtime-lts
+scoop install dotnet-sdk
 
 ##
 # Install winget
@@ -110,7 +114,7 @@ if (!(Test-Path -Path "$($env:USERPROFILE)\Downloads\UltraUXThemePatcher.exe" -P
 ##
 write-host "
 Enabling developer mode and installing WSL"
-.$SCRIPTS_DIR/os/windows/enable_developer_mode.ps1 | Out-Null
+.$SCRIPTS_DIR/os/windows/enable_developer_mode.ps1
 
 ##
 # Mica for Everyone
@@ -124,12 +128,9 @@ Downloading MicaForEveryone..."
     $wc.Downloadfile($download_url, $download_save_file)
     write-host "Downloaded to $($env:USERPROFILE)\Downloads\MicaForEveryone-x64-Release.msix. Installing..."
     Add-AppxPackage -Path "$($env:USERPROFILE)\Downloads\MicaForEveryone-x64-Release.msix" -AllowUnsigned
-    write-host "Patch OS to apply themes"
 } else {
     write-host ""
-    write-host "MicaForEveryone already downloaded. installing..."
-    Add-AppxPackage -Path "$($env:USERPROFILE)\Downloads\MicaForEveryone-x64-Release.msix" -AllowUnsigned
-    write-host "Patch OS to apply custom themes"
+    write-host "MicaForEveryone already downloaded. Skipping..."
 }
 
 ##
@@ -137,18 +138,18 @@ Downloading MicaForEveryone..."
 ##
 write-host "
 Customizing the taskbar"
-.$SCRIPTS_DIR/os/windows/customize_taskbar.ps1 | Out-Null
+.$SCRIPTS_DIR/os/windows/customize_taskbar.ps1
 
 ##
 # Update windows theme
 ##
 write-host "
 Installing Explorer Themes" 
-.$SCRIPTS_DIR/os/windows/customize_explorer.ps1 "$DOTS_DIR/windows/themes/Explorer/" "$DOTS_DIR/windows/themes/Explorer/catppuccin" | Out-Null
+.$SCRIPTS_DIR/os/windows/customize_explorer.ps1 "$DOTS_DIR/windows/themes/Explorer/" "$DOTS_DIR/windows/themes/Explorer/catppuccin"
 
 ##
 # Customize cursor
 ##
 write-host "
 Installing Catppuccin-Mocha-Blue-Cursors"
-.$SCRIPTS_DIR/os/windows/customize_cursor.ps1 "$DOTS_DIR/windows/themes/Cursor/Catppuccin-Mocha-Blue-Cursors/install.inf" | Out-Null
+.$SCRIPTS_DIR/os/windows/customize_cursor.ps1 "$DOTS_DIR/windows/themes/Cursor/Catppuccin-Mocha-Blue-Cursors/install.inf"

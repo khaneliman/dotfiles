@@ -7,7 +7,7 @@ if (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
     }
 }
 
-infdefaultinstall.exe $args | Out-Null
+infdefaultinstall.exe $args
 
 Set-itemproperty "HKCU:\Control Panel\Cursors" -Name "(Default)" -Value "Catppuccin-Mocha-Blue-Cursors"
 

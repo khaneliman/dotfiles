@@ -1,5 +1,3 @@
-param([Switch]$WaitForKey)
-
 if (([Version](Get-CimInstance Win32_OperatingSystem).version).Major -lt 10)
 {
     Write-Host -ForegroundColor Red "The DeveloperMode is only supported on Windows 10"
@@ -30,12 +28,6 @@ if ($myWindowsPrincipal.IsInRole($adminRole))
     if ($feature -and ($feature.State -eq "Disabled"))
     {
         Enable-WindowsOptionalFeature -FeatureName Microsoft-Windows-Subsystem-Linux -Online -All -LimitAccess -NoRestart
-    }
-
-    if ($WaitForKey)
-    {
-        Write-Host -NoNewLine "Press any key to continue..."
-        $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
     }
 }
 else
