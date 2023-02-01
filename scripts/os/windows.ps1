@@ -44,18 +44,18 @@ Installing fonts'
 .$SCRIPTS_DIR/os/windows/install_fonts.ps1 $DOTS_DIR"/shared/home/.fonts/SanFransisco"
 
 ##
-# Install software
-##
-echo "
-Installing software."
-.$SCRIPTS_DIR/os/windows/install_programs.ps1
-
-##
 # Enable developer mode
 ##
 write-host "
 Enabling developer mode and installing WSL"
 .$SCRIPTS_DIR/os/windows/enable_developer_mode.ps1
+
+##
+# Install software
+##
+echo "
+Installing software."
+.$SCRIPTS_DIR/os/windows/install_programs.ps1
 
 ##
 # Customize windows taskbar
