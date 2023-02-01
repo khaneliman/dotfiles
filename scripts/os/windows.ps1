@@ -2,6 +2,7 @@
 $GIT_DIR = git rev-parse --show-toplevel
 $DOTS_DIR = $GIT_DIR+"/dots"
 $SCRIPTS_DIR = $GIT_DIR+"/scripts"
+$wc = New-Object net.webclient
 
 # Source functions
 .$SCRIPTS_DIR/os/windows/test_command_exists.ps1
@@ -71,10 +72,13 @@ scoop install git-crypt
 
 ##
 # Install winget
+# https://github.com/microsoft/winget-cli/
 ##
 If(!(Test-CommandExists winget)) {
     write-host "Installing winget"
-    Invoke-WebRequest -Uri https://github.com/microsoft/winget-cli/releases/download/v1.4.10173/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle -OutFile $($env:USERPROFILE)\Downloads\MicrosoftDesktopAppInstaller_8wekyb3d8bbwe.msixbundle
+    $download_url = "https://github.com/microsoft/winget-cli/releases/download/v1.4.10173/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
+    $download_save_file = "$($env:USERPROFILE)\Downloads\MicrosoftDesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
+    $wc.Downloadfile($download_url, $download_save_file)
     Add-AppXPackage -Path $($env:USERPROFILE)\Downloads\MicrosoftDesktopAppInstaller_8wekyb3d8bbwe.msixbundle
 } else {
     write-host "Winget already installed. Skipping..."
@@ -84,10 +88,14 @@ If(!(Test-CommandExists winget)) {
 # winget install --id Microsoft.Powershell.Preview
 # winget install --id Microsoft.WindowsTerminal.Preview
 
+##
 # Win 11 Theme Patcher
+# https://mhoefs.eu/software_count.php
+##
 if (!(Test-Path -Path "$($env:USERPROFILE)\Downloads\UltraUXThemePatcher.exe" -PathType Leaf)) {
     write-host "Downloading UltraUXThemePatcher..."
     $postParams = @{Uxtheme='UltraUXThemePatcher';id='Uxtheme'}
+    $ProgressPreference = 'SilentlyContinue'
     Invoke-WebRequest -Uri https://mhoefs.eu/software_count.php -OutFile "$($env:USERPROFILE)\Downloads\UltraUXThemePatcher.exe" -Method POST -Body $postParams
     write-host "Downloaded to $($env:USERPROFILE)\Downloads\UltraUXThemePatcher.exe"
     write-host "Patch OS to apply themes"
@@ -97,15 +105,50 @@ if (!(Test-Path -Path "$($env:USERPROFILE)\Downloads\UltraUXThemePatcher.exe" -P
     write-host "Patch OS to apply custom themes"
 }
 
+##
+# Enable developer mode
+##
+write-host "
+Enabling developer mode and installing WSL"
+.$SCRIPTS_DIR/os/windows/enable_developer_mode.ps1 | Out-Null
+
+##
+# Mica for Everyone
+# https://github.com/MicaForEveryone/MicaForEveryone/releases/latest
+##
+if (!(Test-Path -Path "$($env:USERPROFILE)\Downloads\MicaForEveryone-x64-Release.msix" -PathType Leaf)) {
+    write-host "
+Downloading MicaForEveryone..."
+    $download_url = "https://github.com/MicaForEveryone/MicaForEveryone/releases/download/v1.3.0.0/MicaForEveryone-x64-Release.msix"
+    $download_save_file = "$($env:USERPROFILE)\Downloads\MicaForEveryone-x64-Release.msix"
+    $wc.Downloadfile($download_url, $download_save_file)
+    write-host "Downloaded to $($env:USERPROFILE)\Downloads\MicaForEveryone-x64-Release.msix. Installing..."
+    Add-AppxPackage -Path "$($env:USERPROFILE)\Downloads\MicaForEveryone-x64-Release.msix" -AllowUnsigned
+    write-host "Patch OS to apply themes"
+} else {
+    write-host ""
+    write-host "MicaForEveryone already downloaded. installing..."
+    Add-AppxPackage -Path "$($env:USERPROFILE)\Downloads\MicaForEveryone-x64-Release.msix" -AllowUnsigned
+    write-host "Patch OS to apply custom themes"
+}
+
+##
 # Customize windows taskbar
+##
+write-host "
+Customizing the taskbar"
 .$SCRIPTS_DIR/os/windows/customize_taskbar.ps1 | Out-Null
 
+##
 # Update windows theme
+##
 write-host "
 Installing Explorer Themes" 
 .$SCRIPTS_DIR/os/windows/customize_explorer.ps1 "$DOTS_DIR/windows/themes/Explorer/" "$DOTS_DIR/windows/themes/Explorer/catppuccin" | Out-Null
 
+##
 # Customize cursor
+##
 write-host "
 Installing Catppuccin-Mocha-Blue-Cursors"
 .$SCRIPTS_DIR/os/windows/customize_cursor.ps1 "$DOTS_DIR/windows/themes/Cursor/Catppuccin-Mocha-Blue-Cursors/install.inf" | Out-Null

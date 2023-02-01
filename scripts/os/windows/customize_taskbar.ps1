@@ -7,8 +7,6 @@
 #     }
 # }
 
-write-host "
-Customizing the taskbar"
 ##
 # Update Windows Taskbar
 ##
