@@ -6,6 +6,7 @@ $wc = New-Object net.webclient
 
 # Source functions
 .$SCRIPTS_DIR/os/windows/utils/test_command_exists.ps1
+.$SCRIPTS_DIR/os/windows/utils/update_userpreferencesmask.ps1
 
 echo 'Setting powershell to allow execution of scripts'
 Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope CurrentUser
