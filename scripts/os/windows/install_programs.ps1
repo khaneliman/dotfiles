@@ -76,7 +76,9 @@ if (Test-CommandExists winget) {
         'Notepad++.Notepad++',
         'Microsoft.Sysinternals.Autoruns',
         'Valve.Steam',
-        'HeroicGamesLauncher.HeroicGamesLauncher'
+        'HeroicGamesLauncher.HeroicGamesLauncher',
+        'StartIsBack.StartAllBack',
+        'LGUG2Z.komorebi'
     )
 
     foreach ($app in $winget_apps) {
@@ -102,4 +104,25 @@ if (!(Test-Path -Path "$($env:USERPROFILE)\Downloads\UltraUXThemePatcher.exe" -P
     write-host ""
     write-host "UltraUXThemePatcher already downloaded. skipping..."
     write-host "Patch OS to apply custom themes"
+}
+
+
+$RegPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" 
+
+$KomorebicOnLogin = @{
+	Key   = 'KomorebicOnLogin';
+	Type  = "SZ";
+	Value = 'C:\Program Files\komorebi\bin\komorebic.exe start'
+}
+
+write-host "
+Setting Komorebic to launch on login" $KomorebicOnLogin.Value
+
+If ($Null -eq (Get-ItemProperty -Path $RegPath -Name $KomorebicOnLogin.Key -ErrorAction SilentlyContinue))
+{
+	New-ItemProperty -Path $RegPath -Name $KomorebicOnLogin.Key -Value $KomorebicOnLogin.Value -Force
+}
+Else
+{
+	Set-ItemProperty -Path $RegPath -Name $KomorebicOnLogin.Key -Value $KomorebicOnLogin.Value -Force
 }

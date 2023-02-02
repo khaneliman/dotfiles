@@ -711,4 +711,6 @@ function touch {New-Item "$args" -ItemType File}
 
 function clr { clear; fastfetch;}
 
+$Env:KOMOREBI_CONFIG_HOME = "${env:USERPROFILE}\.config\komorebi"
+
 fastfetch
