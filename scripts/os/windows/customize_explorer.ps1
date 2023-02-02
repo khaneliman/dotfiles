@@ -1,11 +1,7 @@
 # Self-elevate the script if required
-if (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) {
-    if ([int](Get-CimInstance -Class Win32_OperatingSystem | Select-Object -ExpandProperty BuildNumber) -ge 6000) {
-        $CommandLine = "-File `"" + $MyInvocation.MyCommand.Path + "`" " + $MyInvocation.UnboundArguments
-        Start-Process -FilePath PowerShell.exe -Verb Runas -ArgumentList $CommandLine
-        Exit
-    }
-}
+.$ELEVATE_SCRIPT
+.$REGISTRY_ENTRY_CLASS
+.$UPSERT_REGISTRY_ENTRY
 
 # # Windows themes variables
 $RESOURCES = "C:\Windows\Resources\Themes"
@@ -79,183 +75,94 @@ for ( $i = 0; $i -lt $args.count; $i++ ) {
 
 ##
 # Explorer Accent Reg Path
+# [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Accent]
 ##
 $RegPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Accent"
 
-#Accent Color Menu Key
-$AccentColorMenuKey = @{
-	Key   = 'AccentColorMenu';
-	Type  = "DWORD";
-	Value = '0xff4e3430'
-}
-
-write-host "
-Setting AccentColorMenu" $AccentColorMenuKey.Value
-
-If ($Null -eq (Get-ItemProperty -Path $RegPath -Name $AccentColorMenuKey.Key -ErrorAction SilentlyContinue))
-{
-	New-ItemProperty -Path $RegPath -Name $AccentColorMenuKey.Key -Value $AccentColorMenuKey.Value -PropertyType $AccentColorMenuKey.Type -Force
-}
-Else
-{
-	Set-ItemProperty -Path $RegPath -Name $AccentColorMenuKey.Key -Value $AccentColorMenuKey.Value -Force
-}
-
 #Accent Palette Key
-$AccentPaletteKey = @{
-	Key   = 'AccentPalette';
-	Type  = "BINARY";
-	Value = '51,58,84,ff,43,49,6e,ff,3a,3f,5e,ff,30,34,4e,ff,26,2a,3f,ff,1d,1f,2f,ff,0f,10,19,ff,88,17,98,00'
-}
-$hexified = $AccentPaletteKey.Value.Split(',') | ForEach-Object { "0x$_" }
+# "AccentPalette"=hex:51,58,84,ff,43,49,6e,ff,3a,3f,5e,ff,30,34,4e,ff,26,2a,3f,\
+#   ff,1d,1f,2f,ff,0f,10,19,ff,88,17,98,00
+$binary = '51,58,84,ff,43,49,6e,ff,3a,3f,5e,ff,30,34,4e,ff,26,2a,3f,ff,1d,1f,2f,ff,0f,10,19,ff,88,17,98,00'
+$hexified = $binary.Split(',') | ForEach-Object { "0x$_" }
 
-write-host "
-Setting AccentPalette" $AccentPaletteKey.Value
-write-host "
-hexified: $hexified".Value
+$RegistryEntry = [RegistryEntry]::new('AccentPalette', "BINARY", $hexified, $RegPath)
+Upsert-RegistryEntry -RegistryParameter $RegistryEntry
 
-If ($Null -eq (Get-ItemProperty -Path $RegPath -Name $AccentPaletteKey.Key -ErrorAction SilentlyContinue))
-{
-	New-ItemProperty -Path $RegPath -Name $AccentPaletteKey.Key -PropertyType Binary -Value ([byte[]]$hexified)
-}
-Else
-{
-	Set-ItemProperty -Path $RegPath -Name $AccentPaletteKey.Key -Value ([byte[]]$hexified) -Force
-}
+#Accent Color Menu Key
+# "AccentColorMenu"=dword:ff4e3430
+$RegistryEntry = [RegistryEntry]::new('AccentColorMenu', "DWORD", '0xff4e3430', $RegPath)
+Upsert-RegistryEntry -RegistryParameter $RegistryEntry
 
 #MotionAccentId_v1.00 Key
-$MotionAccentIdKey = @{
-	Key   = 'MotionAccentId_v1.00';
-	Type  = "DWORD";
-	Value = '0x000000db'
-}
-
-write-host "
-Setting MotionAccentId_v1" $MotionAccentIdKey.Value
-
-
-If ($Null -eq (Get-ItemProperty -Path $RegPath -Name $MotionAccentIdKey.Key -ErrorAction SilentlyContinue))
-{
-	New-ItemProperty -Path $RegPath -Name $MotionAccentIdKey.Key -Value $MotionAccentIdKey.Value -PropertyType $MotionAccentIdKey.Type -Force
-}
-Else
-{
-	Set-ItemProperty -Path $RegPath -Name $MotionAccentIdKey.Key -Value $MotionAccentIdKey.Value -Force
-}
+# "MotionAccentId_v1.00"=dword:000000db
+$RegistryEntry = [RegistryEntry]::new('MotionAccentId_v1.00', "DWORD", '0x000000db', $RegPath)
+Upsert-RegistryEntry -RegistryParameter $RegistryEntry
 
 #Start Color Menu Key
-$StartMenuKey = @{
-	Key   = 'StartColorMenu';
-	Type  = "DWORD";
-	Value = '0xff4e3430'
-}
-
-write-host "
-Setting StartColorMenu" $StartMenuKey.Value
-
-If ($Null -eq (Get-ItemProperty -Path $RegPath -Name $StartMenuKey.Key -ErrorAction SilentlyContinue))
-{
-	New-ItemProperty -Path $RegPath -Name $StartMenuKey.Key -Value $StartMenuKey.Value -PropertyType $StartMenuKey.Type -Force
-}
-Else
-{
-	Set-ItemProperty -Path $RegPath -Name $StartMenuKey.Key -Value $StartMenuKey.Value -Force
-}
+# "StartColorMenu"=dword:ff3f2a26
+$RegistryEntry = [RegistryEntry]::new('StartColorMenu', "DWORD", '0xff3f2a26', $RegPath)
+Upsert-RegistryEntry -RegistryParameter $RegistryEntry
 
 ##
 # DWM Reg Path
+# [HKEY_CURRENT_USER\Software\Microsoft\Windows\DWM]
 ##
 $RegPath = "HKCU:\Software\Microsoft\Windows\DWM"
 
-$ColorizationColorBalance = @{
-	Key   = 'ColorizationColorBalance';
-	Type  = "DWORD";
-	Value = '0x00000059'
-}
+## Composition
+# "Composition"=dword:00000001
+$RegistryEntry = [RegistryEntry]::new('Composition', "DWORD", '0x00000001', $RegPath)
+Upsert-RegistryEntry -RegistryParameter $RegistryEntry
 
-write-host "
-Setting ColorizationColorBalance" $ColorizationColorBalance.Value
+## ColorizationGlassAttribute
+# "ColorizationGlassAttribute"=dword:00000001
+$RegistryEntry = [RegistryEntry]::new('ColorizationGlassAttribute', "DWORD", '0x00000001', $RegPath)
+Upsert-RegistryEntry -RegistryParameter $RegistryEntry
 
-If ($Null -eq (Get-ItemProperty -Path $RegPath -Name $ColorizationColorBalance.Key -ErrorAction SilentlyContinue))
-{
-	New-ItemProperty -Path $RegPath -Name $ColorizationColorBalance.Key -Value $ColorizationColorBalance.Value -PropertyType $ColorizationColorBalance.Type -Force
-}
-Else
-{
-	Set-ItemProperty -Path $RegPath -Name $ColorizationColorBalance.Key -Value $ColorizationColorBalance.Value -Force
-}
+## AccentColor
+# "AccentColor"=dword:ff4e3430
+$RegistryEntry = [RegistryEntry]::new('AccentColor', "DWORD", '0xff4e3430', $RegPath)
+Upsert-RegistryEntry -RegistryParameter $RegistryEntry
 
-$ColorizationBlurBalance = @{
-	Key   = 'ColorizationBlurBalance';
-	Type  = "DWORD";
-	Value = '0x00000001'
-}
+## ColorPrevalence
+# "ColorPrevalence"=dword:00000001
+$RegistryEntry = [RegistryEntry]::new('ColorPrevalence', "DWORD", '0x00000001', $RegPath)
+Upsert-RegistryEntry -RegistryParameter $RegistryEntry
 
-write-host "
-Setting ColorizationBlurBalance" $ColorizationBlurBalance.Value
+## EnableAeroPeek
+# "EnableAeroPeek"=dword:00000001
+$RegistryEntry = [RegistryEntry]::new('EnableAeroPeek', "DWORD", '0x00000001', $RegPath)
+Upsert-RegistryEntry -RegistryParameter $RegistryEntry
 
-If ($Null -eq (Get-ItemProperty -Path $RegPath -Name $ColorizationBlurBalance.Key -ErrorAction SilentlyContinue))
-{
-	New-ItemProperty -Path $RegPath -Name $ColorizationBlurBalance.Key -Value $ColorizationBlurBalance.Value -PropertyType $ColorizationBlurBalance.Type -Force
-}
-Else
-{
-	Set-ItemProperty -Path $RegPath -Name $ColorizationBlurBalance.Key -Value $ColorizationBlurBalance.Value -Force
-}
+## ColorizationColor
+# "ColorizationColor"=dword:c430344e
+$RegistryEntry = [RegistryEntry]::new('ColorizationColor', "DWORD", '0xc430344e', $RegPath)
+Upsert-RegistryEntry -RegistryParameter $RegistryEntry
 
-$AccentColor = @{
-	Key   = 'AccentColor';
-	Type  = "DWORD";
-	Value = '0xff4e3430'
-}
+## ColorizationColorBalance
+# "ColorizationColorBalance"=dword:00000059
+$RegistryEntry = [RegistryEntry]::new('ColorizationColorBalance', "DWORD", '0x00000059', $RegPath)
+Upsert-RegistryEntry -RegistryParameter $RegistryEntry
 
-write-host "
-Setting AccentColor" $AccentColor.Value
+## ColorizationAfterglow
+# "ColorizationAfterglow"=dword:c430344e
+$RegistryEntry = [RegistryEntry]::new('ColorizationAfterglow', "DWORD", '0xc430344e', $RegPath)
+Upsert-RegistryEntry -RegistryParameter $RegistryEntry
 
-If ($Null -eq (Get-ItemProperty -Path $RegPath -Name $AccentColor.Key -ErrorAction SilentlyContinue))
-{
-	New-ItemProperty -Path $RegPath -Name $AccentColor.Key -Value $AccentColor.Value -PropertyType $AccentColor.Type -Force
-}
-Else
-{
-	Set-ItemProperty -Path $RegPath -Name $AccentColor.Key -Value $AccentColor.Value -Force
-}
+## ColorizationAfterglowBalance
+# "ColorizationAfterglowBalance"=dword:0000000a
+$RegistryEntry = [RegistryEntry]::new('ColorizationAfterglowBalance', "DWORD", '0x0000000a', $RegPath)
+Upsert-RegistryEntry -RegistryParameter $RegistryEntry
 
-$ColorizationColor = @{
-	Key   = 'ColorizationColor';
-	Type  = "DWORD";
-	Value = '0xff4e3430'
-}
+## ColorizationBlurBalance
+# "ColorizationBlurBalance"=dword:00000001
+$RegistryEntry = [RegistryEntry]::new('ColorizationBlurBalance', "DWORD", '0x00000001', $RegPath)
+Upsert-RegistryEntry -RegistryParameter $RegistryEntry
 
-write-host "
-Setting ColorizationColor" $ColorizationColor.Value
-
-If ($Null -eq (Get-ItemProperty -Path $RegPath -Name $ColorizationColor.Key -ErrorAction SilentlyContinue))
-{
-	New-ItemProperty -Path $RegPath -Name $ColorizationColor.Key -Value $ColorizationColor.Value -PropertyType $ColorizationColor.Type -Force
-}
-Else
-{
-	Set-ItemProperty -Path $RegPath -Name $ColorizationColor.Key -Value $ColorizationColor.Value -Force
-}
-
-$ColorizationAfterglow = @{
-	Key   = 'ColorizationAfterglow';
-	Type  = "DWORD";
-	Value = '0xff4e3430'
-}
-
-write-host "
-Setting ColorizationAfterglow" $ColorizationAfterglow.Value
-
-If ($Null -eq (Get-ItemProperty -Path $RegPath -Name $ColorizationAfterglow.Key -ErrorAction SilentlyContinue))
-{
-	New-ItemProperty -Path $RegPath -Name $ColorizationAfterglow.Key -Value $ColorizationAfterglow.Value -PropertyType $ColorizationAfterglow.Type -Force
-}
-Else
-{
-	Set-ItemProperty -Path $RegPath -Name $ColorizationAfterglow.Key -Value $ColorizationAfterglow.Value -Force
-}
+## EnableWindowColorization
+# "EnableWindowColorization"=dword:00000001
+$RegistryEntry = [RegistryEntry]::new('EnableWindowColorization', "DWORD", '0x00000001', $RegPath)
+Upsert-RegistryEntry -RegistryParameter $RegistryEntry
 
 ##
 # Themes Personalize Reg Path
@@ -263,40 +170,24 @@ Else
 $RegPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize"
 
 # Enable transparency
-$EnableTransparency = @{
-	Key   = 'EnableTransparency';
-	Type  = "DWORD";
-	Value = '0x00000001'
-}
-
-write-host "
-Setting EnableTransparency" $EnableTransparency.Value
-
-If ($Null -eq (Get-ItemProperty -Path $RegPath -Name $EnableTransparency.Key -ErrorAction SilentlyContinue))
-{
-	New-ItemProperty -Path $RegPath -Name $EnableTransparency.Key -Value $EnableTransparency.Value -PropertyType $EnableTransparency.Type -Force
-}
-Else
-{
-	Set-ItemProperty -Path $RegPath -Name $EnableTransparency.Key -Value $EnableTransparency.Value -Force
-}
+$RegistryEntry = [RegistryEntry]::new('EnableTransparency', "DWORD", '0x00000001', $RegPath)
+Upsert-RegistryEntry -RegistryParameter $RegistryEntry
 
 # # if needed
 # $regPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer"
 # New-Item $regPath -Force | Out-Null
 # New-ItemProperty $regPath -Name NoThemesTab -Value 0 -Force | Out-Null
 
-if (Test-Path -Path "C:\Windows\Resources\Themes\Catppuccin-Mocha.theme" -PathType Leaf) {
+if (Test-Path -Path "$RESOURCES\Catppuccin-Mocha.theme" -PathType Leaf) {
     $currentTheme=(Get-ItemProperty -path HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\ -Name "CurrentTheme").CurrentTheme
-    if ($currentTheme -eq "C:\Windows\resources\Themes\Catppuccin-Mocha.theme") {
+    if ($currentTheme -eq "$RESOURCES\Catppuccin-Mocha.theme") {
         write-host "Theme already set to Catppuccin Mocha. Skipping..."
     } else {
         write-host "Setting theme to Catppuccin Mocha"
-        start-process -filepath "C:\Windows\Resources\Themes\Catppuccin-Mocha.theme"; timeout /t 3; taskkill /im "systemsettings.exe" /f
+        start-process -filepath "$RESOURCES\Catppuccin-Mocha.theme"; timeout /t 3; taskkill /im "systemsettings.exe" /f
     }
-    
 } else {
-    write-host "Catppuccin Mocha not found in C:\Windows\Resources\Themes\. Skipping..."
+    write-host "Catppuccin Mocha not found in $RESOURCES\. Skipping..."
 }
 
 # Restart explorer

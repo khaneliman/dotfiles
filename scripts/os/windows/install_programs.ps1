@@ -1,4 +1,6 @@
 $env:PSModulePath = "$PSHOME/Modules\";
+.$REGISTRY_ENTRY_CLASS
+.$UPSERT_REGISTRY_ENTRY
 
 ## 
 # Install scoop
@@ -107,23 +109,8 @@ if (!(Test-Path -Path "$($env:USERPROFILE)\Downloads\UltraUXThemePatcher.exe" -P
     write-host "Patch OS to apply custom themes"
 }
 
-
+## Set komorebi to run on startup
 $RegPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" 
 
-$KomorebicOnLogin = @{
-	Key   = 'KomorebicOnLogin';
-	Type  = "SZ";
-	Value = 'C:\Program Files\komorebi\bin\komorebic.exe start'
-}
-
-write-host "
-Setting Komorebic to launch on login" $KomorebicOnLogin.Value
-
-If ($Null -eq (Get-ItemProperty -Path $RegPath -Name $KomorebicOnLogin.Key -ErrorAction SilentlyContinue))
-{
-	New-ItemProperty -Path $RegPath -Name $KomorebicOnLogin.Key -Value $KomorebicOnLogin.Value -Force
-}
-Else
-{
-	Set-ItemProperty -Path $RegPath -Name $KomorebicOnLogin.Key -Value $KomorebicOnLogin.Value -Force
-}
+$RegistryEntry = [RegistryEntry]::new('KomorebicOnLogin', "SZ", 'C:\Program Files\komorebi\bin\komorebic.exe start', $RegPath)
+Upsert-RegistryEntry -RegistryParameter $RegistryEntry
