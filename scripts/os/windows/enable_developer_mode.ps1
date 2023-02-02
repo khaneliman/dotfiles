@@ -1,3 +1,5 @@
+using module ElevateScript
+
 if (([Version](Get-CimInstance Win32_OperatingSystem).version).Major -lt 10)
 {
     Write-Host -ForegroundColor Red "The DeveloperMode is only supported on Windows 10"
@@ -45,19 +47,7 @@ if ($myWindowsPrincipal.IsInRole($adminRole))
 }
 else
 {
-   # We are not running "as Administrator" - so relaunch as administrator
-   # Create a new process object that starts PowerShell
-   $newProcess = new-object System.Diagnostics.ProcessStartInfo "PowerShell";
-
-   # Specify the current script path and name as a parameter
-   $newProcess.Arguments = "-NoProfile",$myInvocation.MyCommand.Definition,"-WaitForKey";
-
-   # Indicate that the process should be elevated
-   $newProcess.Verb = "runas";
-
-   # Start the new process
-   [System.Diagnostics.Process]::Start($newProcess);
-
-   # Exit from the current, unelevated, process
-   exit
+  
+    # Self-elevate the script if required
+    Request-ElevateScript
 }

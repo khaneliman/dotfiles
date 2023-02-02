@@ -1,6 +1,7 @@
-$env:PSModulePath = "$PSHOME/Modules\";
-.$REGISTRY_ENTRY_CLASS
-.$UPSERT_REGISTRY_ENTRY
+using module RegistryEntry
+using module TestCommandExists
+
+# $env:PSModulePath = "$PSHOME/Modules\";
 
 ## 
 # Install scoop
@@ -111,6 +112,4 @@ if (!(Test-Path -Path "$($env:USERPROFILE)\Downloads\UltraUXThemePatcher.exe" -P
 
 ## Set komorebi to run on startup
 $RegPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" 
-
-$RegistryEntry = [RegistryEntry]::new('KomorebicOnLogin', "SZ", 'C:\Program Files\komorebi\bin\komorebic.exe start', $RegPath)
-Upsert-RegistryEntry -RegistryParameter $RegistryEntry
+Set-RegistryEntry -Key 'KomorebicOnLogin' -Type "SZ" -Value 'C:\Program Files\komorebi\bin\komorebic.exe start' -Path $RegPath

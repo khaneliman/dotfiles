@@ -1,21 +1,9 @@
 # Variables setup
-$GIT_DIR = git rev-parse --show-toplevel
-$DOTS_DIR = $GIT_DIR+"/dots"
-$SCRIPTS_DIR = $GIT_DIR+"/scripts"
-$wc = New-Object net.webclient
-
-##
-# Script exports
-##
-$REGISTRY_ENTRY_CLASS = $SCRIPTS_DIR+"/os/windows/classes/registry-entry.ps1"
-$UPSERT_REGISTRY_ENTRY = $SCRIPTS_DIR+"/os/windows/utils/upsert_registry_entry.ps1"
-$TEST_COMMAND_EXISTS = $SCRIPTS_DIR+"/os/windows/utils/test_command_exists.ps1"
-$USER_PREFERENCES_MASK = $SCRIPTS_DIR+"/os/windows/utils/update_userpreferencesmask.ps1"
-$ELEVATE_SCRIPT = $SCRIPTS_DIR+"/os/windows/utils/elevate_script.ps1"
-
-# Source functions
-.$TEST_COMMAND_EXISTS
-.$USER_PREFERENCES_MASK
+$global:GIT_DIR = git rev-parse --show-toplevel
+$global:DOTS_DIR = $GIT_DIR+"/dots"
+$global:SCRIPTS_DIR = $GIT_DIR+"/scripts"
+$Env:PSModulePath = $Env:PSModulePath+";$SCRIPTS_DIR/os/windows/modules"
+$global:wc = New-Object net.webclient
 
 ##
 # Set powershell execution policy
@@ -63,10 +51,14 @@ Installing Catppuccin-Mocha-Blue-Cursors"
 ##
 write-host "
 Installing Explorer Themes" 
-.$SCRIPTS_DIR/os/windows/customize_explorer.ps1 "$DOTS_DIR/windows/themes/Explorer/" "$DOTS_DIR/windows/themes/Explorer/catppuccin" "$DOTS_DIR/windows/themes/Explorer/catppuccin/Shell/NormalColor" "$DOTS_DIR/windows/themes/Explorer/catppuccin/wallpapers"
+.$SCRIPTS_DIR/os/windows/install_theme.ps1 "$DOTS_DIR/windows/themes/Explorer/" "$DOTS_DIR/windows/themes/Explorer/catppuccin" "$DOTS_DIR/windows/themes/Explorer/catppuccin/Shell/NormalColor" "$DOTS_DIR/windows/themes/Explorer/catppuccin/wallpapers"
+
+write-host "
+Setting Windows Colors" 
+.$SCRIPTS_DIR/os/windows/customize_explorer.ps1
 
 # ##
-# # Copy Config Files
+# # Copy/Link Config Files
 # ##
 # write-host "
 # Installing Config Files" 

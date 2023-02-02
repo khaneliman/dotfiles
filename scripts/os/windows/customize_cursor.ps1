@@ -1,5 +1,8 @@
+using module UserPreferencesMask
+using module ElevateScript
+
 # Self-elevate the script if required
-.$ELEVATE_SCRIPT
+Request-ElevateScript
 
 # Check what the current cursor is set to
 $current_cursor = Get-ItemPropertyValue "HKCU:\Control Panel\Cursors" -Name "(Default)"

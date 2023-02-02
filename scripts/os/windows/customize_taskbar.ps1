@@ -1,29 +1,23 @@
-# Source Classes
-.$REGISTRY_ENTRY_CLASS
-.$UPSERT_REGISTRY_ENTRY
+using module RegistryEntry
 
 ##
 # Update Windows Taskbar
 ##
-
 $RegPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced"
 
-# # Removes Task View from the Taskbar
-$RegistryEntry = [RegistryEntry]::new('ShowTaskViewButton', "DWORD", '0', $RegPath)
-Upsert-RegistryEntry -RegistryParameter $RegistryEntry
+# Removes Task View from the Taskbar
+Set-RegistryEntry -Key 'ShowTaskViewButton' -Type "DWORD" -Value '0' -Path $RegPath
 
-# # Removes Widgets from the Taskbar
-$RegistryEntry = [RegistryEntry]::new('TaskbarDa', "DWORD", '0', $RegPath)
-Upsert-RegistryEntry -RegistryParameter $RegistryEntry
+# Removes Widgets from the Taskbar
+Set-RegistryEntry -Key 'TaskbarDa' -Type "DWORD" -Value '0' -Path $RegPath
 
-# # Removes Chat from the Taskbar
-$RegistryEntry = [RegistryEntry]::new('TaskbarMn', "DWORD", '0', $RegPath)
-Upsert-RegistryEntry -RegistryParameter $RegistryEntry
+# Removes Chat from the Taskbar
+Set-RegistryEntry -Key 'TaskbarMn' -Type "DWORD" -Value '0' -Path $RegPath
 
-# # Default StartMenu alignment 0=Left
-$RegistryEntry = [RegistryEntry]::new('TaskbarAl', "DWORD", '0', $RegPath)
-Upsert-RegistryEntry -RegistryParameter $RegistryEntry
+# Default StartMenu alignment 0=Left
+Set-RegistryEntry -Key 'TaskbarAl' -Type "DWORD" -Value '0' -Path $RegPath
 
-# # Removes search from the Taskbar
-$RegistryEntry = [RegistryEntry]::new('SearchboxTaskbarMode', "DWORD", '0', "HKCU:\Software\Microsoft\Windows\CurrentVersion\Search")
-Upsert-RegistryEntry -RegistryParameter $RegistryEntry
+$RegPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Search"
+
+# Removes search from the Taskbar
+Set-RegistryEntry -Key 'SearchboxTaskbarMode' -Type "DWORD" -Value '0' -Path $RegPath

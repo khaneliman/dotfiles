@@ -14,3 +14,5 @@ Function Test-CommandExists {
 
  Finally {$ErrorActionPreference=$oldPreference}
 } #end function test-CommandExists
+
+Export-ModuleMember -Function Test-CommandExists
