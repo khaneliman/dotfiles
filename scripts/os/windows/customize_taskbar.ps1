@@ -1,30 +1,102 @@
-# Self-elevate the script if required
-# if (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) {
-#     if ([int](Get-CimInstance -Class Win32_OperatingSystem | Select-Object -ExpandProperty BuildNumber) -ge 6000) {
-#         $CommandLine = "-File `"" + $MyInvocation.MyCommand.Path + "`" " + $MyInvocation.UnboundArguments
-#         Start-Process -FilePath PowerShell.exe -Verb Runas -ArgumentList $CommandLine
-#         Exit
-#     }
-# }
-
 ##
 # Update Windows Taskbar
 ##
-# REG LOAD HKU\$($env:USERPROFILE) C:\Users\$env:USERPROFILE\NTUSER.DAT
- 
+
+$RegPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced"
+
 # Removes Task View from the Taskbar
-Set-itemproperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "ShowTaskViewButton" -Value "0"
- 
+$ShowTaskViewButton = @{
+	Key   = 'ShowTaskViewButton';
+	Type  = "DWORD";
+	Value = '0'
+}
+
+write-host "
+Setting ShowTaskViewButton" $ShowTaskViewButton.Value
+
+If ($Null -eq (Get-ItemProperty -Path $RegPath -Name $ShowTaskViewButton.Key -ErrorAction SilentlyContinue))
+{
+	New-ItemProperty -Path $RegPath -Name $ShowTaskViewButton.Key -Value $ShowTaskViewButton.Value -PropertyType $ShowTaskViewButton.Type -Force
+}
+Else
+{
+	Set-ItemProperty -Path $RegPath -Name $ShowTaskViewButton.Key -Value $ShowTaskViewButton.Value -Force
+}
+
 # Removes Widgets from the Taskbar
-Set-itemproperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "TaskbarDa" -Value "0"
- 
+$TaskbarDa = @{
+	Key   = 'TaskbarDa';
+	Type  = "DWORD";
+	Value = '0'
+}
+
+write-host "
+Setting TaskbarDa" $TaskbarDa.Value
+
+If ($Null -eq (Get-ItemProperty -Path $RegPath -Name $TaskbarDa.Key -ErrorAction SilentlyContinue))
+{
+	New-ItemProperty -Path $RegPath -Name $TaskbarDa.Key -Value $TaskbarDa.Value -PropertyType $TaskbarDa.Type -Force
+}
+Else
+{
+	Set-ItemProperty -Path $RegPath -Name $TaskbarDa.Key -Value $TaskbarDa.Value -Force
+}
+
 # Removes Chat from the Taskbar
-Set-itemproperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "TaskbarMn" -Value "0"
- 
+$TaskbarMn = @{
+	Key   = 'TaskbarMn';
+	Type  = "DWORD";
+	Value = '0'
+}
+
+write-host "
+Setting TaskbarMn" $TaskbarMn.Value
+
+If ($Null -eq (Get-ItemProperty -Path $RegPath -Name $TaskbarMn.Key -ErrorAction SilentlyContinue))
+{
+	New-ItemProperty -Path $RegPath -Name $TaskbarMn.Key -Value $TaskbarMn.Value -PropertyType $TaskbarMn.Type -Force
+}
+Else
+{
+	Set-ItemProperty -Path $RegPath -Name $TaskbarMn.Key -Value $TaskbarMn.Value -Force
+}
+
 # Default StartMenu alignment 0=Left
-Set-itemproperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "TaskbarAl" -Value "0"
- 
+$TaskbarAl = @{
+	Key   = 'TaskbarAl';
+	Type  = "DWORD";
+	Value = '0'
+}
+
+write-host "
+Setting TaskbarAl" $TaskbarAl.Value
+
+If ($Null -eq (Get-ItemProperty -Path $RegPath -Name $TaskbarAl.Key -ErrorAction SilentlyContinue))
+{
+	New-ItemProperty -Path $RegPath -Name $TaskbarAl.Key -Value $TaskbarAl.Value -PropertyType $TaskbarAl.Type -Force
+}
+Else
+{
+	Set-ItemProperty -Path $RegPath -Name $TaskbarAl.Key -Value $TaskbarAl.Value -Force
+}
+
+$RegPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Search"
+
 # Removes search from the Taskbar
-Set-itemproperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Search" -Name "SearchboxTaskbarMode" -Value "0"
- 
-# REG UNLOAD HKU\$($env:USERPROFILE)
+$SearchboxTaskbarMode = @{
+	Key   = 'SearchboxTaskbarMode';
+	Type  = "DWORD";
+	Value = '0'
+}
+
+write-host "
+Setting SearchboxTaskbarMode" $SearchboxTaskbarMode.Value
+
+If ($Null -eq (Get-ItemProperty -Path $RegPath -Name $SearchboxTaskbarMode.Key -ErrorAction SilentlyContinue))
+{
+	New-ItemProperty -Path $RegPath -Name $SearchboxTaskbarMode.Key -Value $SearchboxTaskbarMode.Value -PropertyType $SearchboxTaskbarMode.Type -Force
+}
+Else
+{
+	Set-ItemProperty -Path $RegPath -Name $SearchboxTaskbarMode.Key -Value $SearchboxTaskbarMode.Value -Force
+}
