@@ -78,7 +78,8 @@ if (Test-CommandExists winget) {
         'Valve.Steam',
         'HeroicGamesLauncher.HeroicGamesLauncher',
         'StartIsBack.StartAllBack',
-        'LGUG2Z.komorebi'
+        'LGUG2Z.komorebi',
+        'AutoHotkey.AutoHotkey'
     )
 
     foreach ($app in $winget_apps) {

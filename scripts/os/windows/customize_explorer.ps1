@@ -20,7 +20,6 @@ for ( $i = 0; $i -lt $args.count; $i++ ) {
     $Theme = Get-Item -Path $Path
     
     $ThemeList = Get-ChildItem -Path "$Theme\*" -Include ('*.theme', '*.msstyles', '*.dll', '*.png')
-    $Fontdir = dir $Path
 
     foreach($File in $ThemeList) {
         $name = $File.baseName
