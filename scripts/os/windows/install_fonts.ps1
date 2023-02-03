@@ -5,7 +5,8 @@ $objFolder = $objShell.Namespace($FONTS)
 $username = $env:UserName
 
 # # Loop through provided input directories
-for ( $i = 0; $i -lt $args.count; $i++ ) {
+for ( $i = 0; $i -lt $args.count; $i++ )
+{
     write-host "    Checking $($args[$i]) for fonts that need to be installed..."
     
     # Current directory being checked
@@ -15,7 +16,8 @@ for ( $i = 0; $i -lt $args.count; $i++ ) {
     $FontList = Get-ChildItem -Recurse -Path "$FontItem\*" -Include ('*.fon','*.otf','*.ttc','*.ttf')
     $Fontdir = dir $Path
 
-    foreach($File in $FontList) {
+    foreach($File in $FontList)
+    {
         $name = $File.baseName
 
         if(!($file.name -match "pfb$"))

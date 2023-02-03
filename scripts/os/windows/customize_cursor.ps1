@@ -7,10 +7,11 @@ Request-ElevateScript
 # Check what the current cursor is set to
 $current_cursor = Get-ItemPropertyValue "HKCU:\Control Panel\Cursors" -Name "(Default)"
 
-if ($current_cursor -eq "Catppuccin-Mocha-Blue-Cursors") {
+if ($current_cursor -eq "Catppuccin-Mocha-Blue-Cursors")
+{
     write-host 'Cursor already set. Skipping...'
-} 
-else {
+} else
+{
     infdefaultinstall.exe $args
 
     Set-itemproperty "HKCU:\Control Panel\Cursors" -Name "(Default)" -Value "Catppuccin-Mocha-Blue-Cursors"

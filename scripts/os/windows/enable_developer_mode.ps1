@@ -44,8 +44,7 @@ if ($myWindowsPrincipal.IsInRole($adminRole))
         Enable-WindowsOptionalFeature -FeatureName Microsoft-Hyper-V -Online -All -LimitAccess -NoRestart
     }
 
-}
-else
+} else
 {
   
     # Self-elevate the script if required
