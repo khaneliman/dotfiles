@@ -1,0 +1,9 @@
+CREDITS:  \
+
+Windows-Cursors - niivu <https://www.deviantart.com/niivu>
+
+Cursors:
+ Alexey varfolomeev <varlesh@gmail.com> - volantes-cursors
+
+Colors:
+ elkrien <https://github.com/elkrien> - coloring cursors with Catppuccin palette

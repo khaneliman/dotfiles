@@ -1,0 +1,57 @@
+; Windows installer for Catppuccin-Mocha-Blue-Cursors cursor theme by niivu.
+; Right click on this file ("install.inf"), and click "Install" to install the cursor theme.
+; After installing, change the cursors via windows mouse pointer settings dialog.
+
+[Version]
+signature="$CHICAGO$"
+
+[DefaultInstall]
+CopyFiles = Scheme.Cur, Scheme.Txt
+AddReg = Scheme.Reg
+
+[DestinationDirs]
+Scheme.Cur = 10,"%CUR_DIR%"
+Scheme.Txt = 10,"%CUR_DIR%"
+
+[Scheme.Reg]
+HKCU,"Control Panel\Cursors\Schemes","%SCHEME_NAME%",,"%10%\%CUR_DIR%\%pointer%,%10%\%CUR_DIR%\%help%,%10%\%CUR_DIR%\%work%,%10%\%CUR_DIR%\%busy%,%10%\%CUR_DIR%\%cross%,%10%\%CUR_DIR%\%text%,%10%\%CUR_DIR%\%hand%,%10%\%CUR_DIR%\%unavailable%,%10%\%CUR_DIR%\%vert%,%10%\%CUR_DIR%\%horz%,%10%\%CUR_DIR%\%dgn1%,%10%\%CUR_DIR%\%dgn2%,%10%\%CUR_DIR%\%move%,%10%\%CUR_DIR%\%alternate%,%10%\%CUR_DIR%\%link%"
+
+[Scheme.Cur]
+"install.inf"
+"precision-select.cur"
+"normal-select.cur"
+"move.cur"
+"help-select.cur"
+"unavailable.cur"
+"handwriting.cur"
+"link-select.cur"
+"working-in-background.ani"
+"diagonal-resize-2.cur"
+"diagonal-resize-1.cur"
+"horizontal-resize.cur"
+"vertical-resize.cur"
+"text-select.cur"
+"alt-select.cur"
+"busy.ani"
+
+[Scheme.Txt]
+LICENSE.txt
+
+[Strings]
+CUR_DIR = "Cursors\Catppuccin-Mocha-Blue-Cursors"
+SCHEME_NAME = "Catppuccin-Mocha-Blue-Cursors"
+cross = "precision-select.cur"
+pointer = "normal-select.cur"
+move = "move.cur"
+help = "help-select.cur"
+unavailable = "unavailable.cur"
+hand = "handwriting.cur"
+link = "link-select.cur"
+work = "working-in-background.ani"
+dgn2 = "diagonal-resize-2.cur"
+dgn1 = "diagonal-resize-1.cur"
+horz = "horizontal-resize.cur"
+vert = "vertical-resize.cur"
+text = "text-select.cur"
+alternate = "alt-select.cur"
+busy = "busy.ani"

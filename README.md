@@ -25,16 +25,17 @@ Manual installation, for now. Some will have installation scripts to automate pr
 
 Copy files to respective directories:
 
-- dots
-  - OS
-    - DE/WM
-      - Location
+-   dots
+    -   OS
+        -   DE/WM
+            -   Location
 
 Each environment might require further steps that will be detailed in their respective section.
 
 ### Automatic
 
-    ./install.sh
+    ./install.sh for linux and macos
+    /.install.bat for windows
 
 The script will detect what OS you are running script from and perform the installation for that OS. You will need to select what environment you would like to install the dots for, if there are multiple for that given OS.
 
@@ -78,6 +79,10 @@ I currently use [yabai](https://github.com/koekeishiya/yabai) with my daily driv
 
 ### Yabai
 
+#### Unique Install Steps
+
+See the install steps in MacOS config's [README](/dots/macos/yabai/README.md)
+
 Current window manager used on my laptop. Uses [sketchybar](https://github.com/FelixKratz/SketchyBar) for UI and [skhd](https://github.com/koekeishiya/skhd) for keybinds.
 
 ![macos-yabai-tiling](assets/macos-yabai-tiling.png)
@@ -85,7 +90,21 @@ Current window manager used on my laptop. Uses [sketchybar](https://github.com/F
 
 ## Windows
 
-I only use Windows for work and the rare VM access when needed. I have done some customization and will update this whenever I get a chance.
+### Komorebi
+
+#### Unique Install Steps
+
+See the install steps in Hyrpland config's [README](/dots/windows/README.md)
+
+Current window manager [Komorebi](https://github.com/LGUG2Z/komorebi) with [AutoHotkey](https://github.com/AutoHotkey/AutoHotkey) for keybinds and configuring Komorebi.
+
+![windows-komorebi-tiling](assets/windows-komorebi-tiling.png)
+![windows-komorebi-tiling](assets/windows-komorebi-tiling-arch.png)
+
+#### Unique Install Steps
+
+-   Windows git requires a git config update to properly clone this repo
+    -   '''git config --global core.longpaths true'''
 
 ## Shared
 
@@ -95,16 +114,16 @@ This contains all the platform agnostic and / or shared application configuratio
 
 Inspiration and code from numerous locations all over the internet. Here's some of the major contributors to my setups.
 
-- Shared dotfiles
-  - [Catppuccin](https://github.com/catppuccin/catppuccin)
-  - [AstroNvim](https://astronvim.github.io/)
-- Linux dotfiles
-  - Awesome
-    - [The Glorious Dotfiles](https://github.com/manilarome/the-glorious-dotfiles)
-  - Hyprland
-    - [sway-nvidia](https://github.com/crispyricepc/sway-nvidia)
-    - [Hyprland](https://wiki.hyprland.org/)
-- macOS dotfiles
-  - Yabai
-    - [FelixKratz dotfiles](https://github.com/FelixKratz/dotfiles)
-    - [crissNb Dynamic Island Sketchybar](https://github.com/crissNb/Dynamic-Island-Sketchybar)
+-   Shared dotfiles
+    -   [Catppuccin](https://github.com/catppuccin/catppuccin)
+    -   [AstroNvim](https://astronvim.github.io/)
+-   Linux dotfiles
+    -   Awesome
+        -   [The Glorious Dotfiles](https://github.com/manilarome/the-glorious-dotfiles)
+    -   Hyprland
+        -   [sway-nvidia](https://github.com/crispyricepc/sway-nvidia)
+        -   [Hyprland](https://wiki.hyprland.org/)
+-   macOS dotfiles
+    -   Yabai
+        -   [FelixKratz dotfiles](https://github.com/FelixKratz/dotfiles)
+        -   [crissNb Dynamic Island Sketchybar](https://github.com/crissNb/Dynamic-Island-Sketchybar)
