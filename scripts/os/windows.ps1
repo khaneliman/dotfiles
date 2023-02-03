@@ -16,46 +16,46 @@ Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope CurrentUser
 ##
 Write-Host '
 Installing fonts'
-.$SCRIPTS_DIR/os/windows/install_fonts.ps1 $DOTS_DIR"/shared/home/.fonts/SanFransisco"
+.$SCRIPTS_DIR/os/windows/Install-Fonts.ps1 $DOTS_DIR"/shared/home/.fonts/SanFransisco"
 
 ##
 # Enable developer mode
 ##
 Write-Host "
-Enabling developer mode and installing WSL"
-.$SCRIPTS_DIR/os/windows/enable_developer_mode.ps1
+Enabling developer mode and Windows Features"
+.$SCRIPTS_DIR/os/windows/Enable-WindowsFeatures.ps1
 
 ##
 # Install software
 ##
 Write-Host "
 Installing software."
-.$SCRIPTS_DIR/os/windows/install_programs.ps1
+.$SCRIPTS_DIR/os/windows/Install-Programs.ps1
 
 ##
 # Customize windows taskbar
 ##
 Write-Host "
 Customizing the taskbar"
-.$SCRIPTS_DIR/os/windows/customize_taskbar.ps1
+.$SCRIPTS_DIR/os/windows/Customize-Taskbar.ps1
 
 ##
 # Customize cursor
 ##
 Write-Host "
 Installing Catppuccin-Mocha-Blue-Cursors"
-.$SCRIPTS_DIR/os/windows/customize_cursor.ps1 "$DOTS_DIR/windows/themes/Cursor/Catppuccin-Mocha-Blue-Cursors/install.inf"
+.$SCRIPTS_DIR/os/windows/Install-Cursor.ps1 "$DOTS_DIR/windows/themes/Cursor/Catppuccin-Mocha-Blue-Cursors/install.inf"
 
 ##
 # Update windows theme
 ##
 Write-Host "
 Installing Explorer Themes" 
-.$SCRIPTS_DIR/os/windows/install_theme.ps1 "$DOTS_DIR/windows/themes/Explorer/" "$DOTS_DIR/windows/themes/Explorer/catppuccin" "$DOTS_DIR/windows/themes/Explorer/catppuccin/Shell/NormalColor" "$DOTS_DIR/windows/themes/Explorer/catppuccin/wallpapers"
+.$SCRIPTS_DIR/os/windows/Install-Theme.ps1 "$DOTS_DIR/windows/themes/Explorer/" "$DOTS_DIR/windows/themes/Explorer/catppuccin" "$DOTS_DIR/windows/themes/Explorer/catppuccin/Shell/NormalColor" "$DOTS_DIR/windows/themes/Explorer/catppuccin/wallpapers"
 
 Write-Host "
 Setting Windows Colors" 
-.$SCRIPTS_DIR/os/windows/customize_explorer.ps1
+.$SCRIPTS_DIR/os/windows/Theme-Explorer.ps1
 
 # ##
 # # Copy/Link Config Files
