@@ -57,9 +57,9 @@ Write-Host "
 Setting Windows Colors" 
 .$SCRIPTS_DIR/os/windows/Theme-Explorer.ps1
 
-# ##
-# # Copy/Link Config Files
-# ##
-# Write-Host "
-# Installing Config Files" 
-# .$SCRIPTS_DIR/os/windows/copy_configs.ps1 "$DOTS_DIR/windows/home/" "$DOTS_DIR/shared/home/"
+##
+# Copy/Link Config Files
+##
+Write-Host "
+Installing Config Files" 
+.$SCRIPTS_DIR/os/windows/Install-Configs.ps1 "$DOTS_DIR/windows/home/" "$DOTS_DIR/shared/home/"

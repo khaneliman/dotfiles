@@ -16,7 +16,10 @@ class ConfigMap {
 	[ConfigMapEntry[]]$ConfigMap
 
     ConfigMap() {
-            
+        
+        ##
+        # Windows Configs
+        ##
         $this.ConfigMap += [ConfigMapEntry]::new(
             $global:DOTS_DIR+"/windows/home/.config/komorebi",
             ${env:USERPROFILE}+"\.config\komorebi",
@@ -24,7 +27,7 @@ class ConfigMap {
             $true)
         
         $this.ConfigMap += [ConfigMapEntry]::new(
-            $global:DOTS_DIR+"/windows/home/.config//ohmyposh",
+            $global:DOTS_DIR+"/windows/home/.config/ohmyposh",
             ${env:USERPROFILE}+"\.config\ohmyposh",
             $true,
             $true)
@@ -32,7 +35,7 @@ class ConfigMap {
         $this.ConfigMap += [ConfigMapEntry]::new(
             $global:DOTS_DIR+"/windows/home/AppData/Local/Packages/MicaForEveryone_pfhyqtmn5ksmy/LocalState/MicaForEveryone.conf",
             ${env:USERPROFILE}+"\AppData\Local\Packages\MicaForEveryone_pfhyqtmn5ksmy\LocalState\MicaForEveryone.conf",
-            $true,
+            $false,
             $true)
 
         $this.ConfigMap += [ConfigMapEntry]::new(
@@ -41,9 +44,92 @@ class ConfigMap {
             $true,
             $true)
 
+        # TODO: Fix pathing for users microsoft accounts or customized document folder locations
         $this.ConfigMap += [ConfigMapEntry]::new(
             $global:DOTS_DIR+"/windows/home/Documents\PowerShell\Microsoft.PowerShell_profile.ps1",
             ${env:USERPROFILE}+"\Documents\PowerShell\Microsoft.PowerShell_profile.ps1",
+            $true,
+            $true)
+        
+        # TODO: Fix pathing for users microsoft accounts or customized document folder locations
+        $this.ConfigMap += [ConfigMapEntry]::new(
+            $global:DOTS_DIR+"/windows/home/Documents\PowerShell\powershell.config.json",
+            ${env:USERPROFILE}+"\Documents\PowerShell\powershell.config.json",
+            $true,
+            $true)
+
+        ##
+        # Shared Configs
+        ##
+        $this.ConfigMap += [ConfigMapEntry]::new(
+            $global:DOTS_DIR+"/shared/home/.config/nvim",
+            ${env:USERPROFILE}+"\AppData\Local\nvim",
+            $true,
+            $true)
+
+        $this.ConfigMap += [ConfigMapEntry]::new(
+            $global:DOTS_DIR+"/shared/home/.config/astronvim/lua/user",
+            ${env:USERPROFILE}+"\AppData\Local\nvim/lua/user",
+            $true,
+            $true)
+
+        $this.ConfigMap += [ConfigMapEntry]::new(
+            $global:DOTS_DIR+"/shared/home/.config/alacritty",
+            ${env:USERPROFILE}+"\.config\alacritty",
+            $true,
+            $true)
+        
+        $this.ConfigMap += [ConfigMapEntry]::new(
+            $global:DOTS_DIR+"/shared/home/.config/bat",
+            ${env:USERPROFILE}+"\.config\bat",
+            $true,
+            $true)
+        
+        $this.ConfigMap += [ConfigMapEntry]::new(
+            $global:DOTS_DIR+"/shared/home/.config/fish",
+            ${env:USERPROFILE}+"\.config\fish",
+            $true,
+            $true)
+
+        $this.ConfigMap += [ConfigMapEntry]::new(
+            $global:DOTS_DIR+"/shared/home/.config/btop",
+            ${env:USERPROFILE}+"\.config\btop",
+            $true,
+            $true)
+        
+        $this.ConfigMap += [ConfigMapEntry]::new(
+            $global:DOTS_DIR+"/shared/home/.config/topgrade.toml",
+            ${env:USERPROFILE}+"\.config\topgrade.toml",
+            $true,
+            $true)
+        
+        $this.ConfigMap += [ConfigMapEntry]::new(
+            $global:DOTS_DIR+"/shared/home/.gitconfig",
+            ${env:USERPROFILE}+"\.gitconfig",
+            $true,
+            $true)
+        
+        $this.ConfigMap += [ConfigMapEntry]::new(
+            $global:DOTS_DIR+"/shared/home/.gitconfig.functions",
+            ${env:USERPROFILE}+"\.gitconfig.functions",
+            $true,
+            $true)
+        
+        $this.ConfigMap += [ConfigMapEntry]::new(
+            $global:DOTS_DIR+"/shared/home/.gitconfig.signing",
+            ${env:USERPROFILE}+"\.gitconfig.signing",
+            $true,
+            $true)
+
+        $this.ConfigMap += [ConfigMapEntry]::new(
+            $global:DOTS_DIR+"/shared/home/.wakatime.cfg",
+            ${env:USERPROFILE}+"\.wakatime.cfg",
+            $true,
+            $true)
+        
+        $this.ConfigMap += [ConfigMapEntry]::new(
+            $global:DOTS_DIR+"/shared/home/.wegorc",
+            ${env:USERPROFILE}+"\.wegorc",
             $true,
             $true)
     }

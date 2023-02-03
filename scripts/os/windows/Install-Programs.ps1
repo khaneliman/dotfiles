@@ -30,7 +30,8 @@ if (Test-CommandExists scoop)
 
     # scoops
     $scoop_apps = @(
-        'sudo', 'fastfetch', 'pshazz', 'git-crypt', 'vcredist', '1password-cli', 'secureuxtheme', '7tsp', 'archwsl'
+        'sudo', 'bat', 'btop', 'fastfetch', 'pshazz', 'git-crypt', 'vcredist', '1password-cli',
+        'secureuxtheme', '7tsp', 'archwsl', 'spicetify-cli', 'topgrade'
     )
 
     foreach ($app in $scoop_apps)
@@ -91,7 +92,8 @@ if (Test-CommandExists winget)
         'HeroicGamesLauncher.HeroicGamesLauncher',
         'StartIsBack.StartAllBack',
         'LGUG2Z.komorebi',
-        'AutoHotkey.AutoHotkey'
+        'AutoHotkey.AutoHotkey',
+        'Alacritty.Alacritty'
     )
 
     foreach ($app in $winget_apps)
