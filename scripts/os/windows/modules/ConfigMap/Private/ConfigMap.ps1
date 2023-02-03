@@ -92,9 +92,15 @@ class ConfigMap {
             $true)
 
         $this.ConfigMap += [ConfigMapEntry]::new(
-            $global:DOTS_DIR+"/shared/home/.config/btop",
-            ${env:USERPROFILE}+"\.config\btop",
-            $true,
+            $global:DOTS_DIR+"/shared/home/.config/btop/themes",
+            ${env:USERPROFILE}+"\scoop\persist\btop",
+            $false,
+            $true)
+        
+        $this.ConfigMap += [ConfigMapEntry]::new(
+            $global:DOTS_DIR+"/shared/home/.config/btop/btop.conf",
+            ${env:USERPROFILE}+"\scoop\apps\btop\current\btop.conf",
+            $false,
             $true)
         
         $this.ConfigMap += [ConfigMapEntry]::new(

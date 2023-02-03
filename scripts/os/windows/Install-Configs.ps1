@@ -55,15 +55,19 @@ foreach ( $config in $ConfigMap )
         sudo New-Item -ItemType SymbolicLink -Path $config.Destination -Target $config.Source
     } else
     {
-        #TODO: Fix copy not working for some reason
         write-host "    Copying files to" $config.Destination
         $destinationFolderPath = Split-Path -parent $config.Destination
-        # $destinationFolderPath
-        New-Item $destinationFolderPath -ItemType Directory -Force
-        $destinationFolder = $objShell.Namespace($destinationFolderPath)
-        # $destinationFolder
+        $destinationFolderPath = $destinationFolderPath.Replace("\","/").Replace("C:/","/mnt/c/")
+        $WSL_DESTINATION = $config.Destination.Replace("\","/").Replace("C:/","/mnt/c/")
+        $WSL_SOURCE = $config.Source.Replace("\","/").Replace("C:/","/mnt/c/")
 
-        $destinationFolder.CopyHere($config.Source, 0x14)
+        wsl bash -c "mkdir -p $destinationFolderPath"
+        wsl bash -c "cp -rv $WSL_SOURCE $WSL_DESTINATION"
+
+        if ($config.Source -match "btop.conf") {
+            $btop_theme_path = "${env:USERPROFILE}\scoop\apps\btop\current\themes\catppuccin_macchiato.theme".Replace("\","\\\\")
+            wsl -- sed -i "s/color_theme = .*/color_theme = $btop_theme_path/" $WSL_DESTINATION
+        }
     }
 }
 
