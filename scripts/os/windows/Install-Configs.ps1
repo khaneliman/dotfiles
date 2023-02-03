@@ -13,6 +13,12 @@ foreach ( $config in $ConfigMap )
 
     if ($destinationExists -eq $true)
     {
+        if ((get-item $config.Destination).Attributes.ToString() -match "ReparsePoint") {
+            write-host $config.Destination "is already a symbolic link. Skipping..."
+            write-host "If you'd like to replace this location... delete your existing link and run again."
+            continue
+        } 
+
         $backupRelativeFolderPath = $config.Destination.Replace("${env:USERPROFILE}","")
         $backupFolderPath = $backupFolderPath + $backupRelativeFolderPath
         $backupFolderPath = Split-Path -parent $backupFolderPath
@@ -24,8 +30,11 @@ foreach ( $config in $ConfigMap )
         
         if ($config.ReplaceExisting)
         {
-            write-host "    Deleting " $config.Destination
-            Remove-Item -Path $config.Destination -Recurse -Force
+            if ($config.CreateSymbolicLink -eq $true) 
+            {
+                write-host "    Deleting " $config.Destination
+                Remove-Item -Path $config.Destination -Recurse -Force
+            }
         } else
         {
             write-host "    Config already exists. Skipping..."
@@ -40,6 +49,14 @@ foreach ( $config in $ConfigMap )
         sudo New-Item -ItemType SymbolicLink -Path $config.Destination -Target $config.Source
     } else
     {
+        #TODO: Fix copy not working for some reason
         write-host "    Copying files to" $config.Destination
+        $destinationFolderPath = Split-Path -parent $config.Destination
+        # $destinationFolderPath
+        New-Item $destinationFolderPath -ItemType Directory -Force
+        $destinationFolder = $objShell.Namespace($destinationFolderPath)
+        # $destinationFolder
+
+        $destinationFolder.CopyHere($config.Source, 0x14)
     }
 }

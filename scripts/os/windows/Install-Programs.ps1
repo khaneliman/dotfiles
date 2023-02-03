@@ -1,7 +1,7 @@
 using module RegistryEntry
 using module TestCommandExists
 
-# $env:PSModulePath = "$PSHOME/Modules\";
+$env:PSModulePath = "$PSHOME/Modules\"+";$SCRIPTS_DIR/os/windows/modules";
 
 ## 
 # Install scoop
