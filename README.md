@@ -34,7 +34,8 @@ Each environment might require further steps that will be detailed in their resp
 
 ### Automatic
 
-    ./install.sh
+    ./install.sh for linux and macos
+    /.install.bat for windows
 
 The script will detect what OS you are running script from and perform the installation for that OS. You will need to select what environment you would like to install the dots for, if there are multiple for that given OS.
 
@@ -78,6 +79,10 @@ I currently use [yabai](https://github.com/koekeishiya/yabai) with my daily driv
 
 ### Yabai
 
+#### Unique Install Steps
+
+See the install steps in MacOS config's [README](/dots/macos/yabai/README.md)
+
 Current window manager used on my laptop. Uses [sketchybar](https://github.com/FelixKratz/SketchyBar) for UI and [skhd](https://github.com/koekeishiya/skhd) for keybinds.
 
 ![macos-yabai-tiling](assets/macos-yabai-tiling.png)
@@ -85,7 +90,16 @@ Current window manager used on my laptop. Uses [sketchybar](https://github.com/F
 
 ## Windows
 
-I only use Windows for work and the rare VM access when needed. I have done some customization and will update this whenever I get a chance.
+### Komorebi
+
+#### Unique Install Steps
+
+See the install steps in Hyrpland config's [README](/dots/windows/README.md)
+
+Current window manager [Komorebi](https://github.com/LGUG2Z/komorebi) with [AutoHotkey](https://github.com/AutoHotkey/AutoHotkey) for keybinds and configuring Komorebi.
+
+![windows-komorebi-tiling](assets/windows-komorebi-tiling.png)
+![windows-komorebi-tiling](assets/windows-komorebi-tiling-arch.png)
 
 #### Unique Install Steps
 
