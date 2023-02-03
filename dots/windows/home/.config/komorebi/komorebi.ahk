@@ -24,8 +24,10 @@ InvisibleBorders(7, 0, 14, 7)
 WorkspaceName(0, 0, "I")
 
 ; Uncomment the next two lines if you want a visual border drawn around the focused window
-; ActiveWindowBorderColour(66, 165, 245, "single") ; this is a nice blue colour
-; ActiveWindowBorder("enable")
+ActiveWindowBorderColour(138, 173, 244, "single") ; this is a nice blue colour
+ActiveWindowBorder("enable")
+
+FocusFollowsMouse("enable","komorebi")
 
 ; Allow komorebi to start managing windows
 CompleteConfiguration()

@@ -287,6 +287,11 @@ Run, komorebic.exe float-rule exe "QuickLook.exe", , Hide
 ; RepoZ
 Run, komorebic.exe float-rule exe "RepoZ.exe", , Hide
 
+; Rider
+Run, komorebic.exe identify-object-name-change-application exe "rider64.exe", , Hide
+; If you have disabled minimize/close to tray for this application, you can delete/comment out the next line
+Run, komorebic.exe identify-tray-application exe "rider64.exe", , Hide
+
 ; Roblox FPS Unlocker
 ; If you have disabled minimize/close to tray for this application, you can delete/comment out the next line
 Run, komorebic.exe identify-tray-application exe "rbxfpsunlocker.exe", , Hide
@@ -341,6 +346,10 @@ Run, komorebic.exe identify-tray-application exe "Spotify.exe", , Hide
 
 ; Steam
 Run, komorebic.exe identify-border-overflow-application class "vguiPopupWindow", , Hide
+
+; Stremio
+; If you have disabled minimize/close to tray for this application, you can delete/comment out the next line
+Run, komorebic.exe identify-tray-application exe "stremio.exe", , Hide
 
 ; System Informer
 ; If you have disabled minimize/close to tray for this application, you can delete/comment out the next line
