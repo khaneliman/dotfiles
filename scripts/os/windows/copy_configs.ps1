@@ -1,52 +1,49 @@
-# .$CONFIG_MAP_CLASS
 using module ConfigMap
 
-# # Variables
-$CONFIGS = "${env:USERPROFILE}"
+# Variables
 $objShell = New-Object -ComObject Shell.Application
+$timestamp = Get-Date -Format o | ForEach-Object { $_ -replace ":", "." }
+$backupFolderPath = "${env:USERPROFILE}\.config\dotfiles-backup\$timestamp"
+$ConfigMap = Get-ConfigMap
 
 # Loop through provided input directories
-# for ( $i = 0; $i -lt $args.count; $i++ ) {
-#     write-host "    Checking $($args[$i]) for files that need to be installed..."
-    
-#     # Current directory being checked
-#     $Path=$($args[$i])
-#     $Config = Get-Item -Path $Path
-#     $ConfigList = Get-ChildItem -Force -Path "$Config\*"
+foreach ( $config in $ConfigMap ) {
+    # ConvertTo-Json $config
+    $destinationExists = Test-Path -Path $config.Destination
 
-#     foreach($File in $ConfigList) {
-#         $try = $true
-#         $objFolder = $objShell.Namespace($CONFIGS)
-#         $installedItems = @(Get-ChildItem $CONFIGS | Where-Object {$_.PSIsContainer -eq $false} | Select-Object name)
+    if ($destinationExists -eq $true) {
+        
+        if (!(Test-Path -Path $backupFolderPath)) {
+            write-host "Creating $backupFolderPath"
+            New-Item $backupFolderPath -ItemType Directory -Force
+            $backupFolder = $objShell.Namespace($backupFolderPath)
+        }
 
-#         if ($File -match "\\.config$") {
-#             $objFolder = $objShell.Namespace("$CONFIGS\.config\")
-            
-#             If(!(test-path -PathType container "$CONFIGS\.config\")) {
-#                 New-Item -ItemType Directory -Path "$CONFIGS\.config\"
-#             }
-            
-#             $installedItems = @(Get-ChildItem "$CONFIGS\.config" | Select-Object name)
-            
-#             write-host $installedItems
-#         }
+        write-host "    " $config.Destination "already exists. Backing up existing files..."
+        $backupFolder.CopyHere($config.Destination, 0x14)
+        
+        if ($config.ReplaceExisting) {
+            write-host "    Deleting " $config.Destination
+            Remove-Item -Path $config.Destination -Force
 
-#         foreach($item in $installedItems)
-#         {
-#             if ($item -match $File.name)
-#             {
-#                 write-host $File already exists 
-#                 $try = $false
-#             }
-#         }
-#         if ($try)
-#         {
-#             write-host "    Installing $name from $File"
-#             # $objFolder.CopyHere($File.fullname)
-#             # New-Item -ItemType SymbolicLink -Path "${env:USERPATH}\.config\" -Target $File.fullname
-#         }
-#     }
-# }
+            if ($config.CreateSymbolicLink -eq $true) {
+            write-host "    Creating link to " $config.Source "from" $config.Destination
+            sudo New-Item -ItemType SymbolicLink -Path $config.Destination -Target $config.Source
+            } else {
+                write-host "    Copying files from to" $config.Destination
+            }
 
-$test = Get-ConfigMap
-ConvertTo-Json $test
+        } else {
+            write-host "    Config already exists. Skipping..."
+            continue
+        }
+
+    } else {
+        if ($config.CreateSymbolicLink -eq $true) {
+            write-host "    Creating link to " $config.Source "from" $config.Destination
+            sudo New-Item -ItemType SymbolicLink -Path $config.Destination -Target $config.Source
+        } else {
+            write-host "    Copying files from to" $config.Destination
+        }
+    }
+}
