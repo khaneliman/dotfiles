@@ -119,7 +119,7 @@ class ConfigMap {
             $global:DOTS_DIR+"/shared/home/.gitconfig.signing",
             ${env:USERPROFILE}+"\.gitconfig.signing",
             $true,
-            $true)
+            $false)
 
         $this.ConfigMap += [ConfigMapEntry]::new(
             $global:DOTS_DIR+"/shared/home/.wakatime.cfg",
@@ -130,6 +130,24 @@ class ConfigMap {
         $this.ConfigMap += [ConfigMapEntry]::new(
             $global:DOTS_DIR+"/shared/home/.wegorc",
             ${env:USERPROFILE}+"\.wegorc",
+            $true,
+            $true)
+        
+        $this.ConfigMap += [ConfigMapEntry]::new(
+            $global:DOTS_DIR+"/shared/home/.config/ranger",
+            ${env:USERPROFILE}+"\.config\ranger",
+            $true,
+            $true)
+        
+        $this.ConfigMap += [ConfigMapEntry]::new(
+            $global:DOTS_DIR+"/shared/home/.config/spicetify",
+            ${env:USERPROFILE}+"\.config\spicetify",
+            $true,
+            $true)
+        
+        $this.ConfigMap += [ConfigMapEntry]::new(
+            $global:DOTS_DIR+"/shared/home/.config/BetterDiscord",
+            ${env:USERPROFILE}+"\.config\BetterDiscord",
             $true,
             $true)
     }

@@ -1,9 +1,15 @@
 using module ConfigMap
 
-# Variables
+# Powershell Variables
 $objShell = New-Object -ComObject Shell.Application
 $timestamp = Get-Date -Format o | ForEach-Object { $_ -replace ":", "." }
 $ConfigMap = Get-ConfigMap
+
+# WSL Variables
+$WSL_HOME = ${env:USERPROFILE}.Replace("\","/").Replace("C:/","/mnt/c/")
+$backupFolderPath = "$WSL_HOME\.config\dotfiles-backup\$timestamp"
+$WSL_BACKUP_FOLDER_PATH = $backupFolderPath.Replace("\","/")
+$WSL_DOTS_DIR = $DOTS_DIR.Replace("C:/","/mnt/c/")
 
 # Loop through provided input directories
 foreach ( $config in $ConfigMap )
@@ -60,3 +66,8 @@ foreach ( $config in $ConfigMap )
         $destinationFolder.CopyHere($config.Source, 0x14)
     }
 }
+
+##
+# Use existing shared.sh script for config.
+##
+# wsl bash -c "BACKUP_LOCATION=$WSL_BACKUP_FOLDER_PATH; DOTS_DIR=$WSL_DOTS_DIR; HOME=$WSL_HOME; source ./scripts/utils/installer-helper.sh; source ./scripts/shared.sh; shared_theme_install;"

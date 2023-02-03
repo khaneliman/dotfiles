@@ -7,36 +7,36 @@ shared_backup_existing() {
 	mkdir -p "$BACKUP_LOCATION"/.local/share/
 
 	# backup .config
-	mv ~/.config/BetterDiscord "$BACKUP_LOCATION"/.config/
-	mv ~/.config/alacritty "$BACKUP_LOCATION"/.config/
-	mv ~/.config/astronvim "$BACKUP_LOCATION"/.config/
-	mv ~/.config/bat "$BACKUP_LOCATION"/.config/
-	mv ~/.config/btop "$BACKUP_LOCATION"/.config/
-	mv ~/.config/davmail "$BACKUP_LOCATION"/.config/
-	mv ~/.config/fastfetch "$BACKUP_LOCATION"/.config/
-	mv ~/.config/fish "$BACKUP_LOCATION"/.config/
-	mv ~/.config/kitty "$BACKUP_LOCATION"/.config/
-	mv ~/.config/micro "$BACKUP_LOCATION"/.config/
-	mv ~/.config/nvim "$BACKUP_LOCATION"/.config/
-	mv ~/.local/share/nvim "$BACKUP_LOCATION"/.local/share/nvim/
-	mv ~/.config/ranger "$BACKUP_LOCATION"/.config/
-	mv ~/.config/spicetify "$BACKUP_LOCATION"/.config/
-	mv ~/.config/topgrade.toml "$BACKUP_LOCATION"/.config/
+	mv "$HOME"/.config/BetterDiscord "$BACKUP_LOCATION"/.config/
+	mv "$HOME"/.config/alacritty "$BACKUP_LOCATION"/.config/
+	mv "$HOME"/.config/astronvim "$BACKUP_LOCATION"/.config/
+	mv "$HOME"/.config/bat "$BACKUP_LOCATION"/.config/
+	mv "$HOME"/.config/btop "$BACKUP_LOCATION"/.config/
+	mv "$HOME"/.config/davmail "$BACKUP_LOCATION"/.config/
+	mv "$HOME"/.config/fastfetch "$BACKUP_LOCATION"/.config/
+	mv "$HOME"/.config/fish "$BACKUP_LOCATION"/.config/
+	mv "$HOME"/.config/kitty "$BACKUP_LOCATION"/.config/
+	mv "$HOME"/.config/micro "$BACKUP_LOCATION"/.config/
+	mv "$HOME"/.config/nvim "$BACKUP_LOCATION"/.config/
+	mv "$HOME"/.local/share/nvim "$BACKUP_LOCATION"/.local/share/nvim/
+	mv "$HOME"/.config/ranger "$BACKUP_LOCATION"/.config/
+	mv "$HOME"/.config/spicetify "$BACKUP_LOCATION"/.config/
+	mv "$HOME"/.config/topgrade.toml "$BACKUP_LOCATION"/.config/
 
-	mv ~/.gnupg "$BACKUP_LOCATION"
-	mv ~/.ssh "$BACKUP_LOCATION"
-	mv ~/.gitconfig "$BACKUP_LOCATION"
-	mv ~/.gitconfig.functions "$BACKUP_LOCATION"
-	mv ~/.gitconfig.signing "$BACKUP_LOCATION"
-	mv ~/.wakatime.cfg "$BACKUP_LOCATION"
-	mv ~/.wegorc "$BACKUP_LOCATION"
+	mv "$HOME"/.gnupg "$BACKUP_LOCATION"
+	mv "$HOME"/.ssh "$BACKUP_LOCATION"
+	mv "$HOME"/.gitconfig "$BACKUP_LOCATION"
+	mv "$HOME"/.gitconfig.functions "$BACKUP_LOCATION"
+	mv "$HOME"/.gitconfig.signing "$BACKUP_LOCATION"
+	mv "$HOME"/.wakatime.cfg "$BACKUP_LOCATION"
+	mv "$HOME"/.wegorc "$BACKUP_LOCATION"
 }
 
 correct_ssh_permissions() {
-	message "[>>] Settings ~/.ssh permissions"
+	message "[>>] Settings $HOME/.ssh permissions"
 
-	chmod 700 ~/.ssh
-	chmod 600 ~/.ssh/*
+	chmod 700 "$HOME"/.ssh
+	chmod 600 "$HOME"/.ssh/*
 }
 
 install_bat_themes() {
@@ -66,7 +66,7 @@ install_fish_plugins() {
 		message "[>>] Installing fish plugins"
 		message "[>>] DO NOT configure Tide when prompted"
 
-		cp "$DOTS_DIR"/shared/home/.config/fish/fish_plugins ~/.config/fish/
+		cp "$DOTS_DIR"/shared/home/.config/fish/fish_plugins "$HOME"/.config/fish/fish_plugins
 
 		fish -c "fisher update"
 	else
@@ -101,24 +101,24 @@ install_spicetify() {
 				command -v spicetify && spicetify config spotify_path /usr/share/spotify
 
 			elif [[ -d "$HOME/.var/app/com.spotify.Client/config/spotify" ]]; then
-				message '[>>] Spotify detected in ~/.var/app/com.spotify.Client/config/spotify.. settings permissions and spotify_path'
+				message '[>>] Spotify detected in "$HOME"/.var/app/com.spotify.Client/config/spotify.. settings permissions and spotify_path'
 
-				sudo chmod a+wr ~/.var/app/com.spotify.Client/config/spotify
-				sudo chmod a+wr ~/.var/app/com.spotify.Client/config/spotify/Apps -R
+				sudo chmod a+wr "$HOME"/.var/app/com.spotify.Client/config/spotify
+				sudo chmod a+wr "$HOME"/.var/app/com.spotify.Client/config/spotify/Apps -R
 
-				command -v spicetify && spicetify config spotify_path ~/.var/app/com.spotify.Client/config/spotify
+				command -v spicetify && spicetify config spotify_path "$HOME"/.var/app/com.spotify.Client/config/spotify
 			fi
 
 			# Preferences path
 			if [[ -f "$HOME/.config.spotify/prefs" ]]; then
-				message '[>>] Spotify prefs found at ~/.config/spotify/prefs... settings prefs_path'
+				message '[>>] Spotify prefs found at "$HOME"/.config/spotify/prefs... settings prefs_path'
 
-				command -v spicetify && spicetify config prefs_path ~/.config/spotify/prefs
+				command -v spicetify && spicetify config prefs_path "$HOME"/.config/spotify/prefs
 
 			elif [[ -f "$HOME/.var/app/com.spotify.Client/config/spotify/prefs" ]]; then
-				message '[>>] Spotify prefs found at ~/.var/app/com.spotify.Client/config/spotify/prefs... settings prefs_path'
+				message '[>>] Spotify prefs found at "$HOME"/.var/app/com.spotify.Client/config/spotify/prefs... settings prefs_path'
 
-				command -v spicetify && spicetify config prefs_path ~/.var/app/com.spotify.Client/config/spotify/prefs
+				command -v spicetify && spicetify config prefs_path "$HOME"/.var/app/com.spotify.Client/config/spotify/prefs
 			fi
 		fi
 
@@ -128,14 +128,14 @@ install_spicetify() {
 
 			# Spotify path
 			if [[ -d "/Applications/Spotify.app/" ]]; then
-				message '[>>] Spotify detected in /Applications/Spotify.app/.. setting spotify_path'
+				message "[>>] Spotify detected in /Applications/Spotify.app/.. setting spotify_path"
 
 				command -v spicetify && spicetify config spotify_path /Applications/Spotify.app/Contents/Resources
 			fi
 
 			# Preferences path
 			if [[ -f "$HOME/Library/Application Support/Spotify/prefs" ]]; then
-				message '[>>] Spotify prefs found at ~/Library/Application Support/Spotify/prefs... settings prefs_path'
+				message "[>>] Spotify prefs found at $HOME/Library/Application Support/Spotify/prefs... settings prefs_path"
 
 				command -v spicetify && spicetify config prefs_path "$HOME/Library/Application Support/Spotify/prefs"
 			fi
@@ -148,51 +148,51 @@ install_spicetify() {
 		spicetify backup apply
 		spicetify apply
 	else
-		message '[!!] Spicetify not detected... installation instructions: https://spicetify.app/docs/advanced-usage/installation/'
+		message "[!!] Spicetify not detected... installation instructions: https://spicetify.app/docs/advanced-usage/installation/"
 	fi
 }
 
 initialize_submodules() {
-	message '[>>] Pulling submodules'
+	message "[>>] Pulling submodules"
 
 	git submodule update --init --recursive --remote
 	git pull --recurse-submodules
 }
 
 shared_copy_configuration() {
-	message '[>>] Copying shared config files'
+	message "[>>] Copying shared config files"
 
 	# copy home folder dotfiles if you dont want to use symlinks
 	# cp -r "$DOTS_DIR"/shared/home/. ~
 
 	# link files that replace contents of location
-	ln -s "$SHARED_HOME"/.config/BetterDiscord ~/.config/BetterDiscord
-	ln -s "$SHARED_HOME"/.config/alacritty ~/.config/alacritty
-	ln -s "$SHARED_HOME"/.config/nvim ~/.config/nvim
-	ln -s "$SHARED_HOME"/.config/astronvim/lua/user ~/.config/nvim/lua/user
-	ln -s "$SHARED_HOME"/.config/bat ~/.config/bat
-	ln -s "$SHARED_HOME"/.config/btop ~/.config/btop
-	ln -s "$SHARED_HOME"/.config/davmail ~/.config/davmail
-	ln -s "$SHARED_HOME"/.config/fastfetch ~/.config/fastfetch
-	ln -s "$SHARED_HOME"/.config/fish ~/.config/fish
-	ln -s "$SHARED_HOME"/.config/kitty ~/.config/kitty
-	ln -s "$SHARED_HOME"/.config/micro ~/.config/micro
-	ln -s "$SHARED_HOME"/.config/ranger ~/.config/ranger
-	ln -s "$SHARED_HOME"/.config/spicetify ~/.config/spicetify
-	ln -s "$SHARED_HOME"/.config/topgrade.toml ~/.config/topgrade.toml
-	ln -s "$SHARED_HOME"/.gnupg ~/.gnupg
-	ln -s "$SHARED_HOME"/.ssh ~/.ssh
-	ln -s "$SHARED_HOME"/.face ~/.face
-	ln -s "$SHARED_HOME"/.face.icon ~/.face.icon
-	ln -s "$SHARED_HOME"/.gitconfig ~/.gitconfig
-	ln -s "$SHARED_HOME"/.gitconfig.functions ~/.gitconfig.functions
-	ln -s "$SHARED_HOME"/.gitconfig.signing ~/.gitconfig.signing
-	ln -s "$SHARED_HOME"/.wakatime.cfg ~/.wakatime.cfg
-	ln -s "$SHARED_HOME"/.wegorc ~/.wegorc
+	ln -s "$SHARED_HOME"/.config/BetterDiscord "$HOME"/.config/BetterDiscord
+	ln -s "$SHARED_HOME"/.config/alacritty "$HOME"/.config/alacritty
+	ln -s "$SHARED_HOME"/.config/nvim "$HOME"/.config/nvim
+	ln -s "$SHARED_HOME"/.config/astronvim/lua/user "$HOME"/.config/nvim/lua/user
+	ln -s "$SHARED_HOME"/.config/bat "$HOME"/.config/bat
+	ln -s "$SHARED_HOME"/.config/btop "$HOME"/.config/btop
+	ln -s "$SHARED_HOME"/.config/davmail "$HOME"/.config/davmail
+	ln -s "$SHARED_HOME"/.config/fastfetch "$HOME"/.config/fastfetch
+	ln -s "$SHARED_HOME"/.config/fish "$HOME"/.config/fish
+	ln -s "$SHARED_HOME"/.config/kitty "$HOME"/.config/kitty
+	ln -s "$SHARED_HOME"/.config/micro "$HOME"/.config/micro
+	ln -s "$SHARED_HOME"/.config/ranger "$HOME"/.config/ranger
+	ln -s "$SHARED_HOME"/.config/spicetify "$HOME"/.config/spicetify
+	ln -s "$SHARED_HOME"/.config/topgrade.toml "$HOME"/.config/topgrade.toml
+	ln -s "$SHARED_HOME"/.gnupg "$HOME"/.gnupg
+	ln -s "$SHARED_HOME"/.ssh "$HOME"/.ssh
+	ln -s "$SHARED_HOME"/.face "$HOME"/.face
+	ln -s "$SHARED_HOME"/.face.icon "$HOME"/.face.icon
+	ln -s "$SHARED_HOME"/.gitconfig "$HOME"/.gitconfig
+	ln -s "$SHARED_HOME"/.gitconfig.functions "$HOME"/.gitconfig.functions
+	ln -s "$SHARED_HOME"/.gitconfig.signing "$HOME"/.gitconfig.signing
+	ln -s "$SHARED_HOME"/.wakatime.cfg "$HOME"/.wakatime.cfg
+	ln -s "$SHARED_HOME"/.wegorc "$HOME"/.wegorc
 
 	# copy files that dont replace contents of location
-	cp -r "$SHARED_HOME"/.fonts/ ~/.fonts/
-	cp -r "$SHARED_HOME"/.local/ ~/.local/
+	cp -r "$SHARED_HOME"/.fonts/ "$HOME"/.fonts/
+	cp -r "$SHARED_HOME"/.local/ "$HOME"/.local/
 }
 
 shared_install() {
@@ -208,6 +208,11 @@ shared_install() {
 	correct_ssh_permissions
 
 	# Installations
+	shared_theme_install
+}
+
+shared_theme_install() {
+
 	install_spicetify
 	install_better_discord
 	install_bat_themes
