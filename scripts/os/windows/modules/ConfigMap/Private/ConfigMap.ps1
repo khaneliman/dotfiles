@@ -93,6 +93,12 @@ class ConfigMap {
             $true)
 
         $this.ConfigMap += [ConfigMapEntry]::new(
+            $global:DOTS_DIR+"/shared/home/.config/fastfetch",
+            ${env:USERPROFILE}+"\.config\fastfetch",
+            $true,
+            $true)
+
+        $this.ConfigMap += [ConfigMapEntry]::new(
             $global:DOTS_DIR+"/shared/home/.config/btop/themes",
             ${env:USERPROFILE}+"\scoop\persist\btop",
             $false,
