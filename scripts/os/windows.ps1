@@ -40,6 +40,13 @@ Customizing the taskbar"
 .$SCRIPTS_DIR/os/windows/Customize-Taskbar.ps1
 
 ##
+# Customize windows explorer
+##
+Write-Host "
+Customizing explorer"
+.$SCRIPTS_DIR/os/windows/Customize-Explorer.ps1
+
+##
 # Customize cursor
 ##
 Write-Host "

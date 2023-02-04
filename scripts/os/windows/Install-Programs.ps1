@@ -73,7 +73,7 @@ if (Test-CommandExists winget)
         'MSYS2.MSYS2',
         'JanDeDobbeleer.OhMyPosh',
         'Microsoft.Powershell.Preview',
-        'Microsoft.WindowsTerminalPreview',
+        'Microsoft.WindowsTerminal.Preview',
         'Bitsum.ProcessLasso',
         'Git.Git',
         'GitHub.GitHubDesktop',
@@ -129,7 +129,6 @@ if (!(Test-Path -Path "$($env:USERPROFILE)\Downloads\UltraUXThemePatcher.exe" -P
 
 ## Set komorebi to run on startup
 $RegPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" 
-Set-RegistryEntry -Key 'KomorebicOnLogin' -Type "SZ" -Value 'C:\Program Files\komorebi\bin\komorebic.exe start --await-configuration' -Path $RegPath
+Set-RegistryEntry -Key 'KomorebicOnLogin' -Type "String" -Value 'C:\Program Files\komorebi\bin\komorebic.exe start --await-configuration' -Path $RegPath
 
-$RegPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" 
-Set-RegistryEntry -Key 'KomorebicConfigOnLogin' -Type "SZ" -Value "$($env:USERPROFILE)\.config\komorebi\komorebi.ahk" -Path $RegPath
+Set-RegistryEntry -Key 'KomorebicConfigOnLogin' -Type "String" -Value "$($env:USERPROFILE)\.config\komorebi\komorebi.ahk" -Path $RegPath
