@@ -5,12 +5,6 @@ $objShell = New-Object -ComObject Shell.Application
 $timestamp = Get-Date -Format o | ForEach-Object { $_ -replace ":", "." }
 $ConfigMap = Get-ConfigMap
 
-# WSL Variables
-$WSL_HOME = ${env:USERPROFILE}.Replace("\","/").Replace("C:/","/mnt/c/")
-$backupFolderPath = "$WSL_HOME\.config\dotfiles-backup\$timestamp"
-$WSL_BACKUP_FOLDER_PATH = $backupFolderPath.Replace("\","/")
-$WSL_DOTS_DIR = $DOTS_DIR.Replace("C:/","/mnt/c/")
-
 # Loop through provided input directories
 foreach ( $config in $ConfigMap )
 {   
@@ -46,9 +40,7 @@ foreach ( $config in $ConfigMap )
             write-host "    Config already exists. Skipping..."
             continue
         }
-
     } 
-
 
     $destinationFolderPath = Split-Path -parent $config.Destination
     
@@ -61,23 +53,20 @@ foreach ( $config in $ConfigMap )
         sudo New-Item -ItemType SymbolicLink -Path $config.Destination -Target $config.Source
     } else
     {
-        write-host "    Copying files to" $config.Destination
+        write-host "    Copying" $config.Source "files to" $destinationFolderPath
 
-        $destinationFolderPath = $destinationFolderPath.Replace("\","/").Replace("C:/","/mnt/c/")
-        $WSL_DESTINATION = $config.Destination.Replace("\","/").Replace("C:/","/mnt/c/")
-        $WSL_SOURCE = $config.Source.Replace("\","/").Replace("C:/","/mnt/c/")
+        New-Item -ItemType Directory -Force -Path $destinationFolderPath
 
-        wsl bash -c "mkdir -p $destinationFolderPath"
-        wsl bash -c "cp -rv $WSL_SOURCE $WSL_DESTINATION"
+        Copy-Item -Path $config.Source -Destination $config.Destination -Recurse -Force
 
         if ($config.Source -match "btop.conf") {
-            $btop_theme_path = "${env:USERPROFILE}\scoop\apps\btop\current\themes\catppuccin_macchiato.theme".Replace("\","\\\\")
-            wsl -- sed -i "s/color_theme = .*/color_theme = $btop_theme_path/" $WSL_DESTINATION
+            $btop_theme_path = "${env:USERPROFILE}\scoop\apps\btop\current\themes\catppuccin_macchiato.theme"
+            $regex = "color_theme = .*"
+            $replacement = "color_theme = $btop_theme_path"
+
+            (Get-Content $config.Destination) | 
+            ForEach-Object { $_ -replace $regex, $replacement } |
+                Set-Content $config.Destination
         }
     }
 }
-
-##
-# Use existing shared.sh script for config.
-##
-# wsl bash -c "BACKUP_LOCATION=$WSL_BACKUP_FOLDER_PATH; DOTS_DIR=$WSL_DOTS_DIR; HOME=$WSL_HOME; source ./scripts/utils/installer-helper.sh; source ./scripts/shared.sh; shared_theme_install;"
