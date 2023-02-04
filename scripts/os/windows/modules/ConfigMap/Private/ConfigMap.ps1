@@ -1,21 +1,35 @@
-class ConfigMapEntry {
-	[string]$Source
-	[string]$Destination
-	[boolean]$CreateSymbolicLink
-	[boolean]$ReplaceExisting
+class ConfigMapEntry
+{
+    [string]$Source
+    [string]$Destination
+    [boolean]$CreateSymbolicLink
+    [boolean]$ReplaceExisting
+    [boolean]$RequiresUnlock
 
-	ConfigMapEntry([string]$source, [string]$destination, [boolean]$createSymbolicLink, [boolean]$replaceExisting) {
-		$this.Source = $source
-		$this.Destination = $destination
-		$this.CreateSymbolicLink = $createSymbolicLink
-		$this.ReplaceExisting = $replaceExisting
-	}
+    ConfigMapEntry([string]$source, [string]$destination, [boolean]$createSymbolicLink, [boolean]$replaceExisting)
+    {
+        $this.Source = $source
+        $this.Destination = $destination
+        $this.CreateSymbolicLink = $createSymbolicLink
+        $this.ReplaceExisting = $replaceExisting
+    }
+
+    ConfigMapEntry([string]$source, [string]$destination, [boolean]$createSymbolicLink, [boolean]$replaceExisting, [boolean]$requiresUnlock)
+    {
+        $this.Source = $source
+        $this.Destination = $destination
+        $this.CreateSymbolicLink = $createSymbolicLink
+        $this.ReplaceExisting = $replaceExisting
+        $this.RequiresUnlock = $requiresUnlock
+    }
 }
 
-class ConfigMap {
-	[ConfigMapEntry[]]$ConfigMap
+class ConfigMap
+{
+    [ConfigMapEntry[]]$ConfigMap
 
-    ConfigMap() {
+    ConfigMap()
+    {
 
         $Path = 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders'
         $DOCUMENTS_PATH = Get-ItemPropertyValue -Path $Path -Name "Personal" -ErrorAction SilentlyContinue
@@ -132,7 +146,8 @@ class ConfigMap {
             $global:DOTS_DIR+"/shared/home/.gitconfig.signing",
             ${env:USERPROFILE}+"\.gitconfig.signing",
             $true,
-            $false)
+            $false,
+            $true)
 
         $this.ConfigMap += [ConfigMapEntry]::new(
             $global:DOTS_DIR+"/shared/home/.wakatime.cfg",
@@ -165,11 +180,13 @@ class ConfigMap {
             $true)
     }
 
-	ConfigMap([ConfigMapEntry[]]$configMap) {
-		$this.ConfigMap = $configMap
-	}
+    ConfigMap([ConfigMapEntry[]]$configMap)
+    {
+        $this.ConfigMap = $configMap
+    }
 
-    [ConfigMapEntry[]]GetConfigMap() {    
+    [ConfigMapEntry[]]GetConfigMap()
+    {    
         return $this.ConfigMap
     }
 }

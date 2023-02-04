@@ -8,6 +8,11 @@ $ConfigMap = Get-ConfigMap
 # Loop through provided input directories
 foreach ( $config in $ConfigMap )
 {   
+    if ($config.RequiresUnlock -eq $true -and $GIT_CRYPT_LOCKED -eq $true){
+        write-host $config.Source "is encrypted. Skipping..."
+        continue
+    } 
+
     $backupFolderPath = "${env:USERPROFILE}\.config\dotfiles-backup\$timestamp"
     $destinationExists = Test-Path -Path $config.Destination
 
