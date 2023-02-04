@@ -1,24 +1,25 @@
-# Import-Module -Name Terminal-Icons
-# if ($host.Name -eq 'ConsoleHost')
-# {
-#     Import-Module PSReadLine
-#     Set-PSReadLineOption -PredictionSource History
-#     Set-PSReadLineOption -PredictionViewStyle ListView
-#     Set-PSReadLineOption -EditMode Windows
-# }
-
 using namespace System.Management.Automation
 using namespace System.Management.Automation.Language
  
+if(-not (Get-Module posh-git -ListAvailable)){
+    Install-Module posh-git -Scope CurrentUser -Force
+}
+
+if(-not (Get-Module Terminal-Icons -ListAvailable)){
+    Install-Module Terminal-Icons -Scope CurrentUser -Force
+}
+
+Import-Module posh-git
+Import-Module -Name Terminal-Icons
+
 if ($host.Name -eq 'ConsoleHost')
 {
     Import-Module PSReadLine
+    Set-PSReadLineOption -PredictionSource History
+    Set-PSReadLineOption -PredictionViewStyle ListView
+    Set-PSReadLineOption -EditMode Windows
 }
 
-Import-Module PSColors
-Import-Module posh-git
-Import-Module -Name Terminal-Icons
-Import-Module oh-my-posh
 set-alias desktop "Desktop.ps1"
 
 oh-my-posh --init --shell pwsh --config "$($env:USERPROFILE)\.config\ohmyposh\ohmyposhv3-v2.json" | Invoke-Expression
@@ -676,12 +677,6 @@ Set-PSReadLineKeyHandler -Key Alt+a `
     [Microsoft.PowerShell.PSConsoleReadLine]::SetMark($null, $null)
     [Microsoft.PowerShell.PSConsoleReadLine]::SelectForwardChar($null, ($nextAst.Extent.EndOffset - $nextAst.Extent.StartOffset) - $endOffsetAdjustment)
 }
-
-
-Set-PSReadLineOption -PredictionSource History
-Set-PSReadLineOption -PredictionViewStyle ListView
-Set-PSReadLineOption -EditMode Windows
-
 
 # This is an example of a macro that you might use to execute a command.
 # This will add the command to history.
