@@ -6,7 +6,6 @@
 #     Set-PSReadLineOption -PredictionViewStyle ListView
 #     Set-PSReadLineOption -EditMode Windows
 # }
-# oh-my-posh --init --shell pwsh --config D:\Dropbox\Development\ohmyposhv3-v2.json | Invoke-Expression
 
 using namespace System.Management.Automation
 using namespace System.Management.Automation.Language
@@ -15,15 +14,13 @@ if ($host.Name -eq 'ConsoleHost')
 {
     Import-Module PSReadLine
 }
-#Import-Module PSColors
-#Import-Module posh-git
+
+Import-Module PSColors
+Import-Module posh-git
 Import-Module -Name Terminal-Icons
 Import-Module oh-my-posh
 set-alias desktop "Desktop.ps1"
-#Set-Theme ParadoxGlucose
-#Set-PoshPrompt -theme "D:\Dropbox\poshv3.json"
 
-#oh-my-posh --init --shell pwsh --config "D:\Dropbox\Development\ohmyposhv3-v2.json" | Invoke-Expression
 oh-my-posh --init --shell pwsh --config "$($env:USERPROFILE)\.config\ohmyposh\ohmyposhv3-v2.json" | Invoke-Expression
 
 
