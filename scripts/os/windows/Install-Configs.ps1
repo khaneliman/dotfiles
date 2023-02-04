@@ -48,15 +48,21 @@ foreach ( $config in $ConfigMap )
         }
 
     } 
+
+
+    $destinationFolderPath = Split-Path -parent $config.Destination
     
     if ($config.CreateSymbolicLink -eq $true)
     {
         write-host "    Creating link to " $config.Source "at" $config.Destination
+        
+        New-Item -ItemType Directory -Force -Path $destinationFolderPath
+
         sudo New-Item -ItemType SymbolicLink -Path $config.Destination -Target $config.Source
     } else
     {
         write-host "    Copying files to" $config.Destination
-        $destinationFolderPath = Split-Path -parent $config.Destination
+
         $destinationFolderPath = $destinationFolderPath.Replace("\","/").Replace("C:/","/mnt/c/")
         $WSL_DESTINATION = $config.Destination.Replace("\","/").Replace("C:/","/mnt/c/")
         $WSL_SOURCE = $config.Source.Replace("\","/").Replace("C:/","/mnt/c/")

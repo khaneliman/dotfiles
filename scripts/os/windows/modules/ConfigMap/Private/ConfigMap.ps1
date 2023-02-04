@@ -16,6 +16,9 @@ class ConfigMap {
 	[ConfigMapEntry[]]$ConfigMap
 
     ConfigMap() {
+
+        $Path = 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders'
+        $DOCUMENTS_PATH = Get-ItemPropertyValue -Path $Path -Name "Personal" -ErrorAction SilentlyContinue
         
         ##
         # Windows Configs
@@ -44,17 +47,15 @@ class ConfigMap {
             $true,
             $true)
 
-        # TODO: Fix pathing for users microsoft accounts or customized document folder locations
         $this.ConfigMap += [ConfigMapEntry]::new(
-            $global:DOTS_DIR+"/windows/home/Documents\PowerShell\Microsoft.PowerShell_profile.ps1",
-            ${env:USERPROFILE}+"\Documents\PowerShell\Microsoft.PowerShell_profile.ps1",
+            $global:DOTS_DIR+"/windows/home/Documents/PowerShell/Microsoft.PowerShell_profile.ps1",
+            $DOCUMENTS_PATH+"\PowerShell\Microsoft.PowerShell_profile.ps1",
             $true,
             $true)
         
-        # TODO: Fix pathing for users microsoft accounts or customized document folder locations
         $this.ConfigMap += [ConfigMapEntry]::new(
-            $global:DOTS_DIR+"/windows/home/Documents\PowerShell\powershell.config.json",
-            ${env:USERPROFILE}+"\Documents\PowerShell\powershell.config.json",
+            $global:DOTS_DIR+"/windows/home/Documents/PowerShell/powershell.config.json",
+            $DOCUMENTS_PATH+"\PowerShell\powershell.config.json",
             $true,
             $true)
 
