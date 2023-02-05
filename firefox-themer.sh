@@ -59,7 +59,7 @@ get_profile() {
 	FF_USER_DIRECTORY="$(find "${HOME}/.mozilla/firefox/" -maxdepth 1 -type d -regextype egrep -regex '.*[a-zA-Z0-9]+.'"${EDITION}")"
 
 	if [[ -n $EDITION ]]; then
-		message "[>>] Firefox profile location:  $FF_USER_DIRECTORY"
+		message "Firefox profile location:  $FF_USER_DIRECTORY"
 	fi
 }
 
@@ -71,7 +71,7 @@ get_theme() {
 		elif [[ "${1}" == "minimal" ]]; then
 			THEME="$DOTS_DIR/shared/firefox-themes/minimal"
 		else
-			echo -ne "Invalid parameter!\n"
+			error_message "Invalid parameter!\n"
 			print_help
 			return
 		fi
@@ -79,10 +79,10 @@ get_theme() {
 		THEME="$DOTS_DIR/shared/firefox-themes/minimal"
 	fi
 
-	THEME=$(readlink -f $THEME)
+	THEME=$(readlink -f "$THEME")
 
 	if [[ -d $THEME ]]; then
-		message "[>>] Theme location:  $THEME"
+		message "Theme location:  $THEME"
 	fi
 }
 
@@ -100,7 +100,7 @@ install_theme() {
 	fi
 
 	if [[ -n "$FF_USER_DIRECTORY" ]]; then
-		message "[>>] Firefox user profile directory located..."
+		message "Firefox user profile directory located..."
 		CHROME_DIRECTORY="$(find "$FF_USER_DIRECTORY/" -maxdepth 1 -type d -name 'chrome')"
 		if [[ -n "$CHROME_DIRECTORY" ]]; then
 			# Check if the chrome folder is not empty
@@ -109,12 +109,12 @@ install_theme() {
 
 			# If there's a current theme, make a backup
 			if [ ${#content[@]} -gt 0 ]; then
-				message "[>>] Existing chrome folder detected! Creating a backup to chrome-backup/..."
+				message "Existing chrome folder detected! Creating a backup to chrome-backup/..."
 				backup_dir="${CHROME_DIRECTORY}-backup"
 
 				# Create backup folder
 				if [[ ! -d "${backup_dir}" ]]; then
-					message "[>>] chrome-backup/ folder does not exist! Creating..."
+					message "chrome-backup/ folder does not exist! Creating..."
 					mkdir "${backup_dir}"
 				fi
 
@@ -124,34 +124,34 @@ install_theme() {
 
 			# copy theme directory to firefox chrome folder
 			if [[ -d "$THEME" ]]; then
-				message "[>>] Theme found! copying files..."
+				message "Theme found! copying files..."
 				cp -r "$THEME"/* "${FF_USER_DIRECTORY}/chrome"
 			else
-				message "[!!] Theme isn't a directory. Terminating..."
+				error_message "Theme isn't a directory. Terminating..."
 				exit 1
 			fi
 		else
-			message "[>>] Chrome folder does not exist! Creating one..."
+			message "Chrome folder does not exist! Creating one..."
 			mkdir "${FF_USER_DIRECTORY}/chrome"
 
 			# Check if backup folder exist
 			if [[ $? -eq 0 ]]; then
 				# copy theme directory to firefox chrome folder
 				if [[ -d "$THEME" ]]; then
-					message "[>>] Theme found! copying files..."
+					message "Theme found! copying files..."
 					cp -r "$THEME"/* "${FF_USER_DIRECTORY}/chrome"
 				else
-					message "[!!] Theme isn't a directory. Terminating..."
+					error_message "Theme isn't a directory. Terminating..."
 					exit 1
 				fi
 			else
-				message "[!!] There was a problem while creating the directory. Terminating..."
+				error_message "There was a problem while creating the directory. Terminating..."
 				exit 1
 			fi
 		fi
 
 	else
-		message "[!!] No Firefox ${RELEASE_NAME} user profile detected! Make sure to run Firefox ${RELEASE_NAME} atleast once! Terminating..."
+		error_message "No Firefox ${RELEASE_NAME} user profile detected! Make sure to run Firefox ${RELEASE_NAME} atleast once! Terminating..."
 		exit 1
 	fi
 }

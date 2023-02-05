@@ -2,39 +2,37 @@
 SHARED_HOME="$DOTS_DIR"/shared/home/
 
 shared_backup_existing() {
-	message "[>>] Backing up existing dotfiles to $BACKUP_LOCATION"
-
-	mkdir -p "$BACKUP_LOCATION"/.local/share/
-	mkdir -p "$BACKUP_LOCATION"/.config/
+	message "Backing up existing dotfiles to $BACKUP_LOCATION"
 
 	# backup .config
-	mv "$HOME"/.config/BetterDiscord "$BACKUP_LOCATION"/.config/
-	mv "$HOME"/.config/alacritty "$BACKUP_LOCATION"/.config/
-	mv "$HOME"/.config/astronvim "$BACKUP_LOCATION"/.config/
-	mv "$HOME"/.config/bat "$BACKUP_LOCATION"/.config/
-	mv "$HOME"/.config/btop "$BACKUP_LOCATION"/.config/
-	mv "$HOME"/.config/davmail "$BACKUP_LOCATION"/.config/
-	mv "$HOME"/.config/fastfetch "$BACKUP_LOCATION"/.config/
-	mv "$HOME"/.config/fish "$BACKUP_LOCATION"/.config/
-	mv "$HOME"/.config/kitty "$BACKUP_LOCATION"/.config/
-	mv "$HOME"/.config/micro "$BACKUP_LOCATION"/.config/
-	mv "$HOME"/.config/nvim "$BACKUP_LOCATION"/.config/
-	mv "$HOME"/.local/share/nvim "$BACKUP_LOCATION"/.local/share/nvim/
-	mv "$HOME"/.config/ranger "$BACKUP_LOCATION"/.config/
-	mv "$HOME"/.config/spicetify "$BACKUP_LOCATION"/.config/
-	mv "$HOME"/.config/topgrade.toml "$BACKUP_LOCATION"/.config/
+	backup_files "$HOME"/.config/BetterDiscord "$BACKUP_LOCATION"/.config/
+	backup_files "$HOME"/.config/alacritty "$BACKUP_LOCATION"/.config/
+	backup_files "$HOME"/.config/astronvim "$BACKUP_LOCATION"/.config/
+	backup_files "$HOME"/.config/bat "$BACKUP_LOCATION"/.config/
+	backup_files "$HOME"/.config/btop "$BACKUP_LOCATION"/.config/
+	backup_files "$HOME"/.config/davmail "$BACKUP_LOCATION"/.config/
+	backup_files "$HOME"/.config/fastfetch "$BACKUP_LOCATION"/.config/
+	backup_files "$HOME"/.config/fish "$BACKUP_LOCATION"/.config/
+	backup_files "$HOME"/.config/kitty "$BACKUP_LOCATION"/.config/
+	backup_files "$HOME"/.config/micro "$BACKUP_LOCATION"/.config/
+	backup_files "$HOME"/.config/nvim "$BACKUP_LOCATION"/.config/
+	backup_files "$HOME"/.local/share/nvim "$BACKUP_LOCATION"/.local/share/
+	backup_files "$HOME"/.config/ranger "$BACKUP_LOCATION"/.config/
+	backup_files "$HOME"/.config/spicetify "$BACKUP_LOCATION"/.config/
+	backup_files "$HOME"/.config/topgrade.toml "$BACKUP_LOCATION"/.config/
 
-	git_crypt_check && mv "$HOME"/.gnupg "$BACKUP_LOCATION"
-	git_crypt_check && mv "$HOME"/.ssh "$BACKUP_LOCATION"
-	mv "$HOME"/.gitconfig "$BACKUP_LOCATION"
-	mv "$HOME"/.gitconfig.functions "$BACKUP_LOCATION"
-	git_crypt_check && mv "$HOME"/.gitconfig.signing "$BACKUP_LOCATION"
-	git_crypt_check && mv "$HOME"/.wakatime.cfg "$BACKUP_LOCATION"
-	git_crypt_check && mv "$HOME"/.wegorc "$BACKUP_LOCATION"
+	backup_files "$HOME"/.gitconfig "$BACKUP_LOCATION"
+	backup_files "$HOME"/.gitconfig.functions "$BACKUP_LOCATION"
+
+	git_crypt_check && backup_files "$HOME"/.gnupg "$BACKUP_LOCATION"
+	git_crypt_check && backup_files "$HOME"/.gitconfig.signing "$BACKUP_LOCATION"
+	git_crypt_check && backup_files "$HOME"/.ssh "$BACKUP_LOCATION"
+	git_crypt_check && backup_files "$HOME"/.wakatime.cfg "$BACKUP_LOCATION"
+	git_crypt_check && backup_files "$HOME"/.wegorc "$BACKUP_LOCATION"
 }
 
 correct_ssh_permissions() {
-	message "[>>] Settings $HOME/.ssh permissions"
+	message "Settings $HOME/.ssh permissions"
 
 	chmod 700 "$HOME"/.ssh
 	chmod 600 "$HOME"/.ssh/*
@@ -42,51 +40,51 @@ correct_ssh_permissions() {
 
 install_bat_themes() {
 	if [[ $(command -v bat) ]]; then
-		message "[>>] Installing bat theme"
+		message "Installing bat theme"
 		# bat requires cache to be rebuilt to detect themes in config directory
 		bat cache --build
 	else
-		message "[!!] bat not detected... installation instructions: https://github.com/sharkdp/bat#installation"
+		warning_message "bat not detected... installation instructions: https://github.com/sharkdp/bat#installation"
 	fi
 }
 
 install_better_discord() {
 	if [[ $(command -v betterdiscordctl) ]]; then
-		message "[>>] Better discord detected... installing.."
+		message "Better discord detected... installing.."
 		betterdiscordctl install
 	else
-		message "[!!] Better Discord not detected... installation instructions: https://docs.betterdiscord.app/users/getting-started/installation"
+		warning_message "Better Discord not detected... installation instructions: https://docs.betterdiscord.app/users/getting-started/installation"
 	fi
 }
 
 install_fish_plugins() {
 	if [[ $(command -v fish) ]]; then
-		message "[>>] Installing fisher..."
+		message "Installing fisher..."
 		fish -c "curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher"
 
-		message "[>>] Installing fish plugins"
-		message "[>>] DO NOT configure Tide when prompted"
+		message "Installing fish plugins"
+		warning_message "DO NOT configure Tide when prompted"
 
 		git restore "$SHARED_HOME"/.config/fish/fish_plugins
 
 		fish -c "fisher update"
 	else
-		message "[!!] Fish not detected... installation instructions: https://fishshell.com/"
+		warning_message "Fish not detected... installation instructions: https://fishshell.com/"
 	fi
 }
 
 install_spicetify() {
 	if [[ $(command -v spicetify) ]]; then
 
-		message "[>>] Spicetify detected.. configuring and setting theme"
+		message "Spicetify detected.. configuring and setting theme"
 
 		if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 
-			message "[>>] Linux detected.. checking for spotify installations"
+			message "Linux detected.. checking for spotify installations"
 
 			# Spotify path
 			if [[ -d "/opt/spotify/" ]]; then
-				message "[>>] Spotify detected in /opt/spotify.. setting permissions and spotify_path"
+				message "Spotify detected in /opt/spotify.. setting permissions and spotify_path"
 
 				sudo chmod a+wr /opt/spotify
 				sudo chmod a+wr /opt/spotify/Apps -R
@@ -94,7 +92,7 @@ install_spicetify() {
 				command -v spicetify && spicetify config spotify_path /opt/spotify/
 
 			elif [[ -d "/usr/share/spotify" ]]; then
-				message "[>>] Spotify detected in /usr/share/spotify.. settings permissions and spotify_path"
+				message "Spotify detected in /usr/share/spotify.. settings permissions and spotify_path"
 
 				sudo chmod a+wr /usr/share/spotify
 				sudo chmod a+wr /usr/share/spotify/Apps -R
@@ -102,7 +100,7 @@ install_spicetify() {
 				command -v spicetify && spicetify config spotify_path /usr/share/spotify
 
 			elif [[ -d "$HOME/.var/app/com.spotify.Client/config/spotify" ]]; then
-				message "[>>] Spotify detected in "$HOME"/.var/app/com.spotify.Client/config/spotify.. settings permissions and spotify_path"
+				message "Spotify detected in $HOME/.var/app/com.spotify.Client/config/spotify.. settings permissions and spotify_path"
 
 				sudo chmod a+wr "$HOME"/.var/app/com.spotify.Client/config/spotify
 				sudo chmod a+wr "$HOME"/.var/app/com.spotify.Client/config/spotify/Apps -R
@@ -112,12 +110,12 @@ install_spicetify() {
 
 			# Preferences path
 			if [[ -f "$HOME/.config.spotify/prefs" ]]; then
-				message "[>>] Spotify prefs found at $HOME/.config/spotify/prefs... settings prefs_path"
+				message "Spotify prefs found at $HOME/.config/spotify/prefs... settings prefs_path"
 
 				command -v spicetify && spicetify config prefs_path "$HOME"/.config/spotify/prefs
 
 			elif [[ -f "$HOME/.var/app/com.spotify.Client/config/spotify/prefs" ]]; then
-				message "[>>] Spotify prefs found at $HOME/.var/app/com.spotify.Client/config/spotify/prefs... settings prefs_path"
+				message "Spotify prefs found at $HOME/.var/app/com.spotify.Client/config/spotify/prefs... settings prefs_path"
 
 				command -v spicetify && spicetify config prefs_path "$HOME"/.var/app/com.spotify.Client/config/spotify/prefs
 			fi
@@ -125,18 +123,18 @@ install_spicetify() {
 
 		if [[ "$OSTYPE" == "darwin"* ]]; then
 
-			message "[>>] macOS detected.. checking for spotify installations"
+			message "macOS detected.. checking for spotify installations"
 
 			# Spotify path
 			if [[ -d "/Applications/Spotify.app/" ]]; then
-				message "[>>] Spotify detected in /Applications/Spotify.app/.. setting spotify_path"
+				message "Spotify detected in /Applications/Spotify.app/.. setting spotify_path"
 
 				command -v spicetify && spicetify config spotify_path /Applications/Spotify.app/Contents/Resources
 			fi
 
 			# Preferences path
 			if [[ -f "$HOME/Library/Application Support/Spotify/prefs" ]]; then
-				message "[>>] Spotify prefs found at $HOME/Library/Application Support/Spotify/prefs... settings prefs_path"
+				message "Spotify prefs found at $HOME/Library/Application Support/Spotify/prefs... settings prefs_path"
 
 				command -v spicetify && spicetify config prefs_path "$HOME/Library/Application Support/Spotify/prefs"
 			fi
@@ -149,22 +147,22 @@ install_spicetify() {
 		spicetify backup apply
 		spicetify apply
 	else
-		message "[!!] Spicetify not detected... installation instructions: https://spicetify.app/docs/advanced-usage/installation/"
+		warning_message "Spicetify not detected... installation instructions: https://spicetify.app/docs/advanced-usage/installation/"
 	fi
 }
 
 initialize_submodules() {
-	message "[>>] Pulling submodules"
+	message "Pulling submodules"
 
 	git submodule update --init --recursive --remote
 	git pull --recurse-submodules
 }
 
 shared_copy_configuration() {
-	message "[>>] Copying shared config files"
+	message "Copying shared config files"
 
 	# copy home folder dotfiles if you dont want to use symlinks
-	# cp -r "$DOTS_DIR"/shared/home/. ~
+	# copy_files "$DOTS_DIR"/shared/home/. ~
 
 	# link files that replace contents of location
 	link_locations "$SHARED_HOME"/.config/BetterDiscord "$HOME"/.config/BetterDiscord
@@ -192,8 +190,8 @@ shared_copy_configuration() {
 	git_crypt_check && link_locations "$SHARED_HOME"/.wegorc "$HOME"/.wegorc
 
 	# copy files that dont replace contents of location
-	cp -r "$SHARED_HOME"/.fonts/ "$HOME"/.fonts/
-	cp -r "$SHARED_HOME"/.local/ "$HOME"/.local/
+	copy_files "$SHARED_HOME"/.fonts/ "$HOME"/.fonts/
+	copy_files "$SHARED_HOME"/.local/ "$HOME"/.local/
 }
 
 shared_install() {

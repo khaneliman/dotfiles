@@ -10,36 +10,34 @@
 HYPR_HOME="$DOTS_DIR"/linux/hyprland/home
 
 hypr_backup_existing() {
-	message "[>>] Backing up existing dotfiles to $BACKUP_LOCATION"
-
-	mkdir -p "$BACKUP_LOCATION"
+	message "Backing up existing dotfiles to $BACKUP_LOCATION"
 
 	# backup .config
-	mv "$HOME"/.config/Kvantum "$BACKUP_LOCATION"/.config/
-	mv "$HOME"/.config/OpenRGB "$BACKUP_LOCATION"/.config/
-	mv "$HOME"/.config/aconfmgr "$BACKUP_LOCATION"/.config/
-	mv "$HOME"/.config/ckb-next "$BACKUP_LOCATION"/.config/
-	mv "$HOME"/.config/gtk-2.0 "$BACKUP_LOCATION"/.config/
-	mv "$HOME"/.config/gtk-3.0 "$BACKUP_LOCATION"/.config/
-	mv "$HOME"/.config/gtk-4.0 "$BACKUP_LOCATION"/.config/
-	mv "$HOME"/.config/hypr "$BACKUP_LOCATION"/.config/
-	mv "$HOME"/.config/mako "$BACKUP_LOCATION"/.config/
-	mv "$HOME"/.config/paru "$BACKUP_LOCATION"/.config/
-	mv "$HOME"/.config/qt5ct "$BACKUP_LOCATION"/.config/
-	mv "$HOME"/.config/qt6ct "$BACKUP_LOCATION"/.config/
-	mv "$HOME"/.config/rofi "$BACKUP_LOCATION"/.config/
-	mv "$HOME"/.config/swappy "$BACKUP_LOCATION"/.config/
-	mv "$HOME"/.config/swaylock "$BACKUP_LOCATION"/.config/
-	mv "$HOME"/.config/waybar "$BACKUP_LOCATION"/.config/
-	mv "$HOME"/.config/wlogout "$BACKUP_LOCATION"/.config/
-	mv "$HOME"/.config/mimeapps.list "$BACKUP_LOCATION"/.config/
+	backup_files "$HOME"/.config/Kvantum "$BACKUP_LOCATION"/.config/
+	backup_files "$HOME"/.config/OpenRGB "$BACKUP_LOCATION"/.config/
+	# backup_files "$HOME"/.config/aconfmgr "$BACKUP_LOCATION"/.config/ # not being used right now
+	backup_files "$HOME"/.config/ckb-next "$BACKUP_LOCATION"/.config/
+	backup_files "$HOME"/.config/gtk-2.0 "$BACKUP_LOCATION"/.config/
+	backup_files "$HOME"/.config/gtk-3.0 "$BACKUP_LOCATION"/.config/
+	backup_files "$HOME"/.config/gtk-4.0 "$BACKUP_LOCATION"/.config/
+	backup_files "$HOME"/.config/hypr "$BACKUP_LOCATION"/.config/
+	backup_files "$HOME"/.config/mako "$BACKUP_LOCATION"/.config/
+	backup_files "$HOME"/.config/paru "$BACKUP_LOCATION"/.config/
+	backup_files "$HOME"/.config/qt5ct "$BACKUP_LOCATION"/.config/
+	backup_files "$HOME"/.config/qt6ct "$BACKUP_LOCATION"/.config/
+	backup_files "$HOME"/.config/rofi "$BACKUP_LOCATION"/.config/
+	backup_files "$HOME"/.config/swappy "$BACKUP_LOCATION"/.config/
+	backup_files "$HOME"/.config/swaylock "$BACKUP_LOCATION"/.config/
+	backup_files "$HOME"/.config/waybar "$BACKUP_LOCATION"/.config/
+	backup_files "$HOME"/.config/wlogout "$BACKUP_LOCATION"/.config/
+	backup_files "$HOME"/.config/mimeapps.list "$BACKUP_LOCATION"/.config/
 
-	mv "$HOME"/.screenlayout/primary.sh "$BACKUP_LOCATION"
-	mv "$HOME"/.gtkrc-2.0 "$BACKUP_LOCATION"
+	backup_files "$HOME"/.screenlayout/primary.sh "$BACKUP_LOCATION"/.screenlayout/
+	backup_files "$HOME"/.gtkrc-2.0 "$BACKUP_LOCATION"
 }
 
 hypr_create_symlink() {
-	message "[>>] Creating sym links for hyprland files"
+	message "Creating sym links for hyprland files"
 
 	sudo ln -s -f "$HOME"/.local/share/wlroots-env/ /usr/local/share/
 	sudo ln -s -f "$HOME"/.config/waybar/ /usr/local/share/
@@ -48,10 +46,12 @@ hypr_create_symlink() {
 	sudo ln -s -f "$HOME"/.local/bin/hyprland_setup_dual_monitors.sh /usr/local/bin
 	sudo ln -s -f "$HOME"/.local/bin/hyprland_cleanup_after_startup.s /usr/local/binh
 	sudo ln -s -f "$HOME"/.local/bin/hyprland_handle_monitor_connect.sh /usr/local/bin
+
+	success_message "Successfully created Hyprland launcher symlinks"
 }
 
 hypr_enable_systemd_services() {
-	message "[>>] Enabling user systemd services for hyprland"
+	message "Enabling user systemd services for hyprland"
 
 	systemctl --user enable --now hypr-waybar.service
 	systemctl --user enable --now waybar-config.path
@@ -61,13 +61,13 @@ hypr_enable_systemd_services() {
 }
 
 hypr_copy_configuration() {
-	message "[>>] Copying config files for hyprland"
+	message "Copying config files for hyprland"
 
 	# copy files in when not replacing contents completely
-	cp -r "$HYPR_HOME"/.local/ "$HOME"/.local/
-	cp -r "$HYPR_HOME"/.themes/ "$HOME"/.themes/
-	cp -r "$HYPR_HOME"/.screenlayout/ "$HOME"/.screenlayout/
-	cp -r "$HYPR_HOME"/.config/systemd/ "$HOME"/.config/systemd/
+	copy_files "$HYPR_HOME"/.local/ "$HOME"/
+	copy_files "$HYPR_HOME"/.themes/ "$HOME"/
+	copy_files "$HYPR_HOME"/.screenlayout/ "$HOME"/
+	copy_files "$HYPR_HOME"/.config/systemd/ "$HOME"/.config/
 
 	# symlinks for stuff replaced completely
 	link_locations "$HYPR_HOME"/.config/Kvantum "$HOME"/.config/Kvantum
@@ -93,6 +93,7 @@ hypr_copy_configuration() {
 	# copy desktop file for display manager
 	sudo mkdir -p /usr/share/wayland-sessions/
 	sudo cp "$DOTS_DIR"/linux/hyprland/usr/share/wayland-sessions/hyprland-custom.desktop /usr/share/wayland-sessions/
+	success_message "Successfully copied Hyprland login manager file"
 }
 
 hyprland_install() {

@@ -6,6 +6,53 @@
 # @stdout Output routed to install.log
 # @stderror Output routed to install.log
 
+# @description Backup the given file/folder to a provided destination
+# @arg $1 Source file/folder
+# @arg $2 Destination folder
+backup_files() {
+	if [ -f "$1" ] || [ -d "$1" ]; then
+		if [ -d "$2" ]; then
+			message "Backing up a copy of $1 to $2"
+			cp -r "$1" "$2"
+			success_message "Successfully backed up $1"
+		else
+			warning_message "$2 doesn't exist. Creating destination..."
+			mkdir -p "$2"
+			cp -r "$1" "$2"
+			success_message "Successfully backed up $1"
+		fi
+	else
+		warning_message "$1 doesn't exist. Skipping backup..."
+	fi
+}
+
+cecho() {
+	RED="\033[0;31m"
+	GREEN="\033[0;32m"  # <-- [0 means not bold
+	YELLOW="\033[1;33m" # <-- [1 means bold
+	CYAN="\033[1;36m"
+	# ... Add more colors if you like
+
+	NC="\033[0m" # No Color
+
+	# printf "${(P)1}${2} ${NC}\n" # <-- zsh
+	printf "${!1}${2} ${NC}\n" # <-- bash
+}
+
+# @description Copy files from the given file/folder to a provided destination without replacing entirely
+# @arg $1 Source file/folder
+# @arg $2 Destination file/folder
+copy_files() {
+	if [[ -L "$2" && -e "$2" ]]; then
+		warning_message "Valid symlink already exists at $2. Skipping..."
+		warning_message "If you would like to recreate, delete existing link and rerun."
+	else
+		message "Copying from $1 at $2..."
+		cp -r "$1" "$2"
+		success_message "Successfully copied $1 to $2"
+	fi
+}
+
 # @description Copy logs to installed system and exit script
 # @noargs
 end() {
@@ -18,6 +65,10 @@ end() {
 	fi
 }
 
+error_message() {
+	cecho "RED" "[!!] $1"
+}
+
 # @description Exits script if previous command fails
 # @arg $1 string Exit code of previous command
 # @arg $2 string Previous command
@@ -28,38 +79,6 @@ exit_on_error() {
 		echo >&2 "\"${last_command}\" command failed with exit code ${exit_code}."
 		exit "$exit_code"
 	fi
-}
-
-# @description Displays archinstaller logo
-# @noargs
-logo() {
-	# This will be shown on every set as user is progressing
-	echo -ne "
----------------------------------------------------------------------------------------------------------------------------------------
-██████╗  ██████╗ ████████╗███████╗██╗██╗     ███████╗███████╗    ██╗███╗   ██╗███████╗████████╗ █████╗ ██╗     ██╗     ███████╗██████╗ 
-██╔══██╗██╔═══██╗╚══██╔══╝██╔════╝██║██║     ██╔════╝██╔════╝    ██║████╗  ██║██╔════╝╚══██╔══╝██╔══██╗██║     ██║     ██╔════╝██╔══██╗
-██║  ██║██║   ██║   ██║   █████╗  ██║██║     █████╗  ███████╗    ██║██╔██╗ ██║███████╗   ██║   ███████║██║     ██║     █████╗  ██████╔╝
-██║  ██║██║   ██║   ██║   ██╔══╝  ██║██║     ██╔══╝  ╚════██║    ██║██║╚██╗██║╚════██║   ██║   ██╔══██║██║     ██║     ██╔══╝  ██╔══██╗
-██████╔╝╚██████╔╝   ██║   ██║     ██║███████╗███████╗███████║    ██║██║ ╚████║███████║   ██║   ██║  ██║███████╗███████╗███████╗██║  ██║
-╚═════╝  ╚═════╝    ╚═╝   ╚═╝     ╚═╝╚══════╝╚══════╝╚══════╝    ╚═╝╚═╝  ╚═══╝╚══════╝   ╚═╝   ╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝╚═╝  ╚═╝
-                                                                                                                                       
----------------------------------------------------------------------------------------------------------------------------------------
-                                    Automated Dotfiles Installer
-                        --------------------------------------------------
-"
-}
-
-link_locations() {
-	if [[ -L "$2" && -e "$2" ]]; then
-		echo "Valid symlink already exists at $2. Skipping..."
-		echo "If you would like to recreate, delete existing link and rerun."
-	else
-		ln -s "$1" "$2"
-	fi
-}
-
-message() {
-	printf "%s\n" "$*" >&2
 }
 
 # @description Select multiple options
@@ -171,12 +190,77 @@ function multiselect {
 	eval "$retval"='("${selected[@]}")'
 }
 
-# @description set options in setup.conf
-# @arg $1 string Configuration variable.
-# @arg $2 string Configuration value.
-set_option() {
-	grep -Eq "^${1}.*" "$CONFIG_FILE" && sed -i "/^${1}.*/d" "$CONFIG_FILE" # delete option if exists
-	echo "${1}=${2}" >>"$CONFIG_FILE"                                       # add option
+# @description Check if repo is locked or not
+# @noargs
+git_crypt_check() {
+	if [[ "$GIT_CRYPT_LOCKED" = "False" ]]; then
+		message "Repo is currently unlocked with git-crypt. Installing decrypted file..."
+		return 0
+	else
+		message "Repo is currently locked with git-crypt. Skipping encrypted file..."
+		return 1
+	fi
+}
+
+# @description Displays archinstaller logo
+# @noargs
+logo() {
+	# This will be shown on every set as user is progressing
+	echo -ne "
+---------------------------------------------------------------------------------------------------------------------------------------
+██████╗  ██████╗ ████████╗███████╗██╗██╗     ███████╗███████╗    ██╗███╗   ██╗███████╗████████╗ █████╗ ██╗     ██╗     ███████╗██████╗ 
+██╔══██╗██╔═══██╗╚══██╔══╝██╔════╝██║██║     ██╔════╝██╔════╝    ██║████╗  ██║██╔════╝╚══██╔══╝██╔══██╗██║     ██║     ██╔════╝██╔══██╗
+██║  ██║██║   ██║   ██║   █████╗  ██║██║     █████╗  ███████╗    ██║██╔██╗ ██║███████╗   ██║   ███████║██║     ██║     █████╗  ██████╔╝
+██║  ██║██║   ██║   ██║   ██╔══╝  ██║██║     ██╔══╝  ╚════██║    ██║██║╚██╗██║╚════██║   ██║   ██╔══██║██║     ██║     ██╔══╝  ██╔══██╗
+██████╔╝╚██████╔╝   ██║   ██║     ██║███████╗███████╗███████║    ██║██║ ╚████║███████║   ██║   ██║  ██║███████╗███████╗███████╗██║  ██║
+╚═════╝  ╚═════╝    ╚═╝   ╚═╝     ╚═╝╚══════╝╚══════╝╚══════╝    ╚═╝╚═╝  ╚═══╝╚══════╝   ╚═╝   ╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝╚═╝  ╚═╝
+                                                                                                                                       
+---------------------------------------------------------------------------------------------------------------------------------------
+                                    Automated Dotfiles Installer
+                        --------------------------------------------------
+"
+}
+
+# @description Create a symbolic link from the given file/folder to a provided destination
+# @arg $1 Source file/folder
+# @arg $2 Destination file/folder
+link_locations() {
+	if [[ -L "$2" && -e "$2" ]]; then
+		warning_message "Valid symlink already exists at $2. Skipping..."
+		warning_message "If you would like to recreate, delete existing link and rerun."
+	else
+		if [ -f "$2" ] || [ -d "$2" ]; then
+			message "$2 already exists. Removing..."
+			rm -rf "$2"
+		fi
+
+		message "Creating a link from $1 at $2..."
+		ln -s "$1" "$2"
+		success_message "Successfully linked $2 to $1"
+	fi
+}
+
+message() {
+	printf "[>>] %s\n" "$*" >&2
+}
+
+# @description Remove existing files and copy from the given file/folder to a provided destination
+# @arg $1 Source file/folder
+# @arg $2 Destination file/folder
+replace_files() {
+	if [[ -L "$2" && -e "$2" ]]; then
+		warning_message "Valid symlink already exists at $2. Skipping..."
+		warning_message "If you would like to recreate, delete existing link and rerun."
+	else
+		if [ -f "$2" ] || [ -d "$2" ]; then
+			message "$2 already exists. Removing..."
+			rm -r "$2"
+		fi
+
+		message "Copying from $1 to $2..."
+		cp -r "$1" "$2"
+		success_message "Successfully replaced $2 with $1"
+	fi
 }
 
 # Renders a text based list of options that can be selected by the
@@ -303,6 +387,14 @@ select_option() {
 	return $((active_col + active_row * colmax))
 }
 
+# @description set options in setup.conf
+# @arg $1 string Configuration variable.
+# @arg $2 string Configuration value.
+set_option() {
+	grep -Eq "^${1}.*" "$CONFIG_FILE" && sed -i "/^${1}.*/d" "$CONFIG_FILE" # delete option if exists
+	echo "${1}=${2}" >>"$CONFIG_FILE"                                       # add option
+}
+
 # @description Sources file to be used by the script
 # @arg $1 File to source
 source_file() {
@@ -314,12 +406,12 @@ source_file() {
 	fi
 }
 
-git_crypt_check() {
-	if [[ "$GIT_CRYPT_LOCKED" = "False" ]]; then
-		message "Repo is currently unlocked with git-crypt. Installing decrypted file..."
-		return 0
-	else
-		message "Repo is currently locked with git-crypt. Skipping encrypted file..."
-		return 1
+success_message() {
+	if [ $? -eq 0 ]; then
+		cecho "GREEN" "[>>] $1"
 	fi
+}
+
+warning_message() {
+	cecho "YELLOW" "[!!] $1"
 }

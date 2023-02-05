@@ -17,7 +17,7 @@ linux_install() {
 		gnome_install
 		;;
 	*)
-		message '[!!] No desktop environment selected... aborting...'
+		error_message "No desktop environment selected... aborting..."
 		exit
 		;;
 	esac
