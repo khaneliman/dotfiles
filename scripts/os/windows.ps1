@@ -52,14 +52,14 @@ Customizing explorer"
 ##
 Write-Host "
 Installing Catppuccin-Mocha-Blue-Cursors"
-.$SCRIPTS_DIR/os/windows/Install-Cursor.ps1 "$DOTS_DIR/windows/themes/Cursor/Catppuccin-Mocha-Blue-Cursors/install.inf"
+.$SCRIPTS_DIR/os/windows/Install-Cursor.ps1 "$DOTS_DIR/windows/komorebi/themes/Cursor/Catppuccin-Mocha-Blue-Cursors/install.inf"
 
 ##
 # Update windows theme
 ##
 Write-Host "
 Installing Explorer Themes" 
-.$SCRIPTS_DIR/os/windows/Install-Theme.ps1 "$DOTS_DIR/windows/themes/Explorer/" "$DOTS_DIR/windows/themes/Explorer/catppuccin" "$DOTS_DIR/windows/themes/Explorer/catppuccin/Shell/NormalColor" "$DOTS_DIR/windows/themes/Explorer/catppuccin/wallpapers"
+.$SCRIPTS_DIR/os/windows/Install-Theme.ps1 "$DOTS_DIR/windows/komorebi/themes/Explorer/" "$DOTS_DIR/windows/komorebi/themes/Explorer/catppuccin" "$DOTS_DIR/windows/komorebi/themes/Explorer/catppuccin/Shell/NormalColor" "$DOTS_DIR/windows/themes/Explorer/catppuccin/wallpapers"
 
 Write-Host "
 Setting Windows Colors" 
@@ -70,4 +70,4 @@ Setting Windows Colors"
 ##
 Write-Host "
 Installing Config Files" 
-.$SCRIPTS_DIR/os/windows/Install-Configs.ps1 "$DOTS_DIR/windows/home/" "$DOTS_DIR/shared/home/"
+.$SCRIPTS_DIR/os/windows/Install-Configs.ps1 "$DOTS_DIR/windows/komorebi/home/" "$DOTS_DIR/shared/home/"

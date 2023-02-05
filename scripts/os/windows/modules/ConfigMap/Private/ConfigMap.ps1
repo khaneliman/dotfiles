@@ -38,37 +38,37 @@ class ConfigMap
         # Windows Configs
         ##
         $this.ConfigMap += [ConfigMapEntry]::new(
-            $global:DOTS_DIR+"/windows/home/.config/komorebi",
+            $global:DOTS_DIR+"/windows/komorebi/home/.config/komorebi",
             ${env:USERPROFILE}+"\.config\komorebi",
             $true,
             $true)
         
         $this.ConfigMap += [ConfigMapEntry]::new(
-            $global:DOTS_DIR+"/windows/home/.config/ohmyposh",
+            $global:DOTS_DIR+"/windows/komorebi/home/.config/ohmyposh",
             ${env:USERPROFILE}+"\.config\ohmyposh",
             $true,
             $true)
 
         $this.ConfigMap += [ConfigMapEntry]::new(
-            $global:DOTS_DIR+"/windows/home/AppData/Local/Packages/MicaForEveryone_pfhyqtmn5ksmy/LocalState/MicaForEveryone.conf",
+            $global:DOTS_DIR+"/windows/komorebi/home/AppData/Local/Packages/MicaForEveryone_pfhyqtmn5ksmy/LocalState/MicaForEveryone.conf",
             ${env:USERPROFILE}+"\AppData\Local\Packages\MicaForEveryone_pfhyqtmn5ksmy\LocalState\MicaForEveryone.conf",
             $false,
             $true)
 
         $this.ConfigMap += [ConfigMapEntry]::new(
-            $global:DOTS_DIR+"/windows/home/AppData/Local/Packages/Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe/LocalState/settings.json",
+            $global:DOTS_DIR+"/windows/komorebi/home/AppData/Local/Packages/Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe/LocalState/settings.json",
             ${env:USERPROFILE}+"\AppData\Local\Packages\Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe\LocalState\settings.json",
             $true,
             $true)
 
         $this.ConfigMap += [ConfigMapEntry]::new(
-            $global:DOTS_DIR+"/windows/home/Documents/PowerShell/Microsoft.PowerShell_profile.ps1",
+            $global:DOTS_DIR+"/windows/komorebi/home/Documents/PowerShell/Microsoft.PowerShell_profile.ps1",
             $DOCUMENTS_PATH+"\PowerShell\Microsoft.PowerShell_profile.ps1",
             $true,
             $true)
         
         $this.ConfigMap += [ConfigMapEntry]::new(
-            $global:DOTS_DIR+"/windows/home/Documents/PowerShell/powershell.config.json",
+            $global:DOTS_DIR+"/windows/komorebi/home/Documents/PowerShell/powershell.config.json",
             $DOCUMENTS_PATH+"\PowerShell\powershell.config.json",
             $true,
             $true)

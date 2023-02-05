@@ -94,7 +94,7 @@ Current window manager used on my laptop. Uses [sketchybar](https://github.com/F
 
 #### Unique Install Steps
 
-See the install steps in Windows config's [README](/dots/windows/README.md)
+See the install steps in Windows config's [README](/dots/windows/komorebi/README.md)
 
 Current window manager [Komorebi](https://github.com/LGUG2Z/komorebi) with [AutoHotkey](https://github.com/AutoHotkey/AutoHotkey) for keybinds and configuring Komorebi.
 
