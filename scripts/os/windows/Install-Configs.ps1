@@ -63,7 +63,8 @@ foreach ( $config in $ConfigMap )
         New-Item -ItemType Directory -Force -Path $destinationFolderPath
 
         Copy-Item -Path $config.Source -Destination $config.Destination -Recurse -Force
-
+        
+        # TODO: Move to komorebi specific script 
         if ($config.Source -match "btop.conf") {
             $btop_theme_path = "${env:USERPROFILE}\scoop\apps\btop\current\themes\catppuccin_macchiato.theme"
             $regex = "color_theme = .*"

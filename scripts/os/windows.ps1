@@ -33,6 +33,10 @@ Write-Host "
 Installing software."
 .$SCRIPTS_DIR/os/windows/Install-Programs.ps1
 
+Write-Host "
+Installing Komorebi specific software."
+.$SCRIPTS_DIR/os/windows/komorebi/Install-Programs.ps1
+
 ##
 # Customize windows taskbar
 ##
@@ -52,18 +56,18 @@ Customizing explorer"
 ##
 Write-Host "
 Installing Catppuccin-Mocha-Blue-Cursors"
-.$SCRIPTS_DIR/os/windows/Install-Cursor.ps1 "$DOTS_DIR/windows/komorebi/themes/Cursor/Catppuccin-Mocha-Blue-Cursors/install.inf"
+.$SCRIPTS_DIR/os/windows/komorebi/Install-Cursor.ps1 "$DOTS_DIR/windows/komorebi/themes/Cursor/Catppuccin-Mocha-Blue-Cursors/install.inf"
 
 ##
 # Update windows theme
 ##
 Write-Host "
-Installing Explorer Themes" 
-.$SCRIPTS_DIR/os/windows/Install-Theme.ps1 "$DOTS_DIR/windows/komorebi/themes/Explorer/" "$DOTS_DIR/windows/komorebi/themes/Explorer/catppuccin" "$DOTS_DIR/windows/komorebi/themes/Explorer/catppuccin/Shell/NormalColor" "$DOTS_DIR/windows/themes/Explorer/catppuccin/wallpapers"
+Installing Catppuccin Explorer Themes" 
+.$SCRIPTS_DIR/os/windows/komorebi/Install-Theme.ps1 "$DOTS_DIR/windows/komorebi/themes/Explorer/" "$DOTS_DIR/windows/komorebi/themes/Explorer/catppuccin" "$DOTS_DIR/windows/komorebi/themes/Explorer/catppuccin/Shell/NormalColor" "$DOTS_DIR/windows/themes/Explorer/catppuccin/wallpapers"
 
 Write-Host "
-Setting Windows Colors" 
-.$SCRIPTS_DIR/os/windows/Theme-Explorer.ps1
+Setting Catppuccin Windows Colors" 
+.$SCRIPTS_DIR/os/windows/komorebi/Color-Explorer.ps1
 
 ##
 # Copy/Link Config Files

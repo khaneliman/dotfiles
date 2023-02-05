@@ -90,7 +90,7 @@ Set-RegistryEntry -Key 'KomorebicConfigOnLogin' -Type "SZ" -Value "$($env:USERPR
 
 - Programs used in config. I prefer to use a winget version, when available, for a regular installation. Scoop is user level by design so it's easier to install but unusual in management.
 
-```
+```powershell
 $winget_apps = @(
         'MSYS2.MSYS2',
         'JanDeDobbeleer.OhMyPosh',

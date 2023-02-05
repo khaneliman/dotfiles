@@ -71,7 +71,6 @@ if (Test-CommandExists winget)
 {
     $winget_apps = @(
         'MSYS2.MSYS2',
-        'JanDeDobbeleer.OhMyPosh',
         'Microsoft.Powershell.Preview',
         'Microsoft.WindowsTerminal.Preview',
         'Bitsum.ProcessLasso',
@@ -81,20 +80,15 @@ if (Test-CommandExists winget)
         'Neovim.Neovim',
         'Microsoft.DotNet.SDK.7',
         'Microsoft.DotNet.Runtime.7',
+        'Microsoft.DotNet.DesktopRuntime.7',
         'Mozilla.Firefox.DeveloperEdition',
         'AgileBits.1Password',
         'Microsoft.Teams',
-        'MicaForEveryone.MicaForEveryone',
-        'Rainmeter.Rainmeter',
         'AntibodySoftware.WizTree',
         'Notepad++.Notepad++',
         'Microsoft.Sysinternals.Autoruns',
         'Valve.Steam',
         'HeroicGamesLauncher.HeroicGamesLauncher',
-        'StartIsBack.StartAllBack',
-        'LGUG2Z.komorebi',
-        'AutoHotkey.AutoHotkey',
-        'Lexikos.AutoHotkey',
         'Alacritty.Alacritty'
     )
 
@@ -108,27 +102,3 @@ if (Test-CommandExists winget)
     write-host "    Winget not installed. Skipping winget installs..."
 }
 
-##
-# Win 11 Theme Patcher
-# https://mhoefs.eu/software_count.php
-##
-if (!(Test-Path -Path "$($env:USERPROFILE)\Downloads\UltraUXThemePatcher.exe" -PathType Leaf))
-{
-    write-host "Downloading UltraUXThemePatcher..."
-    $postParams = @{Uxtheme='UltraUXThemePatcher';id='Uxtheme'}
-    $ProgressPreference = 'SilentlyContinue'
-    Invoke-WebRequest -Uri https://mhoefs.eu/software_count.php -OutFile "$($env:USERPROFILE)\Downloads\UltraUXThemePatcher.exe" -Method POST -Body $postParams
-    write-host "Downloaded to $($env:USERPROFILE)\Downloads\UltraUXThemePatcher.exe"
-    write-host "Patch OS to apply themes"
-} else
-{
-    write-host ""
-    write-host "UltraUXThemePatcher already downloaded. skipping..."
-    write-host "Patch OS to apply custom themes"
-}
-
-## Set komorebi to run on startup
-$RegPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" 
-Set-RegistryEntry -Key 'KomorebicOnLogin' -Type "String" -Value 'C:\Program Files\komorebi\bin\komorebic.exe start --await-configuration' -Path $RegPath
-
-Set-RegistryEntry -Key 'KomorebicConfigOnLogin' -Type "String" -Value "$($env:USERPROFILE)\.config\komorebi\komorebi.ahk" -Path $RegPath
