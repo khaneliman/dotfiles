@@ -15,39 +15,39 @@ hypr_backup_existing() {
 	mkdir -p "$BACKUP_LOCATION"
 
 	# backup .config
-	mv ~/.config/Kvantum "$BACKUP_LOCATION"/.config/
-	mv ~/.config/OpenRGB "$BACKUP_LOCATION"/.config/
-	mv ~/.config/aconfmgr "$BACKUP_LOCATION"/.config/
-	mv ~/.config/ckb-next "$BACKUP_LOCATION"/.config/
-	mv ~/.config/gtk-2.0 "$BACKUP_LOCATION"/.config/
-	mv ~/.config/gtk-3.0 "$BACKUP_LOCATION"/.config/
-	mv ~/.config/gtk-4.0 "$BACKUP_LOCATION"/.config/
-	mv ~/.config/hypr "$BACKUP_LOCATION"/.config/
-	mv ~/.config/mako "$BACKUP_LOCATION"/.config/
-	mv ~/.config/paru "$BACKUP_LOCATION"/.config/
-	mv ~/.config/qt5ct "$BACKUP_LOCATION"/.config/
-	mv ~/.config/qt6ct "$BACKUP_LOCATION"/.config/
-	mv ~/.config/rofi "$BACKUP_LOCATION"/.config/
-	mv ~/.config/swappy "$BACKUP_LOCATION"/.config/
-	mv ~/.config/swaylock "$BACKUP_LOCATION"/.config/
-	mv ~/.config/waybar "$BACKUP_LOCATION"/.config/
-	mv ~/.config/wlogout "$BACKUP_LOCATION"/.config/
-	mv ~/.config/mimeapps.list "$BACKUP_LOCATION"/.config/
+	mv "$HOME"/.config/Kvantum "$BACKUP_LOCATION"/.config/
+	mv "$HOME"/.config/OpenRGB "$BACKUP_LOCATION"/.config/
+	mv "$HOME"/.config/aconfmgr "$BACKUP_LOCATION"/.config/
+	mv "$HOME"/.config/ckb-next "$BACKUP_LOCATION"/.config/
+	mv "$HOME"/.config/gtk-2.0 "$BACKUP_LOCATION"/.config/
+	mv "$HOME"/.config/gtk-3.0 "$BACKUP_LOCATION"/.config/
+	mv "$HOME"/.config/gtk-4.0 "$BACKUP_LOCATION"/.config/
+	mv "$HOME"/.config/hypr "$BACKUP_LOCATION"/.config/
+	mv "$HOME"/.config/mako "$BACKUP_LOCATION"/.config/
+	mv "$HOME"/.config/paru "$BACKUP_LOCATION"/.config/
+	mv "$HOME"/.config/qt5ct "$BACKUP_LOCATION"/.config/
+	mv "$HOME"/.config/qt6ct "$BACKUP_LOCATION"/.config/
+	mv "$HOME"/.config/rofi "$BACKUP_LOCATION"/.config/
+	mv "$HOME"/.config/swappy "$BACKUP_LOCATION"/.config/
+	mv "$HOME"/.config/swaylock "$BACKUP_LOCATION"/.config/
+	mv "$HOME"/.config/waybar "$BACKUP_LOCATION"/.config/
+	mv "$HOME"/.config/wlogout "$BACKUP_LOCATION"/.config/
+	mv "$HOME"/.config/mimeapps.list "$BACKUP_LOCATION"/.config/
 
-	mv ~/.screenlayout/primary.sh "$BACKUP_LOCATION"
-	mv ~/.gtkrc-2.0 "$BACKUP_LOCATION"
+	mv "$HOME"/.screenlayout/primary.sh "$BACKUP_LOCATION"
+	mv "$HOME"/.gtkrc-2.0 "$BACKUP_LOCATION"
 }
 
 hypr_create_symlink() {
 	message "[>>] Creating sym links for hyprland files"
 
-	sudo ln -s ~/.local/share/wlroots-env/ /usr/local/share/
-	sudo ln -s ~/.config/waybar/ /usr/local/share/waybar
-	sudo ln -s ~/.local/bin/Hyprland-custom /usr/local/bin/
-	sudo ln -s ~/.local/bin/xdg-desktop-portal.sh /usr/local/bin/
-	sudo ln -s ~/.local/bin/hyprland_setup_dual_monitors.sh /usr/local/bin
-	sudo ln -s ~/.local/bin/hyprland_cleanup_after_startup.s /usr/local/binh
-	sudo ln -s ~/.local/bin/hyprland_handle_monitor_connect.sh /usr/local/bin
+	sudo ln -s -f "$HOME"/.local/share/wlroots-env/ /usr/local/share/
+	sudo ln -s -f "$HOME"/.config/waybar/ /usr/local/share/
+	sudo ln -s -f "$HOME"/.local/bin/Hyprland-custom /usr/local/bin/
+	sudo ln -s -f "$HOME"/.local/bin/xdg-desktop-portal.sh /usr/local/bin/
+	sudo ln -s -f "$HOME"/.local/bin/hyprland_setup_dual_monitors.sh /usr/local/bin
+	sudo ln -s -f "$HOME"/.local/bin/hyprland_cleanup_after_startup.s /usr/local/binh
+	sudo ln -s -f "$HOME"/.local/bin/hyprland_handle_monitor_connect.sh /usr/local/bin
 }
 
 hypr_enable_systemd_services() {
@@ -64,31 +64,31 @@ hypr_copy_configuration() {
 	message "[>>] Copying config files for hyprland"
 
 	# copy files in when not replacing contents completely
-	cp -r "$HYPR_HOME"/.local/ ~/.local/
-	cp -r "$HYPR_HOME"/.themes/ ~/.themes/
-	cp -r "$HYPR_HOME"/.screenlayout/ ~/.screenlayout/
-	cp -r "$HYPR_HOME"/.config/systemd/ ~/.config/systemd/
+	cp -r "$HYPR_HOME"/.local/ "$HOME"/.local/
+	cp -r "$HYPR_HOME"/.themes/ "$HOME"/.themes/
+	cp -r "$HYPR_HOME"/.screenlayout/ "$HOME"/.screenlayout/
+	cp -r "$HYPR_HOME"/.config/systemd/ "$HOME"/.config/systemd/
 
 	# symlinks for stuff replaced completely
-	ln -s "$HYPR_HOME"/.config/Kvantum ~/.config/Kvantum
-	ln -s "$HYPR_HOME"/.config/OpenRGB ~/.config/OpenRGB
-	ln -s "$HYPR_HOME"/.config/ckb-next ~/.config/ckb-next
-	ln -s "$HYPR_HOME"/.config/fish/conf.d/tide.fish ~/.config/fish/conf.d/tide.fish
-	ln -s "$HYPR_HOME"/.config/gtk-3.0 ~/.config/gtk-3.0
-	ln -s "$HYPR_HOME"/.config/gtk-4.0 ~/.config/gtk-4.0
-	ln -s "$HYPR_HOME"/.config/hypr ~/.config/hypr
-	ln -s "$HYPR_HOME"/.config/mako ~/.config/mako
-	ln -s "$HYPR_HOME"/.config/paru ~/.config/paru
-	ln -s "$HYPR_HOME"/.config/qt5ct ~/.config/qt5ct
-	ln -s "$HYPR_HOME"/.config/qt6ct ~/.config/qt6ct
-	ln -s "$HYPR_HOME"/.config/rofi ~/.config/rofi
-	ln -s "$HYPR_HOME"/.config/swappy ~/.config/swappy
-	ln -s "$HYPR_HOME"/.config/swaylock ~/.config/swaylock
-	ln -s "$HYPR_HOME"/.config/waybar ~/.config/waybar
-	ln -s "$HYPR_HOME"/.config/wlogout ~/.config/wlogout
-	ln -s "$HYPR_HOME"/.config/mimeapps.list ~/.config/mimeapps.list
-	ln -s "$HYPR_HOME"/.gitconfig.local ~/.gitconfig.local
-	ln -s "$HYPR_HOME"/.gtkrc-2.0 ~/.gtkrc-2.0
+	link_locations "$HYPR_HOME"/.config/Kvantum "$HOME"/.config/Kvantum
+	link_locations "$HYPR_HOME"/.config/OpenRGB "$HOME"/.config/OpenRGB
+	link_locations "$HYPR_HOME"/.config/ckb-next "$HOME"/.config/ckb-next
+	link_locations "$HYPR_HOME"/.config/fish/conf.d/tide.fish "$HOME"/.config/fish/conf.d/tide.fish
+	link_locations "$HYPR_HOME"/.config/gtk-3.0 "$HOME"/.config/gtk-3.0
+	link_locations "$HYPR_HOME"/.config/gtk-4.0 "$HOME"/.config/gtk-4.0
+	link_locations "$HYPR_HOME"/.config/hypr "$HOME"/.config/hypr
+	link_locations "$HYPR_HOME"/.config/mako "$HOME"/.config/mako
+	link_locations "$HYPR_HOME"/.config/paru "$HOME"/.config/paru
+	link_locations "$HYPR_HOME"/.config/qt5ct "$HOME"/.config/qt5ct
+	link_locations "$HYPR_HOME"/.config/qt6ct "$HOME"/.config/qt6ct
+	link_locations "$HYPR_HOME"/.config/rofi "$HOME"/.config/rofi
+	link_locations "$HYPR_HOME"/.config/swappy "$HOME"/.config/swappy
+	link_locations "$HYPR_HOME"/.config/swaylock "$HOME"/.config/swaylock
+	link_locations "$HYPR_HOME"/.config/waybar "$HOME"/.config/waybar
+	link_locations "$HYPR_HOME"/.config/wlogout "$HOME"/.config/wlogout
+	link_locations "$HYPR_HOME"/.config/mimeapps.list "$HOME"/.config/mimeapps.list
+	link_locations "$HYPR_HOME"/.gitconfig.local "$HOME"/.gitconfig.local
+	link_locations "$HYPR_HOME"/.gtkrc-2.0 "$HOME"/.gtkrc-2.0
 
 	# copy desktop file for display manager
 	sudo mkdir -p /usr/share/wayland-sessions/

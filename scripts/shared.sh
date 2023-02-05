@@ -45,16 +45,16 @@ install_bat_themes() {
 		# bat requires cache to be rebuilt to detect themes in config directory
 		bat cache --build
 	else
-		message '[!!] bat not detected... installation instructions: https://github.com/sharkdp/bat#installation'
+		message "[!!] bat not detected... installation instructions: https://github.com/sharkdp/bat#installation"
 	fi
 }
 
 install_better_discord() {
 	if [[ $(command -v betterdiscordctl) ]]; then
-		message '[>>] Better discord detected... installing..'
+		message "[>>] Better discord detected... installing.."
 		betterdiscordctl install
 	else
-		message '[!!] Better Discord not detected... installation instructions: https://docs.betterdiscord.app/users/getting-started/installation'
+		message "[!!] Better Discord not detected... installation instructions: https://docs.betterdiscord.app/users/getting-started/installation"
 	fi
 }
 
@@ -66,26 +66,26 @@ install_fish_plugins() {
 		message "[>>] Installing fish plugins"
 		message "[>>] DO NOT configure Tide when prompted"
 
-		cp "$DOTS_DIR"/shared/home/.config/fish/fish_plugins "$HOME"/.config/fish/fish_plugins
+		git restore "$SHARED_HOME"/.config/fish/fish_plugins
 
 		fish -c "fisher update"
 	else
-		message '[!!] Fish not detected... installation instructions: https://fishshell.com/'
+		message "[!!] Fish not detected... installation instructions: https://fishshell.com/"
 	fi
 }
 
 install_spicetify() {
 	if [[ $(command -v spicetify) ]]; then
 
-		message '[>>] Spicetify detected.. configuring and setting theme'
+		message "[>>] Spicetify detected.. configuring and setting theme"
 
 		if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 
-			message '[>>] Linux detected.. checking for spotify installations'
+			message "[>>] Linux detected.. checking for spotify installations"
 
 			# Spotify path
 			if [[ -d "/opt/spotify/" ]]; then
-				message '[>>] Spotify detected in /opt/spotify.. setting permissions and spotify_path'
+				message "[>>] Spotify detected in /opt/spotify.. setting permissions and spotify_path"
 
 				sudo chmod a+wr /opt/spotify
 				sudo chmod a+wr /opt/spotify/Apps -R
@@ -93,7 +93,7 @@ install_spicetify() {
 				command -v spicetify && spicetify config spotify_path /opt/spotify/
 
 			elif [[ -d "/usr/share/spotify" ]]; then
-				message '[>>] Spotify detected in /usr/share/spotify.. settings permissions and spotify_path'
+				message "[>>] Spotify detected in /usr/share/spotify.. settings permissions and spotify_path"
 
 				sudo chmod a+wr /usr/share/spotify
 				sudo chmod a+wr /usr/share/spotify/Apps -R
@@ -101,7 +101,7 @@ install_spicetify() {
 				command -v spicetify && spicetify config spotify_path /usr/share/spotify
 
 			elif [[ -d "$HOME/.var/app/com.spotify.Client/config/spotify" ]]; then
-				message '[>>] Spotify detected in "$HOME"/.var/app/com.spotify.Client/config/spotify.. settings permissions and spotify_path'
+				message "[>>] Spotify detected in "$HOME"/.var/app/com.spotify.Client/config/spotify.. settings permissions and spotify_path"
 
 				sudo chmod a+wr "$HOME"/.var/app/com.spotify.Client/config/spotify
 				sudo chmod a+wr "$HOME"/.var/app/com.spotify.Client/config/spotify/Apps -R
@@ -111,12 +111,12 @@ install_spicetify() {
 
 			# Preferences path
 			if [[ -f "$HOME/.config.spotify/prefs" ]]; then
-				message '[>>] Spotify prefs found at "$HOME"/.config/spotify/prefs... settings prefs_path'
+				message "[>>] Spotify prefs found at $HOME/.config/spotify/prefs... settings prefs_path"
 
 				command -v spicetify && spicetify config prefs_path "$HOME"/.config/spotify/prefs
 
 			elif [[ -f "$HOME/.var/app/com.spotify.Client/config/spotify/prefs" ]]; then
-				message '[>>] Spotify prefs found at "$HOME"/.var/app/com.spotify.Client/config/spotify/prefs... settings prefs_path'
+				message "[>>] Spotify prefs found at $HOME/.var/app/com.spotify.Client/config/spotify/prefs... settings prefs_path"
 
 				command -v spicetify && spicetify config prefs_path "$HOME"/.var/app/com.spotify.Client/config/spotify/prefs
 			fi
@@ -124,7 +124,7 @@ install_spicetify() {
 
 		if [[ "$OSTYPE" == "darwin"* ]]; then
 
-			message '[>>] macOS detected.. checking for spotify installations'
+			message "[>>] macOS detected.. checking for spotify installations"
 
 			# Spotify path
 			if [[ -d "/Applications/Spotify.app/" ]]; then
@@ -166,29 +166,29 @@ shared_copy_configuration() {
 	# cp -r "$DOTS_DIR"/shared/home/. ~
 
 	# link files that replace contents of location
-	ln -s "$SHARED_HOME"/.config/BetterDiscord "$HOME"/.config/BetterDiscord
-	ln -s "$SHARED_HOME"/.config/alacritty "$HOME"/.config/alacritty
-	ln -s "$SHARED_HOME"/.config/nvim "$HOME"/.config/nvim
-	ln -s "$SHARED_HOME"/.config/astronvim/lua/user "$HOME"/.config/nvim/lua/user
-	ln -s "$SHARED_HOME"/.config/bat "$HOME"/.config/bat
-	ln -s "$SHARED_HOME"/.config/btop "$HOME"/.config/btop
-	ln -s "$SHARED_HOME"/.config/davmail "$HOME"/.config/davmail
-	ln -s "$SHARED_HOME"/.config/fastfetch "$HOME"/.config/fastfetch
-	ln -s "$SHARED_HOME"/.config/fish "$HOME"/.config/fish
-	ln -s "$SHARED_HOME"/.config/kitty "$HOME"/.config/kitty
-	ln -s "$SHARED_HOME"/.config/micro "$HOME"/.config/micro
-	ln -s "$SHARED_HOME"/.config/ranger "$HOME"/.config/ranger
-	ln -s "$SHARED_HOME"/.config/spicetify "$HOME"/.config/spicetify
-	ln -s "$SHARED_HOME"/.config/topgrade.toml "$HOME"/.config/topgrade.toml
-	ln -s "$SHARED_HOME"/.gnupg "$HOME"/.gnupg
-	ln -s "$SHARED_HOME"/.ssh "$HOME"/.ssh
-	ln -s "$SHARED_HOME"/.face "$HOME"/.face
-	ln -s "$SHARED_HOME"/.face.icon "$HOME"/.face.icon
-	ln -s "$SHARED_HOME"/.gitconfig "$HOME"/.gitconfig
-	ln -s "$SHARED_HOME"/.gitconfig.functions "$HOME"/.gitconfig.functions
-	ln -s "$SHARED_HOME"/.gitconfig.signing "$HOME"/.gitconfig.signing
-	ln -s "$SHARED_HOME"/.wakatime.cfg "$HOME"/.wakatime.cfg
-	ln -s "$SHARED_HOME"/.wegorc "$HOME"/.wegorc
+	link_locations "$SHARED_HOME"/.config/BetterDiscord "$HOME"/.config/BetterDiscord
+	link_locations "$SHARED_HOME"/.config/alacritty "$HOME"/.config/alacritty
+	link_locations "$SHARED_HOME"/.config/nvim "$HOME"/.config/nvim
+	link_locations "$SHARED_HOME"/.config/astronvim/lua/user "$HOME"/.config/nvim/lua/user
+	link_locations "$SHARED_HOME"/.config/bat "$HOME"/.config/bat
+	link_locations "$SHARED_HOME"/.config/btop "$HOME"/.config/btop
+	link_locations "$SHARED_HOME"/.config/davmail "$HOME"/.config/davmail
+	link_locations "$SHARED_HOME"/.config/fastfetch "$HOME"/.config/fastfetch
+	link_locations "$SHARED_HOME"/.config/fish "$HOME"/.config/fish
+	link_locations "$SHARED_HOME"/.config/kitty "$HOME"/.config/kitty
+	link_locations "$SHARED_HOME"/.config/micro "$HOME"/.config/micro
+	link_locations "$SHARED_HOME"/.config/ranger "$HOME"/.config/ranger
+	link_locations "$SHARED_HOME"/.config/spicetify "$HOME"/.config/spicetify
+	link_locations "$SHARED_HOME"/.config/topgrade.toml "$HOME"/.config/topgrade.toml
+	link_locations "$SHARED_HOME"/.gnupg "$HOME"/.gnupg
+	link_locations "$SHARED_HOME"/.ssh "$HOME"/.ssh
+	link_locations "$SHARED_HOME"/.face "$HOME"/.face
+	link_locations "$SHARED_HOME"/.face.icon "$HOME"/.face.icon
+	link_locations "$SHARED_HOME"/.gitconfig "$HOME"/.gitconfig
+	link_locations "$SHARED_HOME"/.gitconfig.functions "$HOME"/.gitconfig.functions
+	link_locations "$SHARED_HOME"/.gitconfig.signing "$HOME"/.gitconfig.signing
+	link_locations "$SHARED_HOME"/.wakatime.cfg "$HOME"/.wakatime.cfg
+	link_locations "$SHARED_HOME"/.wegorc "$HOME"/.wegorc
 
 	# copy files that dont replace contents of location
 	cp -r "$SHARED_HOME"/.fonts/ "$HOME"/.fonts/

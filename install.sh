@@ -4,7 +4,7 @@
 set -a # mark variables to be exported to subsequent commands
 
 CURRENT_TIME=$(date "+%Y.%m.%d-%H.%M.%S")
-BACKUP_LOCATION="$HOME/.dotfiles-backup/$CURRENT_TIME/"
+BACKUP_LOCATION="$HOME/.dotfiles-backup/$CURRENT_TIME"
 
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
 SCRIPTS_DIR="$SCRIPT_DIR"/scripts

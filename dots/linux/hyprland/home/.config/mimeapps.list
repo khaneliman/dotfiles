@@ -2,7 +2,7 @@
 application/json=org.kde.kate.desktop;nvim.desktop;
 application/pdf=firefox-developer-edition.desktop;
 application/x-wine-extension-ini=org.kde.kate.desktop;
-application/xml=org.kde.kate.desktop;firefox-developer-edition.desktop;micro.desktop;vim.desktop;visual-studio-code.desktop;GitKraken.desktop;nvim.desktop;
+application/xml=org.kde.kate.desktop;firefox-developer-edition.desktop;micro.desktop;nvim.desktop;visual-studio-code.desktop;GitKraken.desktop;vim.desktop;
 image/svg+xml=org.inkscape.Inkscape.desktop;
 inode/directory=org.kde.dolphin.desktop;ranger.desktop;
 inode/mount-point=org.kde.dolphin.desktop;

@@ -49,6 +49,15 @@ logo() {
 "
 }
 
+link_locations() {
+	if [[ -L "$2" && -e "$2" ]]; then
+		echo "Valid symlink already exists at $2. Skipping..."
+		echo "If you would like to recreate, delete existing link and rerun."
+	else
+		ln -s "$1" "$2"
+	fi
+}
+
 message() {
 	printf "%s\n" "$*" >&2
 }

@@ -14,5 +14,7 @@ setup.conf
 !/dots/shared/home/.config/fish/conf.d/tide.fish
 /dots/shared/home/.config/ranger/config/local.conf
 /dots/shared/home/.config/spicetify/config-xpui.ini
+/dots/shared/home/.config/spicetify/Extracted/**/*
+/dots/shared/home/.config/spicetify/Backup/**/*
 scripts/os/user_path_bak.txt
 install.log
