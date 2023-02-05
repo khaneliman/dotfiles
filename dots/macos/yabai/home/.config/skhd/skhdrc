@@ -25,6 +25,19 @@ shift + lalt - f : yabai -m window --toggle zoom-fullscreen; sketchybar --trigge
 # Make window zoom to parent node:
 lalt - f : yabai -m window --toggle zoom-parent; sketchybar --trigger window_focus
 
+# Space Navigation
+cmd + ctrl - left : yabai -m space --focus prev
+cmd + ctrl - right : yabai -m space --focus next 
+
+cmd + ctrl - 1 : yabai -m space --focus 1 
+cmd + ctrl - 2 : yabai -m space --focus 2 
+cmd + ctrl - 3 : yabai -m space --focus 3 
+cmd + ctrl - 4 : yabai -m space --focus 4 
+cmd + ctrl - 5 : yabai -m space --focus 5 
+cmd + ctrl - 6 : yabai -m space --focus 6 
+cmd + ctrl - 7 : yabai -m space --focus 7 
+cmd + ctrl - 8 : yabai -m space --focus 8 
+
 # Window Navigation (through display borders): 
 lalt - h    : yabai -m window --focus west  || yabai -m display --focus west
 lalt - j    : yabai -m window --focus south || yabai -m display --focus south

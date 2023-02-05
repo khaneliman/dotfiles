@@ -65,6 +65,145 @@ change_defaults() {
 	defaults write com.apple.screencapture type -string "png"
 	defaults write com.apple.spaces spans-displays -bool false
 	defaults write com.apple.finder CreateDesktop false
+
+	mac_change_symbolickeys
+}
+
+mac_change_symbolickeys() {
+	defaults write com.apple.symbolichotkeys.plist AppleSymbolicHotKeys -dict-add 118 "
+  <dict>
+    <key>enabled</key><false/>
+    <key>value</key><dict>
+      <key>type</key><string>standard</string>
+      <key>parameters</key>
+      <array>
+        <integer>65535</integer>
+        <integer>18</integer>
+        <integer>262144</integer>
+      </array>
+    </dict>
+  </dict>
+"
+
+	defaults write com.apple.symbolichotkeys.plist AppleSymbolicHotKeys -dict-add 119 "
+  <dict>
+    <key>enabled</key><false/>
+    <key>value</key><dict>
+      <key>type</key><string>standard</string>
+      <key>parameters</key>
+      <array>
+        <integer>65535</integer>
+        <integer>19</integer>
+        <integer>262144</integer>
+      </array>
+    </dict>
+  </dict>
+"
+
+	defaults write com.apple.symbolichotkeys.plist AppleSymbolicHotKeys -dict-add 120 "
+  <dict>
+    <key>enabled</key><false/>
+    <key>value</key><dict>
+      <key>type</key><string>standard</string>
+      <key>parameters</key>
+      <array>
+        <integer>65535</integer>
+        <integer>20</integer>
+        <integer>262144</integer>
+      </array>
+    </dict>
+  </dict>
+"
+
+	defaults write com.apple.symbolichotkeys.plist AppleSymbolicHotKeys -dict-add 121 "
+  <dict>
+    <key>enabled</key><false/>
+    <key>value</key><dict>
+      <key>type</key><string>standard</string>
+      <key>parameters</key>
+      <array>
+        <integer>65535</integer>
+        <integer>21</integer>
+        <integer>262144</integer>
+      </array>
+    </dict>
+  </dict>
+"
+
+	defaults write com.apple.symbolichotkeys.plist AppleSymbolicHotKeys -dict-add 122 "
+  <dict>
+    <key>enabled</key><false/>
+    <key>value</key><dict>
+      <key>type</key><string>standard</string>
+      <key>parameters</key>
+      <array>
+        <integer>65535</integer>
+        <integer>23</integer>
+        <integer>262144</integer>
+      </array>
+    </dict>
+  </dict>
+"
+
+	defaults write com.apple.symbolichotkeys.plist AppleSymbolicHotKeys -dict-add 123 "
+  <dict>
+    <key>enabled</key><false/>
+    <key>value</key><dict>
+      <key>type</key><string>standard</string>
+      <key>parameters</key>
+      <array>
+        <integer>65535</integer>
+        <integer>22</integer>
+        <integer>262144</integer>
+      </array>
+    </dict>
+  </dict>
+"
+
+	defaults write com.apple.symbolichotkeys.plist AppleSymbolicHotKeys -dict-add 124 "
+  <dict>
+    <key>enabled</key><false/>
+    <key>value</key><dict>
+      <key>type</key><string>standard</string>
+      <key>parameters</key>
+      <array>
+        <integer>65535</integer>
+        <integer>26</integer>
+        <integer>262144</integer>
+      </array>
+    </dict>
+  </dict>
+"
+	defaults write com.apple.symbolichotkeys.plist AppleSymbolicHotKeys -dict-add 79 "
+  <dict>
+    <key>enabled</key><false/>
+    <key>value</key><dict>
+      <key>type</key><string>standard</string>
+      <key>parameters</key>
+      <array>
+        <integer>65535</integer>
+        <integer>123</integer>
+        <integer>8650752</integer>
+      </array>
+    </dict>
+  </dict>
+"
+	defaults write com.apple.symbolichotkeys.plist AppleSymbolicHotKeys -dict-add 81 "
+  <dict>
+    <key>enabled</key><false/>
+    <key>value</key><dict>
+      <key>type</key><string>standard</string>
+      <key>parameters</key>
+      <array>
+        <integer>65535</integer>
+        <integer>124</integer>
+        <integer>8650752</integer>
+      </array>
+    </dict>
+  </dict>
+"
+
+  /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
 }
 
 enable_brew_servies() {
