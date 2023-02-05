@@ -16,5 +16,6 @@ setup.conf
 /dots/shared/home/.config/spicetify/config-xpui.ini
 /dots/shared/home/.config/spicetify/Extracted/**/*
 /dots/shared/home/.config/spicetify/Backup/**/*
+/scripts/os/mac/Brewfile.lock.json
 scripts/os/user_path_bak.txt
 install.log

@@ -5,26 +5,33 @@ MAC_HOME="$DOTS_DIR"/macos/yabai/home/
 mac_backup_existing() {
 	message "[>>] Backing up existing dotfiles to $BACKUP_LOCATION"
 
-	mv ~/.config/sketchybar "$BACKUP_LOCATION"/.config/
-	mv ~/.config/skhd "$BACKUP_LOCATION"/.config/
-	mv ~/.config/yabai "$BACKUP_LOCATION"/.config/
-	mv ~/.hammerspoon "$BACKUP_LOCATION"/
-	mv ~/.gitconfig.local "$BACKUP_LOCATION"/
-	mv ~/.zshrc "$BACKUP_LOCATION"/
+	mv "$HOME"/.config/sketchybar "$BACKUP_LOCATION"/.config/
+	mv "$HOME"/.config/skhd "$BACKUP_LOCATION"/.config/
+	mv "$HOME"/.config/yabai "$BACKUP_LOCATION"/.config/
+	mv "$HOME"/.hammerspoon "$BACKUP_LOCATION"/
+	mv "$HOME"/.gitconfig.local "$BACKUP_LOCATION"/
+	mv "$HOME"/.zshrc "$BACKUP_LOCATION"/
 }
 
 brew_install() {
 	# Install Brew
-	message "[>>] Installing Brew..."
+	if (! command -v brew); then
+		message "[>>] Installing Brew..."
+		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+	else
+		message "[>>] Brew already installed. Skipping..."
+	fi
 
-	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 	brew analytics off
 }
 
 bundle_install() {
-	message "[>>] Installing taps, brews, casks, and apps... "
-
-	brew bundle --file ./mac/Brewfile
+	if (command -v brew); then
+		message "[>>] Installing taps, brews, casks, and apps... "
+		brew bundle --file "$SCRIPTS_DIR"/os/mac/Brewfile
+	else
+		message "[!!] Brew not installed! Skipping apps..."
+	fi
 }
 
 change_defaults() {
@@ -203,48 +210,59 @@ mac_change_symbolickeys() {
   </dict>
 "
 
-  /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
+	message "[>>] Reloading plist changes..."
+	/System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
 }
 
 enable_brew_servies() {
 	# Start Services
-	message "[>>] Starting Services (grant permissions)..."
-	brew services start skhd
-	brew services start yabai
-	brew services start sketchybar
+	if (command -v brew); then
+		message "[>>] Starting Services (grant permissions)..."
+		brew services start skhd
+		brew services start yabai
+		brew services start sketchybar
+	else
+		message "[!!] Brew not installed! Skipping enabling services..."
+	fi
 }
 
 install_fonts() {
-	# macOS Fonts aren't read from ~/.fonts and symbolic links dont work, need to move to ~/Library/Fonts
-	sudo mv ~/.fonts/* ~/Library/Fonts/
+	# macOS Fonts aren't read from "$HOME"/.fonts and symbolic links dont work, need to move to "$HOME"/Library/Fonts
+	message "[>>] Installing fonts..."
+	sudo mv "$HOME"/.fonts/* "$HOME"/Library/Fonts/
 }
 
 mac_copy_configuration() {
+	message "[>>] Installing config files..."
 	# copy home folder dotfiles if you dont want to use symlinks
-	# cp -r "$DOTS_DIR"/macos/yabai/home/. ~
+	# cp -r "$DOTS_DIR"/macos/yabai/home/. "$HOME"
 
 	# symlinks for files that completely replace location
-	ln -s "$MAC_HOME"/.config/skhd ~/.config/skhd
-	ln -s "$MAC_HOME"/.config/yabai ~/.config/yabai
-	ln -s "$MAC_HOME"/.config/sketchybar ~/.config/sketchybar
-	ln -s "$MAC_HOME"/.hammerspoon ~/.hammerspoon
+	link_locations "$MAC_HOME"/.config/skhd "$HOME"/.config/skhd
+	link_locations "$MAC_HOME"/.config/yabai "$HOME"/.config/yabai
+	link_locations "$MAC_HOME"/.config/sketchybar "$HOME"/.config/sketchybar
+	link_locations "$MAC_HOME"/.config/ranger/config/local.conf "$HOME"/.config/ranger/config/local.conf
+	link_locations "$MAC_HOME"/.config/fish/conf.d/tide.fish "$HOME"/.config/fish/conf.d/tide.fish
+	link_locations "$MAC_HOME"/.config/fish/functions/brew.fish "$HOME"/.config/fish/functions/brew.fish
+	link_locations "$MAC_HOME"/.config/fish/functions/suyabai.fish "$HOME"/.config/fish/functions/suyabai.fish
+	link_locations "$MAC_HOME"/.config/fish/functions/zen.fish "$HOME"/.config/fish/functions/zen.fish
 
-	ln -s "$MAC_HOME"/.config/ranger/config/local.conf ~/.config/ranger/config/local.conf
-	ln -s "$MAC_HOME"/.config/fish/conf.d/tide.fish ~/.config/fish/conf.d/tide.fish
-	ln -s "$MAC_HOME"/.config/fish/functions/brew.fish ~/.config/fish/functions/brew.fish
-	ln -s "$MAC_HOME"/.config/fish/functions/suyabai.fish ~/.config/fish/functions/suyabai.fish
-	ln -s "$MAC_HOME"/.config/fish/functions/zen.fish ~/.config/fish/functions/zen.fish
-
-	ln -s "$MAC_HOME"/.gitconfig.local ~/.gitconfig.local
-	ln -s "$MAC_HOME"/.zshrc ~/.zshrc
+	link_locations "$MAC_HOME"/.hammerspoon "$HOME"/.hammerspoon
+	link_locations "$MAC_HOME"/.gitconfig.local "$HOME"/.gitconfig.local
+	link_locations "$MAC_HOME"/.zshrc "$HOME"/.zshrc
 
 	# copy files that dont replace location
-	cp -r "$MAC_HOME"/.terminfo ~/.terminfo
-	cp -r "$MAC_HOME"/Library ~/Library
+	cp -r "$MAC_HOME"/.terminfo "$HOME"/.terminfo
+	cp -r "$MAC_HOME"/Library "$HOME"/Library
 }
 
 1password_ssh_link() {
-	mkdir -p ~/.1password && ln -s ~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock ~/.1password/agent.sock
+	if [[ -d "$HOME"/Library/Group\ Containers/2BUA8C4S2C.com.1password/ ]]; then
+		message "[>>] Linking 1password ssh agent to home folder..."
+		mkdir -p "$HOME"/.1password && link_locations "$HOME"/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock "$HOME"/.1password/agent.sock
+	else
+		message "[!!] 1password not installed. Skipping linking ssh agent..."
+	fi
 }
 
 mac_install() {
