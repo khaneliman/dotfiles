@@ -7,6 +7,10 @@ WSL. The automatic installation handles almost everything for you, but some stuf
 
 ## Unique Install Steps
 
+- Windows git requires a git config update to properly clone this repo
+
+        git config --global core.longpaths true
+
 - Fonts need to be copied/moved to the C:\Users\$username\AppData\Local\Microsoft\Windows\Fonts since Windows doesn't read from the ~/.fonts/ directory.
 
 - Lots of dependencies on applications installed through Winget and Scoop so you need to install them (Need latest winget version to support skipping existing installs)
