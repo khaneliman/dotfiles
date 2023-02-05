@@ -5,6 +5,7 @@ shared_backup_existing() {
 	message "[>>] Backing up existing dotfiles to $BACKUP_LOCATION"
 
 	mkdir -p "$BACKUP_LOCATION"/.local/share/
+	mkdir -p "$BACKUP_LOCATION"/.config/
 
 	# backup .config
 	mv "$HOME"/.config/BetterDiscord "$BACKUP_LOCATION"/.config/
@@ -23,13 +24,13 @@ shared_backup_existing() {
 	mv "$HOME"/.config/spicetify "$BACKUP_LOCATION"/.config/
 	mv "$HOME"/.config/topgrade.toml "$BACKUP_LOCATION"/.config/
 
-	mv "$HOME"/.gnupg "$BACKUP_LOCATION"
-	mv "$HOME"/.ssh "$BACKUP_LOCATION"
+	git_crypt_check && mv "$HOME"/.gnupg "$BACKUP_LOCATION"
+	git_crypt_check && mv "$HOME"/.ssh "$BACKUP_LOCATION"
 	mv "$HOME"/.gitconfig "$BACKUP_LOCATION"
 	mv "$HOME"/.gitconfig.functions "$BACKUP_LOCATION"
-	mv "$HOME"/.gitconfig.signing "$BACKUP_LOCATION"
-	mv "$HOME"/.wakatime.cfg "$BACKUP_LOCATION"
-	mv "$HOME"/.wegorc "$BACKUP_LOCATION"
+	git_crypt_check && mv "$HOME"/.gitconfig.signing "$BACKUP_LOCATION"
+	git_crypt_check && mv "$HOME"/.wakatime.cfg "$BACKUP_LOCATION"
+	git_crypt_check && mv "$HOME"/.wegorc "$BACKUP_LOCATION"
 }
 
 correct_ssh_permissions() {
@@ -180,15 +181,15 @@ shared_copy_configuration() {
 	link_locations "$SHARED_HOME"/.config/ranger "$HOME"/.config/ranger
 	link_locations "$SHARED_HOME"/.config/spicetify "$HOME"/.config/spicetify
 	link_locations "$SHARED_HOME"/.config/topgrade.toml "$HOME"/.config/topgrade.toml
-	link_locations "$SHARED_HOME"/.gnupg "$HOME"/.gnupg
-	link_locations "$SHARED_HOME"/.ssh "$HOME"/.ssh
+	git_crypt_check && link_locations "$SHARED_HOME"/.gnupg "$HOME"/.gnupg
+	git_crypt_check && link_locations "$SHARED_HOME"/.ssh "$HOME"/.ssh
 	link_locations "$SHARED_HOME"/.face "$HOME"/.face
 	link_locations "$SHARED_HOME"/.face.icon "$HOME"/.face.icon
 	link_locations "$SHARED_HOME"/.gitconfig "$HOME"/.gitconfig
 	link_locations "$SHARED_HOME"/.gitconfig.functions "$HOME"/.gitconfig.functions
-	link_locations "$SHARED_HOME"/.gitconfig.signing "$HOME"/.gitconfig.signing
-	link_locations "$SHARED_HOME"/.wakatime.cfg "$HOME"/.wakatime.cfg
-	link_locations "$SHARED_HOME"/.wegorc "$HOME"/.wegorc
+	git_crypt_check && link_locations "$SHARED_HOME"/.gitconfig.signing "$HOME"/.gitconfig.signing
+	git_crypt_check && link_locations "$SHARED_HOME"/.wakatime.cfg "$HOME"/.wakatime.cfg
+	git_crypt_check && link_locations "$SHARED_HOME"/.wegorc "$HOME"/.wegorc
 
 	# copy files that dont replace contents of location
 	cp -r "$SHARED_HOME"/.fonts/ "$HOME"/.fonts/

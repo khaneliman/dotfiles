@@ -12,6 +12,8 @@ DOTS_DIR="$SCRIPT_DIR"/dots
 CONFIG_FILE="$SCRIPT_DIR"/setup.conf
 LOG_FILE="$SCRIPT_DIR"/install.log
 
+GIT_CRYPT_LOCKED=$(test -z "$(git config --local --get filter.git-crypt.smudge 2>/dev/null)" && echo "True" || echo "False")
+
 [ -f "$CONFIG_FILE" ] || touch -f "$CONFIG_FILE"
 
 # Colors/formatting for echo
