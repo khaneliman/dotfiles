@@ -270,6 +270,27 @@ mac_copy_configuration() {
 	fi
 }
 
+set_wallpapers() {
+	if [[ $(command -v yabai) ]]; then
+		message "Setting walpapers for each desktop"
+
+		LOCAL_WALLPAPERS="$(realpath "$HOME"/.local/share/wallpapers/catppuccin)"
+
+		yabai -m space --focus 1
+
+		for file in "$LOCAL_WALLPAPERS"/*.png; do
+			echo "Processing $file file..."
+			# take action on each file. $f store current file name
+			osascript -e 'tell application "Finder" to set desktop picture to POSIX file "'"$file"'"'
+			yabai -m space --focus next
+		done
+
+		success_message "Desktop pictures set."
+	else
+		warning_message "Yabai is not running. Cannot set wallpapers. Skipping..."
+	fi
+}
+
 mac_install() {
 	mac_backup_existing
 
@@ -290,6 +311,8 @@ mac_install() {
 
 	# Enable services
 	enable_brew_servies
+
+	set_wallpapers
 
 	# Output current SIP status
 	csrutil status
