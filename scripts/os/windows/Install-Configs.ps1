@@ -9,7 +9,7 @@ $ConfigMap = Get-ConfigMap
 foreach ( $config in $ConfigMap )
 {   
     if ($config.RequiresUnlock -eq $true -and $GIT_CRYPT_LOCKED -eq $true){
-        write-host $config.Source "is encrypted. Skipping..."
+        write-host -Foreground yellow $config.Source "is encrypted. Skipping..."
         continue
     } 
 
@@ -19,8 +19,8 @@ foreach ( $config in $ConfigMap )
     if ($destinationExists -eq $true)
     {
         if ((get-item $config.Destination).Attributes.ToString() -match "ReparsePoint") {
-            write-host $config.Destination "is already a symbolic link. Skipping..."
-            write-host "If you'd like to replace this location... delete your existing link and run again."
+            write-host -Foreground yellow $config.Destination "is already a symbolic link. Skipping..."
+            write-host -Foreground yellow "If you'd like to replace this location... delete your existing link and run again."
             continue
         } 
 
@@ -42,7 +42,7 @@ foreach ( $config in $ConfigMap )
             }
         } else
         {
-            write-host "    Config already exists. Skipping..."
+            write-host -Foreground yellow "    Config already exists. Skipping..."
             continue
         }
     } 

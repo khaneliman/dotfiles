@@ -25,7 +25,7 @@ if (Test-CommandExists winget)
     }
 } else
 {
-    write-host "    Winget not installed. Skipping winget installs..."
+    write-host -Foreground yellow "    Winget not installed. Skipping winget installs..."
 }
 
 ##
@@ -39,12 +39,12 @@ if (!(Test-Path -Path "$($env:USERPROFILE)\Downloads\UltraUXThemePatcher.exe" -P
     $ProgressPreference = 'SilentlyContinue'
     Invoke-WebRequest -Uri https://mhoefs.eu/software_count.php -OutFile "$($env:USERPROFILE)\Downloads\UltraUXThemePatcher.exe" -Method POST -Body $postParams
     write-host "Downloaded to $($env:USERPROFILE)\Downloads\UltraUXThemePatcher.exe"
-    write-host "Patch OS to apply themes"
+    write-host -Foreground yellow "Patch OS to apply themes"
 } else
 {
     write-host ""
-    write-host "UltraUXThemePatcher already downloaded. skipping..."
-    write-host "Patch OS to apply custom themes"
+    write-host -Foreground yellow"UltraUXThemePatcher already downloaded. skipping..."
+    write-host -Foreground yellow "Patch OS to apply custom themes"
 }
 
 ## Set komorebi to run on startup

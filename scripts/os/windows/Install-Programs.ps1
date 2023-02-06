@@ -12,7 +12,7 @@ if (!(Test-Path -Path "$($env:USERPROFILE)/scoop/shims/scoop" -PathType Leaf))
 } else
 {
     write-host ""
-    write-host "Scoop already installed. skipping..."
+    write-host -Foreground yellow "Scoop already installed. skipping..."
 }
 
 if (Test-CommandExists scoop)
@@ -43,7 +43,7 @@ if (Test-CommandExists scoop)
     sudo scoop install windowsdesktop-runtime-lts
 } else
 {
-    write-host "    Scoop not installed. Skipping scoop installs..."
+    write-host -Foreground yellow "    Scoop not installed. Skipping scoop installs..."
 }
 
 ##
@@ -61,7 +61,7 @@ if ( !(Test-CommandExists winget))
 } else
 {
     write-host ""
-    write-host "Winget already installed. Skipping..."
+    write-host -Foreground yellow "Winget already installed. Skipping..."
 }
 
 ##
@@ -99,6 +99,6 @@ if (Test-CommandExists winget)
     }
 } else
 {
-    write-host "    Winget not installed. Skipping winget installs..."
+    write-host -Foreground yellow "    Winget not installed. Skipping winget installs..."
 }
 

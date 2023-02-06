@@ -91,7 +91,7 @@ if (Test-Path -Path "$RESOURCES\Catppuccin-Mocha.theme" -PathType Leaf)
     $currentTheme=(Get-ItemProperty -path HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\ -Name "CurrentTheme").CurrentTheme
     if ($currentTheme -eq "$RESOURCES\Catppuccin-Mocha.theme")
     {
-        write-host "Theme already set to Catppuccin Mocha. Skipping..."
+        write-host -Foreground yellow "Theme already set to Catppuccin Mocha. Skipping..."
     } else
     {
         write-host "Setting theme to Catppuccin Mocha"
@@ -99,5 +99,5 @@ if (Test-Path -Path "$RESOURCES\Catppuccin-Mocha.theme" -PathType Leaf)
     }
 } else
 {
-    write-host "Catppuccin Mocha not found in $RESOURCES\. Skipping..."
+    write-host -Foreground red "Catppuccin Mocha not found in $RESOURCES\. Skipping..."
 }

@@ -9,7 +9,7 @@ $current_cursor = Get-ItemPropertyValue "HKCU:\Control Panel\Cursors" -Name "(De
 
 if ($current_cursor -eq "Catppuccin-Mocha-Blue-Cursors")
 {
-    write-host 'Cursor already set. Skipping...'
+    write-host -Foreground yellow 'Cursor already set. Skipping...'
 } else
 {
     infdefaultinstall.exe $args
