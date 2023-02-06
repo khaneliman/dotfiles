@@ -50,9 +50,7 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 	mac_install
 
 elif [[ "$OSTYPE" == "win32" ]]; then
-	message "Windows detected..."
-
-	windows_install
+	error_message "Run the install.bat script instead..."
 
 else
 	error_message "unsupported os... exiting"
