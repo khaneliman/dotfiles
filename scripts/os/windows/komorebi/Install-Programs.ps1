@@ -15,7 +15,7 @@ if (Test-CommandExists winget)
         'StartIsBack.StartAllBack',
         'LGUG2Z.komorebi',
         'AutoHotkey.AutoHotkey',
-        'Lexikos.AutoHotkey',
+        'Lexikos.AutoHotkey'
     )
 
     foreach ($app in $winget_apps)
