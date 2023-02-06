@@ -61,13 +61,13 @@ See the install steps in Hyrpland config's [README](/dots/linux/hyprland/README.
 
 ##### Standard Monitor
 
-![linux-hyprland-tiling](assets/linux-hyprland-tiling.png)
-![linux-hyprland-tiling](assets/linux-hyprland-nvim.png)
+![linux-hyprland-tiling](assets/linux/hyprland/tiling.png)
+![linux-hyprland-tiling](assets/linux/hyprland/nvim.png)
 
 ##### Ultrawide Monitor
 
-![linux-hyprland-tiling](assets/linux-hyprland-tiling-wide.png)
-![linux-hyprland-tiling](assets/linux-hyprland-nvim-wide.png)
+![linux-hyprland-tiling](assets/linux/hyprland/tiling-wide.png)
+![linux-hyprland-tiling](assets/linux/hyprland/nvim-wide.png)
 
 ### Gnome
 
@@ -85,8 +85,8 @@ See the install steps in MacOS config's [README](/dots/macos/yabai/README.md)
 
 Current window manager is used on my laptop. Uses [sketchybar](https://github.com/FelixKratz/SketchyBar) for UI and [skhd](https://github.com/koekeishiya/skhd) for keybinds.
 
-![macos-yabai-tiling](assets/macos-yabai-tiling.png)
-![macos-yabai-nvim](assets/macos-yabai-nvim.png)
+![macos-yabai-tiling](assets/macos/yabai/tiling.png)
+![macos-yabai-nvim](assets/macos/yabai/nvim.png)
 
 ## Windows
 
@@ -98,8 +98,8 @@ See the install steps in Windows config's [README](/dots/windows/komorebi/README
 
 Current window manager [Komorebi](https://github.com/LGUG2Z/komorebi) with [AutoHotkey](https://github.com/AutoHotkey/AutoHotkey) for key binds and configuring Komorebi.
 
-![windows-komorebi-tiling](assets/windows-komorebi-tiling.png)
-![windows-komorebi-tiling](assets/windows-komorebi-tiling-arch.png)
+![windows-komorebi-tiling](assets/windows/komorebi/tiling.png)
+![windows-komorebi-tiling](assets/windows/komorebi/tiling-arch.png)
 
 ## Shared
 

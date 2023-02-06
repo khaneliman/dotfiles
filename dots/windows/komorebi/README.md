@@ -129,5 +129,5 @@ $winget_apps = @(
 
 ## Screenshots
 
-![windows-komorebi-tiling](assets/windows-komorebi-tiling.png)
-![windows-komorebi-tiling](assets/windows-komorebi-tiling-arch.png)
+![windows-komorebi-tiling](assets/windows/komorebi/tiling.png)
+![windows-komorebi-tiling](assets/windows/komorebi/tiling-arch.png)
