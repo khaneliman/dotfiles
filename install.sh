@@ -14,8 +14,6 @@ LOG_FILE="$SCRIPT_DIR"/install.log
 
 GIT_CRYPT_LOCKED=$(test -z "$(git config --local --get filter.git-crypt.smudge 2>/dev/null)" && echo "True" || echo "False")
 
-[ -f "$CONFIG_FILE" ] || touch -f "$CONFIG_FILE"
-
 # Colors/formatting for echo
 BOLD='\e[1m'
 RESET='\e[0m' # Reset text to default appearance
@@ -23,6 +21,8 @@ RESET='\e[0m' # Reset text to default appearance
 BRED='\e[91m'
 
 set +a
+
+[ -f "$CONFIG_FILE" ] || touch -f "$CONFIG_FILE"
 
 # Delete existing log file and log output of script
 [[ -f "$LOG_FILE" ]] && rm -f "$LOG_FILE"

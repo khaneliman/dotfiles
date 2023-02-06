@@ -7,15 +7,14 @@ for filename in "$SCRIPTS_DIR"/os/mac/*.sh; do
 	source "$filename"
 done
 
-mac_backup_existing() {
-	message "Backing up existing dotfiles to $BACKUP_LOCATION"
-
-	backup_files "$HOME"/.config/sketchybar "$BACKUP_LOCATION"/.config/
-	backup_files "$HOME"/.config/skhd "$BACKUP_LOCATION"/.config/
-	backup_files "$HOME"/.config/yabai "$BACKUP_LOCATION"/.config/
-	backup_files "$HOME"/.hammerspoon "$BACKUP_LOCATION"/
-	backup_files "$HOME"/.gitconfig.local "$BACKUP_LOCATION"/
-	backup_files "$HOME"/.zshrc "$BACKUP_LOCATION"/
+1password_ssh_link() {
+	if [[ -d "$HOME"/Library/Group\ Containers/2BUA8C4S2C.com.1password/ ]]; then
+		message "Linking 1password ssh agent to home folder..."
+		mkdir -p "$HOME"/.1password && link_locations "$HOME"/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock "$HOME"/.1password/agent.sock
+		success_message "1password ssh agent linked up"
+	else
+		warning_message "1password not installed. Skipping linking ssh agent..."
+	fi
 }
 
 brew_install() {
@@ -39,49 +38,6 @@ bundle_install() {
 	fi
 }
 
-change_defaults() {
-	message "Changing macOS defaults..."
-
-	defaults write NSGlobalDomain AppleAccentColor -int 1
-	defaults write NSGlobalDomain AppleHighlightColor -string "0.65098 0.85490 0.58431"
-	defaults write NSGlobalDomain AppleShowAllExtensions -bool true
-	defaults write NSGlobalDomain KeyRepeat -int 1
-	defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
-	defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool false
-	defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
-	defaults write NSGlobalDomain _HIHideMenuBar -bool true
-	defaults write com.apple.Finder AppleShowAllFiles -bool true
-	defaults write com.apple.LaunchServices LSQuarantine -bool false
-	defaults write com.apple.NetworkBrowser BrowseAllInterfaces 1
-	defaults write com.apple.Safari AutoOpenSafeDownloads -bool false
-	defaults write com.apple.Safari IncludeDevelopMenu -bool true
-	defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
-	defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true
-	defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool YES
-	defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
-	defaults write com.apple.dock "mru-spaces" -bool "false"
-	defaults write com.apple.dock autohide -bool true
-	defaults write com.apple.finder DisableAllAnimations -bool true
-	defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
-	defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
-	defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
-	defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool false
-	defaults write com.apple.finder ShowHardDrivesOnDesktop -bool false
-	defaults write com.apple.finder ShowMountedServersOnDesktop -bool false
-	defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool false
-	defaults write com.apple.finder ShowStatusBar -bool false
-	defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
-	defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
-	defaults write com.apple.screencapture disable-shadow -bool true
-	defaults write com.apple.screencapture location -string "$HOME/Pictures/screenshots/"
-	defaults write com.apple.screencapture type -string "png"
-	defaults write com.apple.spaces spans-displays -bool false
-	defaults write com.apple.finder CreateDesktop false
-	success_message "Defaults updated"
-
-	mac_change_symbolickeys
-}
-
 enable_brew_servies() {
 	# Start Services
 	if (command -v brew); then
@@ -99,6 +55,17 @@ install_fonts() {
 	message "Installing fonts..."
 	sudo mv "$HOME"/.fonts/* "$HOME"/Library/Fonts/
 	success_message "Fonts installed"
+}
+
+mac_backup_existing() {
+	message "Backing up existing dotfiles to $BACKUP_LOCATION"
+
+	backup_files "$HOME"/.config/sketchybar "$BACKUP_LOCATION"/.config/
+	backup_files "$HOME"/.config/skhd "$BACKUP_LOCATION"/.config/
+	backup_files "$HOME"/.config/yabai "$BACKUP_LOCATION"/.config/
+	backup_files "$HOME"/.hammerspoon "$BACKUP_LOCATION"/
+	backup_files "$HOME"/.gitconfig.local "$BACKUP_LOCATION"/
+	backup_files "$HOME"/.zshrc "$BACKUP_LOCATION"/
 }
 
 mac_copy_configuration() {
@@ -125,46 +92,12 @@ mac_copy_configuration() {
 	copy_files "$MAC_HOME"/Library "$HOME"/
 }
 
-1password_ssh_link() {
-	if [[ -d "$HOME"/Library/Group\ Containers/2BUA8C4S2C.com.1password/ ]]; then
-		message "Linking 1password ssh agent to home folder..."
-		mkdir -p "$HOME"/.1password && link_locations "$HOME"/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock "$HOME"/.1password/agent.sock
-		success_message "1password ssh agent linked up"
-	else
-		warning_message "1password not installed. Skipping linking ssh agent..."
-	fi
-}
-
-set_wallpapers() {
-	if [[ $(command -v yabai) ]]; then
-		message "Setting walpapers for each desktop"
-
-		LOCAL_WALLPAPERS="$(realpath "$HOME"/.local/share/wallpapers/catppuccin)"
-
-		yabai -m space --focus 1
-
-		i=0
-
-		for file in "$LOCAL_WALLPAPERS"/*.png; do
-			((i = i + 1))
-			echo "Setting wallpaper on space $i to $file..."
-			# take action on each file. $f store current file name
-			osascript -e 'tell application "Finder" to set desktop picture to POSIX file "'"$file"'"'
-			yabai -m space --focus next 2 &>/dev/null
-			sleep 0
-		done
-
-		success_message "Desktop pictures set."
-	else
-		warning_message "Yabai is not running. Cannot set wallpapers. Skipping..."
-	fi
-}
-
 mac_install() {
 	mac_backup_existing
 
 	# Configure macOS
 	change_defaults
+	mac_change_symbolickeys
 
 	# Copy configuration
 	mac_copy_configuration
@@ -186,4 +119,29 @@ mac_install() {
 
 	# Output current SIP status
 	csrutil status
+}
+
+set_wallpapers() {
+	if [[ $(command -v yabai) ]]; then
+		message "Setting walpapers for each desktop"
+
+		LOCAL_WALLPAPERS="$(realpath "$HOME"/.local/share/wallpapers/catppuccin)"
+
+		yabai -m space --focus 1
+
+		i=0
+
+		for file in "$LOCAL_WALLPAPERS"/*.png; do
+			((i = i + 1))
+			echo "Setting wallpaper on space $i to $file..."
+			# take action on each file. $f store current file name
+			osascript -e 'tell application "Finder" to set desktop picture to POSIX file "'"$file"'"'
+			yabai -m space --focus next 2 &>/dev/null
+			sleep 0.1
+		done
+
+		success_message "Desktop pictures set."
+	else
+		warning_message "Yabai is not running. Cannot set wallpapers. Skipping..."
+	fi
 }
