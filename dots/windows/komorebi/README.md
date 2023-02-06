@@ -1,7 +1,7 @@
 # Komorebi
 
 [Catppuccin](https://github.com/catppuccin/catppuccin) themed [Komorebi](https://github.com/LGUG2Z/komorebi) configuration.
-There's configuration of Windows Explorer, theme, cursors, fonts, a tiling window manager, and hotkey daemon with application theming and configuration that's cross platform coming from the shared folder.
+There's the configuration of Windows Explorer, theme, cursors, fonts, a tiling window manager, and hotkey daemon with application theming and configuration that's cross-platform coming from the shared folder.
 Windows doesn't abide by most nix standards and requires a lot of manual workarounds that differ from Linux and MacOS. Much of the software I use is also not easily available on Windows and must be run through
 WSL. The automatic installation handles almost everything for you, but some stuff must be done manually, like patching windows for unsigned themes.
 
@@ -13,7 +13,7 @@ WSL. The automatic installation handles almost everything for you, but some stuf
 
 - Fonts need to be copied/moved to the C:\Users\$username\AppData\Local\Microsoft\Windows\Fonts since Windows doesn't read from the ~/.fonts/ directory.
 
-- Lots of dependencies on applications installed through Winget and Scoop so you need to install them (Need latest winget version to support skipping existing installs)
+- Lots of dependencies on applications installed through Winget and Scoop so you need to install them (Need the latest winget version to support skipping existing installs)
 
 ```powershell
 irm get.scoop.sh | iex
@@ -88,7 +88,7 @@ $RegPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run"
 Set-RegistryEntry -Key 'KomorebicConfigOnLogin' -Type "SZ" -Value "$($env:USERPROFILE)\.config\komorebi\komorebi.ahk" -Path $RegPath
 ```
 
-- Programs used in config. I prefer to use a winget version, when available, for a regular installation. Scoop is user level by design so it's easier to install but unusual in management.
+- Programs used in config. I prefer to use a winget version, when available, for a regular installation. Scoop is user-level by design so it's easier to install but unusual in management.
 
 ```powershell
 $winget_apps = @(

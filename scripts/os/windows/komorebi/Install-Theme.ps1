@@ -1,3 +1,4 @@
+using module Message
 using module ElevateScript
 
 # Self-elevate the script if required
@@ -10,7 +11,7 @@ $objShell = New-Object -ComObject Shell.Application
 # Loop through provided input directories
 for ( $i = 0; $i -lt $args.count; $i++ )
 {
-    write-host "    Checking $($args[$i]) for files that need to be installed..."
+    Write-Message  -Message "    Checking $($args[$i]) for files that need to be installed..."
     
     # Current directory being checked
     $Path=$($args[$i])
@@ -75,7 +76,7 @@ for ( $i = 0; $i -lt $args.count; $i++ )
         }
         if ($try)
         {
-            write-host "    Installing $name from $File"
+            Write-Message  -Message "    Installing $name from $File"
             $objFolder.CopyHere($File.fullname)
         }
     }
@@ -91,13 +92,13 @@ if (Test-Path -Path "$RESOURCES\Catppuccin-Mocha.theme" -PathType Leaf)
     $currentTheme=(Get-ItemProperty -path HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\ -Name "CurrentTheme").CurrentTheme
     if ($currentTheme -eq "$RESOURCES\Catppuccin-Mocha.theme")
     {
-        write-host "Theme already set to Catppuccin Mocha. Skipping..."
+        Write-Message -Type WARNING  -Message "Theme already set to Catppuccin Mocha. Skipping..."
     } else
     {
-        write-host "Setting theme to Catppuccin Mocha"
+        Write-Message  -Message "Setting theme to Catppuccin Mocha"
         start-process -filepath "$RESOURCES\Catppuccin-Mocha.theme"; timeout /t 3; taskkill /im "systemsettings.exe" /f
     }
 } else
 {
-    write-host "Catppuccin Mocha not found in $RESOURCES\. Skipping..."
+    Write-Message -Type ERROR  -Message "Catppuccin Mocha not found in $RESOURCES\. Skipping..."
 }

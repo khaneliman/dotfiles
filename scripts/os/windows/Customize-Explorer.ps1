@@ -1,3 +1,4 @@
+using module Message
 using module RegistryEntry
 
 ##

@@ -1,3 +1,4 @@
+using module Message
 using module RegistryEntry
 using module TestCommandExists
 
@@ -20,12 +21,12 @@ if (Test-CommandExists winget)
 
     foreach ($app in $winget_apps)
     {
-        write-host "    Installing $app..."
+        Write-Message  -Message "    Installing $app..."
         winget install --accept-package-agreements --accept-source-agreements --silent --no-upgrade --id $app
     }
 } else
 {
-    write-host "    Winget not installed. Skipping winget installs..."
+    Write-Message -Type WARNING  -Message "    Winget not installed. Skipping winget installs..."
 }
 
 ##
@@ -34,17 +35,17 @@ if (Test-CommandExists winget)
 ##
 if (!(Test-Path -Path "$($env:USERPROFILE)\Downloads\UltraUXThemePatcher.exe" -PathType Leaf))
 {
-    write-host "Downloading UltraUXThemePatcher..."
+    Write-Message "Downloading UltraUXThemePatcher..."
     $postParams = @{Uxtheme='UltraUXThemePatcher';id='Uxtheme'}
     $ProgressPreference = 'SilentlyContinue'
     Invoke-WebRequest -Uri https://mhoefs.eu/software_count.php -OutFile "$($env:USERPROFILE)\Downloads\UltraUXThemePatcher.exe" -Method POST -Body $postParams
-    write-host "Downloaded to $($env:USERPROFILE)\Downloads\UltraUXThemePatcher.exe"
-    write-host "Patch OS to apply themes"
+    Write-Message  -Message "Downloaded to $($env:USERPROFILE)\Downloads\UltraUXThemePatcher.exe"
+    Write-Message -Type WARNING  -Message "Patch OS to apply themes"
 } else
 {
-    write-host ""
-    write-host "UltraUXThemePatcher already downloaded. skipping..."
-    write-host "Patch OS to apply custom themes"
+    Write-Host ""
+    Write-Message -Type WARNING  -Message "UltraUXThemePatcher already downloaded. skipping..."
+    Write-Message -Type WARNING  -Message "Patch OS to apply custom themes"
 }
 
 ## Set komorebi to run on startup

@@ -1,5 +1,6 @@
 using module RegistryEntry
 using module TestCommandExists
+using module Message
 
 $env:PSModulePath = "$PSHOME/Modules\"+";$SCRIPTS_DIR/os/windows/modules";
 
@@ -11,8 +12,8 @@ if (!(Test-Path -Path "$($env:USERPROFILE)/scoop/shims/scoop" -PathType Leaf))
     irm get.scoop.sh | iex
 } else
 {
-    write-host ""
-    write-host "Scoop already installed. skipping..."
+    Write-Host ""
+    Write-Message -Type WARNING -Message "Scoop already installed. skipping..."
 }
 
 if (Test-CommandExists scoop)
@@ -43,7 +44,7 @@ if (Test-CommandExists scoop)
     sudo scoop install windowsdesktop-runtime-lts
 } else
 {
-    write-host "    Scoop not installed. Skipping scoop installs..."
+    Write-Message -Type WARNING  -Message "    Scoop not installed. Skipping scoop installs..."
 }
 
 ##
@@ -52,16 +53,16 @@ if (Test-CommandExists scoop)
 ##
 if ( !(Test-CommandExists winget))
 {
-    write-host ""
-    write-host "Installing winget"
+    Write-Host ""
+    Write-Message  -Message "Installing winget"
     $download_url = "https://github.com/microsoft/winget-cli/releases/download/v1.4.10173/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
     $download_save_file = "$($env:USERPROFILE)\Downloads\MicrosoftDesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
     $wc.Downloadfile($download_url, $download_save_file)
     Add-AppXPackage -Path $($env:USERPROFILE)\Downloads\MicrosoftDesktopAppInstaller_8wekyb3d8bbwe.msixbundle
 } else
 {
-    write-host ""
-    write-host "Winget already installed. Skipping..."
+    Write-Host ""
+    Write-Message -Type WARNING  -Message "Winget already installed. Skipping..."
 }
 
 ##
@@ -94,11 +95,11 @@ if (Test-CommandExists winget)
 
     foreach ($app in $winget_apps)
     {
-        write-host "    Installing $app..."
+        Write-Message -Message "    Installing $app..."
         winget install --accept-package-agreements --accept-source-agreements --silent --no-upgrade --id $app
     }
 } else
 {
-    write-host "    Winget not installed. Skipping winget installs..."
+    Write-Message -Type WARNING -Message "    Winget not installed. Skipping winget installs..."
 }
 

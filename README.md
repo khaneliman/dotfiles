@@ -11,7 +11,7 @@
  <a href="https://github.com/khaneliman/dotfiles/contributors"><img src="https://img.shields.io/github/contributors/khaneliman/dotfiles?colorA=363a4f&colorB=a6da95&style=for-the-badge"></a>
 </p>
 
-Personal dotfiles for each of the platforms I own or have customized. Personal information either redacted or encrypted with [Git-Crypt](https://github.com/AGWA/git-crypt).
+Personal dotfiles for each of the platforms I own or have customized. Personal information is either redacted or encrypted with [Git-Crypt](https://github.com/AGWA/git-crypt).
 
 ## Install
 
@@ -19,7 +19,7 @@ Personal dotfiles for each of the platforms I own or have customized. Personal i
 
     git clone --recurse-submodules https://github.com/khaneliman/dotfiles.git ~/.config/.dotfiles
 
-Manual installation, for now. Some will have installation scripts to automate process a little more in-line with what I've been doing with [ArchInstaller](https://github.com/khaneliman/ArchInstaller)
+Manual installation, for now. Some will have installation scripts to automate the process a little more in line with what I've been doing with [ArchInstaller](https://github.com/khaneliman/ArchInstaller)
 
 ### Manual
 
@@ -34,14 +34,14 @@ Each environment might require further steps that will be detailed in their resp
 
 ### Automatic
 
-    ./install.sh for linux and macos
-    /.install.bat for windows
+    ./install.sh for Linux and macOS
+    ./install.bat for windows
 
-The script will detect what OS you are running script from and perform the installation for that OS. You will need to select what environment you would like to install the dots for, if there are multiple for that given OS.
+The script will detect what OS you are running the script from and perform the installation for that OS. You will need to select what environment you would like to install the dots for if there are multiple for that given OS.
 
 ## Linux
 
-There are numerous linux configs. My primary desktop usage is done through Arch Linux so I will update these most often.
+There are numerous Linux configs. My primary desktop usage is done through Arch Linux so I will update these most often.
 
 ### Awesome
 
@@ -53,7 +53,7 @@ _Dotfiles might be out of sync with where they were in an optimized state since 
 
 ### Hyprland
 
-[Catppuccin](https://github.com/catppuccin/catppuccin) themed [Hyprland](https://github.com/hyprwm/Hyprland) configuration with a lot more time spent on it since it's my current daily driver. There's basic dotfiles and then some [aconfmgr](https://github.com/CyberShadow/aconfmgr) config thrown in for deploying a system. (WIP and not tested thoroughly)
+[Catppuccin](https://github.com/catppuccin/catppuccin) themed [Hyprland](https://github.com/hyprwm/Hyprland) configuration with a lot more time spent on it since it's my current daily driver. There are basic dotfiles and then some [aconfmgr](https://github.com/CyberShadow/aconfmgr) config thrown in for deploying a system. (WIP and not tested thoroughly)
 
 #### Unique Install Steps
 
@@ -83,7 +83,7 @@ I currently use [yabai](https://github.com/koekeishiya/yabai) with my daily driv
 
 See the install steps in MacOS config's [README](/dots/macos/yabai/README.md)
 
-Current window manager used on my laptop. Uses [sketchybar](https://github.com/FelixKratz/SketchyBar) for UI and [skhd](https://github.com/koekeishiya/skhd) for keybinds.
+Current window manager is used on my laptop. Uses [sketchybar](https://github.com/FelixKratz/SketchyBar) for UI and [skhd](https://github.com/koekeishiya/skhd) for keybinds.
 
 ![macos-yabai-tiling](assets/macos-yabai-tiling.png)
 ![macos-yabai-nvim](assets/macos-yabai-nvim.png)
@@ -96,18 +96,18 @@ Current window manager used on my laptop. Uses [sketchybar](https://github.com/F
 
 See the install steps in Windows config's [README](/dots/windows/komorebi/README.md)
 
-Current window manager [Komorebi](https://github.com/LGUG2Z/komorebi) with [AutoHotkey](https://github.com/AutoHotkey/AutoHotkey) for keybinds and configuring Komorebi.
+Current window manager [Komorebi](https://github.com/LGUG2Z/komorebi) with [AutoHotkey](https://github.com/AutoHotkey/AutoHotkey) for key binds and configuring Komorebi.
 
 ![windows-komorebi-tiling](assets/windows-komorebi-tiling.png)
 ![windows-komorebi-tiling](assets/windows-komorebi-tiling-arch.png)
 
 ## Shared
 
-This contains all the platform agnostic and / or shared application configurations that will be the same between all platforms and desktop environments.
+This contains all the platform agnostic and/or shared application configurations that will be the same between all platforms and desktop environments.
 
 ## Credits
 
-Inspiration and code from numerous locations all over the internet. Here's some of the major contributors to my setups.
+Inspiration and code from numerous locations all over the internet. Here are some of the major contributors to my setups.
 
 - Shared dotfiles
   - [Catppuccin](https://github.com/catppuccin/catppuccin)

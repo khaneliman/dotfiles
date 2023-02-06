@@ -1,25 +1,25 @@
 #!/usr/bin/env bash
 
-MAC_HOME="$DOTS_DIR"/macos/yabai/home/
+MAC_HOME="$DOTS_DIR"/macos/yabai/home
 
 mac_backup_existing() {
-	message "[>>] Backing up existing dotfiles to $BACKUP_LOCATION"
+	message "Backing up existing dotfiles to $BACKUP_LOCATION"
 
-	mv "$HOME"/.config/sketchybar "$BACKUP_LOCATION"/.config/
-	mv "$HOME"/.config/skhd "$BACKUP_LOCATION"/.config/
-	mv "$HOME"/.config/yabai "$BACKUP_LOCATION"/.config/
-	mv "$HOME"/.hammerspoon "$BACKUP_LOCATION"/
-	mv "$HOME"/.gitconfig.local "$BACKUP_LOCATION"/
-	mv "$HOME"/.zshrc "$BACKUP_LOCATION"/
+	backup_files "$HOME"/.config/sketchybar "$BACKUP_LOCATION"/.config/
+	backup_files "$HOME"/.config/skhd "$BACKUP_LOCATION"/.config/
+	backup_files "$HOME"/.config/yabai "$BACKUP_LOCATION"/.config/
+	backup_files "$HOME"/.hammerspoon "$BACKUP_LOCATION"/
+	backup_files "$HOME"/.gitconfig.local "$BACKUP_LOCATION"/
+	backup_files "$HOME"/.zshrc "$BACKUP_LOCATION"/
 }
 
 brew_install() {
 	# Install Brew
 	if (! command -v brew); then
-		message "[>>] Installing Brew..."
+		message "Installing Brew..."
 		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 	else
-		message "[>>] Brew already installed. Skipping..."
+		warning_message "Brew already installed. Skipping..."
 	fi
 
 	brew analytics off
@@ -27,15 +27,15 @@ brew_install() {
 
 bundle_install() {
 	if (command -v brew); then
-		message "[>>] Installing taps, brews, casks, and apps... "
+		message "Installing taps, brews, casks, and apps... "
 		brew bundle --file "$SCRIPTS_DIR"/os/mac/Brewfile
 	else
-		message "[!!] Brew not installed! Skipping apps..."
+		warning_message "Brew not installed! Skipping apps..."
 	fi
 }
 
 change_defaults() {
-	message "[>>] Changing macOS defaults..."
+	message "Changing macOS defaults..."
 
 	defaults write NSGlobalDomain AppleAccentColor -int 1
 	defaults write NSGlobalDomain AppleHighlightColor -string "0.65098 0.85490 0.58431"
@@ -72,6 +72,7 @@ change_defaults() {
 	defaults write com.apple.screencapture type -string "png"
 	defaults write com.apple.spaces spans-displays -bool false
 	defaults write com.apple.finder CreateDesktop false
+	success_message "Defaults updated"
 
 	mac_change_symbolickeys
 }
@@ -209,33 +210,36 @@ mac_change_symbolickeys() {
     </dict>
   </dict>
 "
+	warning_message "Disabled macOS mission control shortcuts. SKHD handles yabai spaces."
 
-	message "[>>] Reloading plist changes..."
+	message "Reloading plist changes..."
 	/System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
+	success_message "Successfully reloaded settings"
 }
 
 enable_brew_servies() {
 	# Start Services
 	if (command -v brew); then
-		message "[>>] Starting Services (grant permissions)..."
+		message "Starting Services (grant permissions)..."
 		brew services start skhd
 		brew services start yabai
 		brew services start sketchybar
 	else
-		message "[!!] Brew not installed! Skipping enabling services..."
+		warning_message "Brew not installed! Skipping enabling services..."
 	fi
 }
 
 install_fonts() {
 	# macOS Fonts aren't read from "$HOME"/.fonts and symbolic links dont work, need to move to "$HOME"/Library/Fonts
-	message "[>>] Installing fonts..."
+	message "Installing fonts..."
 	sudo mv "$HOME"/.fonts/* "$HOME"/Library/Fonts/
+	success_message "Fonts installed"
 }
 
 mac_copy_configuration() {
-	message "[>>] Installing config files..."
+	message "Installing config files..."
 	# copy home folder dotfiles if you dont want to use symlinks
-	# cp -r "$DOTS_DIR"/macos/yabai/home/. "$HOME"
+	# copy_files "$DOTS_DIR"/macos/yabai/home/. "$HOME"
 
 	# symlinks for files that completely replace location
 	link_locations "$MAC_HOME"/.config/skhd "$HOME"/.config/skhd
@@ -252,16 +256,17 @@ mac_copy_configuration() {
 	link_locations "$MAC_HOME"/.zshrc "$HOME"/.zshrc
 
 	# copy files that dont replace location
-	cp -r "$MAC_HOME"/.terminfo "$HOME"/.terminfo
-	cp -r "$MAC_HOME"/Library "$HOME"/Library
+	copy_files "$MAC_HOME"/.terminfo "$HOME"/
+	copy_files "$MAC_HOME"/Library "$HOME"/
 }
 
 1password_ssh_link() {
 	if [[ -d "$HOME"/Library/Group\ Containers/2BUA8C4S2C.com.1password/ ]]; then
-		message "[>>] Linking 1password ssh agent to home folder..."
+		message "Linking 1password ssh agent to home folder..."
 		mkdir -p "$HOME"/.1password && link_locations "$HOME"/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock "$HOME"/.1password/agent.sock
+		success_message "1password ssh agent linked up"
 	else
-		message "[!!] 1password not installed. Skipping linking ssh agent..."
+		warning_message "1password not installed. Skipping linking ssh agent..."
 	fi
 }
 

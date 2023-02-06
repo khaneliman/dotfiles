@@ -40,20 +40,18 @@ logo
 shared_install
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-	message '[>>] Linux detected...'
+	message "Linux detected..."
 
 	linux_install
 
 elif [[ "$OSTYPE" == "darwin"* ]]; then
-	message '[>>] Mac detected...'
+	message "Mac detected..."
 
 	mac_install
 
 elif [[ "$OSTYPE" == "win32" ]]; then
-	message '[>>] Windows detected...'
-
-	windows_install
+	error_message "Run the install.bat script instead..."
 
 else
-	message '[!!] unsupported os... exiting'
+	error_message "unsupported os... exiting"
 fi

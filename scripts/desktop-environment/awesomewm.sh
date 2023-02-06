@@ -8,13 +8,14 @@
 # @stderror Output routed to install.log
 
 awesome_copy_configuration() {
-	message "[>>] Copying config files for awesomewm"
+	message "Copying config files for awesomewm"
 
 	# copy home folder dotfiles
-	cp -r "$DOTS_DIR"/linux/awesome/home/. ~
+	copy_files "$DOTS_DIR"/linux/awesome/home/. ~
 
 	sudo mkdir -p /etc/lightdm/
 	sudo cp "$DOTS_DIR"/linux/awesome/etc/lightdm/slick-greeter.conf /etc/lightdm/
+	success_message "Themed lightdm"
 }
 
 awesome_install() {

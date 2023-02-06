@@ -9,7 +9,7 @@ Function Test-CommandExists {
         RETURN $true
     }
     } Catch {
-        Write-Host “$command does not exist”; RETURN $false
+        write-host -Foreground red “$command does not exist”; RETURN $false
     }
 
  Finally {$ErrorActionPreference=$oldPreference}
