@@ -1,7 +1,7 @@
 # Yabai
 
 [Catppuccin](https://github.com/catppuccin/catppuccin) themed [Yabai](https://github.com/koekeishiya/yabai) configuration.
-There's basic configuration of sketchybar, yabai, and skhd with application theming and configuration that's cross platform coming from the shared folder.
+There's the basic configuration of sketchybar, yabai, and skhd with application theming and configuration that's cross-platform coming from the shared folder.
 
 ## Unique Install Steps
 
@@ -18,13 +18,13 @@ There's basic configuration of sketchybar, yabai, and skhd with application them
 
 ```
 
-- Bundle file contains a list of the brew casks, taps, and brews. Check file and remove anything you think you dont need and install :
+- Bundle file contains a list of the brew casks, taps, and brews. Check the file and remove anything you think you don't need and install :
 
 ```bash
  brew bundle --file ./mac/Brewfile
 ```
 
-- Enable and start primary applications for theme
+- Enable and start primary applications for the theme
 
 ```bash
  brew services start skhd
