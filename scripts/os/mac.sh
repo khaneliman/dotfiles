@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-MAC_HOME="$DOTS_DIR"/macos/yabai/home/
+MAC_HOME="$DOTS_DIR"/macos/yabai/home
 
 mac_backup_existing() {
 	message "Backing up existing dotfiles to $BACKUP_LOCATION"

@@ -59,14 +59,7 @@ cat_theme_qt() {
 
 cat_theme_firefox() {
 	# Install firefox theme
-	case "$(uname)" in
-	"Linux")
-		"$SCRIPT_DIR"/firefox-themer.sh -p dev -t minimal
-		;;
-	"Darwin")
-		# TODO: need to identify location on mac
-		;;
-	esac
+	"$SCRIPT_DIR"/firefox-themer.sh -p dev -t minimal
 }
 
 cat_theme_spotify() {
