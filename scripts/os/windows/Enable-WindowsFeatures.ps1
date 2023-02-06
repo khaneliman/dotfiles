@@ -1,8 +1,9 @@
+using module Message
 using module ElevateScript
 
 if (([Version](Get-CimInstance Win32_OperatingSystem).version).Major -lt 10)
 {
-    Write-Host -ForegroundColor Red "The DeveloperMode is only supported on Windows 10"
+    Write-Message -ForegroundColor Red  -Message "The DeveloperMode is only supported on Windows 10"
     exit 1
 }
 

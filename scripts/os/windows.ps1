@@ -9,14 +9,14 @@ $global:wc = New-Object net.webclient
 ##
 # Set powershell execution policy
 ##
-Write-Host 'Setting powershell to allow execution of scripts'
+Write-Host "Setting powershell to allow execution of scripts"
 Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope CurrentUser
 
 ##
 # Install fonts
 ##
-Write-Host '
-Installing fonts'
+Write-Host "
+Installing fonts"
 .$SCRIPTS_DIR/os/windows/Install-Fonts.ps1 $DOTS_DIR"/shared/home/.fonts/SanFransisco"
 
 ##

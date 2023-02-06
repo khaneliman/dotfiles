@@ -1,3 +1,4 @@
+using module Message
 using module ConfigMap
 
 # Powershell Variables
@@ -8,8 +9,9 @@ $ConfigMap = Get-ConfigMap
 # Loop through provided input directories
 foreach ( $config in $ConfigMap )
 {   
-    if ($config.RequiresUnlock -eq $true -and $GIT_CRYPT_LOCKED -eq $true){
-        write-host -Foreground yellow $config.Source "is encrypted. Skipping..."
+    if ($config.RequiresUnlock -eq $true -and $GIT_CRYPT_LOCKED -eq $true)
+    {
+        Write-Message -Type WARNING -Message (-join($config.Source, "is encrypted. Skipping..."))
         continue
     } 
 
@@ -18,9 +20,10 @@ foreach ( $config in $ConfigMap )
 
     if ($destinationExists -eq $true)
     {
-        if ((get-item $config.Destination).Attributes.ToString() -match "ReparsePoint") {
-            write-host -Foreground yellow $config.Destination "is already a symbolic link. Skipping..."
-            write-host -Foreground yellow "If you'd like to replace this location... delete your existing link and run again."
+        if ((get-item $config.Destination).Attributes.ToString() -match "ReparsePoint")
+        {
+            Write-Message -Type WARNING -Message (-join($config.Destination, "is already a symbolic link. Skipping..."))
+            Write-Message -Type WARNING -Message "If you'd like to replace this location... delete your existing link and run again."
             continue
         } 
 
@@ -30,19 +33,19 @@ foreach ( $config in $ConfigMap )
         New-Item $backupFolderPath -ItemType Directory -Force
         $backupFolder = $objShell.Namespace($backupFolderPath)
 
-        write-host "    " $config.Destination "already exists. Backing up existing files..."
+        Write-Message -Message (-join("    ", $config.Destination, "already exists. Backing up existing files..."))
         $backupFolder.CopyHere($config.Destination, 0x14)
         
         if ($config.ReplaceExisting)
         {
             if ($config.CreateSymbolicLink -eq $true) 
             {
-                write-host "    Deleting " $config.Destination
+                Write-Message  -Message (-join("    Deleting ", $config.Destination))
                 Remove-Item -Path $config.Destination -Recurse -Force
             }
         } else
         {
-            write-host -Foreground yellow "    Config already exists. Skipping..."
+            Write-Message -Type WARNING  -Message "    Config already exists. Skipping..."
             continue
         }
     } 
@@ -51,27 +54,28 @@ foreach ( $config in $ConfigMap )
     
     if ($config.CreateSymbolicLink -eq $true)
     {
-        write-host "    Creating link to " $config.Source "at" $config.Destination
+        Write-Message  -Message (-join("    Creating link to ", $config.Source, "at", $config.Destination))
         
         New-Item -ItemType Directory -Force -Path $destinationFolderPath
 
         sudo New-Item -ItemType SymbolicLink -Path $config.Destination -Target $config.Source
     } else
     {
-        write-host "    Copying" $config.Source "files to" $destinationFolderPath
+        Write-Message  -Message (-join("    Copying", $config.Source, "files to", $destinationFolderPath))
 
         New-Item -ItemType Directory -Force -Path $destinationFolderPath
 
         Copy-Item -Path $config.Source -Destination $config.Destination -Recurse -Force
         
         # TODO: Move to komorebi specific script 
-        if ($config.Source -match "btop.conf") {
+        if ($config.Source -match "btop.conf")
+        {
             $btop_theme_path = "${env:USERPROFILE}\scoop\apps\btop\current\themes\catppuccin_macchiato.theme"
             $regex = "color_theme = .*"
             $replacement = "color_theme = $btop_theme_path"
 
             (Get-Content $config.Destination) | 
-            ForEach-Object { $_ -replace $regex, $replacement } |
+                ForEach-Object { $_ -replace $regex, $replacement } |
                 Set-Content $config.Destination
         }
     }

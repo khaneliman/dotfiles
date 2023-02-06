@@ -1,3 +1,5 @@
+using module Message
+
 # # Windows font variables
 $FONTS = 0x14
 $objShell = New-Object -ComObject Shell.Application
@@ -7,7 +9,7 @@ $username = $env:UserName
 # # Loop through provided input directories
 for ( $i = 0; $i -lt $args.count; $i++ )
 {
-    write-host "    Checking $($args[$i]) for fonts that need to be installed..."
+    Write-Message  -Message "    Checking $($args[$i]) for fonts that need to be installed..."
     
     # Current directory being checked
     $Path=$($args[$i])
@@ -37,7 +39,7 @@ for ( $i = 0; $i -lt $args.count; $i++ )
             }
             if ($try)
             {
-                write-host "    Installing $name"
+                Write-Message  -Message "    Installing $name"
                 $objFolder.CopyHere($File.fullname)
             }
         }

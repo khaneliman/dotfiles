@@ -1,3 +1,4 @@
+using module Message
 using module UserPreferencesMask
 using module ElevateScript
 
@@ -9,7 +10,7 @@ $current_cursor = Get-ItemPropertyValue "HKCU:\Control Panel\Cursors" -Name "(De
 
 if ($current_cursor -eq "Catppuccin-Mocha-Blue-Cursors")
 {
-    write-host -Foreground yellow 'Cursor already set. Skipping...'
+    Write-Message -Type WARNING  -Message 'Cursor already set. Skipping...'
 } else
 {
     infdefaultinstall.exe $args
