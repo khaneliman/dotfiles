@@ -10,7 +10,7 @@ if (([Version](Get-CimInstance Win32_OperatingSystem).version).Major -lt 10)
 Write-Message -Type WARNING -Message "Enabling features requires admin elevated privileges. Requesting elevated privileges..."
 
 # Self-elevate the script if required
-Request-ElevateScript
+Request-ElevateScript -File $MyInvocation.MyCommand.Path
 
 $RegistryKeyPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock"
 if (! (Test-Path -Path $RegistryKeyPath)) 

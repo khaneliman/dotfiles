@@ -1,85 +1,29 @@
 using module Message
-using module ElevateScript
 
 # Self-elevate the script if required
-Request-ElevateScript
+if (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) {
+    if ([int](Get-CimInstance -Class Win32_OperatingSystem | Select-Object -ExpandProperty BuildNumber) -ge 6000) {
+        $CommandLine = "-File `"" + $MyInvocation.MyCommand.Path + "`" " + $MyInvocation.UnboundArguments
+        Start-Process -FilePath PowerShell.exe -Verb Runas -ArgumentList $CommandLine
+        Exit
+    }
+}
 
 # # Windows themes variables
-$RESOURCES = "C:\Windows\Resources\Themes"
+$RESOURCES = "C:\Windows\Resources\Themes\"
 $objShell = New-Object -ComObject Shell.Application
 
 # Loop through provided input directories
 for ( $i = 0; $i -lt $args.count; $i++ )
 {
-    Write-Message  -Message "    Checking $($args[$i]) for files that need to be installed..."
-    
     # Current directory being checked
     $Path=$($args[$i])
-    $Theme = Get-Item -Path $Path
     
-    $ThemeList = Get-ChildItem -Path "$Theme\*" -Include ('*.theme', '*.msstyles', '*.dll', '*.png')
+    Write-Message -Message " Installing $Path"
 
-    foreach($File in $ThemeList)
-    {
-        $name = $File.baseName
-        $extension = $File.extension
+    Copy-Item -Path $Path -Destination $RESOURCES -Recurse -Force
 
-        $try = $true
-        $objFolder = $objShell.Namespace($RESOURCES)
-        $installedItems = @(Get-ChildItem $RESOURCES | Where-Object {$_.PSIsContainer -eq $false} | Select-Object basename)
-
-        if ($extension -eq ".msstyles")
-        {
-            $objFolder = $objShell.Namespace("$RESOURCES\catppuccin")
-            
-            If(!(test-path -PathType container "$RESOURCES\catppuccin"))
-            {
-                New-Item -ItemType Directory -Path "$RESOURCES\catppuccin"
-            }
-            
-            $installedItems = @(Get-ChildItem "$RESOURCES\catppuccin" | Where-Object {$_.PSIsContainer -eq $false} | Select-Object basename)
-        }
-
-        if ($extension -eq ".dll")
-        {
-            $objFolder = $objShell.Namespace("$RESOURCES\catppuccin\Shell\NormalColor")
-            
-            If(!(test-path -PathType container "$RESOURCES\catppuccin\Shell\NormalColor"))
-            {
-                New-Item -ItemType Directory -Path "$RESOURCES\catppuccin\Shell\NormalColor"
-            }
-            
-            $installedItems = @(Get-ChildItem "$RESOURCES\catppuccin\Shell\NormalColor" | Where-Object {$_.PSIsContainer -eq $false} | Select-Object basename)
-        }
-    
-        if ($extension -eq ".png")
-        {
-            $objFolder = $objShell.Namespace("$RESOURCES\catppuccin\wallpapers")
-            
-            If(!(test-path -PathType container "$RESOURCES\catppuccin\wallpapers"))
-            {
-                New-Item -ItemType Directory -Path "$RESOURCES\catppuccin\wallpapers"
-            }
-            
-            $installedItems = @(Get-ChildItem "$RESOURCES\catppuccin\wallpapers" | Where-Object {$_.PSIsContainer -eq $false} | Select-Object basename)
-        }
-
-        foreach($item in $installedItems)
-        {
-            $item = $item -replace "_", ""
-            $name = $name -replace "_", ""
-
-            if ($item -match $name)
-            {
-                $try = $false
-            }
-        }
-        if ($try)
-        {
-            Write-Message  -Message "    Installing $name from $File"
-            $objFolder.CopyHere($File.fullname)
-        }
-    }
+    Write-Message -Type SUCCESS -Message "Successfully installed theme."
 }
 
 # # if needed

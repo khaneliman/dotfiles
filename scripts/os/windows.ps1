@@ -70,7 +70,7 @@ Installing Catppuccin-Mocha-Blue-Cursors"
 ##
 Write-Host "
 Installing Catppuccin Explorer Themes" 
-.$SCRIPTS_DIR/os/windows/komorebi/Install-Theme.ps1 "$DOTS_DIR/windows/komorebi/themes/Explorer/" "$DOTS_DIR/windows/komorebi/themes/Explorer/catppuccin" "$DOTS_DIR/windows/komorebi/themes/Explorer/catppuccin/Shell/NormalColor" "$DOTS_DIR/windows/themes/Explorer/catppuccin/wallpapers"
+.$SCRIPTS_DIR/os/windows/komorebi/Install-Theme.ps1 "$DOTS_DIR/windows/komorebi/themes/Explorer/*"
 
 Write-Host "
 Setting Catppuccin Windows Colors" 
@@ -81,7 +81,7 @@ Setting Catppuccin Windows Colors"
 ##
 Write-Host "
 Installing Config Files" 
-.$SCRIPTS_DIR/os/windows/Install-Configs.ps1 "$DOTS_DIR/windows/komorebi/home/" "$DOTS_DIR/shared/home/"
+.$SCRIPTS_DIR/os/windows/Install-Configs.ps1
 
 Write-Host "
 [!!] Dotfiles finished installation. Some changes require a reboot to take effect!"
