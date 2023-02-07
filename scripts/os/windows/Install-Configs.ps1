@@ -1,5 +1,6 @@
 using module Message
 using module ConfigMap
+using module FileCommands
 
 # Powershell Variables
 $objShell = New-Object -ComObject Shell.Application
@@ -15,7 +16,7 @@ foreach ( $config in $ConfigMap )
         continue
     } 
 
-    $backupFolderPath = "${env:USERPROFILE}\.config\dotfiles-backup\$timestamp"
+    $backupFolderPath = (-join(${env:USERPROFILE},"\.config\dotfiles-backup\",$timestamp).Replace("/","\"))
     $destinationExists = Test-Path -Path $config.Destination
 
     if ($destinationExists -eq $true)
@@ -27,14 +28,7 @@ foreach ( $config in $ConfigMap )
             continue
         } 
 
-        $backupRelativeFolderPath = $config.Destination.Replace("${env:USERPROFILE}","")
-        $backupFolderPath = $backupFolderPath + $backupRelativeFolderPath
-        $backupFolderPath = Split-Path -parent $backupFolderPath
-        New-Item $backupFolderPath -ItemType Directory -Force
-        $backupFolder = $objShell.Namespace($backupFolderPath)
-
-        Write-Message -Message (-join($config.Destination, " already exists. Backing up existing files..."))
-        $backupFolder.CopyHere($config.Destination, 0x14)
+        Backup-Files -BackupFolderPath $backupFolderPath -Target $config.Destination
         
         if ($config.ReplaceExisting)
         {
@@ -54,11 +48,7 @@ foreach ( $config in $ConfigMap )
     
     if ($config.CreateSymbolicLink -eq $true)
     {
-        Write-Message  -Message (-join("Creating link to ", $config.Source, " at ", $config.Destination))
-        
-        New-Item -ItemType Directory -Force -Path $destinationFolderPath
-
-        sudo New-Item -ItemType SymbolicLink -Path $config.Destination -Target $config.Source
+        New-SymbolicLink -Path $config.Destination -Target $config.Source
     } else
     {
         Write-Message  -Message (-join("Copying ", $config.Source, " files to ", $destinationFolderPath))
@@ -70,7 +60,7 @@ foreach ( $config in $ConfigMap )
         # TODO: Move to komorebi specific script 
         if ($config.Source -match "btop.conf")
         {
-            $btop_theme_path = "${env:USERPROFILE}\scoop\apps\btop\current\themes\catppuccin_macchiato.theme"
+            $btop_theme_path = (-join(${env:USERPROFILE},"\scoop\apps\btop\current\themes\catppuccin_macchiato.theme").Replace("/","\"))
             $regex = "color_theme = .*"
             $replacement = "color_theme = $btop_theme_path"
 
