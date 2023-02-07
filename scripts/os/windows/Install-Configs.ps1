@@ -11,7 +11,7 @@ foreach ( $config in $ConfigMap )
 {   
     if ($config.RequiresUnlock -eq $true -and $GIT_CRYPT_LOCKED -eq $true)
     {
-        Write-Message -Type WARNING -Message (-join($config.Source, "is encrypted. Skipping..."))
+        Write-Message -Type WARNING -Message (-join($config.Source, " is encrypted. Skipping..."))
         continue
     } 
 
@@ -22,7 +22,7 @@ foreach ( $config in $ConfigMap )
     {
         if ((get-item $config.Destination).Attributes.ToString() -match "ReparsePoint")
         {
-            Write-Message -Type WARNING -Message (-join($config.Destination, "is already a symbolic link. Skipping..."))
+            Write-Message -Type WARNING -Message (-join($config.Destination, " is already a symbolic link. Skipping..."))
             Write-Message -Type WARNING -Message "If you'd like to replace this location... delete your existing link and run again."
             continue
         } 
@@ -33,19 +33,19 @@ foreach ( $config in $ConfigMap )
         New-Item $backupFolderPath -ItemType Directory -Force
         $backupFolder = $objShell.Namespace($backupFolderPath)
 
-        Write-Message -Message (-join("    ", $config.Destination, "already exists. Backing up existing files..."))
+        Write-Message -Message (-join($config.Destination, " already exists. Backing up existing files..."))
         $backupFolder.CopyHere($config.Destination, 0x14)
         
         if ($config.ReplaceExisting)
         {
             if ($config.CreateSymbolicLink -eq $true) 
             {
-                Write-Message  -Message (-join("    Deleting ", $config.Destination))
+                Write-Message  -Message (-join("Deleting ", $config.Destination))
                 Remove-Item -Path $config.Destination -Recurse -Force
             }
         } else
         {
-            Write-Message -Type WARNING  -Message "    Config already exists. Skipping..."
+            Write-Message -Type WARNING  -Message "Config already exists. Skipping..."
             continue
         }
     } 
@@ -54,14 +54,14 @@ foreach ( $config in $ConfigMap )
     
     if ($config.CreateSymbolicLink -eq $true)
     {
-        Write-Message  -Message (-join("    Creating link to ", $config.Source, "at", $config.Destination))
+        Write-Message  -Message (-join("Creating link to ", $config.Source, " at ", $config.Destination))
         
         New-Item -ItemType Directory -Force -Path $destinationFolderPath
 
         sudo New-Item -ItemType SymbolicLink -Path $config.Destination -Target $config.Source
     } else
     {
-        Write-Message  -Message (-join("    Copying", $config.Source, "files to", $destinationFolderPath))
+        Write-Message  -Message (-join("Copying ", $config.Source, " files to ", $destinationFolderPath))
 
         New-Item -ItemType Directory -Force -Path $destinationFolderPath
 
