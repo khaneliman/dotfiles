@@ -24,7 +24,7 @@ foreach ( $config in $ConfigMap )
         if ((get-item $config.Destination).Attributes.ToString() -match "ReparsePoint")
         {
             Write-Message -Type WARNING -Message (-join($config.Destination, " is already a symbolic link. Skipping..."))
-            Write-Message -Type WARNING -Message "If you'd like to replace this location... delete your existing link and run again."
+            Write-Message -Type ERROR -Message "If you'd like to replace this location... delete your existing link and run again."
             continue
         } 
 

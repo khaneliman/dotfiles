@@ -7,6 +7,8 @@ using module RegistryEntry
 ##
 $RegPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Accent"
 
+Write-Message -Message 'Setting Explorer accent colors...'
+
 # #AccentPalette
 # "AccentPalette"=hex:51,58,84,ff,43,49,6e,ff,3a,3f,5e,ff,30,34,4e,ff,26,2a,3f,\
 #   ff,1d,1f,2f,ff,0f,10,19,ff,88,17,98,00
@@ -83,7 +85,9 @@ Set-RegistryEntry -Key 'EnableWindowColorization' -Type "DWORD" -Value '0x000000
 $RegPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize"
 
 # Enable transparency
+Write-Message  -Message 'Enabling transparency...'
 Set-RegistryEntry -Key 'EnableTransparency' -Type "DWORD" -Value '0x00000001' -Path $RegPath
 
-# # # Restart explorer
+# Restart explorer
+Write-Message -Type WARNING  -Message 'Restarting explorer to apply changes...'
 Stop-Process -ProcessName explorer -Force -ErrorAction SilentlyContinue

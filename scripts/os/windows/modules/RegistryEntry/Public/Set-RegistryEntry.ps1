@@ -1,3 +1,5 @@
+using module Message
+
 function Set-RegistryEntry {
     param (
         [Parameter(Mandatory=$true)] [string]$Key,
@@ -6,8 +8,7 @@ function Set-RegistryEntry {
         [Parameter(Mandatory=$true)] [string]$Path
     )
     
-    write-host "
-    Setting" $Path $Key "to" $Value
+    Write-Message -Message "Setting $Path $Key to $Value"
 
     if ($Type -eq 'BINARY') {
         [byte[]]$Value= $Value.Split(',')

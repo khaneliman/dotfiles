@@ -13,6 +13,8 @@ if ($current_cursor -eq "Catppuccin-Mocha-Blue-Cursors")
     Write-Message -Type WARNING  -Message 'Cursor already set. Skipping...'
 } else
 {
+    Write-Message -Message 'Cursor not set. Installing cursor and setting...'
+
     infdefaultinstall.exe $args
 
     Set-itemproperty "HKCU:\Control Panel\Cursors" -Name "(Default)" -Value "Catppuccin-Mocha-Blue-Cursors"

@@ -41,6 +41,9 @@ for ( $i = 0; $i -lt $args.count; $i++ )
             {
                 Write-Message  -Message "    Installing $name"
                 $objFolder.CopyHere($File.fullname)
+                Write-Message -Type SUCCESS -Message "  Successfully installed $name"
+            } else {
+                Write-Message -Type WARNING -Message "    Font $name already installed. Skipping..."
             }
         }
     }

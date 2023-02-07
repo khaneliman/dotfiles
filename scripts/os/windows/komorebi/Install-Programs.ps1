@@ -50,6 +50,9 @@ if (!(Test-Path -Path "$($env:USERPROFILE)\Downloads\UltraUXThemePatcher.exe" -P
 
 ## Set komorebi to run on startup
 $RegPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" 
+
+Write-Message -Message "Setting komorebi to start on login"
 Set-RegistryEntry -Key 'KomorebicOnLogin' -Type "String" -Value 'C:\Program Files\komorebi\bin\komorebic.exe start --await-configuration' -Path $RegPath
 
+Write-Message -Message "Setting komorebi config to load on login"
 Set-RegistryEntry -Key 'KomorebicConfigOnLogin' -Type "String" -Value "$($env:USERPROFILE)\.config\komorebi\komorebi.ahk" -Path $RegPath

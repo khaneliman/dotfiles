@@ -6,5 +6,6 @@ using module RegistryEntry
 ##
 $RegPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced"
 
-# Removes Task View from the Taskbar
+# Show file extensions in explorer
+Write-Message -Message "Showing hidden files in Explorer"
 Set-RegistryEntry -Key 'HideFileExt' -Type "DWORD" -Value '0' -Path $RegPath
