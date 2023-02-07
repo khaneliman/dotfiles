@@ -40,7 +40,7 @@ DefaultValue=Catppuccin-Mocha-Blue-Cursors
 DefaultValue.MUI=@main.cpl,-1020
 
 [Control Panel\Desktop]
-Wallpaper=%SystemRoot%\Resources\Themes\catppuccin\wallpapers\cat-sound.png
+Wallpaper=%SystemRoot%\Resources\Themes\catppuccin\Wallpapers\cat-sound.png
 TileWallpaper=0
 WallpaperStyle=10
 Pattern=
@@ -67,13 +67,13 @@ SchemeName=@%SystemRoot%\System32\mmres.dll,-800
 [Slideshow]
 Interval=1800000
 Shuffle=0
-ImagesRootPath=%SystemRoot%\Resources\Themes\catppuccin\wallpapers\
-Item0Path=%SystemRoot%\Resources\Themes\catppuccin\wallpapers\butons.png
-Item1Path=%SystemRoot%\Resources\Themes\catppuccin\wallpapers\cat_pacman.png
-Item2Path=%SystemRoot%\Resources\Themes\catppuccin\wallpapers\cat-sound.png
-Item3Path=%SystemRoot%\Resources\Themes\catppuccin\wallpapers\flatppuccin_macchiato.png
-Item4Path=%SystemRoot%\Resources\Themes\catppuccin\wallpapers\hashtags-black.png
-Item5Path=%SystemRoot%\Resources\Themes\catppuccin\wallpapers\hashtags-new.png
-Item6Path=%SystemRoot%\Resources\Themes\catppuccin\wallpapers\hearts.png
-Item7Path=%SystemRoot%\Resources\Themes\catppuccin\wallpapers\arch-rainbow.png
-Item8Path=%SystemRoot%\Resources\Themes\catppuccin\wallpapers\tetris.png
+ImagesRootPath=%SystemRoot%\Resources\Themes\catppuccin\Wallpapers\
+Item0Path=%SystemRoot%\Resources\Themes\catppuccin\Wallpapers\butons.png
+Item1Path=%SystemRoot%\Resources\Themes\catppuccin\Wallpapers\cat_pacman.png
+Item2Path=%SystemRoot%\Resources\Themes\catppuccin\Wallpapers\cat-sound.png
+Item3Path=%SystemRoot%\Resources\Themes\catppuccin\Wallpapers\flatppuccin_macchiato.png
+Item4Path=%SystemRoot%\Resources\Themes\catppuccin\Wallpapers\hashtags-black.png
+Item5Path=%SystemRoot%\Resources\Themes\catppuccin\Wallpapers\hashtags-new.png
+Item6Path=%SystemRoot%\Resources\Themes\catppuccin\Wallpapers\hearts.png
+Item7Path=%SystemRoot%\Resources\Themes\catppuccin\Wallpapers\arch-rainbow.png
+Item8Path=%SystemRoot%\Resources\Themes\catppuccin\Wallpapers\tetris.png
