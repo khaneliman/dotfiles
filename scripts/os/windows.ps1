@@ -13,6 +13,13 @@ Write-Host "Setting powershell to allow execution of scripts"
 Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope CurrentUser
 
 ##
+# Install Powershell modules
+##
+Write-Host "
+Installing Powershell Modules"
+.$SCRIPTS_DIR/os/windows/Install-Modules.ps1
+
+##
 # Install fonts
 ##
 Write-Host "
@@ -75,3 +82,6 @@ Setting Catppuccin Windows Colors"
 Write-Host "
 Installing Config Files" 
 .$SCRIPTS_DIR/os/windows/Install-Configs.ps1 "$DOTS_DIR/windows/komorebi/home/" "$DOTS_DIR/shared/home/"
+
+Write-Host "
+[!!] Dotfiles finished installation. Some changes require a reboot to take effect!"
