@@ -44,6 +44,7 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
 alias pls='sudo'
+alias clr='clear'
 
 # Cryptography
 alias genpass='openssl rand -base64 20' # Generate a random, 20-charactered password
