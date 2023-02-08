@@ -401,9 +401,36 @@ source_file() {
 	if [[ -f "$1" ]]; then
 		source "$1"
 	else
-		echo "ERROR! Missing file: $1"
+		error_message "ERROR! Missing file: $1"
 		exit 0
 	fi
+}
+
+setup_environment() {
+	set -a # mark variables to be exported to subsequent commands
+
+	CURRENT_TIME=$(date "+%Y.%m.%d-%H.%M.%S")
+	BACKUP_LOCATION="$HOME/.dotfiles-backup/$CURRENT_TIME"
+
+	GIT_DIR="$(git rev-parse --show-toplevel)"
+	SCRIPTS_DIR="$GIT_DIR"/scripts
+	DOTS_DIR="$GIT_DIR"/dots
+	CONFIG_FILE="$GIT_DIR"/setup.conf
+	LOG_FILE="$GIT_DIR"/install.log
+
+	GIT_CRYPT_LOCKED=$(test -z "$(git config --local --get filter.git-crypt.smudge 2>/dev/null)" && echo "True" || echo "False")
+
+	set +a
+
+	declare -a files_to_source
+	while IFS= read -r -d '' filename; do
+		files_to_source+=("$filename")
+	done < <(find "$SCRIPTS_DIR" -type f -name '*.sh' ! -name "$(basename "installer-helper.sh")" -print0 | sort -z)
+
+	for filename in "${files_to_source[@]}"; do
+		source "$filename"
+	done
+
 }
 
 success_message() {
@@ -415,3 +442,5 @@ success_message() {
 warning_message() {
 	cecho "YELLOW" "[!!] $1"
 }
+
+setup_environment
