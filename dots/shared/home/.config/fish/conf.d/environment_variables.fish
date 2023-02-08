@@ -4,13 +4,13 @@ set -g fish_greeting
 set -g theme_nerd_fonts yes
 
 # Exports
-set -g LANG "en_US.UTF-8"
-set -g LC_ALL "en_US.UTF-8"
-set -g VISUAL "nvim"
-set -g EDITOR "$VISUAL"
-set -g MICRO_TRUECOLOR "1"
-set -g GIT_EDITOR 'nvim'
-set -g RANGER_LOAD_DEFAULT_RC FALSE
+export LANG="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
+export VISUAL="nvim"
+export EDITOR="$VISUAL"
+export MICRO_TRUECOLOR="1"
+export GIT_EDITOR='nvim'
+export RANGER_LOAD_DEFAULT_RC=FALSE
 
 # Git config
 set -g __fish_git_prompt_show_informative_status 1
