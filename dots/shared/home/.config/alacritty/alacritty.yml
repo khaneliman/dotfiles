@@ -8,8 +8,8 @@
 #
 # All imports must either be absolute paths starting with `/`, or paths relative
 # to the user's home directory starting with `~/`.
-# import:
-#  - /path/to/alacritty.yml
+import:
+  - ~/.config/alacritty/local.alacritty.yml
 
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
@@ -60,7 +60,6 @@ window:
   # Values for `decorations` (macOS only):
   #     - transparent: Title bar, transparent background and title bar buttons
   #     - buttonless: Title bar, transparent background and no title bar buttons
-  decorations: buttonless
   opacity: 0.98
   # Startup Mode (changes require restart)
   #
@@ -228,8 +227,8 @@ color_schemes:
       cyan: "#179299" # teal
       white: "#ACB0BE" # surface2
     indexed_colors:
-      - {index: 16, color: "#FE640B"}
-      - {index: 17, color: "#DC8A78"}
+      - { index: 16, color: "#FE640B" }
+      - { index: 17, color: "#DC8A78" }
   frappe: &frappe
     primary: # Default colors
       background: "#303446" # base
@@ -298,8 +297,8 @@ color_schemes:
       cyan: "#81C8BE" # teal
       white: "#B5BFE2" # subtext1
     indexed_colors:
-      - {index: 16, color: "#EF9F76"}
-      - {index: 17, color: "#F2D5CF"}
+      - { index: 16, color: "#EF9F76" }
+      - { index: 17, color: "#F2D5CF" }
   macchiato: &macchiato
     primary: # Default colors
       background: "#24273A" # base
@@ -368,8 +367,8 @@ color_schemes:
       cyan: "#8BD5CA" # teal
       white: "#B8C0E0" # subtext1
     indexed_colors:
-      - {index: 16, color: "#F5A97F"}
-      - {index: 17, color: "#F4DBD6"}
+      - { index: 16, color: "#F5A97F" }
+      - { index: 17, color: "#F4DBD6" }
   mocha: &mocha
     primary: # Default colors
       background: "#1E1E2E" # base
@@ -438,8 +437,8 @@ color_schemes:
       cyan: "#94E2D5" # teal
       white: "#BAC2DE" # subtext1
     indexed_colors:
-      - {index: 16, color: "#FAB387"}
-      - {index: 17, color: "#F5E0DC"}
+      - { index: 16, color: "#FAB387" }
+      - { index: 17, color: "#F5E0DC" }
 colors: *macchiato
 cursor:
   # Cursor style
@@ -891,9 +890,9 @@ key_bindings:
   #- { key: H,              mods: Command,                    action: Hide                  }
   #- { key: H,              mods: Command|Alt,                action: HideOtherApplications }
   #- { key: M,              mods: Command,                    action: Minimize              }
-  - {key: Q, mods: Command, action: Quit}
-  - {key: W, mods: Command, action: Quit}
-  - {key: N, mods: Command, action: CreateNewWindow,}
+  - { key: Q, mods: Command, action: Quit }
+  - { key: W, mods: Command, action: Quit }
+  - { key: N, mods: Command, action: CreateNewWindow }
   #- { key: F,              mods: Command|Control,            action: ToggleFullscreen      }
   #- { key: F,              mods: Command, mode: ~Search,     action: SearchForward         }
   #- { key: B,              mods: Command, mode: ~Search,     action: SearchBackward        }

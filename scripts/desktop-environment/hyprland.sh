@@ -72,12 +72,14 @@ hypr_copy_configuration() {
 	# symlinks for stuff replaced completely
 	link_locations "$HYPR_HOME"/.config/Kvantum "$HOME"/.config/Kvantum
 	link_locations "$HYPR_HOME"/.config/OpenRGB "$HOME"/.config/OpenRGB
+	link_locations "$HYPR_HOME"/.config/alacritty/local.alacritty.yml "$HOME"/.config/alacritty/local.alacritty.yml
 	link_locations "$HYPR_HOME"/.config/ckb-next "$HOME"/.config/ckb-next
 	link_locations "$HYPR_HOME"/.config/fish/conf.d/tide.fish "$HOME"/.config/fish/conf.d/tide.fish
 	link_locations "$HYPR_HOME"/.config/gtk-3.0 "$HOME"/.config/gtk-3.0
 	link_locations "$HYPR_HOME"/.config/gtk-4.0 "$HOME"/.config/gtk-4.0
 	link_locations "$HYPR_HOME"/.config/hypr "$HOME"/.config/hypr
 	link_locations "$HYPR_HOME"/.config/mako "$HOME"/.config/mako
+	link_locations "$HYPR_HOME"/.config/mimeapps.list "$HOME"/.config/mimeapps.list
 	link_locations "$HYPR_HOME"/.config/paru "$HOME"/.config/paru
 	link_locations "$HYPR_HOME"/.config/qt5ct "$HOME"/.config/qt5ct
 	link_locations "$HYPR_HOME"/.config/qt6ct "$HOME"/.config/qt6ct
@@ -86,7 +88,6 @@ hypr_copy_configuration() {
 	link_locations "$HYPR_HOME"/.config/swaylock "$HOME"/.config/swaylock
 	link_locations "$HYPR_HOME"/.config/waybar "$HOME"/.config/waybar
 	link_locations "$HYPR_HOME"/.config/wlogout "$HOME"/.config/wlogout
-	link_locations "$HYPR_HOME"/.config/mimeapps.list "$HOME"/.config/mimeapps.list
 	link_locations "$HYPR_HOME"/.gitconfig.local "$HOME"/.gitconfig.local
 	link_locations "$HYPR_HOME"/.gtkrc-2.0 "$HOME"/.gtkrc-2.0
 
