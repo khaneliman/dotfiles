@@ -88,6 +88,9 @@ hypr_copy_configuration() {
 	link_locations "$HYPR_HOME"/.config/swaylock "$HOME"/.config/swaylock
 	link_locations "$HYPR_HOME"/.config/waybar "$HOME"/.config/waybar
 	link_locations "$HYPR_HOME"/.config/wlogout "$HOME"/.config/wlogout
+
+	link_locations "$HYPR_HOME"/.local/share/fastfetch/presets/local-overrides "$HOME"/.local/share/fastfetch/presets/local-overrides
+
 	link_locations "$HYPR_HOME"/.gitconfig.local "$HOME"/.gitconfig.local
 	link_locations "$HYPR_HOME"/.gtkrc-2.0 "$HOME"/.gtkrc-2.0
 

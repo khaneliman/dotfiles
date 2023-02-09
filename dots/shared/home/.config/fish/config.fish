@@ -117,5 +117,5 @@ end
 
 # Fetch on terminal open
 if status is-interactive
-    fetch 
+    fastfetch 
 end
