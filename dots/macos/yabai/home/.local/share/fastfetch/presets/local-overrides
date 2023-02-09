@@ -1,1 +1,3 @@
-
+--os-key " \e[32m ├─ "
+--packages-key " \e[32m ├─ "
+--kernel-key " \e[32m ├─ "
