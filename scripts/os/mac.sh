@@ -78,6 +78,7 @@ mac_copy_configuration() {
 	link_locations "$MAC_HOME"/.config/yabai "$HOME"/.config/yabai
 	link_locations "$MAC_HOME"/.config/sketchybar "$HOME"/.config/sketchybar
 	link_locations "$MAC_HOME"/.config/ranger/config/local.conf "$HOME"/.config/ranger/config/local.conf
+	link_locations "$MAC_HOME"/.config/kitty/macos.kitty.conf "$HOME"/.config/kitty/macos.kitty.conf
 	link_locations "$MAC_HOME"/.config/fish/conf.d/tide.fish "$HOME"/.config/fish/conf.d/tide.fish
 	link_locations "$MAC_HOME"/.config/fish/functions/brew.fish "$HOME"/.config/fish/functions/brew.fish
 	link_locations "$MAC_HOME"/.config/fish/functions/suyabai.fish "$HOME"/.config/fish/functions/suyabai.fish

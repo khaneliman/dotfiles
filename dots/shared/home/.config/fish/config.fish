@@ -16,8 +16,10 @@ set -gx PATH "$PNPM_HOME" $PATH
 [ $(command -v lsd) ] && alias ls='lsd -al --color=always --group-directories-first' # preferred listing
 [ $(command -v lsd) ] && alias la='lsd -a --color=always --group-directories-first'  # all files and dirs
 [ $(command -v lsd) ] && alias ll='lsd -l --color=always --group-directories-first'  # long format
-[ $(command -v lsd) ] && alias lt='lsd -aT --color=always --group-directories-first' # tree listing
-[ $(command -v lsd) ] && alias l.="lsd -a | egrep '^\.'"                             # show only dotfiles
+[ $(command -v lsd) ] && alias lt='lsd -a --tree --color=always --group-directories-first -I .git' # tree listing
+[ $(command -v lsd) ] && alias lst='lsd -al --tree --color=always --group-directories-first -I .git' # tree listing
+[ $(command -v lsd) ] && alias llt='lsd -l --tree --color=always --group-directories-first -I .git' # tree listing
+[ $(command -v lsd) ] && alias l.="lsd -a | egrep '^\.'"                             # show only dotfilesalias ls='lsd -a'
 
 # Replace some more things with better alternatives
 [ $(command -v bat) ] && alias cat='bat'
@@ -43,12 +45,15 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
+# Misc
 alias pls='sudo'
 alias clr='clear'
+alias vim='nvim'
 
 # Cryptography
 alias genpass='openssl rand -base64 20' # Generate a random, 20-charactered password
 alias sha='shasum -a 256' # Test checksum
+alias sshperm='find .ssh/ -type f -exec chmod 600 {} \;; find .ssh/ -type d -exec chmod 700 {} \;; find .ssh/ -type f -name "*.pub" -exec chmod 644 {} \;'
 
 # Network
 alias cn='ping -c 5 8.8.8.8' # Ping google, checking network
@@ -64,7 +69,7 @@ alias wlon='rfkill unblock wlan' # Unblock wlan, start wifi connection
 # OS Dependent config
 switch (uname)
     case Linux
-        [ -f "/usr/share/doc/find-the-command/ftc.fish" ] && source /usr/share/doc/find-the-command/ftc.fish
+        [ -f "/usr/share/doc/find-the-command/ftc.fish" ] && source /usr/share/doc/find-the-command/ftc.fish noupdate quiet
         
         alias grubup="sudo update-grub"
         alias psmem='ps auxf | sort -nr -k 4'
