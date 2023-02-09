@@ -23,6 +23,8 @@ shared_backup_existing() {
 
 	backup_files "$HOME"/.gitconfig "$BACKUP_LOCATION"
 	backup_files "$HOME"/.gitconfig.functions "$BACKUP_LOCATION"
+	backup_files "$HOME"/.zshrc "$BACKUP_LOCATION"/
+	backup_files "$HOME"/.p10k.zsh "$BACKUP_LOCATION"/
 
 	git_crypt_check && backup_files "$HOME"/.gnupg "$BACKUP_LOCATION"
 	git_crypt_check && backup_files "$HOME"/.gitconfig.signing "$BACKUP_LOCATION"
@@ -179,12 +181,15 @@ shared_copy_configuration() {
 	link_locations "$SHARED_HOME"/.config/ranger "$HOME"/.config/ranger
 	link_locations "$SHARED_HOME"/.config/spicetify "$HOME"/.config/spicetify
 	link_locations "$SHARED_HOME"/.config/topgrade.toml "$HOME"/.config/topgrade.toml
+
 	git_crypt_check && link_locations "$SHARED_HOME"/.gnupg "$HOME"/.gnupg
 	git_crypt_check && link_locations "$SHARED_HOME"/.ssh "$HOME"/.ssh
 	link_locations "$SHARED_HOME"/.face "$HOME"/.face
 	link_locations "$SHARED_HOME"/.face.icon "$HOME"/.face.icon
 	link_locations "$SHARED_HOME"/.gitconfig "$HOME"/.gitconfig
 	link_locations "$SHARED_HOME"/.gitconfig.functions "$HOME"/.gitconfig.functions
+	link_locations "$SHARED_HOME"/.p10k.zsh "$HOME"/.p10k.zsh
+	link_locations "$SHARED_HOME"/.zshrc "$HOME"/.zshrc
 	git_crypt_check && link_locations "$SHARED_HOME"/.gitconfig.signing "$HOME"/.gitconfig.signing
 	git_crypt_check && link_locations "$SHARED_HOME"/.wakatime.cfg "$HOME"/.wakatime.cfg
 	git_crypt_check && link_locations "$SHARED_HOME"/.wegorc "$HOME"/.wegorc

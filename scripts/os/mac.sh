@@ -65,7 +65,6 @@ mac_backup_existing() {
 	backup_files "$HOME"/.config/yabai "$BACKUP_LOCATION"/.config/
 	backup_files "$HOME"/.hammerspoon "$BACKUP_LOCATION"/
 	backup_files "$HOME"/.gitconfig.local "$BACKUP_LOCATION"/
-	backup_files "$HOME"/.zshrc "$BACKUP_LOCATION"/
 }
 
 mac_copy_configuration() {
@@ -86,7 +85,6 @@ mac_copy_configuration() {
 
 	link_locations "$MAC_HOME"/.hammerspoon "$HOME"/.hammerspoon
 	link_locations "$MAC_HOME"/.gitconfig.local "$HOME"/.gitconfig.local
-	link_locations "$MAC_HOME"/.zshrc "$HOME"/.zshrc
 
 	# copy files that dont replace location
 	copy_files "$MAC_HOME"/.terminfo "$HOME"/
