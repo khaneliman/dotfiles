@@ -1,5 +1,6 @@
 #!/bin/bash
 #----------------------------------------------------------------------------
 fusermount -u /mnt/disks/dropbox
-fusermount -u /mnt/disks/google
+fusermount -u /mnt/disks/googledrive
+fusermount -u /mnt/disks/googlephotos
 fusermount -u /mnt/disks/onedrive

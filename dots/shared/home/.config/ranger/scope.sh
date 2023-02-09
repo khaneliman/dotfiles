@@ -69,6 +69,13 @@ handle_extension() {
 
 	## PDF
 	pdf)
+		pdftoppm -f 1 -l 1 \
+			-scale-to-x 1920 \
+			-scale-to-y -1 \
+			-singlefile \
+			-jpeg -tiffcompression jpeg \
+			-- "${FILE_PATH}" "${IMAGE_CACHE_PATH%.*}" &&
+			exit 6
 		## Preview as text conversion
 		pdftotext -l 10 -nopgbrk -q -- "$FILE_PATH" - |
 			fmt -w "$PV_WIDTH" && exit 5
