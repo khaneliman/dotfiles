@@ -235,6 +235,7 @@ link_locations() {
 		fi
 
 		message "Creating a link from $1 at $2..."
+		mkdir -p "$(dirname "$2")"
 		ln -s "$1" "$2"
 		success_message "Successfully linked $2 to $1"
 	fi
