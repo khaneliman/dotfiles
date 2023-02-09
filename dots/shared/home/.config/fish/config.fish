@@ -66,6 +66,10 @@ alias wlon='rfkill unblock wlan' # Unblock wlan, start wifi connection
 [ $(command -v topgrade) ] && alias upd="topgrade $argv"
 [ $(command -v lazygit) ] && alias lg="lazygit $argv"
 
+# SSH setup 
+[ $(command -v fish_ssh_agent) ] && fish_ssh_agent
+load_ssh # if you need ssh loading keys on shell launch
+
 # OS Dependent config
 switch (uname)
     case Linux
@@ -91,6 +95,7 @@ switch (uname)
             [ $(command -v expac) ] && alias big="expac -H M '%m\t%n' | sort -h | nl"              # Sort installed packages according to size in MB 
             alias yeet="yay -Rns $argv" # Remove package and all dependencies
             alias yeetorphan="pacman -Qtdq | sudo pacman -Rns - $argv"
+            alias neofetch='neofetch --source $HOME/.config/neofetch/arch'
 
             # Get fastest mirrors
             alias mirror="sudo reflector -f 30 -l 30 --number 10 --verbose --save /etc/pacman.d/mirrorlist"
@@ -106,7 +111,7 @@ switch (uname)
             
             # Fetch on terminal open
             if status is-interactive
-                fastfetch | lolcat
+                neofetch 
             end
         else if [ -f "/etc/fedora-release" ];
             # Fetch on terminal open
@@ -131,6 +136,3 @@ switch (uname)
             echo Hi, stranger!
 end
 
-# SSH setup 
-[ $(command -v fish_ssh_agent) ] && fish_ssh_agent
-load_ssh # if you need ssh loading keys on shell launch

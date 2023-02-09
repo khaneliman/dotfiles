@@ -3,7 +3,7 @@ function clear --description 'alias clear=clear && fastfetch'
   switch (uname)
     case Linux
         if [ -f "/etc/arch-release" ];
-          command clear && fastfetch | lolcat
+          command clear && neofetch
         else
           command clear && fastfetch
         end
