@@ -79,6 +79,12 @@ class ConfigMap
             $true,
             $true)
 
+        $this.ConfigMap += [ConfigMapEntry]::new(
+            (-join($global:DOTS_DIR,"/windows/komorebi/home/AppData/Local/fastfetch/").Replace("/","\")),
+            (-join($env:USERPROFILE,"\AppData\Local\fastfetch\").Replace("/","\")),
+            $true,
+            $true)
+
         ##
         # Shared Configs
         ##
