@@ -1,6 +1,8 @@
-
-max-visible=5
+max-visible=10
 sort=-time
+# determines which monitor to display notification on
+# if you dont need, just remove setting
+output=DP-2 
 
 layer=top
 anchor=top-right
@@ -8,12 +10,14 @@ anchor=top-right
 font=Liga SFMono Nerd Font 12
 background-color=#24273A
 text-color=#CAD3F5
-width=275
+border-color=#CAD3F5
+# width is a constant, choose a compromise between large enough to be useful
+# and not too large to make small notifications look stupid
+width=400
 height=100
 margin=20
 padding=7,12,10
 border-size=1
-border-color=#CAD3F5
 border-radius=3
 progress-color=over #5588AAFF
 icons=true
@@ -23,3 +27,7 @@ actions=true
 format=<b>%s</b>\n%b
 default-timeout=5000
 ignore-timeout=false
+
+[urgency=critical]
+border-color=#bf616a
+default-timeout=0
