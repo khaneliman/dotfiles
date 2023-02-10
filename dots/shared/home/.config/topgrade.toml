@@ -11,7 +11,7 @@
 #only = ["system", "emacs"]
 
 # Do not ask to retry failed steps (default: false)
-#no_retry = true
+no_retry = true
 
 # Run `sudo -v` to cache credentials at the start of the run; this avoids a
 # blocking password prompt in the middle of a possibly-unattended run.
@@ -36,13 +36,13 @@
 #set_title = false
 
 # Display the time in step titles
-# display_time = true
+display_time = true
 
 # Cleanup temporary or old files
 #cleanup = true
 
 # Skip sending a notification at the end of a run
-#skip_notify = true
+skip_notify = true
 
 [git]
 #max_concurrency = 5
