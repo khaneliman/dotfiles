@@ -73,8 +73,8 @@ alias wlon='rfkill unblock wlan' # Unblock wlan, start wifi connection
 [ $(command -v pacman) ] && alias rmpkg="sudo pacman -Rdd"
 [ $(command -v pacman) ] && alias gitpkg='pacman -Q | grep -i "\-git" | wc -l'			# List amount of -git packages
 [ $(command -v expac) ] && alias big="expac -H M '%m\t%n' | sort -h | nl"              # Sort installed packages according to size in MB 
-[ $(command -v yay) ] && [ $(command -v paru) ] && alias yay='paru'
-[ $(command -v yay) ] && alias yeet="yay -Rns $argv" # Remove package and all dependencies
+[ $(command -v paru) ] && alias yay='paru'
+[ $(command -v paru) ] && alias yeet="paru -Rns $argv" # Remove package and all dependencies
 [ $(command -v pacman) ] && alias yeetorphan="pacman -Qtdq | sudo pacman -Rns - $argv"
 
 # Get fastest mirrors

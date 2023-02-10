@@ -13,6 +13,8 @@ setup.conf
 /dots/shared/home/.config/fish/fish_variables
 /dots/shared/home/.config/fish/conf.d/
 !/dots/shared/home/.config/fish/conf.d/tide.fish
+!/dots/shared/home/.config/fish/conf.d/environment_variables.fish
+!/dots/shared/home/.config/fish/conf.d/fish_variables.fish
 /dots/shared/home/.config/ranger/config/local.conf
 /dots/shared/home/.config/spicetify/config-xpui.ini
 /dots/shared/home/.config/spicetify/Extracted/**/*
@@ -27,3 +29,4 @@ dots/linux/hyprland/home/.config/OpenRGB/logs
 dots/shared/home/.config/kitty/macos.kitty.conf
 dots/shared/home/.config/alacritty/local.alacritty.yml
 dots/shared/home/.local/share/fastfetch/presets/local-overrides
+dots/shared/home/.config/btop/btop.log

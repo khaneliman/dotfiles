@@ -110,8 +110,8 @@ handle_extension() {
 
 		# Markdown
 	md)
-		highlight --syntax=markdown --out-format=ansi "${FILE_PATH}" && exit 5
 		glow -s dark "${FILE_PATH}" && exit 5
+		highlight --syntax=markdown --out-format=ansi "${FILE_PATH}" && exit 5
 		bat "${FILE_PATH}" && exit 5
 		exit 1
 		;;
