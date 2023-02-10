@@ -1,0 +1,2 @@
+# Generated cron settings for plugin autoupdates
+0 0 * * * /usr/local/emhttp/plugins/ca.update.applications/scripts/updateApplications.php >/dev/null 2>&1

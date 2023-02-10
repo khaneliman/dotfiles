@@ -2,12 +2,12 @@
 <!DOCTYPE PLUGIN [
 <!ENTITY name       "enhanced.log">
 <!ENTITY author     "dlandon">
-<!ENTITY version    "2022.10.15a">
+<!ENTITY version    "2023.02.01">
 <!ENTITY launch		"Tools/EnhancedSyslog">
 <!ENTITY gitURL		"https://raw.githubusercontent.com/&author;/&name;/master">
 <!ENTITY pluginURL	"&gitURL;/&name;.plg">
 <!ENTITY supportURL	"https://forums.unraid.net/topic/43115-enhanced-log-view-with-lines-highlighted-in-color/">
-<!ENTITY MD5		"78b8c320d2870b757f9be1dec5d641e8">
+<!ENTITY MD5		"a99485e5c70856eda500421fc608de7c">
 ]>
 
 <PLUGIN	name="&name;"
@@ -22,6 +22,9 @@
 <CHANGES>
 ##&name;
 ###&version;
+- Fix: Php compatibility for 6.12.
+
+###2022.10.15a
 - Fix: Adjust buttons on bottom of page to show when using 'fixed' listing height.
 - Add: Plugin update check.
 
@@ -154,7 +157,7 @@
 </CHANGES>
 
 <!--
-Copyright 2015-2022, Dan Landon
+Copyright 2015-2023, Dan Landon
 This plugin adds a webGui page to view the system log with highlighted lines.
 You can enable or disable event highlighting and set your own colors for each event.
 You can add your own search string to highlight in the log.
@@ -256,7 +259,7 @@ The 'post-install' script.
 echo ""
 echo "-----------------------------------------------------------"
 echo " Plugin &name; is installed."
-echo " Copyright 2015-2022, Dan Landon"
+echo " Copyright 2015-2023, Dan Landon"
 echo " Version: &version;"
 echo "-----------------------------------------------------------"
 echo ""

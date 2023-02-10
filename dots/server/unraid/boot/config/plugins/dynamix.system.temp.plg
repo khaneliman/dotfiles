@@ -2,18 +2,22 @@
 <!DOCTYPE PLUGIN [
 <!ENTITY name "dynamix.system.temp">
 <!ENTITY author "Bergware">
-<!ENTITY version "2022.09.16b">
+<!ENTITY version "2023.02.04b">
 <!ENTITY launch "Settings/TempSettings">
 <!ENTITY pluginURL "https://raw.githubusercontent.com/bergware/dynamix/master/unRAIDv6/&name;.plg">
 <!ENTITY flash "/boot/config/plugins/&name;">
-<!ENTITY MD5 "686c96b1d87be2413749108909ee94e7">
+<!ENTITY MD5 "92d8ce80503e2c8023fb2696727616cf">
 ]>
-<PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" min="6.1.9" support="http://lime-technology.com/forum/index.php?topic=36543.0">
+<PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" min="6.9.0" support="http://lime-technology.com/forum/index.php?topic=36543.0">
 
 <CHANGES>
 ##&name;
 
 ###&version;
+- set minimum Unraid version to 6.9 (supports multi-language)
+- added support for upcoming Unraid version 6.12 
+
+###2022.09.16
 - fixed typos
 - added icons
 
@@ -119,7 +123,7 @@
 </CHANGES>
 
 <!--
-Copyright 2021, Bergware International
+Copyright 2023, Bergware International
 Dynamix System Temperature - Real-time monitoring of CPU and MB temperatures
 -->
 
@@ -188,7 +192,7 @@ echo ""
 echo "-----------------------------------------------------------"
 echo " Plugin &name; is installed."
 echo " This plugin requires Dynamix webGui to operate"
-echo " Copyright 2021, Bergware International"
+echo " Copyright 2023, Bergware International"
 echo " Version: &version;"
 echo "-----------------------------------------------------------"
 echo ""

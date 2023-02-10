@@ -2,18 +2,22 @@
 <!DOCTYPE PLUGIN [
 <!ENTITY name "dynamix.active.streams">
 <!ENTITY author "Bergware">
-<!ENTITY version "2020.06.17">
+<!ENTITY version "2023.02.05">
 <!ENTITY launch "Tools/ActiveStreams">
 <!ENTITY pluginURL "https://raw.githubusercontent.com/bergware/dynamix/master/unRAIDv6/&name;.plg">
 <!ENTITY source "/boot/config/plugins/&name;/&name;">
-<!ENTITY MD5 "3c0fbba75800727ed7006381fec035e4">
+<!ENTITY MD5 "fc3f096834252e79e74e9421dc1ed94f">
 ]>
-<PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" min="6.1.9" support="http://lime-technology.com/forum/index.php?topic=36543.0">
+<PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" min="6.9.0" support="http://lime-technology.com/forum/index.php?topic=36543.0">
 
 <CHANGES>
 ##&name;
 
 ###&version;
+- set minimum Unraid version to 6.9 (supports multi-language)
+- added support for upcoming Unraid version 6.12 
+
+###2020.06.17
 - updated multi-language support
 
 ###2020.05.10

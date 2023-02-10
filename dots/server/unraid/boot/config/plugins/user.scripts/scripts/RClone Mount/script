@@ -16,10 +16,10 @@ chown 99:100 /mnt/disks/onedrive
 
 #This section mounts the various cloud storage into the folders that were created above.
 
-rclone mount --max-read-ahead 1024k --allow-other --dir-cache-time 1000h --cache-dir /mnt/vfs/ --vfs-cache-mode full --vfs-read-ahead 256M dropbox: /mnt/disks/dropbox --gid 100 --uid 99 &
-rclone mount --max-read-ahead 1024k --allow-other --dir-cache-time 1000h --cache-dir /mnt/vfs/ --vfs-cache-mode write --vfs-read-ahead 256M googledrive: /mnt/disks/googledrive --gid 100 --uid 99 &
-rclone mount --max-read-ahead 1024k --dir-cache-time 1000h --allow-other googlephotos: /mnt/disks/googlephotos --gid 100 --uid 99 &
-rclone mount --max-read-ahead 1024k --dir-cache-time 1000h --allow-other --cache-dir /mnt/vfs/ --vfs-cache-mode writes --vfs-read-ahead 256M onedrive: /mnt/disks/onedrive --gid 100 --uid 99 &
+rclone mount --max-read-ahead 1024k --allow-other --dir-cache-time 1000h --cache-dir /mnt/cache/vfs/ --vfs-cache-mode full --vfs-read-ahead 256M  dropbox: /mnt/disks/dropbox --gid 100 --uid 99 &
+rclone mount --max-read-ahead 1024k --allow-other --dir-cache-time 1000h --cache-dir /mnt/cache/vfs/ --vfs-cache-mode writes --vfs-read-ahead 256M googledrive: /mnt/disks/googledrive --gid 100 --uid 99 &
+rclone mount --max-read-ahead 1024k --dir-cache-time 1000h --allow-other --cache-dir /mnt/cache/vfs/ --vfs-cache-mode full googlephotos: /mnt/disks/googlephotos --gid 100 --uid 99 &
+rclone mount --max-read-ahead 1024k --dir-cache-time 1000h --allow-other --cache-dir /mnt/cache/vfs/ --vfs-cache-mode writes --vfs-read-ahead 256M onedrive: /mnt/disks/onedrive --gid 100 --uid 99 &
 
 #echo '"/mnt/disks/dropbox" -fsid=200,async,no_subtree_check *(rw,sec=sys,insecure,anongid=100,anonuid=99,all_squash)' >> /etc/exports
 #echo '"/mnt/disks/google" -fsid=201,async,no_subtree_check *(rw,sec=sys,insecure,anongid=100,anonuid=99,all_squash)' >> /etc/exports

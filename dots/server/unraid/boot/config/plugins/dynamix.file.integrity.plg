@@ -2,31 +2,35 @@
 <!DOCTYPE PLUGIN [
 <!ENTITY name "dynamix.file.integrity">
 <!ENTITY author "Bergware">
-<!ENTITY version "2021.08.24e">
+<!ENTITY version "2023.02.05a">
 <!ENTITY launch "Settings/FileIntegrity">
 <!ENTITY pluginURL "https://raw.githubusercontent.com/bergware/dynamix/master/unRAIDv6/&name;.plg">
 <!ENTITY source "/boot/config/plugins/&name;/&name;">
-<!ENTITY MD5 "b3ff8924d21a25c56d7c7bd74a4d75aa">
+<!ENTITY MD5 "e24e74577058d9286ada285095eaa6e2">
 ]>
-<PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" min="6.1.9" support="http://lime-technology.com/forum/index.php?topic=44989.0">
+<PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" min="6.9.0" support="http://lime-technology.com/forum/index.php?topic=44989.0">
 
 <CHANGES>
 ##&name;
 
 ###&version;
+- set minimum Unraid version to 6.9 (supports multi-language)
+- added support for upcoming Unraid version 6.12 
+
+###2021.08.24
 - fixed all operations with new export file naming
 - fixed regression error in watcher
 
-###2021.8.23
+###2021.08.23
 - include hashing name in export files (this allows to keep export files for different hashing methods)
 - Note: users must do a new 'Export' or rename existing files manually
 
-###2021.8.21
+###2021.08.21
 - fixed regression errors
 - visual enhancements
 - fixed race-condition when starting operation
 
-###2021.8.20
+###2021.08.20
 - Thanks to user Falcosc this plugin has received numerous updates
 - added blake3 hash support for 2-6 times more hash rate than blake2
 - reduced CPU load up to 4 times at same data rate when using blake3

@@ -1,0 +1,16 @@
+{
+    "notify": "yes",
+    "delay": "3",
+    "Global": "true",
+    "cron": {
+        "pluginCronFrequency": "Daily",
+        "pluginCronDay": "0",
+        "pluginCronDayOfMonth": "1",
+        "pluginCronHour": "0",
+        "pluginCronMinute": "0",
+        "pluginCronCustom": ""
+    },
+    "ca.update.applications.plg": "true",
+    "community.applications.plg": "true",
+    "fix.common.problems.plg": "true"
+}

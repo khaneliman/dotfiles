@@ -2,12 +2,12 @@
 <!DOCTYPE PLUGIN [
 <!ENTITY name		"tips.and.tweaks">
 <!ENTITY author		"dlandon">
-<!ENTITY version	"2023.01.18">
+<!ENTITY version	"2023.02.01">
 <!ENTITY launch		"Settings/TipsAndTweaks">
 <!ENTITY gitURL		"https://raw.githubusercontent.com/&author;/&name;/master">
 <!ENTITY pluginURL	"&gitURL;/&name;.plg">
 <!ENTITY supportURL	"https://forums.unraid.net/topic/47527-tips-and-tweaks-plugin-to-possibly-improve-performance-of-unraid-and-vms/?tab=comments#comment-468361">
-<!ENTITY MD5		"c85218fd61e532aa9503e7d21e1a610b">
+<!ENTITY MD5		"50cb3750c104c8e629d9aa54a177ef1a">
 ]>
 
 <PLUGIN	name="&name;"
@@ -22,6 +22,9 @@
 <CHANGES>
 ##&name;
 ###&version;
+- Fix: Php compatibility for 6.12.
+
+###2023.01.18
 - Fix: Remove broken links.
 
 ###2022.12.31a

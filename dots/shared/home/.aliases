@@ -230,3 +230,13 @@ alias gignore='git update-index --assume-unchanged'
 alias gignored='git ls-files -v | grep "^[[:lower:]]"'
 alias gunignore='git update-index --no-assume-unchanged'
 alias grev='git revert'
+
+# #
+# Docker aliases
+# #
+alias dcu="docker-compose up -d"
+alias dcd="docker-compose down"
+alias dim="docker images"
+alias dps="docker ps"
+alias dpsa="docker ps -a"
+alias dsp="docker system prune --all"

@@ -2,12 +2,12 @@
 <!DOCTYPE PLUGIN [
 <!ENTITY name		"unassigned.devices">
 <!ENTITY author		"dlandon">
-<!ENTITY version	"2023.01.14">
+<!ENTITY version	"2023.02.08">
 <!ENTITY launch		"Main/UnassignedDevices">
 <!ENTITY gitURL		"https://raw.githubusercontent.com/&author;/&name;/master">
 <!ENTITY pluginURL	"&gitURL;/&name;.plg">
 <!ENTITY supportURL	"https://forums.unraid.net/topic/92462-unassigned-devices-managing-disk-drives-and-remote-shares-outside-of-the-unraid-array/">
-<!ENTITY MD5		"4b71bc80e7efb4246bdf197e3be5612d">
+<!ENTITY MD5		"1827ed0f63ce38e339a73411cd8f699a">
 ]>
 
 <PLUGIN name="&name;"
@@ -22,6 +22,21 @@
 <CHANGES>
 ##&name;
 ###&version;
+- Fix: Php warnings.
+- Fix: Redo auto mount to make it more robust.
+- Fix: Move 'pass through' and 'auto mount' checks to the disk level from partition level.
+
+###2023.02.05
+- Fix: Change mountpoint shows it failed when it did not.
+- Fix: Php error when changing mount point on luks btrfs formatted disk.
+- Fix: Improve clear disk and remove zpool signatures so a disk can be reformatted.
+- Add: Attach and Detach buttons gray out while operation is in progress and then disappear when the operation is completed.
+- Add: Show green orb when Historical Disk is in standby (detached).
+- Add: Don't show "Passed Through" switch if a disk is mounted.
+- Add: Don't show the apfs volume in Disk Settings if the disk is mounted.
+- Add: Disable 'Remove Historical Device' when a disk is in standby (detached).
+
+###2023.01.14
 - Fix: Fix refresh of Edit Settings to show changes properly.
 - Fix: Don't auto mount/unmount Unassigned Disks marked as 'Array'.
 - Add: Changed array disk detection to be more robust.
@@ -2000,9 +2015,11 @@ find /boot/config/plugins/&name; -type f -iname "&name;*.md5" ! -iname "*&versio
 udevadm control --reload-rules
 
 # Remove the unused smb-extra.conf entries
-if [[ `/usr/bin/grep '#unassigned_devices' /boot/config/smb-extra.conf` != "" ]]; then
-	/usr/bin/sed '/#unassigned_devices_start/,/#unassigned_devices_end/d' /boot/config/smb-extra.conf > /tmp/smb.tmp
-	mv /tmp/smb.tmp /boot/config/smb-extra.conf
+if [ -f /boot/config/smb-extra.conf ] ; then
+	if [[ `/usr/bin/grep '#unassigned_devices' /boot/config/smb-extra.conf > /dev/null` != "" ]]; then
+		/usr/bin/sed '/#unassigned_devices_start/,/#unassigned_devices_end/d' /boot/config/smb-extra.conf > /tmp/smb.tmp
+		mv /tmp/smb.tmp /boot/config/smb-extra.conf
+	fi
 fi
 
 echo ""

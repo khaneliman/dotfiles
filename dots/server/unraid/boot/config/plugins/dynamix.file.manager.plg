@@ -2,10 +2,10 @@
 <!DOCTYPE PLUGIN [
 <!ENTITY name "dynamix.file.manager">
 <!ENTITY author "Bergware">
-<!ENTITY version "2023.01.08">
+<!ENTITY version "2023.02.05">
 <!ENTITY pluginURL "https://raw.githubusercontent.com/bergware/dynamix/master/unRAIDv6/&name;.plg">
 <!ENTITY source "/boot/config/plugins/&name;/&name;">
-<!ENTITY MD5 "7fd65ac83aab1e5420616dc3b515f26c">
+<!ENTITY MD5 "e0dc5ff143c3003cd5c9b697002b7c91">
 ]>
 <PLUGIN name="&name;" author="&author;" version="&version;" pluginURL="&pluginURL;" min="6.10.0" support="https://forums.unraid.net/topic/120982-dynamix-file-manager/">
 

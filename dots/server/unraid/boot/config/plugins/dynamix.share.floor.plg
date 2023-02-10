@@ -2,11 +2,11 @@
 <!DOCTYPE PLUGIN [
 <!ENTITY name "dynamix.share.floor">
 <!ENTITY author "Bergware">
-<!ENTITY version "2022.05.20">
+<!ENTITY version "2023.02.05">
 <!ENTITY launch "Settings/Scheduler">
 <!ENTITY pluginURL "https://raw.githubusercontent.com/bergware/dynamix/master/unRAIDv6/&name;.plg">
 <!ENTITY source "/boot/config/plugins/&name;/&name;">
-<!ENTITY MD5 "88d5c3c5a64a0e1093c4b01815e3c5f9">
+<!ENTITY MD5 "c1109f44afa972ebb922811529c0312f">
 ]>
 <PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" min="6.9.0" support="http://lime-technology.com/forum/index.php?topic=36543.0">
 
@@ -14,6 +14,10 @@
 ##&name;
 
 ###&version;
+- set minimum Unraid version to 6.9 (supports multi-language)
+- added support for upcoming Unraid version 6.12 
+
+###2022.05.20
 - Fixed GUI access when non-standard ports are used
 - Ignore *.img files in calculation, e.g. docker.img and vdisk1.img
 - Removed "Update Now" button, it interferes with the GUI communication
@@ -24,7 +28,7 @@
 </CHANGES>
 
 <!--
-Copyright 2022, Bergware International
+Copyright 2023, Bergware International
 Dynamix Share Fllor - create a cronjob to do regular share floor settings
 -->
 
@@ -52,7 +56,7 @@ echo ""
 echo "-----------------------------------------------------------"
 echo " Plugin &name; is installed."
 echo " This plugin requires Dynamix webGui to operate"
-echo " Copyright 2022, Bergware International"
+echo " Copyright 2023, Bergware International"
 echo " Version: &version;"
 echo "-----------------------------------------------------------"
 echo ""

@@ -1,7 +1,8 @@
 #!/bin/bash
 
 echo '"/mnt/disks/dropbox" -fsid=200,async,no_subtree_check *(rw,sec=sys,insecure,anongid=100,anonuid=99,all_squash)' >> /etc/exports
-echo '"/mnt/disks/google" -fsid=201,async,no_subtree_check *(rw,sec=sys,insecure,anongid=100,anonuid=99,all_squash)' >> /etc/exports
+echo '"/mnt/disks/googledrive" -fsid=201,async,no_subtree_check *(rw,sec=sys,insecure,anongid=100,anonuid=99,all_squash)' >> /etc/exports
+echo '"/mnt/disks/googlephotos" -fsid=201,async,no_subtree_check *(rw,sec=sys,insecure,anongid=100,anonuid=99,all_squash)' >> /etc/exports
 echo '"/mnt/disks/onedrive" -fsid=202,async,no_subtree_check *(rw,sec=sys,insecure,anongid=100,anonuid=99,all_squash)' >> /etc/exports
 
 exportfs -ra

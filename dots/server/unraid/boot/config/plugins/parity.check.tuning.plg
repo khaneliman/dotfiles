@@ -2,8 +2,8 @@
 <!DOCTYPE PLUGIN [
 <!ENTITY name "parity.check.tuning">
 <!ENTITY author "Dave Walker (itimpi)">
-<!ENTITY version "2022.12.05">
-<!ENTITY md5 "b75aad53399adb8a188eb9583d87219f">
+<!ENTITY version "2023.02.08">
+<!ENTITY md5 "b66e746b97212264ee855bc2f944ebf9">
 <!ENTITY launch "Settings/Scheduler">
 <!ENTITY plugin "parity.check.tuning">
 <!ENTITY plugdir "/usr/local/emhttp/plugins/&name;">
@@ -16,7 +16,7 @@
 	version="&version;" 
 	launch="&launch;" 
 	pluginURL="&pluginURL;" 
-	min="6.7.0"
+	min="6.9.2"
 	icon="wrench"
 	support="https://lime-technology.com/forums/topic/78394-parity-check-tuning/">
 
@@ -24,12 +24,23 @@
 
 <CHANGES>
 TODO
- - Update master translation file for latest version of plugin
  - Add more flexible scheduling options (e.g. different by day of week)
  - Improve suppression of misleading Unraid messages about parity operations
+ - See if can autostart array on restarts if needed.
+ 
+### 2023.02.08
+ - New: Remove support for Unraid versions prior to 6.9.2
+ - New: Add warning about incompatibility with Unraid Cumulative Parity Check option.
+ - Fix: History button on Settings page not working for Unraid 6.11 and 6.12
+ - Fix: Extended Parity History on not being displayed from Main screen
+ - Fix: After restart was not pausing if outside increment time slot.
+ - Fix: If increment type not being monitored and paused before reboot was not re-instating pause on restart
+ - Fix: Updates to make master translation file agree with current plugin.
+ - Fix: Improve some of the code to better handle array not yet started.
+ - Fix: Remove code that failed to spin up drives and leave it to Unraid to do this.
  
 ###2022.12.05
- - Fix: Restart of parity checks not working
+ - Fix: Restart of parity checks not working.
  - New: Restart all array operations, not just parity checks
  - New: More detail in notifications if restart has to be abandoned.
  - New: Remove spurious Cancel entries from Parity History file that were
@@ -37,16 +48,16 @@ TODO
 
 ###2022.05.05
  - Fix: Minor internal tweaks to improve logging
- - New: Syslog entries when notifications are (potentially) generated
- - Fix: Updates to translations file
+ - New: Syslog entries when notifications are (potentially) generated.
+ - Fix: Updates to translations file.
  - New: Generate notification if temperature pause exceeds 30 minutes
-	    (tunable via hidden setting in parity.check.tuning.cfg file)
+	    (tunable via hidden setting in parity.check.tuning.cfg file).
  
 ###2022.04.12
- - Fix: Scheduled checks incorrectly being treated as manual checks
- - Fix: Pause/resume notifications omitting operation type
+ - Fix: Scheduled checks incorrectly being treated as manual checks.
+ - Fix: Pause/resume notifications omitting operation type.
  - New: Handle active drives being spundown if paused during array
-         operation (due to drive(s) overheating)
+         operation (due to drive(s) overheating).
  
 ###2022.04.07
  - New: Adjust monitor task frequency
@@ -407,19 +418,29 @@ The 'post-install' script
     # Replace the standard mdcmd one with our custom version
     if [ -f /usr/local/sbin/mdcmd ]; then
       mv -f /usr/local/sbin/mdcmd /usr/local/sbin/mdcmd.orig
-      ln -s /usr/local/emhttp/plugins/&plugin;/&plugin;.mdcmd /usr/local/sbin/mdcmd
+      cp /usr/local/emhttp/plugins/&plugin;/&plugin;.mdcmd /usr/local/sbin/mdcmd
+	  chmod 754 /usr/local/sbin/mdcmd
     fi
-    # Replace the standard ParityHistory.php scrip with our custom version
-    if [ -f /usr/local/emhttp/plugins/dynamix/include/ParityHistory.php ]; then
-          mv -f /usr/local/emhttp/plugins/dynamix/include/ParityHistory.php /usr/local/emhttp/plugins/dynamix/include/ParityHistory.php.orig
-          ln -s /usr/local/emhttp/plugins/&plugin;/ParityHistory.php /usr/local/emhttp/plugins/dynamix/include/ParityHistory.php
+    # Replace the standard parity history display script with our custom version for extra columns
+    if [ -f /usr/local/emhttp/plugins/dynamix/scripts/parity_history ]; then
+	    # Unraid version 6.11+
+		chmod 755 /usr/local/emhttp/plugins/&plugin;/parity_history 
+        mv -f /usr/local/emhttp/plugins/dynamix/scripts/parity_history /usr/local/emhttp/plugins/dynamix/scripts/parity_history.orig
+        cp /usr/local/emhttp/plugins/&plugin;/parity_history /usr/local/emhttp/plugins/dynamix/scripts/parity_history
+
+	
+	elif [ -f /usr/local/emhttp/plugins/dynamix/include/ParityHistory.php ]; then
+	    # Unraid version earlier than 6.11
+		hmod 755 /usr/local/emhttp/plugins/&plugin;/ParityHistory.php
+        mv -f /usr/local/emhttp/plugins/dynamix/include/ParityHistory.php /usr/local/emhttp/plugins/dynamix/include/ParityHistory.php.orig
+        cp /usr/local/emhttp/plugins/&plugin;/ParityHistory.php /usr/local/emhttp/plugins/dynamix/include/ParityHistory.php
     fi
 	echo &version; > /boot/config/plugins/&plugin;/&plugin;.version;
 	# rm -rf /boot/config/plugins/&plugin;/&plugin;.log
     echo ""
     echo "----------------------------------------------------"
     echo " &name; has been installed."
-    echo " Copyright 2019-2022, Dave Walker (itimpi)"
+    echo " Copyright 2019-2023, Dave Walker (itimpi)"
     echo " Version: &version;"
     echo "----------------------------------------------------"
     echo ""
@@ -433,7 +454,7 @@ The 'remove' script.
   <INLINE>
     # Remove option for CLI usage
     rm -v /usr/local/bin/parity.check
-    # We need to replace our customised mdcmd with the original version
+    # Replace our customised mdcmd with the original version
     if [ -h /usr/local/sbin/mdcmd ]; then
       if [ -e /usr/local/sbin/mdcmd.orig ]; then
         rm /usr/local/sbin/mdcmd
@@ -446,8 +467,21 @@ The 'remove' script.
         echo "--------------------------------------"
       fi
     fi
-    # We need to replace our customised ParityHistory.php with the original version
-    if [ -h /usr/local/emhttp/plugins/dynamix/include/ParityHistory.php ]; then
+    # Replace our customised parity hstory display script with the original version
+    if [ -h /usr/local/emhttp/plugins/dynamix/scripts/parity_history ]; then
+	  # Unraid version 6.11+ 
+	  if [ -e /usr/local/emhttp/plugins/dynamix/scripts/parity_history.orig ]; then
+        rm /usr/local/emhttp/plugins/dynamix/scripts/parity_history
+        mv /usr/local/emhttp/plugins/dynamix/scripts/parity_history.orig /usr/local/emhttp/plugins/dynamix/scripts/parity_history
+      else
+        # Should not be possible to get here but lets play safe!
+        echo ""
+        echo "---------------------------------------"
+        echo " ERROR:  saved parity_history not found"
+        echo "---------------------------------------"
+      fi
+	elif [ -h /usr/local/emhttp/plugins/dynamix/include/ParityHistory.php ]; then
+	  # Unraid version earlier than 6.11
       if [ -e /usr/local/emhttp/plugins/dynamix/include/ParityHistory.php.orig ]; then
         rm /usr/local/emhttp/plugins/dynamix/include/ParityHistory.php
         mv /usr/local/emhttp/plugins/dynamix/include/ParityHistory.php.orig /usr/local/emhttp/plugins/dynamix/include/ParityHistory.php

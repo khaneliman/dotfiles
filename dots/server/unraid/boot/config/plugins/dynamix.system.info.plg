@@ -2,18 +2,23 @@
 <!DOCTYPE PLUGIN [
 <!ENTITY name "dynamix.system.info">
 <!ENTITY author "Bergware">
-<!ENTITY version "2020.06.21">
+<!ENTITY version "2023.02.05">
 <!ENTITY launch "Tools/SystemProfiler">
 <!ENTITY pluginURL "https://raw.githubusercontent.com/bergware/dynamix/master/unRAIDv6/&name;.plg">
 <!ENTITY source "/boot/config/plugins/&name;/&name;">
-<!ENTITY MD5 "be2a5a726e2ff01cbaffaece5eeada5b">
+<!ENTITY MD5 "9d2245c8f258277ee0e302271e652b31">
 ]>
-<PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" min="6.1.9" support="http://lime-technology.com/forum/index.php?topic=36543.0">
+<PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" min="6.9.0" support="http://lime-technology.com/forum/index.php?topic=36543.0">
 
 <CHANGES>
 ##&name;
 
 ###&version;
+- set minimum Unraid version to 6.9 (supports multi-language)
+- added support for upcoming Unraid version 6.12 
+- several fixes in overview information
+
+###2020.06.21
 - fixed regression error
 
 ###2020.06.20
@@ -104,7 +109,7 @@
 </CHANGES>
 
 <!--
-Copyright 2020, Bergware International
+Copyright 2023, Bergware International
 Dynamix System Information - System hardware and BIOS details
 -->
 
@@ -153,7 +158,7 @@ echo ""
 echo "-----------------------------------------------------------"
 echo " Plugin &name; is installed."
 echo " This plugin requires Dynamix webGui to operate"
-echo " Copyright 2020, Bergware International"
+echo " Copyright 2023, Bergware International"
 echo " Version: &version;"
 echo "-----------------------------------------------------------"
 echo ""

@@ -2,17 +2,27 @@
 <!DOCTYPE PLUGIN [
 <!ENTITY name "dynamix.system.stats">
 <!ENTITY author "Bergware">
-<!ENTITY version "2022.05.20a">
+<!ENTITY version "2023.02.05a">
 <!ENTITY launch "Settings/StatSettings">
 <!ENTITY pluginURL "https://raw.githubusercontent.com/bergware/dynamix/master/unRAIDv6/&name;.plg">
 <!ENTITY source "/boot/config/plugins/&name;/&name;">
-<!ENTITY MD5 "9c9daaedf26f3fcefa9fff3860410e08">
+<!ENTITY MD5 "40d7ebc773b2e879111d548973b56133">
 ]>
 <PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" min="6.9.0" icon="area-chart" support="http://lime-technology.com/forum/index.php?topic=36543.0">
-  <CHANGES>
+
+<ALERT>
+###AFTER UPGRADING A SYSTEM REBOOT IS REQUIRED TO RESTORE THE 'SA' PACKAGE
+</ALERT>
+
+<CHANGES>
 ##&name;
 
 ###&version;
+- added support for upcoming Unraid version 6.12
+- removed sa package from plugin, and use sa package included in Unraid
+- **NOTE: A SYSTEM REBOOT IS REQUIRED AFTER THIS UPDATE**
+
+###2022.05.20
 - Added missing .png file
 - Removed legacy code
 - Make font size in rem units

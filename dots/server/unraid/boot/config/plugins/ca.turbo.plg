@@ -2,8 +2,8 @@
 <!DOCTYPE PLUGIN [
 <!ENTITY name "ca.turbo">
 <!ENTITY author "Andrew Zawadzki">
-<!ENTITY version "2022.09.16">
-<!ENTITY md5 "f10404aaea7b51863ab3e47bf66de7b0">
+<!ENTITY version "2023.02.02">
+<!ENTITY md5 "44b7ed66aac53fbede2f2759aa3f9cd5">
 <!ENTITY launch "Settings/Turbo">
 <!ENTITY plugdir "/usr/local/emhttp/plugins/&name;">
 <!ENTITY github "Squidly271/ca.turbo">
@@ -12,6 +12,9 @@
 <PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" icon="tachometer" support="https://forums.lime-technology.com/topic/55671-plugin-ca-auto-turbo-write-mode/#comment-544485">
 
 <CHANGES>
+###2023.02.02
+- PHP8 compliance
+
 ###2022.09.16
 - Remove schedule icon missing on later versions of Unraid
 

@@ -2,17 +2,22 @@
 <!DOCTYPE PLUGIN [
 <!ENTITY name "dynamix.date.time">
 <!ENTITY author "Bergware">
-<!ENTITY version "2021.05.20">
+<!ENTITY version "2023.02.05">
 <!ENTITY launch "Settings/DateTime">
 <!ENTITY pluginURL "https://raw.githubusercontent.com/bergware/dynamix/master/unRAIDv6/&name;.plg">
 <!ENTITY source "/boot/config/plugins/&name;/&name;">
-<!ENTITY MD5 "92ad7d6aa9542a65a40e8f649c824769">
+<!ENTITY MD5 "6cb4183b0b527169224b98c865f2ee7f">
 ]>
-<PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" min="6.2" support="http://lime-technology.com/forum/index.php?topic=36543.0">
-  <CHANGES>
+<PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" min="6.9.0" support="http://lime-technology.com/forum/index.php?topic=36543.0">
+
+<CHANGES>
 ##&name;
 
 ###&version;
+- set minimum Unraid version to 6.9 (supports multi-language)
+- added support for upcoming Unraid version 6.12 
+
+###2021.05.20
 - made compatible with Unraid 6.10
 
 ###2020.06.21
@@ -54,8 +59,9 @@
 ###2016.08.24
 - initial release for unRAID v6.2
 </CHANGES>
-  <!--
-Copyright 2021, Bergware International
+
+<!--
+Copyright 2023, Bergware International
 Dynamix Date Time adds an interactive world map to the date and time settings.
 -->
 
@@ -90,7 +96,7 @@ echo ""
 echo "-----------------------------------------------------------"
 echo " Plugin &name; is installed."
 echo " This plugin requires Dynamix webGui to operate"
-echo " Copyright 2021, Bergware International"
+echo " Copyright 2023, Bergware International"
 echo " Version: &version;"
 echo "-----------------------------------------------------------"
 echo ""
@@ -106,5 +112,5 @@ rm -rf /boot/config/plugins/&name;
 # Uninstall the 'source' package
 removepkg &name;
 </INLINE>
-  </FILE>
+</FILE>
 </PLUGIN>

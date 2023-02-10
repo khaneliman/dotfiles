@@ -2,12 +2,12 @@
 <!DOCTYPE PLUGIN [
 <!ENTITY name       "open.files">
 <!ENTITY author     "dlandon">
-<!ENTITY version    "2022.08.19">
-<!ENTITY launch    "Tools/OpenFiles">
+<!ENTITY version	"2023.02.01">
+<!ENTITY launch		"Tools/OpenFiles">
 <!ENTITY gitURL		"https://raw.githubusercontent.com/&author;/&name;/master">
 <!ENTITY pluginURL	"&gitURL;/&name;.plg">
 <!ENTITY supportURL	"https://forums.unraid.net/topic/41196-open-files-plugin-can-help-with-troubleshooting-why-server-wont-shut-down/">
-<!ENTITY MD5		"50aa0579c58e46ff5d8c4be57d0ef171">
+<!ENTITY MD5		"3b07661cd8f7021294ba4865223d9bec">
 ]>
 
 <PLUGIN	name="&name;"
@@ -22,6 +22,9 @@
 <CHANGES>
 ##&name;
 ###&version;
+- Fix: Php compatibility for 6.12.
+
+###2022.08.19
 - Fix: Reference to GitHub repository.
 
 ###2021.08.21
@@ -156,7 +159,7 @@ The 'post-install' script.
 echo ""
 echo "-----------------------------------------------------------"
 echo " &name; is installed."
-echo " Copyright 2015-2022, &author;"
+echo " Copyright 2015-2023, &author;"
 echo " Version: &version;"
 echo "-----------------------------------------------------------"
 echo ""

@@ -2,12 +2,12 @@
 <!DOCTYPE PLUGIN [
 <!ENTITY name       "file.activity">
 <!ENTITY author     "dlandon">
-<!ENTITY version    "2022.10.15b">
+<!ENTITY version    "2023.02.01">
 <!ENTITY launch		"Tools/FileActivity">
 <!ENTITY gitURL		"https://raw.githubusercontent.com/&author;/&name;/master">
 <!ENTITY pluginURL	"&gitURL;/&name;.plg">
 <!ENTITY supportURL	"https://forums.unraid.net/topic/54808-file-activity-plugin-how-can-i-figure-out-what-keeps-spinning-up-my-disks/">
-<!ENTITY MD5		"5dd0b211f55c45d5e7edc053946aa2e7">
+<!ENTITY MD5		"346796eb9c142e172d9eb0074cbddf2e">
 ]>
 
 <PLUGIN	name="&name;"
@@ -22,6 +22,9 @@
 <CHANGES>
 ##&name;
 ###&version;
+- Fix: Php compatibility for 6.12.
+
+###2022.10.15b
 - Fix: Adjust buttons on bottom of page to show when using 'fixed' listing height.
 
 ###2022.08.19
@@ -140,7 +143,7 @@ Fix: Code cleanup.
 </CHANGES>
 
 <!--
-Copyright 2017-2022, Dan Landon
+Copyright 2017-2023, Dan Landon
 This is the webGUI plugin to view disk file activity.
 -->
 
@@ -206,7 +209,7 @@ mkdir /tmp/&name; 2>/dev/null
 echo ""
 echo "-----------------------------------------------------------"
 echo " &name; is installed."
-echo " Copyright 2017-2022, &author;"
+echo " Copyright 2017-2023, &author;"
 echo " Version: &version;"
 echo "-----------------------------------------------------------"
 echo ""

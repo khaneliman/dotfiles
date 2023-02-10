@@ -2,12 +2,12 @@
 <!DOCTYPE PLUGIN [
 <!ENTITY name		"recycle.bin">
 <!ENTITY author		"dlandon">
-<!ENTITY version	"2023.01.20">
+<!ENTITY version	"2023.02.01">
 <!ENTITY launch		"Settings/RecycleBin">
 <!ENTITY gitURL		"https://raw.githubusercontent.com/&author;/&name;/master">
 <!ENTITY pluginURL	"&gitURL;/&name;.plg">
 <!ENTITY supportURL	"https://forums.unraid.net/topic/41044-recycle-bin-vfs-recycle-for-smb-shares/">
-<!ENTITY MD5		"ba9cf5401f6a229650655b54e9ff2903">
+<!ENTITY MD5		"dbf92d79d17291e4854bfa47872ad18f">
 ]>
 
 <PLUGIN	name="&name;"
@@ -22,6 +22,9 @@
 <CHANGES>
 ##&name;
 ###&version;
+- Fix: Php compatibility for 6.12.
+
+###2023.01.20
 - Fix: Setting '.Recycle.Bin' directory permissions not setting on shares with spaces in the name.
 
 ###2023.01.18

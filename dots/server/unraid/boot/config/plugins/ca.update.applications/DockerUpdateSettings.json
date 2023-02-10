@@ -1,0 +1,145 @@
+{
+    "cron": {
+        "dockerCronFrequency": "disabled",
+        "dockerCronDay": "0",
+        "dockerCronDayOfMonth": "1",
+        "dockerCronHour": "0",
+        "dockerCronMinute": "0",
+        "dockerCronCustom": ""
+    },
+    "containers": {
+        "Authelia": {
+            "name": "Authelia",
+            "update": true
+        },
+        "DockerRegistry": {
+            "name": "DockerRegistry",
+            "update": true
+        },
+        "dockersocket": {
+            "name": "dockersocket",
+            "update": true
+        },
+        "goaccess": {
+            "name": "goaccess",
+            "update": true
+        },
+        "Krusader": {
+            "name": "Krusader",
+            "update": true
+        },
+        "mariadb": {
+            "name": "mariadb",
+            "update": true
+        },
+        "MongoDB": {
+            "name": "MongoDB",
+            "update": true
+        },
+        "NginxProxyManager": {
+            "name": "NginxProxyManager",
+            "update": true
+        },
+        "ombi": {
+            "name": "ombi",
+            "update": true
+        },
+        "petio": {
+            "name": "petio",
+            "update": true
+        },
+        "PhotoStructure": {
+            "name": "PhotoStructure",
+            "update": true
+        },
+        "pihole-template": {
+            "name": "pihole-template",
+            "update": true
+        },
+        "plex": {
+            "name": "plex",
+            "update": true
+        },
+        "Plex-Meta-Manager": {
+            "name": "Plex-Meta-Manager",
+            "update": true
+        },
+        "Postgres11": {
+            "name": "Postgres11",
+            "update": true
+        },
+        "prowlarr": {
+            "name": "prowlarr",
+            "update": true
+        },
+        "pwm": {
+            "name": "pwm",
+            "update": true
+        },
+        "radarr": {
+            "name": "radarr",
+            "update": true
+        },
+        "redis": {
+            "name": "redis",
+            "update": true
+        },
+        "requestrr": {
+            "name": "requestrr",
+            "update": true
+        },
+        "scrutiny": {
+            "name": "scrutiny",
+            "update": true
+        },
+        "sonarr": {
+            "name": "sonarr",
+            "update": true
+        },
+        "tautulli": {
+            "name": "tautulli",
+            "update": true
+        },
+        "organizrv2": {
+            "name": "organizrv2",
+            "update": true
+        },
+        "Grafana-Unraid-Stack": {
+            "name": "Grafana-Unraid-Stack",
+            "update": true
+        },
+        "lidarr": {
+            "name": "lidarr",
+            "update": true
+        },
+        "Dozzle": {
+            "name": "Dozzle",
+            "update": true
+        },
+        "bazarr": {
+            "name": "bazarr",
+            "update": true
+        },
+        "nextcloud": {
+            "name": "nextcloud",
+            "update": true
+        },
+        "overseerr": {
+            "name": "overseerr",
+            "update": true
+        },
+        "readarr": {
+            "name": "readarr",
+            "update": true
+        },
+        "TimeMachine": {
+            "name": "TimeMachine",
+            "update": true
+        }
+    },
+    "global": {
+        "dockerNotify": "yes",
+        "dockerStopDelay": "",
+        "dockerUpdateAll": "no"
+    }
+}

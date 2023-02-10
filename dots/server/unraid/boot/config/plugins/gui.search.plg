@@ -2,16 +2,26 @@
 <!DOCTYPE PLUGIN [
 <!ENTITY name      "gui.search">
 <!ENTITY author    "Andrew Zawadzki">
-<!ENTITY version   "2022.12.07">
-<!ENTITY md5       "3739c9d913a3a95622fab6c79eb168a9">
+<!ENTITY version   "2023.02.07">
+<!ENTITY md5       "618d440ba3bf437ebd6298f0afbef8cb">
 <!ENTITY plugdir   "/usr/local/emhttp/plugins/&name;">
 <!ENTITY github    "Squidly271/gui.search">
 <!ENTITY pluginURL "https://raw.githubusercontent.com/&github;/main/plugins/&name;.plg">
 ]>
 
-<PLUGIN name="&name;" author="&author;" version="&version;" pluginURL="&pluginURL;" icon="search" support="https://forums.unraid.net/topic/104822-plugin-gui-search/">
+<PLUGIN name="&name;" author="&author;" version="&version;" pluginURL="&pluginURL;" icon="search" support="https://forums.unraid.net/topic/104822-plugin-gui-search/" min="6.11.0">
 
 <CHANGES>
+###2023.02.07
+- Fixed: Multiple CTRL-K would cause display aberrations
+
+###2023.02.01
+- Move to an icon on task bar
+- PHP8 compliance
+- CTRL-K or CMD-K will automatically open the search
+- Highlight search result on page navigated to
+- Minimum compatibility now 6.11.0
+
 ###2022.12.07
 - Fixed: Compatibility when searching from within File Manager
 
@@ -78,11 +88,14 @@ The 'post-install' script
 -->
 <FILE Run="/bin/bash">
 <INLINE>
+rm -rf /usr/local/emhttp/plugins/gui.search/gui.search.page
 rm -rf /tmp/gui.search
+ln -s /usr/local/emhttp/plugins/gui.search/gui_search_post_hook.sh /usr/local/emhttp/plugins/dynamix.plugin.manager/post-hooks/gui_search_post_hook.sh
+
 echo ""
 echo "----------------------------------------------------"
 echo " &name; has been installed."
-echo " Copyright 2021, Andrew Zawadzki"
+echo " Copyright 2021-2023, Andrew Zawadzki"
 echo " Version: &version;"
 echo " You need to navigate to another page for this to be active"
 echo "----------------------------------------------------"
@@ -98,6 +111,7 @@ The 'remove' script.
 removepkg &name;-&version;-x86_64-1
 rm -rf &plugdir;
 rm -rf /boot/config/plugins/&name;
+
 </INLINE>
 </FILE> 
 </PLUGIN>

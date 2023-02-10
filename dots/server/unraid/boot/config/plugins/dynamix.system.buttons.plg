@@ -2,17 +2,21 @@
 <!DOCTYPE PLUGIN [
 <!ENTITY name "dynamix.system.buttons">
 <!ENTITY author "Bergware">
-<!ENTITY version "2020.06.20">
+<!ENTITY version "2023.02.04">
 <!ENTITY pluginURL "https://raw.githubusercontent.com/bergware/dynamix/master/unRAIDv6/&name;.plg">
 <!ENTITY source "/boot/config/plugins/&name;/&name;">
-<!ENTITY MD5 "251a28eac7e7b9caa2f15f9b0616e1cf">
+<!ENTITY MD5 "80069f39e4a2a70835fa8d532ec67e68">
 ]>
-<PLUGIN name="&name;" author="&author;" version="&version;" pluginURL="&pluginURL;" min="6.1.9" support="http://lime-technology.com/forum/index.php?topic=36543.0">
+<PLUGIN name="&name;" author="&author;" version="&version;" pluginURL="&pluginURL;" min="6.9.0" support="http://lime-technology.com/forum/index.php?topic=36543.0">
 
 <CHANGES>
 ##&name;
 
 ###&version;
+- set minimum Unraid version to 6.9 (supports multi-language)
+- added support for upcoming Unraid version 6.12 
+
+###2020.06.20
 - updated multi-language support
 
 ###2020.05.10
@@ -106,7 +110,7 @@
 </CHANGES>
 
 <!--
-Copyright 2020, Bergware International
+Copyright 2023, Bergware International
 Dynamix System Buttons - Single click system reboot and system shutdown
 -->
 
@@ -134,7 +138,7 @@ echo ""
 echo "-----------------------------------------------------------"
 echo " Plugin &name; is installed."
 echo " This plugin requires Dynamix webGui to operate"
-echo " Copyright 2020, Bergware International"
+echo " Copyright 2023, Bergware International"
 echo " Version: &version;"
 echo "-----------------------------------------------------------"
 echo ""
