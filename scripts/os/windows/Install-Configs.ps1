@@ -60,9 +60,8 @@ foreach ( $config in $ConfigMap )
         # TODO: Move to komorebi specific script 
         if ($config.Source -match "btop.conf")
         {
-            $btop_theme_path = (-join(${env:USERPROFILE},"\scoop\apps\btop\current\themes\catppuccin_macchiato.theme").Replace("/","\"))
             $regex = "color_theme = .*"
-            $replacement = "color_theme = $btop_theme_path"
+            $replacement = "color_theme = catppuccin_macchiato"
 
             (Get-Content $config.Destination) | 
                 ForEach-Object { $_ -replace $regex, $replacement } |

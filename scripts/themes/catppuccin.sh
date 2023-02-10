@@ -75,6 +75,12 @@ cat_theme_spotify() {
 	fi
 }
 
+cat_theme_btop() {
+	message "Installing btop catppuccin theme"
+	sed -i "s?color_theme.*?color_theme=\"catppuccin_macchiato\"?" ~/.config/btop/btop.conf
+	success_message "Btop theme installed"
+}
+
 cat_theme_all() {
 	cat_backup_existing
 
@@ -85,6 +91,7 @@ cat_theme_all() {
 		warning_message "Not running Linux. Skipping GTK/QT themes."
 	fi
 
+	cat_theme_btop
 	cat_theme_firefox
 	cat_theme_spotify
 }
