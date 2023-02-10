@@ -19,8 +19,6 @@ Personal dotfiles for each of the platforms I own or have customized. Personal i
 
     git clone --recurse-submodules https://github.com/khaneliman/dotfiles.git ~/.config/.dotfiles
 
-Manual installation, for now. Some will have installation scripts to automate the process a little more in line with what I've been doing with [ArchInstaller](https://github.com/khaneliman/ArchInstaller)
-
 ### Manual
 
 Copy files to respective directories:
@@ -34,8 +32,10 @@ Each environment might require further steps that will be detailed in their resp
 
 ### Automatic
 
-    ./install.sh for Linux and macOS
-    ./install.bat for windows
+```bash
+./install.sh # for Linux and macOS
+./install.bat # for windows
+```
 
 The script will detect what OS you are running the script from and perform the installation for that OS. You will need to select what environment you would like to install the dots for if there are multiple for that given OS.
 
@@ -49,7 +49,7 @@ This configuration is a glass effect [AwesomeWM](https://github.com/awesomeWM/aw
 
 _Dotfiles might be out of sync with where they were in an optimized state since I rearranged dotfiles and switched most of my setups to using a catppuccin theme._
 
-![linux-awesomewm-tiling](assets/linux-awesomewm-tiling.png)
+![linux-awesomewm-tiling](assets/linux/awesomewm/tiling.png)
 
 ### Hyprland
 
