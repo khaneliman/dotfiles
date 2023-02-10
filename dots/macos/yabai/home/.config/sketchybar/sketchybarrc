@@ -69,7 +69,7 @@ source "$ITEM_DIR/spaces.sh"
 source "$ITEM_DIR/front_app.sh"
 
 # Center
-source "$ITEM_DIR/spotify.sh"
+# source "$ITEM_DIR/spotify.sh"
 source "$DYNAMIC_ISLAND_DIR"/item.sh
 
 # Right
