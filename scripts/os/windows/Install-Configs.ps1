@@ -3,7 +3,6 @@ using module ConfigMap
 using module FileCommands
 
 # Powershell Variables
-$objShell = New-Object -ComObject Shell.Application
 $timestamp = Get-Date -Format o | ForEach-Object { $_ -replace ":", "." }
 $ConfigMap = Get-ConfigMap
 
