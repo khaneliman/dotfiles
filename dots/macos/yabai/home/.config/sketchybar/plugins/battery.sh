@@ -51,7 +51,7 @@ render_bar_item() {
 
 low_battery_label() {
   if [[ "$BATT_PERCENT" -lt 50 ]]; then 
-          sketchybar --set "${NAME}" label="${BATT_PERCENT}%"
+          sketchybar --set "${NAME}" label="${BATT_PERCENT}%" label.drawing=on
   else 
           sketchybar --set "${NAME}" label.drawing=off
   fi
