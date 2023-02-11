@@ -20,6 +20,39 @@ DefaultValue=%SystemRoot%\System32\imageres.dll,-25
 Full=%SystemRoot%\System32\imageres.dll,-54
 Empty=%SystemRoot%\System32\imageres.dll,-55
 
+[Control Panel\Colors]
+Scrollbar=239 241 245
+Background=75 79 105
+ActiveTitle=204 208 218
+InactiveTitle=204 208 218
+Menu=239 241 245
+Window=239 241 245
+WindowFrame=140 143 161
+MenuText=75 79 105
+WindowText=75 79 105
+TitleText=75 79 105
+ActiveBorder=204 208 218
+InactiveBorder=244 247 252
+AppWorkspace=204 208 218
+Hilight=48 52 78
+HilightText=239 241 245
+ButtonFace=239 241 245
+ButtonShadow=204 208 218
+GrayText=140 143 161
+ButtonText=75 79 105
+InactiveTitleText=75 79 105
+ButtonHilight=239 241 245
+ButtonDkShadow=140 143 161
+ButtonLight=253 253 253
+InfoText=75 79 105
+InfoWindow=255 255 225
+ButtonAlternateFace=75 79 105
+HotTrackingColor=38 42 63
+GradientActiveTitle=204 208 218
+GradientInactiveTitle=204 208 218
+MenuHilight=48 52 78
+MenuBar=239 241 245
+
 [Control Panel\Cursors]
 AppStarting=%SYSTEMROOT%\Cursors\Catppuccin-Mocha-Blue-Cursors\working-in-background.ani
 Arrow=%SYSTEMROOT%\Cursors\Catppuccin-Mocha-Blue-Cursors\normal-select.cur
@@ -53,6 +86,7 @@ AutoColorization=0
 SystemMode=Dark
 AppMode=Dark
 Transparency=1
+ColorizationColor=0XC430344E
 
 [boot]
 SCRNSAVE.EXE=
