@@ -85,8 +85,14 @@ Set-RegistryEntry -Key 'EnableWindowColorization' -Type "DWORD" -Value '0x000000
 $RegPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize"
 
 # Enable transparency
+# "EnableTransparency"=dword:00000001
 Write-Message  -Message 'Enabling transparency...'
 Set-RegistryEntry -Key 'EnableTransparency' -Type "DWORD" -Value '0x00000001' -Path $RegPath
+
+# Enable colors on start and taskbar
+# "ColorPrevalance"=dword:00000001
+Write-Message  -Message 'Enabling color on start and taskbar...'
+Set-RegistryEntry -Key 'ColorPrevalence' -Type "DWORD" -Value '0x00000001' -Path $RegPath
 
 # Restart explorer
 Write-Message -Type WARNING  -Message 'Restarting explorer to apply changes...'
