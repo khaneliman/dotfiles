@@ -1,6 +1,7 @@
 ignore-empty-password
 disable-caps-lock-text
 font=Liga SFMono Nerd Font
+grace=60
 
 clock
 timestr=%R
