@@ -221,6 +221,16 @@ user_pref("devtools.webide.enabled", true);
 user_pref("devtools.debugger.remote-enabled", true);
 user_pref("devtools.chrome.enabled", true);
 
+// PREF: Disableall the alternative search shortcuts
+//
+// Speeds up accessing the bottom suggestion when you dont have to navigate passed all the shortcuts
 user_pref("browser.urlbar.shortcuts.bookmarks", false);
 user_pref("browser.urlbar.shortcuts.history", false);
 user_pref("browser.urlbar.shortcuts.tabs", false);
+user_pref(
+  "browser.search.hiddenOneOffs",
+  "Google,Amazon.com,Bing,DuckDuckGo,eBay,Wikipedia (en)"
+);
+
+// PREF: Dont show sponsored results
+user_pref("browser.urlbar.suggest.quicksuggest.sponsored", false);
