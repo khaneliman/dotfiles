@@ -1,5 +1,5 @@
 // Enable user themes
-user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", "true");
+user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
 
 // Turn off annoying beep when using typeahead.
 user_pref("accessibility.typeaheadfind.enablesound", false);
