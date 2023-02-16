@@ -31,7 +31,7 @@ print_help() {
 																																											\n\
 	Example: 																																						\n\
 	 $ ./firefox-themer.sh -p stable -t blurredfox																			\n\
-	 $ ./firefox-themer.sh -d dev -m minimal																						\n\
+	 $ ./firefox-themer.sh -p dev -t minimal																						\n\
 																																											\n\
 	Defaults to 'stable' if empty."
 }

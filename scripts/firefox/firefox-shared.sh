@@ -2,6 +2,30 @@
 SCRIPT_DIR="$(git rev-parse --show-toplevel)"
 . "$SCRIPT_DIR"/scripts/utils/installer-helper.sh SETUP
 
+print_help() {
+	echo -e "	firefox-shared: firefox-shared [-hpt] [arguments]													\n\
+																																											\n\
+	Shared firefox customization scripts.																								\n\
+																																											\n\
+	Options: 																																						\n\
+	 -h | -help 	- Show this message 																									\n\
+	 -p <PROFILE> 	- Which firefox profile to search for				 	 											\n\
+																																											\n\
+	Arguments:																																					\n\
+	 PROFILE	Profile to search for 			 																							\n\
+	  stable	- Firefox Stable Build 																										\n\
+	  dev 		- Firefox Developer Edition 																							\n\
+	  beta 		- Firefox Beta 																														\n\
+	  nightly 	- Firefox Nightly 																											\n\
+	  esr 		- Firefox Extended Support Release 																				\n\
+																																											\n\
+	Example: 																																						\n\
+	 $ ./firefox-shared.sh -p stable																										\n\
+	 $ ./firefox-shared.sh -d dev																												\n\
+																																											\n\
+	Defaults to 'stable' if empty."
+}
+
 get_profile() {
 	# Check args
 	if [[ -n "${*}" ]] && [[ -n "${1}" ]]; then
@@ -47,3 +71,17 @@ get_profile() {
 		error_message "Firefox profile not found!"
 	fi
 }
+
+# Get the options
+while getopts ":hp:t:" option; do
+	case "$option" in
+	h) # display Help
+		print_help
+		exit
+		;;
+	p)
+		get_profile "$OPTARG"
+		;;
+	*) ;;
+	esac
+done
