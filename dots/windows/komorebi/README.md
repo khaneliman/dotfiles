@@ -1,6 +1,9 @@
 # Komorebi
 
-[Catppuccin](https://github.com/catppuccin/catppuccin) themed [Komorebi](https://github.com/LGUG2Z/komorebi) configuration.
+[![windows](https://img.shields.io/badge/windows-cad3f5?style=for-the-badge&logo=Windows&logoColor=0079D5)](https://github.com/khaneliman/dotfiles/blob/main/dots/windows/)
+[![Komorebi](https://img.shields.io/badge/Komorebi-24273a?logo=windows&logoColor=fff&style=for-the-badge)](https://github.com/khaneliman/dotfiles/blob/main/dots/windows/komorebi/README.md)
+
+[Catppuccin](https://github.com/catppuccin/catppuccin)-themed [Komorebi](https://github.com/LGUG2Z/komorebi) configuration.
 There's the configuration of Windows Explorer, theme, cursors, fonts, a tiling window manager, and hotkey daemon with application theming and configuration that's cross-platform coming from the shared folder.
 Windows doesn't abide by most nix standards and requires a lot of manual workarounds that differ from Linux and MacOS. Much of the software I use is also not easily available on Windows and must be run through
 WSL. The automatic installation handles almost everything for you, but some stuff must be done manually, like patching windows for unsigned themes.
