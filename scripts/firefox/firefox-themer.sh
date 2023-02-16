@@ -1,18 +1,21 @@
 #!/usr/bin/env bash
-SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
+
+SCRIPT_DIR="$(git rev-parse --show-toplevel)"
 SCRIPTS_DIR="$SCRIPT_DIR"/scripts
 DOTS_DIR="$SCRIPT_DIR"/dots
-CONFIG_FILE="$SCRIPT_DIR"/setup.conf
-source "scripts/utils/installer-helper.sh"
+
+. $SCRIPTS_DIR/utils/installer-helper.sh SETUP
+. "$SCRIPTS_DIR"/firefox/firefox-shared.sh
 
 print_help() {
-	echo -e "firefox-themer: firefox-themer [-hpt] [arguments]														\n\
+	echo -e "	firefox-themer: firefox-themer [-hpt] [arguments]													\n\
+																																											\n\
 	Installs a predefined theme to a specified firefox profile													\n\
 																																											\n\
 	Options: 																																						\n\
-	 -help 			- Show this message 																										\n\
-	 -profile <PROFILE> 	- Which firefox profile to install theme to 	 								\n\
-	 -theme <THEME> 	- Theme to install 			 																					\n\
+	 -h | -help 	- Show this message 																									\n\
+	 -p <PROFILE> 	- Which firefox profile to install theme to 	 											\n\
+	 -t <THEME> 	- Theme to install 			 																							\n\
 																																											\n\
 	Arguments:																																					\n\
 	 PROFILE	Profile to install theme in 																							\n\
@@ -31,50 +34,6 @@ print_help() {
 	 $ ./firefox-themer.sh -d dev -m minimal																						\n\
 																																											\n\
 	Defaults to 'stable' if empty."
-}
-
-get_profile() {
-	# Check args
-	if [[ -n "${*}" ]] && [[ -n "${1}" ]]; then
-		if [[ "${1}" == "dev" ]]; then
-			RELEASE_NAME="Developer Edition"
-			EDITION="dev-edition-default"
-		elif [[ "${1}" == "beta" ]]; then
-			RELEASE_NAME="Beta"
-			EDITION="default-beta"
-		elif [[ "${1}" == "nightly" ]]; then
-			RELEASE_NAME="Nightly"
-			EDITION="default-nightly"
-		elif [[ "${1}" == "stable" ]]; then
-			RELEASE_NAME="Stable"
-			EDITION="default-release"
-		elif [[ "${1}" == "esr" ]]; then
-			RELEASE_NAME="ESR"
-			EDITION="default-esr"
-		else
-			echo -ne "Invalid parameter!\n"
-			print_help
-			return
-		fi
-	else
-		RELEASE_NAME="Stable"
-		EDITION="default-release"
-	fi
-
-	case "$(uname)" in
-	"Linux")
-		FF_USER_CONFIG="${HOME}/.mozilla/firefox/"
-		FF_USER_PROFILE="$(find "$FF_USER_CONFIG" -maxdepth 1 -type d -regextype egrep -regex '.*[a-zA-Z0-9]+.'"${EDITION}")"
-		;;
-	"Darwin")
-		FF_USER_CONFIG="${HOME}/Library/Application Support/Firefox/Profiles/"
-		FF_USER_PROFILE="$(gfind "$FF_USER_CONFIG" -maxdepth 1 -type d -regextype egrep -regex '.*[a-zA-Z0-9]+.'"${EDITION}")"
-		;;
-	esac
-
-	if [[ -n $EDITION ]]; then
-		message "Firefox profile location:  $FF_USER_PROFILE"
-	fi
 }
 
 get_theme() {
@@ -136,7 +95,6 @@ install_theme() {
 			if [[ -d "$THEME" ]]; then
 				message "Theme found! copying files..."
 				replace_files "$THEME" "${FF_USER_PROFILE}/chrome"
-				copy_files "$THEME/../user.js" "${FF_USER_PROFILE}/"
 				success_message "Installed theme successfully."
 			else
 				error_message "Theme isn't a directory. Terminating..."
@@ -152,7 +110,6 @@ install_theme() {
 				if [[ -d "$THEME" ]]; then
 					message "Theme found! copying files..."
 					replace_files "$THEME" "${FF_USER_PROFILE}/chrome"
-					copy_files "$THEME/../user.js" "${FF_USER_PROFILE}/"
 					success_message "Installed theme successfully."
 				else
 					error_message "Theme isn't a directory. Terminating..."
