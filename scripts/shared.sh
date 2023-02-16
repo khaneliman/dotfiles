@@ -21,6 +21,8 @@ shared_backup_existing() {
 	backup_files "$HOME"/.config/spicetify "$BACKUP_LOCATION"/.config/
 	backup_files "$HOME"/.config/topgrade.toml "$BACKUP_LOCATION"/.config/
 
+	backup_files "$HOME"/.mozilla "$BACKUP_LOCATION"/
+
 	backup_files "$HOME"/.gitconfig "$BACKUP_LOCATION"
 	backup_files "$HOME"/.gitconfig.functions "$BACKUP_LOCATION"
 	backup_files "$HOME"/.zshrc "$BACKUP_LOCATION"/
@@ -197,6 +199,7 @@ shared_copy_configuration() {
 	# copy files that dont replace contents of location
 	copy_files "$SHARED_HOME"/.fonts/ "$HOME"/.fonts/
 	copy_files "$SHARED_HOME"/.local/ "$HOME"/.local/
+	copy_files "$SHARED_HOME"/.mozilla/ "$HOME"/.mozilla/
 }
 
 shared_install() {
