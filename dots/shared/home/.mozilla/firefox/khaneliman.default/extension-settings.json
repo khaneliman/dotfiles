@@ -1,1 +1,80 @@
-{"version":3,"url_overrides":{"newTabURL":{"initialValue":"about:newtab","precedenceList":[{"id":"firefox-prod-newtab@firefox-workona.com","installDate":1675659312255,"value":"moz-extension://cf32265e-0e18-493f-80ba-06fa9b9482e7/newtab.html","enabled":true}]}},"prefs":{"websites.hyperlinkAuditingEnabled":{"initialValue":{},"precedenceList":[{"id":"uBlock0@raymondhill.net","installDate":1675659314320,"value":false,"enabled":true}]},"network.networkPredictionEnabled":{"initialValue":{},"precedenceList":[{"id":"uBlock0@raymondhill.net","installDate":1675659314320,"value":false,"enabled":true}]},"privacy.containers":{"initialValue":{"privacy.userContext.enabled":true},"precedenceList":[{"id":"tabcenter-reborn@ariasuni","installDate":1675659317982,"value":"tabcenter-reborn@ariasuni","enabled":true}]},"services.passwordSavingEnabled":{"initialValue":{"signon.rememberSignons":false},"precedenceList":[{"id":"{d634138d-c276-4fc8-924b-40a0ea21d284}","installDate":1675659316090,"value":false,"enabled":true}]}},"commands":{},"newTabNotification":{"firefox-prod-newtab@firefox-workona.com":{"initialValue":false,"precedenceList":[{"id":"firefox-prod-newtab@firefox-workona.com","installDate":1675659312255,"value":true,"enabled":true}]}}}
+{
+  "version": 3,
+  "url_overrides": {
+    "newTabURL": {
+      "initialValue": "about:newtab",
+      "precedenceList": [
+        {
+          "id": "firefox-prod-newtab@firefox-workona.com",
+          "installDate": 1675659312255,
+          "value": "moz-extension://cf32265e-0e18-493f-80ba-06fa9b9482e7/newtab.html",
+          "enabled": true
+        }
+      ]
+    }
+  },
+  "prefs": {
+    "websites.hyperlinkAuditingEnabled": {
+      "initialValue": {},
+      "precedenceList": [
+        {
+          "id": "uBlock0@raymondhill.net",
+          "installDate": 1675659314320,
+          "value": false,
+          "enabled": true
+        }
+      ]
+    },
+    "network.networkPredictionEnabled": {
+      "initialValue": {},
+      "precedenceList": [
+        {
+          "id": "uBlock0@raymondhill.net",
+          "installDate": 1675659314320,
+          "value": false,
+          "enabled": true
+        }
+      ]
+    },
+    "privacy.containers": {
+      "initialValue": {
+        "privacy.userContext.enabled": true
+      },
+      "precedenceList": [
+        {
+          "id": "tabcenter-reborn@ariasuni",
+          "installDate": 1675659317982,
+          "value": "tabcenter-reborn@ariasuni",
+          "enabled": true
+        }
+      ]
+    },
+    "services.passwordSavingEnabled": {
+      "initialValue": {
+        "signon.rememberSignons": false
+      },
+      "precedenceList": [
+        {
+          "id": "{d634138d-c276-4fc8-924b-40a0ea21d284}",
+          "installDate": 1675659316090,
+          "value": false,
+          "enabled": true
+        }
+      ]
+    }
+  },
+  "commands": {},
+  "newTabNotification": {
+    "firefox-prod-newtab@firefox-workona.com": {
+      "initialValue": false,
+      "precedenceList": [
+        {
+          "id": "firefox-prod-newtab@firefox-workona.com",
+          "installDate": 1675659312255,
+          "value": true,
+          "enabled": true
+        }
+      ]
+    }
+  }
+}

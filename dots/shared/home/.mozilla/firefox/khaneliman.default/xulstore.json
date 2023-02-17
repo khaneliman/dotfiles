@@ -1,0 +1,19 @@
+{
+  "chrome://browser/content/browser.xhtml": {
+    "main-window": {
+      "screenX": "12",
+      "screenY": "61",
+      "width": "738",
+      "height": "909",
+      "sizemode": "normal"
+    },
+    "sidebar-box": {
+      "sidebarcommand": "tabcenter-reborn_ariasuni-sidebar-action",
+      "checked": "true",
+      "style": "--sidebar-background-color: rgb(36, 39, 58); --sidebar-text-color: rgb(202, 211, 245); -moz-box-ordinal-group: 1;"
+    },
+    "sidebar-title": {
+      "value": "Tab Center Reborn"
+    }
+  }
+}

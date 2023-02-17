@@ -234,3 +234,16 @@ user_pref(
 
 // PREF: Dont show sponsored results
 user_pref("browser.urlbar.suggest.quicksuggest.sponsored", false);
+
+// Addons
+user_pref("privacy.userContext.enabled", true);
+user_pref("privacy.userContext.extension", "tabcenter-reborn@ariasuni");
+user_pref("privacy.userContext.ui.enabled", true);
+user_pref("devtools.webextensions.@react-devtools.enabled", true);
+user_pref("devtools.webextensions.extension@redux.devtools.enabled", true);
+user_pref(
+  "devtools.webextensions.{20a9bb38-ed7c-4faf-9aaf-7c5d241fd747}.enabled",
+  true
+);
+user_pref("extensions.activeThemeID", "{d49033ac-8969-488c-afb0-5cdb73957f41}");
+user_pref("extensions.autoDisableScopes", 0);
