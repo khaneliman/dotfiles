@@ -11,7 +11,7 @@
  <a href="https://github.com/khaneliman/dotfiles/contributors"><img src="https://img.shields.io/github/contributors/khaneliman/dotfiles?colorA=363a4f&colorB=a6da95&style=for-the-badge"></a>
 </p>
 
-Personal dotfiles for each of the platforms I own or have customized. Personal information is either redacted or encrypted with [Git-Crypt](https://github.com/AGWA/git-crypt).
+Personal dotfiles for each of the platforms I own or have customized. Personal information is either redacted or encrypted with [Git-Crypt](https://github.com/AGWA/git-crypt). Recommend pairing my SDDM theme with this setup. It can be found [here](https://github.com/khaneliman/sddm-catppuccin) or directly from the AUR [here](https://aur.archlinux.org/packages/sddm-catppuccin-git).
 
 ## Install
 
