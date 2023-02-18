@@ -72,7 +72,6 @@ update() {
   
   render_bar_item
   render_popup
-
   
   if [ "$COUNT" -ne "$PREV_COUNT" ] 2>/dev/null || [ "$SENDER" = "forced" ]; then
     sketchybar --animate tanh 15 --set "$NAME" label.y_offset=5 label.y_offset=0
@@ -80,7 +79,11 @@ update() {
 }
 
 popup() {
-  sketchybar --set "$NAME" popup.drawing="$1"
+  if [ "$COUNT" -gt 0 ]; then
+    sketchybar --set "$NAME" popup.drawing="$1"
+  else 
+    sketchybar --set "$NAME" popup.drawing=off
+  fi
 }
 
 case "$SENDER" in
