@@ -58,6 +58,14 @@ install_better_discord() {
 		betterdiscordctl install
 	else
 		warning_message "Better Discord not detected... installation instructions: https://docs.betterdiscord.app/users/getting-started/installation"
+
+		message "Building and installing from source..."
+		git clone https://github.com/BetterDiscord/BetterDiscord.git "$HOME"/BetterDiscord
+		cd BetterDiscord || return
+		command -v pnpm || npm install -g pnpm
+		pnpm install
+		pnpm build
+		pnpm inject
 	fi
 }
 
