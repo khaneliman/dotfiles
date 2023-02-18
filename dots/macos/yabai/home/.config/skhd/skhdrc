@@ -10,6 +10,11 @@ cmd + alt + ctrl - p : open /Applications/Microsoft\ PowerPoint.app
 cmd + alt + ctrl - f : open /Applications/Firefox\ Developer\ Edition.app 
 cmd + alt + ctrl - t : /Applications/kitty.app/Contents/MacOS/kitty --single-instance -d ~
 
+# MacOS Commands
+cmd - l : osascript -e 'tell application "System Events" to keystroke "q" using {command down,control down}';
+meh - r : osascript -e 'tell app "loginwindow" to «event aevtrrst»';
+meh - p : osascript -e 'tell app "loginwindow" to «event aevtrsdn»';
+
 # Reload yabai 
 ctrl + lalt + cmd - r : bash -c 'launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"'
 
@@ -122,7 +127,7 @@ shift + lalt - r : sketchybar --exit
 
 # Yabai layouts
 # toggle window split type
-lalt - e : yabai -m window --toggle split
+cmd - j : yabai -m window --toggle split
 
 # float / unfloat window and center on screen
 lalt - t : yabai -m window --toggle float; \
