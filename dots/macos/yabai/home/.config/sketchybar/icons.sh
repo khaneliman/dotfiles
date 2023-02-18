@@ -6,6 +6,9 @@ export APPLE=􀣺
 export PREFERENCES=􀺽
 export ACTIVITY=􀒓
 export LOCK=􀒳
+export POWER=
+export REBOOT=
+export SLEEP=⏾
 export BELL=􀋚
 export BELL_DOT=􀝗
 
