@@ -40,16 +40,16 @@ get_theme() {
 	# Check args
 	if [[ -n "${*}" ]] && [[ -n "${1}" ]]; then
 		if [[ "${1}" == "blurredfox" ]]; then
-			THEME="$DOTS_DIR/shared/firefox-themes/blurredfox"
+			THEME="$DOTS_DIR/shared/firefox/themes/blurredfox"
 		elif [[ "${1}" == "minimal" ]]; then
-			THEME="$DOTS_DIR/shared/firefox-themes/minimal"
+			THEME="$DOTS_DIR/shared/firefox/themes/minimal"
 		else
 			error_message "Invalid parameter!\n"
 			print_help
 			return
 		fi
 	else
-		THEME="$DOTS_DIR/shared/firefox-themes/minimal"
+		THEME="$DOTS_DIR/shared/firefox/themes/minimal"
 		warning_message "No theme provided. Falling back to $THEME"
 	fi
 

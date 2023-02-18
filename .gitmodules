@@ -23,8 +23,8 @@
 [submodule "dots/shared/home/.config/ranger/plugins/ranger_devicons"]
 	path = dots/shared/home/.config/ranger/plugins/ranger_devicons
 	url = https://github.com/alexanderjeurissen/ranger_devicons
-[submodule "dots/shared/firefox-themes/blurredfox"]
-	path = dots/shared/firefox-themes/blurredfox
+[submodule "dots/shared/firefox/themes/blurredfox"]
+	path = dots/shared/firefox/themes/blurredfox
 	url = https://github.com/khaneliman/blurredfox
 [submodule "dots/macos/yabai/home/.config/sketchybar/helper/sketchybarhelper"]
 	path = dots/macos/yabai/home/.config/sketchybar/helper/sketchybarhelper
