@@ -66,6 +66,7 @@ mac_backup_existing() {
 
 	backup_files "$HOME"/.hammerspoon "$BACKUP_LOCATION"/
 	backup_files "$HOME"/.gitconfig.local "$BACKUP_LOCATION"/
+	backup_files "$HOME/Application Support/Firefox/Profiles/" "$BACKUP_LOCATION"/Application Support/Firefox/Profiles/
 }
 
 mac_copy_configuration() {
@@ -93,6 +94,7 @@ mac_copy_configuration() {
 	# copy files that dont replace location
 	copy_files "$MAC_HOME"/.terminfo "$HOME"/
 	copy_files "$MAC_HOME"/Library "$HOME"/
+	copy_files "$HOME"/.mozilla/firefox/ "$HOME/Application Support/Firefox/Profiles/"
 }
 
 mac_install() {

@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
 
-# Find the name of the folder the scripts are in
-GIT_DIR="$(git rev-parse --show-toplevel)"
-source "$GIT_DIR"/scripts/utils/installer-helper.sh
+. ./scripts/utils/installer-helper.sh SETUP
+
+if [ ! "$?" -eq 0 ]; then
+	echo "Couldn't source required files. Exiting."
+	exit
+fi
 
 [ -f "$CONFIG_FILE" ] || touch -f "$CONFIG_FILE"
 

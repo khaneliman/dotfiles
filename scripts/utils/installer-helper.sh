@@ -413,11 +413,11 @@ setup_environment() {
 	CURRENT_TIME=$(date "+%Y.%m.%d-%H.%M.%S")
 	BACKUP_LOCATION="$HOME/.dotfiles-backup/$CURRENT_TIME"
 
-	GIT_DIR="$(git rev-parse --show-toplevel)"
-	SCRIPTS_DIR="$GIT_DIR"/scripts
-	DOTS_DIR="$GIT_DIR"/dots
-	CONFIG_FILE="$GIT_DIR"/setup.conf
-	LOG_FILE="$GIT_DIR"/install.log
+	SCRIPT_DIR="$(git rev-parse --show-toplevel)"
+	SCRIPTS_DIR="$SCRIPT_DIR"/scripts
+	DOTS_DIR="$SCRIPT_DIR"/dots
+	CONFIG_FILE="$SCRIPT_DIR"/setup.conf
+	LOG_FILE="$SCRIPT_DIR"/install.log
 
 	GIT_CRYPT_LOCKED=$(test -z "$(git config --local --get filter.git-crypt.smudge 2>/dev/null)" && echo "True" || echo "False")
 
@@ -426,7 +426,7 @@ setup_environment() {
 	declare -a files_to_source
 	while IFS= read -r -d '' filename; do
 		files_to_source+=("$filename")
-	done < <(find "$SCRIPTS_DIR" -type f -name '*.sh' ! -name "$(basename "installer-helper.sh")" -print0 | sort -z)
+	done < <(find "$SCRIPTS_DIR" -type f -name '*.sh' ! -name "$(basename "installer-helper.sh")" ! -name '*firefox*.sh' -print0 | sort -z)
 
 	for filename in "${files_to_source[@]}"; do
 		source "$filename"
@@ -444,4 +444,6 @@ warning_message() {
 	cecho "YELLOW" "[!!] $1"
 }
 
-setup_environment
+if [ "$1" = "SETUP" ]; then
+	setup_environment
+fi
