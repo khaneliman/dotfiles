@@ -30,3 +30,4 @@ dots/shared/home/.config/kitty/macos.kitty.conf
 dots/shared/home/.config/alacritty/local.alacritty.yml
 dots/shared/home/.local/share/fastfetch/presets/local-overrides
 dots/shared/home/.config/btop/btop.log
+dots/shared/home/.gnupg/random_seed
