@@ -24,7 +24,7 @@ update() {
 		COUNTER=$((COUNTER + 1))
 
 		echo $COUNTER
-		
+
 		if [ "${line}" != "" ]; then
 			IFS="${SEP}" read -ra event_parts <<<"$line"
 			time="${event_parts[1]}"
@@ -33,19 +33,19 @@ update() {
 			time="No events today"
 			title=":)"
 		fi
-		
-		args+=(	--clone ical.event."$COUNTER" ical.details
-						--set 	ical.event."$COUNTER" label="$title"
-																					icon="$time"
-																					icon.color="$YELLOW"
-																					click_script="sketchybar --set "$NAME" popup.drawing=off"
-																					position=popup.ical
-																					drawing=on)
+
+		args+=(--clone ical.event."$COUNTER" ical.details
+			--set ical.event."$COUNTER" label="$title"
+			icon="$time"
+			icon.color="$YELLOW"
+			click_script="sketchybar --set "$NAME" popup.drawing=off"
+			position=popup.ical
+			drawing=on)
 
 	done <<<"$(echo "$EVENTS")"
 
 	sketchybar -m "${args[@]}" >/dev/null
-	
+
 	if [ "$SENDER" = "forced" ]; then
 		sketchybar --animate tanh 15 --set "$NAME" label.y_offset=5 label.y_offset=0
 	fi
@@ -56,16 +56,16 @@ popup() {
 }
 
 case "$SENDER" in
-	"routine" | "forced")
-		update
-		;;
-	"mouse.entered")
-		popup on
-		;;
-	"mouse.exited" | "mouse.exited.global")
-		popup off
-		;;
-	"mouse.clicked")
-		popup toggle
-		;;
+"routine" | "forced")
+	update
+	;;
+"mouse.entered")
+	popup on
+	;;
+"mouse.exited" | "mouse.exited.global")
+	popup off
+	;;
+"mouse.clicked")
+	popup toggle
+	;;
 esac

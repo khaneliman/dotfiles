@@ -3,7 +3,7 @@
 STATE=$(blueutil -p)
 
 if [ "$STATE" = "0" ]; then
-  blueutil -p 1
+	blueutil -p 1
 else
-  blueutil -p 0
+	blueutil -p 0
 fi
