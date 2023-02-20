@@ -126,9 +126,28 @@ This contains all the platform agnostic and/or shared application configurations
 
 Inspiration and code from numerous locations all over the internet. Here are some of the major contributors to my setups.
 
+### Submodules
+
+- Shared
+  - [AstroNvim](https://astronvim.github.io/)
+  - [AstroNvim User Config](https://github.com/khaneliman/astronvim.git)
+- macOS
+  - [crissNb Dynamic Island Sketchybar](https://github.com/crissNb/Dynamic-Island-Sketchybar)
+  - [Sketchybar Helper](https://github.com/FelixKratz/SketchyBarHelper.git)
+- AwesomeWM
+  - [AwesomeWM Widgets](https://github.com/streetturtle/awesome-wm-widgets)
+  - [Bling](https://github.com/BlingCorp/bling)
+  - [Smart Borders](https://github.com/intrntbrn/smart_borders)
+- Firefox
+  - [BlurredFox](https://github.com/khaneliman/blurredfox)
+- Ranger
+  - [Disk Menu](https://github.com/SL-RU/ranger_udisk_menu)
+  - [Dev Icons](https://github.com/alexanderjeurissen/ranger_devicons)
+
+### Dotfiles / Documentation
+
 - Shared dotfiles
   - [Catppuccin](https://github.com/catppuccin/catppuccin)
-  - [AstroNvim](https://astronvim.github.io/)
 - Linux dotfiles
   - Awesome
     - [The Glorious Dotfiles](https://github.com/manilarome/the-glorious-dotfiles)
@@ -138,4 +157,3 @@ Inspiration and code from numerous locations all over the internet. Here are som
 - macOS dotfiles
   - Yabai
     - [FelixKratz dotfiles](https://github.com/FelixKratz/dotfiles)
-    - [crissNb Dynamic Island Sketchybar](https://github.com/crissNb/Dynamic-Island-Sketchybar)
