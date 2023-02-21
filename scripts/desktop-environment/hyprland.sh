@@ -105,7 +105,7 @@ hyprland_install() {
 
 	hypr_copy_configuration
 	hypr_create_symlink
-	hypr_enable_systemd_services
+	# hypr_enable_systemd_services # if you'd like systemd services
 
 	cat_theme_all
 }
