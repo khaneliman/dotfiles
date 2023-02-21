@@ -95,6 +95,7 @@ mac_copy_configuration() {
 	copy_files "$MAC_HOME"/.terminfo "$HOME"/
 	copy_files "$MAC_HOME"/Library "$HOME"/
 	copy_files "$HOME"/.mozilla/firefox/ "$HOME/Application Support/Firefox/Profiles/"
+	copy_files "$HOME"/.config/Caprine/ "$HOME/Application Support/Caprine/"
 }
 
 mac_install() {
