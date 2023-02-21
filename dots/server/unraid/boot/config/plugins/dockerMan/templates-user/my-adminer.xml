@@ -16,7 +16,7 @@
 [br] [br]&#xD;
 Plugins: https://github.com/vrana/adminer/tree/master/plugins</Overview>
   <Category>Tools:</Category>
-  <WebUI>http://[IP]:[PORT:8080]</WebUI>
+  <WebUI>http://[IP]:[PORT:8585]</WebUI>
   <TemplateURL>https://raw.githubusercontent.com/selfhosters/unRAID-CA-templates/master/templates/adminer.xml</TemplateURL>
   <Icon>https://raw.githubusercontent.com/selfhosters/unRAID-CA-templates/master/templates/img/adminer.png</Icon>
   <ExtraParams>--memory=20M</ExtraParams>

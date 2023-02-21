@@ -29,6 +29,8 @@ dots/server/unraid/boot/config/plugins/dockerMan/templates-user/my-Cleanarr.xml 
 dots/server/unraid/boot/config/plugins/dockerMan/templates-user/my-binhex-delugevpn.xml filter=git-crypt diff=git-crypt
 dots/server/unraid/boot/config/plugins/dockerMan/templates-user/my-binhex-code-server.xml filter=git-crypt diff=git-crypt
 dots/server/unraid/boot/config/plugins/dockerMan/templates-user/my-TimeMachine.xml filter=git-crypt diff=git-crypt
+dots/server/unraid/boot/config/plugins/dockerMan/templates-user/my-Firefly-III.xml filter=git-crypt diff=git-crypt
+dots/server/unraid/boot/config/plugins/dockerMan/templates-user/my-Firefly-III-Importer.xml filter=git-crypt diff=git-crypt
 
 dots/server/unraid/boot/config/plugins/dockerMan/config.json filter=git-crypt diff=git-crypt
 dots/server/unraid/boot/config/plugins/dynamix.my.servers/myservers.cfg filter=git-crypt diff=git-crypt

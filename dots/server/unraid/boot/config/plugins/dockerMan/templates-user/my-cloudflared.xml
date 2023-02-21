@@ -5,7 +5,7 @@
   <Registry>https://hub.docker.com/r/cloudflare/cloudflared/</Registry>
   <Network>khaneproxy</Network>
   <MyIP/>
-  <Shell>sh</Shell>
+  <Shell>bash</Shell>
   <Privileged>false</Privileged>
   <Support>https://forums.unraid.net/topic/109584-support-aeleos-cloudflared-tunnels/</Support>
   <Project>https://github.com/aeleos/cloudflared</Project>
@@ -17,7 +17,7 @@ Instructions for installation can be found at https://github.com/aeleos/cloudfla
   <TemplateURL>https://raw.githubusercontent.com/aeleos/cloudflared/main/cloudflared.xml</TemplateURL>
   <Icon>https://raw.githubusercontent.com/aeleos/cloudflared/main/cloudflare-icon.png</Icon>
   <ExtraParams>--restart unless-stopped --memory=100M</ExtraParams>
-  <PostArgs>tunnel run 20d0c733-eacb-4517-8154-d657bdfca502</PostArgs>
+  <PostArgs>tunnel run 9271e587-a647-4bc5-ac55-b5664d4a90a8</PostArgs>
   <CPUset>2</CPUset>
   <DateInstalled>1635398624</DateInstalled>
   <DonateText/>

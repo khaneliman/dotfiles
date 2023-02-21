@@ -20,7 +20,7 @@
   <WebUI>http://[IP]:[PORT:6767]</WebUI>
   <TemplateURL>https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/bazarr.xml</TemplateURL>
   <Icon>https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/bazarr.png</Icon>
-  <ExtraParams>-m 500M</ExtraParams>
+  <ExtraParams>-m 1G</ExtraParams>
   <PostArgs/>
   <CPUset/>
   <DateInstalled>1635528545</DateInstalled>

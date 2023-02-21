@@ -5,13 +5,13 @@
   <Registry>https://hub.docker.com/r/fjudith/pwm</Registry>
   <Network>khaneproxy</Network>
   <MyIP/>
-  <Shell>sh</Shell>
+  <Shell>bash</Shell>
   <Privileged>false</Privileged>
   <Support>https://discord.gg/VWAG7rZ</Support>
   <Project>https://github.com/pwm-project/pwm</Project>
   <Overview>PWM is a free and opensource password self-service application enabling end-users to reset their enterprise password themselves.</Overview>
   <Category>Security:</Category>
-  <WebUI>http://[IP]:[PORT:8282]/</WebUI>
+  <WebUI>http://[IP]:[PORT:8282]/private/login</WebUI>
   <TemplateURL>https://raw.githubusercontent.com/ibracorp/unraid-templates/master/pwm/pwm.xml</TemplateURL>
   <Icon>https://i.imgur.com/dAMqu51.png</Icon>
   <ExtraParams>--restart unless-stopped --memory=1G</ExtraParams>
