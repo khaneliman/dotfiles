@@ -27,7 +27,7 @@ cd "$DYNAMIC_ISLAND_DIR"/helper && make
 launchctl unload -F /System/Library/LaunchAgents/com.apple.OSDUIHelper.plist >/dev/null 2>&1 &
 
 # Setting up the general bar appearance and default values
-sketchybar 	--bar 			height=39 																						\
+sketchybar 	--bar 			height=40 																						\
 												color="$BASE" 																				\
 												shadow=on 																						\
 												position=top 																					\
@@ -66,6 +66,8 @@ source "$EVENTS_DIR/toggle_stats.sh"
 # Left
 source "$ITEM_DIR/apple.sh"
 source "$ITEM_DIR/spaces.sh"
+source "$ITEM_DIR/skhd.sh"
+source "$ITEM_DIR/separator-left.sh"
 source "$ITEM_DIR/front_app.sh"
 
 # Center
@@ -85,7 +87,7 @@ source "$ITEM_DIR/battery.sh"
 
 source "$ITEM_DIR/divider.sh"
 
-source "$ITEM_DIR/stats_separator.sh"
+source "$ITEM_DIR/separator-right.sh"
 
 source "$ITEM_DIR/cpu.sh"
 source "$ITEM_DIR/memory.sh"

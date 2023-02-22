@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-stats_separator=(
+separator_right=(
 	icon=
 	icon.font="$NERD_FONT:Regular:16.0"
 	background.padding_left=10
@@ -11,5 +11,5 @@ stats_separator=(
 	icon.color="$TEXT"
 )
 
-sketchybar  --add item stats_separator right \
-	          --set stats_separator "${stats_separator[@]}"
+sketchybar  --add item separator_right right \
+	          --set separator_right "${separator_right[@]}"
