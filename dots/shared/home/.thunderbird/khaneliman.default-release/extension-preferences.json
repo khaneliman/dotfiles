@@ -1,0 +1,56 @@
+{
+  "default-theme@mozilla.org": {
+    "permissions": [
+      "internal:svgContextPropertiesAllowed",
+      "internal:privateBrowsingAllowed"
+    ],
+    "origins": []
+  },
+  "google@search.mozilla.org": {
+    "permissions": [
+      "internal:svgContextPropertiesAllowed",
+      "internal:privateBrowsingAllowed"
+    ],
+    "origins": []
+  },
+  "ddg@search.mozilla.org": {
+    "permissions": [
+      "internal:svgContextPropertiesAllowed",
+      "internal:privateBrowsingAllowed"
+    ],
+    "origins": []
+  },
+  "amazondotcom@search.mozilla.org": {
+    "permissions": [
+      "internal:svgContextPropertiesAllowed",
+      "internal:privateBrowsingAllowed"
+    ],
+    "origins": []
+  },
+  "wikipedia@search.mozilla.org": {
+    "permissions": [
+      "internal:svgContextPropertiesAllowed",
+      "internal:privateBrowsingAllowed"
+    ],
+    "origins": []
+  },
+  "bing@search.mozilla.org": {
+    "permissions": [
+      "internal:svgContextPropertiesAllowed",
+      "internal:privateBrowsingAllowed"
+    ],
+    "origins": []
+  },
+  "thunderbird-compact-dark@mozilla.org": {
+    "permissions": [
+      "internal:privateBrowsingAllowed"
+    ],
+    "origins": []
+  },
+  "thunderbird-compact-light@mozilla.org": {
+    "permissions": [
+      "internal:privateBrowsingAllowed"
+    ],
+    "origins": []
+  }
+}

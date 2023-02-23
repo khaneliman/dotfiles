@@ -1,0 +1,665 @@
+{
+  "chrome://messenger/content/messenger.xhtml": {
+    "qfb-boolean-mode": {
+      "value": "OR"
+    },
+    "selectCol": {
+      "ordinal": "1"
+    },
+    "threadCol": {
+      "ordinal": "3"
+    },
+    "flaggedCol": {
+      "ordinal": "5"
+    },
+    "attachmentCol": {
+      "ordinal": "7"
+    },
+    "subjectCol": {
+      "ordinal": "9"
+    },
+    "unreadButtonColHeader": {
+      "ordinal": "11"
+    },
+    "senderCol": {
+      "ordinal": "13"
+    },
+    "recipientCol": {
+      "ordinal": "15"
+    },
+    "correspondentCol": {
+      "ordinal": "17"
+    },
+    "junkStatusCol": {
+      "ordinal": "19"
+    },
+    "receivedCol": {
+      "ordinal": "21"
+    },
+    "dateCol": {
+      "ordinal": "23",
+      "sortDirection": "descending"
+    },
+    "statusCol": {
+      "ordinal": "25"
+    },
+    "sizeCol": {
+      "ordinal": "27"
+    },
+    "tagsCol": {
+      "ordinal": "29"
+    },
+    "accountCol": {
+      "ordinal": "31"
+    },
+    "priorityCol": {
+      "ordinal": "33"
+    },
+    "unreadCol": {
+      "ordinal": "35"
+    },
+    "totalCol": {
+      "ordinal": "37"
+    },
+    "locationCol": {
+      "ordinal": "39"
+    },
+    "idCol": {
+      "ordinal": "41"
+    },
+    "deleteCol": {
+      "ordinal": "43"
+    },
+    "task-tree-filtergroup": {
+      "value": "throughcurrent"
+    },
+    "unifinder-search-results-tree-col-title": {
+      "ordinal": "1"
+    },
+    "unifinder-search-results-tree-col-startdate": {
+      "ordinal": "3"
+    },
+    "unifinder-search-results-tree-col-enddate": {
+      "ordinal": "5"
+    },
+    "unifinder-search-results-tree-col-categories": {
+      "ordinal": "7"
+    },
+    "unifinder-search-results-tree-col-location": {
+      "ordinal": "9"
+    },
+    "unifinder-search-results-tree-col-status": {
+      "ordinal": "11"
+    },
+    "unifinder-search-results-tree-col-calendarname": {
+      "ordinal": "13"
+    },
+    "messengerWindow": {
+      "screenX": "0",
+      "screenY": "0",
+      "width": "1920",
+      "height": "720",
+      "sizemode": "maximized"
+    },
+    "agenda-panel": {
+      "collapsedinmodes": "calendar"
+    },
+    "today-none-box": {
+      "collapsed": "true"
+    },
+    "today-minimonth-box": {
+      "collapsed": "true"
+    },
+    "today-pane-panel": {
+      "width": "undefined",
+      "collapsedinmodes": ",",
+      "modewidths": "undefined,200,200,200,200,200"
+    },
+    "today-pane-splitter": {
+      "hidden": "true"
+    },
+    "mail-bar3": {
+      "currentset": "button-getmsg,button-newmsg,button-chat,button-address,separator,button-tag,qfb-show-filter-bar,spring,gloda-search,addoncompatibility_opto_one-browserAction-toolbarbutton,button-appmenu",
+      "extensionset": "addoncompatibility_opto_one-browserAction-toolbarbutton"
+    },
+    "qfb-cardbook-boolean-mode": {
+      "value": "OR"
+    },
+    "accountTypeCheckbox": {
+      "ordinal": "1"
+    },
+    "accountColor": {
+      "ordinal": "3"
+    },
+    "accountName": {
+      "ordinal": "5"
+    },
+    "accountId": {
+      "ordinal": "9"
+    },
+    "accountType": {
+      "ordinal": "11"
+    },
+    "accountRoot": {
+      "ordinal": "13"
+    },
+    "accountStatusCheckbox": {
+      "ordinal": "7"
+    },
+    "dummyForScroll": {
+      "ordinal": "9"
+    },
+    "ABName": {
+      "hidden": "true",
+      "ordinal": "11"
+    },
+    "dirPrefId": {
+      "hidden": "true",
+      "ordinal": "13"
+    },
+    "age": {
+      "hidden": "true",
+      "ordinal": "15"
+    },
+    "anniversary": {
+      "hidden": "true",
+      "ordinal": "17"
+    },
+    "adr.1.all": {
+      "hidden": "true",
+      "ordinal": "19"
+    },
+    "adr.1.hometype": {
+      "hidden": "true",
+      "ordinal": "21"
+    },
+    "adr.1.notype": {
+      "hidden": "true",
+      "ordinal": "23"
+    },
+    "adr.1.worktype": {
+      "hidden": "true",
+      "ordinal": "25"
+    },
+    "birthplace": {
+      "hidden": "true",
+      "ordinal": "27"
+    },
+    "bday": {
+      "ordinal": "9"
+    },
+    "cbid": {
+      "hidden": "true",
+      "ordinal": "29"
+    },
+    "categories.0.array": {
+      "hidden": "true",
+      "ordinal": "31"
+    },
+    "class1": {
+      "hidden": "true",
+      "ordinal": "33"
+    },
+    "uid": {
+      "hidden": "true",
+      "ordinal": "35"
+    },
+    "adr.6.all": {
+      "hidden": "true",
+      "ordinal": "37"
+    },
+    "adr.6.hometype": {
+      "hidden": "true",
+      "ordinal": "39"
+    },
+    "adr.6.notype": {
+      "hidden": "true",
+      "ordinal": "41"
+    },
+    "adr.6.worktype": {
+      "hidden": "true",
+      "ordinal": "43"
+    },
+    "deathdate": {
+      "hidden": "true",
+      "ordinal": "45"
+    },
+    "deathplace": {
+      "hidden": "true",
+      "ordinal": "47"
+    },
+    "fn": {
+      "ordinal": "3"
+    },
+    "email.0.all": {
+      "ordinal": "5"
+    },
+    "email.0.hometype": {
+      "hidden": "true",
+      "ordinal": "49"
+    },
+    "email.0.notype": {
+      "hidden": "true",
+      "ordinal": "51"
+    },
+    "email.0.othertype": {
+      "hidden": "true",
+      "ordinal": "53"
+    },
+    "email.0.worktype": {
+      "hidden": "true",
+      "ordinal": "55"
+    },
+    "etag": {
+      "hidden": "true",
+      "ordinal": "57"
+    },
+    "lastname": {
+      "hidden": "true",
+      "ordinal": "59"
+    },
+    "gender": {
+      "hidden": "true",
+      "ordinal": "61"
+    },
+    "geo": {
+      "hidden": "true",
+      "ordinal": "63"
+    },
+    "firstname": {
+      "hidden": "true",
+      "ordinal": "65"
+    },
+    "cardIcon": {
+      "ordinal": "1"
+    },
+    "impp.0.all": {
+      "hidden": "true",
+      "ordinal": "67"
+    },
+    "impp.0.hometype": {
+      "hidden": "true",
+      "ordinal": "69"
+    },
+    "impp.0.notype": {
+      "hidden": "true",
+      "ordinal": "71"
+    },
+    "impp.0.worktype": {
+      "hidden": "true",
+      "ordinal": "73"
+    },
+    "kind": {
+      "hidden": "true",
+      "ordinal": "75"
+    },
+    "rev": {
+      "ordinal": "11"
+    },
+    "adr.3.all": {
+      "hidden": "true",
+      "ordinal": "77"
+    },
+    "adr.3.hometype": {
+      "hidden": "true",
+      "ordinal": "79"
+    },
+    "adr.3.notype": {
+      "hidden": "true",
+      "ordinal": "81"
+    },
+    "adr.3.worktype": {
+      "hidden": "true",
+      "ordinal": "83"
+    },
+    "mailer": {
+      "hidden": "true",
+      "ordinal": "85"
+    },
+    "name": {
+      "hidden": "true",
+      "ordinal": "87"
+    },
+    "nickname": {
+      "hidden": "true",
+      "ordinal": "89"
+    },
+    "note": {
+      "hidden": "true",
+      "ordinal": "91"
+    },
+    "org": {
+      "hidden": "true",
+      "ordinal": "93"
+    },
+    "othername": {
+      "hidden": "true",
+      "ordinal": "95"
+    },
+    "tel.0.all": {
+      "ordinal": "7"
+    },
+    "tel.0.faxtype": {
+      "hidden": "true",
+      "ordinal": "97"
+    },
+    "tel.0.homefaxtype": {
+      "hidden": "true",
+      "ordinal": "99"
+    },
+    "tel.0.hometype": {
+      "hidden": "true",
+      "ordinal": "101"
+    },
+    "tel.0.maintype": {
+      "hidden": "true",
+      "ordinal": "103"
+    },
+    "tel.0.celltype": {
+      "hidden": "true",
+      "ordinal": "105"
+    },
+    "tel.0.notype": {
+      "hidden": "true",
+      "ordinal": "107"
+    },
+    "tel.0.othertype": {
+      "hidden": "true",
+      "ordinal": "109"
+    },
+    "tel.0.pagertype": {
+      "hidden": "true",
+      "ordinal": "111"
+    },
+    "tel.0.workfaxtype": {
+      "hidden": "true",
+      "ordinal": "113"
+    },
+    "tel.0.worktype": {
+      "hidden": "true",
+      "ordinal": "115"
+    },
+    "adr.0.all": {
+      "hidden": "true",
+      "ordinal": "117"
+    },
+    "adr.0.hometype": {
+      "hidden": "true",
+      "ordinal": "119"
+    },
+    "adr.0.notype": {
+      "hidden": "true",
+      "ordinal": "121"
+    },
+    "adr.0.worktype": {
+      "hidden": "true",
+      "ordinal": "123"
+    },
+    "adr.5.all": {
+      "hidden": "true",
+      "ordinal": "125"
+    },
+    "adr.5.hometype": {
+      "hidden": "true",
+      "ordinal": "127"
+    },
+    "adr.5.notype": {
+      "hidden": "true",
+      "ordinal": "129"
+    },
+    "adr.5.worktype": {
+      "hidden": "true",
+      "ordinal": "131"
+    },
+    "prefixname": {
+      "hidden": "true",
+      "ordinal": "133"
+    },
+    "prodid": {
+      "hidden": "true",
+      "ordinal": "135"
+    },
+    "adr.4.all": {
+      "hidden": "true",
+      "ordinal": "137"
+    },
+    "adr.4.hometype": {
+      "hidden": "true",
+      "ordinal": "139"
+    },
+    "adr.4.notype": {
+      "hidden": "true",
+      "ordinal": "141"
+    },
+    "adr.4.worktype": {
+      "hidden": "true",
+      "ordinal": "143"
+    },
+    "role": {
+      "hidden": "true",
+      "ordinal": "145"
+    },
+    "sortstring": {
+      "hidden": "true",
+      "ordinal": "147"
+    },
+    "adr.2.all": {
+      "hidden": "true",
+      "ordinal": "149"
+    },
+    "adr.2.hometype": {
+      "hidden": "true",
+      "ordinal": "151"
+    },
+    "adr.2.notype": {
+      "hidden": "true",
+      "ordinal": "153"
+    },
+    "adr.2.worktype": {
+      "hidden": "true",
+      "ordinal": "155"
+    },
+    "suffixname": {
+      "hidden": "true",
+      "ordinal": "157"
+    },
+    "tz": {
+      "hidden": "true",
+      "ordinal": "159"
+    },
+    "title": {
+      "hidden": "true",
+      "ordinal": "161"
+    },
+    "url.0.all": {
+      "hidden": "true",
+      "ordinal": "163"
+    },
+    "url.0.hometype": {
+      "hidden": "true",
+      "ordinal": "165"
+    },
+    "url.0.notype": {
+      "hidden": "true",
+      "ordinal": "167"
+    },
+    "url.0.othertype": {
+      "hidden": "true",
+      "ordinal": "169"
+    },
+    "url.0.worktype": {
+      "hidden": "true",
+      "ordinal": "171"
+    },
+    "version": {
+      "hidden": "true",
+      "ordinal": "173"
+    },
+    "cardsTree": {
+      "sortDirection": "fn",
+      "sortResource": "ascending"
+    },
+    "resultsSplitter": {
+      "orient": "horizontal",
+      "state": "open"
+    },
+    "dirTreeSplitter": {
+      "state": "open"
+    },
+    "calendar-task-tree": {
+      "widths": "0 0 0 0 0 0 0 0 0 0 0 0",
+      "ordinals": "1 3 5 7 9 11 13 15 17 19 21 23"
+    },
+    "unifinder-todo-tree": {
+      "widths": "0 0 0 0 0 0 0 0 0 0 0 0",
+      "ordinals": "1 1 1 1 1 1 1 1 1 1 1 1",
+      "filterValue": "throughcurrent"
+    },
+    "tomorrow-header": {
+      "checked": "true"
+    },
+    "nextweek-header": {
+      "checked": "true"
+    },
+    "folderTree": {
+      "mode": "all,smart",
+      "compact": "false"
+    },
+    "displayBox": {
+      "height": "590"
+    },
+    "messagepaneboxwrapper": {
+      "height": "706",
+      "width": "2216",
+      "collapsed": ""
+    },
+    "folderPaneBox": {
+      "width": "319"
+    },
+    "mail-toolbox": {
+      "mode": "full"
+    },
+    "threadContentArea": {
+      "width": "2185"
+    },
+    "view-box": {
+      "selectedIndex": "1"
+    },
+    "spacesToolbar": {
+      "hidden": "false",
+      "colors": "{\"background\":\"#1e2030\"}"
+    },
+    "betweenCol": {
+      "hidden": "true"
+    },
+    "todo-tab-panel": {
+      "collapsed": "true"
+    }
+  },
+  "chrome://calendar/content/calendar-alarm-dialog.xhtml": {
+    "calendar-alarm-dialog": {
+      "screenX": "2276",
+      "screenY": "2737",
+      "width": "600",
+      "height": "300"
+    }
+  },
+  "chrome://cardbook/content/addressbooksconfiguration/wdw_addressbooksAdd.xhtml": {
+    "addressbook-creation-window": {
+      "screenX": "964",
+      "screenY": "2718",
+      "width": "914",
+      "height": "600",
+      "sizemode": "maximized"
+    }
+  },
+  "chrome://calendar/content/calendar-invitations-dialog.xhtml": {
+    "calendar-invitations-dialog": {
+      "screenX": "2657",
+      "screenY": "2714",
+      "width": "500",
+      "height": "273"
+    }
+  },
+  "about:preferences": {
+    "paneDeck": {
+      "lastSelected": "paneGeneral"
+    }
+  },
+  "chrome://calendar/content/calendar-creation.xhtml": {
+    "calendar-creation-window": {
+      "screenX": "2636",
+      "screenY": "2524"
+    }
+  },
+  "chrome://calendar/content/calendar-summary-dialog.xhtml": {
+    "calendar-summary-dialog": {
+      "screenX": "0",
+      "screenY": "0",
+      "width": "891"
+    }
+  },
+  "chrome://calendar/content/calendar-conflicts-dialog.xhtml": {
+    "calendar-conflicts-dialog": {
+      "screenX": "610",
+      "screenY": "275"
+    }
+  },
+  "chrome://messenger/content/activity.xhtml": {
+    "activityManager": {
+      "screenX": "2906",
+      "screenY": "2196",
+      "width": "892",
+      "height": "1036",
+      "sizemode": "normal"
+    }
+  },
+  "chrome://calendar/content/chooseCalendarDialog.xhtml": {
+    "chooseCalendar": {
+      "screenX": "718",
+      "screenY": "418",
+      "width": "389",
+      "height": "200"
+    }
+  },
+  "chrome://messenger/content/messengercompose/messengercompose.xhtml": {
+    "msgcomposeWindow": {
+      "screenX": "0",
+      "screenY": "0",
+      "width": "892",
+      "height": "720",
+      "sizemode": "maximized"
+    }
+  },
+  "chrome://messenger/content/customizeToolbar.xhtml": {
+    "CustomizeToolbarWindow": {
+      "width": "767",
+      "height": "480"
+    }
+  },
+  "chrome://calendar/content/calendar-event-dialog.xhtml": {
+    "calendar-event-window": {
+      "screenX": "2586",
+      "screenY": "2196",
+      "width": "2512",
+      "height": "1382"
+    }
+  },
+  "chrome://openpgp/content/ui/enigmailKeyManager.xhtml": {
+    "enigUserNameCol": {
+      "ordinal": "1"
+    },
+    "keyCol": {
+      "ordinal": "3"
+    },
+    "createdCol": {
+      "ordinal": "5"
+    },
+    "expCol": {
+      "ordinal": "7"
+    },
+    "fprCol": {
+      "ordinal": "9"
+    }
+  }
+}
