@@ -16,11 +16,11 @@ create_items() {
 
 	firefox=$(dock_item "/Applications/Firefox Developer Edition.app")
 
-	mail=$(dock_item "/System/Applications/Mail.app")
+	mail=$(dock_item "/Applications/Thunderbird.app")
 
 	messages=$(dock_item "/System/Applications/Messages.app")
 
-	messenger=$(dock_item "/Applications/Messenger.app")
+	messenger=$(dock_item "/Applications/Caprine.app")
 
 	teams=$(dock_item "/Applications/Microsoft Teams.app")
 
