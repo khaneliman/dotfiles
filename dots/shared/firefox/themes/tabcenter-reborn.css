@@ -1,0 +1,178 @@
+/* Overwrite some colours */
+:root {
+  /* These colours are (mainly) used by the
+     Container Tabs Plugin */
+  --uc-identity-colour-blue: #8aadf4;
+  --uc-identity-colour-turquoise: #8bd5ca;
+  --uc-identity-colour-green: #a6da95;
+  --uc-identity-colour-yellow: #eed49f;
+  --uc-identity-colour-orange: #f5a97f;
+  --uc-identity-colour-red: #ed8796;
+  --uc-identity-colour-pink: #f5bde6;
+  --uc-identity-colour-purple: #c6a0f6;
+
+  /*  Cascades main Colour Scheme */
+  --uc-base-colour: #24273a;
+  --uc-highlight-colour: #1e2030;
+  --uc-inverted-colour: #cad3f5;
+  --uc-muted-colour: #6e738d;
+  --uc-accent-colour: var(--uc-identity-colour-blue);
+}
+
+[data-identity-color="blue"] {
+  --identity-color: var(--uc-identity-colour-blue);
+}
+[data-identity-color="turquoise"] {
+  --identity-color: var(--uc-identity-colour-turquoise);
+}
+[data-identity-color="green"] {
+  --identity-color: var(--uc-identity-colour-green);
+}
+[data-identity-color="yellow"] {
+  --identity-color: var(--uc-identity-colour-yellow);
+}
+[data-identity-color="orange"] {
+  --identity-color: var(--uc-identity-colour-orange);
+}
+[data-identity-color="red"] {
+  --identity-color: var(--uc-identity-colour-red);
+}
+[data-identity-color="pink"] {
+  --identity-color: var(--uc-identity-colour-pink);
+}
+[data-identity-color="purple"] {
+  --identity-color: var(--uc-identity-colour-purple);
+}
+
+/* Force compact mode */
+#tablist-wrapper {
+  height: auto;
+  margin: 0 6px;
+}
+
+#tablist-wrapper::after {
+  content: "";
+  max-width: 34px;
+  margin: 2px 0;
+  border: 1px solid var(--tablist-separator);
+  transition: all 0.2s ease;
+  transition-delay: 200ms;
+}
+
+#tablist-wrapper .tab-title-wrapper {
+  visibility: hidden;
+  transition: all 0.2s ease;
+  transition-delay: 200ms;
+}
+
+/* Show more when hovering over the sidebar */
+body:hover #tablist-wrapper .tab-title-wrapper {
+  visibility: visible;
+}
+
+/* Move close button to left side */
+/*.tab-close {
+  left: 0;
+  margin-left: 3px;
+}*/
+
+/* Fix title gradient */
+/*#tablist .tab:hover > .tab-title-wrapper {
+  mask-image: linear-gradient(to left, transparent 0, black 2em);
+}*/
+
+/* Move tab text to right when hovering to accomodate for the close button */
+/*#tablist .tab:hover > .tab-title-wrapper {
+  margin-left: 28px;
+  transition: all 0.2s ease;
+}*/
+
+/* Move favicon to right when hovering to accomodate for the close button */
+/*#tablist .tab:hover > .tab-meta-image {
+  padding-left: 25px;
+  transition: all 0.2s ease;
+}*/
+
+/*** Move container indicators to left ***/
+#tablist-wrapper {
+  margin-left: 0px;
+  padding-left: 6px;
+}
+
+/* #topmenu { */
+/*   display: none !important; */
+/* } */
+
+#tablist-wrapper,
+#pinnedtablist {
+  background: var(--uc-base-colour);
+}
+
+.tab:hover,
+.tab.active {
+  background: var(--uc-highlight-colour);
+}
+
+#tablist-wrapper .tab-title-wrapper {
+  opacity: 0;
+  transform: translateX(-10px);
+
+  transition: all 200ms ease;
+  transition-delay: 0ms;
+}
+
+body:hover #tablist-wrapper .tab-title-wrapper {
+  opacity: 1;
+  transform: translateX(0);
+
+  transition-delay: 50ms;
+}
+
+.tab,
+.tab.active {
+  border-bottom: none !important;
+}
+
+.tab {
+  overflow: visible;
+}
+
+#pinnedtablist:not(.compact) .tab[data-identity-color] .tab-context::before,
+#tablist .tab[data-identity-color] .tab-context::before {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+
+  width: 2px;
+
+  background: var(--identity-color);
+
+  content: "";
+}
+
+#tablist .tab[data-identity-color] .tab-context::before {
+  left: -3px;
+}
+
+#pinnedtablist:not(.compact) .tab[data-identity-color] .tab-context {
+  box-shadow: none !important;
+}
+
+/* Move topmenu to bottom */
+#topmenu {
+  order: 2;
+  background: var(--uc-base-colour);
+  border: none;
+  padding-left: 10px;
+}
+
+/* Hide filterbox */
+#filterbox-icon,
+#filterbox-input {
+  display: none;
+}
+
+/* Right-align settings icon */
+#settings {
+  margin-left: auto;
+}
