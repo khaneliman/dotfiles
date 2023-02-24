@@ -15,7 +15,6 @@ print_help() {
 	Options: 																																						\n\
 	 -h | -help 	- Show this message 																									\n\
 	 -p <PROFILE> 	- Which firefox profile to install config to 	 											\n\
-	 -t <THEME> 	- Theme to install 			 																							\n\
 																																											\n\
 	Arguments:																																					\n\
 	 PROFILE	Profile to install config in 																							\n\

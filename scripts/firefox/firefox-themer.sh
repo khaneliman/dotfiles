@@ -28,6 +28,7 @@ print_help() {
 	 THEME 		Theme folder to install 																									\n\
 	  blurredfox 	- Transparent glass-like theme 																				\n\
 	  minimal 	- Minimal theme with vertical tabs via Tab Center Reborn 								\n\
+	  cascade   - Case minimal theme configured with Tab Center Reborn and Catppuccin   \n\
 																																											\n\
 	Example: 																																						\n\
 	 $ ./firefox-themer.sh -p stable -t blurredfox																			\n\
