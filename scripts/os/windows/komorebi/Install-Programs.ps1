@@ -15,8 +15,7 @@ if (Test-CommandExists winget)
         'Rainmeter.Rainmeter',
         'StartIsBack.StartAllBack',
         'LGUG2Z.komorebi',
-        'AutoHotkey.AutoHotkey',
-        'Lexikos.AutoHotkey'
+        'LGUG2Z.whkd'
     )
 
     foreach ($app in $winget_apps)
@@ -52,7 +51,4 @@ if (!(Test-Path -Path "$($env:USERPROFILE)\Downloads\UltraUXThemePatcher.exe" -P
 $RegPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" 
 
 Write-Message -Message "Setting komorebi to start on login"
-Set-RegistryEntry -Key 'KomorebicOnLogin' -Type "String" -Value 'C:\Program Files\komorebi\bin\komorebic.exe start --await-configuration' -Path $RegPath
-
-Write-Message -Message "Setting komorebi config to load on login"
-Set-RegistryEntry -Key 'KomorebicConfigOnLogin' -Type "String" -Value "$($env:USERPROFILE)\.config\komorebi\komorebi.ahk" -Path $RegPath
+Set-RegistryEntry -Key 'KomorebicOnLogin' -Type "String" -Value 'pwsh -Command "komorebic start --await-configuration"' -Path $RegPath
