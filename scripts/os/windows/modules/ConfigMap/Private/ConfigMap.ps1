@@ -42,7 +42,12 @@ class ConfigMap
             (-join($env:USERPROFILE,"\.config\komorebi").Replace("/","\")),
             $true,
             $true)
-        
+        $this.ConfigMap += [ConfigMapEntry]::new(
+            (-join($global:DOTS_DIR,"/windows/komorebi/home/.config/whkdrc").Replace("/","\")),
+            (-join($env:USERPROFILE,"\.config\whkdrc").Replace("/","\")),
+            $true,
+            $true)
+
         $this.ConfigMap += [ConfigMapEntry]::new(
             (-join($global:DOTS_DIR,"/windows/komorebi/home/.config/ohmyposh").Replace("/","\")),
             (-join($env:USERPROFILE,"\.config\ohmyposh").Replace("/","\")),

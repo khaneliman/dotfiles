@@ -1,6 +1,8 @@
 using namespace System.Management.Automation
 using namespace System.Management.Automation.Language
- 
+
+$Env:KOMOREBI_CONFIG_HOME = "${env:USERPROFILE}\.config\komorebi"
+
 if(-not (Get-Module posh-git -ListAvailable)){
     Install-Module posh-git -Scope CurrentUser -Force
 }
@@ -702,7 +704,5 @@ Set-PSReadLineKeyHandler -Key Ctrl+Shift+t `
 function touch {New-Item "$args" -ItemType File}
 
 function clr { clear; fastfetch;}
-
-$Env:KOMOREBI_CONFIG_HOME = "${env:USERPROFILE}\.config\komorebi"
 
 fastfetch
