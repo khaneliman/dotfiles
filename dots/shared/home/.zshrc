@@ -19,13 +19,21 @@ znap source zsh-users/zsh-syntax-highlighting
 export VISUAL="nvim"
 export EDITOR="$VISUAL"
 export MICRO_TRUECOLOR=1
-export PATH=$PATH:~/.spicetify
+export PATH="$PATH:/opt/local/bin:/opt/local/sbin:$HOME/.local/share/pnpm:~/.spicetify"
+PATH="$(perl -e 'print join(":", grep { not $seen{$_}++ } split(/:/, $ENV{PATH}))')"
 
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 
-plugins=(
+if type brew &>/dev/null; then
+    FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+
+    autoload -Uz compinit
+    compinit
+fi
+
+  plugins=(
   git zsh-autosuggestions zsh-syntax-highlighting sudo
   web-search history macos zsh-navigation-tools zsh-interactive-cd
   web-search wd vscode urltools universalarchive tmux tig themes

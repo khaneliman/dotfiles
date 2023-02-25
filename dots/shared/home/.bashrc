@@ -63,12 +63,22 @@ else
 	[[ ! -f "$OSH"/oh-my-bash.sh ]] || source "$OSH"/oh-my-bash.sh
 fi
 
+eval "$("/opt/homebrew/bin/brew" shellenv)"
+
+if [ -f ~/.config/op/plugins.sh ]; then
+	source "$HOME"/.config/op/plugins.sh
+fi
+
 source "$HOME"/.aliases
 
+[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+[[ -r "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh" ]] && . "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
+
+export PATH="$PATH:/opt/local/bin:/opt/local/sbin:$HOME/.local/share/pnpm:~/.spicetify"
+PATH="$(perl -e 'print join(":", grep { not $seen{$_}++ } split(/:/, $ENV{PATH}))')"
 export VISUAL="nvim"
 export EDITOR="$VISUAL"
 export MICRO_TRUECOLOR=1
-export PATH=$PATH:~/.spicetify
 
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
