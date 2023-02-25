@@ -20,9 +20,11 @@ znap source romkatv/powerlevel10k
 export VISUAL="nvim"
 export EDITOR="$VISUAL"
 export MICRO_TRUECOLOR=1
+export PATH=$PATH:~/.spicetify
 
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 
 plugins=(
   git zsh-autosuggestions zsh-syntax-highlighting sudo
@@ -31,9 +33,6 @@ plugins=(
   rsync ripgrep react-native pip nvm npm node ng gitignore
   github git-prompt git-flow fzf dotnet docker command-not-found
   colorize colored-man-pages brew 1password)
-
-# Source aliases
-source ~/.aliases
 
 # Sketchybar interactivity overloads
 function brew() {
@@ -61,10 +60,9 @@ function push() {
   sketchybar --trigger git_push
 }
 
-export PATH=$PATH:~/.spicetify
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
-
 fastfetch
 
+# Source aliases
+source ~/.aliases
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

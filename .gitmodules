@@ -29,3 +29,7 @@
 [submodule "dots/shared/home/.config/astronvim/lua/user"]
 	path = dots/shared/home/.config/astronvim/lua/user
 	url = https://github.com/khaneliman/astronvim.git
+[submodule "dots/shared/home/.oh-my-bash"]
+	path = dots/shared/home/.oh-my-bash
+	url = https://github.com/ohmybash/oh-my-bash.git
+
