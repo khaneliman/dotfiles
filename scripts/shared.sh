@@ -15,6 +15,7 @@ shared_backup_existing() {
 	backup_files "$HOME"/.config/fish "$BACKUP_LOCATION"/.config/
 	backup_files "$HOME"/.config/kitty "$BACKUP_LOCATION"/.config/
 	backup_files "$HOME"/.config/micro "$BACKUP_LOCATION"/.config/
+	backup_files "$HOME"/.config/ohmyposh "$BACKUP_LOCATION"/.config/
 	backup_files "$HOME"/.config/nvim "$BACKUP_LOCATION"/.config/
 	backup_files "$HOME"/.local/share/nvim "$BACKUP_LOCATION"/.local/share/
 	backup_files "$HOME"/.config/ranger "$BACKUP_LOCATION"/.config/
@@ -189,6 +190,7 @@ shared_copy_configuration() {
 	link_locations "$SHARED_HOME"/.config/fish "$HOME"/.config/fish
 	link_locations "$SHARED_HOME"/.config/kitty "$HOME"/.config/kitty
 	link_locations "$SHARED_HOME"/.config/micro "$HOME"/.config/micro
+	link_locations "$SHARED_HOME"/.config/ohmyposh "$HOME"/.config/ohymyposh
 	link_locations "$SHARED_HOME"/.config/ranger "$HOME"/.config/ranger
 	link_locations "$SHARED_HOME"/.config/spicetify "$HOME"/.config/spicetify
 	link_locations "$SHARED_HOME"/.config/topgrade.toml "$HOME"/.config/topgrade.toml

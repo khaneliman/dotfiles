@@ -49,7 +49,7 @@ class ConfigMap
             $true)
 
         $this.ConfigMap += [ConfigMapEntry]::new(
-            (-join($global:DOTS_DIR,"/windows/komorebi/home/.config/ohmyposh").Replace("/","\")),
+            (-join($global:DOTS_DIR,"/shared/home/.config/ohmyposh").Replace("/","\")),
             (-join($env:USERPROFILE,"\.config\ohmyposh").Replace("/","\")),
             $true,
             $true)

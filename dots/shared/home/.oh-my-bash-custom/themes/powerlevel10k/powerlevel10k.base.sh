@@ -187,7 +187,6 @@ function __powerline_prompt_command {
 		LEFT_PROMPT+="${move_cursor_rightmost}"
 		for segment in $POWERLEVEL10K_RIGHT_PROMPT; do
 			local info="$(__powerline_${segment}_prompt)"
-			echo $info
 			[[ -n "${info}" ]] && __powerline_right_segment "${info}"
 		done
 		LEFT_PROMPT+="\033[${RIGHT_PROMPT_LENGTH}D"

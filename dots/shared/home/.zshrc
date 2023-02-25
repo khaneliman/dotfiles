@@ -15,7 +15,6 @@ source ~/.config/zsnap/zsh-snap/znap.zsh  # Start Znapns
 # `znap source` automatically downloads and starts your plugins.
 znap source zsh-users/zsh-autosuggestions
 znap source zsh-users/zsh-syntax-highlighting
-znap source romkatv/powerlevel10k
 
 export VISUAL="nvim"
 export EDITOR="$VISUAL"
@@ -64,5 +63,10 @@ fastfetch
 
 # Source aliases
 source ~/.aliases
+if [ $(command -v oh-my-posh) ]; then
+  eval "$(oh-my-posh --init --shell zsh --config "$HOME/.config/ohmyposh/ohmyposhv3-v2.json")"
+else 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+znap source romkatv/powerlevel10k
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+fi
