@@ -194,7 +194,7 @@ shared_copy_configuration() {
 	link_locations "$SHARED_HOME"/.config/topgrade.toml "$HOME"/.config/topgrade.toml
 
 	link_locations "$SHARED_HOME"/.oh-my-bash "$HOME"/.oh-my-bash
-	link_locations "$SHARED_HOME"/.oh-my-bash-custom/themes/powerline-multiline "$HOME"/.oh-my-bash/custom/themes/powerline-multiline
+	link_locations "$SHARED_HOME"/.oh-my-bash-custom/themes/powerlevel10k "$HOME"/.oh-my-bash/custom/themes/powerlevel10k
 
 	git_crypt_check && link_locations "$SHARED_HOME"/.gnupg "$HOME"/.gnupg
 	git_crypt_check && link_locations "$SHARED_HOME"/.ssh "$HOME"/.ssh
