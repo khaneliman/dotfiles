@@ -49,12 +49,6 @@ class ConfigMap
             $true)
 
         $this.ConfigMap += [ConfigMapEntry]::new(
-            (-join($global:DOTS_DIR,"/shared/home/.config/ohmyposh").Replace("/","\")),
-            (-join($env:USERPROFILE,"\.config\ohmyposh").Replace("/","\")),
-            $true,
-            $true)
-
-        $this.ConfigMap += [ConfigMapEntry]::new(
             (-join($global:DOTS_DIR,"/windows/komorebi/home/AppData/Local/Packages/MicaForEveryone_pfhyqtmn5ksmy/LocalState/MicaForEveryone.conf").Replace("/","\")),
             (-join($env:USERPROFILE,"\AppData\Local\Packages\MicaForEveryone_pfhyqtmn5ksmy\LocalState\MicaForEveryone.conf").Replace("/","\")),
             $false,
@@ -193,6 +187,24 @@ class ConfigMap
         $this.ConfigMap += [ConfigMapEntry]::new(
             (-join($global:DOTS_DIR,"/shared/home/.config/BetterDiscord").Replace("/","\")),
             (-join($env:USERPROFILE,"\.config\BetterDiscord").Replace("/","\")),
+            $true,
+            $true)
+
+        $this.ConfigMap += [ConfigMapEntry]::new(
+            (-join($global:DOTS_DIR,"/shared/home/.config/ohmyposh").Replace("/","\")),
+            (-join($env:USERPROFILE,"\.config\ohmyposh").Replace("/","\")),
+            $true,
+            $true)
+
+        $this.ConfigMap += [ConfigMapEntry]::new(
+            (-join($global:DOTS_DIR,"/shared/home/.bash_profile").Replace("/","\")),
+            (-join($env:USERPROFILE,"\.bash_profile").Replace("/","\")),
+            $true,
+            $true)
+
+        $this.ConfigMap += [ConfigMapEntry]::new(
+            (-join($global:DOTS_DIR,"/shared/home/.bashrc").Replace("/","\")),
+            (-join($env:USERPROFILE,"\.bashrc").Replace("/","\")),
             $true,
             $true)
     }
