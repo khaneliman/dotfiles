@@ -39,6 +39,7 @@ shared_backup_existing() {
 	git_crypt_check && backup_files "$HOME"/.ssh "$BACKUP_LOCATION"
 	git_crypt_check && backup_files "$HOME"/.wakatime.cfg "$BACKUP_LOCATION"
 	git_crypt_check && backup_files "$HOME"/.wegorc "$BACKUP_LOCATION"
+	git_crypt_check && backup_files "$HOME"/weather_url "$BACKUP_LOCATION"
 }
 
 correct_ssh_permissions() {
@@ -218,6 +219,7 @@ shared_copy_configuration() {
 	git_crypt_check && link_locations "$SHARED_HOME"/.ssh "$HOME"/.ssh
 	git_crypt_check && link_locations "$SHARED_HOME"/.wakatime.cfg "$HOME"/.wakatime.cfg
 	git_crypt_check && link_locations "$SHARED_HOME"/.wegorc "$HOME"/.wegorc
+	git_crypt_check && link_locations "$SHARED_HOME"/weather_url "$HOME"/weather_url
 
 	# copy files that dont replace contents of location
 	copy_files "$SHARED_HOME"/.fonts/ "$HOME"/.fonts/

@@ -4,6 +4,7 @@ dots/linux/hyprland/home/.config/aconfmgr/files/etc/NetworkManager/system-connec
 
 dots/shared/home/.wakatime.cfg filter=git-crypt diff=git-crypt
 dots/shared/home/.wegorc filter=git-crypt diff=git-crypt
+dots/shared/home/weather_url filter=git-crypt diff=git-crypt
 dots/shared/home/.gitconfig.signing filter=git-crypt diff=git-crypt
 
 dots/shared/home/.ssh/** filter=git-crypt diff=git-crypt
