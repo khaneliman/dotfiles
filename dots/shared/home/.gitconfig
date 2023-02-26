@@ -5,6 +5,7 @@
 
 [core]
 	longpaths = true
+	excludesFile = ~/.gitignore_global
 
 [init]
 	defaultBranch = main
