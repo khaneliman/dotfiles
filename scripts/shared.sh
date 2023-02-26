@@ -25,6 +25,7 @@ shared_backup_existing() {
 	backup_files "$HOME"/.mozilla "$BACKUP_LOCATION"/
 	backup_files "$HOME"/.oh-my-bash "$BACKUP_LOCATION"/
 
+	backup_files "$HOME"/.bashenv "$BACKUP_LOCATION"/
 	backup_files "$HOME"/.bash_profile "$BACKUP_LOCATION"/
 	backup_files "$HOME"/.bashrc "$BACKUP_LOCATION"/
 	backup_files "$HOME"/.gitconfig "$BACKUP_LOCATION"
@@ -201,6 +202,7 @@ shared_copy_configuration() {
 	link_locations "$SHARED_HOME"/.oh-my-bash "$HOME"/.oh-my-bash
 	link_locations "$SHARED_HOME"/.oh-my-bash-custom/themes/powerlevel10k "$HOME"/.oh-my-bash/custom/themes/powerlevel10k
 
+	link_locations "$SHARED_HOME"/.bashenv "$HOME"/.bashenv
 	link_locations "$SHARED_HOME"/.bash_profile "$HOME"/.bash_profile
 	link_locations "$SHARED_HOME"/.bashrc "$HOME"/.bashrc
 	link_locations "$SHARED_HOME"/.face "$HOME"/.face

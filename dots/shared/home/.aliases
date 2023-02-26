@@ -7,6 +7,7 @@ alias wget='wget -c '
 
 # Navigation shortcuts
 alias home="cd ~"
+alias dots="cd $DOTS_DIR"
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
