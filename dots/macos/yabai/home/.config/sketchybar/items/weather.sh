@@ -11,8 +11,7 @@ weather_icon=(
 )
 
 weather_temp=(
-	update_freq=900
-	# icon.drawing=off
+	update_freq=60
 	popup.align=right
 	popup.height=20
 	y_offset=-10

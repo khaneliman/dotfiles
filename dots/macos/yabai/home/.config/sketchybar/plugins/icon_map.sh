@@ -380,7 +380,7 @@ case $@ in
 	icon_result=":sequel_ace:"
 	;;
 "false Mostly Cloudy" | "false Cloudy" | "false Partly Cloudy")
-	icon_result="󰼱"
+	icon_result=""
 	;;
 "false Rain")
 	icon_result=""
@@ -398,7 +398,7 @@ case $@ in
 	icon_result=""
 	;;
 "false Clear" | "false Mostly Clear")
-	icon_result="󰖔"
+	icon_result=""
 	;;
 *)
 	icon_result=":default:"

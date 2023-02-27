@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-source "$HOME/.config/sketchybar/colors.sh" # Loads all defined colors
-source "$HOME/.config/sketchybar/icons.sh"  # Loads all defined icons
-source "$HOME/.config/sketchybar/userconfig.sh"  # Loads all defined icons
+source "$HOME/.config/sketchybar/colors.sh"     # Loads all defined colors
+source "$HOME/.config/sketchybar/icons.sh"      # Loads all defined icons
+source "$HOME/.config/sketchybar/userconfig.sh" # Loads all defined icons
 
 # Setting up and starting the helper process
 HELPER=git.felix.helper
@@ -10,9 +10,9 @@ killall helper
 cd "$HOME"/.config/sketchybar/helper && make
 "$HOME"/.config/sketchybar/helper/helper "$HELPER" >/dev/null 2>&1 &
 
-ITEM_DIR="$HOME/.config/sketchybar/items"     # Directory where the items are configured
+ITEM_DIR="$HOME/.config/sketchybar/items"            # Directory where the items are configured
 export PLUGIN_DIR="$HOME/.config/sketchybar/plugins" # Directory where all the plugin scripts are stored
-EVENTS_DIR="$HOME/.config/sketchybar/events" # Directory where the event scripts are stored
+EVENTS_DIR="$HOME/.config/sketchybar/events"         # Directory where the event scripts are stored
 
 # Set up dynamic island helper
 DYNAMIC_ISLAND_DIR="$HOME/.config/sketchybar/plugins/Dynamic-Island-Sketchybar"
@@ -26,39 +26,59 @@ cd "$DYNAMIC_ISLAND_DIR"/helper && make
 # Unload the macOS on screen indicator overlay for volume change
 launchctl unload -F /System/Library/LaunchAgents/com.apple.OSDUIHelper.plist >/dev/null 2>&1 &
 
+bar_config=(
+	blur_radius=20
+	color="$BASE"
+	corner_radius=9
+	height=40
+	margin=10
+	padding_left=10
+	padding_right=10
+	position=top
+	shadow=on
+	sticky=on
+	y_offset=10
+)
+
+icon_defaults=(
+	icon.color="$ICON_COLOR"
+	icon.font="$NERD_FONT:Bold:16.0"
+	icon.padding_left="$PADDINGS"
+	icon.padding_right="$PADDINGS"
+)
+
+label_defaults=(
+	label.color="$TEXT"
+	label.font="$FONT:Semibold:13.0"
+	label.padding_left="$PADDINGS"
+	label.padding_right="$PADDINGS"
+)
+
+background_defaults=(
+	background.corner_radius=9
+	background.height=30
+	background.padding_left="$PADDINGS"
+	background.padding_right="$PADDINGS"
+)
+
+popup_defaults=(
+	popup.height=30
+	popup.horizontal=false
+	popup.background.border_color="$BLUE"
+	popup.background.border_width=2
+	popup.background.color="$MANTLE"
+	popup.background.corner_radius=9
+	popup.background.shadow.drawing=on
+)
 # Setting up the general bar appearance and default values
-sketchybar 	--bar 			height=40 																						\
-												color="$BASE" 																				\
-												shadow=on 																						\
-												position=top 																					\
-												sticky=on 																						\
-												padding_right=10 																			\
-												padding_left=10 																			\
-												corner_radius=9 																			\
-												y_offset=10 																					\
-												margin=10 																						\
-												blur_radius=20 																				\
-																																							\
-												--default 	updates=when_shown 												\
-												icon.font="$NERD_FONT:Bold:16.0" 											\
-												icon.color="$ICON_COLOR" 															\
-												icon.padding_left="$PADDINGS" 												\
-												icon.padding_right="$PADDINGS" 												\
-												label.font="$FONT:Semibold:13.0" 											\
-												label.color="$TEXT" 																	\
-												label.padding_left="$PADDINGS" 												\
-												label.padding_right="$PADDINGS" 											\
-												background.padding_right="$PADDINGS" 									\
-												background.padding_left="$PADDINGS" 									\
-												background.height=30 																	\
-												background.corner_radius=9 														\
-												popup.horizontal=false          											\
-												popup.height=30          															\
-												popup.background.border_width=2 											\
-												popup.background.corner_radius=9 											\
-												popup.background.border_color="$BLUE" 								\
-												popup.background.color="$MANTLE" 											\
-												popup.background.shadow.drawing=on
+sketchybar 	--bar 			"${bar_config[@]}"            \
+																											\
+						--default 	                   						\
+												updates=when_shown 						\
+												"${icon_defaults[@]}"         \
+												"${label_defaults[@]}"        \
+												"${background_defaults[@]}"   \
+												"${popup_defaults[@]}"
 
 source "$EVENTS_DIR/lock.sh"
 source "$EVENTS_DIR/toggle_stats.sh"

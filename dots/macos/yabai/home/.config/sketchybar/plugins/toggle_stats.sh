@@ -2,35 +2,35 @@
 
 hide_stats() {
 	sketchybar --set cpu.percent \
-		label.drawing=off \
-		icon.drawing=off \
-		--set memory \
-		label.drawing=off \
-		icon.drawing=off \
-		--set disk \
-		label.drawing=off \
-		icon.drawing=off \
-		--set stats_separator \
-		icon=
+										label.drawing=off \
+										icon.drawing=off \
+							--set memory \
+										label.drawing=off \
+										icon.drawing=off \
+							--set disk \
+										label.drawing=off \
+										icon.drawing=off \
+							--set separator_right \
+										icon=
 
 }
 
 show_stats() {
-	sketchybar --set cpu.percent \
-		label.drawing=on \
-		icon.drawing=on \
-		--set memory \
-		label.drawing=on \
-		icon.drawing=on \
-		--set disk \
-		label.drawing=on \
-		icon.drawing=on \
-		--set stats_separator \
-		icon=
+	sketchybar 	--set cpu.percent \
+										label.drawing=on \
+										icon.drawing=on \
+							--set memory \
+										label.drawing=on \
+										icon.drawing=on \
+							--set disk \
+										label.drawing=on \
+										icon.drawing=on \
+							--set separator_right \
+										icon=
 }
 
 toggle_stats() {
-	state=$(sketchybar --query stats_separator | jq -r .icon.value)
+	state=$(sketchybar --query separator_right | jq -r .icon.value)
 
 	case $state in
 	"")
