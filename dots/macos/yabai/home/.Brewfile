@@ -191,6 +191,7 @@ brew "koekeishiya/formulae/skhd"
 brew "koekeishiya/formulae/yabai", args: ["HEAD"]
 cask "1password-cli"
 cask "alacritty"
+cask "alfred"
 cask "authy"
 cask "betterdiscord-installer"
 cask "caprine"
@@ -214,6 +215,7 @@ cask "sloth"
 cask "spotify"
 cask "stats"
 cask "thunderbird"
+cask "visual-studio-code"
 cask "xquartz"
 mas "1Password for Safari", id: 1569813296
 mas "AdGuard for Safari", id: 1440147259

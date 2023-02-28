@@ -15,12 +15,12 @@ function check_for_updates() {
 	# avoid GitHub rate limitations when jq is installed by using the GitHub
 	# API instead of ls-remote
 	if command -v jq >/dev/null 2>&1; then
-		installed="$(brew info --json /yabai |
+		installed="$(brew info --json yabai |
 			jq -r '.[0].installed[0].version')"
 		remote="$(curl -fsSL "https://api.github.com/repos/koekeishiya/yabai/commits" |
 			jq -r '"HEAD-" + (.[0].sha | explode | .[0:7] | implode)')"
 	else
-		installed="$(brew info /yabai | grep 'HEAD-' |
+		installed="$(brew info yabai | grep 'HEAD-' |
 			awk '{print substr($1,length($1)-6)}')"
 		remote="$(git ls-remote 'https://github.com/koekeishiya/yabai.git' HEAD |
 			awk '{print substr($1,1,7)}')"
