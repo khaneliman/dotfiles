@@ -379,27 +379,6 @@ case $@ in
 "Sequel Ace")
 	icon_result=":sequel_ace:"
 	;;
-"false Mostly Cloudy" | "false Cloudy" | "false Partly Cloudy")
-	icon_result=""
-	;;
-"false Rain")
-	icon_result=""
-	;;
-"false Slight Chance Rain Showers")
-	icon_result=""
-	;;
-"true Rain Showers Likely" | "true Rain Showers" | "true Chance Rain Showers")
-	icon_result=""
-	;;
-"false Patchy Fog" | "false Areas Of Fog" | "false Widespread Fog")
-	icon_result=""
-	;;
-"true Mostly Sunny" | "true Sunny")
-	icon_result=""
-	;;
-"false Clear" | "false Mostly Clear")
-	icon_result=""
-	;;
 *)
 	icon_result=":default:"
 	;;

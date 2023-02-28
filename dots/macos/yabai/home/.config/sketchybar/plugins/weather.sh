@@ -2,6 +2,39 @@
 
 source "$HOME/.config/sketchybar/colors.sh"
 
+weather_icon_map() {
+	case $@ in
+	"false Mostly Cloudy" | "false Cloudy" | "false Partly Cloudy")
+		icon_result=""
+		;;
+	"false Rain")
+		icon_result=""
+		;;
+	"false Slight Chance Rain Showers")
+		icon_result=""
+		;;
+	"false Slight Chance Light Snow")
+		icon_result=""
+		;;
+	"true Rain Showers Likely" | "true Rain Showers" | "true Chance Rain Showers")
+		icon_result=""
+		;;
+	"false Patchy Fog" | "false Areas Of Fog" | "false Widespread Fog")
+		icon_result=""
+		;;
+	"true Mostly Sunny" | "true Sunny")
+		icon_result=""
+		;;
+	"false Clear" | "false Mostly Clear")
+		icon_result=""
+		;;
+	*)
+		icon_result=":default:"
+		;;
+		esac
+	echo $icon_result
+}
+
 render_bar() {
 	args+=(--set weather.icon icon="$icon")
 	args+=(--set weather.temp label="$temp""°")
@@ -58,7 +91,7 @@ update() {
 	temp=$(echo "$weather" | jq -r '.properties.periods[0].temperature')
 	forecast=$(echo "$weather" | jq -r '.properties.periods[0].shortForecast')
 	time=$(echo "$weather" | jq -r '.properties.periods[0].isDaytime')
-	icon=$("$HOME"/.config/sketchybar/plugins/icon_map.sh "$time $forecast")
+	icon=$(weather_icon_map "$time" "$forecast")
 
 	render_bar
 	render_popup
