@@ -2,20 +2,19 @@
  * vim: ft=less
  */
 
+@import "macchiato.css";
+
 @define-color noti-border-color rgba(255, 255, 255, 0.9);
-@define-color noti-bg #24273a;
-@define-color noti-bg-alt #1e2030;
-@define-color noti-fg #cad3f5;
-@define-color noti-bg-hover #8aadf4;
-@define-color noti-bg-focus #a6da95;
 @define-color noti-close-bg rgba(255, 255, 255, 0.1);
 @define-color noti-close-bg-hover rgba(255, 255, 255, 0.15);
+@define-color noti-bg-hover @blue;
+@define-color noti-bg-focus @green;
 @define-color noti-urgent #BF616A;
 
 @define-color bg-selected rgb(0, 128, 255);
 
 * {
-  color: @noti-fg;
+  color: @text;
 }
 
 .notification-row {
@@ -24,16 +23,15 @@
 
 .notification-row:focus,
 .notification-row:hover {
-  background: transparent;
+  background: @noti-bg-focus;
 }
 
 .notification {
   border-radius: 1em;
   margin: 6px 12px;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 3px 1px rgba(0, 0, 0, 0.7),
-    0 2px 6px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.3),
+    0 1px 3px 1px rgba(0, 0, 0, 0.7), 0 2px 6px 2px rgba(0, 0, 0, 0.3);
   padding: 0;
-  border: 1px solid @noti-border-color;
 }
 
 /* Uncomment to enable specific urgency colors */
@@ -45,6 +43,7 @@
 .normal {
   background: green;
   padding: 6px;
+  border: 2px solid @surface1;
 } */
 
 .critical {
@@ -83,7 +82,7 @@
   padding: 4px;
   margin: 0;
   box-shadow: none;
-  background: @noti-bg;
+  background: @mantle;
   border: none;
   color: white;
 }
@@ -161,7 +160,9 @@
 }
 
 .control-center {
-  background-color: @noti-bg-alt;
+  background-color: @base;
+  border: 1px solid @surface0;
+  border-radius: 1em;
 }
 
 .control-center-list {
@@ -189,7 +190,7 @@
   font-size: initial;
   color: white;
   text-shadow: none;
-  background: @noti-bg;
+  background: @mantle;
   border: 1px solid @noti-border-color;
   box-shadow: none;
   border-radius: 12px;
@@ -208,7 +209,7 @@
 .widget-dnd > switch {
   font-size: initial;
   border-radius: 12px;
-  background: @noti-bg;
+  background: @mantle;
   border: 1px solid @noti-border-color;
   box-shadow: none;
 }
@@ -253,7 +254,7 @@
 /* Volume and Brightness Widget*/
 
 .widget-volume {
-  background-color: @noti-bg;
+  background-color: @mantle;
   padding: 4px 8px 8px 8px;
   margin: 0px 8px 8px 8px;
   border-bottom-left-radius: 12px;
@@ -261,7 +262,7 @@
 }
 
 .widget-backlight {
-  background-color: @noti-bg;
+  background-color: @mantle;
   padding: 8px 8px 4px 8px;
   margin: 8px 8px 0px 8px;
   border-top-left-radius: 12px;
@@ -275,7 +276,7 @@
 }
 
 .power-buttons {
-  background-color: @noti-bg;
+  background-color: @mantle;
   padding: 8px;
   margin: 8px;
   border-radius: 12px;
@@ -304,11 +305,11 @@
   padding: 8px;
   margin: 8px;
   border-radius: 12px;
-  background-color: @noti-bg;
+  background-color: @mantle;
 }
 
 .widget-buttons-grid > flowbox > flowboxchild > button {
-  background: @noti-bg;
+  background: @base;
   border-radius: 12px;
 }
 
@@ -317,7 +318,7 @@
 }
 
 .powermode-buttons {
-  background-color: @noti-bg;
+  background-color: @mantle;
   padding: 8px;
   margin: 8px;
   border-radius: 12px;
