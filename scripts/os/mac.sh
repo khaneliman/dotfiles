@@ -32,7 +32,7 @@ brew_install() {
 bundle_install() {
 	if (command -v brew); then
 		message "Installing taps, brews, casks, and apps... "
-		brew bundle --file "$SCRIPTS_DIR"/os/mac/Brewfile
+		brew bundle --file "$HOME"/.Brewfile
 	else
 		warning_message "Brew not installed! Skipping apps..."
 	fi
@@ -64,6 +64,7 @@ mac_backup_existing() {
 	backup_files "$HOME"/.config/skhd "$BACKUP_LOCATION"/.config/
 	backup_files "$HOME"/.config/yabai "$BACKUP_LOCATION"/.config/
 
+	backup_files "$HOME"/.Brewfile "$BACKUP_LOCATION"/
 	backup_files "$HOME"/.hammerspoon "$BACKUP_LOCATION"/
 	backup_files "$HOME"/.gitconfig.local "$BACKUP_LOCATION"/
 	backup_files "$HOME/Application Support/Firefox/Profiles/" "$BACKUP_LOCATION"/Application Support/Firefox/Profiles/
@@ -88,6 +89,7 @@ mac_copy_configuration() {
 
 	link_locations "$MAC_HOME"/.local/share/fastfetch/presets/local-overrides "$HOME"/.local/share/fastfetch/presets/local-overrides
 
+	link_locations "$MAC_HOME"/.Brewfile "$HOME"/.Brewfile
 	link_locations "$MAC_HOME"/.hammerspoon "$HOME"/.hammerspoon
 	link_locations "$MAC_HOME"/.gitconfig.local "$HOME"/.gitconfig.local
 

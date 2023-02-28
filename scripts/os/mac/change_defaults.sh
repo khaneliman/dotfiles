@@ -138,6 +138,8 @@ change_defaults() {
 	chflags nohidden ~/Library
 	# Show the /Volumes folder
 	sudo chflags nohidden /Volumes
+	# Show quit option
+	defaults write com.apple.finder QuitMenuItem -bool true
 	# Restart Finder
 	killall Finder
 
