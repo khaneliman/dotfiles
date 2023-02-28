@@ -28,6 +28,7 @@ hypr_backup_existing() {
 	backup_files "$HOME"/.config/rofi "$BACKUP_LOCATION"/.config/
 	backup_files "$HOME"/.config/swappy "$BACKUP_LOCATION"/.config/
 	backup_files "$HOME"/.config/swaylock "$BACKUP_LOCATION"/.config/
+	backup_files "$HOME"/.config/swaync "$BACKUP_LOCATION"/.config/
 	backup_files "$HOME"/.config/waybar "$BACKUP_LOCATION"/.config/
 	backup_files "$HOME"/.config/wlogout "$BACKUP_LOCATION"/.config/
 	backup_files "$HOME"/.config/mimeapps.list "$BACKUP_LOCATION"/.config/
@@ -86,6 +87,7 @@ hypr_copy_configuration() {
 	link_locations "$HYPR_HOME"/.config/rofi "$HOME"/.config/rofi
 	link_locations "$HYPR_HOME"/.config/swappy "$HOME"/.config/swappy
 	link_locations "$HYPR_HOME"/.config/swaylock "$HOME"/.config/swaylock
+	link_locations "$HYPR_HOME"/.config/swaync "$HOME"/.config/swaync
 	link_locations "$HYPR_HOME"/.config/waybar "$HOME"/.config/waybar
 	link_locations "$HYPR_HOME"/.config/wlogout "$HOME"/.config/wlogout
 

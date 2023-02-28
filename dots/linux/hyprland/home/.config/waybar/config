@@ -19,6 +19,7 @@
 		"modules-right": [
 			"tray",
 			"custom/separator",
+			"custom/notification",
 			"custom/pipewire",
 			"cpu",
 			"memory",
