@@ -24,7 +24,7 @@
 
 .notification-row:focus,
 .notification-row:hover {
-  background: @noti-bg-focus;
+  background: transparent;
 }
 
 .notification {

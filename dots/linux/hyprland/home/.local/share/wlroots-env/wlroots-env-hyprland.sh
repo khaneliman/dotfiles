@@ -4,3 +4,4 @@
 
 export XDG_SESSION_DESKTOP=Hyprland
 export XDG_CURRENT_DESKTOP=Hyprland
+export HYPRLAND_LOG_WLR=1

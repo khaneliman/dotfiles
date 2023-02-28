@@ -20,6 +20,7 @@
 			"tray",
 			"custom/separator",
 			"custom/notification",
+			"idle_inhibitor",
 			"custom/pipewire",
 			"cpu",
 			"memory",

@@ -49,6 +49,19 @@
     "max-length": 8,
     "tooltip": false
   },
+  "mpris": {
+    "format": "DEFAULT: {player_icon} {dynamic}",
+    "format-paused": "DEFAULT: {status_icon} <i>{dynamic}</i>",
+    "player-icons": {
+      "default": "▶",
+      "mpv": "🎵",
+      "spotify": ""
+    },
+    "status-icons": {
+      "paused": "⏸"
+    },
+    "ignored-players": ["firefox"]
+  },
   "mpd": {
     "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",
     "format-disconnected": "Disconnected ",
@@ -145,10 +158,11 @@
     // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
   },
   "custom/separator": {
-    "format": ""
+    "format": "",
+    "tooltip": false
   },
   "custom/notification": {
-    "tooltip": false,
+    "tooltip": true,
     "format": "{} {icon}",
     "format-icons": {
       "notification": "<span foreground='red'><sup></sup></span>",
