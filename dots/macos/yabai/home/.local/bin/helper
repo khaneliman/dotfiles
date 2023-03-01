@@ -189,7 +189,7 @@ create_spaces() {
 			yabai -m window $YABAI_WINDOW_ID --space $2
 		fi
 		yabai -m space --focus $2
-		wallpaper set "$HOME/.local/share/wallpapers/$(/bin/ls ~/.local/share/wallpapers | shuf -n 1)"
+		set_wallpaper "$HOME/.local/share/wallpapers/catppuccin/$(/bin/ls ~/.local/share/wallpapers/catppuccin | shuf -n 1)"
 		return 0
 	fi
 
@@ -202,26 +202,33 @@ create_spaces() {
 		echo $i
 		yabai -m space --create
 		yabai -m space --focus $i
-		wallpaper set "$HOME/.local/share/wallpapers/$(/bin/ls ~/.local/share/wallpapers | shuf -n 1)"
+		set_wallpaper "$HOME/.local/share/wallpapers/catppuccin/$(/bin/ls ~/.local/share/wallpapers/catppuccin | shuf -n 1)"
 	done
 	yabai -m space $CURRENT_SPACE --focus
 
 }
 
 set_wallpaper() {
-	# TODO: Add flag to set all spaces to same wallpaper
-	# TODO: Set the name of the terminal and center and float it in yabai rules
-	# TODO: Bind key to set color scheme
-	# TODO: Bind key to show desktop
-	skhd -k 'escape'
+	osascript -e 'tell application "Finder" to set desktop picture to POSIX file "'"$1"'"'
+}
 
-	RUNNING=$(osascript -e 'tell application "System Events" to set Appli_Launch to exists (processes where name is "kitty")')
-	TOTAL_SPACES=$(yabai -m query --spaces | jq -r '[.[]."is-native-fullscreen"| select(.==false) ]| length')
-	CURRENT_SPACE=$(yabai -m query --spaces --space | jq -r ."index")
+set_wallpapers() {
+	if [[ $(command -v yabai) ]]; then
+		LOCAL_WALLPAPERS="$(realpath "$HOME"/.local/share/wallpapers/catppuccin)"
 
-	yabai -m space --focus 1
+		yabai -m space --focus 1
 
-	/Applications/kitty.app/Contents/MacOS/kitty -1 --title=Wallpaper sh -c "ls $1 | fzf --multi $TOTAL_SPACES --reverse --height 100% --bind 'ctrl-w:execute-silent:(wallpaper set $1{})' --preview 'timg -g 80x40 --auto-crop $1{}' | xargs -I {} sh -c 'yabai -m config active_window_opacity 0.01 normal_window_opacity 0.01; wallpaper set $1{}; yabai -m space --focus next;'; yabai -m space --focus $CURRENT_SPACE; yabai -m config active_window_opacity 1.00 normal_window_opacity 0.85;"
+		i=0
+
+		for file in "$LOCAL_WALLPAPERS"/*.png; do
+			((i = i + 1))
+			echo "Setting wallpaper on space $i to $file..."
+			# take action on each file. $f store current file name
+			osascript -e 'tell application "Finder" to set desktop picture to POSIX file "'"$file"'"'
+			yabai -m space --focus next 2 &>/dev/null
+			sleep 0.1
+		done
+	fi
 }
 
 get_pixel_color() {

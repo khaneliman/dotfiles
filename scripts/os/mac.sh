@@ -132,7 +132,7 @@ mac_install() {
 
 set_wallpapers() {
 	if [[ $(command -v yabai) ]]; then
-		message "Setting walpapers for each desktop"
+		message "Setting wallpapers for each desktop"
 
 		LOCAL_WALLPAPERS="$(realpath "$HOME"/.local/share/wallpapers/catppuccin)"
 

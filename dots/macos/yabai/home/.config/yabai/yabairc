@@ -7,10 +7,13 @@ sudo yabai --load-sa
 # Signal hooks
 yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
 yabai -m signal --add event=window_focused action="sketchybar --trigger window_focus"
-yabai -m signal --add event=display_added action="sleep 1 && $HOME/.config/yabai/create_spaces.sh"
-yabai -m signal --add event=display_removed action="sleep 1 && $HOME/.config/yabai/create_spaces.sh"
+yabai -m signal --add event=display_added action="sleep 1 && source $HOME/.local/bin/helper && create_spaces 7"
+yabai -m signal --add event=display_removed action="sleep 1 && source $HOME/.local/bin/helper && create_spaces 7"
 yabai -m signal --add event=window_created action="sketchybar --trigger windows_on_spaces"
 yabai -m signal --add event=window_destroyed action="sketchybar --trigger windows_on_spaces"
+yabai -m signal --add event=window_created app="Code" action="source ${HOME}/.config/bin/helper && auto_stack Code"
+yabai -m signal --add event=window_created app="Firefox" title!="(— Private Browsing$|^Picture-in-Picture$)" action="source ${HOME}/.local/bin/helper && auto_stack Firefox"
+yabai -m signal --add event=window_title_changed app="Firefox" title="- noVNC$" action="yabai -m window ${WINDOW_ID} --toggle native-fullscreen"
 
 # Create managed spaces
 # "$HOME"/.config/yabai/create_spaces.sh

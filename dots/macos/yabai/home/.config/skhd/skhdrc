@@ -100,6 +100,8 @@ default < shift + ctrl - l    : yabai -m window  east --stack $(yabai -m query -
 # Stack Navigation: shift + ctrl - {n, p}
 default < shift + ctrl - n : yabai -m window --focus stack.next
 default < shift + ctrl - p : yabai -m window --focus stack.prev
+default < shift + ctrl - right : yabai -m window --focus stack.next
+default < shift + ctrl - left : yabai -m window --focus stack.prev
 
 ## Resize (ctrl + lalt - ...)
 # Resize windows: ctrl + lalt - {j, k, l, ö}

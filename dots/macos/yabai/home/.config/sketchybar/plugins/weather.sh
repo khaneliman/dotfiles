@@ -4,7 +4,10 @@ source "$HOME/.config/sketchybar/colors.sh"
 
 weather_icon_map() {
 	case $@ in
-	"false Mostly Cloudy" | "false Cloudy" | "false Partly Cloudy")
+	"false Clear" | "false Mostly Clear")
+		icon_result=""
+		;;
+	"false Mostly Cloudy" | "false Cloudy" | "false Partly Cloudy" )
 		icon_result=""
 		;;
 	"false Rain")
@@ -25,8 +28,8 @@ weather_icon_map() {
 	"true Mostly Sunny" | "true Sunny")
 		icon_result=""
 		;;
-	"false Clear" | "false Mostly Clear")
-		icon_result=""
+	"true Partly Sunny")
+		icon_result=""
 		;;
 	*)
 		icon_result=":default:"
