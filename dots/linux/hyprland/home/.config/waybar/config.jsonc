@@ -1,0 +1,43 @@
+[
+  {
+    "include": ["~/.config/waybar/default-modules.jsonc"],
+    "layer": "top",
+    "position": "top",
+    "output": "DP-2",
+    "margin-top": 10,
+    "margin-left": 20,
+    "margin-right": 20,
+    "modules-center": ["hyprland/window"],
+    "modules-left": ["custom/wlogout", "wlr/workspaces"],
+    "modules-right": [
+      "tray",
+      "custom/separator",
+      "custom/notification",
+      "idle_inhibitor",
+      "custom/pipewire",
+      "cpu",
+      "memory",
+      "disk",
+      "temperature",
+      "keyboard-state",
+      "hyprland/submap",
+      "user",
+      "clock"
+    ]
+  },
+  {
+    "include": ["~/.config/waybar/default-modules.jsonc"],
+    "layer": "top",
+    "position": "top",
+    "output": "DP-1",
+    "margin-top": 10,
+    "margin-left": 20,
+    "margin-right": 20,
+    "modules-center": ["hyprland/window"],
+    "modules-left": ["custom/wlogout", "wlr/workspaces"],
+    "modules-right": ["clock", "user"],
+    "clock": {
+      "format": "{:%Y-%m-%d %I:%M %p }"
+    }
+  }
+]

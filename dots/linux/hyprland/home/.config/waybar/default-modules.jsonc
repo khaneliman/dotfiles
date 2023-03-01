@@ -128,11 +128,7 @@
     "critical-threshold": 80,
     "format-critical": "{temperatureC}°C {icon}",
     "format": "{icon} {temperatureC}°C",
-    "format-icons": [
-      "",
-      "",
-      ""
-    ],
+    "format-icons": ["", "", ""],
     "interval": "5"
   },
   "network": {
@@ -151,11 +147,7 @@
     "format": "{icon} {percentage}",
     "format-icons": {
       "mute": "",
-      "default": [
-        "",
-        "",
-        ""
-      ]
+      "default": ["", "", ""]
     },
     "on-click": "pavucontrol"
   },
