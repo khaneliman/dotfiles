@@ -69,13 +69,6 @@ handle_extension() {
 
 	## PDF
 	pdf)
-		pdftoppm -f 1 -l 1 \
-			-scale-to-x 1920 \
-			-scale-to-y -1 \
-			-singlefile \
-			-jpeg -tiffcompression jpeg \
-			-- "${FILE_PATH}" "${IMAGE_CACHE_PATH%.*}" &&
-			exit 6
 		## Preview as text conversion
 		pdftotext -l 10 -nopgbrk -q -- "$FILE_PATH" - |
 			fmt -w "$PV_WIDTH" && exit 5
@@ -154,9 +147,10 @@ handle_image() {
 	local mimetype="${1}"
 	case "$mimetype" in
 	## SVG
-	# image/svg+xml|image/svg)
-	#     convert -- "${FILE_PATH}" "${IMAGE_CACHE_PATH}" && exit 6
-	#     exit 1;;
+	image/svg+xml | image/svg)
+		convert -- "${FILE_PATH}" "${IMAGE_CACHE_PATH}" && exit 6
+		exit 1
+		;;
 
 	## DjVu
 	# image/vnd.djvu)
@@ -180,31 +174,34 @@ handle_image() {
 		exit 7
 		;;
 
-	## Video
-	# video/*)
-	#     # Thumbnail
-	#     ffmpegthumbnailer -i "${FILE_PATH}" -o "${IMAGE_CACHE_PATH}" -s 0 && exit 6
-	#     exit 1;;
+	# Video
+	video/*)
+		# Thumbnail
+		ffmpegthumbnailer -i "${FILE_PATH}" -o "${IMAGE_CACHE_PATH}" -s 0 && exit 6
+		exit 1
+		;;
 
-	## PDF
-	# application/pdf)
-	#     pdftoppm -f 1 -l 1 \
-	#              -scale-to-x "${DEFAULT_SIZE%x*}" \
-	#              -scale-to-y -1 \
-	#              -singlefile \
-	#              -jpeg -tiffcompression jpeg \
-	#              -- "${FILE_PATH}" "${IMAGE_CACHE_PATH%.*}" \
-	#         && exit 6 || exit 1;;
+	# PDF
+	application/pdf)
+		pdftoppm -f 1 -l 1 \
+			-scale-to-x "${DEFAULT_SIZE%x*}" \
+			-scale-to-y -1 \
+			-singlefile \
+			-jpeg -tiffcompression jpeg \
+			-- "${FILE_PATH}" "${IMAGE_CACHE_PATH%.*}" &&
+			exit 6 || exit 1
+		;;
 
 	## ePub, MOBI, FB2 (using Calibre)
-	# application/epub+zip|application/x-mobipocket-ebook|\
-	# application/x-fictionbook+xml)
-	#     # ePub (using https://github.com/marianosimone/epub-thumbnailer)
-	#     epub-thumbnailer "${FILE_PATH}" "${IMAGE_CACHE_PATH}" \
-	#         "${DEFAULT_SIZE%x*}" && exit 6
-	#     ebook-meta --get-cover="${IMAGE_CACHE_PATH}" -- "${FILE_PATH}" \
-	#         >/dev/null && exit 6
-	#     exit 1;;
+	application/epub+zip | application/x-mobipocket-ebook | \
+		application/x-fictionbook+xml)
+		# ePub (using https://github.com/marianosimone/epub-thumbnailer)
+		epub-thumbnailer "${FILE_PATH}" "${IMAGE_CACHE_PATH}" \
+			"${DEFAULT_SIZE%x*}" && exit 6
+		ebook-meta --get-cover="${IMAGE_CACHE_PATH}" -- "${FILE_PATH}" \
+			>/dev/null && exit 6
+		exit 1
+		;;
 
 	## Font
 	application/font* | application/*opentype)
