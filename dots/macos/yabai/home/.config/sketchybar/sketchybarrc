@@ -80,39 +80,25 @@ sketchybar 	--bar 			"${bar_config[@]}"            \
 												"${background_defaults[@]}"   \
 												"${popup_defaults[@]}"
 
-source "$EVENTS_DIR/lock.sh"
-source "$EVENTS_DIR/toggle_stats.sh"
+source "$PLUGIN_DIR/lock/item.sh"
 
 # Left
-source "$ITEM_DIR/apple.sh"
-source "$ITEM_DIR/spaces.sh"
-source "$ITEM_DIR/skhd.sh"
-source "$ITEM_DIR/separator-left.sh"
-source "$ITEM_DIR/front_app.sh"
+source "$PLUGIN_DIR/apple/item.sh"
+source "$PLUGIN_DIR/spaces/item.sh"
+source "$PLUGIN_DIR/skhd/item.sh"
+source "$PLUGIN_DIR/front-app/item.sh"
 
 # Center
 # source "$ITEM_DIR/spotify.sh"
-source "$DYNAMIC_ISLAND_DIR"/item.sh
+source "$DYNAMIC_ISLAND_DIR/item.sh"
 
 # Right
-source "$ITEM_DIR/calendar.sh"
-source "$ITEM_DIR/ical.sh"
-source "$ITEM_DIR/weather.sh"
+source "$PLUGIN_DIR/date/item.sh"
+source "$PLUGIN_DIR/weather/item.sh"
 
-source "$ITEM_DIR/brew.sh"
-source "$ITEM_DIR/github.sh"
+source "$PLUGIN_DIR/control-center/item.sh"
 
-source "$ITEM_DIR/bluetooth.sh"
-source "$ITEM_DIR/wifi.sh"
-source "$ITEM_DIR/battery.sh"
-
-source "$ITEM_DIR/divider.sh"
-
-source "$ITEM_DIR/separator-right.sh"
-
-source "$ITEM_DIR/cpu.sh"
-source "$ITEM_DIR/memory.sh"
-source "$ITEM_DIR/disk.sh"
+source "$PLUGIN_DIR/stats/item.sh"
 
 # Forcing all item scripts to run (never do this outside of sketchybarrc)
 sketchybar --update
