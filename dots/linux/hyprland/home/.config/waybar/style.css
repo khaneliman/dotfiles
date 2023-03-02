@@ -10,12 +10,12 @@
 * */
 * {
   font-family: Liga SFMono Nerd Font;
-  font-size: 14px;
+  font-size: 16px;
+  border-radius: 0.75em;
 }
 
 window#waybar {
   border: 2px solid @surface1;
-  border-radius: 0.5em;
   background: @theme_base_color;
   box-shadow: 1px 1px 10px 10px @mantle;
   color: @theme_text_color;
@@ -54,16 +54,16 @@ box {
 }
 
 /* Primary monitor configuration */
-window.DP-2 .modules-center,
-.modules-right,
+window.DP-2,
+#notifications,
 #workspaces {
   margin: 0.5em;
-  padding: 0 1em;
+  padding-left: 5px;
+  padding-right: 5px;
   color: @peach;
-  background-color: @surface0;
   font-weight: bold;
-  border-radius: 0.5em;
-  border: 1px solid @surface1;
+  background-color: @surface0;
+  border: 2px solid @surface1;
 }
 
 /* Secondary monitor configuration */
@@ -73,20 +73,17 @@ window.DP-1 #workspaces {
 }
 
 /* Wlr/workspaces configuration  */
-
 #window,
 #workspaces {
-  border-radius: 0.5em;
   color: @peach;
 }
 
 #workspaces label {
-  font-size: 1em;
+  font-size: 20px;
 }
 
 #workspaces button {
   padding: 0 0.5em;
-  border-radius: 0.5em;
   background-color: @surface0;
   color: @text;
   margin: 0.25em;
@@ -112,6 +109,9 @@ window.DP-1 #workspaces {
 
 #custom-pipewire,
 #custom-notification,
+#custom-pacman,
+#custom-github,
+#custom-weather,
 #idle_inhibitor,
 #pulseaudio,
 #battery,
@@ -184,8 +184,9 @@ window.DP-1 #workspaces {
   color: @blue;
 }
 
-#custom-separator {
-  font-size: 16px;
+#custom-separator-right,
+#custom-separator-left {
+  font-size: 20px;
   padding-left: 1em;
   padding-right: 1em;
   color: @text;

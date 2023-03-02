@@ -95,7 +95,7 @@
     "tooltip-format-disconnected": "MPD (disconnected)"
   },
   "idle_inhibitor": {
-    "format": "{icon}",
+    "format": "{icon} ",
     "format-icons": {
       "activated": "",
       "deactivated": ""
@@ -107,7 +107,7 @@
   },
   "clock": {
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-    "format": "{:%I:%M %p}",
+    "format": "{:%Y-%m-%d \n %I:%M %p }",
     "format-alt": "{:%Y-%m-%d}"
   },
   "cpu": {
@@ -128,7 +128,11 @@
     "critical-threshold": 80,
     "format-critical": "{temperatureC}°C {icon}",
     "format": "{icon} {temperatureC}°C",
-    "format-icons": ["", "", ""],
+    "format-icons": [
+      "",
+      "",
+      ""
+    ],
     "interval": "5"
   },
   "network": {
@@ -147,7 +151,11 @@
     "format": "{icon} {percentage}",
     "format-icons": {
       "mute": "",
-      "default": ["", "", ""]
+      "default": [
+        "",
+        "",
+        ""
+      ]
     },
     "on-click": "pavucontrol"
   },
@@ -163,13 +171,17 @@
     "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
     // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
   },
-  "custom/separator": {
+  "custom/separator-right": {
     "format": "",
+    "tooltip": false
+  },
+  "custom/separator-left": {
+    "format": "",
     "tooltip": false
   },
   "custom/notification": {
     "tooltip": true,
-    "format": "{} {icon}",
+    "format": "{icon} {}",
     "format-icons": {
       "notification": "<span foreground='red'><sup></sup></span>",
       "none": "",
@@ -186,5 +198,46 @@
     "on-click": "swaync-client -t -sw",
     "on-click-right": "swaync-client -d -sw",
     "escape": true
+  },
+  "custom/pacman": {
+    "format": " {}",
+    "return-type": "json",
+    "interval": 900,
+    "exec": "$HOME/.config/waybar/scripts/pacman.sh",
+    "on-click": "kitty paru; pkill -SIGRTMIN+16 waybar", // update system
+    "signal": 16
+  },
+  "custom/github": {
+    "format": " {}",
+    "return-type": "json",
+    "interval": 60,
+    "exec": "$HOME/.config/waybar/scripts/github.sh",
+    "on-click": "xdg-open https://github.com/notifications"
+  },
+  "custom/weather": {
+    "exec": "$HOME/.config/waybar/scripts/weather.sh $(awk  '{print $0}' ~/wttr_location)",
+    "return-type": "json",
+    "format": "{}",
+    "tooltip": true,
+    "interval": 3600
+  },
+  "group/stats": {
+    "orientation": "horizontal",
+    "modules": [
+      "cpu",
+      "memory",
+      "disk",
+      "temperature"
+    ]
+  },
+  "group/notifications": {
+    "orientation": "horizontal",
+    "modules": [
+      "idle_inhibitor",
+      "custom/pacman",
+      "custom/notification",
+      "custom/github",
+      "custom/pipewire"
+    ]
   }
 }

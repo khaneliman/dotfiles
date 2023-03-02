@@ -1,43 +1,53 @@
 [
   {
-    "include": ["~/.config/waybar/default-modules.jsonc"],
+    "include": [
+      "~/.config/waybar/default-modules.jsonc"
+    ],
     "layer": "top",
     "position": "top",
     "output": "DP-2",
     "margin-top": 10,
     "margin-left": 20,
     "margin-right": 20,
-    "modules-center": ["hyprland/window"],
-    "modules-left": ["custom/wlogout", "wlr/workspaces"],
+    "modules-center": [],
+    "modules-left": [
+      "custom/wlogout",
+      "wlr/workspaces",
+      "custom/separator-left",
+      "hyprland/window"
+    ],
     "modules-right": [
       "tray",
-      "custom/separator",
-      "custom/notification",
-      "idle_inhibitor",
-      "custom/pipewire",
-      "cpu",
-      "memory",
-      "disk",
-      "temperature",
-      "keyboard-state",
+      "custom/separator-right",
+      "group/stats",
+      "custom/separator-right",
+      "group/notifications",
       "hyprland/submap",
-      "user",
+      "custom/weather",
       "clock"
     ]
   },
   {
-    "include": ["~/.config/waybar/default-modules.jsonc"],
+    "include": [
+      "~/.config/waybar/default-modules.jsonc"
+    ],
     "layer": "top",
     "position": "top",
     "output": "DP-1",
     "margin-top": 10,
     "margin-left": 20,
     "margin-right": 20,
-    "modules-center": ["hyprland/window"],
-    "modules-left": ["custom/wlogout", "wlr/workspaces"],
-    "modules-right": ["clock", "user"],
-    "clock": {
-      "format": "{:%Y-%m-%d %I:%M %p }"
-    }
+    "modules-center": [],
+    "modules-left": [
+      "custom/wlogout",
+      "wlr/workspaces",
+      "custom/separator-left",
+      "hyprland/window"
+    ],
+    "modules-right": [
+      "group/notifications",
+      "custom/weather",
+      "clock"
+    ]
   }
 ]
