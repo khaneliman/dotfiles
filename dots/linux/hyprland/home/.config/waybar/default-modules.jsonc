@@ -107,7 +107,7 @@
   },
   "clock": {
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-    "format": "{:%Y-%m-%d \n %I:%M %p }",
+    "format": "{:%a %d, %b \n %I:%M %p }",
     "format-alt": "{:%Y-%m-%d}"
   },
   "cpu": {
@@ -128,11 +128,7 @@
     "critical-threshold": 80,
     "format-critical": "{temperatureC}°C {icon}",
     "format": "{icon} {temperatureC}°C",
-    "format-icons": [
-      "",
-      "",
-      ""
-    ],
+    "format-icons": ["", "", ""],
     "interval": "5"
   },
   "network": {
@@ -151,11 +147,7 @@
     "format": "{icon} {percentage}",
     "format-icons": {
       "mute": "",
-      "default": [
-        "",
-        "",
-        ""
-      ]
+      "default": ["", "", ""]
     },
     "on-click": "pavucontrol"
   },
@@ -199,13 +191,15 @@
     "on-click-right": "swaync-client -d -sw",
     "escape": true
   },
-  "custom/pacman": {
-    "format": " {}",
+  "custom/updates": {
+    "format": "{} {icon}",
     "return-type": "json",
-    "interval": 900,
-    "exec": "$HOME/.config/waybar/scripts/pacman.sh",
-    "on-click": "kitty paru; pkill -SIGRTMIN+16 waybar", // update system
-    "signal": 16
+    "format-icons": {
+      "has-updates": "󱍷",
+      "updated": "󰂪"
+    },
+    "exec-if": "which waybar-module-pacman-updates",
+    "exec": "waybar-module-pacman-updates"
   },
   "custom/github": {
     "format": " {}",
@@ -223,18 +217,13 @@
   },
   "group/stats": {
     "orientation": "horizontal",
-    "modules": [
-      "cpu",
-      "memory",
-      "disk",
-      "temperature"
-    ]
+    "modules": ["cpu", "memory", "disk", "temperature"]
   },
   "group/notifications": {
     "orientation": "horizontal",
     "modules": [
       "idle_inhibitor",
-      "custom/pacman",
+      "custom/updates",
       "custom/notification",
       "custom/github",
       "custom/pipewire"

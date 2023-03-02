@@ -38,16 +38,17 @@
 ### Standard monitor
 
 ![linux-hyprland-tiling](../../../assets/linux/hyprland/tiling.png)
-![linux-hyprland-tiling](../../../assets/linux/hyprland/nvim.png)
-![linux-hyprland-tiling](../../../assets/linux/hyprland/waybar.png)
-![linux-hyprland-tiling](../../../assets/linux/hyprland/drun.png)
-![linux-hyprland-tiling](../../../assets/linux/hyprland/spotlight.png)
-![linux-hyprland-tiling](../../../assets/linux/hyprland/appmenu.png)
-![linux-hyprland-tiling](../../../assets/linux/hyprland/spotify.png)
-![linux-hyprland-tiling](../../../assets/linux/hyprland/discord.png)
+![linux-hyprland-nvim](../../../assets/linux/hyprland/nvim.png)
+![linux-hyprland-notifications](../../../assets/linux/hyprland/notifications.png)
+![linux-hyprland-waybar](../../../assets/linux/hyprland/waybar.png)
+![linux-hyprland-drun](../../../assets/linux/hyprland/drun.png)
+![linux-hyprland-spotlight](../../../assets/linux/hyprland/spotlight.png)
+![linux-hyprland-appmenu](../../../assets/linux/hyprland/appmenu.png)
+![linux-hyprland-spotify](../../../assets/linux/hyprland/spotify.png)
+![linux-hyprland-discord](../../../assets/linux/hyprland/discord.png)
 ![linux-hyprland-wlogout](../../../assets/linux/hyprland/wlogout.png)
 
 ### Ultrawide monitor
 
-![linux-hyprland-tiling](../../../assets/linux/hyprland/tiling-wide.png)
-![linux-hyprland-tiling](../../../assets/linux/hyprland/nvim-wide.png)
+![linux-hyprland-tiling-wide](../../../assets/linux/hyprland/tiling-wide.png)
+![linux-hyprland-nvim-wide](../../../assets/linux/hyprland/nvim-wide.png)
