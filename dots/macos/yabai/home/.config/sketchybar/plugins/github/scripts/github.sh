@@ -3,9 +3,6 @@
 source "$HOME/.config/sketchybar/colors.sh"
 source "$HOME/.config/sketchybar/icons.sh"
 
-NOTIFICATIONS="$(gh api notifications)"
-COUNT="$(echo "$NOTIFICATIONS" | jq 'length')"
-
 render_bar_item() {
 	if [ "$NOTIFICATIONS" = "[]" ]; then
 		args+=(--set "$NAME" icon="$BELL" label="0")
@@ -78,6 +75,9 @@ render_popup() {
 }
 
 update() {
+	NOTIFICATIONS="$(gh api notifications)"
+	COUNT="$(echo "$NOTIFICATIONS" | jq 'length')"
+
 	args=()
 
 	PREV_COUNT=$(sketchybar --query github.bell | jq -r .label.value)
@@ -93,7 +93,13 @@ update() {
 }
 
 popup() {
-	sketchybar --set "$NAME" popup.drawing="$1"
+	PREV_COUNT=$(sketchybar --query github.bell | jq -r .label.value)
+
+	if [[ "$PREV_COUNT" -gt 0 ]]; then         
+    sketchybar --set "$NAME" popup.drawing="$1"
+  else 
+    sketchybar --set "$NAME" popup.drawing=off
+  fi
 }
 
 case "$SENDER" in

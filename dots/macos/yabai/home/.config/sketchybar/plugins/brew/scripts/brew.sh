@@ -4,11 +4,6 @@ source "$HOME/.config/sketchybar/colors.sh"
 source "$HOME/.config/sketchybar/icons.sh"
 source "$HOME/.config/sketchybar/userconfig.sh" # Loads all defined icons
 
-OUTDATED=$(brew outdated)
-COUNT=$(brew outdated | wc -l | tr -d ' ')
-
-COLOR=$RED
-
 render_bar_item() {
 	case "$COUNT" in
 	[3-5][0-9])
@@ -36,7 +31,6 @@ add_outdated_header() {
 		                  label.align=left                    \
 		                  icon.drawing=off                    \
 		                  click_script="sketchybar --set $NAME popup.drawing=off"
-
 }
 
 render_popup() {
@@ -64,11 +58,13 @@ render_popup() {
 		COUNTER=$((COUNTER + 1))
 
 	done <<<"$(echo -e "$OUTDATED")"
-
-	# sketchybar -m "${args[@]}" > /dev/null
 }
 
 update() {
+	COLOR=$RED
+	"$(brew update)"
+	OUTDATED=$(brew outdated)
+	COUNT=$(echo -n "$OUTDATED" | wc -c | tr -d ' ')
 
 	PREV_COUNT=$(sketchybar --query brew | jq -r .popup.items | grep ".package*" -c)
 
@@ -81,11 +77,14 @@ update() {
 }
 
 popup() {
-	if [ "$COUNT" -gt 0 ]; then
-		sketchybar --set "$NAME" popup.drawing="$1"
-	else
-		sketchybar --set "$NAME" popup.drawing=off
-	fi
+	PREV_COUNT=$(sketchybar --query brew | jq -r .popup.items | grep ".package*" -c)
+	
+	if [[ "$PREV_COUNT" -gt 0 ]]; then         
+    sketchybar --set "$NAME" popup.drawing="$1"
+  else 
+    sketchybar --set "$NAME" popup.drawing=off
+  fi
+
 }
 
 case "$SENDER" in
