@@ -37,34 +37,30 @@ render_popup() {
 	add_outdated_header
 
 	COUNTER=0
+	sketchybar -m --remove '/brew.package\.*/'
 
-	if [ "$COUNT" -lt "$PREV_COUNT" ]; then
-		sketchybar -m --remove '/brew.package\.*/'
+	if [[ -n "$OUTDATED" ]]; then
+		while IFS= read -r package; do
+
+			sketchybar -m --add item brew.package."$COUNTER"\
+													popup."$NAME"               \
+			                  	label="$(echo "$package")"  \
+			                  	label.align=right           \
+			                  	label.padding_left=20       \
+			                  	icon="$COUNT : $PREV_COUNT" \
+			                  	icon.drawing=off            \
+			                  	click_script="sketchybar --set $NAME popup.drawing=off"
+			COUNTER=$((COUNTER + 1))
+
+		done <<<"$(echo -n "$OUTDATED" | grep '^')"
 	fi
-
-	while IFS= read -r package; do
-
-		if [ "$COUNT" -gt "$PREV_COUNT" ]; then
-			sketchybar -m --add item brew.package."$COUNTER" popup."$NAME"
-		fi
-
-		sketchybar -m --set brew.package."$COUNTER"     \
-			                  label="$(echo "$package")"  \
-			                  label.align=right           \
-			                  label.padding_left=20       \
-			                  icon="$COUNT : $PREV_COUNT" \
-			                  icon.drawing=off            \
-			                  click_script="sketchybar --set $NAME popup.drawing=off"
-		COUNTER=$((COUNTER + 1))
-
-	done <<<"$(echo -e "$OUTDATED")"
 }
 
 update() {
-	COLOR=$RED
 	"$(brew update)"
+	COLOR=$RED
 	OUTDATED=$(brew outdated)
-	COUNT=$(echo -n "$OUTDATED" | wc -c | tr -d ' ')
+	COUNT=$(echo -n "$OUTDATED" | grep -c '^')
 
 	PREV_COUNT=$(sketchybar --query brew | jq -r .popup.items | grep ".package*" -c)
 
