@@ -68,6 +68,7 @@ mac_backup_existing() {
 	backup_files "$HOME"/.hammerspoon "$BACKUP_LOCATION"/
 	backup_files "$HOME"/.gitconfig.local "$BACKUP_LOCATION"/
 	backup_files "$HOME/Application Support/Firefox/Profiles/" "$BACKUP_LOCATION"/Application Support/Firefox/Profiles/
+	backup_files "$HOME/Application Support/BetterDiscord/" "$BACKUP_LOCATION"/Application Support/
 }
 
 mac_copy_configuration() {
@@ -86,6 +87,7 @@ mac_copy_configuration() {
 	link_locations "$MAC_HOME"/.config/sketchybar "$HOME"/.config/sketchybar
 	link_locations "$MAC_HOME"/.config/skhd "$HOME"/.config/skhd
 	link_locations "$MAC_HOME"/.config/yabai "$HOME"/.config/yabai
+	link_locations "$MAC_HOME"/.config/BetterDiscord "$HOME/Library/Application Support/BetterDiscord"
 
 	link_locations "$MAC_HOME"/.local/bin/helper "$HOME"/.local/bin/helper
 	link_locations "$MAC_HOME"/.local/share/fastfetch/presets/local-overrides "$HOME"/.local/share/fastfetch/presets/local-overrides
