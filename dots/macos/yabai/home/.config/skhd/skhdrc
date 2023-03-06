@@ -54,10 +54,10 @@ default < cmd + ctrl - 7 : yabai -m space --focus 7
 default < cmd + ctrl - 8 : yabai -m space --focus 8 
 
 # Window Navigation (through display borders): 
-default < lalt - h    : yabai -m window --focus west  || yabai -m display --focus west
-default < lalt - j    : yabai -m window --focus south || yabai -m display --focus south
-default < lalt - k    : yabai -m window --focus north || yabai -m display --focus north
-default < lalt - l    : yabai -m window --focus east  || yabai -m display --focus east
+default < lalt - h : yabai -m window --focus west  || yabai -m display --focus west
+default < lalt - j : yabai -m window --focus south || yabai -m display --focus south
+default < lalt - k : yabai -m window --focus north || yabai -m display --focus north
+default < lalt - l : yabai -m window --focus east  || yabai -m display --focus east
 
 ## Window Movement (shift + lalt - ...)
 # Moving windows in spaces:
@@ -92,10 +92,10 @@ default < shift + lalt - y : yabai -m space --mirror y-axis
 
 ## Stacks (shift + ctrl - ...)
 # Add the active window to the window or stack to the {direction}: shift + ctrl - {j, k, l, ö}
-default < shift + ctrl - h    : yabai -m window  west --stack $(yabai -m query --windows --window | jq -r '.id'); sketchybar --trigger window_focus
-default < shift + ctrl - j    : yabai -m window south --stack $(yabai -m query --windows --window | jq -r '.id'); sketchybar --trigger window_focus
-default < shift + ctrl - k    : yabai -m window north --stack $(yabai -m query --windows --window | jq -r '.id'); sketchybar --trigger window_focus
-default < shift + ctrl - l    : yabai -m window  east --stack $(yabai -m query --windows --window | jq -r '.id'); sketchybar --trigger window_focus
+default < shift + ctrl - h : yabai -m window  west --stack $(yabai -m query --windows --window | jq -r '.id'); sketchybar --trigger window_focus
+default < shift + ctrl - j : yabai -m window south --stack $(yabai -m query --windows --window | jq -r '.id'); sketchybar --trigger window_focus
+default < shift + ctrl - k : yabai -m window north --stack $(yabai -m query --windows --window | jq -r '.id'); sketchybar --trigger window_focus
+default < shift + ctrl - l : yabai -m window  east --stack $(yabai -m query --windows --window | jq -r '.id'); sketchybar --trigger window_focus
 
 # Stack Navigation: shift + ctrl - {n, p}
 default < shift + ctrl - n : yabai -m window --focus stack.next
@@ -105,10 +105,10 @@ default < shift + ctrl - left : yabai -m window --focus stack.prev
 
 ## Resize (ctrl + lalt - ...)
 # Resize windows: ctrl + lalt - {j, k, l, ö}
-default < ctrl + lalt - h    : yabai -m window --resize right:-100:0 || yabai -m window --resize left:-100:0
-default < ctrl + lalt - j    : yabai -m window --resize bottom:0:100 || yabai -m window --resize top:0:100
-default < ctrl + lalt - k    : yabai -m window --resize bottom:0:-100 || yabai -m window --resize top:0:-100
-default < ctrl + lalt - l    : yabai -m window --resize right:100:0 || yabai -m window --resize left:100:0
+default < ctrl + lalt - h : yabai -m window --resize right:-100:0 || yabai -m window --resize left:-100:0
+default < ctrl + lalt - j : yabai -m window --resize bottom:0:100 || yabai -m window --resize top:0:100
+default < ctrl + lalt - k : yabai -m window --resize bottom:0:-100 || yabai -m window --resize top:0:-100
+default < ctrl + lalt - l : yabai -m window --resize right:100:0 || yabai -m window --resize left:100:0
 
 # Equalize size of windows: ctrl + lalt - e
 default < ctrl + lalt - e : yabai -m space --balance
