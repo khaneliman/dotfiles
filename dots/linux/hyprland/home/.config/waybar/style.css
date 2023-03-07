@@ -122,6 +122,11 @@ window.DP-1 #workspaces {
   padding: 0 0.5em;
 }
 
+#custom-updates.updated {
+  padding-left: 0;
+  padding-right: 1em;
+}
+
 /* Unique colors for modules */
 #cpu {
   color: @red;
