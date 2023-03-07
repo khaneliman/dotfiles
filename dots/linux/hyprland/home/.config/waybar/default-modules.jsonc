@@ -132,8 +132,9 @@
     "interval": "5"
   },
   "network": {
-    "format-wifi": " {essid} ({signalStrength}%)",
-    "format-ethernet": " {ipaddr}",
+    "interval": 1,
+    "format-wifi": "  󰜮 {bandwidthDownBytes} 󰜷 {bandwidthUpBytes}",
+    "format-ethernet": "  󰜮 {bandwidthDownBytes} 󰜷 {bandwidthUpBytes}",
     "tooltip-format": " {ifname} via {gwaddr}",
     "format-linked": " {ifname} (No IP)",
     "format-disconnected": " Disconnected",
@@ -211,7 +212,7 @@
   },
   "group/stats": {
     "orientation": "horizontal",
-    "modules": ["cpu", "memory", "disk", "temperature"]
+    "modules": ["network", "cpu", "memory", "disk", "temperature"]
   },
   "group/notifications": {
     "orientation": "horizontal",
