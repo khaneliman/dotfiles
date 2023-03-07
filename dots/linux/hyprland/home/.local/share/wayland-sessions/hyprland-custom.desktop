@@ -1,5 +1,0 @@
-[Desktop Entry]
-Name=Hyprland (Custom)
-Comment=An intelligent dynamic tiling Wayland compositor (Custom fixes)
-Exec=/usr/local/bin/Hyprland-custom
-Type=Application

@@ -1,5 +1,44 @@
+#
+# ░█▀▀░█░░░█▀█░█▀▄░█▀█░█░░
+# ░█░█░█░░░█░█░█▀▄░█▀█░█░░
+# ░▀▀▀░▀▀▀░▀▀▀░▀▀░░▀░▀░▀▀▀
+#
+# Dotfiles project
 **/*.tmp*
 setup.conf
+install.log
+
+# Folder view configuration files
+.DS_Store
+Desktop.ini
+
+# Thumbnail cache files
+._*
+Thumbs.db
+
+# Files that might appear on external disks
+.Spotlight-V100
+.Trashes
+
+# Compiled Python files
+**/__pycache__/*
+*.pyc
+
+# Compiled C++ files
+*.out
+
+# Application specific files
+venv
+node_modules
+.sass-cache
+
+.idea*
+
+#
+# ░█▀▀░█░█░█▀█░█▀▄░█▀▀░█▀▄
+# ░▀▀█░█▀█░█▀█░█▀▄░█▀▀░█░█
+# ░▀▀▀░▀░▀░▀░▀░▀░▀░▀▀▀░▀▀░
+#
 /dots/shared/home/.config/fish/completions
 /dots/shared/home/.config/fish/functions
 !/dots/shared/home/.config/fish/functions/bak.fish
@@ -20,14 +59,24 @@ setup.conf
 /dots/shared/home/.config/spicetify/Extracted/**/*
 /dots/shared/home/.config/spicetify/Backup/**/*
 /dots/shared/home/.ssh/id_rsa*
-/scripts/os/mac/Brewfile.lock.json
-scripts/os/user_path_bak.txt
-install.log
-dots/linux/hyprland/home/.config/rofi/spotlight/history.txt
-dots/linux/hyprland/home/.config/OpenRGB/logs
-dots/linux/hyprland/home/.config/OpenRGB/logs
 dots/shared/home/.config/kitty/macos.kitty.conf
 dots/shared/home/.config/alacritty/local.alacritty.yml
 dots/shared/home/.local/share/fastfetch/presets/local-overrides
 dots/shared/home/.config/btop/btop.log
 dots/shared/home/.gnupg/random_seed
+
+#
+# ░█▄█░█▀█░█▀▀░█▀█░█▀▀░░
+# ░█░█░█▀█░█░░░█░█░▀▀█░░
+# ░▀░▀░▀░▀░▀▀▀░▀▀▀░▀▀▀░░
+#
+/scripts/os/mac/Brewfile.lock.json
+
+#
+# ░█░░░▀█▀░█▀█░█░█░█░█░░
+# ░█░░░░█░░█░█░█░█░▄▀▄░░
+# ░▀▀▀░▀▀▀░▀░▀░▀▀▀░▀░▀░░
+#
+dots/linux/hyprland/home/.config/rofi/spotlight/history.txt
+dots/linux/hyprland/home/.config/OpenRGB/logs
+

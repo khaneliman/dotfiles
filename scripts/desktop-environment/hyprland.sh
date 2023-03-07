@@ -4,16 +4,19 @@
 # ░█▀█░░█░░█▀▀░█▀▄░█░░░█▀█░█░█░█░█░░░█░░░█░█░█░█░█▀▀░░█░░█░█
 # ░▀░▀░░▀░░▀░░░▀░▀░▀▀▀░▀░▀░▀░▀░▀▀░░░░▀▀▀░▀▀▀░▀░▀░▀░░░▀▀▀░▀▀▀
 #
-
 #github-action genshdoc
 #
 # @file Hyprland custom script
 # @brief Contains the functions used to configure and theme Hyprland window manager
 # @stdout Output routed to install.log
 # @stderror Output routed to install.log
-
 HYPR_HOME="$DOTS_DIR"/linux/hyprland/home
 
+#
+# ░█▀█░█▀▄░█▀▀░█▀█
+# ░█▀▀░█▀▄░█▀▀░█▀▀
+# ░▀░░░▀░▀░▀▀▀░▀░░
+#
 hypr_backup_existing() {
 	message "Backing up existing dotfiles to $BACKUP_LOCATION"
 
@@ -42,28 +45,21 @@ hypr_backup_existing() {
 	backup_files "$HOME"/.gtkrc-2.0 "$BACKUP_LOCATION"
 }
 
+#
+# ░█▀▀░█▀█░█▀█░█▀▀░▀█▀░█▀▀░█░█░█▀▄░█▀█░▀█▀░▀█▀░█▀█░█▀█
+# ░█░░░█░█░█░█░█▀▀░░█░░█░█░█░█░█▀▄░█▀█░░█░░░█░░█░█░█░█
+# ░▀▀▀░▀▀▀░▀░▀░▀░░░▀▀▀░▀▀▀░▀▀▀░▀░▀░▀░▀░░▀░░▀▀▀░▀▀▀░▀░▀
+#
+#
 hypr_create_symlink() {
 	message "Creating sym links for hyprland files"
 
-	sudo ln -s -f "$HOME"/.local/share/wlroots-env/ /usr/local/share/
-	sudo ln -s -f "$HOME"/.config/waybar/ /usr/local/share/
-	sudo ln -s -f "$HOME"/.local/bin/Hyprland-custom /usr/local/bin/
 	sudo ln -s -f "$HOME"/.local/bin/xdg-desktop-portal.sh /usr/local/bin/
 	sudo ln -s -f "$HOME"/.local/bin/hyprland_setup_dual_monitors.sh /usr/local/bin
 	sudo ln -s -f "$HOME"/.local/bin/hyprland_cleanup_after_startup.s /usr/local/binh
 	sudo ln -s -f "$HOME"/.local/bin/hyprland_handle_monitor_connect.sh /usr/local/bin
 
 	success_message "Successfully created Hyprland launcher symlinks"
-}
-
-hypr_enable_systemd_services() {
-	message "Enabling user systemd services for hyprland"
-
-	systemctl --user enable --now hypr-waybar.service
-	systemctl --user enable --now waybar-config.path
-	systemctl --user enable --now hypr-swayidle.service
-	systemctl --user enable --now hyprpaper.service
-	systemctl --user enable --now hyprland-desktop-portal.service
 }
 
 hypr_copy_configuration() {
@@ -73,7 +69,6 @@ hypr_copy_configuration() {
 	copy_files "$HYPR_HOME"/.local/ "$HOME"/
 	copy_files "$HYPR_HOME"/.themes/ "$HOME"/
 	copy_files "$HYPR_HOME"/.screenlayout/ "$HOME"/
-	copy_files "$HYPR_HOME"/.config/systemd/ "$HOME"/.config/
 
 	# symlinks for stuff replaced completely
 	link_locations "$HYPR_HOME"/.config/Kvantum "$HOME"/.config/Kvantum
@@ -100,11 +95,6 @@ hypr_copy_configuration() {
 
 	link_locations "$HYPR_HOME"/.gitconfig.local "$HOME"/.gitconfig.local
 	link_locations "$HYPR_HOME"/.gtkrc-2.0 "$HOME"/.gtkrc-2.0
-
-	# copy desktop file for display manager
-	sudo mkdir -p /usr/share/wayland-sessions/
-	sudo cp "$DOTS_DIR"/linux/hyprland/usr/share/wayland-sessions/hyprland-custom.desktop /usr/share/wayland-sessions/
-	success_message "Successfully copied Hyprland login manager file"
 }
 
 hyprland_install() {
@@ -112,7 +102,6 @@ hyprland_install() {
 
 	hypr_copy_configuration
 	hypr_create_symlink
-	# hypr_enable_systemd_services # if you'd like systemd services
 
 	cat_theme_all
 }

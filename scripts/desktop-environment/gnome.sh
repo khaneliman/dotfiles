@@ -12,12 +12,22 @@
 # @stdout Output routed to install.log
 # @stderror Output routed to install.log
 
+#
+# ░█▀█░█▀▄░█▀▀░█▀█
+# ░█▀▀░█▀▄░█▀▀░█▀▀
+# ░▀░░░▀░▀░▀▀▀░▀░░
+#
 gnome_backup_existing() {
 	message "Backing up dconf to $BACKUP_LOCATION"
 
 	dconf dump / >"$BACKUP_LOCATION"/"$(cat /etc/hostname)".dconf
 }
 
+#
+# ░█▀▀░█▀█░█▀█░█▀▀░▀█▀░█▀▀░█░█░█▀▄░█▀█░▀█▀░▀█▀░█▀█░█▀█
+# ░█░░░█░█░█░█░█▀▀░░█░░█░█░█░█░█▀▄░█▀█░░█░░░█░░█░█░█░█
+# ░▀▀▀░▀▀▀░▀░▀░▀░░░▀▀▀░▀▀▀░▀▀▀░▀░▀░▀░▀░░▀░░▀▀▀░▀▀▀░▀░▀
+#
 gnome_copy_configuration() {
 	message "Copying config files for gnome"
 
