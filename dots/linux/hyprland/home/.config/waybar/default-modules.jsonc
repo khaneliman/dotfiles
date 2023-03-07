@@ -139,17 +139,11 @@
     "format-disconnected": " Disconnected",
     "format-alt": "{ifname}: {ipaddr}/{cidr}"
   },
-  "custom/pipewire": {
-    "exec": "pw-volume status",
-    "return-type": "json",
-    "interval": "once",
-    "signal": 8,
-    "format": "{icon} {percentage}",
-    "format-icons": {
-      "mute": "",
-      "default": ["", "", ""]
-    },
-    "on-click": "pavucontrol"
+  "wireplumber": {
+    "format": "{volume}% {icon}",
+    "format-muted": "",
+    "on-click": "helvum",
+    "format-icons": ["", "", ""]
   },
   "custom/media": {
     "format": "{icon} {}",
@@ -226,7 +220,7 @@
       "custom/updates",
       "custom/notification",
       "custom/github",
-      "custom/pipewire"
+      "wireplumber"
     ]
   }
 }

@@ -107,13 +107,12 @@ window.DP-1 #workspaces {
   padding: 0 1em;
 }
 
-#custom-pipewire,
 #custom-notification,
 #custom-updates,
 #custom-github,
 #custom-weather,
 #idle_inhibitor,
-#pulseaudio,
+#wireplumber,
 #battery,
 #cpu,
 #memory,
