@@ -87,9 +87,9 @@ yabai -m config "${MOUSE[@]}"
 LABELS=(
 	main
 	comms
-	productivity
 	code
 	ref
+	productivity
 	media
 	vm
 	misc

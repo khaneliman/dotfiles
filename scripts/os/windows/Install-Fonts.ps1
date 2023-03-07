@@ -1,5 +1,10 @@
 using module Message
 
+#
+# ░█▀▀░█▀█░█▀█░▀█▀░█▀▀
+# ░█▀▀░█░█░█░█░░█░░▀▀█
+# ░▀░░░▀▀▀░▀░▀░░▀░░▀▀▀
+#
 # # Windows font variables
 $FONTS = 0x14
 $objShell = New-Object -ComObject Shell.Application
@@ -42,7 +47,8 @@ for ( $i = 0; $i -lt $args.count; $i++ )
                 Write-Message  -Message "    Installing $name"
                 $objFolder.CopyHere($File.fullname)
                 Write-Message -Type SUCCESS -Message "  Successfully installed $name"
-            } else {
+            } else
+            {
                 Write-Message -Type WARNING -Message "    Font $name already installed. Skipping..."
             }
         }

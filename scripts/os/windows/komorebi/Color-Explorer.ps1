@@ -1,6 +1,11 @@
 using module Message
 using module RegistryEntry
 
+#
+# ░▀█▀░█░█░█▀▀░█▄█░▀█▀░█▀█░█▀▀
+# ░░█░░█▀█░█▀▀░█░█░░█░░█░█░█░█
+# ░░▀░░▀░▀░▀▀▀░▀░▀░▀▀▀░▀░▀░▀▀▀
+#
 ##
 # Explorer Accent Reg Path
 # [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Accent]

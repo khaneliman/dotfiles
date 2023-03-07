@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 #github-action genshdoc
 #
+# ░▀█▀░█▀█░█▀▀░▀█▀░█▀█░█░░░█░░░█▀█░▀█▀░▀█▀░█▀█░█▀█░░░░░█░█░█▀▀░█░░░█▀█░█▀▀░█▀▄
+# ░░█░░█░█░▀▀█░░█░░█▀█░█░░░█░░░█▀█░░█░░░█░░█░█░█░█░░░░░█▀█░█▀▀░█░░░█▀▀░█▀▀░█▀▄
+# ░▀▀▀░▀░▀░▀▀▀░░▀░░▀░▀░▀▀▀░▀▀▀░▀░▀░░▀░░▀▀▀░▀▀▀░▀░▀░░░░░▀░▀░▀▀▀░▀▀▀░▀░░░▀▀▀░▀░▀
+#
 # @file Installer Helper
 # @brief Contains the functions used to facilitate the installer
 # @stdout Output routed to install.log

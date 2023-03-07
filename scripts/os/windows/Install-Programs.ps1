@@ -4,12 +4,17 @@ using module Message
 
 $env:PSModulePath = "$PSHOME/Modules\"+";$SCRIPTS_DIR/os/windows/modules";
 
+#
+# ░█▀▀░█▀▀░█▀█░█▀█░█▀█░░░█▀█░█▀█░█▀█░█▀▀
+# ░▀▀█░█░░░█░█░█░█░█▀▀░░░█▀█░█▀▀░█▀▀░▀▀█
+# ░▀▀▀░▀▀▀░▀▀▀░▀▀▀░▀░░░░░▀░▀░▀░░░▀░░░▀▀▀
+#
 ## 
 # Install scoop
 ##
 if (!(Test-Path -Path "$($env:USERPROFILE)/scoop/shims/scoop" -PathType Leaf))
 {
-    irm get.scoop.sh | iex
+    Invoke-RestMethod get.scoop.sh | Invoke-Expression
 } else
 {
     Write-Host ""
@@ -47,6 +52,11 @@ if (Test-CommandExists scoop)
     Write-Message -Type WARNING  -Message "    Scoop not installed. Skipping scoop installs..."
 }
 
+#
+# ░█░█░▀█▀░█▀█░█▀▀░█▀▀░▀█▀░░░█▀█░█▀█░█▀█░█▀▀
+# ░█▄█░░█░░█░█░█░█░█▀▀░░█░░░░█▀█░█▀▀░█▀▀░▀▀█
+# ░▀░▀░▀▀▀░▀░▀░▀▀▀░▀▀▀░░▀░░░░▀░▀░▀░░░▀░░░▀▀▀
+#
 ##
 # Install winget
 # https://github.com/microsoft/winget-cli/

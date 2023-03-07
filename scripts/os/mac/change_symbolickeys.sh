@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
-
+#
+# ░█▀▀░█░█░█▀█░█▀▄░▀█▀░█▀▀░█░█░▀█▀░█▀▀
+# ░▀▀█░█▀█░█░█░█▀▄░░█░░█░░░█░█░░█░░▀▀█
+# ░▀▀▀░▀░▀░▀▀▀░▀░▀░░▀░░▀▀▀░▀▀▀░░▀░░▀▀▀
+#
 mac_change_symbolickeys() {
 
 	message "Removing default mission control hostkeys"

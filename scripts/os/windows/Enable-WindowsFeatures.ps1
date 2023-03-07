@@ -1,6 +1,12 @@
 using module Message
 using module ElevateScript
 
+#
+# ░█░█░▀█▀░█▀█░█▀▄░█▀█░█░█░█▀▀░░░█▀▀░█▀▀░█▀█░▀█▀░█░█░█▀▄░█▀▀░█▀▀
+# ░█▄█░░█░░█░█░█░█░█░█░█▄█░▀▀█░░░█▀▀░█▀▀░█▀█░░█░░█░█░█▀▄░█▀▀░▀▀█
+# ░▀░▀░▀▀▀░▀░▀░▀▀░░▀▀▀░▀░▀░▀▀▀░░░▀░░░▀▀▀░▀░▀░░▀░░▀▀▀░▀░▀░▀▀▀░▀▀▀
+#
+
 if (([Version](Get-CimInstance Win32_OperatingSystem).version).Major -lt 10)
 {
     Write-Message -Type ERROR -Message "The DeveloperMode is only supported on Windows 10"
@@ -17,7 +23,8 @@ if (! (Test-Path -Path $RegistryKeyPath))
 {
     Write-Message -Message "Enable installing unsigned apps"
     New-Item -Path $RegistryKeyPath -ItemType Directory -Force
-} else {
+} else
+{
     Write-Message -Type WARNING -Message "AppModelUnlock already set. Skipping.."
 }
 
@@ -26,7 +33,8 @@ if (! (Get-ItemProperty -Path $RegistryKeyPath | Select -ExpandProperty AllowDev
     # Add registry value to enable Developer Mode
     Write-Message -Message "Enable developer mode"
     New-ItemProperty -Path $RegistryKeyPath -Name AllowDevelopmentWithoutDevLicense -PropertyType DWORD -Value 1
-} else {
+} else
+{
     Write-Message -Type WARNING -Message "Dev mode already enabled. Skipping.."
 }
 
@@ -35,7 +43,8 @@ if ($feature -and ($feature.State -eq "Disabled"))
 {
     Write-Message -Message "Enable WSL"
     Enable-WindowsOptionalFeature -FeatureName Microsoft-Windows-Subsystem-Linux -Online -All -LimitAccess -NoRestart
-} else {
+} else
+{
     Write-Message -Type WARNING -Message "WSL already enabled. Skipping.."
 }
 
@@ -44,7 +53,8 @@ if ($feature -and ($feature.State -eq "Disabled"))
 {
     Write-Message -Message "Enable Virtual Machine Platform"
     Enable-WindowsOptionalFeature -FeatureName VirtualMachinePlatform -Online -All -LimitAccess -NoRestart
-} else {
+} else
+{
     Write-Message -Type WARNING -Message "Virtual Machine Platform already enabled. Skipping.."
 }
 
@@ -53,6 +63,7 @@ if ($feature -and ($feature.State -eq "Disabled"))
 {
     Write-Message -Message "Enable Hyper-V"
     Enable-WindowsOptionalFeature -FeatureName Microsoft-Hyper-V -Online -All -LimitAccess -NoRestart
-} else {
+} else
+{
     Write-Message -Type WARNING -Message "Hyper-V already enabled. Skipping.."
 }

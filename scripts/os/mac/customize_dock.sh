@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
-
+#
+# ░█▀▄░█▀█░█▀▀░█░█░░░█▀▀░█▀█░█▀█░█▀▀░▀█▀░█▀▀
+# ░█░█░█░█░█░░░█▀▄░░░█░░░█░█░█░█░█▀▀░░█░░█░█
+# ░▀▀░░▀▀▀░▀▀▀░▀░▀░░░▀▀▀░▀▀▀░▀░▀░▀░░░▀▀▀░▀▀▀
+#
 create_items() {
 
 	large_blank='{tile-data={}; tile-type="spacer-tile";}'
@@ -51,7 +55,7 @@ create_items() {
 	discord=$(dock_item "/Applications/Discord.app")
 
 }
-#
+
 dock_item() {
 	printf "<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>%s</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>" "$1"
 }

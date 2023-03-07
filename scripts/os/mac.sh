@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
-
+#
+# ░█▄█░█▀█░█▀▀░█▀█░█▀▀░░░█▀▀░█▀█░█▀█░█▀▀░▀█▀░█▀▀░█▀▀
+# ░█░█░█▀█░█░░░█░█░▀▀█░░░█░░░█░█░█░█░█▀▀░░█░░█░█░▀▀█
+# ░▀░▀░▀░▀░▀▀▀░▀▀▀░▀▀▀░░░▀▀▀░▀▀▀░▀░▀░▀░░░▀▀▀░▀▀▀░▀▀▀
+#
 MAC_HOME="$DOTS_DIR"/macos/yabai/home
 
 for filename in "$SCRIPTS_DIR"/os/mac/*.sh; do
@@ -7,56 +11,11 @@ for filename in "$SCRIPTS_DIR"/os/mac/*.sh; do
 	source "$filename"
 done
 
-1password_ssh_link() {
-	if [[ -d "$HOME"/Library/Group\ Containers/2BUA8C4S2C.com.1password/ ]]; then
-		message "Linking 1password ssh agent to home folder..."
-		mkdir -p "$HOME"/.1password && link_locations "$HOME"/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock "$HOME"/.1password/agent.sock
-		success_message "1password ssh agent linked up"
-	else
-		warning_message "1password not installed. Skipping linking ssh agent..."
-	fi
-}
-
-brew_install() {
-	# Install Brew
-	if (! command -v brew); then
-		message "Installing Brew..."
-		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-	else
-		warning_message "Brew already installed. Skipping..."
-	fi
-
-	brew analytics off
-}
-
-bundle_install() {
-	if (command -v brew); then
-		message "Installing taps, brews, casks, and apps... "
-		brew bundle --file "$HOME"/.Brewfile
-	else
-		warning_message "Brew not installed! Skipping apps..."
-	fi
-}
-
-enable_brew_servies() {
-	# Start Services
-	if (command -v brew); then
-		message "Starting Services (grant permissions)..."
-		brew services start skhd
-		brew services start yabai
-		brew services start sketchybar
-	else
-		warning_message "Brew not installed! Skipping enabling services..."
-	fi
-}
-
-install_fonts() {
-	# macOS Fonts aren't read from "$HOME"/.fonts and symbolic links dont work, need to move to "$HOME"/Library/Fonts
-	message "Installing fonts..."
-	sudo mv "$HOME"/.fonts/* "$HOME"/Library/Fonts/
-	success_message "Fonts installed"
-}
-
+#
+# ░█▀▄░█▀█░█▀▀░█░█░█░█░█▀█
+# ░█▀▄░█▀█░█░░░█▀▄░█░█░█▀▀
+# ░▀▀░░▀░▀░▀▀▀░▀░▀░▀▀▀░▀░░
+#
 mac_backup_existing() {
 	message "Backing up existing dotfiles to $BACKUP_LOCATION"
 
@@ -71,6 +30,54 @@ mac_backup_existing() {
 	backup_files "$HOME/Application Support/BetterDiscord/" "$BACKUP_LOCATION"/Application Support/
 }
 
+#
+# ░█▀█░█▀▄░█▀▀░█▀█
+# ░█▀▀░█▀▄░█▀▀░█▀▀
+# ░▀░░░▀░▀░▀▀▀░▀░░
+#
+brew_install() {
+	# Install Brew
+	if (! command -v brew); then
+		message "Installing Brew..."
+		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+	else
+		warning_message "Brew already installed. Skipping..."
+	fi
+
+	brew analytics off
+}
+
+#
+# ░█▀▀░█▀█░█▀█░▀█▀░█▀▀
+# ░█▀▀░█░█░█░█░░█░░▀▀█
+# ░▀░░░▀▀▀░▀░▀░░▀░░▀▀▀
+#
+install_fonts() {
+	# macOS Fonts aren't read from "$HOME"/.fonts and symbolic links dont work, need to move to "$HOME"/Library/Fonts
+	message "Installing fonts..."
+	sudo mv "$HOME"/.fonts/* "$HOME"/Library/Fonts/
+	success_message "Fonts installed"
+}
+
+#
+# ░█▀▀░█▀█░█▀▀░▀█▀░█░█░█▀█░█▀▄░█▀▀
+# ░▀▀█░█░█░█▀▀░░█░░█▄█░█▀█░█▀▄░█▀▀
+# ░▀▀▀░▀▀▀░▀░░░░▀░░▀░▀░▀░▀░▀░▀░▀▀▀
+#
+bundle_install() {
+	if (command -v brew); then
+		message "Installing taps, brews, casks, and apps... "
+		brew bundle --file "$HOME"/.Brewfile
+	else
+		warning_message "Brew not installed! Skipping apps..."
+	fi
+}
+
+#
+# ░█▀▀░█▀█░█▀█░█▀▀░▀█▀░█▀▀░█░█░█▀▄░█▀█░▀█▀░▀█▀░█▀█░█▀█
+# ░█░░░█░█░█░█░█▀▀░░█░░█░█░█░█░█▀▄░█▀█░░█░░░█░░█░█░█░█
+# ░▀▀▀░▀▀▀░▀░▀░▀░░░▀▀▀░▀▀▀░▀▀▀░▀░▀░▀░▀░░▀░░▀▀▀░▀▀▀░▀░▀
+#
 mac_copy_configuration() {
 	message "Installing config files..."
 	# copy home folder dotfiles if you dont want to use symlinks
@@ -103,6 +110,53 @@ mac_copy_configuration() {
 	copy_files "$HOME"/.config/Caprine/ "$HOME/Application Support/Caprine/"
 }
 
+1password_ssh_link() {
+	if [[ -d "$HOME"/Library/Group\ Containers/2BUA8C4S2C.com.1password/ ]]; then
+		message "Linking 1password ssh agent to home folder..."
+		mkdir -p "$HOME"/.1password && link_locations "$HOME"/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock "$HOME"/.1password/agent.sock
+		success_message "1password ssh agent linked up"
+	else
+		warning_message "1password not installed. Skipping linking ssh agent..."
+	fi
+}
+
+enable_brew_servies() {
+	# Start Services
+	if (command -v brew); then
+		message "Starting Services (grant permissions)..."
+		brew services start skhd
+		brew services start yabai
+		brew services start sketchybar
+	else
+		warning_message "Brew not installed! Skipping enabling services..."
+	fi
+}
+
+set_wallpapers() {
+	if [[ $(command -v yabai) ]]; then
+		message "Setting wallpapers for each desktop"
+
+		LOCAL_WALLPAPERS="$(realpath "$HOME"/.local/share/wallpapers/catppuccin)"
+
+		yabai -m space --focus 1
+
+		i=0
+
+		for file in "$LOCAL_WALLPAPERS"/*.png; do
+			((i = i + 1))
+			echo "Setting wallpaper on space $i to $file..."
+			# take action on each file. $f store current file name
+			osascript -e 'tell application "Finder" to set desktop picture to POSIX file "'"$file"'"'
+			yabai -m space --focus next 2 &>/dev/null
+			sleep 0.1
+		done
+
+		success_message "Desktop pictures set."
+	else
+		warning_message "Yabai is not running. Cannot set wallpapers. Skipping..."
+	fi
+}
+
 mac_install() {
 	mac_backup_existing
 
@@ -130,29 +184,4 @@ mac_install() {
 
 	# Output current SIP status
 	csrutil status
-}
-
-set_wallpapers() {
-	if [[ $(command -v yabai) ]]; then
-		message "Setting wallpapers for each desktop"
-
-		LOCAL_WALLPAPERS="$(realpath "$HOME"/.local/share/wallpapers/catppuccin)"
-
-		yabai -m space --focus 1
-
-		i=0
-
-		for file in "$LOCAL_WALLPAPERS"/*.png; do
-			((i = i + 1))
-			echo "Setting wallpaper on space $i to $file..."
-			# take action on each file. $f store current file name
-			osascript -e 'tell application "Finder" to set desktop picture to POSIX file "'"$file"'"'
-			yabai -m space --focus next 2 &>/dev/null
-			sleep 0.1
-		done
-
-		success_message "Desktop pictures set."
-	else
-		warning_message "Yabai is not running. Cannot set wallpapers. Skipping..."
-	fi
 }

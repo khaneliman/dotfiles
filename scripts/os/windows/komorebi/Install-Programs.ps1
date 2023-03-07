@@ -4,6 +4,11 @@ using module TestCommandExists
 
 $env:PSModulePath = "$PSHOME/Modules\"+";$SCRIPTS_DIR/os/windows/modules";
 
+#
+# ░▀█▀░█░█░█▀▀░█▄█░▀█▀░█▀█░█▀▀
+# ░░█░░█▀█░█▀▀░█░█░░█░░█░█░█░█
+# ░░▀░░▀░▀░▀▀▀░▀░▀░▀▀▀░▀░▀░▀▀▀
+#
 ##
 # Winget installations
 ##

@@ -1,6 +1,11 @@
 using module Message
 using module RegistryEntry
 
+#
+# ░▀█▀░█░█░█▀▀░█▄█░▀█▀░█▀█░█▀▀
+# ░░█░░█▀█░█▀▀░█░█░░█░░█░█░█░█
+# ░░▀░░▀░▀░▀▀▀░▀░▀░▀▀▀░▀░▀░▀▀▀
+#
 ##
 # Update Windows Taskbar
 ##

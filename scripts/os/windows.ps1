@@ -1,3 +1,8 @@
+#
+# ░█░█░▀█▀░█▀█░█▀▄░█▀█░█░█░█▀▀░░░█▀▀░█▀█░█▀█░█▀▀░▀█▀░█▀▀░█▀▀
+# ░█▄█░░█░░█░█░█░█░█░█░█▄█░▀▀█░░░█░░░█░█░█░█░█▀▀░░█░░█░█░▀▀█
+# ░▀░▀░▀▀▀░▀░▀░▀▀░░▀▀▀░▀░▀░▀▀▀░░░▀▀▀░▀▀▀░▀░▀░▀░░░▀▀▀░▀▀▀░▀▀▀
+#
 # Variables setup
 $global:GIT_DIR = git rev-parse --show-toplevel
 $global:DOTS_DIR = $GIT_DIR+"/dots"
@@ -6,7 +11,11 @@ $global:GIT_CRYPT_LOCKED = $null -eq (git config --local --get filter.git-crypt.
 $Env:PSModulePath = $Env:PSModulePath+";$SCRIPTS_DIR/os/windows/modules"
 $global:wc = New-Object net.webclient
 
-##
+# 
+# ░█▀█░█▀▄░█▀▀░█▀█
+# ░█▀▀░█▀▄░█▀▀░█▀▀
+# ░▀░░░▀░▀░▀▀▀░▀░░
+#
 # Set powershell execution policy
 ##
 Write-Host "Setting powershell to allow execution of scripts"
@@ -19,21 +28,33 @@ Write-Host "
 Installing Powershell Modules"
 .$SCRIPTS_DIR/os/windows/Install-Modules.ps1
 
-##
+#
+# ░█▀▀░█▀█░█▀█░▀█▀░█▀▀
+# ░█▀▀░█░█░█░█░░█░░▀▀█
+# ░▀░░░▀▀▀░▀░▀░░▀░░▀▀▀
+#
 # Install fonts
 ##
 Write-Host "
 Installing fonts"
 .$SCRIPTS_DIR/os/windows/Install-Fonts.ps1 $DOTS_DIR"/shared/home/.fonts/SanFransisco"
 
-##
+#
+# ░█░█░▀█▀░█▀█░█▀▄░█▀█░█░█░█▀▀░░░█▀▀░█▀▀░█▀█░▀█▀░█░█░█▀▄░█▀▀░█▀▀
+# ░█▄█░░█░░█░█░█░█░█░█░█▄█░▀▀█░░░█▀▀░█▀▀░█▀█░░█░░█░█░█▀▄░█▀▀░▀▀█
+# ░▀░▀░▀▀▀░▀░▀░▀▀░░▀▀▀░▀░▀░▀▀▀░░░▀░░░▀▀▀░▀░▀░░▀░░▀▀▀░▀░▀░▀▀▀░▀▀▀
+#
 # Enable developer mode
 ##
 Write-Host "
 Enabling developer mode and Windows Features"
 .$SCRIPTS_DIR/os/windows/Enable-WindowsFeatures.ps1
 
-##
+#
+# ░█▀█░█▀█░█▀█░█░░░▀█▀░█▀▀░█▀█░▀█▀░▀█▀░█▀█░█▀█░█▀▀
+# ░█▀█░█▀▀░█▀▀░█░░░░█░░█░░░█▀█░░█░░░█░░█░█░█░█░▀▀█
+# ░▀░▀░▀░░░▀░░░▀▀▀░▀▀▀░▀▀▀░▀░▀░░▀░░▀▀▀░▀▀▀░▀░▀░▀▀▀
+#
 # Install software
 ##
 Write-Host "
@@ -44,6 +65,10 @@ Write-Host "
 Installing Komorebi specific software."
 .$SCRIPTS_DIR/os/windows/komorebi/Install-Programs.ps1
 
+#
+# ░▀█▀░█░█░█▀▀░█▄█░▀█▀░█▀█░█▀▀
+# ░░█░░█▀█░█▀▀░█░█░░█░░█░█░█░█
+# ░░▀░░▀░▀░▀▀▀░▀░▀░▀▀▀░▀░▀░▀▀▀
 ##
 # Customize windows taskbar
 ##
@@ -76,6 +101,11 @@ Write-Host "
 Setting Catppuccin Windows Colors" 
 .$SCRIPTS_DIR/os/windows/komorebi/Color-Explorer.ps1
 
+#
+# ░█▀▀░█▀█░█▀█░█▀▀░▀█▀░█▀▀░█░█░█▀▄░█▀█░▀█▀░▀█▀░█▀█░█▀█
+# ░█░░░█░█░█░█░█▀▀░░█░░█░█░█░█░█▀▄░█▀█░░█░░░█░░█░█░█░█
+# ░▀▀▀░▀▀▀░▀░▀░▀░░░▀▀▀░▀▀▀░▀▀▀░▀░▀░▀░▀░░▀░░▀▀▀░▀▀▀░▀░▀
+#
 ##
 # Copy/Link Config Files
 ##

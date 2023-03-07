@@ -2,6 +2,11 @@ using module Message
 using module ConfigMap
 using module FileCommands
 
+#
+# ░█▀▀░█▀█░█▀█░█▀▀░▀█▀░█▀▀░█░█░█▀▄░█▀█░▀█▀░▀█▀░█▀█░█▀█
+# ░█░░░█░█░█░█░█▀▀░░█░░█░█░█░█░█▀▄░█▀█░░█░░░█░░█░█░█░█
+# ░▀▀▀░▀▀▀░▀░▀░▀░░░▀▀▀░▀▀▀░▀▀▀░▀░▀░▀░▀░░▀░░▀▀▀░▀▀▀░▀░▀
+#
 # Powershell Variables
 $timestamp = Get-Date -Format o | ForEach-Object { $_ -replace ":", "." }
 $ConfigMap = Get-ConfigMap
