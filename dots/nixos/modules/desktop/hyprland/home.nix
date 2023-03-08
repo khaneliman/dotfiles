@@ -1,7 +1,9 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports = [ ../../environment/hypr-variables.nix ];
+  imports = [
+    (import ../../environment/hypr-variables.nix)
+  ];
   programs = {
     bash = {
       initExtra = ''
@@ -11,19 +13,18 @@
       '';
     };
   };
-  home = {
-    packages = with pkgs; [
-      swaybg
-      swaylock-effects
-      pamixer
-    ];
-  };
-  home.file = {
-    ".config/hypr/hyprland.conf".text = ''
+  systemd.user.targets.hyprland-session.Unit.Wants = [ "xdg-desktop-autostart.target" ];
+  wayland.windowManager.hyprland = {
+    enable = true;
+    systemdIntegration = true;
+    nvidiaPatches = false;
+    extraConfig = ''
       $mainMod = ALT
       # $scripts=$HOME/.config/hypr/scripts
 
-      monitor=,preferred,auto,1
+      monitor=,preferred,auto,1 
+      # monitor=HDMI-A-1, 1920x1080, 0x0, 1
+      # monitor=eDP-1, 1920x1080, 1920x0, 1
 
       # Source a file (multi-file configs)
       # source = ~/.config/hypr/myColors.conf
@@ -80,10 +81,11 @@
         inactive_opacity = 1.0
         fullscreen_opacity = 1.0
         rounding = 0
-        blur = no 
+        blur = yes 
         blur_size = 3
         blur_passes = 1
         blur_new_optimizations = true
+        blur_xray = true
 
         drop_shadow = false
         shadow_range = 4
@@ -252,13 +254,13 @@
       #------------------------#
       # quickly launch program #
       #------------------------# 
-      bind=$mainMod,B,exec,firefox
+      bind=$mainMod,B,exec,nvidia-offload firefox
       bind=$mainMod,M,exec,netease-cloud-music-gtk4 
       bind=$mainMod SHIFT,M,exec,kitty --class="musicfox" --hold sh -c "musicfox" 
-      bind=$mainMod SHIFT,D,exec,kitty  --class="danmufloat" --hold sh -c "cd /home/khaneliman/Codelearning/go/src/bilibili_live_tui/  && export TERM=xterm-256color && go run main.go -c config.toml"
+      bind=$mainMod SHIFT,D,exec,kitty  --class="danmufloat" --hold sh -c "cd /home/ruixi/Codelearning/go/src/bilibili_live_tui/  && export TERM=xterm-256color && go run main.go -c config.toml"
       bind=$mainMod SHIFT,X,exec,myswaylock
       bind=$mainMod,T,exec,telegram-desktop
-      bind=$mainMod,Q,exec,icalingua-plus-plus --enable-features=UseOzonePlatform --ozone-platform=wayland
+      bind=$mainMod,Q,exec,nvidia-offload icalingua-plus-plus --enable-features=UseOzonePlatform --ozone-platform=wayland
       bind=$mainMod,bracketleft,exec,grimblast --notify --cursor  copysave area ~/Pictures/$(date "+%Y-%m-%d"T"%H:%M:%S_no_watermark").png
       bind=$mainMod,bracketright,exec, grimblast --notify --cursor  copy area
       bind=$mainMod,A,exec, grimblast_watermark
@@ -274,9 +276,9 @@
       bind=,XF86AudioMicMute,exec, pamixer --default-source -t
       bind=,XF86MonBrightnessUp,exec, light -A 5
       bind=,XF86MonBrightnessDown, exec, light -U 5
-      bind=,XF86AudioPlay,exec, playerctl play-pause
-      bind=,XF86AudioNext,exec, playerctl next
-      bind=,XF86AudioPrev,exec, playerctl previous
+      bind=,XF86AudioPlay,exec, mpc -q toggle 
+      bind=,XF86AudioNext,exec, mpc -q next 
+      bind=,XF86AudioPrev,exec, mpc -q prev
 
       #---------------#
       # waybar toggle #
@@ -311,17 +313,16 @@
       bindm = $mainMod, mouse:272, movewindow
       bindm = $mainMod, mouse:273, resizewindow
 
-      #------#
-      # wall #
-      #------#
+      #-----------------------#
+      # wall(by swww service) #
+      #-----------------------#
       # exec-once = dynamic_wallpaper
-      exec-once = default_wall 
+      # exec-once = default_wall 
 
       #------------#
       # auto start #
       #------------#
       exec-once = launch_waybar &
-      exec-once = fcitx5 -d &
       exec-once = mako &
       exec-once = border_color &
       exec-once = nm-applet --indicator &
@@ -362,6 +363,7 @@
       windowrule=float,ncmpcpp
       windowrule=move 25%-,ncmpcpp
       windowrule=size 960 540,ncmpcpp
+      windowrule=noblur,^(firefox)$
     '';
   };
 }

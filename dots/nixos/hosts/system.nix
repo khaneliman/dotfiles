@@ -3,6 +3,8 @@
 {
   nixpkgs.system = "x86_64-linux";
 
+  nixpkgs.config.allowUnfree = true;
+
   networking = {
     hostName = "khaneliman"; # Define your hostname.
     networkmanager.enable = true;
@@ -78,7 +80,6 @@
       keep-derivations      = true
     '';
   };
-  nixpkgs.config.allowUnfree = true;
 
   system = {
     autoUpgrade = {

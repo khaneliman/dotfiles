@@ -7,7 +7,7 @@ return {
 		local dap = require("dap")
 		dap.adapters.lldb = {
 			type = "executable",
-			command = "/etc/profiles/per-user/khaneliman/bin/lldb-vscode", -- adjust as needed, must be absolute path
+			command = "/etc/profiles/per-user/ruixi/bin/lldb-vscode", -- adjust as needed, must be absolute path
 			name = "lldb",
 		}
 		dap.configurations.cpp = {
