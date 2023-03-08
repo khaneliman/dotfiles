@@ -2,16 +2,16 @@
   programs = {
     git = {
       enable = true;
-      userName = "khaneliman";
-      userEmail = "khaneliman12@gmail.com";
+      userName = "Ruixi-rebirth";
+      userEmail = "ruixirebirth@gmail.com";
       signing = {
-        key = "";
+        key = "18B9F11F26C894A0D9E3F92BB26EAEB7189F30B4";
         signByDefault = true;
       };
       extraConfig = {
         url = {
-          "ssh://git@github.com:khaneliman" = {
-            insteadOf = "https://github.com/khaneliman/";
+          "ssh://git@github.com:Ruixi-rebirth" = {
+            insteadOf = "https://github.com/Ruixi-rebirth/";
           };
         };
       };

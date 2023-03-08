@@ -9,7 +9,7 @@ let
       else 
              npm set prefix ~/.npm-global
     fi
-    npm i -g npm vscode-langservers-extracted vscode-langservers-extracted typescript typescript-language-server bash-language-server
+    npm i -g npm vscode-langservers-extracted typescript typescript-language-server bash-language-server
   '';
 in
 {
@@ -30,12 +30,14 @@ in
       #-- LSP --#
       install_lsp
       rnix-lsp
-      sumneko-lua-language-server
+      lua-language-server
       gopls
       pyright
       zk
       rust-analyzer
       clang-tools
+      #-- tree-sitter --#
+      tree-sitter
       #-- format --#
       stylua
       black

@@ -1,22 +1,10 @@
 { config, lib, pkgs, ... }:
 {
-  imports = [ ../../programs/waybar/sway_waybar.nix ];
-
+  imports = [ ../../programs/wayland/waybar/sway_waybar.nix ];
   programs = {
-    sway = {
-      enable = true;
-      wrapperFeatures.gtk = true;
-      extraPackages = with pkgs;[
-        swaybg
-        swayidle
-        swaylock-effects
-        pamixer
-      ];
-    };
+    dconf.enable = true;
+    light.enable = true;
   };
-
-  # Automatically on TTY login, see `../../shell/fish/fish.nix`
-
   security.pam.services.swaylock = { };
   xdg.portal = {
     enable = true;

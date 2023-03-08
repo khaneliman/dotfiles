@@ -1,9 +1,13 @@
-{ pkgs, }:
-
-{
-  catppuccin-cursors = pkgs.callPackage ./catppuccin-cursors { };
-  catppuccin-frappe-gtk = pkgs.callPackage ./catppuccin-frappe-gtk { };
-  catppuccin-latte-gtk = pkgs.callPackage ./catppuccin-latte-gtk { };
-  qq = pkgs.callPackage ./qq { };
-  go-musicfox = pkgs.callPackage ./go-musicfox { };
+rec{
+  overlay = final: prev:
+    let
+      dirContents = builtins.readDir ../pkgs;
+      genPackage = name: {
+        inherit name;
+        value = final.callPackage (../pkgs + "/${name}") { };
+      };
+      names = builtins.attrNames dirContents;
+    in
+    builtins.listToAttrs (map genPackage names);
 }
+  
