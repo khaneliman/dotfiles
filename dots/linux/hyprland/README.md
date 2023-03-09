@@ -9,29 +9,13 @@
 ## Unique Install Steps
 
 - Create system links from ~/.local files to their /usr/local paths
-- Create a system link from ~/.config/waybar to /usr/local/share/waybar if you want automatic reload to work
 
   ```bash
-  sudo ln -s ~/.local/share/wlroots-env/ /usr/local/share/
-  sudo ln -s ~/.config/waybar/ /usr/local/share/waybar
-  sudo ln -s ~/.local/bin/Hyprland-custom /usr/local/bin/
   sudo ln -s ~/.local/bin/xdg-desktop-portal.sh /usr/local/bin/
   sudo ln -s ~/.local/bin/hyprland_setup_dual_monitors.sh /usr/local/bin
   sudo ln -s ~/.local/bin/hyprland_cleanup_after_startup.s /usr/local/binh
   sudo ln -s ~/.local/bin/hyprland_handle_monitor_connect.sh /usr/local/bin
   ```
-
-- Enable user systemd services so the applications auto start properly (or add exec-once statements to ~/.config/hypr/hyprland.conf if you dont use systemd)
-
-  ```bash
-  systemctl --user enable --now hypr-waybar.service
-  systemctl --user enable --now waybar-config.path
-  systemctl --user enable --now hypr-swayidle.service
-  systemctl --user enable --now hyprpaper.service
-  systemctl --user enable --now hyprland-desktop-portal.service
-  ```
-
-- Copy the dots/linux/hyprland/usr/share/wayland-sessions/hyprland-custom.desktop to /usr/share/wayland-sessions/
 
 ## Screenshots
 
