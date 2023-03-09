@@ -10,7 +10,6 @@ render_bar_item() {
 		args+=(--set "$NAME" label="$SSID (${CURR_TX}Mbps)"
 			label.drawing=off) # remove if you want more detailed info available without hovering
 	fi
-
 }
 
 render_popup() {

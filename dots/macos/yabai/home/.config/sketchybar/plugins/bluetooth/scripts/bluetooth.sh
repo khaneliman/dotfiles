@@ -13,13 +13,15 @@ render_bar_item() {
 }
 
 add_paired_header() {
-	sketchybar -m --set bluetooth.details \
-		label="$(echo -e 'Paired Devices')" \
-		label.font="$FONT:Bold:14.0" \
-		label.align=left \
-		icon.drawing=off \
+	bluetooth_details=(
+		label="$(echo -e 'Paired Devices')"
+		label.font="$FONT:Bold:14.0"
+		label.align=left
+		icon.drawing=off
 		click_script="sketchybar --set $NAME popup.drawing=off"
+	)
 
+	sketchybar -m --set bluetooth.details "${bluetooth_details[@]}"
 }
 
 render_popup() {
@@ -37,17 +39,19 @@ render_popup() {
 			sketchybar -m --add item bluetooth.device."$COUNTER" popup."$NAME"
 		fi
 
-		sketchybar -m --set bluetooth.device."$COUNTER" \
-			label="$(echo "$device" | grep -Eo '".*."')" \
-			label.align=right \
-			icon="$COUNT_PAIRED : $PREV_COUNT" \
-			icon.drawing=off \
+		bluetooth_device=(
+			label="$(echo "$device" | grep -Eo '".*."')"
+			label.align=right
+			icon="$COUNT_PAIRED : $PREV_COUNT"
+			icon.drawing=off
 			click_script="sketchybar --set $NAME popup.drawing=off"
+		)
+
+		sketchybar -m --set bluetooth.device."$COUNTER" "${bluetooth_device[@]}"
+
 		COUNTER=$((COUNTER + 1))
 
 	done <<<"$(echo -e "$PAIRED")"
-
-	# sketchybar -m "${args[@]}" > /dev/null
 }
 
 update() {

@@ -35,8 +35,12 @@ for i in "${!SPACE_ICONS[@]}"; do
 							--subscribe space.$sid mouse.clicked
 done
 
-sketchybar 	--add bracket spaces '/space\..*/' 				\
-						--set spaces background.color="$SURFACE0" \
-													background.border_color="$SURFACE1" 			\
-													background.border_width=2 								\
-													background.drawing=on
+spaces_bracket=(
+	background.color="$SURFACE0"
+	background.border_color="$SURFACE1"
+	background.border_width=2
+	background.drawing=on
+)
+
+sketchybar --add bracket spaces '/space\..*/' \
+	--set spaces "${spaces_bracket[@]}"

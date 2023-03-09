@@ -34,13 +34,16 @@ update() {
 			title=":)"
 		fi
 
-		args+=(--clone ical.event."$COUNTER" ical.details
-			--set ical.event."$COUNTER" label="$title"
+		ical_event=(
+			label="$title"
 			icon="$time"
 			icon.color="$YELLOW"
 			click_script="sketchybar --set "$NAME" popup.drawing=off"
 			position=popup.ical
-			drawing=on)
+			drawing=on
+		)
+		args+=(--clone ical.event."$COUNTER" ical.details
+			--set ical.event."$COUNTER" "${ical_event[@]}")
 
 	done <<<"$(echo "$EVENTS")"
 

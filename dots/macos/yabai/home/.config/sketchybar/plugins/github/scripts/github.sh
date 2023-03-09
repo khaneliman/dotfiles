@@ -57,17 +57,21 @@ render_popup() {
 			args+=(--set github.bell icon.color="$COLOR")
 		fi
 
-		args+=(--clone github.notification."$COUNTER" github.template
-			--set github.notification."$COUNTER"  label="$(echo "$title" | sed -e "s/^'//" -e "s/'$//")"
-			                                      icon="$ICON $(echo "$repo" | sed -e "s/^'//" -e "s/'$//"):"
-			                                      icon.padding_left="$PADDING"
-			                                      label.padding_right="$PADDING"
-			                                      icon.color="$COLOR"
-			                                      position=popup.github.bell
-			                                      icon.background.color="$COLOR"
-			                                      drawing=on
-			                                      click_script="open $URL;
-                                                          sketchybar --set github.bell popup.drawing=off")
+		github_notification=(
+			label="$(echo "$title" | sed -e "s/^'//" -e "s/'$//")"
+			icon="$ICON $(echo "$repo" | sed -e "s/^'//" -e "s/'$//"):"
+			icon.padding_left="$PADDING"
+			label.padding_right="$PADDING"
+			icon.color="$COLOR"
+			position=popup.github.bell
+			icon.background.color="$COLOR"
+			drawing=on
+			click_script="open $URL; sketchybar --set github.bell popup.drawing=off"
+		)
+
+		args+=(--clone github.notification."$COUNTER" github.template)
+		args+=(--set github.notification."$COUNTER" "${github_notification[@]}")
+
 	done <<<"$(echo "$NOTIFICATIONS" | jq -r '.[] | [.repository.name, .subject.latest_comment_url, .subject.type, .subject.title] | @sh')"
 
 	sketchybar -m "${args[@]}" >/dev/null
@@ -95,11 +99,11 @@ update() {
 popup() {
 	PREV_COUNT=$(sketchybar --query github.bell | jq -r .label.value)
 
-	if [[ "$PREV_COUNT" -gt 0 ]]; then         
-    sketchybar --set "$NAME" popup.drawing="$1"
-  else 
-    sketchybar --set "$NAME" popup.drawing=off
-  fi
+	if [[ "$PREV_COUNT" -gt 0 ]]; then
+		sketchybar --set "$NAME" popup.drawing="$1"
+	else
+		sketchybar --set "$NAME" popup.drawing=off
+	fi
 }
 
 case "$SENDER" in

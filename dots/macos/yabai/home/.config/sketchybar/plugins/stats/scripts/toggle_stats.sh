@@ -1,32 +1,32 @@
 #!/usr/bin/env bash
 
-hide_stats() {
-	sketchybar --set cpu.percent \
-										label.drawing=off \
-										icon.drawing=off \
-							--set memory \
-										label.drawing=off \
-										icon.drawing=off \
-							--set disk \
-										label.drawing=off \
-										icon.drawing=off \
-							--set separator_right \
-										icon=
+stats=(
+	cpu.percent
+	memory
+	disk
+	network
+)
 
+hide_stats() {
+	args=()
+	for item in "${stats[@]}"; do
+		args+=(--set "$item" drawing=off)
+	done
+
+	sketchybar "${args[@]}" \
+		--set separator_right \
+		icon=
 }
 
 show_stats() {
-	sketchybar 	--set cpu.percent \
-										label.drawing=on \
-										icon.drawing=on \
-							--set memory \
-										label.drawing=on \
-										icon.drawing=on \
-							--set disk \
-										label.drawing=on \
-										icon.drawing=on \
-							--set separator_right \
-										icon=
+	args=()
+	for item in "${stats[@]}"; do
+		args+=(--set "$item" drawing=on)
+	done
+
+	sketchybar "${args[@]}" \
+		--set separator_right \
+		icon=
 }
 
 toggle_stats() {
