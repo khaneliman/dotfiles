@@ -17,6 +17,9 @@ export BATTERY=
 export CPU=
 export DISK=
 export MEMORY=﬙
+export NETWORK=
+export NETWORK_DOWN=
+export NETWORK_UP=
 
 # Git Icons
 export GIT_ISSUE=􀍷

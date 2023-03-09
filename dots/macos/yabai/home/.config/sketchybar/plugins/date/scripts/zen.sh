@@ -18,6 +18,8 @@ zen_items=(
 	separator_left
 	separator_right
 	github.bell
+	network.up
+	network.down
 )
 
 zen_on() {

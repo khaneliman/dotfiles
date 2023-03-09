@@ -7,7 +7,8 @@ weather_icon=(
 	icon.align=right
 	y_offset=4
 	background.padding_right=-15
-	icon.padding_left=10
+	icon.padding_left=5
+	icon.padding_right=5
 )
 
 weather_temp=(

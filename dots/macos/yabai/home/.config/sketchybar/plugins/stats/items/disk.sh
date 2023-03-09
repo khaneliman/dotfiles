@@ -3,6 +3,7 @@
 source "$HOME/.config/sketchybar/colors.sh"
 
 disk=(
+	background.padding_left=0
 	label.font="$FONT:Heavy:12"
 	label.color="$TEXT"
 	icon="$DISK"
@@ -11,5 +12,5 @@ disk=(
 	script="$PLUGIN_DIR/stats/scripts/disk.sh"
 )
 
-sketchybar --add item disk right 		\
-					 --set disk "${disk[@]}"
+sketchybar --add item disk right \
+	--set disk "${disk[@]}"

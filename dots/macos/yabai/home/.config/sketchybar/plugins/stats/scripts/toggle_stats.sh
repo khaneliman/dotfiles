@@ -4,7 +4,8 @@ stats=(
 	cpu.percent
 	memory
 	disk
-	network
+	network.up
+	network.down
 )
 
 hide_stats() {
