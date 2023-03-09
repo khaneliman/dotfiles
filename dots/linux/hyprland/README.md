@@ -17,6 +17,21 @@
   sudo ln -s ~/.local/bin/hyprland_handle_monitor_connect.sh /usr/local/bin
   ```
 
+- Install application dependencies
+
+### Arch
+
+```bash
+# core
+yay -Sy --needed hyprland-nvidia-git waybar-hyprland-git xdg-desktop-portal-hyprland-git swaync-git wlogoutrofi-lbonn-wayland-git swayidle swaylock-effects-git hyprpaper-git blueman network-manager-applet polkit-kde-agent gnome-keyring
+# theme
+yay -Sy --needed kvantum qt5ct qt6ct
+# convenience
+yay -Sy --needed find-the-command cliphist firefox-developer-edition
+# media
+yay -Sy --needed thunar spotify playerctl wireplumber swayimg hyprpicker-git wf-recorder grim
+```
+
 ## Screenshots
 
 ### Standard monitor
