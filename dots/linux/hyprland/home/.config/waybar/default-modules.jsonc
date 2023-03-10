@@ -128,7 +128,11 @@
     "critical-threshold": 80,
     "format-critical": "{temperatureC}°C {icon}",
     "format": "{icon} {temperatureC}°C",
-    "format-icons": ["", "", ""],
+    "format-icons": [
+      "",
+      "",
+      ""
+    ],
     "interval": "5"
   },
   "network": {
@@ -144,7 +148,11 @@
     "format": "{volume}% {icon}",
     "format-muted": "",
     "on-click": "helvum",
-    "format-icons": ["", "", ""]
+    "format-icons": [
+      "",
+      "",
+      ""
+    ]
   },
   "custom/media": {
     "format": "{icon} {}",
@@ -204,7 +212,7 @@
     "on-click": "xdg-open https://github.com/notifications"
   },
   "custom/weather": {
-    "exec": "$HOME/.config/waybar/scripts/weather.sh $(awk  '{print $0}' ~/wttr_location)",
+    "exec": "$HOME/.config/waybar/scripts/weather.py -l $(awk  '{print $0}' ~/wttr_location)",
     "return-type": "json",
     "format": "{}",
     "tooltip": true,
@@ -212,7 +220,13 @@
   },
   "group/stats": {
     "orientation": "horizontal",
-    "modules": ["network", "cpu", "memory", "disk", "temperature"]
+    "modules": [
+      "network",
+      "cpu",
+      "memory",
+      "disk",
+      "temperature"
+    ]
   },
   "group/notifications": {
     "orientation": "horizontal",
