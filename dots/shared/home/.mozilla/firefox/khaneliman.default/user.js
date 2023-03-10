@@ -247,3 +247,8 @@ user_pref(
 );
 user_pref("extensions.activeThemeID", "{d49033ac-8969-488c-afb0-5cdb73957f41}");
 user_pref("extensions.autoDisableScopes", 0);
+
+// Fonts
+user_pref("font.name.monospace.x-western", "Liga SFMono Nerd Font");
+user_pref("font.name.sans-serif.x-western", "Liga SFMono Nerd Font");
+user_pref("font.name.serif.x-western", "Liga SFMono Nerd Font");
