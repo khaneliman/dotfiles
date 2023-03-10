@@ -19,10 +19,10 @@ weather_icon_map() {
 	"false Slight Chance Rain Showers" | "false Chance Rain Showers")
 		icon_result=""
 		;;
-	"false Slight Chance Light Snow" | "false Chance Light Snow")
+	"false Slight Chance Light Snow" | "false Chance Light Snow" | "false Snow Likely")
 		icon_result=""
 		;;
-	"false Snow Showers" | "false Snow Showers Likely" | "false Chance Snow Showers")
+	"false Snow Showers" | "false Snow Showers Likely" | "false Chance Snow Showers" | "false Heavy Snow" | "false Snow and Patchy Blowing Snow")
 		icon_result=""
 		;;
 	"false Patchy Fog" | "false Areas Of Fog" | "false Widespread Fog")
@@ -40,6 +40,9 @@ weather_icon_map() {
 		;;
 	"true Partly Sunny")
 		icon_result=""
+		;;
+	"true Cloudy")
+		icon_result=""
 		;;
 	# No Match
 	*)

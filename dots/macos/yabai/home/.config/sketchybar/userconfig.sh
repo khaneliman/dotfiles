@@ -17,11 +17,12 @@ export P_DYNAMIC_ISLAND_DISPLAY=Primary
 
 # Needs to have Regular, Bold, Semibold, Heavy and Black variants
 export P_DYNAMIC_ISLAND_FONT="SF Pro"
+export P_DYNAMIC_ISLAND_NERD_FONT="Liga SFMono Nerd Font"
 
 # Enable/Disable Islands
 export P_DYNAMIC_ISLAND_MUSIC_ENABLED=1
 export P_DYNAMIC_ISLAND_APPSWITCH_ENABLED=1
-export P_DYNAMIC_ISLAND_NOTIFICATION_ENABLED=0
+export P_DYNAMIC_ISLAND_NOTIFICATION_ENABLED=1
 export P_DYNAMIC_ISLAND_VOLUME_ENABLED=1
 export P_DYNAMIC_ISLAND_BRIGHTNESS_ENABLED=1
 export P_DYNAMIC_ISLAND_WIFI_ENABLED=1
@@ -91,7 +92,7 @@ export P_DYNAMIC_ISLAND_MUSIC_RESUME_CORNER_RAD=15 # Corner Radius
 #
 export P_DYNAMIC_ISLAND_WIFI_EXPAND_WIDTH=150     # This value should match the notch size, appearence wise
 export P_DYNAMIC_ISLAND_WIFI_MAX_EXPAND_WIDTH=295 # Max size when expanded
-export P_DYNAMIC_ISLAND_WIFI_EXPAND_HEIGHT=65
+export P_DYNAMIC_ISLAND_WIFI_EXPAND_HEIGHT=75
 export P_DYNAMIC_ISLAND_WIFI_CORNER_RAD=15 # Corner Radius
 export P_DYNAMIC_ISLAND_ICON_WIFI_CONNECTED=􀙇
 export P_DYNAMIC_ISLAND_ICON_WIFI_DISCONNECTED=􀙈
@@ -125,10 +126,12 @@ export P_DYNAMIC_ISLAND_COLOR_BLACK=0xff000000
 export P_DYNAMIC_ISLAND_COLOR_TRANSPARENT=0x00000000
 export P_DYNAMIC_ISLAND_COLOR_ICON_HIDDEN=$P_DYNAMIC_ISLAND_COLOR_BLACK
 
+export P_DYNAMIC_ISLAND_PADDINGS=3 # All paddings use this value (icon, label, background)
+
 #
 ## Fonts
 #
 export FONT="SF Pro" # Needs to have Regular, Bold, Semibold, Heavy and Black variants
 export NERD_FONT="Liga SFMono Nerd Font"
 
-export PADDINGS=3 # All paddings use this value (icon, label, background)
+export PADDINGS=3
