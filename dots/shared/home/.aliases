@@ -56,10 +56,16 @@ alias wlon='rfkill unblock wlan' # Unblock wlan, start wifi connection
 [ $(command -v topgrade) ] && alias upd="topgrade $argv"
 [ $(command -v lazygit) ] && alias lg="lazygit $argv"
 [ $(command -v update-grub) ] && alias grubup="sudo update-grub"
- 
+
+# #
+# MacOS aliases
+#
+[ $(uname) = 'Darwin' ] && alias neovide='neovide --frame buttonless'
+
 # #
 # Linux aliases
 # #
+[ $(uname) = 'Linux' ] && alias neovide='neovide --frame none'
 [ $(command -v ps) ] && alias psmem='ps auxf | sort -nr -k 4'
 [ $(command -v ps) ] && alias psmem10='ps auxf | sort -nr -k 4 | head -10'
 [ $(command -v hwinfo) ] && alias hw='hwinfo --short'                                   # Hardware Info

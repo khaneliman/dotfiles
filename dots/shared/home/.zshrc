@@ -28,52 +28,56 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 
 if type brew &>/dev/null; then
-    FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
 
-    autoload -Uz compinit
-    compinit
+  autoload -Uz compinit
+  compinit
 fi
 
-  plugins=(
-  git zsh-autosuggestions zsh-syntax-highlighting sudo
-  web-search history macos zsh-navigation-tools zsh-interactive-cd
-  web-search wd vscode urltools universalarchive tmux tig themes
-  rsync ripgrep react-native pip nvm npm node ng gitignore
-  github git-prompt git-flow fzf dotnet docker command-not-found
-  colorize colored-man-pages brew 1password)
+plugins=(
+git zsh-autosuggestions zsh-syntax-highlighting sudo
+web-search history macos zsh-navigation-tools zsh-interactive-cd
+web-search wd vscode urltools universalarchive tmux tig themes
+rsync ripgrep react-native pip nvm npm node ng gitignore
+github git-prompt git-flow fzf dotnet docker command-not-found
+colorize colored-man-pages brew 1password)
 
-# Sketchybar interactivity overloads
-function brew() {
-  command brew "$@"
+if [ $(uname) = 'Darwin' ]; then # Begin Darwin check 
 
-  if [[ $* =~ "upgrade" ]] || [[ $* =~ "update" ]] || [[ $* =~ "outdated" ]]; then
-    sketchybar --trigger brew_update
-  fi
-  
-  local dump_commands=('install' 'uninstall') # Include all commands that should do a brew dump
-  local main_command="${1}"
+  # Sketchybar interactivity overloads
+  function brew() {
+    command brew "$@"
 
-  for command in "${dump_commands[@]}"; do
-    [[ "${command}" == "${main_command}" ]] && brew bundle dump --file="${HOME}/.Brewfile" --force
-  done
-}
+    if [[ $* =~ "upgrade" ]] || [[ $* =~ "update" ]] || [[ $* =~ "outdated" ]]; then
+      sketchybar --trigger brew_update
+    fi
+    
+    local dump_commands=('install' 'uninstall') # Include all commands that should do a brew dump
+    local main_command="${1}"
 
-function mas() {
-  command mas "$@"
+    for command in "${dump_commands[@]}"; do
+      [[ "${command}" == "${main_command}" ]] && brew bundle dump --file="${HOME}/.Brewfile" --force
+    done
+  }
 
-  if [[ $* =~ "upgrade" ]] || [[ $* =~ "update" ]] || [[ $* =~ "outdated" ]]; then
-    sketchybar --trigger brew_update
-  fi
-}
+  function mas() {
+    command mas "$@"
 
-function zen() {
-  ~/.config/sketchybar/plugins/zen.sh $1
-}
+    if [[ $* =~ "upgrade" ]] || [[ $* =~ "update" ]] || [[ $* =~ "outdated" ]]; then
+      sketchybar --trigger brew_update
+    fi
+  }
 
-function push() {
-  command git push
-  sketchybar --trigger git_push
-}
+  function zen() {
+    ~/.config/sketchybar/plugins/zen.sh $1
+  }
+
+  function push() {
+    command git push
+    sketchybar --trigger git_push
+  }
+
+end # end Darwin check
 
 fastfetch
 
