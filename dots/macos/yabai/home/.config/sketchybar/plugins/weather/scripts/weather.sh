@@ -29,6 +29,9 @@ weather_icon_map() {
 		icon_result=""
 		;;
 	# Daytime
+	"true Snow" | "true Heavy Snow" | "true Snow Showers")
+		icon_result=""
+		;;
 	"true Slight Chance Light Rain" | "true Chance Light Rain")
 		icon_result=""
 		;;
@@ -41,7 +44,7 @@ weather_icon_map() {
 	"true Partly Sunny")
 		icon_result=""
 		;;
-	"true Cloudy")
+	"true Cloudy" | "true Mostly Cloudy")
 		icon_result=""
 		;;
 	# No Match
@@ -61,8 +64,8 @@ render_popup() {
 	args+=(--remove '/weather.details.\.*/')
 
 	weather_details=(
-		icon.drawing=off
-		label="$popup"
+		icon="$forecast"
+		label="$popup_weather"
 		icon.color="$YELLOW"
 		click_script="sketchybar --set $NAME popup.drawing=off"
 		position=popup.weather.temp
@@ -111,7 +114,7 @@ update() {
 	icon=$(weather_icon_map "$time" "$forecast")
 	# popup
 	location=$(cat ~/wttr_location)
-	popup=$(curl -s "https://wttr.in/${location}?format=4" | sed 's/  */ /g')
+	popup_weather=$(curl -s "https://wttr.in/${location}?format=4" | sed 's/  */ /g')
 	# icon=$(curl -s "$(echo "$weather" | jq -r '.poperties.periods[0].icon')")
 
 	render_bar

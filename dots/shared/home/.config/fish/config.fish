@@ -12,7 +12,9 @@ end
 
 # pnpm
 set -gx PNPM_HOME "$HOME/.local/share/pnpm"
-set -gx PATH "$PNPM_HOME" $PATH
+if not string match -q -- $PNPM_HOME $PATH
+  set -gx PATH "$PNPM_HOME" $PATH
+end
 # pnpm end
 
 # SSH setup 
