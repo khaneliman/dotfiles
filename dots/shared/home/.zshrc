@@ -77,7 +77,7 @@ if [ $(uname) = 'Darwin' ]; then # Begin Darwin check
     sketchybar --trigger git_push
   }
 
-end # end Darwin check
+fi # end Darwin check
 
 fastfetch
 
