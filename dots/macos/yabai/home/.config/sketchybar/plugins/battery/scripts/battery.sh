@@ -80,7 +80,7 @@ update() {
 popup() {
 	BATT_PERCENT=$(sketchybar --query battery.details | jq -r '.label.value | sub("%"; "")')
 
-	if [[ "$BATT_PERCENT" -gt 50 ]]; then
+	if [[ "$BATT_PERCENT" -gt 49 ]]; then
 		sketchybar --set "$NAME" popup.drawing="$1"
 	else
 		sketchybar --set "$NAME" popup.drawing=off
