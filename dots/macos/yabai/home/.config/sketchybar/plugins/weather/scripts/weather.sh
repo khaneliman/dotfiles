@@ -61,9 +61,8 @@ render_popup() {
 	args+=(--remove '/weather.details.\.*/')
 
 	weather_details=(
-		icon="$icon"
-		icon.font="$NERD_FONT:Bold:16.0"
-		label="$temp""° $forecast"
+		icon.drawing=off
+		label="$popup"
 		icon.color="$YELLOW"
 		click_script="sketchybar --set $NAME popup.drawing=off"
 		position=popup.weather.temp
@@ -72,6 +71,7 @@ render_popup() {
 	args+=(--clone weather.details.0 weather.details
 		--set weather.details.0 "${weather_details[@]}")
 
+	# TODO: Generate full weather report in popup
 	# 	COUNTER=0
 	#
 	# 	if [ "$COUNT" -lt "$PREV_COUNT" ]; then
@@ -101,17 +101,18 @@ render_popup() {
 }
 
 update() {
-	# WEATHER=$(wego --aat-monochrome)
-	# COUNT="$(echo "$WEATHER" | wc -l | tr -d ' ')"
-	# PREV_COUNT="$(sketchybar --query weather.temp | jq -r .popup.items | grep ".details.*" -c)"
-
 	args=()
+	# Bar
 	url=$(awk '/https/{print $0}' ~/weather_url)
 	weather=$(curl -s "$url")
 	temp=$(echo "$weather" | jq -r '.properties.periods[0].temperature')
 	forecast=$(echo "$weather" | jq -r '.properties.periods[0].shortForecast')
 	time=$(echo "$weather" | jq -r '.properties.periods[0].isDaytime')
 	icon=$(weather_icon_map "$time" "$forecast")
+	# popup
+	location=$(cat ~/wttr_location)
+	popup=$(curl -s "https://wttr.in/${location}?format=4" | sed 's/  */ /g')
+	# icon=$(curl -s "$(echo "$weather" | jq -r '.poperties.periods[0].icon')")
 
 	render_bar
 	render_popup
