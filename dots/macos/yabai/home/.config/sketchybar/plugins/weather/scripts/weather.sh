@@ -56,71 +56,85 @@ weather_icon_map() {
 }
 
 render_bar() {
-	args+=(--set weather.icon icon="$icon")
-	args+=(--set weather.temp label="$temp""°")
+	sketchybar --set weather.icon icon="$icon"
+	sketchybar --set weather.temp label="$temp""°"
 }
 
 render_popup() {
-	args+=(--remove '/weather.details.\.*/')
+	sketchybar --remove '/weather.details.\.*/'
 
 	weather_details=(
-		icon="$forecast"
-		label="$popup_weather"
-		icon.color="$YELLOW"
+		label="$forecast $popup_weather"
+		label.padding_left=80
 		click_script="sketchybar --set $NAME popup.drawing=off"
 		position=popup.weather.temp
 		drawing=on
 	)
-	args+=(--clone weather.details.0 weather.details
-		--set weather.details.0 "${weather_details[@]}")
 
-	# TODO: Generate full weather report in popup
-	# 	COUNTER=0
-	#
-	# 	if [ "$COUNT" -lt "$PREV_COUNT" ]; then
-	# 		sketchybar -m --remove '/weather.details.\.*/'
-	# 	fi
-	#
-	# 	while IFS= read -r line; do
-	#   printf '%s\n' "$line"
-	# done < output.txt
-	#
-	# 	while IFS= read -r line; do
-	#
-	# 		if [ "$COUNT" -gt "$PREV_COUNT" ]; then
-	# 			sketchybar -m --add item weather.details."$COUNTER" popup."$NAME"
-	# 		fi
-	#
-	# 		sketchybar -m --set weather.details."$COUNTER"     \
-	# 			                  label="$(printf '%s\n' "$line")"  \
-	# 			                  label.align=right           \
-	# 			                  label.padding_left=20       \
-	# 			                  icon="$COUNT : $PREV_COUNT" \
-	# 			                  icon.drawing=off            \
-	# 			                  click_script="sketchybar --set $NAME popup.drawing=off"
-	# 		COUNTER=$((COUNTER + 1))
-	#
-	# 	done <<<"$(printf '%s' "$WEATHER")"
+	COUNTER=0
+
+	sketchybar --clone weather.details."$COUNTER" weather.details
+	sketchybar --set weather.details."$COUNTER" "${weather_details[@]}"
+
+	echo "$weather" | jq -r '.properties.periods[] | @base64' | while read -r period; do
+		COUNTER=$((COUNTER + 1))
+
+		if [ "$COUNTER" -lt 4 ]; then
+			decoded_period=$(echo "$period" | base64 --decode)
+			period_name=$(echo "$period" | base64 --decode | jq -r '.name')
+			detailed_forecast=$(echo "$decoded_period" | jq -r '.detailedForecast')
+			temperature=$(echo "$decoded_period" | jq -r '.temperature')
+			temperature_unit=$(echo "$decoded_period" | jq -r '.temperatureUnit')
+
+			weather_period=(
+				icon="$period_name - $temperature $temperature_unit"
+				icon.color="$BLUE"
+				label="$sentence"
+				label.drawing=on
+				click_script="sketchybar --set $NAME popup.drawing=off"
+				drawing=on
+			)
+
+			item=weather.details."$COUNTER"
+			sketchybar --add item "$item" popup.weather.temp
+			sketchybar --set "$item" "${weather_period[@]}"
+
+			SUBCOUNTER=0
+			echo "$detailed_forecast" | grep -o -E '\b[^.!?]*[.!?]' | while read -r sentence; do
+
+				SUBCOUNTER=$((SUBCOUNTER + 1))
+				weather_period=(
+					label="$sentence"
+					label.drawing=on
+					click_script="sketchybar --set $NAME popup.drawing=off"
+					drawing=on
+				)
+
+				item=weather.details."$COUNTER"."$SUBCOUNTER"
+				sketchybar --add item "$item" popup.weather.temp
+				sketchybar --set "$item" "${weather_period[@]}"
+			done
+
+			sketchybar --add item weather.details.newline."$COUNTER" popup.weather.temp
+		fi
+	done
 }
 
 update() {
-	args=()
 	# Bar
-	url=$(awk '/https/{print $0}' ~/weather_url)
+	url=$(jq -r '.weathergov | "\(.url)\(.location)/\(.format)"' ~/weather_config.json)
 	weather=$(curl -s "$url")
 	temp=$(echo "$weather" | jq -r '.properties.periods[0].temperature')
 	forecast=$(echo "$weather" | jq -r '.properties.periods[0].shortForecast')
 	time=$(echo "$weather" | jq -r '.properties.periods[0].isDaytime')
 	icon=$(weather_icon_map "$time" "$forecast")
+
 	# popup
-	location=$(cat ~/wttr_location)
-	popup_weather=$(curl -s "https://wttr.in/${location}?format=4" | sed 's/  */ /g')
-	# icon=$(curl -s "$(echo "$weather" | jq -r '.poperties.periods[0].icon')")
+	url=$(jq -r '.wttr | "\(.url)\(.location)?\(.format)"' ~/weather_config.json)
+	popup_weather=$(curl -s "$url" | sed 's/  */ /g')
 
 	render_bar
 	render_popup
-
-	sketchybar -m "${args[@]}" >/dev/null
 
 	if [ "$COUNT" -ne "$PREV_COUNT" ] 2>/dev/null || [ "$SENDER" = "forced" ]; then
 		sketchybar --animate tanh 15 --set "$NAME" label.y_offset=5 label.y_offset=0

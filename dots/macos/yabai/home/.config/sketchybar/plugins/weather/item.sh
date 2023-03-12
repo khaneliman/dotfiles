@@ -12,6 +12,7 @@ weather_icon=(
 )
 
 weather_temp=(
+	label="temp"
 	update_freq=60
 	popup.align=right
 	popup.height=20
