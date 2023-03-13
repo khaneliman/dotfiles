@@ -31,11 +31,11 @@ shared_backup_existing() {
 	backup_files "$HOME"/.oh-my-bash "$BACKUP_LOCATION"/
 
 	backup_files "$HOME"/.bashenv "$BACKUP_LOCATION"/
-	backup_files "$HOME"/.bash_profile "$BACKUP_LOCATION"/
 	backup_files "$HOME"/.bashrc "$BACKUP_LOCATION"/
 	backup_files "$HOME"/.gitconfig "$BACKUP_LOCATION"
 	backup_files "$HOME"/.gitconfig.functions "$BACKUP_LOCATION"
 	backup_files "$HOME"/.gitignore_global "$BACKUP_LOCATION"
+	backup_files "$HOME"/.zshenv "$BACKUP_LOCATION"/
 	backup_files "$HOME"/.zshrc "$BACKUP_LOCATION"/
 	backup_files "$HOME"/.p10k.zsh "$BACKUP_LOCATION"/
 
@@ -210,7 +210,6 @@ shared_copy_configuration() {
 	link_locations "$SHARED_HOME"/.oh-my-bash-custom/themes/powerlevel10k "$HOME"/.oh-my-bash/custom/themes/powerlevel10k
 
 	link_locations "$SHARED_HOME"/.bashenv "$HOME"/.bashenv
-	link_locations "$SHARED_HOME"/.bash_profile "$HOME"/.bash_profile
 	link_locations "$SHARED_HOME"/.bashrc "$HOME"/.bashrc
 	link_locations "$SHARED_HOME"/.face "$HOME"/.face
 	link_locations "$SHARED_HOME"/.face.icon "$HOME"/.face.icon
@@ -219,6 +218,7 @@ shared_copy_configuration() {
 	link_locations "$SHARED_HOME"/.gitignore_global "$HOME"/.gitignore_global
 	link_locations "$SHARED_HOME"/.p10k.zsh "$HOME"/.p10k.zsh
 	link_locations "$SHARED_HOME"/.zshrc "$HOME"/.zshrc
+	link_locations "$SHARED_HOME"/.zshenv "$HOME"/.zshenv
 
 	git_crypt_check && link_locations "$SHARED_HOME"/.gnupg "$HOME"/.gnupg
 	git_crypt_check && link_locations "$SHARED_HOME"/.gitconfig.signing "$HOME"/.gitconfig.signing

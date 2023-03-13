@@ -1,7 +1,6 @@
 # #
 # Exports
 # #
-
 export PATH="$PATH:/opt/local/bin:/opt/local/sbin:$HOME/.local/share/pnpm:~/.spicetify"
 PATH="$(perl -e 'print join(":", grep { not $seen{$_}++ } split(/:/, $ENV{PATH}))')"
 
@@ -23,40 +22,13 @@ export GIT_EDITOR='nvim'
 export DOTS_DIR="$HOME/.config/.dotfiles/"
 # export RANGER_LOAD_DEFAULT_RC=FALSE # uncomment if you dont want the default config loaded, as well.
 
-# Which completions would you like to load? (completions can be found in ~/.oh-my-bash/completions/*)
-# Custom completions may be added to ~/.oh-my-bash/custom/completions/
-# Example format: completions=(ssh git bundler gem pip pip3)
-# Add wisely, as too many completions slow down shell startup.
-export completions=(
-	defaults
-	brew
-	dirs
-	docker
-	docker-compose
-	gh
-	git
-	git_flow
-	composer
-	ssh
-)
+# Load cargo environment
+if [[ -f ~/.cargo/env ]]; then
+	. ~/.cargo/env
+fi
 
-# Which aliases would you like to load? (aliases can be found in ~/.oh-my-bash/aliases/*)
-# Custom aliases may be added to ~/.oh-my-bash/custom/aliases/
-# Example format: aliases=(vagrant composer git-avh)
-# Add wisely, as too many aliases slow down shell startup.
-export aliases=(
-	general
-)
+# Brew environment
+if [[ -f /opt/homebrew/bin/brew ]]; then
+	eval "$("/opt/homebrew/bin/brew" shellenv)"
+fi
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-bash/plugins/*)
-# Custom plugins may be added to ~/.oh-my-bash/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-export plugins=(
-	fasd
-	git
-	bashmarks
-	brew
-	npm
-	nvm
-)
