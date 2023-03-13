@@ -1,22 +1,25 @@
-# Source aliases
-source ~/.aliases
-
 # Add paths
 fish_add_path "/opt/local/bin" "/opt/local/sbin" # Homebrew applications
 fish_add_path "$HOME"/kde/src/kdesrc-build # KDE src location
 fish_add_path /usr/lib/jvm/default/bin # java bin
 fish_add_path "$HOME"/.cargo/bin # cargo bin
+fish_add_path "$PNPM_HOME" 
+fish_add_path "$HOME"/.spicetify
 
+# Source aliases
+if [ -f "$HOME"/.aliases ];
+    source ~/.aliases
+end
+
+# 1password plugin
 if [ -f ~/.config/op/plugins.sh ];
     source ~/.config/op/plugins.sh
 end
 
-# pnpm
-set -gx PNPM_HOME "$HOME/.local/share/pnpm"
-if not string match -q -- $PNPM_HOME $PATH
-  set -gx PATH "$PNPM_HOME" $PATH
+# Brew environment
+if [ -f /opt/homebrew/bin/brew ];
+	eval "$("/opt/homebrew/bin/brew" shellenv)"
 end
-# pnpm end
 
 # SSH setup 
 [ $(command -v fish_ssh_agent) ] && fish_ssh_agent
