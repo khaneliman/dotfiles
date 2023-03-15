@@ -6,12 +6,19 @@ case $- in
 *) return ;;
 esac
 
+# Source environment config
 if [ -f "$HOME"/.bashenv ]; then
 	. "$HOME"/.bashenv
 fi
 
+# Source aliases
 if [ -f "$HOME"/.aliases ]; then
 	source "$HOME"/.aliases
+fi
+
+# Source functions
+if [ -f "$HOME"/.functions ]; then
+	source "$HOME"/.functions
 fi
 
 # choose preferred prompt, oh-my-bash or oh-my-posh

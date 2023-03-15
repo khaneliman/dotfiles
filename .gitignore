@@ -44,6 +44,7 @@ node_modules
 !/dots/shared/home/.config/fish/functions/bak.fish
 !/dots/shared/home/.config/fish/functions/cd.fish
 !/dots/shared/home/.config/fish/functions/clear.fish
+!/dots/shared/home/.config/fish/functions/ex.fish
 !/dots/shared/home/.config/fish/functions/git.fish
 !/dots/shared/home/.config/fish/functions/mkcd.fish
 !/dots/shared/home/.config/fish/functions/mvcd.fish

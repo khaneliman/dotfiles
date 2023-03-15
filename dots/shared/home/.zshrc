@@ -12,6 +12,11 @@ if [ -f "$HOME"/.aliases ]; then
   source ~/.aliases
 fi
 
+# Source functions
+if [ -f "$HOME"/.functions ]; then
+	source "$HOME"/.functions
+fi
+
 ##
 #
 # Znap plugin management
@@ -48,43 +53,6 @@ if type brew &>/dev/null; then
   autoload -Uz compinit
   compinit
 fi
-
-# Macos functions
-if [ $(uname) = 'Darwin' ]; then # Begin Darwin check 
-  # Sketchybar interactivity overloads
-  function brew() {
-    command brew "$@"
-
-    if [[ $* =~ "upgrade" ]] || [[ $* =~ "update" ]] || [[ $* =~ "outdated" ]]; then
-      sketchybar --trigger brew_update
-    fi
-    
-    local dump_commands=('install' 'uninstall') # Include all commands that should do a brew dump
-    local main_command="${1}"
-
-    for command in "${dump_commands[@]}"; do
-      [[ "${command}" == "${main_command}" ]] && brew bundle dump --file="${HOME}/.Brewfile" --force
-    done
-  }
-
-  function mas() {
-    command mas "$@"
-
-    if [[ $* =~ "upgrade" ]] || [[ $* =~ "update" ]] || [[ $* =~ "outdated" ]]; then
-      sketchybar --trigger brew_update
-    fi
-  }
-
-  function zen() {
-    ~/.config/sketchybar/plugins/zen.sh $1
-  }
-
-  function push() {
-    command git push
-    sketchybar --trigger git_push
-  }
-
-fi # end Darwin check
 
 # Determine prompt 
 if [ $(command -v oh-my-posh) ]; then

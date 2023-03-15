@@ -1,0 +1,72 @@
+#! /usr/bin/env bash
+# Bash / Zsh functions
+
+# Macos functions
+if [ "$(uname)" = 'Darwin' ]; then # Begin Darwin check
+	# Sketchybar interactivity overloads
+	function brew() {
+		command brew "$@"
+
+		if [[ $* =~ "upgrade" ]] || [[ $* =~ "update" ]] || [[ $* =~ "outdated" ]]; then
+			sketchybar --trigger brew_update
+		fi
+
+		local dump_commands=('install' 'uninstall') # Include all commands that should do a brew dump
+		local main_command="${1}"
+
+		for command in "${dump_commands[@]}"; do
+			[[ "${command}" == "${main_command}" ]] && brew bundle dump --file="${HOME}/.Brewfile" --force
+		done
+	}
+
+	function mas() {
+		command mas "$@"
+
+		if [[ $* =~ "upgrade" ]] || [[ $* =~ "update" ]] || [[ $* =~ "outdated" ]]; then
+			sketchybar --trigger brew_update
+		fi
+	}
+
+	function zen() {
+		~/.config/sketchybar/plugins/zen.sh "$1"
+	}
+
+	function push() {
+		command git push
+		sketchybar --trigger git_push
+	}
+
+fi # end Darwin check
+
+ex() {
+	if [ -f "$1" ]; then
+		filename=$(basename -- "$1")
+		foldername="${filename%.*}"
+		mkdir -p "$foldername"
+		case "$1" in
+		*.tar.bz2) tar xjf "$1" -C "$foldername" ;;
+		*.tar.gz) tar xzf "$1" -C "$foldername" ;;
+		*.bz2)
+			bunzip2 -k "$1"
+			mv "${filename%.bz2}" "./$foldername/"
+			;;
+		*.rar) unrar x "$1" "./$foldername/" ;;
+		*.gz)
+			gunzip -k "$1"
+			mv "${filename%.gz}" "./$foldername/"
+			;;
+		*.tar) tar xf "$1" -C "./$foldername/" ;;
+		*.tbz2) tar xjf "$1" -C "./$foldername/" ;;
+		*.tgz) tar xzf "$1" -C "./$foldername/" ;;
+		*.zip) unzip -d "./$foldername/" "$filename" ;;
+		*.Z)
+			uncompress "$filename"
+			mv "${filename%.Z}" "./$foldername/"
+			;;
+		*.7z) 7z x "$filename" "-o./$foldername/" ;;
+		*) echo "'$filename' cannot be extracted via ex()" ;;
+		esac
+	else
+		echo "'$filename' is not a valid file"
+	fi
+}

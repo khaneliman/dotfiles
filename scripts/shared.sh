@@ -38,6 +38,8 @@ shared_backup_existing() {
 	backup_files "$HOME"/.zshenv "$BACKUP_LOCATION"/
 	backup_files "$HOME"/.zshrc "$BACKUP_LOCATION"/
 	backup_files "$HOME"/.p10k.zsh "$BACKUP_LOCATION"/
+	backup_files "$HOME"/.aliases "$BACKUP_LOCATION"/
+	backup_files "$HOME"/.functions "$BACKUP_LOCATION"/
 
 	git_crypt_check && backup_files "$HOME"/.gnupg "$BACKUP_LOCATION"
 	git_crypt_check && backup_files "$HOME"/.gitconfig.signing "$BACKUP_LOCATION"
@@ -219,6 +221,8 @@ shared_copy_configuration() {
 	link_locations "$SHARED_HOME"/.p10k.zsh "$HOME"/.p10k.zsh
 	link_locations "$SHARED_HOME"/.zshrc "$HOME"/.zshrc
 	link_locations "$SHARED_HOME"/.zshenv "$HOME"/.zshenv
+	link_locations "$SHARED_HOME"/.aliases "$HOME"/.aliases
+	link_locations "$SHARED_HOME"/.functions "$HOME"/.functions
 
 	git_crypt_check && link_locations "$SHARED_HOME"/.gnupg "$HOME"/.gnupg
 	git_crypt_check && link_locations "$SHARED_HOME"/.gitconfig.signing "$HOME"/.gitconfig.signing
