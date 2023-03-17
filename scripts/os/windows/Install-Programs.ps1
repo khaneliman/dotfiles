@@ -100,7 +100,11 @@ if (Test-CommandExists winget)
         'Microsoft.Sysinternals.Autoruns',
         'Valve.Steam',
         'HeroicGamesLauncher.HeroicGamesLauncher',
-        'Alacritty.Alacritty'
+        'Alacritty.Alacritty',
+        'Rustlang.Rustup',
+        'LLVM.LLVM',
+        'CoreyButler.NVMforWindows',
+        'JesseDuffield.lazygit'
     )
 
     foreach ($app in $winget_apps)
