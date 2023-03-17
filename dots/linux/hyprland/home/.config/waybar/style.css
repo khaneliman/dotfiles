@@ -54,7 +54,7 @@ box {
 }
 
 /* Primary monitor configuration */
-window.DP-2,
+window.DP-1,
 #notifications,
 #workspaces {
   margin: 0.5em;
@@ -67,7 +67,7 @@ window.DP-2,
 }
 
 /* Secondary monitor configuration */
-window.DP-1 #workspaces {
+window.DP-3 #workspaces {
   margin: 0.5em;
   padding: 0 1em;
 }

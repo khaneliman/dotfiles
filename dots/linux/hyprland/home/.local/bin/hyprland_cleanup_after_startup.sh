@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-sleep 10
+sleep 1
 
 hyprctl keyword windowrule "workspace unset,kitty"
 hyprctl keyword windowrule "workspace unset,Code"

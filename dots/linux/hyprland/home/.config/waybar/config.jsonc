@@ -1,11 +1,9 @@
 [
   {
-    "include": [
-      "~/.config/waybar/default-modules.jsonc"
-    ],
+    "include": ["~/.config/waybar/default-modules.jsonc"],
     "layer": "top",
     "position": "top",
-    "output": "DP-2",
+    "output": "DP-1",
     "margin-top": 10,
     "margin-left": 20,
     "margin-right": 20,
@@ -28,12 +26,10 @@
     ]
   },
   {
-    "include": [
-      "~/.config/waybar/default-modules.jsonc"
-    ],
+    "include": ["~/.config/waybar/default-modules.jsonc"],
     "layer": "top",
     "position": "top",
-    "output": "DP-1",
+    "output": "DP-3",
     "margin-top": 10,
     "margin-left": 20,
     "margin-right": 20,
@@ -44,10 +40,6 @@
       "custom/separator-left",
       "hyprland/window"
     ],
-    "modules-right": [
-      "group/notifications",
-      "custom/weather",
-      "clock"
-    ]
+    "modules-right": ["group/notifications", "custom/weather", "clock"]
   }
 ]
