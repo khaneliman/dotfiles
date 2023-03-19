@@ -25,7 +25,7 @@
       "4": "",
       "5": "",
       "6": "",
-      "7": "",
+      "7": "",
       "8": "󰢹",
       "urgent": "",
       "default": ""
@@ -54,8 +54,8 @@
     "format-paused": "{player_icon} {status_icon} <i>{dynamic}</i>",
     "max-length": 45,
     "player-icons": {
-      "chromium": "爵",
-      "default": "",
+      "chromium": "",
+      "default": "",
       "firefox": "",
       "kdeconnect": "",
       "mopidy": "",

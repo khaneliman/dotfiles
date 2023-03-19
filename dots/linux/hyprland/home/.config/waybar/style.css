@@ -186,6 +186,7 @@ window.DP-3 #workspaces {
 
 #clock {
   font-size: 16px;
+  font-weight: 900;
 }
 
 /* Custom styling for the logout icon on end */

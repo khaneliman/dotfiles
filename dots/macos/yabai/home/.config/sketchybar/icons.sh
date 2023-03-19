@@ -26,7 +26,7 @@ export GIT_ISSUE=􀍷
 export GIT_DISCUSSION=􀒤
 export GIT_PULL_REQUEST=􀙡
 export GIT_COMMIT=􀡚
-export GIT_INDICATOR=􀂓
+export GIT_INDICATOR=
 
 # Spotify Icons
 export SPOTIFY_BACK=􀊎
