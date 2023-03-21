@@ -1,0 +1,51 @@
+Shared:
+- dots/shared/**/*
+- scripts/shared.sh
+
+Linux:
+- dots/linux/**/*
+- scripts/os/linux.sh
+- scripts/desktop-environment/*
+
+MacOS:
+- dots/macos/**/*
+- scripts/os/mac.sh
+- scripts/os/mac/*
+
+Windows:
+- dots/windows/**/*
+- scripts/os/windows/*
+- scripts/os/windows.ps1
+
+Hyprland:
+- dots/linux/hyprland/**/*
+- scripts/desktop-environment/hyprland.sh
+
+AwesomeWM: 
+- dots/linux/awesome/**/*
+- scripts/desktop-environment/awesomewm.sh
+
+Gnome: 
+- dots/linux/gnome/**/*
+- scripts/desktop-environment/gnome.sh
+
+Komorebi:
+- dots/windows/komorebi/**/*
+
+Yabai:
+- dots/macos/yabai/**/*
+
+Server:
+- dots/server/**/*
+
+Unraid:
+- dots/server/unraid/**/*
+
+Docker: 
+- dots/server/docker/**/*
+
+repo:
+- '*'
+
+GitHub-Action:
+- .github/workflows/*
