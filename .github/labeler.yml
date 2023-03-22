@@ -12,6 +12,10 @@ MacOS:
 - scripts/os/mac.sh
 - scripts/os/mac/*
 
+NixOS:
+- dots/nixos/**/*
+- scripts/os/nixos/**/*
+
 Windows:
 - dots/windows/**/*
 - scripts/os/windows/*
