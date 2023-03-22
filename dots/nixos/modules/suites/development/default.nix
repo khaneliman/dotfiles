@@ -40,7 +40,6 @@ in
         http = enabled;
         k8s = enabled;
         node = enabled;
-        titan = enabled;
         qmk = enabled;
       };
 
