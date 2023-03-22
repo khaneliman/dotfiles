@@ -1,69 +1,139 @@
 {
-  description = "My Personal NixOS Configuration";
+  description = "KhaneliNix";
 
-  inputs =
-    {
-      nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-      neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-      rust-overlay.url = "github:oxalica/rust-overlay";
-      impermanence.url = "github:nix-community/impermanence";
-      nur.url = "github:nix-community/NUR";
-      hyprpicker.url = "github:hyprwm/hyprpicker";
-      hypr-contrib.url = "github:hyprwm/contrib";
-      flake-utils.url = "github:numtide/flake-utils";
-      sops-nix.url = "github:Mic92/sops-nix";
-      picom.url = "github:yaocccc/picom";
-      hyprland.url = "github:hyprwm/Hyprland";
-      home-manager = {
-        url = "github:nix-community/home-manager";
-        inputs.nixpkgs.follows = "nixpkgs";
-      };
+  inputs = {
+    # NixPkgs (nixos-22.11)
+    nixpkgs.url =
+      "github:nixos/nixpkgs/nixos-22.11";
+
+    # NixPkgs Unstable (nixos-unstable)
+    unstable.url =
+      "github:nixos/nixpkgs/nixos-unstable";
+
+    # Home Manager (release-22.05)
+    home-manager.url =
+      "github:nix-community/home-manager/release-22.11";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    # macOS Support (master)
+    darwin.url = "github:lnl7/nix-darwin";
+    darwin.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Hardware Configuration
+    nixos-hardware.url = "github:nixos/nixos-hardware";
+
+    # Generate System Images
+    nixos-generators.url =
+      "github:nix-community/nixos-generators";
+    nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Snowfall Lib
+    snowfall-lib.url = "github:snowfallorg/lib/dev";
+    snowfall-lib.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Snowfall Flake
+    flake.url = "github:snowfallorg/flake";
+    flake.inputs.nixpkgs.follows = "unstable";
+    # flake.inputs.snowfall-lib.follows = "snowfall-lib";
+
+    # Comma
+    comma.url =
+      "github:nix-community/comma";
+    comma.inputs.nixpkgs.follows = "unstable";
+
+    # System Deployment
+    deploy-rs.url = "github:serokell/deploy-rs";
+    deploy-rs.inputs.nixpkgs.follows = "unstable";
+
+    # Run unpatched dynamically compiled binaries
+    nix-ld.url = "github:Mic92/nix-ld";
+    nix-ld.inputs.nixpkgs.follows = "unstable";
+
+    # Neovim
+    neovim.url = "github:neovim/neovim?dir=contrib";
+    neovim.inputs.nixpkgs.follows = "unstable";
+
+    # Discord Replugged
+    replugged.url = "github:LunNova/replugged-nix-flake";
+    replugged.inputs.nixpkgs.follows = "unstable";
+
+    # Discord Replugged plugins / themes
+    discord-tweaks = {
+      url = "github:NurMarvin/discord-tweaks";
+      flake = false;
+    };
+    discord-nord-theme = {
+      url = "github:DapperCore/NordCord";
+      flake = false;
     };
 
-  outputs = inputs @ { self, nixpkgs, flake-utils, ... }:
+    # Cows!
+    cowsay = {
+      url = "github:snowfallorg/cowsay";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.unstable.follows = "unstable";
+    };
+
+    # Backup management
+    icehouse = {
+      url = "github:snowfallorg/icehouse";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.unstable.follows = "unstable";
+    };
+
+    # Yubikey Guide
+    yubikey-guide = {
+      url = "github:drduh/YubiKey-Guide";
+      flake = false;
+    };
+
+    # GPG default configuration
+    gpg-base-conf = {
+      url = "github:drduh/config";
+      flake = false;
+    };
+
+    bibata-cursors = {
+      url = "github:suchipi/Bibata_Cursor";
+      flake = false;
+    };
+
+  };
+
+  outputs = inputs:
     let
-      user = "khaneliman";
-      domain = "khaneliman.top";
-      selfPkgs = import ./pkgs;
+      lib = inputs.snowfall-lib.mkLib {
+        inherit inputs;
+        src = ./.;
+      };
     in
-    flake-utils.lib.eachSystem [ "x86_64-linux" "aarch64-linux"]
-      (
-        system:
-        let
-          pkgs = import nixpkgs {
-            inherit system;
-            overlays = [
-              self.overlays.default
-            ];
-          };
-        in
-        {
-          devShells = {
-            #run by `nix devlop` or `nix-shell`(legacy)
-            default = import ./shell.nix { inherit pkgs; };
-            #run by `nix devlop .#<name>`
-            secret = with pkgs; mkShell {
-              name = "secret";
-              nativeBuildInputs = [
-                sops
-                age
-                ssh-to-age
-                ssh-to-pgp
-              ];
-              shellHook = ''
-                export PS1="\e[0;31m(Secret)\$ \e[m" 
-              '';
-            };
-          };
-        }
-      )
-      overlays.default = selfPkgs.overlay;
-      nixosConfigurations = (
-        # NixOS configurations
-        import ./hosts {
-          # Imports ./hosts/default.nix
-          inherit nixpkgs self inputs user;
-        }
-      );
+    lib.mkFlake {
+      package-namespace = "plusultra";
+
+      channels-config.allowUnfree = true;
+
+      overlays = with inputs; [
+        neovim.overlay
+        flake.overlay
+        cowsay.overlay
+        icehouse.overlay
+      ];
+
+      systems.modules = with inputs; [
+        home-manager.nixosModules.home-manager
+        nix-ld.nixosModules.nix-ld
+      ];
+
+      systems.hosts.jasper.modules = with inputs; [
+        nixos-hardware.nixosModules.framework
+      ];
+
+      deploy = lib.mkDeploy { inherit (inputs) self; };
+
+      checks =
+        builtins.mapAttrs
+          (system: deploy-lib:
+            deploy-lib.deployChecks inputs.self.deploy)
+          inputs.deploy-rs.lib;
     };
 }
