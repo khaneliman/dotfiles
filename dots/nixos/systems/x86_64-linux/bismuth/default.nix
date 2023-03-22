@@ -21,7 +21,6 @@ with lib.internal;
 
   environment.systemPackages = with pkgs;
     [
-      chromium
       plusultra.kalidoface
     ];
 
