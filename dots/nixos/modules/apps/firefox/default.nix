@@ -27,7 +27,6 @@ in
   };
 
   config = mkIf cfg.enable {
-    plusultra.desktop.addons.firefox-nordic-theme = enabled;
 
     services.gnome.gnome-browser-connector.enable = config.plusultra.desktop.gnome.enable;
 

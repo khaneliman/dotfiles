@@ -41,7 +41,6 @@ with lib.internal;
       node = enabled;
       http = enabled;
       misc = enabled;
-      titan = enabled;
     };
 
     hardware = {
