@@ -26,7 +26,7 @@
       domain = "khaneliman.top";
       selfPkgs = import ./pkgs;
     in
-    flake-utils.lib.eachSystem [ "x86_64-linux" ]
+    flake-utils.lib.eachSystem [ "x86_64-linux" "aarch64-linux"]
       (
         system:
         let
@@ -57,13 +57,11 @@
           };
         }
       )
-    // {
       overlays.default = selfPkgs.overlay;
       nixosConfigurations = (
         # NixOS configurations
         import ./hosts {
           # Imports ./hosts/default.nix
-          system = "x86_64-linux";
           inherit nixpkgs self inputs user;
         }
       );
