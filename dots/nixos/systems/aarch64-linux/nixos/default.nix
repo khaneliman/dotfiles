@@ -5,8 +5,6 @@ with lib.internal;
 {
   imports = [ ./hardware.nix ];
 
-  boot.loader.grub.enable = true;
-
   programs.sway.extraSessionCommands = ''
     WLR_NO_HARDWARE_CURSORS=1
   '';
@@ -56,6 +54,7 @@ with lib.internal;
     };
 
     system = {
+      boot =enabled;
       fonts = enabled;
       locale = enabled;
       time = enabled;
