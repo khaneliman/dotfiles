@@ -15,7 +15,6 @@ with lib.internal;
     apps = {
       _1password = enabled;
       firefox = enabled;
-      logseq = enabled;
       vscode = enabled;
     };
 
