@@ -1,13 +1,13 @@
 { lib, stdenv, fetchzip, pkgs, ... }:
 
 stdenv.mkDerivation rec {
-  pname = "cattpuccin-latte-gtk";
-  version = "0.2.7";
+  pname = "cattpuccin-macchiato-gtk";
+  version = "0.4.1";
 
   src = fetchzip {
     url =
-      "https://github.com/catppuccin/gtk/releases/download/v-0.2.7/Catppuccin-Latte-Green.zip";
-    sha256 = "sha256-5jZj/KDkxeMCqVcnu4ZT6bmNjo//o89A3eYHck2VZ70=";
+      "https://github.com/catppuccin/gtk/releases/download/v-0.4.1/Catppuccin-Macchiato-Standard-Blue-Dark.zip";
+    sha256 = "w7yv9e9MuZgmCdr/RdDxg2hAeIhb1f82idUj4diI8v8=";
     stripRoot = false;
   };
 
@@ -18,7 +18,7 @@ stdenv.mkDerivation rec {
 
   installPhase = ''
     mkdir -p $out/share/themes/
-    cp -r Catppuccin-Latte-Green $out/share/themes
+    cp -r Catppuccin-Macchiato-Standard-Blue $out/share/themes
   '';
 
   meta = {

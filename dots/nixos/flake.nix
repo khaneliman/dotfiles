@@ -13,10 +13,7 @@
       flake-utils.url = "github:numtide/flake-utils";
       sops-nix.url = "github:Mic92/sops-nix";
       picom.url = "github:yaocccc/picom";
-      hyprland = {
-        url = "github:hyprwm/Hyprland";
-        inputs.nixpkgs.follows = "nixpkgs";
-      };
+      hyprland.url = "github:hyprwm/Hyprland";
       home-manager = {
         url = "github:nix-community/home-manager";
         inputs.nixpkgs.follows = "nixpkgs";
@@ -45,18 +42,6 @@
             #run by `nix devlop` or `nix-shell`(legacy)
             default = import ./shell.nix { inherit pkgs; };
             #run by `nix devlop .#<name>`
-            blog = with pkgs; mkShell {
-              name = "blog";
-              nativeBuildInputs = [
-                hugo
-              ];
-              shellHook = ''
-                export PS1="\e[0;32m(Blog)\$ \e[m" 
-                cd ./blog
-                cp -r ./static/hugo-theme-stack ./themes/
-                #hugo server --buildDrafts --forceSyncStatic
-              '';
-            };
             secret = with pkgs; mkShell {
               name = "secret";
               nativeBuildInputs = [
