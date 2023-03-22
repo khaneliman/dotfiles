@@ -42,7 +42,7 @@ with lib.internal;
     };
 
     hardware = {
-      audio = enabled;
+      # audio = enabled;
       networking = enabled;
     };
 
