@@ -30,6 +30,6 @@ rustPlatform.buildRustPackage rec {
     description = "A Solution to your Wayland Wallpaper Woes. ";
     homepage = "https://github.com/Horus645/${pname}";
     license = licenses.gpl3Only;
-    platforms = [ "x86_64-linux" ];
+    platforms = lib.platforms.unix;
   };
 }

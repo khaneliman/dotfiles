@@ -12,6 +12,8 @@
       ../../modules/desktop/hyprland
     ];
 
+  nixpkgs.system = "aarch64-linux";
+
   sops.defaultSopsFile = ../../secrets/secrets.yaml;
   users.mutableUsers = false;
   users.users.root.initialHashedPassword = "$6$zFiGJgqJfjwLXUI3$CFZsP5cPFRD5jDAp.HBnKAqlWNArrJwHQhOa91rqA1SJveIiZOOXUsUGpwykQuzPyxudOYt62Dw00bkwXtpuc0";
