@@ -2,7 +2,7 @@
 
 {
   home.sessionVariables = {
-    GTK_THEME = "Catppuccin-Frappe-Pink";
+    GTK_THEME = "Catppuccin-Macchiato-Standard-Blue";
   };
   home.pointerCursor = {
     package = pkgs.catppuccin-cursors;
@@ -13,8 +13,8 @@
   gtk = {
     enable = true;
     theme = {
-      name = "Catppuccin-Frappe-Pink";
-      package = pkgs.catppuccin-frappe-gtk;
+      name = "Catppuccin-Macchiato-Standard-Blue";
+      package = pkgs.catppuccin-macchiato-gtk;
     };
     cursorTheme = {
       name = "Catppuccin-Frappe-Dark";
