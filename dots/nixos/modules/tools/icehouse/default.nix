@@ -1,12 +1,12 @@
 { config, lib, pkgs, ... }:
 
 let
-  cfg = config.plusultra.tools.icehouse;
+  cfg = config.khaneliman.tools.icehouse;
 
   inherit (lib) mkEnableOption mkIf;
 in
 {
-  options.plusultra.tools.icehouse = {
+  options.khaneliman.tools.icehouse = {
     enable = mkEnableOption "Icehouse";
   };
 

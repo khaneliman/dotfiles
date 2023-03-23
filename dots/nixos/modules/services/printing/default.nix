@@ -2,10 +2,10 @@
 
 with lib;
 with lib.internal;
-let cfg = config.plusultra.services.printing;
+let cfg = config.khaneliman.services.printing;
 in
 {
-  options.plusultra.services.printing = with types; {
+  options.khaneliman.services.printing = with types; {
     enable = mkBoolOpt false "Whether or not to configure printing support.";
   };
 

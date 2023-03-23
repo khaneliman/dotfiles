@@ -3,10 +3,10 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.plusultra.apps.yubikey;
+  cfg = config.khaneliman.apps.yubikey;
 in
 {
-  options.plusultra.apps.yubikey = with types; {
+  options.khaneliman.apps.yubikey = with types; {
     enable = mkBoolOpt false "Whether or not to enable Yubikey.";
   };
 

@@ -7,7 +7,7 @@ with lib.internal;
   # is incompatible with networkmanager.
   networking.wireless.enable = mkForce false;
 
-  plusultra = {
+  khaneliman = {
     nix = enabled;
 
     apps = {

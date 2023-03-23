@@ -3,15 +3,15 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.plusultra.archetypes.gaming;
+  cfg = config.khaneliman.archetypes.gaming;
 in
 {
-  options.plusultra.archetypes.gaming = with types; {
+  options.khaneliman.archetypes.gaming = with types; {
     enable = mkBoolOpt false "Whether or not to enable the gaming archetype.";
   };
 
   config = mkIf cfg.enable {
-    plusultra.suites = {
+    khaneliman.suites = {
       common = enabled;
       desktop = enabled;
       games = enabled;

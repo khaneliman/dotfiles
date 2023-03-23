@@ -21,7 +21,7 @@ with lib.internal;
 
   environment.systemPackages = with pkgs;
     [
-      plusultra.kalidoface
+      khaneliman.kalidoface
     ];
 
   services.minecraft-server = {
@@ -33,7 +33,7 @@ with lib.internal;
     };
   };
 
-  plusultra = {
+  khaneliman = {
     apps = {
       rpcs3 = enabled;
       ubports-installer = enabled;
@@ -73,8 +73,8 @@ with lib.internal;
 
     desktop.gnome = {
       wallpaper = {
-        light = pkgs.plusultra.wallpapers.nord-rainbow-light-nix-ultrawide;
-        dark = pkgs.plusultra.wallpapers.nord-rainbow-dark-nix-ultrawide;
+        light = pkgs.khaneliman.wallpapers.nord-rainbow-light-nix-ultrawide;
+        dark = pkgs.khaneliman.wallpapers.nord-rainbow-dark-nix-ultrawide;
       };
       monitors = ./monitors.xml;
     };

@@ -2,10 +2,10 @@
 
 with lib;
 with lib.internal;
-let cfg = config.plusultra.apps.logseq;
+let cfg = config.khaneliman.apps.logseq;
 in
 {
-  options.plusultra.apps.logseq = with types; {
+  options.khaneliman.apps.logseq = with types; {
     enable = mkBoolOpt false "Whether or not to enable logseq.";
   };
 

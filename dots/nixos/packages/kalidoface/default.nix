@@ -11,7 +11,7 @@ let
     desktopName = "Kalidoface 2D";
     genericName = "Animate Live2D characters using just your browser webcam!";
     exec = ''
-      ${firefox}/bin/firefox "https://kalidoface.com/?plusultra.app=true"'';
+      ${firefox}/bin/firefox "https://kalidoface.com/?khaneliman.app=true"'';
     icon = ./icon-2d.svg;
     type = "Application";
     categories = [ "Network" ];
@@ -23,7 +23,7 @@ let
     genericName =
       "Animate character faces, poses and fingers in 3D using just your browser webcam!";
     exec = ''
-      ${firefox}/bin/firefox "https://3d.kalidoface.com/?plusultra.app=true"'';
+      ${firefox}/bin/firefox "https://3d.kalidoface.com/?khaneliman.app=true"'';
     icon = ./icon-3d.svg;
     type = "Application";
     categories = [ "Network" ];

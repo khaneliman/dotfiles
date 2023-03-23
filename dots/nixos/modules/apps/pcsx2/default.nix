@@ -3,10 +3,10 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.plusultra.apps.pcsx2;
+  cfg = config.khaneliman.apps.pcsx2;
 in
 {
-  options.plusultra.apps.pcsx2 = with types; {
+  options.khaneliman.apps.pcsx2 = with types; {
     enable = mkBoolOpt false "Whether or not to enable PCSX2.";
   };
 

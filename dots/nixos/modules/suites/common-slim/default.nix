@@ -3,19 +3,19 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.plusultra.suites.common-slim;
+  cfg = config.khaneliman.suites.common-slim;
 in
 {
-  options.plusultra.suites.common-slim = with types; {
+  options.khaneliman.suites.common-slim = with types; {
     enable = mkBoolOpt false "Whether or not to enable common-slim configuration.";
   };
 
   config = mkIf cfg.enable {
     environment.systemPackages = [
-      pkgs.plusultra.list-iommu
+      pkgs.khaneliman.list-iommu
     ];
 
-    plusultra = {
+    khaneliman = {
       nix = enabled;
 
       cli-apps = {

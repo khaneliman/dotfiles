@@ -3,10 +3,10 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.plusultra.apps.vlc;
+  cfg = config.khaneliman.apps.vlc;
 in
 {
-  options.plusultra.apps.vlc = with types; {
+  options.khaneliman.apps.vlc = with types; {
     enable = mkBoolOpt false "Whether or not to enable vlc.";
   };
 

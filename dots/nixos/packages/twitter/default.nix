@@ -12,7 +12,7 @@ let
       desktopName = "Twitter";
       genericName = "The toxic bird app.";
       exec = ''
-        ${firefox}/bin/firefox "https://twitter.com/home?plusultra.app=true"'';
+        ${firefox}/bin/firefox "https://twitter.com/home?khaneliman.app=true"'';
       icon = ./icon.svg;
       type = "Application";
       categories = [ "Network" "InstantMessaging" "Feed" ];

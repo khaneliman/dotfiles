@@ -3,10 +3,10 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.plusultra.apps.prismlauncher;
+  cfg = config.khaneliman.apps.prismlauncher;
 in
 {
-  options.plusultra.apps.prismlauncher = with types; {
+  options.khaneliman.apps.prismlauncher = with types; {
     enable = mkBoolOpt false "Whether or not to enable Prism Launcher.";
   };
 

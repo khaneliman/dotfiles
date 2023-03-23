@@ -2,10 +2,10 @@
 
 with lib;
 with lib.internal;
-let cfg = config.plusultra.system.fonts;
+let cfg = config.khaneliman.system.fonts;
 in
 {
-  options.plusultra.system.fonts = with types; {
+  options.khaneliman.system.fonts = with types; {
     enable = mkBoolOpt false "Whether or not to manage fonts.";
     fonts = mkOpt (listOf package) [ ] "Custom font packages to install.";
   };

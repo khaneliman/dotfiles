@@ -2,10 +2,10 @@
 
 with lib;
 with lib.internal;
-let cfg = config.plusultra.security.doas;
+let cfg = config.khaneliman.security.doas;
 in
 {
-  options.plusultra.security.doas = {
+  options.khaneliman.security.doas = {
     enable = mkBoolOpt false "Whether or not to replace sudo with doas.";
   };
 
@@ -17,7 +17,7 @@ in
     security.doas = {
       enable = true;
       extraRules = [{
-        users = [ config.plusultra.user.name ];
+        users = [ config.khaneliman.user.name ];
         noPass = true;
         keepEnv = true;
       }];

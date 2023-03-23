@@ -2,10 +2,10 @@
 
 with lib;
 with lib.internal;
-let cfg = config.plusultra.apps.vscode;
+let cfg = config.khaneliman.apps.vscode;
 in
 {
-  options.plusultra.apps.vscode = with types; {
+  options.khaneliman.apps.vscode = with types; {
     enable = mkBoolOpt false "Whether or not to enable vscode.";
   };
 

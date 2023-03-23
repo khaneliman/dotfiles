@@ -3,12 +3,12 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.plusultra.suites.media;
+  cfg = config.khaneliman.suites.media;
 in
 {
-  options.plusultra.suites.media = with types; {
+  options.khaneliman.suites.media = with types; {
     enable = mkBoolOpt false "Whether or not to enable media configuration.";
   };
 
-  config = mkIf cfg.enable { plusultra = { apps = { freetube = enabled; }; }; };
+  config = mkIf cfg.enable { khaneliman = { apps = { freetube = enabled; }; }; };
 }

@@ -3,10 +3,10 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.plusultra.apps.gparted;
+  cfg = config.khaneliman.apps.gparted;
 in
 {
-  options.plusultra.apps.gparted = with types; {
+  options.khaneliman.apps.gparted = with types; {
     enable = mkBoolOpt false "Whether or not to enable gparted.";
   };
 

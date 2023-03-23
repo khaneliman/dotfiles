@@ -1,16 +1,16 @@
 { options, config, lib, pkgs, ... }:
 with lib;
 with lib.internal;
-let cfg = config.plusultra.archetypes.workstation;
+let cfg = config.khaneliman.archetypes.workstation;
 in
 {
-  options.plusultra.archetypes.workstation = with types; {
+  options.khaneliman.archetypes.workstation = with types; {
     enable =
       mkBoolOpt false "Whether or not to enable the workstation archetype.";
   };
 
   config = mkIf cfg.enable {
-    plusultra = {
+    khaneliman = {
       suites = {
         common = enabled;
         desktop = enabled;

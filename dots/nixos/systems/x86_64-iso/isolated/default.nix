@@ -56,7 +56,7 @@ in
     };
   };
 
-  plusultra = {
+  khaneliman = {
     nix = enabled;
 
     desktop = {

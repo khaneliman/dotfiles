@@ -2,17 +2,17 @@
 
 with lib;
 with lib.internal;
-let cfg = config.plusultra.nix;
+let cfg = config.khaneliman.nix;
 in
 {
-  options.plusultra.nix = with types; {
+  options.khaneliman.nix = with types; {
     enable = mkBoolOpt true "Whether or not to manage nix configuration.";
     package = mkOpt package pkgs.nixUnstable "Which nix package to use.";
   };
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      plusultra.nixos-revision
+      khaneliman.nixos-revision
       deploy-rs
       nixfmt
       nix-index
@@ -20,7 +20,7 @@ in
     ];
 
     nix =
-      let users = [ "root" config.plusultra.user.name ];
+      let users = [ "root" config.khaneliman.user.name ];
       in
       {
         package = cfg.package;
@@ -34,7 +34,7 @@ in
           auto-optimise-store = true;
           trusted-users = users;
           allowed-users = users;
-        } // (lib.optionalAttrs config.plusultra.tools.direnv.enable {
+        } // (lib.optionalAttrs config.khaneliman.tools.direnv.enable {
           keep-outputs = true;
           keep-derivations = true;
         });

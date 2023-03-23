@@ -3,10 +3,10 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.plusultra.apps.yuzu;
+  cfg = config.khaneliman.apps.yuzu;
 in
 {
-  options.plusultra.apps.yuzu = with types; {
+  options.khaneliman.apps.yuzu = with types; {
     enable = mkBoolOpt false "Whether or not to enable Yuzu.";
   };
 

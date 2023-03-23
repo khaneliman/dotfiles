@@ -4,12 +4,12 @@ let
   inherit (lib) mkIf mkEnableOption optional;
   inherit (lib.internal) mkOpt;
 
-  cfg = config.plusultra.security.acme;
+  cfg = config.khaneliman.security.acme;
 in
 {
-  options.plusultra.security.acme = with lib.types; {
+  options.khaneliman.security.acme = with lib.types; {
     enable = mkEnableOption "default ACME configuration";
-    email = mkOpt str config.plusultra.user.email "The email to use.";
+    email = mkOpt str config.khaneliman.user.email "The email to use.";
     staging = mkOpt bool virtual "Whether to use the staging server or not.";
   };
 

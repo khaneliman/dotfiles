@@ -3,12 +3,12 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.plusultra.tools.git;
-  gpg = config.plusultra.security.gpg;
-  user = config.plusultra.user;
+  cfg = config.khaneliman.tools.git;
+  gpg = config.khaneliman.security.gpg;
+  user = config.khaneliman.user;
 in
 {
-  options.plusultra.tools.git = with types; {
+  options.khaneliman.tools.git = with types; {
     enable = mkBoolOpt false "Whether or not to install and configure git.";
     userName = mkOpt types.str user.fullName "The name to configure git with.";
     userEmail = mkOpt types.str user.email "The email to configure git with.";
@@ -19,7 +19,7 @@ in
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [ git ];
 
-    plusultra.home.extraOptions = {
+    khaneliman.home.extraOptions = {
       programs.git = {
         enable = true;
         inherit (cfg) userName userEmail;

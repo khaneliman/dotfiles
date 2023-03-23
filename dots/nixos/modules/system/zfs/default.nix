@@ -1,14 +1,14 @@
 { config, lib, ... }:
 
 let
-  cfg = config.plusultra.system.zfs;
+  cfg = config.khaneliman.system.zfs;
 
   inherit (lib) mkEnableOption mkIf mkDefault;
   inherit (lib.internal) mkOpt enabled;
   inherit (lib.types) listOf str;
 in
 {
-  options.plusultra.system.zfs = {
+  options.khaneliman.system.zfs = {
     enable = mkEnableOption "ZFS support";
 
     pools = mkOpt (listOf str) [ "rpool" ] "The ZFS pools to manage.";
@@ -38,7 +38,7 @@ in
       };
     };
 
-    plusultra = {
+    khaneliman = {
       tools = {
         icehouse = enabled;
       };

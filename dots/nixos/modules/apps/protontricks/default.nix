@@ -3,10 +3,10 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.plusultra.apps.protontricks;
+  cfg = config.khaneliman.apps.protontricks;
 in
 {
-  options.plusultra.apps.protontricks = with types; {
+  options.khaneliman.apps.protontricks = with types; {
     enable = mkBoolOpt false "Whether or not to enable Protontricks.";
   };
 

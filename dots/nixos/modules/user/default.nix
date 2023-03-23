@@ -3,7 +3,7 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.plusultra.user;
+  cfg = config.khaneliman.user;
   defaultIconFileName = "profile.png";
   defaultIcon = pkgs.stdenvNoCC.mkDerivation {
     name = "default-icon";
@@ -20,14 +20,14 @@ let
   propagatedIcon = pkgs.runCommandNoCC "propagated-icon"
     { passthru = { fileName = cfg.icon.fileName; }; }
     ''
-      local target="$out/share/plusultra-icons/user/${cfg.name}"
+      local target="$out/share/khaneliman-icons/user/${cfg.name}"
       mkdir -p "$target"
 
       cp ${cfg.icon} "$target/${cfg.icon.fileName}"
     '';
 in
 {
-  options.plusultra.user = with types; {
+  options.khaneliman.user = with types; {
     name = mkOpt str "khaneliman" "The name to use for the user account.";
     fullName = mkOpt str "Austin Horstman" "The full name of the user.";
     email = mkOpt str "khaneliman12@gmail.com" "The email of the user.";
@@ -45,7 +45,7 @@ in
       cowsay
       fortune
       lolcat
-      plusultra.cowsay-plus
+      khaneliman.cowsay-plus
       propagatedIcon
     ];
 
@@ -55,7 +55,7 @@ in
       histFile = "$XDG_CACHE_HOME/zsh.history";
     };
 
-    plusultra.home = {
+    khaneliman.home = {
       file = {
         "Desktop/.keep".text = "";
         "Documents/.keep".text = "";

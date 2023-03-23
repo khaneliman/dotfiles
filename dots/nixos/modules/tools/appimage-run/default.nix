@@ -3,15 +3,15 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.plusultra.tools.appimage-run;
+  cfg = config.khaneliman.tools.appimage-run;
 in
 {
-  options.plusultra.tools.appimage-run = with types; {
+  options.khaneliman.tools.appimage-run = with types; {
     enable = mkBoolOpt false "Whether or not to enable appimage-run.";
   };
 
   config = mkIf cfg.enable {
-    plusultra.home.configFile."wgetrc".text = "";
+    khaneliman.home.configFile."wgetrc".text = "";
 
     environment.systemPackages = with pkgs; [
       appimage-run

@@ -3,15 +3,15 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.plusultra.suites.music;
+  cfg = config.khaneliman.suites.music;
 in
 {
-  options.plusultra.suites.music = with types; {
+  options.khaneliman.suites.music = with types; {
     enable = mkBoolOpt false "Whether or not to enable music configuration.";
   };
 
   config = mkIf cfg.enable {
-    plusultra = {
+    khaneliman = {
       apps = {
         ardour = enabled;
         bottles = enabled;

@@ -2,10 +2,10 @@
 
 with lib;
 with lib.internal;
-let cfg = config.plusultra.hardware.storage;
+let cfg = config.khaneliman.hardware.storage;
 in
 {
-  options.plusultra.hardware.storage = with types; {
+  options.khaneliman.hardware.storage = with types; {
     enable = mkBoolOpt false
       "Whether or not to enable support for extra storage devices.";
   };

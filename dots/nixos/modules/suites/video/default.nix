@@ -3,15 +3,15 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.plusultra.suites.video;
+  cfg = config.khaneliman.suites.video;
 in
 {
-  options.plusultra.suites.video = with types; {
+  options.khaneliman.suites.video = with types; {
     enable = mkBoolOpt false "Whether or not to enable video configuration.";
   };
 
   config = mkIf cfg.enable {
-    plusultra = {
+    khaneliman = {
       apps = {
         pitivi = enabled;
         obs = enabled;
