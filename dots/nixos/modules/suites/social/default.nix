@@ -3,15 +3,15 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.plusultra.suites.social;
+  cfg = config.khaneliman.suites.social;
 in
 {
-  options.plusultra.suites.social = with types; {
+  options.khaneliman.suites.social = with types; {
     enable = mkBoolOpt false "Whether or not to enable social configuration.";
   };
 
   config = mkIf cfg.enable {
-    plusultra = {
+    khaneliman = {
       apps = {
         discord = {
           enable = true;

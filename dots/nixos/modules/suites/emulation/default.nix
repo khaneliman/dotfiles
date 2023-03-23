@@ -3,16 +3,16 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.plusultra.suites.emulation;
+  cfg = config.khaneliman.suites.emulation;
 in
 {
-  options.plusultra.suites.emulation = with types; {
+  options.khaneliman.suites.emulation = with types; {
     enable =
       mkBoolOpt false "Whether or not to enable emulation configuration.";
   };
 
   config = mkIf cfg.enable {
-    plusultra = {
+    khaneliman = {
       apps = {
         yuzu = enabled;
         pcsx2 = enabled;

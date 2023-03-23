@@ -2,17 +2,17 @@
 
 with lib;
 with lib.internal;
-let cfg = config.plusultra.virtualisation.podman;
+let cfg = config.khaneliman.virtualisation.podman;
 in
 {
-  options.plusultra.virtualisation.podman = with types; {
+  options.khaneliman.virtualisation.podman = with types; {
     enable = mkBoolOpt false "Whether or not to enable Podman.";
   };
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [ podman-compose ];
 
-    plusultra.home.extraOptions = {
+    khaneliman.home.extraOptions = {
       home.shellAliases = { "docker-compose" = "podman-compose"; };
     };
 

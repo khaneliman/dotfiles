@@ -3,7 +3,7 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.plusultra.cli-apps.tmux;
+  cfg = config.khaneliman.cli-apps.tmux;
   configFiles = lib.snowfall.fs.get-files ./config;
 
   # Extrakto with wl-clipboard patched in.
@@ -44,12 +44,12 @@ let
     ]);
 in
 {
-  options.plusultra.cli-apps.tmux = with types; {
+  options.khaneliman.cli-apps.tmux = with types; {
     enable = mkBoolOpt false "Whether or not to enable tmux.";
   };
 
   config = mkIf cfg.enable {
-    plusultra.home.extraOptions = {
+    khaneliman.home.extraOptions = {
       programs.tmux = {
         enable = true;
         terminal = "screen-256color-bce";

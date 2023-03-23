@@ -3,11 +3,11 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.plusultra.apps.looking-glass-client;
-  user = config.plusultra.user;
+  cfg = config.khaneliman.apps.looking-glass-client;
+  user = config.khaneliman.user;
 in
 {
-  options.plusultra.apps.looking-glass-client = with types; {
+  options.khaneliman.apps.looking-glass-client = with types; {
     enable =
       mkBoolOpt false "Whether or not to enable the Looking Glass client.";
   };

@@ -2,10 +2,10 @@
 
 with lib;
 with lib.internal;
-let cfg = config.plusultra.system.boot;
+let cfg = config.khaneliman.system.boot;
 in
 {
-  options.plusultra.system.boot = with types; {
+  options.khaneliman.system.boot = with types; {
     enable = mkBoolOpt false "Whether or not to enable booting.";
   };
 

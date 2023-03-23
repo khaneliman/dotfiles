@@ -2,10 +2,10 @@
 
 with lib;
 with lib.internal;
-let cfg = config.plusultra.apps.inkscape;
+let cfg = config.khaneliman.apps.inkscape;
 in
 {
-  options.plusultra.apps.inkscape = with types; {
+  options.khaneliman.apps.inkscape = with types; {
     enable = mkBoolOpt false "Whether or not to enable Inkscape.";
   };
 

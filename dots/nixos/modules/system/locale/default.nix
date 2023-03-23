@@ -2,10 +2,10 @@
 
 with lib;
 with lib.internal;
-let cfg = config.plusultra.system.locale;
+let cfg = config.khaneliman.system.locale;
 in
 {
-  options.plusultra.system.locale = with types; {
+  options.khaneliman.system.locale = with types; {
     enable = mkBoolOpt false "Whether or not to manage locale settings.";
   };
 

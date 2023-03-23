@@ -2,10 +2,10 @@
 
 with lib;
 with lib.internal;
-let cfg = config.plusultra.tools.http;
+let cfg = config.khaneliman.tools.http;
 in
 {
-  options.plusultra.tools.http = with types; {
+  options.khaneliman.tools.http = with types; {
     enable = mkBoolOpt false "Whether or not to enable common http utilities.";
   };
 

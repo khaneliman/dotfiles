@@ -6,7 +6,7 @@ let
   inherit (pkgs) fortune toot;
   inherit (pkgs.snowfallorg) cow2img;
 
-  cfg = config.plusultra.services.cowsay-mastodon-poster;
+  cfg = config.khaneliman.services.cowsay-mastodon-poster;
 
   script = ''
     if [ ! -f ~/.config/toot/config.json ]; then
@@ -31,10 +31,10 @@ let
   '';
 in
 {
-  options.plusultra.services.cowsay-mastodon-poster = with types; {
+  options.khaneliman.services.cowsay-mastodon-poster = with types; {
     enable = mkBoolOpt false "Whether or not to enable cowsay posts.";
     short = mkBoolOpt false "Use short fortunes only.";
-    user = mkOpt str config.plusultra.user.name "The user to run as.";
+    user = mkOpt str config.khaneliman.user.name "The user to run as.";
     group = mkOpt str "users" "The group to run as.";
   };
 

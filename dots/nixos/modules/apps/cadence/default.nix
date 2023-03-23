@@ -2,10 +2,10 @@
 
 with lib;
 with lib.internal;
-let cfg = config.plusultra.apps.cadence;
+let cfg = config.khaneliman.apps.cadence;
 in
 {
-  options.plusultra.apps.cadence = with types; {
+  options.khaneliman.apps.cadence = with types; {
     enable = mkBoolOpt false "Whether or not to enable Cadence.";
   };
 

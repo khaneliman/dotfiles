@@ -2,10 +2,10 @@
 
 with lib;
 with lib.internal;
-let cfg = config.plusultra.tools.qmk;
+let cfg = config.khaneliman.tools.qmk;
 in
 {
-  options.plusultra.tools.qmk = with types; {
+  options.khaneliman.tools.qmk = with types; {
     enable = mkBoolOpt false "Whether or not to enable QMK";
   };
 

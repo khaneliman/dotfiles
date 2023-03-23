@@ -3,10 +3,10 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.plusultra.apps.etcher;
+  cfg = config.khaneliman.apps.etcher;
 in
 {
-  options.plusultra.apps.etcher = with types; {
+  options.khaneliman.apps.etcher = with types; {
     enable = mkBoolOpt false "Whether or not to enable etcher.";
   };
 

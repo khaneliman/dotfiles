@@ -3,7 +3,7 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.plusultra.suites.development;
+  cfg = config.khaneliman.suites.development;
   apps = {
     vscode = enabled;
     yubikey = enabled;
@@ -16,7 +16,7 @@ let
   };
 in
 {
-  options.plusultra.suites.development = with types; {
+  options.khaneliman.suites.development = with types; {
     enable = mkBoolOpt false
       "Whether or not to enable common development configuration.";
   };
@@ -30,7 +30,7 @@ in
       8081
     ];
 
-    plusultra = {
+    khaneliman = {
       inherit apps cli-apps;
 
       tools = {

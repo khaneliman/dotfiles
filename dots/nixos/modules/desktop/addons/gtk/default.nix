@@ -3,11 +3,11 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.plusultra.desktop.addons.gtk;
+  cfg = config.khaneliman.desktop.addons.gtk;
   gdmCfg = config.services.xserver.displayManager.gdm;
 in
 {
-  options.plusultra.desktop.addons.gtk = with types; {
+  options.khaneliman.desktop.addons.gtk = with types; {
     enable = mkBoolOpt false "Whether to customize GTK and apply themes.";
     theme = {
       name = mkOpt str "Nordic-darker"
@@ -17,7 +17,7 @@ in
     cursor = {
       name = mkOpt str "Bibata-Modern-Ice"
         "The name of the cursor theme to apply.";
-      pkg = mkOpt package pkgs.plusultra.bibata-cursors "The package to use for the cursor theme.";
+      pkg = mkOpt package pkgs.khaneliman.bibata-cursors "The package to use for the cursor theme.";
     };
     icon = {
       name = mkOpt str "Papirus"
@@ -36,7 +36,7 @@ in
       XCURSOR_THEME = cfg.cursor.name;
     };
 
-    plusultra.home.extraOptions = {
+    khaneliman.home.extraOptions = {
       gtk = {
         enable = true;
 

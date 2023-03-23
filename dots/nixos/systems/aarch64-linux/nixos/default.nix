@@ -9,7 +9,7 @@ with lib.internal;
     WLR_NO_HARDWARE_CURSORS=1
   '';
 
-  plusultra = {
+  khaneliman = {
     nix = enabled;
 
     apps = {

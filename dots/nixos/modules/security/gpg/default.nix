@@ -3,7 +3,7 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.plusultra.security.gpg;
+  cfg = config.khaneliman.security.gpg;
 
   gpgConf = "${inputs.gpg-base-conf}/gpg.conf";
 
@@ -51,7 +51,7 @@ let
   '';
 in
 {
-  options.plusultra.security.gpg = with types; {
+  options.khaneliman.security.gpg = with types; {
     enable = mkBoolOpt false "Whether or not to enable GPG.";
     agentTimeout = mkOpt int 5 "The amount of time to wait before continuing with shell init.";
   };
@@ -98,7 +98,7 @@ in
       };
     };
 
-    plusultra = {
+    khaneliman = {
       home.file = {
         ".gnupg/yubikey-guide.md".source = guide;
         ".gnupg/yubikey-guide.html".source = guideHTML;

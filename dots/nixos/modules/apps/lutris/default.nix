@@ -3,10 +3,10 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.plusultra.apps.lutris;
+  cfg = config.khaneliman.apps.lutris;
 in
 {
-  options.plusultra.apps.lutris = with types; {
+  options.khaneliman.apps.lutris = with types; {
     enable = mkBoolOpt false "Whether or not to enable Lutris.";
   };
 

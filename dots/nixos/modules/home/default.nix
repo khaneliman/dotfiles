@@ -2,14 +2,14 @@
 
 with lib;
 with lib.internal;
-let cfg = config.plusultra.home;
+let cfg = config.khaneliman.home;
 in
 {
   imports = with inputs; [
     home-manager.nixosModules.home-manager
   ];
 
-  options.plusultra.home = with types; {
+  options.khaneliman.home = with types; {
     file = mkOpt attrs { }
       "A set of files to be managed by home-manager's <option>home.file</option>.";
     configFile = mkOpt attrs { }
@@ -18,18 +18,18 @@ in
   };
 
   config = {
-    plusultra.home.extraOptions = {
+    khaneliman.home.extraOptions = {
       home.stateVersion = config.system.stateVersion;
-      home.file = mkAliasDefinitions options.plusultra.home.file;
+      home.file = mkAliasDefinitions options.khaneliman.home.file;
       xdg.enable = true;
-      xdg.configFile = mkAliasDefinitions options.plusultra.home.configFile;
+      xdg.configFile = mkAliasDefinitions options.khaneliman.home.configFile;
     };
 
     home-manager = {
       useUserPackages = true;
 
-      users.${config.plusultra.user.name} =
-        mkAliasDefinitions options.plusultra.home.extraOptions;
+      users.${config.khaneliman.user.name} =
+        mkAliasDefinitions options.khaneliman.home.extraOptions;
     };
   };
 }

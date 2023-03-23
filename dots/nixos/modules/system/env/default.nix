@@ -2,10 +2,10 @@
 
 with lib;
 with lib.internal;
-let cfg = config.plusultra.system.env;
+let cfg = config.khaneliman.system.env;
 in
 {
-  options.plusultra.system.env = with types;
+  options.khaneliman.system.env = with types;
     mkOption {
       type = attrsOf (oneOf [ str path (listOf (either str path)) ]);
       apply = mapAttrs (n: v:

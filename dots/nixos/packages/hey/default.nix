@@ -11,7 +11,7 @@ let
     desktopName = "HEY";
     genericName = "The email app that makes email suck less.";
     exec = ''
-      ${firefox}/bin/firefox "https://app.hey.com/?plusultra.app=true"'';
+      ${firefox}/bin/firefox "https://app.hey.com/?khaneliman.app=true"'';
     icon = ./icon.svg;
     type = "Application";
     categories = [ "Office" "Network" "Email" ];

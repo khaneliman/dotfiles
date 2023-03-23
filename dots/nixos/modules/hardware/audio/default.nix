@@ -2,10 +2,10 @@
 
 with lib;
 with lib.internal;
-let cfg = config.plusultra.hardware.audio;
+let cfg = config.khaneliman.hardware.audio;
 in
 {
-  options.plusultra.hardware.audio = with types; {
+  options.khaneliman.hardware.audio = with types; {
     enable = mkBoolOpt false "Whether or not to enable audio support.";
     alsa-monitor = mkOpt attrs { } "Alsa configuration.";
     nodes = mkOpt (listOf attrs) [ ]
@@ -31,7 +31,7 @@ in
 
       media-session.enable = true;
       media-session.config.alsa-monitor =
-        mkAliasDefinitions options.plusultra.hardware.audio.alsa-monitor;
+        mkAliasDefinitions options.khaneliman.hardware.audio.alsa-monitor;
 
       config.pipewire = {
         "context.objects" = cfg.nodes ++ [ ];
@@ -70,9 +70,9 @@ in
       pavucontrol
     ] ++ cfg.extra-packages;
 
-    plusultra.user.extraGroups = [ "audio" ];
+    khaneliman.user.extraGroups = [ "audio" ];
 
-    plusultra.home.extraOptions = {
+    khaneliman.home.extraOptions = {
       systemd.user.services.mpris-proxy = {
         Unit.Description = "Mpris proxy";
         Unit.After = [ "network.target" "sound.target" ];

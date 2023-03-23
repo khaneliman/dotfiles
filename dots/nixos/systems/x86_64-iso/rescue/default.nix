@@ -3,7 +3,7 @@
 with lib;
 with lib.internal;
 {
-  plusultra = {
+  khaneliman = {
     nix = enabled;
 
     cli-apps = { neovim = enabled; };

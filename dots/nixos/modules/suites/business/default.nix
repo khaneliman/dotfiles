@@ -3,13 +3,13 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.plusultra.suites.business;
+  cfg = config.khaneliman.suites.business;
 in
 {
-  options.plusultra.suites.business = with types; {
+  options.khaneliman.suites.business = with types; {
     enable = mkBoolOpt false "Whether or not to enable business configuration.";
   };
 
   config =
-    mkIf cfg.enable { plusultra = { apps = { frappe-books = enabled; }; }; };
+    mkIf cfg.enable { khaneliman = { apps = { frappe-books = enabled; }; }; };
 }

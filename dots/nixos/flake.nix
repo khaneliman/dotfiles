@@ -108,7 +108,7 @@
       };
     in
     lib.mkFlake {
-      package-namespace = "plusultra";
+      package-namespace = "khaneliman";
 
       channels-config.allowUnfree = true;
 

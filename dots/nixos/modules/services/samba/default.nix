@@ -1,7 +1,7 @@
 { lib, config, ... }:
 
 let
-  cfg = config.plusultra.services.samba;
+  cfg = config.khaneliman.services.samba;
 
   inherit (lib)
     types
@@ -23,14 +23,14 @@ let
       browseable = mkBoolOpt true "Whether the share is browseable.";
       comment = mkOpt str name "An optional comment.";
       read-only = mkBoolOpt false "Whether the share should be read only.";
-      only-owner-editable = mkBoolOpt false "Whether the share is only writable by the system owner (plusultra.user.name).";
+      only-owner-editable = mkBoolOpt false "Whether the share is only writable by the system owner (khaneliman.user.name).";
 
       extra-config = mkOpt attrs { } "Extra configuration options for the share.";
     };
   });
 in
 {
-  options.plusultra.services.samba = with types; {
+  options.khaneliman.services.samba = with types; {
     enable = mkEnableOption "Samba";
     workgroup = mkOpt str "WORKGROUP" "The workgroup to use.";
     browseable = mkBoolOpt true "Whether the shares are browseable.";
@@ -66,7 +66,7 @@ in
           browseable = bool-to-yes-no value.browseable;
           "read only" = bool-to-yes-no value.read-only;
         } // (optionalAttrs value.only-owner-editable {
-          "write list" = config.plusultra.user.name;
+          "write list" = config.khaneliman.user.name;
           "read list" = "guest, nobody";
           "create mask" = "0755";
         }) // value.extra-config)

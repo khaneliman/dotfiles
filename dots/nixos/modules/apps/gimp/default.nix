@@ -3,10 +3,10 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.plusultra.apps.gimp;
+  cfg = config.khaneliman.apps.gimp;
 in
 {
-  options.plusultra.apps.gimp = with types; {
+  options.khaneliman.apps.gimp = with types; {
     enable = mkBoolOpt false "Whether or not to enable Gimp.";
   };
 

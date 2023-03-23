@@ -3,7 +3,7 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.plusultra.suites.games;
+  cfg = config.khaneliman.suites.games;
   apps = {
     steam = enabled;
     prismlauncher = enabled;
@@ -18,10 +18,10 @@ let
   };
 in
 {
-  options.plusultra.suites.games = with types; {
+  options.khaneliman.suites.games = with types; {
     enable =
       mkBoolOpt false "Whether or not to enable common games configuration.";
   };
 
-  config = mkIf cfg.enable { plusultra = { inherit apps cli-apps; }; };
+  config = mkIf cfg.enable { khaneliman = { inherit apps cli-apps; }; };
 }

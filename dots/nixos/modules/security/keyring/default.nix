@@ -3,10 +3,10 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.plusultra.security.keyring;
+  cfg = config.khaneliman.security.keyring;
 in
 {
-  options.plusultra.security.keyring = with types; {
+  options.khaneliman.security.keyring = with types; {
     enable = mkBoolOpt false "Whether to enable gnome keyring.";
   };
 

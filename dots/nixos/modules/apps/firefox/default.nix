@@ -3,7 +3,7 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.plusultra.apps.firefox;
+  cfg = config.khaneliman.apps.firefox;
   defaultSettings = {
     "browser.aboutwelcome.enabled" = false;
     "browser.meta_refresh_when_inactive.disabled" = true;
@@ -17,7 +17,7 @@ let
   };
 in
 {
-  options.plusultra.apps.firefox = with types; {
+  options.khaneliman.apps.firefox = with types; {
     enable = mkBoolOpt false "Whether or not to enable Firefox.";
     extraConfig =
       mkOpt str "" "Extra configuration for the user profile JS file.";
@@ -28,13 +28,13 @@ in
 
   config = mkIf cfg.enable {
 
-    services.gnome.gnome-browser-connector.enable = config.plusultra.desktop.gnome.enable;
+    services.gnome.gnome-browser-connector.enable = config.khaneliman.desktop.gnome.enable;
 
-    plusultra.home = {
+    khaneliman.home = {
       file = {
         ".mozilla/native-messaging-hosts/com.dannyvankooten.browserpass.json".source = "${pkgs.browserpass}/lib/mozilla/native-messaging-hosts/com.dannyvankooten.browserpass.json";
 
-        ".mozilla/native-messaging-hosts/org.gnome.chrome_gnome_shell.json".source = mkIf config.plusultra.desktop.gnome.enable "${pkgs.chrome-gnome-shell}/lib/mozilla/native-messaging-hosts/org.gnome.chrome_gnome_shell.json";
+        ".mozilla/native-messaging-hosts/org.gnome.chrome_gnome_shell.json".source = mkIf config.khaneliman.desktop.gnome.enable "${pkgs.chrome-gnome-shell}/lib/mozilla/native-messaging-hosts/org.gnome.chrome_gnome_shell.json";
       };
 
       extraOptions = {
@@ -44,20 +44,20 @@ in
             {
               cfg = {
                 enableBrowserpass = true;
-                enableGnomeExtensions = config.plusultra.desktop.gnome.enable;
+                enableGnomeExtensions = config.khaneliman.desktop.gnome.enable;
               };
 
               extraNativeMessagingHosts =
                 optional
-                  config.plusultra.desktop.gnome.enable
+                  config.khaneliman.desktop.gnome.enable
                   pkgs.gnomeExtensions.gsconnect;
             }
           );
 
-          profiles.${config.plusultra.user.name} = {
+          profiles.${config.khaneliman.user.name} = {
             inherit (cfg) extraConfig userChrome settings;
             id = 0;
-            name = config.plusultra.user.name;
+            name = config.khaneliman.user.name;
           };
         };
       };

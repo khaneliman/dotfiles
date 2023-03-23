@@ -2,10 +2,10 @@
 
 with lib;
 with lib.internal;
-let cfg = config.plusultra.apps.bottles;
+let cfg = config.khaneliman.apps.bottles;
 in
 {
-  options.plusultra.apps.bottles = with types; {
+  options.khaneliman.apps.bottles = with types; {
     enable = mkBoolOpt false "Whether or not to enable Bottles.";
   };
 

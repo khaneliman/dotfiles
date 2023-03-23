@@ -3,15 +3,15 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.plusultra.desktop.sway;
-  term = config.plusultra.desktop.addons.term;
+  cfg = config.khaneliman.desktop.sway;
+  term = config.khaneliman.desktop.addons.term;
   substitutedConfig = pkgs.substituteAll {
     src = ./config;
     term = term.pkg.pname or term.pkg.name;
   };
 in
 {
-  options.plusultra.desktop.sway = with types; {
+  options.khaneliman.desktop.sway = with types; {
     enable = mkBoolOpt false "Whether or not to enable Sway.";
     wallpaper = mkOpt (nullOr package) null "The wallpaper to display.";
     extraConfig =
@@ -20,7 +20,7 @@ in
 
   config = mkIf cfg.enable {
     # Desktop additions
-    plusultra.desktop.addons = {
+    khaneliman.desktop.addons = {
       gtk = enabled;
       foot = enabled;
       mako = enabled;
@@ -35,7 +35,7 @@ in
       electron-support = enabled;
     };
 
-    plusultra.home.configFile."sway/config".text =
+    khaneliman.home.configFile."sway/config".text =
       fileWithText substitutedConfig ''
         #############################
         #░░░░░░░░░░░░░░░░░░░░░░░░░░░#

@@ -3,11 +3,11 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.plusultra.virtualisation.kvm;
-  user = config.plusultra.user;
+  cfg = config.khaneliman.virtualisation.kvm;
+  user = config.khaneliman.user;
 in
 {
-  options.plusultra.virtualisation.kvm = with types; {
+  options.khaneliman.virtualisation.kvm = with types; {
     enable = mkBoolOpt false "Whether or not to enable KVM virtualisation.";
     vfioIds = mkOpt (listOf str) [ ]
       "The hardware IDs to pass through to a virtual machine.";
@@ -65,7 +65,7 @@ in
       };
     };
 
-    plusultra = {
+    khaneliman = {
       user = { extraGroups = [ "qemu-libvirtd" "libvirtd" "disk" ]; };
 
       apps = { looking-glass-client = enabled; };

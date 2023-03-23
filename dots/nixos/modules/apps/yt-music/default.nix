@@ -3,13 +3,13 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.plusultra.apps.yt-music;
+  cfg = config.khaneliman.apps.yt-music;
 in
 {
-  options.plusultra.apps.yt-music = with types; {
+  options.khaneliman.apps.yt-music = with types; {
     enable = mkBoolOpt false "Whether or not to enable YouTube Music.";
   };
 
   config =
-    mkIf cfg.enable { environment.systemPackages = with pkgs.plusultra; [ yt-music ]; };
+    mkIf cfg.enable { environment.systemPackages = with pkgs.khaneliman; [ yt-music ]; };
 }

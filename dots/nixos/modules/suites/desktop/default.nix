@@ -3,16 +3,16 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.plusultra.suites.desktop;
+  cfg = config.khaneliman.suites.desktop;
 in
 {
-  options.plusultra.suites.desktop = with types; {
+  options.khaneliman.suites.desktop = with types; {
     enable =
       mkBoolOpt false "Whether or not to enable common desktop configuration.";
   };
 
   config = mkIf cfg.enable {
-    plusultra = {
+    khaneliman = {
       desktop = {
         gnome = enabled;
 

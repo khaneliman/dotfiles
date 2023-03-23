@@ -3,15 +3,15 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.plusultra.suites.art;
+  cfg = config.khaneliman.suites.art;
 in
 {
-  options.plusultra.suites.art = with types; {
+  options.khaneliman.suites.art = with types; {
     enable = mkBoolOpt false "Whether or not to enable art configuration.";
   };
 
   config = mkIf cfg.enable {
-    plusultra = {
+    khaneliman = {
       apps = {
         gimp = enabled;
         inkscape = enabled;

@@ -3,19 +3,19 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.plusultra.tools.comma;
+  cfg = config.khaneliman.tools.comma;
 in
 {
-  options.plusultra.tools.comma = with types; {
+  options.khaneliman.tools.comma = with types; {
     enable = mkBoolOpt false "Whether or not to enable comma.";
   };
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       comma
-      plusultra.nix-update-index
+      khaneliman.nix-update-index
     ];
 
-    plusultra.home.extraOptions = { programs.nix-index.enable = true; };
+    khaneliman.home.extraOptions = { programs.nix-index.enable = true; };
   };
 }

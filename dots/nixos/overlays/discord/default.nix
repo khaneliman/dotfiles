@@ -1,7 +1,7 @@
 { channels, ... }:
 
 final: prev: {
-  plusultra = (prev.plusultra or { }) // {
+  khaneliman = (prev.khaneliman or { }) // {
     discord-chromium = with prev;
       makeDesktopItem {
         name = "Discord (chromium)";
@@ -22,7 +22,7 @@ final: prev: {
         desktopName = "Discord (firefox)";
         genericName = "All-in-one cross-platform voice and text chat for gamers";
         exec = ''
-          ${firefox}/bin/firefox "https://discord.com/channels/@me?plusultra.app=true"'';
+          ${firefox}/bin/firefox "https://discord.com/channels/@me?khaneliman.app=true"'';
         icon = "discord";
         type = "Application";
         categories = [ "Network" "InstantMessaging" ];

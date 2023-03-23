@@ -39,7 +39,7 @@ let
     wallpapers;
 in
 pkgs.stdenvNoCC.mkDerivation {
-  name = "plusultra-wallpapers";
+  name = "khaneliman-wallpapers";
   src = ./wallpapers;
 
   installPhase = ''

@@ -3,10 +3,10 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.plusultra.apps.virtualbox;
+  cfg = config.khaneliman.apps.virtualbox;
 in
 {
-  options.plusultra.apps.virtualbox = with types; {
+  options.khaneliman.apps.virtualbox = with types; {
     enable = mkBoolOpt false "Whether or not to enable Virtualbox.";
   };
 
@@ -16,6 +16,6 @@ in
       enableExtensionPack = true;
     };
 
-    plusultra.user.extraGroups = [ "vboxusers" ];
+    khaneliman.user.extraGroups = [ "vboxusers" ];
   };
 }

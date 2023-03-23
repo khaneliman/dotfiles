@@ -2,10 +2,10 @@
 
 with lib;
 with lib.internal;
-let cfg = config.plusultra.desktop.addons.xdg-portal;
+let cfg = config.khaneliman.desktop.addons.xdg-portal;
 in
 {
-  options.plusultra.desktop.addons.xdg-portal = with types; {
+  options.khaneliman.desktop.addons.xdg-portal = with types; {
     enable = mkBoolOpt false "Whether or not to add support for xdg portal.";
   };
 

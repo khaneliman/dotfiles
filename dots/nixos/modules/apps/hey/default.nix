@@ -3,12 +3,12 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.plusultra.apps.hey;
+  cfg = config.khaneliman.apps.hey;
 in
 {
-  options.plusultra.apps.hey = with types; {
+  options.khaneliman.apps.hey = with types; {
     enable = mkBoolOpt false "Whether or not to enable HEY.";
   };
 
-  config = mkIf cfg.enable { environment.systemPackages = with pkgs.plusultra; [ hey ]; };
+  config = mkIf cfg.enable { environment.systemPackages = with pkgs.khaneliman; [ hey ]; };
 }

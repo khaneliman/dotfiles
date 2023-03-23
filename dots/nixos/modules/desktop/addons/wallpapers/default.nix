@@ -3,17 +3,17 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.plusultra.desktop.addons.wallpapers;
-  inherit (pkgs.plusultra) wallpapers;
+  cfg = config.khaneliman.desktop.addons.wallpapers;
+  inherit (pkgs.khaneliman) wallpapers;
 in
 {
-  options.plusultra.desktop.addons.wallpapers = with types; {
+  options.khaneliman.desktop.addons.wallpapers = with types; {
     enable = mkBoolOpt false
       "Whether or not to add wallpapers to ~/Pictures/wallpapers.";
   };
 
   config = {
-    plusultra.home.file = lib.foldl
+    khaneliman.home.file = lib.foldl
       (acc: name:
         let wallpaper = wallpapers.${name};
         in
