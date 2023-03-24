@@ -307,6 +307,10 @@ in
           "org/gnome/shell/extensions/gtile" = {
             show-icon = false;
           };
+          
+          "org/gnome/shell/extensions/user-theme" = {
+            name = "Catppuccin-Dark";
+          };
         };
     };
 
