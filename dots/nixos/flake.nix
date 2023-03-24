@@ -93,8 +93,8 @@
       flake = false;
     };
 
-    bibata-cursors = {
-      url = "github:suchipi/Bibata_Cursor";
+    catppuccin-cursors = {
+      url = "github:catppuccin/cursors";
       flake = false;
     };
 
