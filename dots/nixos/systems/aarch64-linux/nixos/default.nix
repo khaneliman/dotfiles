@@ -12,6 +12,10 @@ with lib.internal;
   khaneliman = {
     nix = enabled;
 
+    archetypes = {
+      vm = enabled;
+    };
+
     apps = {
       _1password = enabled;
       firefox = enabled;
@@ -45,7 +49,9 @@ with lib.internal;
       networking = enabled;
     };
 
-    services = { printing = enabled; };
+    services = { 
+      printing = enabled;
+    };
 
     security = {
       doas = enabled;
