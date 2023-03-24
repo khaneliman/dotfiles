@@ -15,6 +15,7 @@ in
       apps = {
         ardour = enabled;
         bottles = enabled;
+        yt-music = enabled;
       };
     };
   };

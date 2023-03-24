@@ -18,6 +18,7 @@ in
           chromium = enabled;
         };
         element = enabled;
+        twitter = enabled;
       };
     };
   };
