@@ -73,8 +73,8 @@ with lib.internal;
 
     desktop.gnome = {
       wallpaper = {
-        light = pkgs.khaneliman.wallpapers.nord-rainbow-light-nix-ultrawide;
-        dark = pkgs.khaneliman.wallpapers.nord-rainbow-dark-nix-ultrawide;
+        light = pkgs.khaneliman.wallpapers.flatppuccin_macchiato;
+        dark = pkgs.khaneliman.wallpapers.cat-sound;
       };
       monitors = ./monitors.xml;
     };
