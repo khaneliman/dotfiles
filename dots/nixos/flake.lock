@@ -1,18 +1,18 @@
 {
   "nodes": {
-    "bibata-cursors": {
+    "catppuccin-cursors": {
       "flake": false,
       "locked": {
-        "lastModified": 1673748590,
-        "narHash": "sha256-7QUz1JrRMxyOI4ovsvTBNTF5TgECbSRnkeKNk9IZEZg=",
-        "owner": "suchipi",
-        "repo": "Bibata_Cursor",
-        "rev": "ff2475240548c68b6eb59a664465be0d756222ad",
+        "lastModified": 1673786126,
+        "narHash": "sha256-NNCtlcOhFEkOOLzXv6Qh2qyG/176pQgJliWjnfR9uFw=",
+        "owner": "catppuccin",
+        "repo": "cursors",
+        "rev": "0ed5dfed4d3be01a923435fae191b82de51a2013",
         "type": "github"
       },
       "original": {
-        "owner": "suchipi",
-        "repo": "Bibata_Cursor",
+        "owner": "catppuccin",
+        "repo": "cursors",
         "type": "github"
       }
     },
@@ -720,7 +720,7 @@
     },
     "root": {
       "inputs": {
-        "bibata-cursors": "bibata-cursors",
+        "catppuccin-cursors": "catppuccin-cursors",
         "comma": "comma",
         "cowsay": "cowsay",
         "darwin": "darwin",
