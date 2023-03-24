@@ -10,9 +10,9 @@ in
   options.khaneliman.desktop.addons.gtk = with types; {
     enable = mkBoolOpt false "Whether to customize GTK and apply themes.";
     theme = {
-      name = mkOpt str "Nordic-darker"
+      name = mkOpt str "Catppuccin-Dark"
         "The name of the GTK theme to apply.";
-      pkg = mkOpt package pkgs.nordic "The package to use for the theme.";
+      pkg = mkOpt package pkgs.catppuccin-gtk "The package to use for the theme.";
     };
     cursor = {
       name = mkOpt str "Catppuccin-Macchiato-Blue-Cursors"
