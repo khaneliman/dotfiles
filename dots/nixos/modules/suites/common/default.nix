@@ -19,22 +19,36 @@ in
       nix = enabled;
 
       cli-apps = {
+        btop = enabled;
+        feh = enabled;
         flake = enabled;
+        glow = enabled;
+        ranger = enabled;
       };
 
       tools = {
-        git = enabled;
-        misc = enabled;
-        fup-repl = enabled;
-        comma = enabled;
-        nix-ld = enabled;
+        atool = enabled;
+        bat = enabled;
         bottom = enabled;
+        comma = enabled;
+        exa = enabled;
+        fup-repl = enabled;
+        git = enabled;
+        lsd = enabled;
+        misc = enabled;
+        nix-ld = enabled;
+        oh-my-posh = enabled;
+        socat = enabled;
+        spicetify-cli = enabled;
+        toilet = enabled;
+        topgrade = enabled;
+        xclip = enabled;
       };
 
       hardware = {
         audio = enabled;
-        storage = enabled;
         networking = enabled;
+        storage = enabled;
       };
 
       services = {
@@ -44,8 +58,8 @@ in
       };
 
       security = {
-        gpg = enabled;
         doas = enabled;
+        gpg = enabled;
         keyring = enabled;
       };
 

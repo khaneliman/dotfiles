@@ -22,10 +22,10 @@ in
       apps = {
         _1password = enabled;
         firefox = enabled;
-        vlc = enabled;
+        gparted = enabled;
         hey = enabled;
         pocketcasts = enabled;
-        gparted = enabled;
+        vlc = enabled;
       };
     };
   };

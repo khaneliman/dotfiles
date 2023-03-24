@@ -93,6 +93,7 @@
       flake = false;
     };
 
+    # Catppuccin cursors
     catppuccin-cursors = {
       url = "github:catppuccin/cursors";
       flake = false;

@@ -19,20 +19,30 @@ in
       nix = enabled;
 
       cli-apps = {
+        btop = enabled;
         flake = enabled;
+        glow = enabled;
+        ranger = enabled;
       };
 
       tools = {
-        git = enabled;
-        fup-repl = enabled;
-        comma = enabled;
+        atool = enabled;
+        bat = enabled;
         bottom = enabled;
+        comma = enabled;
         direnv = enabled;
+        exa = enabled;
+        fup-repl = enabled;
+        git = enabled;
+        lsd = enabled;
+        socat = enabled;
+        topgrade = enabled;
+        xclip = enabled;
       };
 
       hardware = {
-        storage = enabled;
         networking = enabled;
+        storage = enabled;
       };
 
       services = {
