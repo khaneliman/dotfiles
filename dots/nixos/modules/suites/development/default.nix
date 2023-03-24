@@ -5,14 +5,18 @@ with lib.internal;
 let
   cfg = config.khaneliman.suites.development;
   apps = {
+    neovide = enabled;
     vscode = enabled;
     yubikey = enabled;
   };
   cli-apps = {
-    tmux = enabled;
+    lazydocker = enabled;
+    lazygit = enabled;
     neovim = enabled;
-    yubikey = enabled;
+    onefetch = enabled;
     prisma = enabled;
+    tmux = enabled;
+    yubikey = enabled;
   };
 in
 {
@@ -35,12 +39,18 @@ in
 
       tools = {
         at = enabled;
+        cmake = enabled;
         direnv = enabled;
+        git-crypt = enabled;
+        gnumake = enabled;
         go = enabled;
         http = enabled;
         k8s = enabled;
+        llvm = enabled;
         node = enabled;
         qmk = enabled;
+        rustup = enabled;
+        tree-sitter = enabled;
       };
 
       virtualisation = { podman = enabled; };

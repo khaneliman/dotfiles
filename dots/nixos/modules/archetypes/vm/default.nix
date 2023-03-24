@@ -12,6 +12,7 @@ in
   config = mkIf cfg.enable {
     khaneliman = {
       suites = {
+        common-slim = enabled;
         desktop = enabled;
         development = enabled;
         vm = enabled;
