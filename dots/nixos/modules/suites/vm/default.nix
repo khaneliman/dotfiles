@@ -23,6 +23,7 @@ in
 
       services = { 
         spice-vdagentd = enabled;
+        spice-webdav = enabled;
       };
 
       tools = {
