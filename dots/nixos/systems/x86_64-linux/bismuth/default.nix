@@ -36,7 +36,6 @@ with lib.internal;
   khanelinix = {
     apps = {
       rpcs3 = enabled;
-      ubports-installer = enabled;
       steamtinkerlaunch = enabled;
     };
 

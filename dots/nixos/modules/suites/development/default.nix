@@ -38,7 +38,6 @@ in
       inherit apps cli-apps;
 
       tools = {
-        at = enabled;
         cmake = enabled;
         direnv = enabled;
         git-crypt = enabled;

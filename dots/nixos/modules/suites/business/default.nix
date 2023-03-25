@@ -11,5 +11,5 @@ in
   };
 
   config =
-    mkIf cfg.enable { khanelinix = { apps = { frappe-books = enabled; }; }; };
+    mkIf cfg.enable { khanelinix = { apps = {  }; }; };
 }
