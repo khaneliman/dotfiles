@@ -19,4 +19,4 @@ jobs:
             experimental-features = nix-command flakes
       - name: run flake check
         working-directory: ./dots/nixos/
-        run: nix flake check
+        run: nix flake check --show-trace
