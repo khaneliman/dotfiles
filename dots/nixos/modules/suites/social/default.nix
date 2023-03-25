@@ -17,8 +17,6 @@ in
           enable = true;
           chromium = enabled;
         };
-        element = enabled;
-        twitter = enabled;
       };
     };
   };

@@ -157,7 +157,6 @@ in
               ++ optional config.khanelinix.desktop.addons.foot.enable "foot.desktop"
               ++ optional config.khanelinix.apps.logseq.enable "logseq.desktop"
               ++ optional config.khanelinix.apps.discord.enable "discord.desktop"
-              ++ optional config.khanelinix.apps.element.enable "element-desktop.desktop"
               ++ optional config.khanelinix.apps.steam.enable "steam.desktop";
           };
 

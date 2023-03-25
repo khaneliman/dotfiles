@@ -23,7 +23,6 @@ in
         _1password = enabled;
         firefox = enabled;
         gparted = enabled;
-        hey = enabled;
         pocketcasts = enabled;
         vlc = enabled;
       };
