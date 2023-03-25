@@ -2,10 +2,10 @@
 
 with lib;
 with lib.internal;
-let cfg = config.khaneliman.hardware.fingerprint;
+let cfg = config.khanelinix.hardware.fingerprint;
 in
 {
-  options.khaneliman.hardware.fingerprint = with types; {
+  options.khanelinix.hardware.fingerprint = with types; {
     enable = mkBoolOpt false "Whether or not to enable fingerprint support.";
   };
 

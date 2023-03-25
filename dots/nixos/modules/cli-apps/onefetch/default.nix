@@ -2,10 +2,10 @@
 
 with lib;
 with lib.internal;
-let cfg = config.khaneliman.cli-apps.onefetch;
+let cfg = config.khanelinix.cli-apps.onefetch;
 in
 {
-  options.khaneliman.cli-apps.onefetch = with types; {
+  options.khanelinix.cli-apps.onefetch = with types; {
     enable = mkBoolOpt false "Whether or not to enable onefetch.";
   };
 

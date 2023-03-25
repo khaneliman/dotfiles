@@ -2,10 +2,10 @@
 
 with lib;
 with lib.internal;
-let cfg = config.khaneliman.apps.blender;
+let cfg = config.khanelinix.apps.blender;
 in
 {
-  options.khaneliman.apps.blender = with types; {
+  options.khanelinix.apps.blender = with types; {
     enable = mkBoolOpt false "Whether or not to enable Blender.";
   };
 

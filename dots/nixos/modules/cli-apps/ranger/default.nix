@@ -2,10 +2,10 @@
 
 with lib;
 with lib.internal;
-let cfg = config.khaneliman.cli-apps.ranger;
+let cfg = config.khanelinix.cli-apps.ranger;
 in
 {
-  options.khaneliman.cli-apps.ranger = with types; {
+  options.khanelinix.cli-apps.ranger = with types; {
     enable = mkBoolOpt false "Whether or not to enable ranger.";
   };
 

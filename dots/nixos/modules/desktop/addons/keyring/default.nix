@@ -2,10 +2,10 @@
 
 with lib;
 with lib.internal;
-let cfg = config.khaneliman.desktop.addons.keyring;
+let cfg = config.khanelinix.desktop.addons.keyring;
 in
 {
-  options.khaneliman.desktop.addons.keyring = with types; {
+  options.khanelinix.desktop.addons.keyring = with types; {
     enable = mkBoolOpt false "Whether to enable the gnome keyring.";
   };
 

@@ -3,10 +3,10 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.khaneliman.cli-apps.yubikey;
+  cfg = config.khanelinix.cli-apps.yubikey;
 in
 {
-  options.khaneliman.cli-apps.yubikey = with types; {
+  options.khanelinix.cli-apps.yubikey = with types; {
     enable = mkBoolOpt false "Whether or not to enable Yubikey.";
   };
 

@@ -2,10 +2,10 @@
 
 with lib;
 with lib.internal;
-let cfg = config.khaneliman.cli-apps.glow;
+let cfg = config.khanelinix.cli-apps.glow;
 in
 {
-  options.khaneliman.cli-apps.glow = with types; {
+  options.khanelinix.cli-apps.glow = with types; {
     enable = mkBoolOpt false "Whether or not to enable glow.";
   };
 

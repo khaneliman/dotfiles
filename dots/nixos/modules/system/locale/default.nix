@@ -2,10 +2,10 @@
 
 with lib;
 with lib.internal;
-let cfg = config.khaneliman.system.locale;
+let cfg = config.khanelinix.system.locale;
 in
 {
-  options.khaneliman.system.locale = with types; {
+  options.khanelinix.system.locale = with types; {
     enable = mkBoolOpt false "Whether or not to manage locale settings.";
   };
 

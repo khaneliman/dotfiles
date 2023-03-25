@@ -3,12 +3,12 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.khaneliman.tools.git;
-  gpg = config.khaneliman.security.gpg;
-  user = config.khaneliman.user;
+  cfg = config.khanelinix.tools.git;
+  gpg = config.khanelinix.security.gpg;
+  user = config.khanelinix.user;
 in
 {
-  options.khaneliman.tools.git = with types; {
+  options.khanelinix.tools.git = with types; {
     enable = mkBoolOpt false "Whether or not to install and configure git.";
     userName = mkOpt types.str user.fullName "The name to configure git with.";
     userEmail = mkOpt types.str user.email "The email to configure git with.";
@@ -19,7 +19,7 @@ in
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [ git ];
 
-    khaneliman.home.extraOptions = {
+    khanelinix.home.extraOptions = {
       programs.git = {
         enable = true;
         inherit (cfg) userName userEmail;

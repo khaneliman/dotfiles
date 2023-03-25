@@ -2,10 +2,10 @@
 
 with lib;
 with lib.internal;
-let cfg = config.khaneliman.tools.atool;
+let cfg = config.khanelinix.tools.atool;
 in
 {
-  options.khaneliman.tools.atool = with types; {
+  options.khanelinix.tools.atool = with types; {
     enable = mkBoolOpt false "Whether or not to enable atool.";
   };
 

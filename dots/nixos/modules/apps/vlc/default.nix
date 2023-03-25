@@ -3,10 +3,10 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.khaneliman.apps.vlc;
+  cfg = config.khanelinix.apps.vlc;
 in
 {
-  options.khaneliman.apps.vlc = with types; {
+  options.khanelinix.apps.vlc = with types; {
     enable = mkBoolOpt false "Whether or not to enable vlc.";
   };
 

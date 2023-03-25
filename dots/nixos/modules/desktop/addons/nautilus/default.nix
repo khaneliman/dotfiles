@@ -2,10 +2,10 @@
 
 with lib;
 with lib.internal;
-let cfg = config.khaneliman.desktop.addons.nautilus;
+let cfg = config.khanelinix.desktop.addons.nautilus;
 in
 {
-  options.khaneliman.desktop.addons.nautilus = with types; {
+  options.khanelinix.desktop.addons.nautilus = with types; {
     enable = mkBoolOpt false "Whether to enable the gnome file manager.";
   };
 

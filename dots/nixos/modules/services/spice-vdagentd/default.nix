@@ -3,10 +3,10 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.khaneliman.services.spice-vdagentd;
+  cfg = config.khanelinix.services.spice-vdagentd;
 in
 {
-  options.khaneliman.services.spice-vdagentd = with types; {
+  options.khanelinix.services.spice-vdagentd = with types; {
     enable = mkBoolOpt false "Whether or not to configure spice-vdagent support.";
   };
 

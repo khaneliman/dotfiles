@@ -3,10 +3,10 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.khaneliman.tools.socat;
+  cfg = config.khanelinix.tools.socat;
 in
 {
-  options.khaneliman.tools.socat = with types; {
+  options.khanelinix.tools.socat = with types; {
     enable = mkBoolOpt false "Whether or not to enable socat.";
   };
 

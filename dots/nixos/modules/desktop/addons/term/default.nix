@@ -2,10 +2,10 @@
 
 with lib;
 with lib.internal;
-let cfg = config.khaneliman.desktop.addons.term;
+let cfg = config.khanelinix.desktop.addons.term;
 in
 {
-  options.khaneliman.desktop.addons.term = with types; {
+  options.khanelinix.desktop.addons.term = with types; {
     enable = mkBoolOpt false "Whether to enable the gnome file manager.";
     pkg = mkOpt package pkgs.foot "The terminal to install.";
   };

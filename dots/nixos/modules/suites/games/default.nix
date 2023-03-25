@@ -3,7 +3,7 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.khaneliman.suites.games;
+  cfg = config.khanelinix.suites.games;
   apps = {
     steam = enabled;
     prismlauncher = enabled;
@@ -18,10 +18,10 @@ let
   };
 in
 {
-  options.khaneliman.suites.games = with types; {
+  options.khanelinix.suites.games = with types; {
     enable =
       mkBoolOpt false "Whether or not to enable common games configuration.";
   };
 
-  config = mkIf cfg.enable { khaneliman = { inherit apps cli-apps; }; };
+  config = mkIf cfg.enable { khanelinix = { inherit apps cli-apps; }; };
 }

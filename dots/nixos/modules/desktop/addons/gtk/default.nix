@@ -3,11 +3,11 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.khaneliman.desktop.addons.gtk;
+  cfg = config.khanelinix.desktop.addons.gtk;
   gdmCfg = config.services.xserver.displayManager.gdm;
 in
 {
-  options.khaneliman.desktop.addons.gtk = with types; {
+  options.khanelinix.desktop.addons.gtk = with types; {
     enable = mkBoolOpt false "Whether to customize GTK and apply themes.";
     theme = {
       name = mkOpt str "Catppuccin-Dark"
@@ -36,7 +36,7 @@ in
       XCURSOR_THEME = cfg.cursor.name;
     };
 
-    khaneliman.home.extraOptions = {
+    khanelinix.home.extraOptions = {
       gtk = {
         enable = true;
 

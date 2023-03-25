@@ -109,7 +109,7 @@
       };
     in
     lib.mkFlake {
-      package-namespace = "khaneliman";
+      package-namespace = "khanelinix";
 
       channels-config.allowUnfree = true;
 

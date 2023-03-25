@@ -2,10 +2,10 @@
 
 with lib;
 with lib.internal;
-let cfg = config.khaneliman.cli-apps.feh;
+let cfg = config.khanelinix.cli-apps.feh;
 in
 {
-  options.khaneliman.cli-apps.feh = with types; {
+  options.khanelinix.cli-apps.feh = with types; {
     enable = mkBoolOpt false "Whether or not to enable feh.";
   };
 

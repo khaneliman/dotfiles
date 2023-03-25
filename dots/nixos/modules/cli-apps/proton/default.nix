@@ -3,10 +3,10 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.khaneliman.cli-apps.proton;
+  cfg = config.khanelinix.cli-apps.proton;
 in
 {
-  options.khaneliman.cli-apps.proton = with types; {
+  options.khanelinix.cli-apps.proton = with types; {
     enable = mkBoolOpt false "Whether or not to enable Proton.";
   };
 

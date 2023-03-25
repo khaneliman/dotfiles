@@ -2,10 +2,10 @@
 
 with lib;
 with lib.internal;
-let cfg = config.khaneliman.hardware.audio;
+let cfg = config.khanelinix.hardware.audio;
 in
 {
-  options.khaneliman.hardware.audio = with types; {
+  options.khanelinix.hardware.audio = with types; {
     enable = mkBoolOpt false "Whether or not to enable audio support.";
     alsa-monitor = mkOpt attrs { } "Alsa configuration.";
     nodes = mkOpt (listOf attrs) [ ]
@@ -31,7 +31,7 @@ in
 
       media-session.enable = true;
       media-session.config.alsa-monitor =
-        mkAliasDefinitions options.khaneliman.hardware.audio.alsa-monitor;
+        mkAliasDefinitions options.khanelinix.hardware.audio.alsa-monitor;
 
       config.pipewire = {
         "context.objects" = cfg.nodes ++ [ ];
@@ -70,9 +70,9 @@ in
       pavucontrol
     ] ++ cfg.extra-packages;
 
-    khaneliman.user.extraGroups = [ "audio" ];
+    khanelinix.user.extraGroups = [ "audio" ];
 
-    khaneliman.home.extraOptions = {
+    khanelinix.home.extraOptions = {
       systemd.user.services.mpris-proxy = {
         Unit.Description = "Mpris proxy";
         Unit.After = [ "network.target" "sound.target" ];

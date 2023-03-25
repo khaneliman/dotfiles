@@ -2,10 +2,10 @@
 
 with lib;
 with lib.internal;
-let cfg = config.khaneliman.desktop.addons.mako;
+let cfg = config.khanelinix.desktop.addons.mako;
 in
 {
-  options.khaneliman.desktop.addons.mako = with types; {
+  options.khanelinix.desktop.addons.mako = with types; {
     enable = mkBoolOpt false "Whether to enable Mako in Sway.";
   };
 
@@ -39,6 +39,6 @@ in
       };
     };
 
-    khaneliman.home.configFile."mako/config".source = ./config;
+    khanelinix.home.configFile."mako/config".source = ./config;
   };
 }

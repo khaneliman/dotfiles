@@ -3,10 +3,10 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.khaneliman.apps.freetube;
+  cfg = config.khanelinix.apps.freetube;
 in
 {
-  options.khaneliman.apps.freetube = with types; {
+  options.khanelinix.apps.freetube = with types; {
     enable = mkBoolOpt false "Whether or not to enable FreeTube.";
   };
 

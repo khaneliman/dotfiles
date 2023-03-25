@@ -2,10 +2,10 @@
 
 with lib;
 with lib.internal;
-let cfg = config.khaneliman.services.printing;
+let cfg = config.khanelinix.services.printing;
 in
 {
-  options.khaneliman.services.printing = with types; {
+  options.khanelinix.services.printing = with types; {
     enable = mkBoolOpt false "Whether or not to configure printing support.";
   };
 

@@ -3,10 +3,10 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.khaneliman.tools.cmake;
+  cfg = config.khanelinix.tools.cmake;
 in
 {
-  options.khaneliman.tools.cmake = with types; {
+  options.khanelinix.tools.cmake = with types; {
     enable = mkBoolOpt false "Whether or not to enable cmake.";
   };
 

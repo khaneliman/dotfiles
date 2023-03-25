@@ -3,10 +3,10 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.khaneliman.apps.winetricks;
+  cfg = config.khanelinix.apps.winetricks;
 in
 {
-  options.khaneliman.apps.winetricks = with types; {
+  options.khanelinix.apps.winetricks = with types; {
     enable = mkBoolOpt false "Whether or not to enable Winetricks.";
   };
 

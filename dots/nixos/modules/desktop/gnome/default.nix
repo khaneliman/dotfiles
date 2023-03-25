@@ -3,7 +3,7 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.khaneliman.desktop.gnome;
+  cfg = config.khanelinix.desktop.gnome;
   gdmHome = config.users.users.gdm.home;
 
   defaultExtensions = with pkgs.gnomeExtensions; [
@@ -33,12 +33,12 @@ let
   nested-default-attrs = mapAttrs (key: default-attrs);
 in
 {
-  options.khaneliman.desktop.gnome = with types; {
+  options.khanelinix.desktop.gnome = with types; {
     enable =
       mkBoolOpt false "Whether or not to use Gnome as the desktop environment.";
     wallpaper = {
-      light = mkOpt (oneOf [ str package ]) pkgs.khaneliman.wallpapers.flatppuccin_macchiato "The light wallpaper to use.";
-      dark = mkOpt (oneOf [ str package ]) pkgs.khaneliman.wallpapers.cat-sound "The dark wallpaper to use.";
+      light = mkOpt (oneOf [ str package ]) pkgs.khanelinix.wallpapers.flatppuccin_macchiato "The light wallpaper to use.";
+      dark = mkOpt (oneOf [ str package ]) pkgs.khanelinix.wallpapers.cat-sound "The dark wallpaper to use.";
     };
     color-scheme = mkOpt (enum [ "light" "dark" ]) "dark" "The color scheme to use.";
     wayland = mkBoolOpt true "Whether or not to use Wayland.";
@@ -49,8 +49,8 @@ in
   };
 
   config = mkIf cfg.enable {
-    khaneliman.system.xkb.enable = true;
-    khaneliman.desktop.addons = {
+    khanelinix.system.xkb.enable = true;
+    khanelinix.desktop.addons = {
       gtk = enabled;
       wallpapers = enabled;
       electron-support = enabled;
@@ -58,7 +58,7 @@ in
     };
 
     environment.systemPackages = with pkgs; [
-      (hiPrio khaneliman.xdg-open-with-portal)
+      (hiPrio khanelinix.xdg-open-with-portal)
       wl-clipboard
       gnome.gnome-tweaks
       gnome.nautilus-python
@@ -81,7 +81,7 @@ in
       lib.optional (cfg.monitors != null) "L+ ${gdmHome}/.config/monitors.xml - - - - ${cfg.monitors}"
     );
 
-    systemd.services.khaneliman-user-icon = {
+    systemd.services.khanelinix-user-icon = {
       before = [ "display-manager.service" ];
       wantedBy = [ "display-manager.service" ];
 
@@ -92,8 +92,8 @@ in
       };
 
       script = ''
-        config_file=/var/lib/AccountsService/users/${config.khaneliman.user.name}
-        icon_file=/run/current-system/sw/share/khaneliman-icons/user/${config.khaneliman.user.name}/${config.khaneliman.user.icon.fileName}
+        config_file=/var/lib/AccountsService/users/${config.khanelinix.user.name}
+        icon_file=/run/current-system/sw/share/khanelinix.icons/user/${config.khanelinix.user.name}/${config.khanelinix.user.icon.fileName}
 
         if ! [ -d "$(dirname "$config_file")"]; then
           mkdir -p "$(dirname "$config_file")"
@@ -131,10 +131,10 @@ in
       desktopManager.gnome.enable = true;
     };
 
-    khaneliman.home.extraOptions = {
+    khanelinix.home.extraOptions = {
       dconf.settings =
         let
-          user = config.users.users.${config.khaneliman.user.name};
+          user = config.users.users.${config.khanelinix.user.name};
           get-wallpaper = wallpaper:
             if lib.isDerivation wallpaper then
               builtins.toString wallpaper
@@ -152,13 +152,13 @@ in
             ];
             favorite-apps =
               [ "org.gnome.Nautilus.desktop" ]
-              ++ optional config.khaneliman.apps.firefox.enable "firefox.desktop"
-              ++ optional config.khaneliman.apps.vscode.enable "code.desktop"
-              ++ optional config.khaneliman.desktop.addons.foot.enable "foot.desktop"
-              ++ optional config.khaneliman.apps.logseq.enable "logseq.desktop"
-              ++ optional config.khaneliman.apps.discord.enable "discord.desktop"
-              ++ optional config.khaneliman.apps.element.enable "element-desktop.desktop"
-              ++ optional config.khaneliman.apps.steam.enable "steam.desktop";
+              ++ optional config.khanelinix.apps.firefox.enable "firefox.desktop"
+              ++ optional config.khanelinix.apps.vscode.enable "code.desktop"
+              ++ optional config.khanelinix.desktop.addons.foot.enable "foot.desktop"
+              ++ optional config.khanelinix.apps.logseq.enable "logseq.desktop"
+              ++ optional config.khanelinix.apps.discord.enable "discord.desktop"
+              ++ optional config.khanelinix.apps.element.enable "element-desktop.desktop"
+              ++ optional config.khanelinix.apps.steam.enable "steam.desktop";
           };
 
           "org/gnome/desktop/background" = {
@@ -245,8 +245,8 @@ in
             menu-button-icon-image = 23;
 
             menu-button-terminal =
-              if config.khaneliman.desktop.addons.term.enable then
-                lib.getExe config.khaneliman.desktop.addons.term.pkg
+              if config.khanelinix.desktop.addons.term.enable then
+                lib.getExe config.khanelinix.desktop.addons.term.pkg
               else
                 lib.getExe pkgs.gnome.gnome-terminal;
           };

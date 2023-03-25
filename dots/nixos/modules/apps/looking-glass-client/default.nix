@@ -3,11 +3,11 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.khaneliman.apps.looking-glass-client;
-  user = config.khaneliman.user;
+  cfg = config.khanelinix.apps.looking-glass-client;
+  user = config.khanelinix.user;
 in
 {
-  options.khaneliman.apps.looking-glass-client = with types; {
+  options.khanelinix.apps.looking-glass-client = with types; {
     enable =
       mkBoolOpt false "Whether or not to enable the Looking Glass client.";
   };

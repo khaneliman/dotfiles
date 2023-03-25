@@ -3,14 +3,14 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.khaneliman.apps.frappe-books;
+  cfg = config.khanelinix.apps.frappe-books;
 in
 {
-  options.khaneliman.apps.frappe-books = with types; {
+  options.khanelinix.apps.frappe-books = with types; {
     enable = mkBoolOpt false "Whether or not to enable FrappeBooks.";
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ khaneliman.frappe-books ];
+    environment.systemPackages = with pkgs; [ khanelinix.frappe-books ];
   };
 }

@@ -3,10 +3,10 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.khaneliman.tools.tree-sitter;
+  cfg = config.khanelinix.tools.tree-sitter;
 in
 {
-  options.khaneliman.tools.tree-sitter = with types; {
+  options.khanelinix.tools.tree-sitter = with types; {
     enable = mkBoolOpt false "Whether or not to enable tree-sitter.";
   };
 

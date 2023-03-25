@@ -2,19 +2,19 @@
 
 with lib;
 with lib.internal;
-let cfg = config.khaneliman.desktop.addons.foot;
+let cfg = config.khanelinix.desktop.addons.foot;
 in
 {
-  options.khaneliman.desktop.addons.foot = with types; {
+  options.khanelinix.desktop.addons.foot = with types; {
     enable = mkBoolOpt false "Whether to enable the gnome file manager.";
   };
 
   config = mkIf cfg.enable {
-    khaneliman.desktop.addons.term = {
+    khanelinix.desktop.addons.term = {
       enable = true;
       pkg = pkgs.foot;
     };
 
-    khaneliman.home.configFile."foot/foot.ini".source = ./foot.ini;
+    khanelinix.home.configFile."foot/foot.ini".source = ./foot.ini;
   };
 }

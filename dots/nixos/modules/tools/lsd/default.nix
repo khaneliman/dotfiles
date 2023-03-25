@@ -3,10 +3,10 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.khaneliman.tools.lsd;
+  cfg = config.khanelinix.tools.lsd;
 in
 {
-  options.khaneliman.tools.lsd = with types; {
+  options.khanelinix.tools.lsd = with types; {
     enable = mkBoolOpt false "Whether or not to enable lsd.";
   };
 

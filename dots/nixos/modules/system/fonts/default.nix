@@ -2,10 +2,10 @@
 
 with lib;
 with lib.internal;
-let cfg = config.khaneliman.system.fonts;
+let cfg = config.khanelinix.system.fonts;
 in
 {
-  options.khaneliman.system.fonts = with types; {
+  options.khanelinix.system.fonts = with types; {
     enable = mkBoolOpt false "Whether or not to manage fonts.";
     fonts = mkOpt (listOf package) [ ] "Custom font packages to install.";
   };

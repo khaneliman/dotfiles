@@ -2,10 +2,10 @@
 
 with lib;
 with lib.internal;
-let cfg = config.khaneliman.desktop.addons.wofi;
+let cfg = config.khanelinix.desktop.addons.wofi;
 in
 {
-  options.khaneliman.desktop.addons.wofi = with types; {
+  options.khanelinix.desktop.addons.wofi = with types; {
     enable =
       mkBoolOpt false "Whether to enable the Wofi in the desktop environment.";
   };
@@ -16,8 +16,8 @@ in
     # config -> .config/wofi/config
     # css -> .config/wofi/style.css
     # colors -> $XDG_CACHE_HOME/wal/colors
-    # khaneliman.home.configFile."foot/foot.ini".source = ./foot.ini;
-    khaneliman.home.configFile."wofi/config".source = ./config;
-    khaneliman.home.configFile."wofi/style.css".source = ./style.css;
+    # khanelinix.home.configFile."foot/foot.ini".source = ./foot.ini;
+    khanelinix.home.configFile."wofi/config".source = ./config;
+    khanelinix.home.configFile."wofi/style.css".source = ./style.css;
   };
 }

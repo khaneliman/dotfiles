@@ -2,10 +2,10 @@
 
 with lib;
 with lib.internal;
-let cfg = config.khaneliman.desktop.addons.rofi;
+let cfg = config.khanelinix.desktop.addons.rofi;
 in
 {
-  options.khaneliman.desktop.addons.rofi = with types; {
+  options.khanelinix.desktop.addons.rofi = with types; {
     enable =
       mkBoolOpt false "Whether to enable Rofi in the desktop environment.";
   };
@@ -13,6 +13,6 @@ in
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [ rofi ];
 
-    khaneliman.home.configFile."rofi/config.rasi".source = ./config.rasi;
+    khanelinix.home.configFile."rofi/config.rasi".source = ./config.rasi;
   };
 }

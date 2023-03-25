@@ -3,10 +3,10 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.khaneliman.apps.element;
+  cfg = config.khanelinix.apps.element;
 in
 {
-  options.khaneliman.apps.element = with types; {
+  options.khanelinix.apps.element = with types; {
     enable = mkBoolOpt false "Whether or not to enable Element.";
   };
 

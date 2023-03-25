@@ -1,16 +1,16 @@
 { options, config, lib, pkgs, ... }:
 with lib;
 with lib.internal;
-let cfg = config.khaneliman.archetypes.vm;
+let cfg = config.khanelinix.archetypes.vm;
 in
 {
-  options.khaneliman.archetypes.vm = with types; {
+  options.khanelinix.archetypes.vm = with types; {
     enable =
       mkBoolOpt false "Whether or not to enable the vm archetype.";
   };
 
   config = mkIf cfg.enable {
-    khaneliman = {
+    khanelinix = {
       suites = {
         common-slim = enabled;
         desktop = enabled;

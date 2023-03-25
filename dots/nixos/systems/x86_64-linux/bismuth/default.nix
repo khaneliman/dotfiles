@@ -21,7 +21,7 @@ with lib.internal;
 
   environment.systemPackages = with pkgs;
     [
-      khaneliman.kalidoface
+      khanelinix.kalidoface
     ];
 
   services.minecraft-server = {
@@ -33,7 +33,7 @@ with lib.internal;
     };
   };
 
-  khaneliman = {
+  khanelinix = {
     apps = {
       rpcs3 = enabled;
       ubports-installer = enabled;
@@ -73,8 +73,8 @@ with lib.internal;
 
     desktop.gnome = {
       wallpaper = {
-        light = pkgs.khaneliman.wallpapers.flatppuccin_macchiato;
-        dark = pkgs.khaneliman.wallpapers.cat-sound;
+        light = pkgs.khanelinix.wallpapers.flatppuccin_macchiato;
+        dark = pkgs.khanelinix.wallpapers.cat-sound;
       };
       monitors = ./monitors.xml;
     };

@@ -1,12 +1,12 @@
 { lib, pkgs, config, ... }:
 
 let
-  cfg = config.khaneliman.apps.steamtinkerlaunch;
+  cfg = config.khanelinix.apps.steamtinkerlaunch;
 
   inherit (lib) mkIf mkEnableOption;
 in
 {
-  options.khaneliman.apps.steamtinkerlaunch = {
+  options.khanelinix.apps.steamtinkerlaunch = {
     enable = mkEnableOption "Steam Tinker Launch";
   };
 

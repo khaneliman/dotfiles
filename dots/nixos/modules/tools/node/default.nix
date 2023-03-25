@@ -2,10 +2,10 @@
 
 with lib;
 with lib.internal;
-let cfg = config.khaneliman.tools.node;
+let cfg = config.khanelinix.tools.node;
 in
 {
-  options.khaneliman.tools.node = with types; {
+  options.khanelinix.tools.node = with types; {
     enable = mkBoolOpt false "Whether or not to install and configure git";
     pkg = mkOpt package pkgs.nodejs-18_x "The NodeJS package to use";
     prettier = {

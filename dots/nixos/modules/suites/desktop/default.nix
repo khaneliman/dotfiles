@@ -3,16 +3,16 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.khaneliman.suites.desktop;
+  cfg = config.khanelinix.suites.desktop;
 in
 {
-  options.khaneliman.suites.desktop = with types; {
+  options.khanelinix.suites.desktop = with types; {
     enable =
       mkBoolOpt false "Whether or not to enable common desktop configuration.";
   };
 
   config = mkIf cfg.enable {
-    khaneliman = {
+    khanelinix = {
       desktop = {
         gnome = enabled;
 

@@ -3,10 +3,10 @@ inputs@{ options, config, lib, pkgs, ... }:
 with lib;
 with lib.internal;
 let
-  cfg = config.khaneliman.cli-apps.flake;
+  cfg = config.khanelinix.cli-apps.flake;
 in
 {
-  options.khaneliman.cli-apps.flake = with types; {
+  options.khanelinix.cli-apps.flake = with types; {
     enable = mkBoolOpt false "Whether or not to enable flake.";
   };
 

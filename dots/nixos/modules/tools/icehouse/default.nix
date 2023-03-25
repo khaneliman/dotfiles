@@ -1,12 +1,12 @@
 { config, lib, pkgs, ... }:
 
 let
-  cfg = config.khaneliman.tools.icehouse;
+  cfg = config.khanelinix.tools.icehouse;
 
   inherit (lib) mkEnableOption mkIf;
 in
 {
-  options.khaneliman.tools.icehouse = {
+  options.khanelinix.tools.icehouse = {
     enable = mkEnableOption "Icehouse";
   };
 

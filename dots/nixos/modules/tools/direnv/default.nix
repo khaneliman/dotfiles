@@ -2,15 +2,15 @@
 
 with lib;
 with lib.internal;
-let cfg = config.khaneliman.tools.direnv;
+let cfg = config.khanelinix.tools.direnv;
 in
 {
-  options.khaneliman.tools.direnv = with types; {
+  options.khanelinix.tools.direnv = with types; {
     enable = mkBoolOpt false "Whether or not to enable direnv.";
   };
 
   config = mkIf cfg.enable {
-    khaneliman.home.extraOptions = {
+    khanelinix.home.extraOptions = {
       programs.direnv = {
         enable = true;
         nix-direnv = enabled;

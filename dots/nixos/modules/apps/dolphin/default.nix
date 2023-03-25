@@ -2,10 +2,10 @@
 
 with lib;
 with lib.internal;
-let cfg = config.khaneliman.apps.dolphin;
+let cfg = config.khanelinix.apps.dolphin;
 in
 {
-  options.khaneliman.apps.dolphin = with types; {
+  options.khanelinix.apps.dolphin = with types; {
     enable = mkBoolOpt false "Whether or not to enable Dolphin.";
   };
 

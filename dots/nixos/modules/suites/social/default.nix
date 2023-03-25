@@ -3,15 +3,15 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.khaneliman.suites.social;
+  cfg = config.khanelinix.suites.social;
 in
 {
-  options.khaneliman.suites.social = with types; {
+  options.khanelinix.suites.social = with types; {
     enable = mkBoolOpt false "Whether or not to enable social configuration.";
   };
 
   config = mkIf cfg.enable {
-    khaneliman = {
+    khanelinix = {
       apps = {
         discord = {
           enable = true;

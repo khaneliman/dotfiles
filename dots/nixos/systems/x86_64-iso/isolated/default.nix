@@ -56,7 +56,7 @@ in
     };
   };
 
-  khaneliman = {
+  khanelinix = {
     nix = enabled;
 
     desktop = {

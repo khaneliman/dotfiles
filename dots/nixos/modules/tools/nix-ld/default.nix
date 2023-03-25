@@ -2,10 +2,10 @@
 
 with lib;
 with lib.internal;
-let cfg = config.khaneliman.tools.nix-ld;
+let cfg = config.khanelinix.tools.nix-ld;
 in
 {
-  options.khaneliman.tools.nix-ld = with types; {
+  options.khanelinix.tools.nix-ld = with types; {
     enable = mkBoolOpt false "Whether or not to enable nix-ld.";
   };
 

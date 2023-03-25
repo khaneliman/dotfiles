@@ -3,10 +3,10 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.khaneliman.tools.gnumake;
+  cfg = config.khanelinix.tools.gnumake;
 in
 {
-  options.khaneliman.tools.gnumake = with types; {
+  options.khanelinix.tools.gnumake = with types; {
     enable = mkBoolOpt false "Whether or not to enable gnumake.";
   };
 

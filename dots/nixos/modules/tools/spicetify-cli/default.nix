@@ -3,10 +3,10 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.khaneliman.tools.spicetify-cli;
+  cfg = config.khanelinix.tools.spicetify-cli;
 in
 {
-  options.khaneliman.tools.spicetify-cli = with types; {
+  options.khanelinix.tools.spicetify-cli = with types; {
     enable = mkBoolOpt false "Whether or not to enable spicetify-cli.";
   };
 

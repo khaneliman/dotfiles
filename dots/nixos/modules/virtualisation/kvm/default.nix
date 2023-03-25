@@ -3,11 +3,11 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.khaneliman.virtualisation.kvm;
-  user = config.khaneliman.user;
+  cfg = config.khanelinix.virtualisation.kvm;
+  user = config.khanelinix.user;
 in
 {
-  options.khaneliman.virtualisation.kvm = with types; {
+  options.khanelinix.virtualisation.kvm = with types; {
     enable = mkBoolOpt false "Whether or not to enable KVM virtualisation.";
     vfioIds = mkOpt (listOf str) [ ]
       "The hardware IDs to pass through to a virtual machine.";
@@ -65,7 +65,7 @@ in
       };
     };
 
-    khaneliman = {
+    khanelinix = {
       user = { extraGroups = [ "qemu-libvirtd" "libvirtd" "disk" ]; };
 
       apps = { looking-glass-client = enabled; };
