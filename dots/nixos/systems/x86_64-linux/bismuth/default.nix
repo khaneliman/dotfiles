@@ -19,11 +19,6 @@ with lib.internal;
     allowedTCPPorts = [ 28000 ];
   };
 
-  environment.systemPackages = with pkgs;
-    [
-      khanelinix.kalidoface
-    ];
-
   services.minecraft-server = {
     enable = false;
     eula = true;
