@@ -5,13 +5,6 @@ with lib.internal;
 {
   imports = [ ./hardware.nix ];
 
-  # Resolve an issue with Bismuth's wired connections failing sometimes due to weird
-  # DHCP issues. I'm not quite sure why this is the case, but I have found that the
-  # problem can be resolved by stopping dhcpcd, restarting Network Manager, and then
-  # unplugging and replugging the ethernet cable. Perhaps there's some weird race
-  # condition when the system is coming up that causes this.
-  # networking.dhcpcd.enable = false;
-
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   networking.firewall = {
@@ -19,23 +12,40 @@ with lib.internal;
     allowedTCPPorts = [ 28000 ];
   };
 
-  services.minecraft-server = {
-    enable = false;
-    eula = true;
-    declarative = true;
-    serverProperties = {
-      server-port = 43000;
-    };
-  };
-
   khanelinix = {
+    nix = enabled;
+
+    archetypes = {
+      gaming = enabled;
+      workstation = enabled;
+    };
+
     apps = {
+      _1password = enabled;
+      firefox = enabled;
+      vscode = enabled;
       rpcs3 = enabled;
       steamtinkerlaunch = enabled;
     };
 
+    cli-apps = { neovim = enabled; };
+
+    desktop.gnome = {
+      wallpaper = {
+        light = pkgs.khanelinix.wallpapers.flatppuccin_macchiato;
+        dark = pkgs.khanelinix.wallpapers.cat-sound;
+      };
+      monitors = ./monitors.xml;
+    };
+
+    hardware = {
+      # audio = enabled;
+      networking = enabled;
+    };
+
     services = {
       avahi = enabled;
+      printing = enabled;
 
       samba = {
         enable = true;
@@ -60,17 +70,25 @@ with lib.internal;
 
     };
 
-    archetypes = {
-      gaming = enabled;
-      workstation = enabled;
+    security = {
+      doas = enabled;
+      keyring = enabled;
     };
 
-    desktop.gnome = {
-      wallpaper = {
-        light = pkgs.khanelinix.wallpapers.flatppuccin_macchiato;
-        dark = pkgs.khanelinix.wallpapers.cat-sound;
-      };
-      monitors = ./monitors.xml;
+    system = {
+      boot = enabled;
+      fonts = enabled;
+      locale = enabled;
+      time = enabled;
+      xkb = enabled;
+    };
+
+    tools = {
+      k8s = enabled;
+      git = enabled;
+      node = enabled;
+      http = enabled;
+      misc = enabled;
     };
 
     virtualisation.kvm = {
@@ -144,10 +162,6 @@ with lib.internal;
       ];
     };
   };
-
-  # WiFi is typically unused on the desktop. Enable this service
-  # if it's no longer only using a wired connection.
-  systemd.services.network-addresses-wlp41s0.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

@@ -59,7 +59,7 @@ with lib.internal;
     };
 
     system = {
-      boot =enabled;
+      boot = enabled;
       fonts = enabled;
       locale = enabled;
       time = enabled;
