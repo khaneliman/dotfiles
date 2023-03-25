@@ -125,10 +125,6 @@
         nix-ld.nixosModules.nix-ld
       ];
 
-      systems.hosts.jasper.modules = with inputs; [
-        nixos-hardware.nixosModules.framework
-      ];
-
       deploy = lib.mkDeploy { inherit (inputs) self; };
 
       checks =
