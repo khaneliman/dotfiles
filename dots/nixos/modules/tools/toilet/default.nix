@@ -3,10 +3,10 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.khaneliman.tools.toilet;
+  cfg = config.khanelinix.tools.toilet;
 in
 {
-  options.khaneliman.tools.toilet = with types; {
+  options.khanelinix.tools.toilet = with types; {
     enable = mkBoolOpt false "Whether or not to enable toilet.";
   };
 

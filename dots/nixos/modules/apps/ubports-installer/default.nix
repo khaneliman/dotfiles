@@ -3,20 +3,20 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.khaneliman.apps.ubports-installer;
+  cfg = config.khanelinix.apps.ubports-installer;
 in
 {
-  options.khaneliman.apps.ubports-installer = with types; {
+  options.khanelinix.apps.ubports-installer = with types; {
     enable = mkBoolOpt false "Whether or not to enable the UBPorts Installer.";
   };
 
   config =
     mkIf cfg.enable {
-      environment.systemPackages = with pkgs.khaneliman; [
+      environment.systemPackages = with pkgs.khanelinix; [
         ubports-installer
       ];
 
-      services.udev.packages = with pkgs.khaneliman; [
+      services.udev.packages = with pkgs.khanelinix; [
         ubports-installer-udev-rules
       ];
     };

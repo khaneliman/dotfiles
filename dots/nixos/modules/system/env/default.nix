@@ -2,10 +2,10 @@
 
 with lib;
 with lib.internal;
-let cfg = config.khaneliman.system.env;
+let cfg = config.khanelinix.system.env;
 in
 {
-  options.khaneliman.system.env = with types;
+  options.khanelinix.system.env = with types;
     mkOption {
       type = attrsOf (oneOf [ str path (listOf (either str path)) ]);
       apply = mapAttrs (n: v:

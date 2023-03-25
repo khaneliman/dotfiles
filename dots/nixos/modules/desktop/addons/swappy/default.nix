@@ -2,10 +2,10 @@
 
 with lib;
 with lib.internal;
-let cfg = config.khaneliman.desktop.addons.swappy;
+let cfg = config.khanelinix.desktop.addons.swappy;
 in
 {
-  options.khaneliman.desktop.addons.swappy = with types; {
+  options.khanelinix.desktop.addons.swappy = with types; {
     enable =
       mkBoolOpt false "Whether to enable Swappy in the desktop environment.";
   };
@@ -13,7 +13,7 @@ in
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [ swappy ];
 
-    khaneliman.home.configFile."swappy/config".source = ./config;
-    khaneliman.home.file."Pictures/screenshots/.keep".text = "";
+    khanelinix.home.configFile."swappy/config".source = ./config;
+    khanelinix.home.file."Pictures/screenshots/.keep".text = "";
   };
 }

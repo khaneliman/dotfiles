@@ -3,10 +3,10 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.khaneliman.tools.rustup;
+  cfg = config.khanelinix.tools.rustup;
 in
 {
-  options.khaneliman.tools.rustup = with types; {
+  options.khanelinix.tools.rustup = with types; {
     enable = mkBoolOpt false "Whether or not to enable rustup.";
   };
 

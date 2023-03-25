@@ -2,10 +2,10 @@
 
 with lib;
 with lib.internal;
-let cfg = config.khaneliman.cli-apps.lazygit;
+let cfg = config.khanelinix.cli-apps.lazygit;
 in
 {
-  options.khaneliman.cli-apps.lazygit = with types; {
+  options.khanelinix.cli-apps.lazygit = with types; {
     enable = mkBoolOpt false "Whether or not to enable lazygit.";
   };
 

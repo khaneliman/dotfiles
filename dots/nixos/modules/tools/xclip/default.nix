@@ -3,10 +3,10 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.khaneliman.tools.xclip;
+  cfg = config.khanelinix.tools.xclip;
 in
 {
-  options.khaneliman.tools.xclip = with types; {
+  options.khanelinix.tools.xclip = with types; {
     enable = mkBoolOpt false "Whether or not to enable xclip.";
   };
 

@@ -2,10 +2,10 @@
 
 with lib;
 with lib.internal;
-let cfg = config.khaneliman.apps.logseq;
+let cfg = config.khanelinix.apps.logseq;
 in
 {
-  options.khaneliman.apps.logseq = with types; {
+  options.khanelinix.apps.logseq = with types; {
     enable = mkBoolOpt false "Whether or not to enable logseq.";
   };
 

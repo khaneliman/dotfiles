@@ -2,10 +2,10 @@
 
 with lib;
 with lib.internal;
-let cfg = config.khaneliman.tools.http;
+let cfg = config.khanelinix.tools.http;
 in
 {
-  options.khaneliman.tools.http = with types; {
+  options.khanelinix.tools.http = with types; {
     enable = mkBoolOpt false "Whether or not to enable common http utilities.";
   };
 

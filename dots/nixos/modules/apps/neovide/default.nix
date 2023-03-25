@@ -2,10 +2,10 @@
 
 with lib;
 with lib.internal;
-let cfg = config.khaneliman.apps.neovide;
+let cfg = config.khanelinix.apps.neovide;
 in
 {
-  options.khaneliman.apps.neovide = with types; {
+  options.khanelinix.apps.neovide = with types; {
     enable = mkBoolOpt false "Whether or not to enable neovide.";
   };
 

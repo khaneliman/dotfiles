@@ -3,7 +3,7 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.khaneliman.apps.discord;
+  cfg = config.khanelinix.apps.discord;
   discord = lib.replugged.makeDiscordPlugged {
     inherit pkgs;
 
@@ -20,7 +20,7 @@ let
   };
 in
 {
-  options.khaneliman.apps.discord = with types; {
+  options.khanelinix.apps.discord = with types; {
     enable = mkBoolOpt false "Whether or not to enable Discord.";
     canary.enable = mkBoolOpt false "Whether or not to enable Discord Canary.";
     chromium.enable = mkBoolOpt false
@@ -33,9 +33,9 @@ in
   config = mkIf (cfg.enable or cfg.chromium.enable) {
     environment.systemPackages =
       lib.optional cfg.enable discord
-      ++ lib.optional cfg.canary.enable pkgs.khaneliman.discord
-      ++ lib.optional cfg.chromium.enable pkgs.khaneliman.discord-chromium
-      ++ lib.optional cfg.firefox.enable pkgs.khaneliman.discord-firefox
+      ++ lib.optional cfg.canary.enable pkgs.khanelinix.discord
+      ++ lib.optional cfg.chromium.enable pkgs.khanelinix.discord-chromium
+      ++ lib.optional cfg.firefox.enable pkgs.khanelinix.discord-firefox
       ++ lib.optional cfg.native.enable pkgs.discord;
   };
 }

@@ -1,14 +1,14 @@
 { config, lib, ... }:
 
 let
-  cfg = config.khaneliman.system.zfs;
+  cfg = config.khanelinix.system.zfs;
 
   inherit (lib) mkEnableOption mkIf mkDefault;
   inherit (lib.internal) mkOpt enabled;
   inherit (lib.types) listOf str;
 in
 {
-  options.khaneliman.system.zfs = {
+  options.khanelinix.system.zfs = {
     enable = mkEnableOption "ZFS support";
 
     pools = mkOpt (listOf str) [ "rpool" ] "The ZFS pools to manage.";
@@ -38,7 +38,7 @@ in
       };
     };
 
-    khaneliman = {
+    khanelinix = {
       tools = {
         icehouse = enabled;
       };

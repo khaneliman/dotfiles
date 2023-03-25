@@ -2,10 +2,10 @@
 
 with lib;
 with lib.internal;
-let cfg = config.khaneliman.system.boot;
+let cfg = config.khanelinix.system.boot;
 in
 {
-  options.khaneliman.system.boot = with types; {
+  options.khanelinix.system.boot = with types; {
     enable = mkBoolOpt false "Whether or not to enable booting.";
   };
 

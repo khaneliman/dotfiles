@@ -3,9 +3,9 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.khaneliman.services.openssh;
+  cfg = config.khanelinix.services.openssh;
 
-  user = config.users.users.${config.khaneliman.user.name};
+  user = config.users.users.${config.khanelinix.user.name};
   user-id = builtins.toString user.uid;
 
   default-key =
@@ -13,7 +13,7 @@ let
 
   other-hosts = lib.filterAttrs
     (key: host:
-      key != name && (host.config.khaneliman.user.name or null) != null)
+      key != name && (host.config.khanelinix.user.name or null) != null)
     ((inputs.self.nixosConfigurations or { }) // (inputs.self.darwinConfigurations or { }));
 
   other-hosts-config = lib.concatMapStringsSep
@@ -21,7 +21,7 @@ let
     (name:
       let
         remote = other-hosts.${name};
-        remote-user-name = remote.config.khaneliman.user.name;
+        remote-user-name = remote.config.khanelinix.user.name;
         remote-user-id = builtins.toString remote.config.users.users.${remote-user-name}.uid;
 
         forward-gpg = optionalString (config.programs.gnupg.agent.enable && remote.config.programs.gnupg.agent.enable)
@@ -42,7 +42,7 @@ let
     (builtins.attrNames other-hosts);
 in
 {
-  options.khaneliman.services.openssh = with types; {
+  options.khanelinix.services.openssh = with types; {
     enable = mkBoolOpt false "Whether or not to configure OpenSSH support.";
     authorizedKeys =
       mkOpt (listOf str) [ default-key ] "The public keys to apply.";
@@ -72,10 +72,10 @@ in
       ${other-hosts-config}
     '';
 
-    khaneliman.user.extraOptions.openssh.authorizedKeys.keys =
+    khanelinix.user.extraOptions.openssh.authorizedKeys.keys =
       cfg.authorizedKeys;
 
-    khaneliman.home.extraOptions = {
+    khanelinix.home.extraOptions = {
       programs.zsh.shellAliases = foldl
         (aliases: system:
           aliases // {

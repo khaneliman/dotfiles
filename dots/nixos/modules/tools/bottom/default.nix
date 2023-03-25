@@ -3,10 +3,10 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.khaneliman.tools.bottom;
+  cfg = config.khanelinix.tools.bottom;
 in
 {
-  options.khaneliman.tools.bottom = with types; {
+  options.khanelinix.tools.bottom = with types; {
     enable = mkBoolOpt false "Whether or not to enable Bottom.";
   };
 

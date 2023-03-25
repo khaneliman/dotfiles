@@ -2,10 +2,10 @@
 
 with lib;
 with lib.internal;
-let cfg = config.khaneliman.apps.cadence;
+let cfg = config.khanelinix.apps.cadence;
 in
 {
-  options.khaneliman.apps.cadence = with types; {
+  options.khanelinix.apps.cadence = with types; {
     enable = mkBoolOpt false "Whether or not to enable Cadence.";
   };
 

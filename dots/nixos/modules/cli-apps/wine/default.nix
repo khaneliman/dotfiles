@@ -3,10 +3,10 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.khaneliman.cli-apps.wine;
+  cfg = config.khanelinix.cli-apps.wine;
 in
 {
-  options.khaneliman.cli-apps.wine = with types; {
+  options.khanelinix.cli-apps.wine = with types; {
     enable = mkBoolOpt false "Whether or not to enable Wine.";
   };
 

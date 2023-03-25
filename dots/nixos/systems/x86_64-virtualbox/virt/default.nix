@@ -11,7 +11,7 @@ with lib.internal;
     WLR_NO_HARDWARE_CURSORS=1
   '';
 
-  khaneliman = {
+  khanelinix = {
     nix = enabled;
 
     apps = {

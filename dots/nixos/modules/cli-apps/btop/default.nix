@@ -2,10 +2,10 @@
 
 with lib;
 with lib.internal;
-let cfg = config.khaneliman.cli-apps.btop;
+let cfg = config.khanelinix.cli-apps.btop;
 in
 {
-  options.khaneliman.cli-apps.btop = with types; {
+  options.khanelinix.cli-apps.btop = with types; {
     enable = mkBoolOpt false "Whether or not to enable btop.";
   };
 

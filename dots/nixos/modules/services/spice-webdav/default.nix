@@ -3,10 +3,10 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.khaneliman.services.spice-webdav;
+  cfg = config.khanelinix.services.spice-webdav;
 in
 {
-  options.khaneliman.services.spice-webdav = with types; {
+  options.khanelinix.services.spice-webdav = with types; {
     enable = mkBoolOpt false "Whether or not to configure spice-webdav proxy support.";
      package = mkOption {
         default = pkgs.phodav;

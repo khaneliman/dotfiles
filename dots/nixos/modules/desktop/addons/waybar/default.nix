@@ -2,10 +2,10 @@
 
 with lib;
 with lib.internal;
-let cfg = config.khaneliman.desktop.addons.waybar;
+let cfg = config.khanelinix.desktop.addons.waybar;
 in
 {
-  options.khaneliman.desktop.addons.waybar = with types; {
+  options.khanelinix.desktop.addons.waybar = with types; {
     enable =
       mkBoolOpt false "Whether to enable Waybar in the desktop environment.";
   };
@@ -13,7 +13,7 @@ in
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [ waybar ];
 
-    khaneliman.home.configFile."waybar/config".source = ./config;
-    khaneliman.home.configFile."waybar/style.css".source = ./style.css;
+    khanelinix.home.configFile."waybar/config".source = ./config;
+    khanelinix.home.configFile."waybar/style.css".source = ./style.css;
   };
 }

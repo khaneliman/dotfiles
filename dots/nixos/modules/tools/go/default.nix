@@ -3,10 +3,10 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.khaneliman.tools.go;
+  cfg = config.khanelinix.tools.go;
 in
 {
-  options.khaneliman.tools.go = with types; {
+  options.khanelinix.tools.go = with types; {
     enable = mkBoolOpt false "Whether or not to enable Go support.";
   };
 

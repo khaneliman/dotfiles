@@ -3,7 +3,7 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.khaneliman.user;
+  cfg = config.khanelinix.user;
   defaultIconFileName = "profile.png";
   defaultIcon = pkgs.stdenvNoCC.mkDerivation {
     name = "default-icon";
@@ -20,17 +20,17 @@ let
   propagatedIcon = pkgs.runCommandNoCC "propagated-icon"
     { passthru = { fileName = cfg.icon.fileName; }; }
     ''
-      local target="$out/share/khaneliman-icons/user/${cfg.name}"
+      local target="$out/share/khanelinix.icons/user/${cfg.name}"
       mkdir -p "$target"
 
       cp ${cfg.icon} "$target/${cfg.icon.fileName}"
     '';
 in
 {
-  options.khaneliman.user = with types; {
+  options.khanelinix.user = with types; {
     name = mkOpt str "khaneliman" "The name to use for the user account.";
     fullName = mkOpt str "Austin Horstman" "The full name of the user.";
-    email = mkOpt str "khaneliman12@gmail.com" "The email of the user.";
+    email = mkOpt str "khaneliman.2@gmail.com" "The email of the user.";
     initialPassword = mkOpt str "password"
       "The initial password to use when the user is first created.";
     icon = mkOpt (nullOr package) defaultIcon
@@ -45,7 +45,7 @@ in
       cowsay
       fortune
       lolcat
-      khaneliman.cowsay-plus
+      khanelinix.cowsay-plus
       propagatedIcon
     ];
 
@@ -55,7 +55,7 @@ in
       histFile = "$XDG_CACHE_HOME/zsh.history";
     };
 
-    khaneliman.home = {
+    khanelinix.home = {
       file = {
         "Desktop/.keep".text = "";
         "Documents/.keep".text = "";

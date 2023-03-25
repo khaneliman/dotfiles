@@ -2,10 +2,10 @@
 
 with lib;
 with lib.internal;
-let cfg = config.khaneliman.services.tailscale;
+let cfg = config.khanelinix.services.tailscale;
 in
 {
-  options.khaneliman.services.tailscale = with types; {
+  options.khanelinix.services.tailscale = with types; {
     enable = mkBoolOpt false "Whether or not to configure Tailscale";
     autoconnect = {
       enable = mkBoolOpt false "Whether or not to enable automatic connection to Tailscale";
@@ -17,7 +17,7 @@ in
     assertions = [
       {
         assertion = cfg.autoconnect.enable -> cfg.autoconnect.key != "";
-        message = "khaneliman.services.tailscale.autoconnect.key must be set";
+        message = "khanelinix.services.tailscale.autoconnect.key must be set";
       }
     ];
 

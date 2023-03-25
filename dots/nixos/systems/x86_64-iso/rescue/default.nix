@@ -3,7 +3,7 @@
 with lib;
 with lib.internal;
 {
-  khaneliman = {
+  khanelinix = {
     nix = enabled;
 
     cli-apps = { neovim = enabled; };

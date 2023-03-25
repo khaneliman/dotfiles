@@ -2,10 +2,10 @@
 
 with lib;
 with lib.internal;
-let cfg = config.khaneliman.system.xkb;
+let cfg = config.khanelinix.system.xkb;
 in
 {
-  options.khaneliman.system.xkb = with types; {
+  options.khanelinix.system.xkb = with types; {
     enable = mkBoolOpt false "Whether or not to configure xkb.";
   };
 

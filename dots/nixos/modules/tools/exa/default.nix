@@ -3,10 +3,10 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.khaneliman.tools.exa;
+  cfg = config.khanelinix.tools.exa;
 in
 {
-  options.khaneliman.tools.exa = with types; {
+  options.khanelinix.tools.exa = with types; {
     enable = mkBoolOpt false "Whether or not to enable exa.";
   };
 

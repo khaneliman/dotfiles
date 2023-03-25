@@ -3,10 +3,10 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.khaneliman.cli-apps.prisma;
+  cfg = config.khanelinix.cli-apps.prisma;
 in
 {
-  options.khaneliman.cli-apps.prisma = with types; {
+  options.khanelinix.cli-apps.prisma = with types; {
     enable = mkBoolOpt false "Whether or not to install Prisma";
     pkgs = {
       npm = mkOpt package pkgs.nodePackages.prisma "The NPM package to install";
@@ -18,7 +18,7 @@ in
   config = mkIf cfg.enable {
     environment.systemPackages = [ cfg.pkgs.npm ];
 
-    khaneliman.home.extraOptions = {
+    khanelinix.home.extraOptions = {
       programs.zsh.initExtra = ''
         export PRISMA_MIGRATION_ENGINE_BINARY="${cfg.pkgs.engines}/bin/migration-engine"
         export PRISMA_QUERY_ENGINE_BINARY="${cfg.pkgs.engines}/bin/query-engine"

@@ -3,13 +3,13 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.khaneliman.tools.fup-repl;
+  cfg = config.khanelinix.tools.fup-repl;
   fup-repl = pkgs.writeShellScriptBin "fup-repl" ''
     ${pkgs.fup-repl}/bin/repl ''${@}
   '';
 in
 {
-  options.khaneliman.tools.fup-repl = with types; {
+  options.khanelinix.tools.fup-repl = with types; {
     enable = mkBoolOpt false "Whether to enable fup-repl or not";
   };
 

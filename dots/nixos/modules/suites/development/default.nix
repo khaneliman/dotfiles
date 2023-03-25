@@ -3,7 +3,7 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.khaneliman.suites.development;
+  cfg = config.khanelinix.suites.development;
   apps = {
     neovide = enabled;
     vscode = enabled;
@@ -20,7 +20,7 @@ let
   };
 in
 {
-  options.khaneliman.suites.development = with types; {
+  options.khanelinix.suites.development = with types; {
     enable = mkBoolOpt false
       "Whether or not to enable common development configuration.";
   };
@@ -34,7 +34,7 @@ in
       8081
     ];
 
-    khaneliman = {
+    khanelinix = {
       inherit apps cli-apps;
 
       tools = {

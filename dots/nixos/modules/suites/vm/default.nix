@@ -3,17 +3,17 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.khaneliman.suites.vm;
+  cfg = config.khanelinix.suites.vm;
 in
 {
-  options.khaneliman.suites.vm = with types; {
+  options.khanelinix.suites.vm = with types; {
     enable = mkBoolOpt false
       "Whether or not to enable common vm configuration.";
   };
 
   config = mkIf cfg.enable {
 
-    khaneliman = {
+    khanelinix = {
     
       apps = {
       };

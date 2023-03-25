@@ -3,10 +3,10 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.khaneliman.apps.virtualbox;
+  cfg = config.khanelinix.apps.virtualbox;
 in
 {
-  options.khaneliman.apps.virtualbox = with types; {
+  options.khanelinix.apps.virtualbox = with types; {
     enable = mkBoolOpt false "Whether or not to enable Virtualbox.";
   };
 
@@ -16,6 +16,6 @@ in
       enableExtensionPack = true;
     };
 
-    khaneliman.user.extraGroups = [ "vboxusers" ];
+    khanelinix.user.extraGroups = [ "vboxusers" ];
   };
 }

@@ -3,13 +3,13 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.khaneliman.apps.twitter;
+  cfg = config.khanelinix.apps.twitter;
 in
 {
-  options.khaneliman.apps.twitter = with types; {
+  options.khanelinix.apps.twitter = with types; {
     enable = mkBoolOpt false "Whether or not to enable Twitter.";
   };
 
   config =
-    mkIf cfg.enable { environment.systemPackages = with pkgs.khaneliman; [ twitter ]; };
+    mkIf cfg.enable { environment.systemPackages = with pkgs.khanelinix; [ twitter ]; };
 }

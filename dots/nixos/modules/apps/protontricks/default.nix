@@ -3,10 +3,10 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.khaneliman.apps.protontricks;
+  cfg = config.khanelinix.apps.protontricks;
 in
 {
-  options.khaneliman.apps.protontricks = with types; {
+  options.khanelinix.apps.protontricks = with types; {
     enable = mkBoolOpt false "Whether or not to enable Protontricks.";
   };
 

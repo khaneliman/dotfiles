@@ -2,17 +2,17 @@
 
 with lib;
 with lib.internal;
-let cfg = config.khaneliman.hardware.networking;
+let cfg = config.khanelinix.hardware.networking;
 in
 {
-  options.khaneliman.hardware.networking = with types; {
+  options.khanelinix.hardware.networking = with types; {
     enable = mkBoolOpt false "Whether or not to enable networking support";
     hosts = mkOpt attrs { }
       "An attribute set to merge with <option>networking.hosts</option>";
   };
 
   config = mkIf cfg.enable {
-    khaneliman.user.extraGroups = [ "networkmanager" ];
+    khanelinix.user.extraGroups = [ "networkmanager" ];
 
     networking = {
       hosts = {

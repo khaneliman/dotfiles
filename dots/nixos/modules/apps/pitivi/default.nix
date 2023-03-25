@@ -3,10 +3,10 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.khaneliman.apps.pitivi;
+  cfg = config.khanelinix.apps.pitivi;
 in
 {
-  options.khaneliman.apps.pitivi = with types; {
+  options.khanelinix.apps.pitivi = with types; {
     enable = mkBoolOpt false "Whether or not to enable Pitivi.";
   };
 

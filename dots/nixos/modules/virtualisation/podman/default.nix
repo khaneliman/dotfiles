@@ -2,17 +2,17 @@
 
 with lib;
 with lib.internal;
-let cfg = config.khaneliman.virtualisation.podman;
+let cfg = config.khanelinix.virtualisation.podman;
 in
 {
-  options.khaneliman.virtualisation.podman = with types; {
+  options.khanelinix.virtualisation.podman = with types; {
     enable = mkBoolOpt false "Whether or not to enable Podman.";
   };
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [ podman-compose ];
 
-    khaneliman.home.extraOptions = {
+    khanelinix.home.extraOptions = {
       home.shellAliases = { "docker-compose" = "podman-compose"; };
     };
 

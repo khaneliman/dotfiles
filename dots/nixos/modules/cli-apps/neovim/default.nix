@@ -3,10 +3,10 @@ inputs@{ options, config, lib, pkgs, ... }:
 with lib;
 with lib.internal;
 let
-  cfg = config.khaneliman.cli-apps.neovim;
+  cfg = config.khanelinix.cli-apps.neovim;
 in
 {
-  options.khaneliman.cli-apps.neovim = with types; {
+  options.khanelinix.cli-apps.neovim = with types; {
     enable = mkBoolOpt false "Whether or not to enable neovim.";
   };
 
@@ -22,7 +22,7 @@ in
       EDITOR = "nvim";
     };
 
-    khaneliman.home = {
+    khanelinix.home = {
       configFile = {
         "nvim/init.lua".text = "$HOME/.config/.dotfiles/dots/shared/home/.config/nvim/init.lua";
       };

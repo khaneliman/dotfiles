@@ -3,16 +3,16 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.khaneliman.archetypes.server;
+  cfg = config.khanelinix.archetypes.server;
 in
 {
-  options.khaneliman.archetypes.server = with types; {
+  options.khanelinix.archetypes.server = with types; {
     enable =
       mkBoolOpt false "Whether or not to enable the server archetype.";
   };
 
   config = mkIf cfg.enable {
-    khaneliman = {
+    khanelinix = {
       suites = {
         common-slim = enabled;
       };

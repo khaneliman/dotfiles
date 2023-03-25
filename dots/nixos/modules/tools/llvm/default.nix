@@ -3,10 +3,10 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.khaneliman.tools.llvm;
+  cfg = config.khanelinix.tools.llvm;
 in
 {
-  options.khaneliman.tools.llvm = with types; {
+  options.khanelinix.tools.llvm = with types; {
     enable = mkBoolOpt false "Whether or not to enable llvm.";
   };
 

@@ -3,10 +3,10 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.khaneliman.apps.ardour;
+  cfg = config.khanelinix.apps.ardour;
 in
 {
-  options.khaneliman.apps.ardour = with types; {
+  options.khanelinix.apps.ardour = with types; {
     enable = mkBoolOpt false "Whether or not to enable Ardour.";
   };
 

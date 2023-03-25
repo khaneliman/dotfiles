@@ -3,10 +3,10 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.khaneliman.apps.obs;
+  cfg = config.khanelinix.apps.obs;
 in
 {
-  options.khaneliman.apps.obs = with types; {
+  options.khanelinix.apps.obs = with types; {
     enable = mkBoolOpt false "Whether or not to enable support for OBS.";
   };
 

@@ -3,18 +3,18 @@
 with lib;
 with lib.internal;
 let
-  cfg = config.khaneliman.desktop.addons.kanshi;
-  user = config.khaneliman.user;
+  cfg = config.khanelinix.desktop.addons.kanshi;
+  user = config.khanelinix.user;
   home = config.users.users.${user.name}.home;
 in
 {
-  options.khaneliman.desktop.addons.kanshi = with types; {
+  options.khanelinix.desktop.addons.kanshi = with types; {
     enable =
       mkBoolOpt false "Whether to enable Kanshi in the desktop environment.";
   };
 
   config = mkIf cfg.enable {
-    khaneliman.home.configFile."kanshi/config".source = ./config;
+    khanelinix.home.configFile."kanshi/config".source = ./config;
 
     environment.systemPackages = with pkgs; [ kanshi ];
 
