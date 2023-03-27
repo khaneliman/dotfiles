@@ -16,7 +16,10 @@ in
       desktop = {
         gnome = enabled;
 
-        addons = { wallpapers = enabled; };
+        addons = { 
+          wallpapers = enabled; 
+          kvantum = enabled;
+        };
       };
 
       apps = {
