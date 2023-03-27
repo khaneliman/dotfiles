@@ -10,12 +10,26 @@ in
   };
 
   config = mkIf cfg.enable {
-    boot.loader.systemd-boot.enable = true;
-    boot.loader.systemd-boot.configurationLimit = 10;
-    boot.loader.efi.canTouchEfiVariables = true;
-    boot.loader.efi.efiSysMountPoint = "/boot/efi";
+    boot = {
+      loader = {
+        # https://github.com/NixOS/nixpkgs/blob/c32c39d6f3b1fe6514598fa40ad2cf9ce22c3fb7/nixos/modules/system/systemd-boot/systemd-boot.nix#L66
+        systemd-boot = {
+          enable = true;
+          configurationLimit = 10;
+          editor = false;
+        };
+        efi = {
+          canTouchEfiVariables = true;
+          efiSysMountPoint = "/boot/efi";
+        };
+      };
 
-    # https://github.com/NixOS/nixpkgs/blob/c32c39d6f3b1fe6514598fa40ad2cf9ce22c3fb7/nixos/modules/system/boot/loader/systemd-boot/systemd-boot.nix#L66
-    boot.loader.systemd-boot.editor = false;
+      plymouth = {
+        enable = true;
+        themePackages = [pkgs.khanelinix.catppuccin-plymouth];
+        theme = "catppuccin-macchiato";
+        # font = "${pkgs.noto-fonts}/share/fonts/truetype/noto/NotoSans-Light.ttf";
+      };
+    };
   };
 }
