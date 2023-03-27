@@ -5,9 +5,13 @@ on: [push, pull_request, workflow_dispatch]
 jobs:
 
   checks:
-    name: Check expressions
-    runs-on: ubuntu-latest
-
+    name: Check expressions on ${{ matrix.arch }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        arch: [x86_64, aarch64]
     steps:
       - uses: actions/checkout@v3
       - uses: cachix/install-nix-action@v18
@@ -17,6 +21,7 @@ jobs:
             auto-optimise-store = true
             access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
             experimental-features = nix-command flakes
+            system = ${{ matrix.arch }}
       - name: run flake check
         working-directory: ./dots/nixos/
-        run: nix flake check --show-trace
+        run: nix flake check --system ${{ matrix.arch }}
