@@ -2,25 +2,25 @@
   options,
   config,
   lib,
-  unstable,
+  pkgs,
   ...
 }:
 with lib;
 with lib.internal; let
-  cfg = config.khanelinix.desktop.addons.kvantum;
+  cfg = config.khanelinix.desktop.addons.qt;
 in {
-  options.khanelinix.desktop.addons.kvantum = with types; {
+  options.khanelinix.desktop.addons.qt = with types; {
     enable = mkBoolOpt false "Whether to customize qt and apply themes.";
     theme = {
       name =
         mkOpt str "Catppuccin-Macchiato-Blue"
         "The name of the kvantum theme to apply.";
-      pkg = mkOpt package unstable.catppuccin-kvantum "The package to use for the theme.";
+      pkg = mkOpt package pkgs.catppuccin-kvantum "The package to use for the theme.";
     };
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with unstable; [
+    environment.systemPackages = with pkgs; [
       cfg.theme.pkg
       libsForQt5.qtstyleplugin-kvantum
     ];
