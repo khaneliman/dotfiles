@@ -1,11 +1,13 @@
-{ lib, config, options, ... }:
-
-let
+{
+  lib,
+  config,
+  options,
+  ...
+}: let
   cfg = config.khanelinix.services.avahi;
 
   inherit (lib) types mkEnableOption mkIf;
-in
-{
+in {
   options.khanelinix.services.avahi = with types; {
     enable = mkEnableOption "Avahi";
   };

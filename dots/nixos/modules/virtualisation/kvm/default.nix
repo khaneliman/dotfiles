@@ -1,21 +1,26 @@
-{ config, lib, pkgs, ... }:
-
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
-with lib.internal;
-let
+with lib.internal; let
   cfg = config.khanelinix.virtualisation.kvm;
   user = config.khanelinix.user;
-in
-{
+in {
   options.khanelinix.virtualisation.kvm = with types; {
     enable = mkBoolOpt false "Whether or not to enable KVM virtualisation.";
-    vfioIds = mkOpt (listOf str) [ ]
+    vfioIds =
+      mkOpt (listOf str) []
       "The hardware IDs to pass through to a virtual machine.";
-    platform = mkOpt (enum [ "amd" "intel" ]) "amd"
+    platform =
+      mkOpt (enum ["amd" "intel"]) "amd"
       "Which CPU platform the machine is using.";
     # Use `machinectl` and then `machinectl status <name>` to
     # get the unit "*.scope" of the virtual machine.
-    machineUnits = mkOpt (listOf str) [ ]
+    machineUnits =
+      mkOpt (listOf str) []
       "The systemd *.scope units to wait for before starting Scream.";
   };
 
@@ -33,7 +38,8 @@ in
         "${cfg.platform}_iommu=pt"
         "kvm.ignore_msrs=1"
       ];
-      extraModprobeConfig = optionalString (length cfg.vfioIds > 0)
+      extraModprobeConfig =
+        optionalString (length cfg.vfioIds > 0)
         "options vfio-pci ids=${concatStringsSep "," cfg.vfioIds}";
     };
 
@@ -42,7 +48,7 @@ in
       "f /dev/shm/scream 0660 ${user.name} qemu-libvirtd -"
     ];
 
-    environment.systemPackages = with pkgs; [ virt-manager ];
+    environment.systemPackages = with pkgs; [virt-manager];
 
     virtualisation = {
       libvirtd = {
@@ -66,22 +72,23 @@ in
     };
 
     khanelinix = {
-      user = { extraGroups = [ "qemu-libvirtd" "libvirtd" "disk" ]; };
+      user = {extraGroups = ["qemu-libvirtd" "libvirtd" "disk"];};
 
-      apps = { looking-glass-client = enabled; };
+      apps = {looking-glass-client = enabled;};
 
       home = {
         extraOptions = {
           systemd.user.services.scream = {
             Unit.Description = "Scream";
-            Unit.After = [
-              "libvirtd.service"
-              "pipewire-pulse.service"
-              "pipewire.service"
-              "sound.target"
-            ] ++ cfg.machineUnits;
-            Service.ExecStart =
-              "${pkgs.scream}/bin/scream -n scream -o pulse -m /dev/shm/scream";
+            Unit.After =
+              [
+                "libvirtd.service"
+                "pipewire-pulse.service"
+                "pipewire.service"
+                "sound.target"
+              ]
+              ++ cfg.machineUnits;
+            Service.ExecStart = "${pkgs.scream}/bin/scream -n scream -o pulse -m /dev/shm/scream";
             Service.Restart = "always";
             Service.StartLimitIntervalSec = "5";
             Service.StartLimitBurst = "1";

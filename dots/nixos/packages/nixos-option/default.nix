@@ -1,6 +1,12 @@
-{ lib, nixos-option, makeWrapper, fetchFromGitHub, runCommandNoCC, flakeSource ? "/home/short/work/config", ... }:
-
-let
+{
+  lib,
+  nixos-option,
+  makeWrapper,
+  fetchFromGitHub,
+  runCommandNoCC,
+  flakeSource ? "/home/short/work/config",
+  ...
+}: let
   flake-compat = fetchFromGitHub {
     owner = "edolstra";
     repo = "flake-compat";
@@ -9,10 +15,10 @@ let
   };
   prefix = ''(import ${flake-compat} { src = ${flakeSource}; }).defaultNix.nixosConfigurations.\$(hostname)'';
 in
-runCommandNoCC "nixos-option"
-{
-  buildInputs = [ makeWrapper ];
-}
+  runCommandNoCC "nixos-option"
+  {
+    buildInputs = [makeWrapper];
+  }
   ''
     makeWrapper ${nixos-option}/bin/nixos-option $out/bin/nixos-option \
       --add-flags --config_expr \

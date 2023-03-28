@@ -1,7 +1,7 @@
-{ channels, ... }:
-
-final: prev: {
-  gnomeExtensions = prev.gnomeExtensions // {
-    inherit (channels.unstable.gnomeExtensions) top-bar-organizer;
-  };
+{channels, ...}: final: prev: {
+  gnomeExtensions =
+    prev.gnomeExtensions
+    // {
+      inherit (channels.unstable.gnomeExtensions) top-bar-organizer;
+    };
 }

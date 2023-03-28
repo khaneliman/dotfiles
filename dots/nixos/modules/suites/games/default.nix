@@ -1,8 +1,12 @@
-{ options, config, lib, pkgs, ... }:
-
+{
+  options,
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
-with lib.internal;
-let
+with lib.internal; let
   cfg = config.khanelinix.suites.games;
   apps = {
     steam = enabled;
@@ -16,12 +20,11 @@ let
     wine = enabled;
     proton = enabled;
   };
-in
-{
+in {
   options.khanelinix.suites.games = with types; {
     enable =
       mkBoolOpt false "Whether or not to enable common games configuration.";
   };
 
-  config = mkIf cfg.enable { khanelinix = { inherit apps cli-apps; }; };
+  config = mkIf cfg.enable {khanelinix = {inherit apps cli-apps;};};
 }

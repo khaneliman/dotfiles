@@ -1,8 +1,13 @@
-{ options, config, lib, pkgs, inputs, ... }:
-
+{
+  options,
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
 with lib;
-with lib.internal;
-let
+with lib.internal; let
   cfg = config.khanelinix.apps.discord;
   discord = lib.replugged.makeDiscordPlugged {
     inherit pkgs;
@@ -18,14 +23,15 @@ let
       inherit (inputs) discord-nord-theme;
     };
   };
-in
-{
+in {
   options.khanelinix.apps.discord = with types; {
     enable = mkBoolOpt false "Whether or not to enable Discord.";
     canary.enable = mkBoolOpt false "Whether or not to enable Discord Canary.";
-    chromium.enable = mkBoolOpt false
+    chromium.enable =
+      mkBoolOpt false
       "Whether or not to enable the Chromium version of Discord.";
-    firefox.enable = mkBoolOpt false
+    firefox.enable =
+      mkBoolOpt false
       "Whether or not to enable the Firefox version of Discord.";
     native.enable = mkBoolOpt false "Whether or not to enable the native version of Discord.";
   };

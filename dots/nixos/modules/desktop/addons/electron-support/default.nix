@@ -1,12 +1,17 @@
-{ options, config, lib, pkgs, ... }:
-
-with lib;
-with lib.internal;
-let cfg = config.khanelinix.desktop.addons.electron-support;
-in
 {
+  options,
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib;
+with lib.internal; let
+  cfg = config.khanelinix.desktop.addons.electron-support;
+in {
   options.khanelinix.desktop.addons.electron-support = with types; {
-    enable = mkBoolOpt false
+    enable =
+      mkBoolOpt false
       "Whether to enable electron support in the desktop environment.";
   };
 
@@ -14,6 +19,6 @@ in
     khanelinix.home.configFile."electron-flags.conf".source =
       ./electron-flags.conf;
 
-    environment.sessionVariables = { NIXOS_OZONE_WL = "1"; };
+    environment.sessionVariables = {NIXOS_OZONE_WL = "1";};
   };
 }
