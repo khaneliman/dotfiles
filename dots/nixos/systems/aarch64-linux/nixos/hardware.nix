@@ -1,9 +1,13 @@
-{ config, lib, pkgs, modulesPath, inputs, ... }:
-
-let
-  inherit (inputs) nixos-hardware;
-in
 {
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  inputs,
+  ...
+}: let
+  inherit (inputs) nixos-hardware;
+in {
   imports = with nixos-hardware.nixosModules; [
     (modulesPath + "/installer/scan/not-detected.nix")
     common-pc
@@ -15,11 +19,10 @@ in
 
     initrd = {
       # kernelModules = [ "amdgpu" ];
-      availableKernelModules =
-        [ "nvme" "ahci" "xhci_pci" "usbhid" "usb_storage" "sd_mod" ];
+      availableKernelModules = ["nvme" "ahci" "xhci_pci" "usbhid" "usb_storage" "sd_mod"];
     };
 
-    extraModulePackages = [ ];
+    extraModulePackages = [];
   };
 
   fileSystems."/" = {
@@ -32,7 +35,7 @@ in
     fsType = "vfat";
   };
 
-  swapDevices = [{ device = "/dev/disk/by-label/swap"; }];
+  swapDevices = [{device = "/dev/disk/by-label/swap";}];
 
   hardware.enableRedistributableFirmware = true;
 

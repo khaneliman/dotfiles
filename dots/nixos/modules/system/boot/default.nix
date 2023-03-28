@@ -1,10 +1,14 @@
-{ options, config, pkgs, lib, ... }:
-
-with lib;
-with lib.internal;
-let cfg = config.khanelinix.system.boot;
-in
 {
+  options,
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+with lib;
+with lib.internal; let
+  cfg = config.khanelinix.system.boot;
+in {
   options.khanelinix.system.boot = with types; {
     enable = mkBoolOpt false "Whether or not to enable booting.";
   };

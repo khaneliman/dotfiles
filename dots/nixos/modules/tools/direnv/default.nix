@@ -1,10 +1,14 @@
-{ options, config, lib, pkgs, ... }:
-
-with lib;
-with lib.internal;
-let cfg = config.khanelinix.tools.direnv;
-in
 {
+  options,
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib;
+with lib.internal; let
+  cfg = config.khanelinix.tools.direnv;
+in {
   options.khanelinix.tools.direnv = with types; {
     enable = mkBoolOpt false "Whether or not to enable direnv.";
   };

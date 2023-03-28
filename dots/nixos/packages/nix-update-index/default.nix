@@ -1,5 +1,8 @@
-{ pkgs, lib, ... }:
-
+{
+  pkgs,
+  lib,
+  ...
+}:
 pkgs.writeShellScriptBin "nix-update-index" ''
   set -euo pipefail
 

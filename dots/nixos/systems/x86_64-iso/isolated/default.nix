@@ -1,8 +1,10 @@
-{ pkgs, lib, ... }:
-
+{
+  pkgs,
+  lib,
+  ...
+}:
 with lib;
-with lib.internal;
-let
+with lib.internal; let
   gpgConf = pkgs.fetchurl {
     url = "https://raw.githubusercontent.com/drduh/config/master/gpg.conf";
     sha256 = "0va62sgnah8rjgp4m6zygs4z9gbpmqvq9m3x4byywk1dha6nvvaj";
@@ -11,8 +13,7 @@ let
     pinentry-program /run/current-system/sw/bin/pinentry-curses
   '';
   guide = pkgs.fetchurl {
-    url =
-      "https://raw.githubusercontent.com/drduh/YubiKey-Guide/master/README.md";
+    url = "https://raw.githubusercontent.com/drduh/YubiKey-Guide/master/README.md";
     sha256 = "164pyqm3yjybxlvwxzfb9mpp38zs9rb2fycngr6jv20n3vr1dipj";
   };
   theme = pkgs.fetchFromGitHub {
@@ -21,7 +22,7 @@ let
     rev = "019a4829242937761949274916022e9861ed0627";
     sha256 = "1h48yqffpaz437f3c9hfryf23r95rr319lrb3y79kxpxbc9hihxb";
   };
-  guideHTML = pkgs.runCommand "yubikey-guide" { } ''
+  guideHTML = pkgs.runCommand "yubikey-guide" {} ''
     ${pkgs.pandoc}/bin/pandoc \
       --standalone \
       --metadata title="Yubikey Guide" \
@@ -34,10 +35,9 @@ let
       -o $out \
       ${guide}
   '';
-in
-{
+in {
   services.pcscd.enable = true;
-  services.udev.packages = with pkgs; [ yubikey-personalization ];
+  services.udev.packages = with pkgs; [yubikey-personalization];
 
   environment.systemPackages = with pkgs; [
     cryptsetup
@@ -95,7 +95,7 @@ in
       };
     };
 
-    security = { doas = enabled; };
+    security = {doas = enabled;};
 
     system = {
       fonts = enabled;
