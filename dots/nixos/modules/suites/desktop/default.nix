@@ -21,7 +21,7 @@ in {
 
         addons = {
           wallpapers = enabled;
-          kvantum = enabled;
+          qt = enabled;
         };
       };
 
