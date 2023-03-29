@@ -21,6 +21,15 @@ if [ -f /opt/homebrew/bin/brew ];
 	eval "$("/opt/homebrew/bin/brew" shellenv)"
 end
 
+# Nix
+if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish' ];
+ source '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish'
+end
+if [ -f '/nix/var/nix/profiles/default/etc/profile.d/nix.fish' ];
+ source '/nix/var/nix/profiles/default/etc/profile.d/nix.fish'
+end
+# End Nix
+
 # SSH setup 
 [ $(command -v fish_ssh_agent) ] && fish_ssh_agent
 load_ssh # if you need ssh loading keys on shell launch
