@@ -8,4 +8,5 @@ export GIT_EDITOR='nvim'
 export DOTS_DIR="$HOME/.config/.dotfiles/"
 export NVM_DIR=([ -z "$XDG_CONFIG_HOME" ]; and echo "$HOME/.nvm"; or echo "$XDG_CONFIG_HOME/nvm")
 export PNPM_HOME="$HOME/.local/share/pnpm"
+export NIX_PATH="darwin-config=$HOME/.nixpkgs/darwin-configuration.nix:$HOME/.nix-defexpr/channels:$NIX_PATH"
 # export RANGER_LOAD_DEFAULT_RC=FALSE # uncomment if you dont want the default config loaded, as well.
