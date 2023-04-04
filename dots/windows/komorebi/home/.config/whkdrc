@@ -8,7 +8,17 @@ ctrl + shift + r         : komorebic reload-configuration
 # app shortcuts - these require shell to be pwsh / powershell
 # the apps will be focused if open, or launched if not open
 # alt + f                 : if ($wshell.AppActivate('Firefox') -eq $False) { start firefox }
-# alt + b                 : if ($wshell.AppActivate('Chrome') -eq $False) { start chrome }
+ctrl + shift + return   : wt # windows terminal 
+ctrl + shift + e        : explorer # windows explorer
+# ctrl + shift + b        : start msedge # browser
+ctrl + shift + b        : if ($wshell.AppActivate('Edge') -eq $False) { start msedge }
+ctrl + shift + c        : code # vscode
+ctrl + shift + s        : spotify # spotify
+ctrl + shift + t        : if ($wshell.AppActivate('Teams') -eq $False) { start "$(env:LOCALAPPDATA)\Microsoft\Teams\Current\Teams.exe" }
+# ctrl + shift + t        : start "$(env:LOCALAPPDATA)\Microsoft\Teams\Current\Teams.exe" # teams
+ctrl + shift + w        : start winword # word
+ctrl + shift + o        : if ($wshell.AppActivate('Outlook') -eq $False) { start outlook }
+# ctrl + shift + o        : start outlook # outlook
 
 # focus windows
 alt + h                 : komorebic focus left
