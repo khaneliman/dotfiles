@@ -2,8 +2,8 @@
 
 # reload swhkd configuration
 # alt + o                 : taskkill /f /im swhkd.exe && start /b swhkd # if shell is cmd
-alt + o                 : taskkill /f /im whkd.exe && Start-Process whkd -WindowStyle hidden # if shell is pwsh / powershell
-alt + shift + o         : komorebic reload-configuration
+ctrl + shift + alt + r   : taskkill /f /im whkd.exe && Start-Process whkd -WindowStyle hidden # if shell is pwsh / powershell
+ctrl + shift + r         : komorebic reload-configuration
 
 # app shortcuts - these require shell to be pwsh / powershell
 # the apps will be focused if open, or launched if not open
