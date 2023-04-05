@@ -35,7 +35,10 @@ default < shift + lalt - s : yabai -m window --toggle split
 default < lalt - space : yabai -m window --toggle float; sketchybar --trigger window_focus
 
 # Make window zoom to fullscreen:
-default < shift + lalt - f : yabai -m window --toggle zoom-fullscreen; sketchybar --trigger window_focus
+# default < shift + lalt - f : yabai -m window --toggle zoom-fullscreen; sketchybar --trigger window_focus
+default < shift + cmd - f : yabai -m query --spaces --window | grep '"type":"float"' && yabai -m space --layout bsp;\
+          yabai -m query --windows --window | grep '"floating":1' && yabai -m window --toggle float;\
+          yabai -m window --toggle zoom-fullscreen && sketchybar --trigger window_focus;
 
 # Make window zoom to parent node:
 default < lalt - f : yabai -m window --toggle zoom-parent; sketchybar --trigger window_focus

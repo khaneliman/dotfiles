@@ -5,6 +5,7 @@ POPUP_CLICK_SCRIPT="sketchybar --set ical popup.drawing=toggle"
 ical=(
 	update_freq=180
 	icon=􀉉
+	icon.padding_right=12
 	icon.align=right
 	popup.align=right
 	popup.height=20

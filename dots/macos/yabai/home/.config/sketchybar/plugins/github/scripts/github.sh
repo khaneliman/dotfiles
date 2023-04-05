@@ -2,6 +2,7 @@
 
 source "$HOME/.config/sketchybar/colors.sh"
 source "$HOME/.config/sketchybar/icons.sh"
+source "$HOME/.config/sketchybar/userconfig.sh" # Loads all defined variables
 
 render_bar_item() {
 	if [ "$NOTIFICATIONS" = "[]" ]; then
@@ -57,9 +58,9 @@ render_popup() {
 			args+=(--set github.bell icon.color="$COLOR")
 		fi
 
-		github_notification=(
-			label="$(echo "$title" | sed -e "s/^'//" -e "s/'$//")"
-			icon="$ICON $(echo "$repo" | sed -e "s/^'//" -e "s/'$//"):"
+		github_notification_repo=(
+			icon.font="$NERD_FONT:Bold:14.0"
+			icon="$ICON $(echo "$repo" | sed -e "s/^'//" -e "s/'$//")"
 			icon.padding_left="$PADDING"
 			label.padding_right="$PADDING"
 			icon.color="$COLOR"
@@ -69,8 +70,22 @@ render_popup() {
 			click_script="open $URL; sketchybar --set github.bell popup.drawing=off"
 		)
 
-		args+=(--clone github.notification."$COUNTER" github.template)
-		args+=(--set github.notification."$COUNTER" "${github_notification[@]}")
+		github_notification_message=(
+			label="$(echo "$title" | sed -e "s/^'//" -e "s/'$//")"
+			icon.padding_left="$PADDING"
+			icon.drawing=off
+			label.padding_right=10
+			icon.color="$COLOR"
+			position=popup.github.bell
+			icon.background.color="$COLOR"
+			drawing=on
+			click_script="open $URL; sketchybar --set github.bell popup.drawing=off"
+		)
+
+		args+=(--clone github.notification."$COUNTER".repo github.template)
+		args+=(--set github.notification."$COUNTER".repo "${github_notification_repo[@]}")
+		args+=(--clone github.notification."$COUNTER".message github.template)
+		args+=(--set github.notification."$COUNTER".message "${github_notification_message[@]}")
 
 	done <<<"$(echo "$NOTIFICATIONS" | jq -r '.[] | [.repository.name, .subject.latest_comment_url, .subject.type, .subject.title] | @sh')"
 
