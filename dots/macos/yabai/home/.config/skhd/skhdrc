@@ -1,9 +1,9 @@
 # hyper (cmd + shift + alt + ctrl)
 # meh (shift + alt + ctrl)
 # Modes
-:: default : sketchybar -m --set modal icon="N" icon.color="0xff8aadf4" drawing=off 
-:: window @ : sketchybar -m --set modal icon="W" icon.color="0xffa6da95" drawing=on 
-:: scripts @ : sketchybar -m --set modal icon="S" icon.color="0xffed8796" drawing=on 
+:: default : sketchybar -m --set skhd icon="N" icon.color="0xff8aadf4" drawing=off 
+:: window @ : sketchybar -m --set skhd icon="W" icon.color="0xffa6da95" drawing=on 
+:: scripts @ : sketchybar -m --set skhd icon="S" icon.color="0xffed8796" drawing=on 
 
 # Mode Shortcuts
 # NOTE: This will toggle through modes with ctrl - escape
