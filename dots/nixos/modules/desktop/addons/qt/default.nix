@@ -15,7 +15,7 @@ in {
       name =
         mkOpt str "Catppuccin-Macchiato-Blue"
         "The name of the kvantum theme to apply.";
-      pkg = mkOpt package pkgs.catppuccin-kvantum "The package to use for the theme.";
+      pkg = mkOpt package pkgs.khanelinix.catppuccin-kvantum "The package to use for the theme.";
     };
   };
 
@@ -25,7 +25,7 @@ in {
       libsForQt5.qtstyleplugin-kvantum
     ];
 
-    environment.sessionVariables = {
+    environment.sessionVariables = lib.mkForce {
       "QT_STYLE_OVERRIDE" = "kvantum";
     };
 

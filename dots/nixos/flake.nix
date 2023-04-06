@@ -106,6 +106,17 @@
 
       channels-config.allowUnfree = true;
 
+      # TODO: figure out devshells
+      outputs-builder = channels: {
+        # packages = {
+        #   default = "my-package";
+        # };
+
+        # devShells = {
+        #   default = "zsh";
+        # };
+      };
+
       overlays = with inputs; [
         neovim.overlay
         flake.overlay
