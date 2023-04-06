@@ -39,9 +39,6 @@ in {
 
   hardware.enableRedistributableFirmware = true;
 
-  # high-resolution display
-  hardware.video.hidpi.enable = lib.mkDefault true;
-
   # services.xserver.videoDrivers = [ "amdgpu" ];
 
   hardware.bluetooth.enable = true;

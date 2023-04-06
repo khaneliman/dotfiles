@@ -43,7 +43,6 @@ in {
 
       tools = {
         cmake = enabled;
-        direnv = enabled;
         git-crypt = enabled;
         gnumake = enabled;
         go = enabled;

@@ -34,6 +34,7 @@ in {
         bat = enabled;
         bottom = enabled;
         comma = enabled;
+        direnv = enabled;
         exa = enabled;
         fup-repl = enabled;
         git = enabled;
