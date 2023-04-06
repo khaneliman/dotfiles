@@ -1,4 +1,4 @@
-{channels, ...}: final: prev: {
+{channels, ...}: _final: prev: {
   gnomeExtensions =
     prev.gnomeExtensions
     // {

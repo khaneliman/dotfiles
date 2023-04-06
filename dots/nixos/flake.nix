@@ -107,7 +107,7 @@
       channels-config.allowUnfree = true;
 
       # TODO: figure out devshells
-      outputs-builder = channels: {
+      outputs-builder = _channels: {
         # packages = {
         #   default = "my-package";
         # };
@@ -133,7 +133,7 @@
 
       checks =
         builtins.mapAttrs
-        (system: deploy-lib:
+        (_system: deploy-lib:
           deploy-lib.deployChecks inputs.self.deploy)
         inputs.deploy-rs.lib;
     };

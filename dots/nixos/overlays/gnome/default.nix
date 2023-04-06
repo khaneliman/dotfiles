@@ -1,4 +1,4 @@
-{channels, ...}: final: prev: let
+{channels, ...}: _final: prev: let
   extensions = channels.unstable.gnomeExtensions;
 in {
   gnomeExtensions =

@@ -1,3 +1,3 @@
-{channels, ...}: final: prev: {
+{channels, ...}: _final: _prev: {
   inherit (channels.unstable) prismlauncher;
 }

@@ -1,15 +1,12 @@
 {
   options,
   config,
-  pkgs,
   lib,
   inputs,
   ...
 }:
 with lib;
-with lib.internal; let
-  cfg = config.khanelinix.home;
-in {
+with lib.internal; {
   imports = with inputs; [
     home-manager.nixosModules.home-manager
   ];
