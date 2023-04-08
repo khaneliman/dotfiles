@@ -5,53 +5,53 @@ source "$HOME/.config/sketchybar/colors.sh"
 # False = night
 # True = daytime
 weather_icon_map() {
-	case $@ in
-	# Night
-	"false Clear" | "false Mostly Clear")
-		icon_result=""
-		;;
-	"false Mostly Cloudy" | "false Cloudy" | "false Partly Cloudy")
-		icon_result=""
-		;;
-	"false Rain")
-		icon_result=""
-		;;
-	"false Slight Chance Rain Showers" | "false Chance Rain Showers")
-		icon_result=""
-		;;
-	"false Slight Chance Light Snow" | "false Chance Light Snow" | "false Snow Likely")
-		icon_result=""
-		;;
-	"false Snow Showers" | "false Snow Showers Likely" | "false Chance Snow Showers" | "false Heavy Snow" | "false Snow and Patchy Blowing Snow")
-		icon_result=""
-		;;
-	"false Patchy Fog" | "false Areas Of Fog" | "false Widespread Fog")
-		icon_result=""
-		;;
-	# Daytime
-	"true Snow" | "true Heavy Snow" | "true Snow Showers")
-		icon_result=""
-		;;
-	"true Slight Chance Light Rain" | "true Chance Light Rain")
-		icon_result=""
-		;;
-	"true Rain Showers Likely" | "true Rain Showers" | "true Chance Rain Showers")
-		icon_result=""
-		;;
-	"true Mostly Sunny" | "true Sunny")
-		icon_result=""
-		;;
-	"true Partly Sunny")
-		icon_result=""
-		;;
-	"true Cloudy" | "true Mostly Cloudy")
-		icon_result=""
-		;;
-	# No Match
-	*)
-		icon_result="N/A"
-		;;
-	esac
+	shopt -s extglob
+	# check if first argument is true or false to determine whether day or night
+	# then check if second argument wildcard contains a string for determining which icon to show
+	# if no match, return default icon
+	if [ "$1" = "true" ]; then # Daytime
+		case $2 in
+		*Snow*)
+			icon_result=""
+			;;
+		*Rain*)
+			icon_result=""
+			;;
+		*"Partly Sunny"* | *"Partly Cloudy"*)
+			icon_result=""
+			;;
+		*Sunny*)
+			icon_result=""
+			;;
+		*Cloudy*)
+			icon_result=""
+			;;
+		*)
+			icon_result=""
+			;;
+		esac
+	else
+		case $2 in # Night
+		*Snow*)
+			icon_result=""
+			;;
+		*Rain*)
+			icon_result=""
+			;;
+		*Clear*)
+			icon_result=""
+			;;
+		*Cloudy*)
+			icon_result=""
+			;;
+		*Fog*)
+			icon_result=""
+			;;
+		*)
+			icon_result=""
+			;;
+		esac
+	fi
 	echo $icon_result
 }
 
