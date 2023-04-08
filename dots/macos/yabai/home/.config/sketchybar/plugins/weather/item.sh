@@ -5,10 +5,10 @@ POPUP_CLICK_SCRIPT="sketchybar --set weather popup.drawing=toggle"
 weather_icon=(
 	icon=
 	icon.align=right
-	y_offset=4
+	y_offset=6
 	background.padding_right=-15
-	icon.padding_left=10
-	icon.padding_right=0
+	icon.padding_left=12
+	icon.padding_right=2
 )
 
 weather_temp=(
@@ -16,13 +16,14 @@ weather_temp=(
 	update_freq=60
 	popup.align=right
 	popup.height=20
-	y_offset=-10
+	y_offset=-8
 	script="$PLUGIN_DIR/weather/scripts/weather.sh"
 	click_script="$POPUP_CLICK_SCRIPT"
+	label.align=right
 	label.padding_left==0
 	label.padding_right==0
 	background.padding_right=-30
-	background.padding_left=10
+	background.padding_left=5
 )
 
 weather_details=(
