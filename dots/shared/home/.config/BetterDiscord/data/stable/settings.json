@@ -1,6 +1,5 @@
 {
     "general": {
-        "publicServers": true,
         "voiceDisconnect": false,
         "showToasts": true,
         "mediaKeys": false
