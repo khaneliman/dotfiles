@@ -44,10 +44,6 @@
     nix-ld.url = "github:Mic92/nix-ld";
     nix-ld.inputs.nixpkgs.follows = "unstable";
 
-    # Neovim
-    neovim.url = "github:neovim/neovim?dir=contrib";
-    neovim.inputs.nixpkgs.follows = "unstable";
-
     # Discord Replugged
     replugged.url = "github:LunNova/replugged-nix-flake";
     replugged.inputs.nixpkgs.follows = "unstable";
@@ -107,18 +103,8 @@
       channels-config.allowUnfree = true;
 
       # TODO: figure out devshells
-      outputs-builder = channels: {
-        # packages = {
-        #   default = "my-package";
-        # };
-
-        # devShells = {
-        #   default = "zsh";
-        # };
-      };
 
       overlays = with inputs; [
-        neovim.overlay
         flake.overlay
         cowsay.overlay
         icehouse.overlay
