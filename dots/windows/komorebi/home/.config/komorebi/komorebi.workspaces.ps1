@@ -1,7 +1,51 @@
-# create named workspaces on monitor 0
-komorebic ensure-named-workspaces 0 main comms code ref productivity
-# you can do the same thing for secondary monitors too
-# komorebic ensure-named-workspaces 1 A B C D E F
+# create named workspaces on monitors
+$Monitors = Get-CimInstance -Query "SELECT * FROM CIM_DesktopMonitor WHERE Availability = 3"
+
+Write-Host "Number of connected monitors: $($Monitors.Count)"
+
+if ($Monitors.Count -gt 1)
+{
+
+  Add-Type -AssemblyName System.Windows.Forms
+
+  $AllScreens = [System.Windows.Forms.Screen]::AllScreens
+  $PrimaryScreen = [System.Windows.Forms.Screen]::PrimaryScreen
+
+  $PrimaryMonitorIndex = -1
+
+  for ($i = 0; $i -lt $AllScreens.Length; $i++)
+  {
+    if ($AllScreens[$i] -eq $PrimaryScreen)
+    {
+      $PrimaryMonitorIndex = $i
+      break
+    }
+  }
+
+  Write-Host "Primary monitor display index: $PrimaryMonitorIndex"
+
+  & komorebic ensure-named-workspaces $PrimaryMonitorIndex main code
+
+  $Workspaces = @('comms', 'ref', 'productivity')
+  $WorkspaceIndex = 0
+
+  for ($i = 0; $i -lt $AllScreens.Length; $i++)
+  {
+    if ($i -ne $PrimaryMonitorIndex)
+    {
+      & komorebic ensure-named-workspaces $i $($Workspaces[$WorkspaceIndex])
+
+      $WorkspaceIndex++
+      if ($WorkspaceIndex -ge $Workspaces.Length)
+      {
+        $WorkspaceIndex = 0
+      }
+    }
+  }
+} else
+{
+  & komorebic ensure-named-workspaces 0 main comms code ref productivity
+}
 
 # assign layouts to workspaces, possible values: bsp, columns, rows, vertical-stack, horizontal-stack, ultrawide-vertical-stack
 komorebic named-workspace-layout main vertical-stack
