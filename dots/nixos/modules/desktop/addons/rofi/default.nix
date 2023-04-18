@@ -17,6 +17,10 @@ in {
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [rofi];
 
-    khanelinix.home.configFile."rofi/config.rasi".source = ./config.rasi;
+    khanelinix.home = {
+      configFile = {
+        "rofi/".source = pkgs.khanelinix.dotfiles.outPath + "/dots/linux/hyprland/home/.config/rofi";
+      };
+    };
   };
 }
