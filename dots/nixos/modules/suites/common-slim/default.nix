@@ -23,6 +23,7 @@ in {
 
       cli-apps = {
         btop = enabled;
+        fastfetch = enabled;
         flake = enabled;
         glow = enabled;
         ranger = enabled;

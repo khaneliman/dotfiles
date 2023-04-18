@@ -8,6 +8,9 @@
     # NixPkgs Unstable (nixos-unstable)
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    # Nix User Repository (master)
+    nur.url = "github:nix-community/NUR";
+
     # Home Manager (release-22.05)
     home-manager.url = "github:nix-community/home-manager/release-22.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -108,6 +111,7 @@
         flake.overlay
         cowsay.overlay
         icehouse.overlay
+        nur.overlay
       ];
 
       systems.modules = with inputs; [
