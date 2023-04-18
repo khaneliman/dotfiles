@@ -36,6 +36,7 @@ in {
     khanelinix.home = {
       configFile = {
         "nvim/".source = pkgs.khanelinix.dotfiles.outPath + "/dots/shared/home/.config/nvim";
+        "astronvim/lua/user/".source = pkgs.khanelinix.dotfiles.outPath + "/dots/shared/home/.config/astronvim/lua/user";
       };
 
       extraOptions = {
