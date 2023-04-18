@@ -32,6 +32,7 @@ in {
       swayidle = enabled;
       swaynotificationcenter = enabled;
       waybar = enabled;
+      wlogout = enabled;
     };
 
     khanelinix.home.configFile =
@@ -76,7 +77,6 @@ in {
       gtk3.out # for gtk-launch
       gnome.gnome-control-center
       xdg-desktop-portal-hyprland
-      wlogout
       hyprpaper
       hyprpicker
       swayimg
