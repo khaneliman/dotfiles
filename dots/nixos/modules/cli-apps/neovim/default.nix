@@ -9,8 +9,16 @@ with lib;
 with lib.internal; let
   cfg = config.khanelinix.cli-apps.neovim;
 in {
-  options.khanelinix.cli-apps.neovim = with types; {
-    enable = mkBoolOpt false "Whether or not to enable neovim.";
+  options.khanelinix.cli-apps.neovim = with lib.types; {
+    enable = lib.mkEnableOption "neovim";
+    # configDir = lib.mkOption {
+    #   type = path;
+    #   default = builtins.path {
+    #     path = ~/.config/.dotfiles/shared/home/.config/nvim;
+    #     # path = ./config;
+    #   };
+    #   description = "Path to the neovim configuration directory.";
+    # };
   };
 
   config = mkIf cfg.enable {
@@ -27,7 +35,7 @@ in {
 
     khanelinix.home = {
       configFile = {
-        "nvim/init.lua".text = "$HOME/.config/.dotfiles/dots/shared/home/.config/nvim/init.lua";
+        "nvim/".source = pkgs.khanelinix.dotfiles.outPath + "/dots/shared/home/.config/nvim";
       };
 
       extraOptions = {
