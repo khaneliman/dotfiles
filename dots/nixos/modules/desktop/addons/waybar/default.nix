@@ -17,7 +17,14 @@ in {
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [waybar];
 
-    khanelinix.home.configFile."waybar/config".source = ./config;
-    khanelinix.home.configFile."waybar/style.css".source = ./style.css;
+    khanelinix.home.configFile = mkMerge [
+      (mkIf config.khanelinix.desktop.sway.enable {
+        "waybar/config".source = ./sway/config;
+        "waybar/style.css".source = ./sway/style.css;
+      })
+      (mkIf config.khanelinix.desktop.hyprland.enable {
+        "waybar".source = pkgs.khanelinix.dotfiles.outPath + "/dots/linux/hyprland/home/.config/waybar";
+      })
+    ];
   };
 }

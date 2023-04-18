@@ -31,6 +31,7 @@ in {
       swaylock = enabled;
       swayidle = enabled;
       swaynotificationcenter = enabled;
+      waybar = enabled;
     };
 
     khanelinix.home.configFile =
@@ -74,7 +75,6 @@ in {
       glib # for gsettings
       gtk3.out # for gtk-launch
       gnome.gnome-control-center
-      waybar
       xdg-desktop-portal-hyprland
       wlogout
       hyprpaper
@@ -83,7 +83,6 @@ in {
       blueman
       networkmanagerapplet
       polkit-kde-agent
-      gnome.gnome-keyring
     ];
 
     services.xserver.enable = true;

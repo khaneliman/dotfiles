@@ -30,6 +30,8 @@ in {
       rofi = enabled;
       wofi = enabled;
       swappy = enabled;
+      swaylock = enabled;
+      swayidle = enabled;
       kanshi = enabled;
       waybar = enabled;
       keyring = enabled;
@@ -66,9 +68,6 @@ in {
     programs.sway = {
       enable = true;
       extraPackages = with pkgs; [
-        rofi
-        swaylock
-        swayidle
         xwayland
         sway-contrib.grimshot
         swaylock-fancy
