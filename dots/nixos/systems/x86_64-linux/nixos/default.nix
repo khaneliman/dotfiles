@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  config,
   ...
 }:
 with lib;
@@ -33,6 +34,10 @@ with lib.internal; {
 
       hyprland = {
         enable = true;
+
+        customConfigFiles = {
+          "hypr/displays.conf".source = pkgs.writeText "hypr-displays.conf" "";
+        };
       };
 
       addons = {
