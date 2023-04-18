@@ -17,5 +17,17 @@ in {
     environment.systemPackages = with pkgs; [
       bat
     ];
+
+    khanelinix.home = {
+      configFile = {
+        "bat/".source = pkgs.khanelinix.dotfiles.outPath + "/dots/shared/home/.config/bat";
+      };
+    };
+
+    system.activationScripts.postInstallBat = stringAfter ["users"] ''
+      echo "Running command after bat installation"
+      # Your command here, for example:
+      ${pkgs.bat}/bin/bat cache --build
+    '';
   };
 }

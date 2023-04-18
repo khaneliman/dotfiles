@@ -11,14 +11,6 @@ with lib.internal; let
 in {
   options.khanelinix.cli-apps.neovim = with lib.types; {
     enable = lib.mkEnableOption "neovim";
-    # configDir = lib.mkOption {
-    #   type = path;
-    #   default = builtins.path {
-    #     path = ~/.config/.dotfiles/shared/home/.config/nvim;
-    #     # path = ./config;
-    #   };
-    #   description = "Path to the neovim configuration directory.";
-    # };
   };
 
   config = mkIf cfg.enable {
