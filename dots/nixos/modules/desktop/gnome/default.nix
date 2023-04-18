@@ -57,7 +57,7 @@ in {
       gtk = enabled;
       wallpapers = enabled;
       electron-support = enabled;
-      foot = enabled;
+      kitty = enabled;
     };
 
     environment.systemPackages = with pkgs;
@@ -162,6 +162,7 @@ in {
               ++ optional config.khanelinix.apps.firefox.enable "firefox.desktop"
               ++ optional config.khanelinix.apps.vscode.enable "code.desktop"
               ++ optional config.khanelinix.desktop.addons.foot.enable "foot.desktop"
+              ++ optional config.khanelinix.desktop.addons.kitty.enable "kitty.desktop"
               ++ optional config.khanelinix.apps.logseq.enable "logseq.desktop"
               ++ optional config.khanelinix.apps.discord.enable "discord.desktop"
               ++ optional config.khanelinix.apps.steam.enable "steam.desktop";
