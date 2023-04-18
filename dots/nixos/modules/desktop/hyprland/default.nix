@@ -28,6 +28,7 @@ in {
       keyring = enabled;
       nautilus = enabled;
       electron-support = enabled;
+      swaylock = enabled;
     };
 
     khanelinix.home.configFile =
@@ -60,8 +61,6 @@ in {
     };
 
     environment.systemPackages = with pkgs; [
-      rofi
-      swaylock-effects
       swayidle
       xwayland
       grim
@@ -76,7 +75,6 @@ in {
       gnome.gnome-control-center
       swaynotificationcenter
       waybar
-      xdg-desktop-portal-wlr
       xdg-desktop-portal-hyprland
       wlogout
       hyprpaper
