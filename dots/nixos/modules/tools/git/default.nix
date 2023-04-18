@@ -22,6 +22,14 @@ in {
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [git];
 
+    khanelinix.home.file = {
+      ".gitconfig".source = pkgs.khanelinix.dotfiles.outPath + "/dots/shared/home/.gitconfig";
+      ".gitconfig.functions".source = pkgs.khanelinix.dotfiles.outPath + "/dots/shared/home/.gitconfig.functions";
+      # ".gitconfig.signing".source = pkgs.khanelinix.dotfiles.outPath + "/dots/shared/home/.gitconfig.signing"; # TODO: handle secrets
+      ".gitignore_global".source = pkgs.khanelinix.dotfiles.outPath + "/dots/shared/home/.gitignore_global";
+      ".gitconfig.local".source = pkgs.khanelinix.dotfiles.outPath + "/dots/linux/hyprland/home/.gitconfig.local";
+    };
+
     khanelinix.home.extraOptions = {
       programs.git = {
         enable = true;
@@ -30,15 +38,6 @@ in {
         signing = {
           key = cfg.signingKey;
           signByDefault = mkIf gpg.enable true;
-        };
-        extraConfig = {
-          init = {defaultBranch = "main";};
-          pull = {rebase = true;};
-          push = {autoSetupRemote = true;};
-          core = {whitespace = "trailing-space,space-before-tab";};
-          safe = {
-            directory = "${config.users.users.${user.name}.home}/work/config";
-          };
         };
       };
     };

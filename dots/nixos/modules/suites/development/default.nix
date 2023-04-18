@@ -43,6 +43,7 @@ in {
 
       tools = {
         cmake = enabled;
+        git = enabled;
         git-crypt = enabled;
         gnumake = enabled;
         go = enabled;
