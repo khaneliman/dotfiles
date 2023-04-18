@@ -13,6 +13,13 @@ in {
     enable = mkBoolOpt false "Whether or not to enable btop.";
   };
 
-  config =
-    mkIf cfg.enable {environment.systemPackages = with pkgs; [btop];};
+  config = mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [btop];
+
+    khanelinix.home = {
+      configFile = {
+        "btop/".source = pkgs.khanelinix.dotfiles.outPath + "/dots/shared/home/.config/btop";
+      };
+    };
+  };
 }
