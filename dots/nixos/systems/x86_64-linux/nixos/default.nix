@@ -25,7 +25,9 @@ with lib.internal; {
       vscode = enabled;
     };
 
-    cli-apps = {neovim = enabled;};
+    cli-apps = {
+      neovim = enabled;
+    };
 
     desktop = {
       gnome = {
@@ -53,6 +55,7 @@ with lib.internal; {
       node = enabled;
       http = enabled;
       misc = enabled;
+      oh-my-posh = enabled;
     };
 
     hardware = {

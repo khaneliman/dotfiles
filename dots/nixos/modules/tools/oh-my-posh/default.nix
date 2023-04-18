@@ -17,5 +17,11 @@ in {
     environment.systemPackages = with pkgs; [
       oh-my-posh
     ];
+
+    khanelinix.home = {
+      configFile = {
+        "ohmyposh/".source = pkgs.khanelinix.dotfiles.outPath + "/dots/shared/home/.config/ohmyposh";
+      };
+    };
   };
 }
