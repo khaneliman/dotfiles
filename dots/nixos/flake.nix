@@ -92,6 +92,9 @@
       url = "github:catppuccin/cursors";
       flake = false;
     };
+
+    # hyprland
+    hyprland.url = "github:hyprwm/Hyprland";
   };
 
   outputs = inputs: let
@@ -117,6 +120,7 @@
       systems.modules = with inputs; [
         home-manager.nixosModules.home-manager
         nix-ld.nixosModules.nix-ld
+        hyprland.nixosModules.default
       ];
 
       deploy = lib.mkDeploy {inherit (inputs) self;};
