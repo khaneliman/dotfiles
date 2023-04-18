@@ -28,8 +28,12 @@ in {
         noto-fonts-cjk-sans
         noto-fonts-cjk-serif
         noto-fonts-emoji
-        (nerdfonts.override {fonts = ["Hack"];})
+        (nerdfonts.override {fonts = ["Hack" "CascadiaCode"];})
       ]
       ++ cfg.fonts;
+
+    khanelinix.home.file = {
+      ".local/share/fonts/SanFransisco/SF-Mono/".source = pkgs.khanelinix.dotfiles.outPath + "/dots/shared/home/.fonts/SanFransisco/SF-Mono";
+    };
   };
 }
