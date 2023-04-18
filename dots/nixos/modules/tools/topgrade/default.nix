@@ -17,5 +17,11 @@ in {
     environment.systemPackages = with pkgs; [
       topgrade
     ];
+
+    khanelinix.home = {
+      configFile = {
+        "topgrade.toml".source = pkgs.khanelinix.dotfiles.outPath + "/dots/shared/home/.config/topgrade.toml";
+      };
+    };
   };
 }
