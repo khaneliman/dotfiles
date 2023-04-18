@@ -29,6 +29,8 @@ in {
       nautilus = enabled;
       electron-support = enabled;
       swaylock = enabled;
+      swayidle = enabled;
+      swaynotificationcenter = enabled;
     };
 
     khanelinix.home.configFile =
@@ -61,7 +63,6 @@ in {
     };
 
     environment.systemPackages = with pkgs; [
-      swayidle
       xwayland
       grim
       cliphist
@@ -73,7 +74,6 @@ in {
       glib # for gsettings
       gtk3.out # for gtk-launch
       gnome.gnome-control-center
-      swaynotificationcenter
       waybar
       xdg-desktop-portal-hyprland
       wlogout
