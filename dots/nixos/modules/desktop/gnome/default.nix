@@ -163,6 +163,7 @@ in {
               ++ optional config.khanelinix.apps.vscode.enable "code.desktop"
               ++ optional config.khanelinix.desktop.addons.foot.enable "foot.desktop"
               ++ optional config.khanelinix.desktop.addons.kitty.enable "kitty.desktop"
+              ++ ["org.gnome.Console.desktop"]
               ++ optional config.khanelinix.apps.logseq.enable "logseq.desktop"
               ++ optional config.khanelinix.apps.discord.enable "discord.desktop"
               ++ optional config.khanelinix.apps.steam.enable "steam.desktop";

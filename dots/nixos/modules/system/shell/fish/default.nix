@@ -21,12 +21,12 @@ in {
     };
 
     environment.systemPackages = with pkgs; [
+      fishPlugins.autopair-fish
       fishPlugins.done
       fishPlugins.fzf-fish
       fishPlugins.forgit
       # fishPlugins.fish-abbreviation-tips
       # fishPlugins.wakatime-fish
-      fzf
       # fishPlugins.grc
       # grc
       fishPlugins.tide
