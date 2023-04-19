@@ -42,7 +42,10 @@ in {
       inherit apps cli-apps;
 
       tools = {
+        clang = enabled;
         cmake = enabled;
+        dotnet = enabled;
+        fd = enabled;
         git = enabled;
         git-crypt = enabled;
         gnumake = enabled;
@@ -51,8 +54,10 @@ in {
         k8s = enabled;
         llvm = enabled;
         node = enabled;
+        python = enabled;
         qmk = enabled;
-        rustup = enabled;
+        ripgrep = enabled;
+        rust = enabled;
         tree-sitter = enabled;
       };
 

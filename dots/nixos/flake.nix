@@ -95,6 +95,11 @@
 
     # hyprland
     hyprland.url = "github:hyprwm/Hyprland";
+
+    # Neovim
+    # neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
+
+    rustup-overlay.url = "github:oxalica/rust-overlay";
   };
 
   outputs = inputs: let
@@ -115,6 +120,8 @@
         cowsay.overlay
         icehouse.overlay
         nur.overlay
+        # neovim-nightly.overlay
+        rustup-overlay.overlays.default
       ];
 
       systems.modules = with inputs; [

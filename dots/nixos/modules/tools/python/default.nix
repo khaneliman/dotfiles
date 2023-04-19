@@ -7,15 +7,15 @@
 }:
 with lib;
 with lib.internal; let
-  cfg = config.khanelinix.tools.rustup;
+  cfg = config.khanelinix.tools.python;
 in {
-  options.khanelinix.tools.rustup = with types; {
-    enable = mkBoolOpt false "Whether or not to enable rustup.";
+  options.khanelinix.tools.python = with types; {
+    enable = mkBoolOpt false "Whether or not to enable python.";
   };
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      rustup
+      python3Full
     ];
   };
 }
