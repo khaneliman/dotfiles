@@ -14,6 +14,7 @@ with lib.internal; let
     yubikey = enabled;
   };
   cli-apps = {
+    helix = enabled;
     lazydocker = enabled;
     lazygit = enabled;
     neovim = enabled;
