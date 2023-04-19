@@ -78,6 +78,11 @@ with lib.internal; {
       locale = enabled;
       time = enabled;
       xkb = enabled;
+      shell = {
+        zsh = enabled;
+        bash = enabled;
+        fish = enabled;
+      };
     };
   };
 
