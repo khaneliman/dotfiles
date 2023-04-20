@@ -34,14 +34,6 @@ with lib.internal; {
         enable = true;
       };
 
-      hyprland = {
-        enable = true;
-
-        customConfigFiles = {
-          "hypr/displays.conf".source = pkgs.writeText "hypr-displays.conf" "";
-        };
-      };
-
       addons = {
         # I like to have a convenient place to share wallpapers from
         # even if they're not currently being used.

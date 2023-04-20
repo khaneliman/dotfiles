@@ -27,6 +27,11 @@ with lib.internal; {
     };
 
     desktop = {
+      gnome = {
+        enable = true;
+        monitors = ./monitors.xml;
+      };
+
       hyprland = {
         enable = true;
       };

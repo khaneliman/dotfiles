@@ -10,6 +10,10 @@
 in {
   imports = with nixos-hardware.nixosModules; [
     (modulesPath + "/installer/scan/not-detected.nix")
+    common-cpu-amd
+    common-gpu-amd
+    common-pc
+    common-pc-ssd
   ];
 
   ##
@@ -17,7 +21,7 @@ in {
   ##
   boot = {
     kernelPackages = pkgs.linuxPackages_latest;
-    kernelParams = [ "amd_iommu=on" ];
+    kernelParams = ["nomodeset" "amd_iommu=on" ];
 
     initrd = {
       kernelModules = ["amdgpu"];
