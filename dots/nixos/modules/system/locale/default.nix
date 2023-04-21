@@ -14,16 +14,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    i18n = {
-      inputMethod = {
-        enabled = "fcitx5";
-      };
-      defaultLocale = "en_US.UTF-8";
-      extraLocaleSettings = {
-        LC_MESSAGES = "en_US.UTF-8";
-        LC_ALL = "en_US.UTF-8";
-      };
-    };
+    i18n.defaultLocale = "en_US.UTF-8";
 
     console = {
       keyMap = mkForce "us";

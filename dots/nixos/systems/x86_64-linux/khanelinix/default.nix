@@ -23,15 +23,9 @@ with lib.internal; {
     };
 
     cli-apps = {
-      neovim = enabled;
     };
 
     desktop = {
-      gnome = {
-        enable = true;
-        monitors = ./monitors.xml;
-      };
-
       hyprland = {
         enable = true;
       };
@@ -61,7 +55,23 @@ with lib.internal; {
     services = {
       avahi = enabled;
       printing = enabled;
-      samba = enabled;
+
+      samba = {
+        enable = true;
+
+        shares = {
+          video = {
+            path = "/mnt/games";
+            public = true;
+            read-only = true;
+          };
+          audio = {
+            path = "/mnt/steam";
+            public = true;
+            read-only = true;
+          };
+        };
+      };
     };
 
     security = {
@@ -74,14 +84,25 @@ with lib.internal; {
       fonts = enabled;
       locale = enabled;
       time = enabled;
-      xkb = enabled;
       shell = {
         zsh = enabled;
         bash = enabled;
         fish = enabled;
       };
     };
+
+    #   IOMMU Group 24:
+    # 	05:00.0 VGA compatible controller [0300]: NVIDIA Corporation GA102 [GeForce RTX 3080] [10de:2206] (rev a1)
+    # 	05:00.1 Audio device [0403]: NVIDIA Corporation GA102 High Definition Audio Controller [10de:1aef] (rev a1)
+    virtualisation.kvm = {
+      enable = true;
+      platform = "amd";
+
+      vfioIds = ["10de:2206" "10de:1aef"];
+    };
   };
+
+  services.xserver.displayManager.defaultSession = "hyprland";
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

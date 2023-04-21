@@ -66,6 +66,7 @@ in {
     };
 
     environment.systemPackages = with pkgs; [
+      khanelinix.catppuccin-sddm
       sddm
       xwayland
       grim
@@ -87,10 +88,16 @@ in {
       polkit-kde-agent
     ];
 
-    services.xserver.enable = true;
+    services.xserver = {
+      enable = true;
+
+      libinput.enable = true;
+      displayManager.sddm = {
+        enable = true;
+        theme = "sddm-catppuccin";
+      };
+    };
+
     # services.xserver.displayManager.defaultSession = "hyprland";
-    # services.xserver.displayManager.sddm.enable = true;
-    # services.xserver.displayManager.gdm.wayland = true;
-    services.xserver.libinput.enable = true;
   };
 }

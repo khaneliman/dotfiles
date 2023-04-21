@@ -21,14 +21,14 @@ in {
   ##
   boot = {
     kernelPackages = pkgs.linuxPackages_latest;
-    kernelParams = ["nomodeset" "amd_iommu=on" ];
+    kernelParams = ["nomodeset"];
 
     initrd = {
       kernelModules = ["amdgpu"];
       availableKernelModules = ["nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" "sr_mod"];
     };
 
-    blacklistedKernelModules = [ "nouveau" "nvidia_drm" "nvidia_modeset" "nvidia" ];
+    blacklistedKernelModules = ["nouveau" "nvidia_drm" "nvidia_modeset" "nvidia"];
     extraModulePackages = [];
   };
 
