@@ -78,7 +78,6 @@ in {
       brightnessctl
       glib # for gsettings
       gtk3.out # for gtk-launch
-      gnome.gnome-control-center
       xdg-desktop-portal-hyprland
       hyprpaper
       hyprpicker
@@ -93,7 +92,7 @@ in {
 
       libinput.enable = true;
       displayManager.sddm = {
-        # enable = true;
+        enable = true;
         theme = "sddm-catppuccin";
       };
     };

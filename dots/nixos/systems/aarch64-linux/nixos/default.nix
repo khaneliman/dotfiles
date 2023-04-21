@@ -27,9 +27,9 @@ with lib.internal; {
     cli-apps = {neovim = enabled;};
 
     desktop = {
-      # gnome = {
-        # enable = true;
-      # };
+      gnome = {
+        enable = true;
+      };
 
       addons = {
         # I like to have a convenient place to share wallpapers from

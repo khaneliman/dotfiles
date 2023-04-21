@@ -37,6 +37,10 @@ with lib.internal; {
       };
     };
 
+    suites = {
+      desktop = mkForce disabled;
+    };
+
     tools = {
       k8s = enabled;
       git = enabled;

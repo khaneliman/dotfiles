@@ -10,7 +10,7 @@ with lib.internal; let
   cfg = config.khanelinix.desktop.addons.foot;
 in {
   options.khanelinix.desktop.addons.foot = with types; {
-    enable = mkBoolOpt false "Whether to enable the gnome file manager.";
+    enable = mkBoolOpt false "Whether to enable the foot.";
   };
 
   config = mkIf cfg.enable {
