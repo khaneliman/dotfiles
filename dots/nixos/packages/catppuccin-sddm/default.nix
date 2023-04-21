@@ -11,7 +11,7 @@ stdenvNoCC.mkDerivation {
     owner = "khaneliman";
     repo = "sddm-catppuccin";
     rev = "7b7a86ee9a5a2905e7e6623d2af5922ce890ef79";
-    hash = "";
+    hash = "sha256-sTnt8RarNXz3RmYfmx4rD+nMlY8rr2n0EN3ntPzOurw=";
   };
 
   dontConfigure = true;

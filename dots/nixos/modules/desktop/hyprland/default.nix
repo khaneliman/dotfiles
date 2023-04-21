@@ -93,7 +93,7 @@ in {
 
       libinput.enable = true;
       displayManager.sddm = {
-        enable = true;
+        # enable = true;
         theme = "sddm-catppuccin";
       };
     };
