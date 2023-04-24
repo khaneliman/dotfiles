@@ -24,6 +24,7 @@ in {
       jq
       clac
       wget
+      pciutils
     ];
   };
 }

@@ -51,6 +51,8 @@ in {
     environment.systemPackages = with pkgs; [virt-manager];
 
     virtualisation = {
+      spiceUSBRedirection.enable = true;
+
       libvirtd = {
         enable = true;
         extraConfig = ''
@@ -59,7 +61,6 @@ in {
 
         onBoot = "ignore";
         onShutdown = "shutdown";
-
         qemu = {
           package = pkgs.qemu_kvm;
           ovmf = enabled;
