@@ -3,7 +3,7 @@
 
   inputs = {
     # NixPkgs (nixos-22.11)
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-22.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # NixPkgs Unstable (nixos-unstable)
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -12,7 +12,7 @@
     nur.url = "github:nix-community/NUR";
 
     # Home Manager (release-22.05)
-    home-manager.url = "github:nix-community/home-manager/release-22.11";
+    home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # macOS Support (master)
@@ -112,6 +112,9 @@
       package-namespace = "khanelinix";
 
       channels-config.allowUnfree = true;
+      channels-config.permittedInsecurePackages = [
+        "imagemagick-6.9.12-68"
+      ];
 
       # TODO: figure out devshells
 
