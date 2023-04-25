@@ -1,16 +1,16 @@
-{
-  options,
-  config,
-  pkgs,
-  lib,
-  ...
+{ options
+, config
+, pkgs
+, lib
+, ...
 }:
 with lib;
 with lib.internal; let
   cfg = config.khanelinix.tools.git;
   gpg = config.khanelinix.security.gpg;
   user = config.khanelinix.user;
-in {
+in
+{
   options.khanelinix.tools.git = with types; {
     enable = mkBoolOpt false "Whether or not to install and configure git.";
     userName = mkOpt types.str user.fullName "The name to configure git with.";
@@ -20,11 +20,16 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [git];
+    environment.systemPackages = with pkgs; [
+      git
+      gh
+      github-desktop
+    ];
 
     khanelinix.home.file = {
       ".gitconfig".source = pkgs.khanelinix.dotfiles.outPath + "/dots/shared/home/.gitconfig";
       ".gitconfig.functions".source = pkgs.khanelinix.dotfiles.outPath + "/dots/shared/home/.gitconfig.functions";
+      # TODO: retrieve git secrets/signing information
       # ".gitconfig.signing".source = pkgs.khanelinix.dotfiles.outPath + "/dots/shared/home/.gitconfig.signing"; # TODO: handle secrets
       ".gitignore_global".source = pkgs.khanelinix.dotfiles.outPath + "/dots/shared/home/.gitignore_global";
       ".gitconfig.local".source = pkgs.khanelinix.dotfiles.outPath + "/dots/linux/hyprland/home/.gitconfig.local";

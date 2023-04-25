@@ -23,7 +23,11 @@ in {
         "waybar/style.css".source = ./sway/style.css;
       })
       (mkIf config.khanelinix.desktop.hyprland.enable {
-        "waybar".source = pkgs.khanelinix.dotfiles.outPath + "/dots/linux/hyprland/home/.config/waybar";
+        "waybar/scripts".source = pkgs.khanelinix.dotfiles.outPath + "/dots/linux/hyprland/home/.config/waybar/scripts";
+        "waybar/default-modules.jsonc".source = ./nixos/default-modules.jsonc;
+        "waybar/config.jsconc".source = ./nixos/config.jsonc;
+        "waybar/macchiato.css".source = pkgs.khanelinix.dotfiles.outPath + "/dots/linux/hyprland/home/.config/waybar/macchiato.css";
+        "waybar/style.css".source = pkgs.khanelinix.dotfiles.outPath + "/dots/linux/hyprland/home/.config/waybar/style.css";
       })
     ];
   };

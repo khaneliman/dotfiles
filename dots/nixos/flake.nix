@@ -2,7 +2,7 @@
   description = "KhaneliNix";
 
   inputs = {
-    # NixPkgs (nixos-22.11)
+    # NixPkgs (nixos-22.11) 🤷
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # NixPkgs Unstable (nixos-unstable)
@@ -11,7 +11,7 @@
     # Nix User Repository (master)
     nur.url = "github:nix-community/NUR";
 
-    # Home Manager (release-22.05)
+    # Home Manager (master)
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -102,22 +102,25 @@
     rustup-overlay.url = "github:oxalica/rust-overlay";
   };
 
-  outputs = inputs: let
-    lib = inputs.snowfall-lib.mkLib {
-      inherit inputs;
-      src = ./.;
-    };
-  in
+  outputs = inputs:
+    let
+      lib = inputs.snowfall-lib.mkLib {
+        inherit inputs;
+        src = ./.;
+      };
+    in
     lib.mkFlake {
       package-namespace = "khanelinix";
 
       channels-config.allowUnfree = true;
+      # TODO: cleanup when available
       channels-config.permittedInsecurePackages = [
         "imagemagick-6.9.12-68"
       ];
 
       # TODO: figure out devshells
 
+      # overlays from inputs
       overlays = with inputs; [
         flake.overlay
         cowsay.overlay
@@ -127,18 +130,19 @@
         rustup-overlay.overlays.default
       ];
 
+      # modules from inputs
       systems.modules = with inputs; [
         home-manager.nixosModules.home-manager
         nix-ld.nixosModules.nix-ld
         hyprland.nixosModules.default
       ];
 
-      deploy = lib.mkDeploy {inherit (inputs) self;};
+      deploy = lib.mkDeploy { inherit (inputs) self; };
 
       checks =
         builtins.mapAttrs
-        (system: deploy-lib:
-          deploy-lib.deployChecks inputs.self.deploy)
-        inputs.deploy-rs.lib;
+          (system: deploy-lib:
+            deploy-lib.deployChecks inputs.self.deploy)
+          inputs.deploy-rs.lib;
     };
 }

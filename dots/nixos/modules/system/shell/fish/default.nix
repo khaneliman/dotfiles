@@ -52,6 +52,8 @@ in {
         "fish/functions/mkcd.fish".source = fishBasePath + "functions/mkcd.fish";
         "fish/functions/mvcd.fish".source = fishBasePath + "functions/mvcd.fish";
         "fish/functions/ranger.fish".source = fishBasePath + "functions/ranger.fish";
+      };
+      file = {
         ".aliases".source = pkgs.khanelinix.dotfiles.outPath + "/dots/shared/home/.aliases";
       };
     };

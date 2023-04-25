@@ -13,7 +13,7 @@ in {
   options.khanelinix.desktop.addons.wallpapers = with types; {
     enable =
       mkBoolOpt false
-      "Whether or not to add wallpapers to ~/Pictures/wallpapers.";
+      "Whether or not to add wallpapers to ~/.local/share/wallpapers.";
   };
 
   config = {
@@ -24,7 +24,7 @@ in {
       in
         acc
         // {
-          "Pictures/wallpapers/${wallpaper.fileName}".source = wallpaper;
+          ".local/share/wallpapers/catppuccin/${wallpaper.fileName}".source = wallpaper;
         })
       {}
       (wallpapers.names);

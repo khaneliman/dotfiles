@@ -20,7 +20,8 @@ in {
 
     khanelinix.home = {
       configFile = {
-        "bat/".source = pkgs.khanelinix.dotfiles.outPath + "/dots/shared/home/.config/bat";
+        "bat/themes".source = pkgs.khanelinix.dotfiles.outPath + "/dots/shared/home/.config/bat/themes/";
+        "bat/config".source = pkgs.khanelinix.dotfiles.outPath + "/dots/shared/home/.config/bat/config";
       };
     };
 

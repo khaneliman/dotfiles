@@ -1,26 +1,27 @@
-{
-  options,
-  config,
-  lib,
-  pkgs,
-  ...
+{ options
+, config
+, lib
+, pkgs
+, ...
 }:
 with lib;
 with lib.internal; let
   cfg = config.khanelinix.desktop.hyprland;
   term = config.khanelinix.desktop.addons.term;
   hyprBasePath = pkgs.khanelinix.dotfiles.outPath + "/dots/linux/hyprland/home/.config/hypr/";
-in {
+in
+{
   options.khanelinix.desktop.hyprland = with types; {
     enable = mkBoolOpt false "Whether or not to enable Hyprland.";
     wallpaper = mkOpt (nullOr package) null "The wallpaper to display.";
-    customConfigFiles = mkOpt attrs {} "Custom configuration files that can be used to override the default files.";
+    customConfigFiles = mkOpt attrs { } "Custom configuration files that can be used to override the default files.";
   };
 
   config = mkIf cfg.enable {
     # Desktop additions
     khanelinix.desktop.addons = {
       gtk = enabled;
+      qt = enabled;
       kitty = enabled;
       rofi = enabled;
       swappy = enabled;
@@ -33,6 +34,8 @@ in {
       swaynotificationcenter = enabled;
       waybar = enabled;
       wlogout = enabled;
+      wdisplays = enabled;
+      xdg-portal = enabled;
     };
 
     khanelinix.home.configFile =
@@ -93,7 +96,7 @@ in {
       libinput.enable = true;
       displayManager.sddm = {
         enable = true;
-        theme = "sddm-catppuccin";
+        theme = "catppuccin";
       };
     };
 
