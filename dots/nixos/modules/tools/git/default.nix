@@ -32,7 +32,20 @@ in
       # TODO: retrieve git secrets/signing information
       # ".gitconfig.signing".source = pkgs.khanelinix.dotfiles.outPath + "/dots/shared/home/.gitconfig.signing"; # TODO: handle secrets
       ".gitignore_global".source = pkgs.khanelinix.dotfiles.outPath + "/dots/shared/home/.gitignore_global";
-      ".gitconfig.local".source = pkgs.khanelinix.dotfiles.outPath + "/dots/linux/hyprland/home/.gitconfig.local";
+      ".gitconfig.local".source = (pkgs.writeTextFile {
+        name = ".gitconfig.local";
+        text = ''
+          [gpg "ssh"]
+            # program = /opt/1Password/op-ssh-sign
+
+          [credential "https://github.com"]
+           	helper = !gh auth git-credential
+
+          [credential "https://gist.github.com"]
+           	helper = !gh auth git-credential
+        '';
+      });
+
     };
 
     khanelinix.home.extraOptions = {
