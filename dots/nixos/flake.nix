@@ -128,6 +128,7 @@
         nur.overlay
         # neovim-nightly.overlay
         rustup-overlay.overlays.default
+        hyprland.overlays.default
       ];
 
       # modules from inputs

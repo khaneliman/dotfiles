@@ -8,6 +8,8 @@ with lib;
 with lib.internal; let
   cfg = config.khanelinix.desktop.addons.gtk;
   gdmCfg = config.services.xserver.displayManager.gdm;
+  default-attrs = mapAttrs (key: mkDefault);
+  nested-default-attrs = mapAttrs (key: default-attrs);
 in
 {
   options.khanelinix.desktop.addons.gtk = with types; {
@@ -36,11 +38,20 @@ in
     environment.systemPackages = [
       cfg.icon.pkg
       cfg.cursor.pkg
+      cfg.theme.pkg
     ];
 
     environment.sessionVariables = {
       XCURSOR_THEME = cfg.cursor.name;
+      CURSOR_THEME = cfg.cursor.name;
     };
+
+    services =
+      {
+        # needed for GNOME services outside of GNOME Desktop
+        dbus.packages = [ pkgs.gcr ];
+        udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
+      };
 
     khanelinix.home.extraOptions = {
       gtk = {
@@ -48,7 +59,12 @@ in
 
         theme = {
           name = cfg.theme.name;
-          package = cfg.theme.pkg;
+          package = cfg.theme.pkg.override
+            {
+              accents = [ "blue" ];
+              size = "standard";
+              variant = "macchiato";
+            };
         };
 
         cursorTheme = {
@@ -60,8 +76,29 @@ in
           name = cfg.icon.name;
           package = cfg.icon.pkg;
         };
+
+        font = {
+          name = config.khanelinix.system.fonts.default;
+        };
+      };
+
+      dconf = {
+        enable = true;
+
+        settings =
+          let
+            user = config.users.users.${config.khanelinix.user.name};
+          in
+          nested-default-attrs {
+            "org/gnome/desktop/interface" = {
+              color-scheme = "prefer-dark";
+              enable-hot-corners = false;
+              font-theme = config.khanelinix.system.fonts.default;
+            };
+          };
       };
     };
+
 
     # @NOTE(jakehamilton): In order to set the cursor theme in GDM we have to specify it in the
     # dconf profile. However, the NixOS module doesn't provide an easy way to do this so the relevant
@@ -70,31 +107,29 @@ in
     #
     # @NOTE(jakehamilton): The GTK and icon themes don't seem to affect recent GDM versions. I've
     # left them here as reference for the future.
-    programs.dconf.profiles = mkIf gdmCfg.enable {
+    programs.dconf.profiles = {
       gdm =
         let
           customDconf = pkgs.writeTextFile {
             name = "gdm-dconf";
             destination = "/dconf/gdm-custom";
             text = ''
-                ${optionalString (!gdmCfg.autoSuspend) ''
-                  [org/gnome/settings-daemon/plugins/power]
-                  sleep-inactive-ac-type='nothing'
-                  sleep-inactive-battery-type='nothing'
-                  sleep-inactive-ac-timeout=0
-                  sleep-inactive-battery-timeout=0
-                ''}
+              ${optionalString (!gdmCfg.autoSuspend) ''
+                [org/gnome/settings-daemon/plugins/power]
+                sleep-inactive-ac-type='nothing'
+                sleep-inactive-battery-type='nothing'
+                sleep-inactive-ac-timeout=0
+                sleep-inactive-battery-timeout=0
+              ''}
 
-                [org/gnome/desktop/interface]
-                gtk-theme='${cfg.theme.name}'
-                cursor-theme='${cfg.cursor.name}'
-                icon-theme='${cfg.icon.name}'
-
-                ["org/gnome/desktop/interface"]
-                color-scheme = 'prefer-dark'
-                enable-hot-corners = false;
-              };
-
+              [org/gnome/desktop/interface]
+              gtk-theme='${cfg.theme.name}'
+              cursor-theme='${cfg.cursor.name}'
+              icon-theme='${cfg.icon.name}'
+              font-theme='${config.khanelinix.system.fonts.default}'
+              color-scheme='prefer-dark'
+              enable-hot-corners=false
+              enable-animations=true
             '';
           };
 

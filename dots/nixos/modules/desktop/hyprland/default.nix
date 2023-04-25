@@ -46,9 +46,18 @@ in
         "hypr/binds.conf".source = hyprBasePath + "binds.conf";
         "hypr/displays.conf".source = hyprBasePath + "displays.conf";
         "hypr/environment.conf".source = hyprBasePath + "environment.conf";
+        # "hypr/environment.conf".source = (pkgs.writeTextFile {
+        #   name = "environment.conf";
+        #   text = ''
+        #   '';
+        # });
         "hypr/hyprland.conf".source = hyprBasePath + "hyprland.conf";
         "hypr/hyprpaper.conf".source = hyprBasePath + "hyprpaper.conf";
-        "hypr/polish.conf".source = hyprBasePath + "polish.conf";
+        "hypr/polish.conf".source = (pkgs.writeTextFile {
+          name = "polish.conf";
+          text = ''
+          '';
+        });
         "hypr/variables.conf".source = hyprBasePath + "variables.conf";
         "hypr/windowrules.conf".source = hyprBasePath + "windowrules.conf";
         "mimeapps.list".source = pkgs.khanelinix.dotfiles.outPath + "/dots/linux/hyprland/home/.config/mimeapps.list";
@@ -89,6 +98,22 @@ in
       networkmanagerapplet
       polkit-kde-agent
     ];
+
+    # environment.sessionVariables = {
+    #   WLR_NO_HARDWARE_CURSORS = "1";
+    #   WLR_RENDERER = "vulkan";
+    #   XDG_SESSION_TYPE = "wayland";
+    #   QT_QPA_PLATFORM = "wayland";
+    #   QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+    #   MOZ_ENABLE_WAYLAND = "1";
+    #   MOZ_USE_XINPUT2 = "1";
+    #   SDL_VIDEODRIVER = "wayland";
+    #   _JAVA_AWT_WM_NONEREPARENTING = "1";
+    #   XDG_SESSION_DESKTOP = "Hyprland";
+    #   XDG_CURRENT_DESKTOP = "Hyprland";
+    #   HYPRLAND_LOG_WLR = "1";
+    #   # ASAN_OPTIONS = log_path = ~/asan.log;
+    # };
 
     services.xserver = {
       enable = true;

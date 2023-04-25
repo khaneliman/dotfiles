@@ -1,12 +1,11 @@
-{
-  pkgs,
-  lib,
-  config,
-  ...
+{ pkgs
+, lib
+, config
+, ...
 }:
 with lib;
 with lib.internal; {
-  imports = [./hardware.nix];
+  imports = [ ./hardware.nix ];
 
   khanelinix = {
     nix = enabled;
@@ -22,8 +21,7 @@ with lib.internal; {
       vscode = enabled;
     };
 
-    cli-apps = {
-    };
+    cli-apps = { };
 
     desktop = {
       hyprland = {
@@ -59,6 +57,7 @@ with lib.internal; {
     services = {
       avahi = enabled;
       printing = enabled;
+      geoclue = enabled;
 
       samba = {
         enable = true;
@@ -102,7 +101,7 @@ with lib.internal; {
       enable = true;
       platform = "amd";
 
-      vfioIds = ["10de:2206" "10de:1aef"];
+      vfioIds = [ "10de:2206" "10de:1aef" ];
     };
   };
 

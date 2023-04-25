@@ -21,28 +21,38 @@ in
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      cfg.theme.pkg
+      (cfg.theme.pkg.override {
+        accent = "Blue";
+        variant = "Macchiato";
+      })
       libsForQt5.qtstyleplugin-kvantum
       libsForQt5.qt5.qtgraphicaleffects
       libsForQt5.qt5.qtquickcontrols2
       libsForQt5.qt5.qtsvg
+      libsForQt5.qt5ct
     ];
 
-    environment.sessionVariables = lib.mkForce {
-      # "QT_QPA_PLATFORMTHEME" = "qt5ct";
-      # QT_STYLE_OVERRIDE = "kvantum";
+    khanelinix.home = {
+      configFile = {
+        # "Kvantum/kvantum.kvconfig".source = (pkgs.formats.ini { }).generate "kvantum.kvconfig" {
+        #   General.Theme = cfg.theme.name;
+        # };
+        "Kvantum".source = pkgs.khanelinix.dotfiles.outPath + "/dots/linux/hyprland/home/.config/Kvantum/";
+        "qt5ct".source = pkgs.khanelinix.dotfiles.outPath + "/dots/linux/hyprland/home/.config/qt5ct/";
+        "qt6ct".source = pkgs.khanelinix.dotfiles.outPath + "/dots/linux/hyprland/home/.config/qt6ct/";
+      };
     };
 
-    khanelinix.home.extraOptions = {
-      qt = {
-        enable = true;
+    qt = {
+      enable = true;
 
-        platformTheme = "gtk";
-
-        style = {
-          name = cfg.theme.name;
-          package = cfg.theme.pkg;
-        };
+      platformTheme = "qt5ct";
+      style = {
+        name = cfg.theme.name;
+        package = (cfg.theme.pkg.override {
+          accent = "Blue";
+          variant = "Macchiato";
+        });
       };
     };
   };

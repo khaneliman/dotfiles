@@ -1,21 +1,21 @@
-{
-  options,
-  config,
-  lib,
-  pkgs,
-  ...
+{ options
+, config
+, lib
+, pkgs
+, ...
 }:
 with lib;
 with lib.internal; let
   cfg = config.khanelinix.desktop.addons.waybar;
-in {
+in
+{
   options.khanelinix.desktop.addons.waybar = with types; {
     enable =
       mkBoolOpt false "Whether to enable Waybar in the desktop environment.";
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [waybar];
+    environment.systemPackages = with pkgs; [ waybar-hyprland ];
 
     khanelinix.home.configFile = mkMerge [
       (mkIf config.khanelinix.desktop.sway.enable {
