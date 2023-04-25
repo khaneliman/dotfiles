@@ -31,7 +31,37 @@ with lib.internal; {
           "hypr/polish.conf".source = (pkgs.writeTextFile {
             name = "polish.conf";
             text = ''
+              # ░█▀█░█▀█░█░░░▀█▀░█▀▀░█░█
+              # ░█▀▀░█░█░█░░░░█░░▀▀█░█▀█
+              # ░▀░░░▀▀▀░▀▀▀░▀▀▀░▀▀▀░▀░▀
+
+              # ░▀█▀░█░█░█▀▀░█▄█░█▀▀
+              # ░░█░░█▀█░█▀▀░█░█░█▀▀
+              # ░░▀░░▀░▀░▀▀▀░▀░▀░▀▀▀
+
               hyprctl setcursor Catppuccin-Mocha-Dark-Cursors 24
+
+              # gsettings
+              exec-once = gsettings set org.gnome.desktop.interface gtk-theme 'Catppuccin-Dark'
+              #exec-once = gsettings set org.gnome.desktop.interface icon-theme 'oomox-Catppuccin-Macchiato'
+              exec-once = gsettings set org.gnome.desktop.interface font-name 'Liga SFMono Nerd Font 10'
+              exec-once = gsettings set org.gnome.desktop.interface cursor-theme 'Catppuccin-Mocha-Dark-Cursors'
+              exec-once = gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+              exec-once = gsettings set org.gnome.desktop.interface enable-animations true
+
+              # ░█░█░█▀█░█▀▄░█░█░█▀▀░█▀█░█▀█░█▀▀░█▀▀░░░█▀▀░█▀█░█▀█░█▀▀░▀█▀░█▀▀
+              # ░█▄█░█░█░█▀▄░█▀▄░▀▀█░█▀▀░█▀█░█░░░█▀▀░░░█░░░█░█░█░█░█▀▀░░█░░█░█
+              # ░▀░▀░▀▀▀░▀░▀░▀░▀░▀▀▀░▀░░░▀░▀░▀▀▀░▀▀▀░░░▀▀▀░▀▀▀░▀░▀░▀░░░▀▀▀░▀▀▀
+              # Move workspaces to correct monitor
+              exec-once = hyprland_handle_monitor_connect.sh
+
+
+              # ░█▀▀░█▀▄░█▀▀░█▀▀░▀█▀░█▀▀░█▀▄
+              # ░█░█░█▀▄░█▀▀░█▀▀░░█░░█▀▀░█▀▄
+              # ░▀▀▀░▀░▀░▀▀▀░▀▀▀░░▀░░▀▀▀░▀░▀
+
+              # greeting
+              exec = notify-send --icon ~/.face -u normal "Hello $(whoami)"
             '';
           });
           "hypr/environment.conf".source = (pkgs.writeTextFile {

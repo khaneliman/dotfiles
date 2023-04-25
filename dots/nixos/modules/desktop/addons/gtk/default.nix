@@ -35,7 +35,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = [
+    environment.systemPackages = with pkgs; [
       cfg.icon.pkg
       cfg.cursor.pkg
       cfg.theme.pkg
@@ -53,57 +53,66 @@ in
         udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
       };
 
-    khanelinix.home.extraOptions = {
-      home.pointerCursor = {
-        package = cfg.cursor.pkg;
-        name = cfg.cursor.name;
-        size = 24;
-        gtk.enable = true;
-        x11.enable = true;
+    khanelinix.home = {
+      configFile = {
+        "gtk-3.0/gtk.css".source = pkgs.khanelinix.dotfiles.outPath + "/dots/linux/hyprland/home/.config/gtk-3.0/gtk.css";
+        "gtk-3.0/gtk-dark.css".source = pkgs.khanelinix.dotfiles.outPath + "/dots/linux/hyprland/home/.config/gtk-3.0/gtk-dark.css";
+        "gtk-4.0/gtk.css".source = pkgs.khanelinix.dotfiles.outPath + "/dots/linux/hyprland/home/.config/gtk-4.0/gtk.css";
+        "gtk-4.0/gtk-dark.css".source = pkgs.khanelinix.dotfiles.outPath + "/dots/linux/hyprland/home/.config/gtk-4.0/gtk-dark.css";
       };
 
-      gtk = {
-        enable = true;
-
-        theme = {
-          name = cfg.theme.name;
-          package = cfg.theme.pkg.override
-            {
-              accents = [ "blue" ];
-              size = "standard";
-              variant = "macchiato";
-            };
-        };
-
-        cursorTheme = {
-          name = cfg.cursor.name;
+      extraOptions = {
+        home.pointerCursor = {
           package = cfg.cursor.pkg;
+          name = cfg.cursor.name;
+          size = 24;
+          gtk.enable = true;
+          x11.enable = true;
         };
 
-        iconTheme = {
-          name = cfg.icon.name;
-          package = cfg.icon.pkg;
-        };
+        gtk = {
+          enable = true;
 
-        font = {
-          name = config.khanelinix.system.fonts.default;
-        };
-      };
-
-      dconf = {
-        enable = true;
-
-        settings =
-          let
-            user = config.users.users.${config.khanelinix.user.name};
-          in
-          nested-default-attrs {
-            "org/gnome/desktop/interface" = {
-              color-scheme = "prefer-dark";
-              enable-hot-corners = false;
-              font-theme = config.khanelinix.system.fonts.default;
-            };
+          theme = {
+            name = cfg.theme.name;
+            package = cfg.theme.pkg.override
+              {
+                accents = [ "blue" ];
+                size = "standard";
+                variant = "macchiato";
+              };
           };
+
+          cursorTheme = {
+            name = cfg.cursor.name;
+            package = cfg.cursor.pkg;
+          };
+
+          iconTheme = {
+            name = cfg.icon.name;
+            package = cfg.icon.pkg;
+          };
+
+          font = {
+            name = config.khanelinix.system.fonts.default;
+          };
+        };
+
+        dconf = {
+          enable = true;
+
+          settings =
+            let
+              user = config.users.users.${config.khanelinix.user.name};
+            in
+            nested-default-attrs {
+              "org/gnome/desktop/interface" = {
+                color-scheme = "prefer-dark";
+                enable-hot-corners = false;
+                font-theme = config.khanelinix.system.fonts.default;
+              };
+            };
+        };
       };
     };
 

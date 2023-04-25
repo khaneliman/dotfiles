@@ -32,6 +32,7 @@ in
       swaylock = enabled;
       swayidle = enabled;
       swaynotificationcenter = enabled;
+      thunar = enabled;
       waybar = enabled;
       wlogout = enabled;
       wdisplays = enabled;
