@@ -54,6 +54,14 @@ in
       };
 
     khanelinix.home.extraOptions = {
+      home.pointerCursor = {
+        package = cfg.cursor.pkg;
+        name = cfg.cursor.name;
+        size = 24;
+        gtk.enable = true;
+        x11.enable = true;
+      };
+
       gtk = {
         enable = true;
 

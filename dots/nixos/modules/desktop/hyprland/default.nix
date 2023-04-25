@@ -46,18 +46,9 @@ in
         "hypr/binds.conf".source = hyprBasePath + "binds.conf";
         "hypr/displays.conf".source = hyprBasePath + "displays.conf";
         "hypr/environment.conf".source = hyprBasePath + "environment.conf";
-        # "hypr/environment.conf".source = (pkgs.writeTextFile {
-        #   name = "environment.conf";
-        #   text = ''
-        #   '';
-        # });
         "hypr/hyprland.conf".source = hyprBasePath + "hyprland.conf";
         "hypr/hyprpaper.conf".source = hyprBasePath + "hyprpaper.conf";
-        "hypr/polish.conf".source = (pkgs.writeTextFile {
-          name = "polish.conf";
-          text = ''
-          '';
-        });
+        "hypr/polish.conf".source = hyprBasePath + "polish.conf";
         "hypr/variables.conf".source = hyprBasePath + "variables.conf";
         "hypr/windowrules.conf".source = hyprBasePath + "windowrules.conf";
         "mimeapps.list".source = pkgs.khanelinix.dotfiles.outPath + "/dots/linux/hyprland/home/.config/mimeapps.list";
