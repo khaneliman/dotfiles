@@ -30,13 +30,17 @@ in
       libsForQt5.qt5.qtquickcontrols2
       libsForQt5.qt5.qtsvg
       libsForQt5.qt5ct
-      qt6.full
+      # qt6.full
+      # qt6.qtsvg
+      # qt6.qtquick3d
+      # qt6.wrapQtAppsHook
+      # qt6.qtwayland
     ];
 
     khanelinix.home = {
       configFile = {
-        # "Kvantum/kvantum.kvconfig".source = (pkgs.formats.ini { }).generate "kvantum.kvconfig" {
-        #   General.Theme = cfg.theme.name;
+        # "kvantum/kvantum.kvconfig".source = (pkgs.formats.ini { }).generate "kvantum.kvconfig" {
+        #   general.theme = cfg.theme.name;
         # };
         "Kvantum".source = pkgs.khanelinix.dotfiles.outPath + "/dots/linux/hyprland/home/.config/Kvantum/";
         "qt5ct".source = pkgs.khanelinix.dotfiles.outPath + "/dots/linux/hyprland/home/.config/qt5ct/";
