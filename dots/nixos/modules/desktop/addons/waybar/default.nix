@@ -15,7 +15,10 @@ in
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ waybar-hyprland ];
+
+    environment.systemPackages = with pkgs; [
+      waybar-hyprland
+    ];
 
     khanelinix.home.configFile = mkMerge [
       (mkIf config.khanelinix.desktop.sway.enable {
@@ -30,5 +33,9 @@ in
         "waybar/style.css".source = pkgs.khanelinix.dotfiles.outPath + "/dots/linux/hyprland/home/.config/waybar/style.css";
       })
     ];
+
+    khanelinix.home.file = {
+      # "weather_config.json".source = pkgs.khanelinix.dotfiles.outPath + "/dots/shared/home/weather_config.json";
+    };
   };
 }

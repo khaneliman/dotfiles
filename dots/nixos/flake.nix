@@ -99,6 +99,7 @@
     # Neovim
     # neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
 
+    # rust overlay
     rustup-overlay.url = "github:oxalica/rust-overlay";
   };
 
