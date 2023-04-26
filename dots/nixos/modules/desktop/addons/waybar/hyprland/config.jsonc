@@ -1,7 +1,7 @@
 [
   {
     "include": [
-      "~.config/waybar/default-modules.jsonc"
+      "~/.config/waybar/default-modules.jsonc"
     ],
     "layer": "top",
     "position": "top",
@@ -21,7 +21,7 @@
       "custom/separator-right",
       "group/stats",
       "custom/separator-right",
-      "group/nix-notifications",
+      "group/notifications",
       "hyprland/submap",
       "custom/weather",
       "clock"
@@ -29,7 +29,7 @@
   },
   {
     "include": [
-      "~.config/waybar/default-modules.jsonc"
+      "~/.config/waybar/default-modules.jsonc"
     ],
     "layer": "top",
     "position": "top",
@@ -45,7 +45,7 @@
       "hyprland/window"
     ],
     "modules-right": [
-      "group/nix-notifications",
+      "group/notifications",
       "custom/weather",
       "clock"
     ]

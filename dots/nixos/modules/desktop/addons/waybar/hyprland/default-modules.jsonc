@@ -232,16 +232,7 @@
     "orientation": "horizontal",
     "modules": [
       "idle_inhibitor",
-      "custom/updates",
-      "custom/notification",
-      "custom/github",
-      "wireplumber"
-    ]
-  },
-  "group/nix-notifications": {
-    "orientation": "horizontal",
-    "modules": [
-      "idle_inhibitor",
+      // "custom/updates",
       "custom/notification",
       "custom/github",
       "wireplumber"
