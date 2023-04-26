@@ -14,6 +14,11 @@ in
   };
 
   config = mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [
+      libsForQt5.polkit-kde-agent
+      polkit-kde-agent
+    ];
+
     # Enable and configure `polkit`.
     security.polkit = {
       enable = true;
@@ -27,7 +32,7 @@ in
         after = [ "graphical-session.target" ];
         serviceConfig = {
           Type = "simple";
-          ExecStart = "${pkgs.polkit-kde-agent}/lib/polkit-kde-authentication-agent-1";
+          ExecStart = "${pkgs.polkit-kde-agent}/libexec/polkit-kde-authentication-agent-1";
           Restart = "on-failure";
           RestartSec = 1;
           TimeoutStopSec = 10;
