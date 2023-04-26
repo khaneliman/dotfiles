@@ -1,9 +1,8 @@
-{
-  options,
-  config,
-  pkgs,
-  lib,
-  ...
+{ options
+, config
+, pkgs
+, lib
+, ...
 }:
 with lib;
 with lib.internal; let
@@ -19,32 +18,33 @@ with lib.internal; let
       cp $src $out
     '';
 
-    passthru = {fileName = defaultIconFileName;};
+    passthru = { fileName = defaultIconFileName; };
   };
   propagatedIcon =
     pkgs.runCommandNoCC "propagated-icon"
-    {passthru = {fileName = cfg.icon.fileName;};}
-    ''
-      local target="$out/share/khanelinix.icons/user/${cfg.name}"
-      mkdir -p "$target"
+      { passthru = { fileName = cfg.icon.fileName; }; }
+      ''
+        local target="$out/share/khanelinix.icons/user/${cfg.name}"
+        mkdir -p "$target"
 
-      cp ${cfg.icon} "$target/${cfg.icon.fileName}"
-    '';
-in {
+        cp ${cfg.icon} "$target/${cfg.icon.fileName}"
+      '';
+in
+{
   options.khanelinix.user = with types; {
     name = mkOpt str "khaneliman" "The name to use for the user account.";
     fullName = mkOpt str "Austin Horstman" "The full name of the user.";
     email = mkOpt str "khaneliman.2@gmail.com" "The email of the user.";
     initialPassword =
       mkOpt str "password"
-      "The initial password to use when the user is first created.";
+        "The initial password to use when the user is first created.";
     icon =
       mkOpt (nullOr package) defaultIcon
-      "The profile picture to use for the user.";
-    extraGroups = mkOpt (listOf str) [] "Groups for the user to be assigned.";
+        "The profile picture to use for the user.";
+    extraGroups = mkOpt (listOf str) [ ] "Groups for the user to be assigned.";
     extraOptions =
-      mkOpt attrs {}
-      "Extra options passed to <option>users.users.<name></option>.";
+      mkOpt attrs { }
+        "Extra options passed to <option>users.users.<name></option>.";
   };
 
   config = {
@@ -72,6 +72,7 @@ in {
         "Videos/.keep".text = "";
         "work/.keep".text = "";
         ".face".source = cfg.icon;
+        ".face.icon".source = cfg.icon;
         "Pictures/${
           cfg.icon.fileName or (builtins.baseNameOf cfg.icon)
         }".source =
@@ -158,7 +159,7 @@ in {
         # system to select).
         uid = 1000;
 
-        extraGroups = ["wheel"] ++ cfg.extraGroups;
+        extraGroups = [ "wheel" ] ++ cfg.extraGroups;
       }
       // cfg.extraOptions;
   };
