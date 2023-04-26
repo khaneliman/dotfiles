@@ -38,7 +38,12 @@ in
     environment.systemPackages = with pkgs; [
       cfg.icon.pkg
       cfg.cursor.pkg
-      cfg.theme.pkg
+      (cfg.theme.pkg.override
+        {
+          accents = [ "blue" ];
+          size = "standard";
+          variant = "macchiato";
+        })
     ];
 
     environment.sessionVariables = {
