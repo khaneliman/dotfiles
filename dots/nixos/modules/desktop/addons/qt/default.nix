@@ -30,6 +30,7 @@ in
       libsForQt5.qt5.qtquickcontrols2
       libsForQt5.qt5.qtsvg
       libsForQt5.qt5ct
+      qt6.full
     ];
 
     khanelinix.home = {
