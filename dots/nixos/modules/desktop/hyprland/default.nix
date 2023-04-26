@@ -79,6 +79,8 @@ in
       khanelinix.catppuccin-sddm
       xwayland
       grim
+      slurp
+      swappy
       cliphist
       wl-clipboard
       wf-recorder

@@ -39,7 +39,7 @@ with lib.internal; {
               # ░░█░░█▀█░█▀▀░█░█░█▀▀
               # ░░▀░░▀░▀░▀▀▀░▀░▀░▀▀▀
 
-              hyprctl setcursor Catppuccin-Mocha-Dark-Cursors 24
+              hyprctl setcursor Catppuccin-Mocha-Dark-Cursors 32
 
               # gsettings
               exec-once = gsettings set org.gnome.desktop.interface gtk-theme 'Catppuccin-Dark'
