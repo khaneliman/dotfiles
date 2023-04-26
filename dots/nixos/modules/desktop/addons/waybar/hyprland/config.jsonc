@@ -21,7 +21,7 @@
       "custom/separator-right",
       "group/stats",
       "custom/separator-right",
-      "group/notifications",
+      // "group/notifications",
       "hyprland/submap",
       "custom/weather",
       "clock"

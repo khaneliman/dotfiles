@@ -18,6 +18,12 @@ in
   };
 
   config = mkIf cfg.enable {
+    # khanelinix.suites.desktop.windowManager = true;
+
+    khanelinix.apps = {
+      partitionmanager = enabled;
+    };
+
     # Desktop additions
     khanelinix.desktop.addons = {
       gtk = enabled;
@@ -71,7 +77,6 @@ in
 
     environment.systemPackages = with pkgs; [
       khanelinix.catppuccin-sddm
-      sddm
       xwayland
       grim
       cliphist
@@ -88,24 +93,7 @@ in
       swayimg
       blueman
       networkmanagerapplet
-      polkit-kde-agent
     ];
-
-    # environment.sessionVariables = {
-    #   WLR_NO_HARDWARE_CURSORS = "1";
-    #   WLR_RENDERER = "vulkan";
-    #   XDG_SESSION_TYPE = "wayland";
-    #   QT_QPA_PLATFORM = "wayland";
-    #   QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
-    #   MOZ_ENABLE_WAYLAND = "1";
-    #   MOZ_USE_XINPUT2 = "1";
-    #   SDL_VIDEODRIVER = "wayland";
-    #   _JAVA_AWT_WM_NONEREPARENTING = "1";
-    #   XDG_SESSION_DESKTOP = "Hyprland";
-    #   XDG_CURRENT_DESKTOP = "Hyprland";
-    #   HYPRLAND_LOG_WLR = "1";
-    #   # ASAN_OPTIONS = log_path = ~/asan.log;
-    # };
 
     services.xserver = {
       enable = true;
