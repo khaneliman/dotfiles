@@ -15,11 +15,16 @@ with lib.internal; {
       workstation = enabled;
     };
 
-    apps = {
-      _1password = enabled;
-      firefox = enabled;
-      vscode = enabled;
-    };
+    apps =
+      {
+        _1password = enabled;
+        firefox = {
+          enable = true;
+          extraConfig = builtins.readFile (pkgs.khanelinix.dotfiles.outPath + "/dots/shared/home/.mozilla/firefox/khaneliman.default/user.js");
+          userChrome = builtins.readFile (pkgs.khanelinix.dotfiles.outPath + "/dots/shared/home/.mozilla/firefox/khaneliman.default/chrome/userChrome.css");
+        };
+        vscode = enabled;
+      };
 
     cli-apps = { };
 

@@ -1,9 +1,8 @@
-{
-  options,
-  config,
-  lib,
-  pkgs,
-  ...
+{ options
+, config
+, lib
+, pkgs
+, ...
 }:
 with lib;
 with lib.internal; let
@@ -18,7 +17,8 @@ with lib.internal; let
     "browser.aboutConfig.showWarning" = false;
     "browser.ssb.enabled" = true;
   };
-in {
+in
+{
   options.khanelinix.apps.firefox = with types; {
     enable = mkBoolOpt false "Whether or not to enable Firefox.";
     extraConfig =
@@ -52,8 +52,8 @@ in {
 
             extraNativeMessagingHosts =
               optional
-              config.khanelinix.desktop.gnome.enable
-              pkgs.gnomeExtensions.gsconnect;
+                config.khanelinix.desktop.gnome.enable
+                pkgs.gnomeExtensions.gsconnect;
           };
 
           profiles.${config.khanelinix.user.name} = {
@@ -66,3 +66,19 @@ in {
     };
   };
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

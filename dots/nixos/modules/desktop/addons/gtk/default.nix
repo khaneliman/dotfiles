@@ -44,6 +44,9 @@ in
           size = "standard";
           variant = "macchiato";
         })
+      gsettings-desktop-schemas
+      glib
+      gtk3.out # for gtk-launch
     ];
 
     environment.sessionVariables = {
@@ -70,7 +73,7 @@ in
         home.pointerCursor = {
           package = cfg.cursor.pkg;
           name = cfg.cursor.name;
-          size = 24;
+          size = 32;
           gtk.enable = true;
           x11.enable = true;
         };
