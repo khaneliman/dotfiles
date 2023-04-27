@@ -20,7 +20,10 @@ stdenvNoCC.mkDerivation {
   installPhase = ''
     runHook preInstall
     mkdir -p "$out/share/plymouth"
+    sed -i 's/ImageDir=\/usr\/share/ImageDir=\/etc/' themes/catppuccin-frappe/catppuccin-frappe.plymouth
+    sed -i 's/ImageDir=\/usr\/share/ImageDir=\/etc/' themes/catppuccin-latte/catppuccin-latte.plymouth
     sed -i 's/ImageDir=\/usr\/share/ImageDir=\/etc/' themes/catppuccin-macchiato/catppuccin-macchiato.plymouth
+    sed -i 's/ImageDir=\/usr\/share/ImageDir=\/etc/' themes/catppuccin-mocha/catppuccin-mocha.plymouth
     cp -r themes/ "$out/share/plymouth/"
     runHook postInstall
   '';
@@ -29,7 +32,7 @@ stdenvNoCC.mkDerivation {
     description = "Soothing pastel theme for Plymouth";
     homepage = "https://github.com/catppuccin/plymouth";
     license = lib.licenses.mit;
-    maintainers = with lib.maintainers; [ fufexan ];
+    maintainers = with lib.maintainers; [ fufexan khaneliman ];
     platforms = lib.platforms.linux;
   };
 }
