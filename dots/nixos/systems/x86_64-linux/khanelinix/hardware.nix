@@ -154,12 +154,14 @@ in
     { device = "/dev/disk/by-uuid/be1e6602-df3a-4d27-9d46-c52586093cb8"; }
   ];
 
-  hardware.bluetooth.enable = true;
-  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-  hardware.enableRedistributableFirmware = true;
-  hardware.opengl.driSupport = true;
-  hardware.opengl.driSupport32Bit = true;
-  hardware.opengl.enable = true;
-  services.rpcbind.enable = true; # needed for NFS
-  services.xserver.videoDrivers = [ "modesetting" ];
+  hardware = {
+    bluetooth.enable = true;
+    cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+    enableRedistributableFirmware = true;
+  };
+
+  services = {
+    rpcbind.enable = true; # needed for NFS
+    xserver.videoDrivers = [ "modesetting" ];
+  };
 }

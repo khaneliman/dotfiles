@@ -137,8 +137,9 @@ with lib.internal; {
     hardware = {
       audio = enabled;
       networking = enabled;
-      storage = enabled;
       rgb = enabled;
+      storage = enabled;
+      opengl = enabled;
     };
 
     services = {
