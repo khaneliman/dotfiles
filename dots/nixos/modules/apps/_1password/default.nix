@@ -21,6 +21,18 @@ in
 
         polkitPolicyOwners = [ config.khanelinix.user.name ];
       };
+
+      ssh.extraConfig = ''
+        Host *
+          AddKeysToAgent yes
+          IdentityAgent ~/.1password/agent.sock
+      '';
     };
+
+    system.activationScripts.postInstall1Password = stringAfter [ "users" ] ''
+      echo "Running command after 1Password installation"
+      mkdir -p /opt/1Password/
+      ln -sf ${./op-ssh-sign} /opt/1Password/op-ssh-sign
+    '';
   };
 }

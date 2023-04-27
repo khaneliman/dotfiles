@@ -36,7 +36,7 @@ in
         name = ".gitconfig.local";
         text = ''
           [gpg "ssh"]
-            # program = /opt/1Password/op-ssh-sign
+            program = /opt/1Password/op-ssh-sign
 
           [credential "https://github.com"]
            	helper = !gh auth git-credential

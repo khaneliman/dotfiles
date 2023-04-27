@@ -146,6 +146,10 @@ with lib.internal; {
       printing = enabled;
       geoclue = enabled;
 
+      openssh = {
+        enable = true;
+      };
+
       samba = {
         enable = true;
 

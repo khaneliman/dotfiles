@@ -7,11 +7,6 @@
 with lib;
 with lib.internal; let
   cfg = config.khanelinix.hardware.rgb;
-  # openrgb-rules = builtins.fetchurl
-  #   {
-  #     url = "https://gitlab.com/CalcProgrammer1/OpenRGB/-/raw/master/60-openrgb.rules";
-  #     sha256 = "";
-  #   };
 in
 {
   options.khanelinix.hardware.rgb = with types;
@@ -27,7 +22,6 @@ in
     };
 
   config = mkIf cfg.enable {
-    # services.udev.extraRules = builtins.readFile openrgb-rules;
     hardware.ckb-next.enable = true;
     services.hardware.openrgb = {
       enable = true;
