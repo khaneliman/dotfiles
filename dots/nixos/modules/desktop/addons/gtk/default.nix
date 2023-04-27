@@ -16,9 +16,15 @@ in
     enable = mkBoolOpt false "Whether to customize GTK and apply themes.";
     theme = {
       name =
-        mkOpt str "Catppuccin-Dark"
+        mkOpt str "Catppuccin-Macchiato-Standard-Blue-Dark"
           "The name of the GTK theme to apply.";
-      pkg = mkOpt package pkgs.catppuccin-gtk "The package to use for the theme.";
+      pkg = mkOpt package
+        (pkgs.catppuccin-gtk.override
+          ({
+            accents = [ "blue" ];
+            size = "standard";
+            variant = "macchiato";
+          })) "The package to use for the theme.";
     };
     cursor = {
       name =
@@ -38,12 +44,7 @@ in
     environment.systemPackages = with pkgs; [
       cfg.icon.pkg
       cfg.cursor.pkg
-      (cfg.theme.pkg.override
-        {
-          accents = [ "blue" ];
-          size = "standard";
-          variant = "macchiato";
-        })
+      cfg.theme.pkg
       gsettings-desktop-schemas
       glib
       gtk3.out # for gtk-launch
@@ -62,11 +63,16 @@ in
       };
 
     khanelinix.home = {
+      file = {
+        ".themes/Catppuccin-Dark".source = cfg.theme.pkg.outPath + "/share/themes/${cfg.theme.name}/";
+      };
       configFile = {
-        "gtk-3.0/gtk.css".source = pkgs.khanelinix.dotfiles.outPath + "/dots/linux/hyprland/home/.config/gtk-3.0/gtk.css";
-        "gtk-3.0/gtk-dark.css".source = pkgs.khanelinix.dotfiles.outPath + "/dots/linux/hyprland/home/.config/gtk-3.0/gtk-dark.css";
-        "gtk-4.0/gtk.css".source = pkgs.khanelinix.dotfiles.outPath + "/dots/linux/hyprland/home/.config/gtk-4.0/gtk.css";
-        "gtk-4.0/gtk-dark.css".source = pkgs.khanelinix.dotfiles.outPath + "/dots/linux/hyprland/home/.config/gtk-4.0/gtk-dark.css";
+        "gtk-3.0/assets".source = cfg.theme.pkg.outPath + "/share/themes/${cfg.theme.name}/gtk-3.0/assets/";
+        "gtk-3.0/gtk.css".source = cfg.theme.pkg.outPath + "/share/themes/${cfg.theme.name}/gtk-3.0/gtk.css";
+        "gtk-3.0/gtk-dark.css".source = cfg.theme.pkg.outPath + "/share/themes/${cfg.theme.name}/gtk-3.0/gtk-dark.css";
+        "gtk-4.0/assets".source = cfg.theme.pkg.outPath + "/share/themes/${cfg.theme.name}/gtk-4.0/assets/";
+        "gtk-4.0/gtk.css".source = cfg.theme.pkg.outPath + "/share/themes/${cfg.theme.name}/gtk-4.0/gtk.css";
+        "gtk-4.0/gtk-dark.css".source = cfg.theme.pkg.outPath + "/share/themes/${cfg.theme.name}/gtk-4.0/gtk-dark.css";
       };
 
       extraOptions = {
@@ -82,13 +88,8 @@ in
           enable = true;
 
           theme = {
-            name = cfg.theme.name;
-            package = cfg.theme.pkg.override
-              {
-                accents = [ "blue" ];
-                size = "standard";
-                variant = "macchiato";
-              };
+            name = "Catppuccin-Dark";
+            package = cfg.theme.pkg;
           };
 
           cursorTheme = {
