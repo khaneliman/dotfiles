@@ -5,7 +5,7 @@
 }:
 stdenvNoCC.mkDerivation {
   pname = "catppuccin-plymouth";
-  version = "unstable-2022-12-10";
+  version = "unstable-2023-4-27";
 
   src = fetchFromGitHub {
     owner = "catppuccin";
@@ -20,6 +20,7 @@ stdenvNoCC.mkDerivation {
   installPhase = ''
     runHook preInstall
     mkdir -p "$out/share/plymouth"
+    sed -i 's/ImageDir=\/usr\/share/ImageDir=\/etc/' themes/catppuccin-macchiato/catppuccin-macchiato.plymouth
     cp -r themes/ "$out/share/plymouth/"
     runHook postInstall
   '';

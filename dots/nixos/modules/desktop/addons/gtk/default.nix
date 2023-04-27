@@ -88,6 +88,7 @@ in
           enable = true;
 
           theme = {
+            # Index.theme is named Catppuccin-Dark for some reason...
             name = "Catppuccin-Dark";
             package = cfg.theme.pkg;
           };

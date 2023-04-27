@@ -25,6 +25,7 @@ in
         accent = "Blue";
         variant = "Macchiato";
       })
+      # TODO: get qt5 and qt6 to work together properly with sddm and xdph
       libsForQt5.qtstyleplugin-kvantum
       libsForQt5.qt5.qtgraphicaleffects
       libsForQt5.qt5.qtquickcontrols2
