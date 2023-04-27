@@ -138,6 +138,7 @@ with lib.internal; {
       audio = enabled;
       networking = enabled;
       storage = enabled;
+      rgb = enabled;
     };
 
     services = {

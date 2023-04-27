@@ -79,6 +79,10 @@ in
           cfg.icon;
       };
 
+      configFile = {
+        "sddm/faces/.${cfg.name}".source = cfg.icon;
+      };
+
       extraOptions = {
         home.shellAliases = {
           lc = "${pkgs.colorls}/bin/colorls --sd";
