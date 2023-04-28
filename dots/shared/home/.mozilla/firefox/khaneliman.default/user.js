@@ -252,3 +252,6 @@ user_pref("extensions.autoDisableScopes", 0);
 user_pref("font.name.monospace.x-western", "Liga SFMono Nerd Font");
 user_pref("font.name.sans-serif.x-western", "Liga SFMono Nerd Font");
 user_pref("font.name.serif.x-western", "Liga SFMono Nerd Font");
+
+// VAAPI 
+user_pref("media.ffmpeg.vaapi.enabled", true);
