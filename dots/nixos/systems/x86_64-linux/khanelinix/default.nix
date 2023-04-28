@@ -135,6 +135,7 @@ with lib.internal; {
     };
 
     hardware = {
+      amdgpu = enabled;
       audio = enabled;
       networking = enabled;
       rgb = enabled;
