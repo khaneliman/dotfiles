@@ -16,6 +16,11 @@ in
   };
 
   config = mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [
+      vdpauinfo
+      libva-utils
+    ];
+
     hardware.opengl =
       {
         enable = true;
@@ -24,8 +29,10 @@ in
         extraPackages = with pkgs; [
           vaapiVdpau
           libvdpau-va-gl
-          libva1
-        ];
+          libva
+          libvdpau
+          libdrm
+        ]; #++ lib.optional config.khanelinix.hardware.amdgpu.enable pkgs.mesa-vdpau;
       };
   };
 }

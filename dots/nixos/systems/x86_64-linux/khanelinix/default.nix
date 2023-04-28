@@ -154,19 +154,6 @@ with lib.internal; {
 
       samba = {
         enable = true;
-
-        shares = {
-          video = {
-            path = "/mnt/games";
-            public = true;
-            read-only = true;
-          };
-          audio = {
-            path = "/mnt/steam";
-            public = true;
-            read-only = true;
-          };
-        };
       };
     };
 
