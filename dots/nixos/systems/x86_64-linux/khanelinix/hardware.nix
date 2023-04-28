@@ -30,7 +30,7 @@ in
 
     initrd = {
       kernelModules = [ ];
-      availableKernelModules = [ "amdgpu" "nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" "sr_mod" ];
+      availableKernelModules = [ "nvme" "xhci_pci" "ehci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" "sr_mod" ];
     };
 
     extraModulePackages = [ ];
@@ -157,12 +157,10 @@ in
 
   hardware = {
     bluetooth.enable = true;
-    cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
     enableRedistributableFirmware = true;
   };
 
   services = {
     rpcbind.enable = true; # needed for NFS
-    xserver.videoDrivers = [ "modesetting" ];
   };
 }
