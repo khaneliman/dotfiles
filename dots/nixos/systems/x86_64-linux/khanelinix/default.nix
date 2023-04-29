@@ -148,10 +148,12 @@ with lib.internal; {
       printing = enabled;
       geoclue = enabled;
 
+      # TODO: Set up ssh
       openssh = {
         enable = true;
       };
 
+      # TODO: Set up shares
       samba = {
         enable = true;
       };
