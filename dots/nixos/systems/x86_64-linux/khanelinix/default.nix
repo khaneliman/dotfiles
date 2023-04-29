@@ -138,7 +138,11 @@ with lib.internal; {
       amdgpu = enabled;
       audio = enabled;
       networking = enabled;
-      rgb = enabled;
+      rgb = {
+        enable = true;
+        ckbNextConfig = ./ckb-next.conf;
+        openRGBConfig = ./openrgb;
+      };
       storage = enabled;
       opengl = enabled;
     };
