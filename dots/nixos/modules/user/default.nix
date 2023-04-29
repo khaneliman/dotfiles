@@ -85,12 +85,54 @@ in
 
       extraOptions = {
         home.shellAliases = {
+          ls = "lsd -al --color=always --group-directories-first"; # preferred listing                   
+          la = "lsd -a --color=always --group-directories-first"; # all files and dirs                  
+          ll = "lsd -l --color=always --group-directories-first"; # long format                         
+          lt = "lsd -a --tree --color=always --group-directories-first -I .git"; # tree listing          
+          lst = "lsd -al --tree --color=always --group-directories-first -I .git"; # tree listing        
+          llt = "lsd -l --tree --color=always --group-directories-first -I .git"; # tree listing         
+          l = "lsd -a | egrep '^\.'"; # show only dotfilesalias ls='lsd -a' 
+
           lc = "${pkgs.colorls}/bin/colorls --sd";
           lcg = "lc --gs";
           lcl = "lc -1";
           lclg = "lc -1 --gs";
           lcu = "${pkgs.colorls}/bin/colorls -U";
           lclu = "${pkgs.colorls}/bin/colorls -U -1";
+
+          # File management
+          rcp = "rsync -rahP --mkpath --modify-window=1"; # Rsync copy keeping all attributes,timestamps,permissions"
+          rmv = "rsync -rahP --mkpath --modify-window=1 --remove-sent-files"; # Rsync move keeping all attributes,timestamps,permissions
+          tarnow = "tar -acf ";
+          untar = "tar -zxvf ";
+          wget = "wget -c ";
+
+          # Navigation shortcuts
+          home = "cd ~";
+          dots = "cd $DOTS_DIR";
+          ".." = "cd ..";
+          "..." = "cd ../..";
+          "...." = "cd ../../..";
+          "....." = "cd ../../../..";
+          "......" = "cd ../../../../..";
+
+          # Colorize output
+          dir = "dir --color=auto";
+          vdir = "vdir --color=auto";
+          grep = "grep --color=auto";
+          fgrep = "fgrep --color=auto";
+          egrep = "egrep --color=auto";
+
+          # Misc
+          pls = "sudo";
+          clr = "clear";
+          clear = "clear && fastfetch";
+          usage = "du -ah -d1 | sort -rn 2>/dev/null";
+
+          # Cryptography
+          genpass = "openssl rand - base64 20"; # Generate a random, 20-charactered password
+          sha = "shasum -a 256"; # Test checksum
+          sshperm = ''find .ssh/ -type f -exec chmod 600 {} \;; find .ssh/ -type d -exec chmod 700 {} \;; find .ssh/ -type f -name "*.pub" -exec chmod 644 {} \;'';
         };
 
         programs = {
@@ -154,7 +196,7 @@ in
         home = "/home/${cfg.name}";
         group = "users";
 
-        shell = pkgs.zsh;
+        shell = pkgs.fish;
 
         # Arbitrary user ID to use for the user. Since I only
         # have a single user on my machines this won't ever collide.

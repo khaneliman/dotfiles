@@ -22,6 +22,12 @@ in
       configFile = {
         "bat/".source = pkgs.khanelinix.dotfiles.outPath + "/dots/shared/home/.config/bat";
       };
+      extraOptions = {
+        home.shellAliases = {
+          cat = "bat";
+
+        };
+      };
     };
 
     system.activationScripts.postInstallBat = stringAfter [ "users" ] ''

@@ -1,14 +1,14 @@
-inputs @ {
-  options,
-  config,
-  lib,
-  pkgs,
-  ...
+inputs @ { options
+, config
+, lib
+, pkgs
+, ...
 }:
 with lib;
 with lib.internal; let
   cfg = config.khanelinix.cli-apps.neovim;
-in {
+in
+{
   options.khanelinix.cli-apps.neovim = with lib.types; {
     enable = lib.mkEnableOption "neovim";
   };
@@ -36,6 +36,9 @@ in {
         programs.zsh.shellAliases.vimdiff = "nvim -d";
         programs.bash.shellAliases.vimdiff = "nvim -d";
         programs.fish.shellAliases.vimdiff = "nvim -d";
+        home.shellAliases = {
+          vim = "nvim";
+        };
       };
     };
   };
