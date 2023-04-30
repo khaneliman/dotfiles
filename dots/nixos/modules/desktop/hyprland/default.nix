@@ -55,7 +55,7 @@ in
         "hypr/environment.conf".source = hyprBasePath + "environment.conf";
         "hypr/hyprland.conf".source = hyprBasePath + "hyprland.conf";
         "hypr/hyprpaper.conf".source = hyprBasePath + "hyprpaper.conf";
-        "hypr/polish.conf".source = hyprBasePath + "polish.conf";
+        "hypr/polish.conf".source = ./hypr/polish.conf;
         "hypr/variables.conf".source = hyprBasePath + "variables.conf";
         "hypr/windowrules.conf".source = hyprBasePath + "windowrules.conf";
         "mimeapps.list".source = pkgs.khanelinix.dotfiles.outPath + "/dots/linux/hyprland/home/.config/mimeapps.list";

@@ -28,89 +28,7 @@ with lib.internal; {
         enable = true;
 
         customConfigFiles = {
-          "hypr/polish.conf".source = (pkgs.writeTextFile {
-            name = "polish.conf";
-            text = ''
-              # ░█▀█░█▀█░█░░░▀█▀░█▀▀░█░█
-              # ░█▀▀░█░█░█░░░░█░░▀▀█░█▀█
-              # ░▀░░░▀▀▀░▀▀▀░▀▀▀░▀▀▀░▀░▀
-
-              # ░▀█▀░█░█░█▀▀░█▄█░█▀▀
-              # ░░█░░█▀█░█▀▀░█░█░█▀▀
-              # ░░▀░░▀░▀░▀▀▀░▀░▀░▀▀▀
-
-              hyprctl setcursor Catppuccin-Mocha-Dark-Cursors 32
-
-              # gsettings
-              exec-once = gsettings set org.gnome.desktop.interface gtk-theme 'Catppuccin-Dark'
-              #exec-once = gsettings set org.gnome.desktop.interface icon-theme 'oomox-Catppuccin-Macchiato'
-              exec-once = gsettings set org.gnome.desktop.interface font-name 'Liga SFMono Nerd Font 10'
-              exec-once = gsettings set org.gnome.desktop.interface cursor-theme 'Catppuccin-Mocha-Dark-Cursors'
-              exec-once = gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
-              exec-once = gsettings set org.gnome.desktop.interface enable-animations true
-
-              # ░█░█░█▀█░█▀▄░█░█░█▀▀░█▀█░█▀█░█▀▀░█▀▀░░░█▀▀░█▀█░█▀█░█▀▀░▀█▀░█▀▀
-              # ░█▄█░█░█░█▀▄░█▀▄░▀▀█░█▀▀░█▀█░█░░░█▀▀░░░█░░░█░█░█░█░█▀▀░░█░░█░█
-              # ░▀░▀░▀▀▀░▀░▀░▀░▀░▀▀▀░▀░░░▀░▀░▀▀▀░▀▀▀░░░▀▀▀░▀▀▀░▀░▀░▀░░░▀▀▀░▀▀▀
-              # Move workspaces to correct monitor
-              exec-once = hyprland_handle_monitor_connect.sh
-
-
-              # ░█▀▀░█▀▄░█▀▀░█▀▀░▀█▀░█▀▀░█▀▄
-              # ░█░█░█▀▄░█▀▀░█▀▀░░█░░█▀▀░█▀▄
-              # ░▀▀▀░▀░▀░▀▀▀░▀▀▀░░▀░░▀▀▀░▀░▀
-
-              # greeting
-              exec = notify-send --icon ~/.face -u normal "Hello $(whoami)"
-            '';
-          });
-          "hypr/environment.conf".source = (pkgs.writeTextFile {
-            name = "environment.conf";
-            text = ''
-              ##
-              # ░█▀▀░█▀█░█░█░▀█▀░█▀▄░█▀█░█▀█░█▄█░█▀▀░█▀█░▀█▀
-              # ░█▀▀░█░█░▀▄▀░░█░░█▀▄░█░█░█░█░█░█░█▀▀░█░█░░█░
-              # ░▀▀▀░▀░▀░░▀░░▀▀▀░▀░▀░▀▀▀░▀░▀░▀░▀░▀▀▀░▀░▀░░▀░
-              ##
-
-
-              # ░█░█░█░░░█▀▄░█▀█░█▀█░▀█▀░█▀▀
-              # ░█▄█░█░░░█▀▄░█░█░█░█░░█░░▀▀█
-              # ░▀░▀░▀▀▀░▀░▀░▀▀▀░▀▀▀░░▀░░▀▀▀
-
-              env = WLR_RENDERER,vulkan
-              env = XDG_SESSION_TYPE,wayland
-              env = QT_QPA_PLATFORM,wayland
-              env = QT_WAYLAND_DISABLE_WINDOWDECORATION,1
-              env = MOZ_ENABLE_WAYLAND,1
-              env = MOZ_USE_XINPUT2,1
-              env = __GL_GSYNC_ALLOWED,0
-              env = __GL_VRR_ALLOWED,0
-              env = SDL_VIDEODRIVER,wayland
-              env = _JAVA_AWT_WM_NONEREPARENTING,1
-
-
-              # ░▀█▀░█░█░█▀▀░█▄█░█▀▀
-              # ░░█░░█▀█░█▀▀░█░█░█▀▀
-              # ░░▀░░▀░▀░▀▀▀░▀░▀░▀▀▀
-
-              # Theme variables
-              env = QT_QPA_PLATFORMTHEME,qt5ct
-              env = GTK_THEME,Catppuccin-Dark
-              env = XCURSOR_SIZE,32
-              env = XCURSOR_THEME,Catppuccin-Mocha-Dark-Cursors
-
-
-              # ░█░█░█░█░█▀█░█▀▄░█░░░█▀█░█▀█░█▀▄
-              # ░█▀█░░█░░█▀▀░█▀▄░█░░░█▀█░█░█░█░█
-              # ░▀░▀░░▀░░▀░░░▀░▀░▀▀▀░▀░▀░▀░▀░▀▀░
-
-              env = XDG_SESSION_DESKTOP,Hyprland
-              env = XDG_CURRENT_DESKTOP,Hyprland
-              env = HYPRLAND_LOG_WLR,1
-              env = ASAN_OPTIONS,log_path=~/asan.log
-            '';
-          });
+          "hypr/environment.conf".source = ./hypr/environment.conf;
         };
       };
 
@@ -140,7 +58,7 @@ with lib.internal; {
       networking = enabled;
       rgb = {
         enable = true;
-        ckbNextConfig = ./ckb-next.conf;
+        ckbNextConfig = ./ckb-next/ckb-next.conf;
         openRGBConfig = ./openrgb;
       };
       storage = enabled;
