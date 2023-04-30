@@ -26,6 +26,7 @@ shared_backup_existing() {
 	backup_files "$HOME"/.config/ranger "$BACKUP_LOCATION"/.config/
 	backup_files "$HOME"/.config/spicetify "$BACKUP_LOCATION"/.config/
 	backup_files "$HOME"/.config/topgrade.toml "$BACKUP_LOCATION"/.config/
+	backup_files "$HOME"/.config/nix "$BACKUP_LOCATION"/.config/
 
 	backup_files "$HOME"/.mozilla "$BACKUP_LOCATION"/
 	backup_files "$HOME"/.oh-my-bash "$BACKUP_LOCATION"/
@@ -231,6 +232,7 @@ shared_copy_configuration() {
 	git_crypt_check && link_locations "$SHARED_HOME"/.wegorc "$HOME"/.wegorc
 	git_crypt_check && link_locations "$SHARED_HOME"/weather_url "$HOME"/weather_url
 	git_crypt_check && link_locations "$SHARED_HOME"/wttr_location "$HOME"/wttr_location
+	git_crypt_check && link_locations "$SHARED_HOME"/.config/nix/nix.conf "$HOME"/.config/nix/nix.conf
 
 	# copy files that dont replace contents of location
 	copy_files "$SHARED_HOME"/.fonts/ "$HOME"/.fonts/

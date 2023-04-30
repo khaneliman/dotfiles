@@ -81,3 +81,7 @@ dots/shared/home/.gnupg/random_seed
 dots/linux/hyprland/home/.config/rofi/spotlight/history.txt
 dots/linux/hyprland/home/.config/OpenRGB/logs
 
+# ░█▀█░▀█▀░█░█░█▀█░█▀▀
+# ░█░█░░█░░▄▀▄░█░█░▀▀█
+# ░▀░▀░▀▀▀░▀░▀░▀▀▀░▀▀▀
+dots/nixos/.direnv/*

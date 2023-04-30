@@ -10,6 +10,7 @@ dots/shared/home/.gitconfig.signing filter=git-crypt diff=git-crypt
 dots/shared/home/.ssh/** filter=git-crypt diff=git-crypt
 dots/shared/home/.gnupg/** filter=git-crypt diff=git-crypt
 dots/shared/home/.config/davmail/** filter=git-crypt diff=git-crypt
+dots/shared/home/.config/nix/nix.conf filter=git-crypt diff=git-crypt
 
 dots/server/docker/secrets.env filter=git-crypt diff=git-crypt
 
