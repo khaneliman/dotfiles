@@ -2,11 +2,8 @@
   description = "KhaneliNix";
 
   inputs = {
-    # NixPkgs (nixos-22.11) 🤷
+    # NixPkgs (nixos-unstable) 
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-
-    # NixPkgs Unstable (nixos-unstable)
-    unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # Nix User Repository (master)
     nur.url = "github:nix-community/NUR";
@@ -32,24 +29,24 @@
 
     # Snowfall Flake
     flake.url = "github:snowfallorg/flake";
-    flake.inputs.nixpkgs.follows = "unstable";
+    flake.inputs.nixpkgs.follows = "nixpkgs";
     # flake.inputs.snowfall-lib.follows = "snowfall-lib";
 
     # Comma
     comma.url = "github:nix-community/comma";
-    comma.inputs.nixpkgs.follows = "unstable";
+    comma.inputs.nixpkgs.follows = "nixpkgs";
 
     # System Deployment
     deploy-rs.url = "github:serokell/deploy-rs";
-    deploy-rs.inputs.nixpkgs.follows = "unstable";
+    deploy-rs.inputs.nixpkgs.follows = "nixpkgs";
 
     # Run unpatched dynamically compiled binaries
     nix-ld.url = "github:Mic92/nix-ld";
-    nix-ld.inputs.nixpkgs.follows = "unstable";
+    nix-ld.inputs.nixpkgs.follows = "nixpkgs";
 
     # Discord Replugged
     replugged.url = "github:LunNova/replugged-nix-flake";
-    replugged.inputs.nixpkgs.follows = "unstable";
+    replugged.inputs.nixpkgs.follows = "nixpkgs";
 
     # Discord Replugged plugins / themes
     discord-tweaks = {
@@ -65,14 +62,14 @@
     cowsay = {
       url = "github:snowfallorg/cowsay";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.unstable.follows = "unstable";
+      inputs.unstable.follows = "nixpkgs";
     };
 
     # Backup management
     icehouse = {
       url = "github:snowfallorg/icehouse";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.unstable.follows = "unstable";
+      inputs.unstable.follows = "nixpkgs";
     };
 
     # Yubikey Guide

@@ -89,7 +89,6 @@ in
       brightnessctl
       glib # for gsettings
       gtk3.out # for gtk-launch
-      xdg-desktop-portal-hyprland
       hyprpaper
       hyprpicker
       swayimg

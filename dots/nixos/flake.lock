@@ -21,7 +21,7 @@
         "flake-compat": "flake-compat",
         "naersk": "naersk",
         "nixpkgs": [
-          "unstable"
+          "nixpkgs"
         ],
         "utils": "utils"
       },
@@ -63,7 +63,7 @@
         ],
         "snowfall-lib": "snowfall-lib",
         "unstable": [
-          "unstable"
+          "nixpkgs"
         ],
         "vhs": "vhs"
       },
@@ -105,7 +105,7 @@
       "inputs": {
         "flake-compat": "flake-compat_4",
         "nixpkgs": [
-          "unstable"
+          "nixpkgs"
         ],
         "utils": "utils_2"
       },
@@ -159,7 +159,7 @@
       "inputs": {
         "flake-compat": "flake-compat_5",
         "nixpkgs": [
-          "unstable"
+          "nixpkgs"
         ],
         "snowfall-lib": "snowfall-lib_3",
         "unstable": "unstable"
@@ -574,7 +574,7 @@
         ],
         "snowfall-lib": "snowfall-lib_4",
         "unstable": [
-          "unstable"
+          "nixpkgs"
         ]
       },
       "locked": {
@@ -616,7 +616,7 @@
     "nix-ld": {
       "inputs": {
         "nixpkgs": [
-          "unstable"
+          "nixpkgs"
         ],
         "utils": "utils_3"
       },
@@ -751,7 +751,7 @@
     "replugged": {
       "inputs": {
         "nixpkgs": [
-          "unstable"
+          "nixpkgs"
         ],
         "replugged": "replugged_2"
       },
@@ -807,7 +807,6 @@
         "replugged": "replugged",
         "rustup-overlay": "rustup-overlay",
         "snowfall-lib": "snowfall-lib_5",
-        "unstable": "unstable_2",
         "yubikey-guide": "yubikey-guide"
       }
     },
@@ -970,22 +969,6 @@
         "owner": "nixos",
         "repo": "nixpkgs",
         "rev": "f6f44561884c3470e2b783683d5dbac42dfc833b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "unstable_2": {
-      "locked": {
-        "lastModified": 1682879489,
-        "narHash": "sha256-sASwo8gBt7JDnOOstnps90K1wxmVfyhsTPPNTGBPjjg=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "da45bf6ec7bbcc5d1e14d3795c025199f28e0de0",
         "type": "github"
       },
       "original": {
