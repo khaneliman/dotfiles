@@ -18,7 +18,7 @@ in
   config = mkIf cfg.enable {
     # TODO: conditionally add kernel module and video drivers
     boot.initrd.availableKernelModules = [ "amdgpu" ];
-    services.xserver.videoDrivers = [ "amdgpu" ];
+    services.xserver.videoDrivers = [ "modesetting" ];
 
     environment.systemPackages = with pkgs; [ radeontop ];
 

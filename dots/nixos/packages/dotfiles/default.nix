@@ -5,14 +5,14 @@
 }:
 stdenvNoCC.mkDerivation {
   pname = "dotfiles";
-  version = "2023-4-28";
+  version = "9e688804b219c70860f470d6b6db08623e17cd08";
 
   src = fetchFromGitHub {
     name = "dotfiles";
     owner = "khaneliman";
     repo = "dotfiles";
-    rev = "adf912881de5ab00f7459064235b51f09c618073";
-    sha256 = "NRti8KqYUiZqqW12p+hHt/uGDrueR7vv9uE8d/Qja6E=";
+    rev = "9e688804b219c70860f470d6b6db08623e17cd08";
+    sha256 = "qdWfa27+kF5AAeNMHGx8AI6yHIhLNgqZgF4EdlE6kJc=";
     fetchSubmodules = true;
   };
 
