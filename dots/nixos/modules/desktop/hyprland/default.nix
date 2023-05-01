@@ -9,6 +9,7 @@ with lib.internal; let
   cfg = config.khanelinix.desktop.hyprland;
   term = config.khanelinix.desktop.addons.term;
   hyprBasePath = pkgs.khanelinix.dotfiles.outPath + "/dots/linux/hyprland/home/.config/hypr/";
+  user = config.users.users.${config.khanelinix.user.name};
 in
 {
   options.khanelinix.desktop.hyprland = with types; {
@@ -18,8 +19,6 @@ in
   };
 
   config = mkIf cfg.enable {
-    # khanelinix.suites.desktop.windowManager = true;
-
     khanelinix.apps = {
       partitionmanager = enabled;
     };
@@ -76,6 +75,7 @@ in
     };
 
     environment.systemPackages = with pkgs; [
+      # sddm
       khanelinix.catppuccin-sddm
       xwayland
       grim
@@ -101,12 +101,19 @@ in
       enable = true;
 
       libinput.enable = true;
-      displayManager.sddm = {
-        enable = true;
-        theme = "catppuccin";
+      displayManager = {
+        # defaultSession = "hyprland";
+        sddm = {
+          enable = true;
+          theme = "catppuccin";
+        };
       };
     };
 
-    # services.xserver.displayManager.defaultSession = "hyprland";
+    system.activationScripts.postInstallHyprland = stringAfter [ "users" ] ''
+      echo "Setting sddm permissions for user icon"
+      ${pkgs.acl}/bin/setfacl -m u:sddm:x /home/${config.khanelinix.user.name}
+      ${pkgs.acl}/bin/setfacl -m u:sddm:r /home/${config.khanelinix.user.name}/.face.icon
+    '';
   };
 }
