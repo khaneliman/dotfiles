@@ -93,6 +93,11 @@
     # hyprland
     hyprland.url = "github:hyprwm/Hyprland";
 
+    hyprland-contrib = {
+      url = "github:hyprwm/contrib";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Neovim
     # neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
 

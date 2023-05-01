@@ -2,6 +2,7 @@
 , config
 , lib
 , pkgs
+, inputs 
 , ...
 }:
 with lib;
@@ -67,7 +68,6 @@ in
       ".local/bin/hyprland_cleanup_after_startup.sh".source = pkgs.khanelinix.dotfiles.outPath + "/dots/linux/hyprland/home/.local/bin/hyprland_cleanup_after_startup.sh";
       ".local/bin/hyprland_handle_monitor_connect.sh".source = pkgs.khanelinix.dotfiles.outPath + "/dots/linux/hyprland/home/.local/bin/hyprland_handle_monitor_connect.sh";
       ".local/bin/record_screen".source = pkgs.khanelinix.dotfiles.outPath + "/dots/linux/hyprland/home/.local/bin/record_screen";
-      ".local/bin/grimblast".source = pkgs.khanelinix.dotfiles.outPath + "/dots/linux/hyprland/home/.local/bin/grimblast";
     };
 
     programs.hyprland = {
@@ -94,6 +94,7 @@ in
       swayimg
       blueman
       networkmanagerapplet
+      inputs.hyprland-contrib.packages.${pkgs.hostPlatform.system}.grimblast
     ];
 
     services.xserver = {

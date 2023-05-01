@@ -546,6 +546,26 @@
         "type": "github"
       }
     },
+    "hyprland-contrib": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1682971056,
+        "narHash": "sha256-nUtcFkieWyNgJILFHo8AwHBRh4QTr48ZcjI5qI7UoFE=",
+        "owner": "hyprwm",
+        "repo": "contrib",
+        "rev": "2e2ecbe931dd800ca7374642583fc98ce19c42c6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hyprwm",
+        "repo": "contrib",
+        "type": "github"
+      }
+    },
     "hyprland-protocols": {
       "inputs": {
         "nixpkgs": [
@@ -735,11 +755,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1682963119,
-        "narHash": "sha256-M9KJTCpzpCUsGc2GmKNRdS7EK07qSjnsJ3uC6FgLVRY=",
+        "lastModified": 1682970362,
+        "narHash": "sha256-SrivGIhZr8rl136UpPlMY6oYAMDvI1RMcrto1YqilwI=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "3551924f9dcf5692b5d7fbd9e2e2c46bd6c62fb1",
+        "rev": "694865435f5f375eb5d86e33096d9e527f297bc3",
         "type": "github"
       },
       "original": {
@@ -798,6 +818,7 @@
         "gpg-base-conf": "gpg-base-conf",
         "home-manager": "home-manager",
         "hyprland": "hyprland",
+        "hyprland-contrib": "hyprland-contrib",
         "icehouse": "icehouse",
         "nix-ld": "nix-ld",
         "nixos-generators": "nixos-generators",
