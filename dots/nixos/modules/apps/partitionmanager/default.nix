@@ -14,5 +14,5 @@ in
   };
 
   config =
-    mkIf cfg.enable { environment.systemPackages = with pkgs; [ partition-manager ]; };
+    mkIf cfg.enable { environment.systemPackages = with pkgs; [ partition-manager libsForQt5.kpmcore ]; };
 }
