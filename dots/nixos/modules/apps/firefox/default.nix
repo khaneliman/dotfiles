@@ -47,7 +47,7 @@ in
       extraOptions = {
         programs.firefox = {
           enable = true;
-          package = pkgs.firefox.override {
+          package = pkgs.firefox-wayland.override {
             cfg = {
               enableBrowserpass = true;
               enableGnomeExtensions = config.khanelinix.desktop.gnome.enable;

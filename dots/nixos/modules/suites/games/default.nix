@@ -10,7 +10,6 @@ with lib.internal; let
   cfg = config.khanelinix.suites.games;
   apps = {
     steam = enabled;
-    prismlauncher = enabled;
     lutris = enabled;
     winetricks = enabled;
     protontricks = enabled;
