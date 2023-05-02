@@ -103,6 +103,8 @@
 
     # rust overlay
     rustup-overlay.url = "github:oxalica/rust-overlay";
+
+    sops-nix.url = "github:Mic92/sops-nix";
   };
 
   outputs = inputs:
@@ -139,6 +141,7 @@
         home-manager.nixosModules.home-manager
         nix-ld.nixosModules.nix-ld
         hyprland.nixosModules.default
+        sops-nix.nixosModules.sops
       ];
 
       deploy = lib.mkDeploy { inherit (inputs) self; };

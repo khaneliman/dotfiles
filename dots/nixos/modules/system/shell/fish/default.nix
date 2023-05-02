@@ -22,10 +22,6 @@ in
 
     khanelinix.home = {
       configFile = {
-        # TODO: make sure all equivalent functionality is reproduced in nix config
-        # "fish/config.fish".source = fishBasePath + "config.fish";
-        # "fish/fish_plugins".source = fishBasePath + "fish_plugins";
-        # "fish/fish_plugins".text = builtins.readFile (fishBasePath + "fish_plugins");
         "fish/themes".source = fishBasePath + "themes/";
         "fish/conf.d/environment_variables.fish".source = fishBasePath + "conf.d/environment_variables.fish";
         "fish/conf.d/fish_variables.fish".source = fishBasePath + "conf.d/fish_variables.fish";
@@ -46,6 +42,18 @@ in
           loginShellInit = ''
           '';
           interactiveShellInit = ''
+            fish_add_path "$HOME/.local/bin"
+
+            if [ -f "$HOME"/.aliases ];
+              source ~/.aliases
+            end
+
+            if [ $(command -v hyprctl) ];
+                # Hyprland logs 
+                alias hl='cat /tmp/hypr/$(lsd -t /tmp/hypr/ | head -n 1)/hyprland.log'
+                alias hl1='cat /tmp/hypr/$(lsd -t -r /tmp/hypr/ | head -n 2 | tail -n 1)/hyprland.log'
+            end
+
             set fish_greeting # Disable greeting
             fastfetch
           '';
