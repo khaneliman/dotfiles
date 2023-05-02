@@ -49,7 +49,6 @@ in
       {
         "hypr/assets/square.png".source = hyprBasePath + "assets/square.png";
         "hypr/assets/diamond.png".source = hyprBasePath + "assets/diamond.png";
-        "hypr/apps.conf".source = hyprBasePath + "apps.conf";
         "hypr/binds.conf".source = hyprBasePath + "binds.conf";
         "hypr/displays.conf".source = hyprBasePath + "displays.conf";
         "hypr/environment.conf".source = hyprBasePath + "environment.conf";
