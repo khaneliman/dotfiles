@@ -56,6 +56,7 @@ in
         llvm = enabled;
         meson = enabled;
         node = enabled;
+        pkg-config = enabled;
         python = enabled;
         qmk = enabled;
         ripgrep = enabled;
