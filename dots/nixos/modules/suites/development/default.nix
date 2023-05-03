@@ -1,9 +1,8 @@
-{
-  options,
-  config,
-  lib,
-  pkgs,
-  ...
+{ options
+, config
+, lib
+, pkgs
+, ...
 }:
 with lib;
 with lib.internal; let
@@ -23,11 +22,12 @@ with lib.internal; let
     tmux = enabled;
     yubikey = enabled;
   };
-in {
+in
+{
   options.khanelinix.suites.development = with types; {
     enable =
       mkBoolOpt false
-      "Whether or not to enable common development configuration.";
+        "Whether or not to enable common development configuration.";
   };
 
   config = mkIf cfg.enable {
@@ -54,6 +54,7 @@ in {
         http = enabled;
         k8s = enabled;
         llvm = enabled;
+        meson = enabled;
         node = enabled;
         python = enabled;
         qmk = enabled;
@@ -62,7 +63,7 @@ in {
         tree-sitter = enabled;
       };
 
-      virtualisation = {podman = enabled;};
+      virtualisation = { podman = enabled; };
     };
   };
 }
