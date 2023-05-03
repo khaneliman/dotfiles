@@ -11,8 +11,8 @@ stdenvNoCC.mkDerivation {
     name = "dotfiles";
     owner = "khaneliman";
     repo = "dotfiles";
-    rev = "9e688804b219c70860f470d6b6db08623e17cd08";
-    sha256 = "qdWfa27+kF5AAeNMHGx8AI6yHIhLNgqZgF4EdlE6kJc=";
+    rev = "f547c4ed1af9f23bcbe0e8397b722f0800675b5f";
+    sha256 = "VBARQoqDXIJ/s7AHdJSXdcsEw+/PBExe26yBaXqnkvQ=";
     fetchSubmodules = true;
   };
 
