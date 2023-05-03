@@ -1,11 +1,12 @@
-{
-  pkgs,
-  config,
-  types,
-  ...
-}: let
+{ pkgs
+, config
+, types
+, ...
+}:
+let
   cfg = config.khanelinix.desktop.hyprland.hypr;
-in {
+in
+{
   # Define an output to generate the final configuration file
   config = {
     khanelinix.home.configFile = {
@@ -37,7 +38,7 @@ in {
 
           # Startup apps that have rules for organizing them
           exec-once = [workspace special silent ] kitty --session scratchpad # Spawn scratchpad terminal
-          exec-once = command -v firefox-developer-edition && firefox-developer-edition
+          exec-once = command -v firefox && firefox
           exec-once = command -v steam && steam
           exec-once = command -v thunderbird && thunderbird
           exec-once = command -v virt-manager && virt-manager
