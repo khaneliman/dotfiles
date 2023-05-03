@@ -106,6 +106,7 @@ with lib.internal; {
       platform = "amd";
 
       vfioIds = [ "10de:2206" "10de:1aef" ];
+      machineUnits = [ "machine-qemu\\x2d4\\x2dwin11\\x2dGPU.scope" ];
     };
   };
 
