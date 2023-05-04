@@ -105,6 +105,9 @@
     rustup-overlay.url = "github:oxalica/rust-overlay";
 
     sops-nix.url = "github:Mic92/sops-nix";
+
+    devshell.url = "github:numtide/devshell";
+    # flake-utils.url = "github:numtide/flake-utils";
   };
 
   outputs = inputs:
@@ -123,8 +126,6 @@
         "imagemagick-6.9.12-68"
       ];
 
-      # TODO: figure out devshells
-
       # overlays from inputs
       overlays = with inputs; [
         flake.overlay
@@ -134,6 +135,7 @@
         # neovim-nightly.overlay
         rustup-overlay.overlays.default
         hyprland.overlays.default
+        devshell.overlays.default
       ];
 
       # modules from inputs
