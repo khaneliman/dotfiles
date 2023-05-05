@@ -108,6 +108,11 @@
 
     devshell.url = "github:numtide/devshell";
     # flake-utils.url = "github:numtide/flake-utils";
+
+    astronvim = {
+      url = "github:AstroNvim/AstroNvim/nightly";
+      flake = false;
+    };
   };
 
   outputs = inputs:

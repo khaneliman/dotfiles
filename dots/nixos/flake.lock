@@ -1,5 +1,22 @@
 {
   "nodes": {
+    "astronvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1683292551,
+        "narHash": "sha256-O5X8U0tjiKf2h5qxBHjv+p1EkFXzPNI6JPa67zH8t0c=",
+        "owner": "AstroNvim",
+        "repo": "AstroNvim",
+        "rev": "596124e37bf53a44adfeaf0f16cfce47d7805416",
+        "type": "github"
+      },
+      "original": {
+        "owner": "AstroNvim",
+        "ref": "nightly",
+        "repo": "AstroNvim",
+        "type": "github"
+      }
+    },
     "catppuccin-cursors": {
       "flake": false,
       "locked": {
@@ -567,11 +584,11 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1683276380,
-        "narHash": "sha256-Sd8dfgA46ov9bynmGysBXsrqGuqi49Pa3OrUvPtSXQE=",
+        "lastModified": 1683297722,
+        "narHash": "sha256-1uRVjPMCCjXC6MRErLkh+SJychOC2SKDGFajriBIfno=",
         "owner": "hyprwm",
         "repo": "Hyprland",
-        "rev": "d1d4683c9162aa4777a4a0da0691ba8c0bd6b7e7",
+        "rev": "c0be1e2fd8221a362252c379811880224eee12a2",
         "type": "github"
       },
       "original": {
@@ -837,11 +854,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1683279897,
-        "narHash": "sha256-iVDg5FSmFwriLuuYF9r3Jmjy2SEnbgifelm6D6aPICo=",
+        "lastModified": 1683295546,
+        "narHash": "sha256-h+ea4UTl74p5nyOcNb0MfgEdd5TftEfas6DyvyufPOM=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "4dfe38b74d52259176d8649e187488cb8c2614c8",
+        "rev": "cd969de65c550962e34ac917c0fb4de89203eb74",
         "type": "github"
       },
       "original": {
@@ -889,6 +906,7 @@
     },
     "root": {
       "inputs": {
+        "astronvim": "astronvim",
         "catppuccin-cursors": "catppuccin-cursors",
         "comma": "comma",
         "cowsay": "cowsay",

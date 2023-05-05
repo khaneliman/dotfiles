@@ -1,7 +1,8 @@
-inputs @ { options
+{ options
 , config
 , lib
 , pkgs
+, inputs
 , ...
 }:
 with lib;
@@ -25,9 +26,13 @@ in
       EDITOR = "nvim";
     };
 
-    khanelinix.home = {
+    khanelinix.home = with pkgs; {
       configFile = {
-        "nvim/".source = pkgs.khanelinix.dotfiles.outPath + "/dots/shared/home/.config/nvim";
+        # "nvim/".source = pkgs.khanelinix.dotfiles.outPath + "/dots/shared/home/.config/nvim";
+        nvim = {
+          onChange = "${neovim}/bin/nvim --headless +quitall";
+          source = inputs.astronvim;
+        };
         "astronvim/lua/user/".source = pkgs.khanelinix.dotfiles.outPath + "/dots/shared/home/.config/astronvim/lua/user";
       };
 
