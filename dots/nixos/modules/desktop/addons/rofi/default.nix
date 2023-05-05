@@ -19,8 +19,8 @@ in
     environment.systemPackages = with pkgs; [ rofi ];
 
     khanelinix.home = {
-      configFile = {
-        "rofi/".source = inputs.dotfiles.outPath + "/dots/linux/hyprland/home/.config/rofi";
+      configFile = with inputs; {
+        "rofi/".source = dotfiles.outPath + "/dots/linux/hyprland/home/.config/rofi";
       };
     };
   };

@@ -27,12 +27,12 @@ in
       github-desktop
     ];
 
-    khanelinix.home.file = {
-      ".gitconfig".source = inputs.dotfiles.outPath + "/dots/shared/home/.gitconfig";
-      ".gitconfig.functions".source = inputs.dotfiles.outPath + "/dots/shared/home/.gitconfig.functions";
+    khanelinix.home.file = with inputs; {
+      ".gitconfig".source = dotfiles.outPath + "/dots/shared/home/.gitconfig";
+      ".gitconfig.functions".source = dotfiles.outPath + "/dots/shared/home/.gitconfig.functions";
       # TODO: retrieve git secrets/signing information
-      # ".gitconfig.signing".source = inputs.dotfiles.outPath + "/dots/shared/home/.gitconfig.signing"; # TODO: handle secrets
-      ".gitignore_global".source = inputs.dotfiles.outPath + "/dots/shared/home/.gitignore_global";
+      # ".gitconfig.signing".source = dotfiles.outPath + "/dots/shared/home/.gitconfig.signing"; # TODO: handle secrets
+      ".gitignore_global".source = dotfiles.outPath + "/dots/shared/home/.gitignore_global";
       ".gitconfig.local".source = (pkgs.writeTextFile {
         name = ".gitconfig.local";
         text = ''

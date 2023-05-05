@@ -20,8 +20,8 @@ in
     ];
 
     khanelinix.home = {
-      configFile = {
-        "ohmyposh/".source = inputs.dotfiles.outPath + "/dots/shared/home/.config/ohmyposh";
+      configFile = with inputs; {
+        "ohmyposh/".source = dotfiles.outPath + "/dots/shared/home/.config/ohmyposh";
       };
     };
   };

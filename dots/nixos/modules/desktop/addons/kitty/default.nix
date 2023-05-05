@@ -21,8 +21,8 @@ in
     };
 
     khanelinix.home = {
-      configFile = {
-        "kitty/".source = inputs.dotfiles.outPath + "/dots/shared/home/.config/kitty";
+      configFile = with inputs; {
+        "kitty/".source = dotfiles.outPath + "/dots/shared/home/.config/kitty";
       };
     };
   };

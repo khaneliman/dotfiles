@@ -20,8 +20,8 @@ in
     ];
 
     khanelinix.home = {
-      configFile = {
-        "topgrade.toml".source = inputs.dotfiles.outPath + "/dots/shared/home/.config/topgrade.toml";
+      configFile = with inputs; {
+        "topgrade.toml".source = dotfiles.outPath + "/dots/shared/home/.config/topgrade.toml";
       };
     };
   };

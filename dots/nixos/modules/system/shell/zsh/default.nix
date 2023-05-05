@@ -18,17 +18,17 @@ in
     programs.zsh = {
       enable = true;
       # interactiveShellInit = ''
-      #   source ${inputs.dotfiles.outPath}/dots/shared/home/.config/zsh/zshrc
+      #   source ${dotfiles.outPath}/dots/shared/home/.config/zsh/zshrc
       # '';
     };
 
     khanelinix.home = {
-      file = {
-        ".zshrc".source = inputs.dotfiles.outPath + "/dots/shared/home/.zshrc";
-        ".zshenv".source = inputs.dotfiles.outPath + "/dots/shared/home/.zshenv";
-        ".p10k.zsh".source = inputs.dotfiles.outPath + "/dots/shared/home/.p10k.zsh";
-        ".aliases".source = inputs.dotfiles.outPath + "/dots/shared/home/.aliases";
-        ".functions".source = inputs.dotfiles.outPath + "/dots/shared/home/.functions";
+      file = with inputs; {
+        ".zshrc".source = dotfiles.outPath + "/dots/shared/home/.zshrc";
+        ".zshenv".source = dotfiles.outPath + "/dots/shared/home/.zshenv";
+        ".p10k.zsh".source = dotfiles.outPath + "/dots/shared/home/.p10k.zsh";
+        ".aliases".source = dotfiles.outPath + "/dots/shared/home/.aliases";
+        ".functions".source = dotfiles.outPath + "/dots/shared/home/.functions";
       };
     };
   };

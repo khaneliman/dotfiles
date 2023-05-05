@@ -145,9 +145,9 @@
         "imagemagick-6.9.12-68"
       ];
 
-      # devShells = {
-      #   default = inputs.nixpkgs.mkShell {
-      #     packages = [ inputs.nixpkgs.bashInteractive ];
+      # devShells = with inputs; {
+      #   default = nixpkgs.mkShell {
+      #     packages = [ nixpkgs.bashInteractive ];
       #   };
       # };
 

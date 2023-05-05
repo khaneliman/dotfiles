@@ -19,8 +19,8 @@ in
     environment.systemPackages = with pkgs; [ swaynotificationcenter libnotify ];
 
     khanelinix.home = {
-      configFile = {
-        "swaync/".source = inputs.dotfiles.outPath + "/dots/linux/hyprland/home/.config/swaync";
+      configFile = with inputs; {
+        "swaync/".source = dotfiles.outPath + "/dots/linux/hyprland/home/.config/swaync";
       };
     };
   };

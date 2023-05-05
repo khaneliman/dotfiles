@@ -19,8 +19,9 @@ in
     environment.systemPackages = with pkgs; [ wlogout ];
 
     khanelinix.home = {
-      configFile = {
-        "wlogout/".source = inputs.dotfiles.outPath + "/dots/linux/hyprland/home/.config/wlogout";
+      configFile = with inputs; {
+        # TODO: Fix broken in nixos config
+        "wlogout/".source = dotfiles.outPath + "/dots/linux/hyprland/home/.config/wlogout";
       };
     };
   };

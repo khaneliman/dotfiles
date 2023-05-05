@@ -30,15 +30,15 @@ in
     };
 
     khanelinix.home = with pkgs; {
-      configFile = {
+      configFile = with inputs; {
         # "nvim/".source = inputs.dotfiles.outPath + "/dots/shared/home/.config/nvim";
         nvim = {
           onChange = "${neovim}/bin/nvim --headless +quitall";
-          source = inputs.astronvim;
+          source = astronvim;
         };
         # "astronvim/lua/user/".source = inputs.dotfiles.outPath + "/dots/shared/home/.config/astronvim/lua/user";
         "astronvim/lua/user" = {
-          source = inputs.astronvim-user;
+          source = astronvim-user;
         };
       };
 

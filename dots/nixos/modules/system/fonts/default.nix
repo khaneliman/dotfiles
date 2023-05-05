@@ -34,8 +34,8 @@ in
       ]
       ++ cfg.fonts;
 
-    khanelinix.home.file = {
-      ".local/share/fonts/SanFransisco/SF-Mono/".source = inputs.dotfiles.outPath + "/dots/shared/home/.fonts/SanFransisco/SF-Mono";
+    khanelinix.home.file = with inputs; {
+      ".local/share/fonts/SanFransisco/SF-Mono/".source = dotfiles.outPath + "/dots/shared/home/.fonts/SanFransisco/SF-Mono";
     };
   };
 }

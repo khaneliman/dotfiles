@@ -18,8 +18,8 @@ in
     environment.systemPackages = with pkgs; [ nur.repos.vanilla.fastfetch ];
 
     khanelinix.home = {
-      configFile = {
-        "fastfetch/".source = inputs.dotfiles.outPath + "/dots/shared/home/.config/fastfetch";
+      configFile = with inputs;{
+        "fastfetch/".source = dotfiles.outPath + "/dots/shared/home/.config/fastfetch";
       };
       file = {
         ".local/share/fastfetch/presets/local-overrides".source = ./local-overrides;

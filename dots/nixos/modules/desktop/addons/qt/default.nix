@@ -40,13 +40,13 @@ in
     ];
 
     khanelinix.home = {
-      configFile = {
+      configFile = with inputs; {
         # "kvantum/kvantum.kvconfig".source = (pkgs.formats.ini { }).generate "kvantum.kvconfig" {
         #   general.theme = cfg.theme.name;
         # };
-        "Kvantum".source = inputs.dotfiles.outPath + "/dots/linux/hyprland/home/.config/Kvantum/";
-        "qt5ct".source = inputs.dotfiles.outPath + "/dots/linux/hyprland/home/.config/qt5ct/";
-        "qt6ct".source = inputs.dotfiles.outPath + "/dots/linux/hyprland/home/.config/qt6ct/";
+        "Kvantum".source = dotfiles.outPath + "/dots/linux/hyprland/home/.config/Kvantum/";
+        "qt5ct".source = dotfiles.outPath + "/dots/linux/hyprland/home/.config/qt5ct/";
+        "qt6ct".source = dotfiles.outPath + "/dots/linux/hyprland/home/.config/qt6ct/";
       };
     };
 

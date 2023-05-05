@@ -32,16 +32,16 @@ in
   config = mkIf cfg.enable {
     services.gnome.gnome-browser-connector.enable = config.khanelinix.desktop.gnome.enable;
 
-    khanelinix.home = {
+    khanelinix.home = with inputs; {
       file = mkMerge [
         (mkIf config.khanelinix.desktop.gnome.enable {
           ".mozilla/native-messaging-hosts/org.gnome.chrome_gnome_shell.json".source = "${pkgs.chrome-gnome-shell}/lib/mozilla/native-messaging-hosts/org.gnome.chrome_gnome_shell.json";
         })
         {
           ".mozilla/native-messaging-hosts/com.dannyvankooten.browserpass.json".source = "${pkgs.browserpass}/lib/mozilla/native-messaging-hosts/com.dannyvankooten.browserpass.json";
-          ".mozilla/firefox/${config.khanelinix.user.name}/chrome/userChrome.css".source = inputs.dotfiles.outPath + "/dots/shared/home/.mozilla/firefox/khaneliman.default/chrome/userChrome.css";
-          ".mozilla/firefox/${config.khanelinix.user.name}/chrome/img".source = inputs.dotfiles.outPath + "/dots/shared/home/.mozilla/firefox/khaneliman.default/chrome/img/";
-          ".mozilla/firefox/${config.khanelinix.user.name}/user.js".source = inputs.dotfiles.outPath + "/dots/shared/home/.mozilla/firefox/khaneliman.default/user.js";
+          ".mozilla/firefox/${config.khanelinix.user.name}/chrome/userChrome.css".source = dotfiles.outPath + "/dots/shared/home/.mozilla/firefox/khaneliman.default/chrome/userChrome.css";
+          ".mozilla/firefox/${config.khanelinix.user.name}/chrome/img".source = dotfiles.outPath + "/dots/shared/home/.mozilla/firefox/khaneliman.default/chrome/img/";
+          ".mozilla/firefox/${config.khanelinix.user.name}/user.js".source = dotfiles.outPath + "/dots/shared/home/.mozilla/firefox/khaneliman.default/user.js";
         }
       ];
 

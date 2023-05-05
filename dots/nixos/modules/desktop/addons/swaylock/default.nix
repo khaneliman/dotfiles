@@ -20,8 +20,8 @@ in
     security.pam.services.swaylock = { };
 
     khanelinix.home = {
-      configFile = {
-        "swaylock/".source = inputs.dotfiles.outPath + "/dots/linux/hyprland/home/.config/swaylock";
+      configFile = with inputs; {
+        "swaylock/".source = dotfiles.outPath + "/dots/linux/hyprland/home/.config/swaylock";
       };
     };
   };

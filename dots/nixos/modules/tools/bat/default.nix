@@ -20,8 +20,8 @@ in
     ];
 
     khanelinix.home = {
-      configFile = {
-        "bat/".source = inputs.dotfiles.outPath + "/dots/shared/home/.config/bat";
+      configFile = with inputs; {
+        "bat/".source = dotfiles.outPath + "/dots/shared/home/.config/bat";
       };
       extraOptions = {
         home.shellAliases = {

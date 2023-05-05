@@ -19,8 +19,8 @@ in
     environment.systemPackages = with pkgs; [ swayidle ];
 
     khanelinix.home = {
-      configFile = {
-        "swayidle/".source = inputs.dotfiles.outPath + "/dots/linux/hyprland/home/.config/swayidle";
+      configFile = with inputs; {
+        "swayidle/".source = dotfiles.outPath + "/dots/linux/hyprland/home/.config/swayidle";
       };
     };
   };

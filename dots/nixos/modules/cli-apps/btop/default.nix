@@ -18,8 +18,8 @@ in
     environment.systemPackages = with pkgs; [ btop ];
 
     khanelinix.home = {
-      configFile = {
-        "btop/".source = inputs.dotfiles.outPath + "/dots/shared/home/.config/btop";
+      configFile = with inputs; {
+        "btop/".source = dotfiles.outPath + "/dots/shared/home/.config/btop";
       };
     };
   };

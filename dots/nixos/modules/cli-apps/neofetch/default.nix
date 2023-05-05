@@ -18,8 +18,8 @@ in
     environment.systemPackages = with pkgs; [ neofetch ];
 
     khanelinix.home = {
-      configFile = {
-        "neofetch/".source = inputs.dotfiles.outPath + "/dots/shared/home/.config/neofetch";
+      configFile = with inputs; {
+        "neofetch/".source = dotfiles.outPath + "/dots/shared/home/.config/neofetch";
       };
     };
   };
