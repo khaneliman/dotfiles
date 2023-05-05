@@ -17,6 +17,9 @@ in
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       neovim
+      ripgrep
+      gdu
+      bottom
     ];
 
     environment.variables = {

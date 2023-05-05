@@ -47,6 +47,8 @@ in
         cmake = enabled;
         dotnet = enabled;
         fd = enabled;
+        gcc = enabled;
+        gxx = enabled;
         git = enabled;
         git-crypt = enabled;
         gnumake = enabled;
