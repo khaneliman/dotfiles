@@ -50,6 +50,8 @@ node_modules
 !/dots/shared/home/.config/fish/functions/mvcd.fish
 !/dots/shared/home/.config/fish/functions/ranger.fish
 !/dots/shared/home/.config/fish/functions/fetch.fish
+!/dots/shared/home/.config/fish/functions/nixify.fish
+!/dots/shared/home/.config/fish/functions/flakify.fish
 /dots/shared/home/.config/fish/fish_variables
 /dots/shared/home/.config/fish/conf.d/
 !/dots/shared/home/.config/fish/conf.d/tide.fish
