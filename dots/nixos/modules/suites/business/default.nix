@@ -19,6 +19,7 @@ in
         apps = {
           thunderbird = enabled;
           teams = enabled;
+          libreoffice = enabled;
         };
       };
     };
