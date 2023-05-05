@@ -93,6 +93,7 @@
     # hyprland
     hyprland.url = "github:hyprwm/Hyprland";
 
+    # Hyprland user contributions flake
     hyprland-contrib = {
       url = "github:hyprwm/contrib";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -109,8 +110,15 @@
     devshell.url = "github:numtide/devshell";
     # flake-utils.url = "github:numtide/flake-utils";
 
+    # Astronvim repo
     astronvim = {
       url = "github:AstroNvim/AstroNvim/nightly";
+      flake = false;
+    };
+
+    # Personal astronvim configuration
+    astronvim-user = {
+      url = "github:khaneliman/astronvim";
       flake = false;
     };
   };

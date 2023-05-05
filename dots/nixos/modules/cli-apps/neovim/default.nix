@@ -33,7 +33,10 @@ in
           onChange = "${neovim}/bin/nvim --headless +quitall";
           source = inputs.astronvim;
         };
-        "astronvim/lua/user/".source = pkgs.khanelinix.dotfiles.outPath + "/dots/shared/home/.config/astronvim/lua/user";
+        # "astronvim/lua/user/".source = pkgs.khanelinix.dotfiles.outPath + "/dots/shared/home/.config/astronvim/lua/user";
+        "astronvim/lua/user" = {
+          source = inputs.astronvim-user;
+        };
       };
 
       extraOptions = {
