@@ -15,6 +15,7 @@ shared_backup_existing() {
 	backup_files "$HOME"/.config/astronvim "$BACKUP_LOCATION"/.config/
 	backup_files "$HOME"/.config/bat "$BACKUP_LOCATION"/.config/
 	backup_files "$HOME"/.config/btop "$BACKUP_LOCATION"/.config/
+	backup_files "$HOME"/.config/cava "$BACKUP_LOCATION"/.config/
 	backup_files "$HOME"/.config/davmail "$BACKUP_LOCATION"/.config/
 	backup_files "$HOME"/.config/fastfetch "$BACKUP_LOCATION"/.config/
 	backup_files "$HOME"/.config/fish "$BACKUP_LOCATION"/.config/
@@ -199,6 +200,7 @@ shared_copy_configuration() {
 	link_locations "$SHARED_HOME"/.config/astronvim/lua/user "$HOME"/.config/nvim/lua/user
 	link_locations "$SHARED_HOME"/.config/bat "$HOME"/.config/bat
 	link_locations "$SHARED_HOME"/.config/btop "$HOME"/.config/btop
+	link_locations "$SHARED_HOME"/.config/cava/config "$HOME"/.config/cava/config
 	link_locations "$SHARED_HOME"/.config/davmail "$HOME"/.config/davmail
 	link_locations "$SHARED_HOME"/.config/fastfetch "$HOME"/.config/fastfetch
 	link_locations "$SHARED_HOME"/.config/fish "$HOME"/.config/fish
