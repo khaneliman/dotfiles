@@ -27,7 +27,7 @@ in {
 
     khanelinix.home = {
       configFile = {
-        "micro/".source = pkgs.khanelinix.dotfiles.outPath + "/dots/shared/home/.config/micro";
+        "micro/".source = inputs.dotfiles.outPath + "/dots/shared/home/.config/micro";
       };
 
       extraOptions = {

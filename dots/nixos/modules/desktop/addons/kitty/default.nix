@@ -1,14 +1,15 @@
-{
-  options,
-  config,
-  lib,
-  pkgs,
-  ...
+{ options
+, config
+, lib
+, pkgs
+, inputs
+, ...
 }:
 with lib;
 with lib.internal; let
   cfg = config.khanelinix.desktop.addons.kitty;
-in {
+in
+{
   options.khanelinix.desktop.addons.kitty = with types; {
     enable = mkBoolOpt false "Whether to enable kitty.";
   };
@@ -21,7 +22,7 @@ in {
 
     khanelinix.home = {
       configFile = {
-        "kitty/".source = pkgs.khanelinix.dotfiles.outPath + "/dots/shared/home/.config/kitty";
+        "kitty/".source = inputs.dotfiles.outPath + "/dots/shared/home/.config/kitty";
       };
     };
   };

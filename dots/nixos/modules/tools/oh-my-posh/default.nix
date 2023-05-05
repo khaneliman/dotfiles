@@ -1,14 +1,15 @@
-{
-  options,
-  config,
-  lib,
-  pkgs,
-  ...
+{ options
+, config
+, lib
+, pkgs
+, inputs
+, ...
 }:
 with lib;
 with lib.internal; let
   cfg = config.khanelinix.tools.oh-my-posh;
-in {
+in
+{
   options.khanelinix.tools.oh-my-posh = with types; {
     enable = mkBoolOpt false "Whether or not to enable oh-my-posh.";
   };
@@ -20,7 +21,7 @@ in {
 
     khanelinix.home = {
       configFile = {
-        "ohmyposh/".source = pkgs.khanelinix.dotfiles.outPath + "/dots/shared/home/.config/ohmyposh";
+        "ohmyposh/".source = inputs.dotfiles.outPath + "/dots/shared/home/.config/ohmyposh";
       };
     };
   };

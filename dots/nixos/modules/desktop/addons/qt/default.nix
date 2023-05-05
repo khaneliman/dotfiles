@@ -2,6 +2,7 @@
 , config
 , lib
 , pkgs
+, inputs
 , ...
 }:
 with lib;
@@ -43,9 +44,9 @@ in
         # "kvantum/kvantum.kvconfig".source = (pkgs.formats.ini { }).generate "kvantum.kvconfig" {
         #   general.theme = cfg.theme.name;
         # };
-        "Kvantum".source = pkgs.khanelinix.dotfiles.outPath + "/dots/linux/hyprland/home/.config/Kvantum/";
-        "qt5ct".source = pkgs.khanelinix.dotfiles.outPath + "/dots/linux/hyprland/home/.config/qt5ct/";
-        "qt6ct".source = pkgs.khanelinix.dotfiles.outPath + "/dots/linux/hyprland/home/.config/qt6ct/";
+        "Kvantum".source = inputs.dotfiles.outPath + "/dots/linux/hyprland/home/.config/Kvantum/";
+        "qt5ct".source = inputs.dotfiles.outPath + "/dots/linux/hyprland/home/.config/qt5ct/";
+        "qt6ct".source = inputs.dotfiles.outPath + "/dots/linux/hyprland/home/.config/qt6ct/";
       };
     };
 

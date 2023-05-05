@@ -2,6 +2,7 @@
 , config
 , lib
 , pkgs
+, inputs
 , ...
 }:
 with lib;
@@ -38,9 +39,9 @@ in
         })
         {
           ".mozilla/native-messaging-hosts/com.dannyvankooten.browserpass.json".source = "${pkgs.browserpass}/lib/mozilla/native-messaging-hosts/com.dannyvankooten.browserpass.json";
-          ".mozilla/firefox/${config.khanelinix.user.name}/chrome/userChrome.css".source = pkgs.khanelinix.dotfiles.outPath + "/dots/shared/home/.mozilla/firefox/khaneliman.default/chrome/userChrome.css";
-          ".mozilla/firefox/${config.khanelinix.user.name}/chrome/img".source = pkgs.khanelinix.dotfiles.outPath + "/dots/shared/home/.mozilla/firefox/khaneliman.default/chrome/img/";
-          ".mozilla/firefox/${config.khanelinix.user.name}/user.js".source = pkgs.khanelinix.dotfiles.outPath + "/dots/shared/home/.mozilla/firefox/khaneliman.default/user.js";
+          ".mozilla/firefox/${config.khanelinix.user.name}/chrome/userChrome.css".source = inputs.dotfiles.outPath + "/dots/shared/home/.mozilla/firefox/khaneliman.default/chrome/userChrome.css";
+          ".mozilla/firefox/${config.khanelinix.user.name}/chrome/img".source = inputs.dotfiles.outPath + "/dots/shared/home/.mozilla/firefox/khaneliman.default/chrome/img/";
+          ".mozilla/firefox/${config.khanelinix.user.name}/user.js".source = inputs.dotfiles.outPath + "/dots/shared/home/.mozilla/firefox/khaneliman.default/user.js";
         }
       ];
 

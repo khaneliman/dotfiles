@@ -2,6 +2,7 @@
 , config
 , lib
 , pkgs
+, inputs
 , ...
 }:
 with lib;
@@ -20,7 +21,7 @@ in
 
     khanelinix.home = {
       configFile = {
-        "swaylock/".source = pkgs.khanelinix.dotfiles.outPath + "/dots/linux/hyprland/home/.config/swaylock";
+        "swaylock/".source = inputs.dotfiles.outPath + "/dots/linux/hyprland/home/.config/swaylock";
       };
     };
   };

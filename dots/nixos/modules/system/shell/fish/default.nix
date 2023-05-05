@@ -8,7 +8,7 @@
 with lib;
 with lib.internal; let
   cfg = config.khanelinix.system.shell.fish;
-  fishBasePath = pkgs.khanelinix.dotfiles.outPath + "/dots/shared/home/.config/fish/";
+  fishBasePath = inputs.dotfiles.outPath + "/dots/shared/home/.config/fish/";
 in
 {
   options.khanelinix.system.shell.fish = with types; {

@@ -2,6 +2,7 @@
 , config
 , lib
 , pkgs
+, inputs
 , ...
 }:
 with lib;
@@ -20,7 +21,7 @@ in
 
     khanelinix.home = {
       configFile = {
-        "bat/".source = pkgs.khanelinix.dotfiles.outPath + "/dots/shared/home/.config/bat";
+        "bat/".source = inputs.dotfiles.outPath + "/dots/shared/home/.config/bat";
       };
       extraOptions = {
         home.shellAliases = {

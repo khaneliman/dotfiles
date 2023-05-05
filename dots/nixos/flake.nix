@@ -121,6 +121,12 @@
       url = "github:khaneliman/astronvim";
       flake = false;
     };
+
+    # Personal dotfiles configuration
+    dotfiles = {
+      url = "github:khaneliman/dotfiles";
+      flake = false;
+    };
   };
 
   outputs = inputs:
@@ -138,6 +144,12 @@
       channels-config.permittedInsecurePackages = [
         "imagemagick-6.9.12-68"
       ];
+
+      # devShells = {
+      #   default = inputs.nixpkgs.mkShell {
+      #     packages = [ inputs.nixpkgs.bashInteractive ];
+      #   };
+      # };
 
       # overlays from inputs
       overlays = with inputs; [

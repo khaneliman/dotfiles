@@ -2,6 +2,7 @@
 , config
 , pkgs
 , lib
+, inputs
 , ...
 }:
 with lib;
@@ -27,11 +28,11 @@ in
     ];
 
     khanelinix.home.file = {
-      ".gitconfig".source = pkgs.khanelinix.dotfiles.outPath + "/dots/shared/home/.gitconfig";
-      ".gitconfig.functions".source = pkgs.khanelinix.dotfiles.outPath + "/dots/shared/home/.gitconfig.functions";
+      ".gitconfig".source = inputs.dotfiles.outPath + "/dots/shared/home/.gitconfig";
+      ".gitconfig.functions".source = inputs.dotfiles.outPath + "/dots/shared/home/.gitconfig.functions";
       # TODO: retrieve git secrets/signing information
-      # ".gitconfig.signing".source = pkgs.khanelinix.dotfiles.outPath + "/dots/shared/home/.gitconfig.signing"; # TODO: handle secrets
-      ".gitignore_global".source = pkgs.khanelinix.dotfiles.outPath + "/dots/shared/home/.gitignore_global";
+      # ".gitconfig.signing".source = inputs.dotfiles.outPath + "/dots/shared/home/.gitconfig.signing"; # TODO: handle secrets
+      ".gitignore_global".source = inputs.dotfiles.outPath + "/dots/shared/home/.gitignore_global";
       ".gitconfig.local".source = (pkgs.writeTextFile {
         name = ".gitconfig.local";
         text = ''

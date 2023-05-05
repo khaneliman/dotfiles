@@ -207,6 +207,22 @@
         "type": "github"
       }
     },
+    "dotfiles": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1683309410,
+        "narHash": "sha256-Z07up/vZ1A5hFDEjnBlg6hcPKE480IUer+r6i97Plds=",
+        "owner": "khaneliman",
+        "repo": "dotfiles",
+        "rev": "57e30bb697e81cacc12f370e49b57867bef8118e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "khaneliman",
+        "repo": "dotfiles",
+        "type": "github"
+      }
+    },
     "flake": {
       "inputs": {
         "flake-compat": "flake-compat_5",
@@ -932,6 +948,7 @@
         "devshell": "devshell",
         "discord-nord-theme": "discord-nord-theme",
         "discord-tweaks": "discord-tweaks",
+        "dotfiles": "dotfiles",
         "flake": "flake",
         "gpg-base-conf": "gpg-base-conf",
         "home-manager": "home-manager",

@@ -26,7 +26,7 @@ in {
 
     # khanelinix.home = {
     #   configFile = {
-    #     "helix/".source = pkgs.khanelinix.dotfiles.outPath + "/dots/shared/home/.config/helix";
+    #     "helix/".source = inputs.dotfiles.outPath + "/dots/shared/home/.config/helix";
     #   };
 
     #   extraOptions = {

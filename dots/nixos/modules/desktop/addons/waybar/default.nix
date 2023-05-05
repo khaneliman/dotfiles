@@ -2,6 +2,7 @@
 , config
 , lib
 , pkgs
+, inputs
 , ...
 }:
 with lib;
@@ -26,16 +27,16 @@ in
         "waybar/style.css".source = ./sway/style.css;
       })
       (mkIf config.khanelinix.desktop.hyprland.enable {
-        "waybar/scripts".source = pkgs.khanelinix.dotfiles.outPath + "/dots/linux/hyprland/home/.config/waybar/scripts";
+        "waybar/scripts".source = inputs.dotfiles.outPath + "/dots/linux/hyprland/home/.config/waybar/scripts";
         "waybar/default-modules.jsonc".source = ./hyprland/default-modules.jsonc;
         "waybar/config.jsonc".source = ./hyprland/config.jsonc;
-        "waybar/macchiato.css".source = pkgs.khanelinix.dotfiles.outPath + "/dots/linux/hyprland/home/.config/waybar/macchiato.css";
-        "waybar/style.css".source = pkgs.khanelinix.dotfiles.outPath + "/dots/linux/hyprland/home/.config/waybar/style.css";
+        "waybar/macchiato.css".source = inputs.dotfiles.outPath + "/dots/linux/hyprland/home/.config/waybar/macchiato.css";
+        "waybar/style.css".source = inputs.dotfiles.outPath + "/dots/linux/hyprland/home/.config/waybar/style.css";
       })
     ];
 
     khanelinix.home.file = {
-      # "weather_config.json".source = pkgs.khanelinix.dotfiles.outPath + "/dots/shared/home/weather_config.json";
+      # "weather_config.json".source = inputs.dotfiles.outPath + "/dots/shared/home/weather_config.json";
     };
   };
 }

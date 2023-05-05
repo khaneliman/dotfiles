@@ -2,6 +2,7 @@
 , config
 , pkgs
 , lib
+, inputs
 , ...
 }:
 with lib;
@@ -34,7 +35,7 @@ in
       ++ cfg.fonts;
 
     khanelinix.home.file = {
-      ".local/share/fonts/SanFransisco/SF-Mono/".source = pkgs.khanelinix.dotfiles.outPath + "/dots/shared/home/.fonts/SanFransisco/SF-Mono";
+      ".local/share/fonts/SanFransisco/SF-Mono/".source = inputs.dotfiles.outPath + "/dots/shared/home/.fonts/SanFransisco/SF-Mono";
     };
   };
 }

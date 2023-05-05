@@ -1,14 +1,15 @@
-{
-  options,
-  config,
-  lib,
-  pkgs,
-  ...
+{ options
+, config
+, lib
+, pkgs
+, inputs
+, ...
 }:
 with lib;
 with lib.internal; let
   cfg = config.khanelinix.desktop.addons.alacritty;
-in {
+in
+{
   options.khanelinix.desktop.addons.alacritty = with types; {
     enable = mkBoolOpt false "Whether to enable alacritty.";
   };
@@ -21,7 +22,7 @@ in {
 
     khanelinix.home = {
       configFile = {
-        "alacritty/".source = pkgs.khanelinix.dotfiles.outPath + "/dots/shared/home/.config/alacritty";
+        "alacritty/".source = inputs.dotfiles.outPath + "/dots/shared/home/.config/alacritty";
       };
     };
   };

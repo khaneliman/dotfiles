@@ -9,7 +9,7 @@ with lib;
 with lib.internal; let
   cfg = config.khanelinix.desktop.hyprland;
   term = config.khanelinix.desktop.addons.term;
-  hyprBasePath = pkgs.khanelinix.dotfiles.outPath + "/dots/linux/hyprland/home/.config/hypr/";
+  hyprBasePath = inputs.dotfiles.outPath + "/dots/linux/hyprland/home/.config/hypr/";
   user = config.users.users.${config.khanelinix.user.name};
 in
 {
@@ -57,16 +57,16 @@ in
         "hypr/polish.conf".source = ./hypr/polish.conf;
         "hypr/variables.conf".source = hyprBasePath + "variables.conf";
         "hypr/windowrules.conf".source = hyprBasePath + "windowrules.conf";
-        "mimeapps.list".source = pkgs.khanelinix.dotfiles.outPath + "/dots/linux/hyprland/home/.config/mimeapps.list";
+        "mimeapps.list".source = inputs.dotfiles.outPath + "/dots/linux/hyprland/home/.config/mimeapps.list";
       }
       // cfg.customConfigFiles;
 
     khanelinix.home.file = {
-      ".local/bin/xdg-desktop-portal.sh".source = pkgs.khanelinix.dotfiles.outPath + "/dots/linux/hyprland/home/.local/bin/xdg-desktop-portal.sh";
-      ".local/bin/hyprland_setup_dual_monitors.sh".source = pkgs.khanelinix.dotfiles.outPath + "/dots/linux/hyprland/home/.local/bin/hyprland_setup_dual_monitors.sh";
-      ".local/bin/hyprland_cleanup_after_startup.sh".source = pkgs.khanelinix.dotfiles.outPath + "/dots/linux/hyprland/home/.local/bin/hyprland_cleanup_after_startup.sh";
-      ".local/bin/hyprland_handle_monitor_connect.sh".source = pkgs.khanelinix.dotfiles.outPath + "/dots/linux/hyprland/home/.local/bin/hyprland_handle_monitor_connect.sh";
-      ".local/bin/record_screen".source = pkgs.khanelinix.dotfiles.outPath + "/dots/linux/hyprland/home/.local/bin/record_screen";
+      ".local/bin/xdg-desktop-portal.sh".source = inputs.dotfiles.outPath + "/dots/linux/hyprland/home/.local/bin/xdg-desktop-portal.sh";
+      ".local/bin/hyprland_setup_dual_monitors.sh".source = inputs.dotfiles.outPath + "/dots/linux/hyprland/home/.local/bin/hyprland_setup_dual_monitors.sh";
+      ".local/bin/hyprland_cleanup_after_startup.sh".source = inputs.dotfiles.outPath + "/dots/linux/hyprland/home/.local/bin/hyprland_cleanup_after_startup.sh";
+      ".local/bin/hyprland_handle_monitor_connect.sh".source = inputs.dotfiles.outPath + "/dots/linux/hyprland/home/.local/bin/hyprland_handle_monitor_connect.sh";
+      ".local/bin/record_screen".source = inputs.dotfiles.outPath + "/dots/linux/hyprland/home/.local/bin/record_screen";
     };
 
     programs.hyprland = {
