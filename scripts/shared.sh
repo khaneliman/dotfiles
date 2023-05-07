@@ -50,6 +50,8 @@ shared_backup_existing() {
 	git_crypt_check && backup_files "$HOME"/.wegorc "$BACKUP_LOCATION"
 	git_crypt_check && backup_files "$HOME"/weather_url "$BACKUP_LOCATION"
 	git_crypt_check && backup_files "$HOME"/wttr_location "$BACKUP_LOCATION"
+	git_crypt_check && backup_files "$HOME"/.config/gh "$BACKUP_LOCATION"/.config/
+	git_crypt_check && backup_files "$HOME"/.config/github-copilot "$BACKUP_LOCATION"/.config/
 }
 
 correct_ssh_permissions() {
@@ -235,6 +237,8 @@ shared_copy_configuration() {
 	git_crypt_check && link_locations "$SHARED_HOME"/weather_url "$HOME"/weather_url
 	git_crypt_check && link_locations "$SHARED_HOME"/wttr_location "$HOME"/wttr_location
 	git_crypt_check && link_locations "$SHARED_HOME"/.config/nix/nix.conf "$HOME"/.config/nix/nix.conf
+	git_crypt_check && link_locations "$SHARED_HOME"/.config/gh "$HOME"/.config/gh
+	git_crypt_check && link_locations "$SHARED_HOME"/.config/github-copilot "$HOME"/.config/github-copilot
 
 	# copy files that dont replace contents of location
 	copy_files "$SHARED_HOME"/.fonts/ "$HOME"/.fonts/

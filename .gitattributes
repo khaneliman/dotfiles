@@ -11,6 +11,8 @@ dots/shared/home/.ssh/** filter=git-crypt diff=git-crypt
 dots/shared/home/.gnupg/** filter=git-crypt diff=git-crypt
 dots/shared/home/.config/davmail/** filter=git-crypt diff=git-crypt
 dots/shared/home/.config/nix/nix.conf filter=git-crypt diff=git-crypt
+dots/shared/home/.config/gh/** filter=git-crypt diff=git-crypt
+dots/shared/home/.config/github-copilot/** filter=git-crypt diff=git-crypt
 
 dots/server/docker/secrets.env filter=git-crypt diff=git-crypt
 
