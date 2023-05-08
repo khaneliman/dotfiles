@@ -29,6 +29,7 @@ with lib.internal; {
         enable = true;
 
         customConfigFiles = {
+          "hypr/displays.conf".source = ./hypr/displays.conf;
           "hypr/environment.conf".source = ./hypr/environment.conf;
         };
       };
