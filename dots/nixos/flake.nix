@@ -44,6 +44,39 @@
     nix-ld.url = "github:Mic92/nix-ld";
     nix-ld.inputs.nixpkgs.follows = "nixpkgs";
 
+    # Personal astronvim configuration
+    astronvim-user = {
+      url = "github:khaneliman/astronvim";
+      flake = false;
+    };
+
+    # Personal dotfiles configuration
+    dotfiles = {
+      url = "github:khaneliman/dotfiles";
+      flake = false;
+    };
+
+    # hyprland
+    hyprland.url = "github:hyprwm/Hyprland";
+
+    # Hyprland user contributions flake
+    hyprland-contrib = {
+      url = "github:hyprwm/contrib";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # Catppuccin cursors
+    catppuccin-cursors = {
+      url = "github:catppuccin/cursors";
+      flake = false;
+    };
+
+    # Astronvim repo
+    astronvim = {
+      url = "github:AstroNvim/AstroNvim/nightly";
+      flake = false;
+    };
+
     # Discord Replugged
     replugged.url = "github:LunNova/replugged-nix-flake";
     replugged.inputs.nixpkgs.follows = "nixpkgs";
@@ -84,49 +117,19 @@
       flake = false;
     };
 
-    # Catppuccin cursors
-    catppuccin-cursors = {
-      url = "github:catppuccin/cursors";
-      flake = false;
-    };
+    # rust overlay
+    rustup-overlay.url = "github:oxalica/rust-overlay";
 
-    # hyprland
-    hyprland.url = "github:hyprwm/Hyprland";
-
-    # Hyprland user contributions flake
-    hyprland-contrib = {
-      url = "github:hyprwm/contrib";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # TODO: utilize these 
 
     # Neovim
     # neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
 
-    # rust overlay
-    rustup-overlay.url = "github:oxalica/rust-overlay";
-
     sops-nix.url = "github:Mic92/sops-nix";
 
+    agenix.url = "github:ryantm/agenix";
+
     devshell.url = "github:numtide/devshell";
-    # flake-utils.url = "github:numtide/flake-utils";
-
-    # Astronvim repo
-    astronvim = {
-      url = "github:AstroNvim/AstroNvim/nightly";
-      flake = false;
-    };
-
-    # Personal astronvim configuration
-    astronvim-user = {
-      url = "github:khaneliman/astronvim";
-      flake = false;
-    };
-
-    # Personal dotfiles configuration
-    dotfiles = {
-      url = "github:khaneliman/dotfiles";
-      flake = false;
-    };
   };
 
   outputs = inputs:
@@ -145,6 +148,7 @@
         "imagemagick-6.9.12-68"
       ];
 
+      #TODO: implement proper devshell
       # devShells = with inputs; {
       #   default = nixpkgs.mkShell {
       #     packages = [ nixpkgs.bashInteractive ];
@@ -169,6 +173,7 @@
         nix-ld.nixosModules.nix-ld
         hyprland.nixosModules.default
         sops-nix.nixosModules.sops
+        agenix.nixosModules.default
       ];
 
       deploy = lib.mkDeploy { inherit (inputs) self; };

@@ -12,6 +12,7 @@ with lib.internal; {
 
     archetypes = {
       gaming = enabled;
+      personal = enabled;
       workstation = enabled;
     };
 
