@@ -58,6 +58,7 @@
 
     # hyprland
     hyprland.url = "github:hyprwm/Hyprland";
+    hyprland.inputs.nixpkgs.follows = "nixpkgs";
 
     # Hyprland user contributions flake
     hyprland-contrib = {
@@ -119,6 +120,8 @@
 
     # rust overlay
     rustup-overlay.url = "github:oxalica/rust-overlay";
+    rustup-overlay.inputs.nixpkgs.follows = "nixpkgs";
+
 
     # TODO: utilize these 
 
@@ -126,10 +129,14 @@
     # neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
 
     sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
 
     agenix.url = "github:ryantm/agenix";
+    agenix.inputs.nixpkgs.follows = "nixpkgs";
 
     devshell.url = "github:numtide/devshell";
+    devshell.inputs.nixpkgs.follows = "nixpkgs";
+
   };
 
   outputs = inputs:
