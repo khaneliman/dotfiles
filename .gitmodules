@@ -33,3 +33,6 @@
 	path = dots/shared/home/.oh-my-bash
 	url = https://github.com/ohmybash/oh-my-bash.git
 
+[submodule "dots/nixos"]
+	path = dots/nixos
+	url = https://github.com/khaneliman/nixos-config
