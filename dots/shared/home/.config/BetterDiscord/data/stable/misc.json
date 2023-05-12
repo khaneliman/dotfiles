@@ -1,8 +1,9 @@
 {
-    "version": "1.9.2",
-    "drawerStates": {
-        "settings": {
-            "customcss": true
-        }
+  "version": "1.9.2",
+  "emoteVersion": "v1.5.3",
+  "drawerStates": {
+    "settings": {
+      "customcss": true
     }
+  }
 }

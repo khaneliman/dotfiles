@@ -94,7 +94,7 @@ mac_copy_configuration() {
 	link_locations "$MAC_HOME"/.config/sketchybar "$HOME"/.config/sketchybar
 	link_locations "$MAC_HOME"/.config/skhd "$HOME"/.config/skhd
 	link_locations "$MAC_HOME"/.config/yabai "$HOME"/.config/yabai
-	link_locations "$MAC_HOME"/.config/BetterDiscord "$HOME/Library/Application Support/BetterDiscord"
+	link_locations "$HOME"/.config/BetterDiscord "$HOME/Library/Application Support/BetterDiscord"
 
 	link_locations "$MAC_HOME"/.local/bin/helper "$HOME"/.local/bin/helper
 	link_locations "$MAC_HOME"/.local/share/fastfetch/presets/local-overrides "$HOME"/.local/share/fastfetch/presets/local-overrides
