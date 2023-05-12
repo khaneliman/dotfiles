@@ -1,1 +1,0 @@
-KERNEL=="i2c-[0-99]*", GROUP="i2c", TAG+="uaccess", MODE="0666"

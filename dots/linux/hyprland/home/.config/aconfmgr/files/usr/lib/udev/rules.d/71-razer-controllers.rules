@@ -1,5 +1,0 @@
-# Razer Raiju PS4 Controller
-KERNEL=="hidraw*", ATTRS{idVendor}=="1532", ATTRS{idProduct}=="1000", MODE="0660", TAG+="uaccess"
-
-# Razer Panthera Arcade Stick
-KERNEL=="hidraw*", ATTRS{idVendor}=="1532", ATTRS{idProduct}=="0401", MODE="0660", TAG+="uaccess"

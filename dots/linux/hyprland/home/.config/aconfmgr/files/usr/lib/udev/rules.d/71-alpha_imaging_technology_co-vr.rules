@@ -1,2 +1,0 @@
-# Alpha Imaging Technology Corp.
-KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="114d", ATTRS{idProduct}=="8a12", TAG+="uaccess"
