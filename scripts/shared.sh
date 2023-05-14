@@ -28,6 +28,7 @@ shared_backup_existing() {
 	backup_files "$HOME"/.config/spicetify "$BACKUP_LOCATION"/.config/
 	backup_files "$HOME"/.config/topgrade.toml "$BACKUP_LOCATION"/.config/
 	backup_files "$HOME"/.config/nix "$BACKUP_LOCATION"/.config/
+	backup_files "$HOME"/.config/tmux "$BACKUP_LOCATION"/.config/
 
 	backup_files "$HOME"/.mozilla "$BACKUP_LOCATION"/
 	backup_files "$HOME"/.oh-my-bash "$BACKUP_LOCATION"/
@@ -212,6 +213,7 @@ shared_copy_configuration() {
 	link_locations "$SHARED_HOME"/.config/ranger "$HOME"/.config/ranger
 	link_locations "$SHARED_HOME"/.config/spicetify "$HOME"/.config/spicetify
 	link_locations "$SHARED_HOME"/.config/topgrade.toml "$HOME"/.config/topgrade.toml
+	link_locations "$SHARED_HOME"/.config/tmux "$HOME"/.config/tmux
 
 	link_locations "$SHARED_HOME"/.oh-my-bash "$HOME"/.oh-my-bash
 	link_locations "$SHARED_HOME"/.oh-my-bash-custom/themes/powerlevel10k "$HOME"/.oh-my-bash/custom/themes/powerlevel10k
