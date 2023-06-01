@@ -68,4 +68,6 @@ else
   [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 fi
 
+if [ "$TMUX" = "" ]; then command -v tmux && tmux; fi
+
 fastfetch

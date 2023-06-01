@@ -57,5 +57,9 @@ end
 
 # Fetch on terminal open
 if status is-interactive
+    if [ "$TMUX" = "" ];
+        command -v tmux && tmux
+    end
+
     fastfetch 
 end

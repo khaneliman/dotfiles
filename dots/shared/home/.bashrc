@@ -83,4 +83,6 @@ plugins=(
 	nvm
 )
 
+if [ "$TMUX" = "" ]; then command -v tmux && tmux; fi
+
 fastfetch
