@@ -56,6 +56,7 @@ alias wlon='rfkill unblock wlan' # Unblock wlan, start wifi connection
 [ $(command -v topgrade) ] && alias upd="topgrade $argv"
 [ $(command -v lazygit) ] && alias lg="lazygit $argv"
 [ $(command -v update-grub) ] && alias grubup="sudo update-grub"
+[ $(command -v cava) ] && alias cava="TERM=st-256color cava"
 
 # #
 # MacOS aliases
