@@ -30,8 +30,8 @@ There's the basic configuration of sketchybar, yabai, and skhd with application 
 - Enable and start primary applications for the theme
 
 ```bash
- brew services start skhd
- brew services start yabai
+ skhd --start-service
+ yabai --start-service
  brew services start sketchybar
 ```
 

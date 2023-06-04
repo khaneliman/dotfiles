@@ -113,7 +113,7 @@ Current window manager is used on my laptop. Uses [sketchybar](https://github.co
 
 See the install steps in Windows config's [README](/dots/windows/komorebi/README.md)
 
-Current window manager [Komorebi](https://github.com/LGUG2Z/komorebi) with [AutoHotkey](https://github.com/AutoHotkey/AutoHotkey) for key binds and configuring Komorebi.
+Current window manager [Komorebi](https://github.com/LGUG2Z/komorebi) with [whkd](https://github.com/LGUG2Z/whkd) for key binds and configuring Komorebi.
 
 ![windows-komorebi-tiling](assets/windows/komorebi/tiling.png)
 ![windows-komorebi-tiling](assets/windows/komorebi/tiling-arch.png)

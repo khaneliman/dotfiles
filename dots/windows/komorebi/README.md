@@ -118,8 +118,7 @@ $winget_apps = @(
         'HeroicGamesLauncher.HeroicGamesLauncher',
         'StartIsBack.StartAllBack',
         'LGUG2Z.komorebi',
-        'AutoHotkey.AutoHotkey',
-        'Lexikos.AutoHotkey',
+        'LGUG2Z.whkd',
         'Alacritty.Alacritty'
     )
 
