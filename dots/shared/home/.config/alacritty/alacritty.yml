@@ -83,21 +83,21 @@ window:
   # instance: Alacritty
   # General application class
   # general: Alacritty
-# GTK theme variant (Linux/BSD only)
-#
-# Override the variant of the GTK theme. Commonly supported values are `dark`
-# and `light`. Set this to `None` to use the default theme variant.
-# gtk_theme_variant: None
+  # GTK theme variant (Linux/BSD only)
+  #
+  # Override the variant of the GTK theme. Commonly supported values are `dark`
+  # and `light`. Set this to `None` to use the default theme variant.
+  # gtk_theme_variant: None
 
-# scrolling:
-# Maximum number of lines in the scrollback buffer.
-# Specifying '0' will disable scrolling.
-# history: 10000
+  # scrolling:
+  # Maximum number of lines in the scrollback buffer.
+  # Specifying '0' will disable scrolling.
+  # history: 10000
 
-# Scrolling distance multiplier.
-# multiplier: 3
+  # Scrolling distance multiplier.
+  # multiplier: 3
 
-# Font configuration
+  # Font configuration
 font:
   # Normal (roman) font face
   normal:
@@ -110,7 +110,7 @@ font:
     family: Liga SFMono Nerd Font
     # The `style` can be specified to pick a specific face.
     # style: Regular
-  # Bold font face
+    # Bold font face
   bold:
     # Font family
     #
@@ -156,11 +156,12 @@ font:
     # Thin strokes are suitable for retina displays, but for non-retina screens
     # it is recommended to set `use_thin_strokes` to `false`.
     # use_thin_strokes: true
-# If `true`, bold text is drawn using the bright color variants.
-# draw_bold_text_with_bright_colors: false
+    # If `true`, bold text is drawn using the bright color variants.
+    # draw_bold_text_with_bright_colors: false
 color_schemes:
   latte: &latte
-    primary: # Default colors
+    primary:
+      # Default colors
       background: "#EFF1F5" # base
       foreground: "#4C4F69" # text
       # Bright and dim foreground colors
@@ -230,7 +231,8 @@ color_schemes:
       - { index: 16, color: "#FE640B" }
       - { index: 17, color: "#DC8A78" }
   frappe: &frappe
-    primary: # Default colors
+    primary:
+      # Default colors
       background: "#303446" # base
       foreground: "#C6D0F5" # text
       # Bright and dim foreground colors
@@ -300,7 +302,8 @@ color_schemes:
       - { index: 16, color: "#EF9F76" }
       - { index: 17, color: "#F2D5CF" }
   macchiato: &macchiato
-    primary: # Default colors
+    primary:
+      # Default colors
       background: "#24273A" # base
       foreground: "#CAD3F5" # text
       # Bright and dim foreground colors
@@ -370,7 +373,8 @@ color_schemes:
       - { index: 16, color: "#F5A97F" }
       - { index: 17, color: "#F4DBD6" }
   mocha: &mocha
-    primary: # Default colors
+    primary:
+      # Default colors
       background: "#1E1E2E" # base
       foreground: "#CDD6F4" # text
       # Bright and dim foreground colors
@@ -465,42 +469,43 @@ cursor:
     #
     # See `cursor.style` for available options.
     # vi_mode_style: None
-# Cursor blinking interval in milliseconds.
-# blink_interval: 750
+    # Cursor blinking interval in milliseconds.
+    # blink_interval: 750
 
-# If this is `true`, the cursor will be rendered as a hollow box when the
-# window is not focused.
-# unfocused_hollow: true
+    # If this is `true`, the cursor will be rendered as a hollow box when the
+    # window is not focused.
+    # unfocused_hollow: true
 
-# Thickness of the cursor relative to the cell width as floating point number
-# from `0.0` to `1.0`.
-# thickness: 0.15
+    # Thickness of the cursor relative to the cell width as floating point number
+    # from `0.0` to `1.0`.
+    # thickness: 0.15
 
-# Live config reload (changes require restart)
-# live_config_reload: true
+    # Live config reload (changes require restart)
+    # live_config_reload: true
 
-# Shell
-#
-# You can set `shell.program` to the path of your favorite shell, e.g.
-# `/bin/fish`. Entries in `shell.args` are passed unmodified as arguments to the
-# shell.
-#
-# Default:
-#   - (macOS) /bin/bash --login
-#   - (Linux/BSD) user login shell
-#   - (Windows) powershell
-# shell:
-#  program: /bin/bash
-#  args:
-#    - --login
+    # Shell
+    #
+    # You can set `shell.program` to the path of your favorite shell, e.g.
+    # `/bin/fish`. Entries in `shell.args` are passed unmodified as arguments to the
+    # shell.
+    #
+    # Default:
+    #   - (macOS) /bin/bash --login
+    #   - (Linux/BSD) user login shell
+    #   - (Windows) powershell
+    # shell:
+    #  program: /bin/bash
+    #  args:
+    #    - --login
 
-# Startup directory
-#
-# Directory the shell is started in. If this is unset, or `None`, the working
-# directory of the parent process will be used.
+    # Startup directory
+    #
+    # Directory the shell is started in. If this is unset, or `None`, the working
+    # directory of the parent process will be used.
 working_directory: None
 # Send ESC (\x1b) before characters when alt is pressed.
-alt_send_esc: false
+# TODO: replace with window.option_as_alt
+# alt_send_esc: false
 mouse:
   # Click settings
   #
@@ -896,22 +901,22 @@ key_bindings:
   #- { key: F,              mods: Command|Control,            action: ToggleFullscreen      }
   #- { key: F,              mods: Command, mode: ~Search,     action: SearchForward         }
   #- { key: B,              mods: Command, mode: ~Search,     action: SearchBackward        }
-# debug:
-# Display the time it takes to redraw each frame.
-# render_timer: false
+  # debug:
+  # Display the time it takes to redraw each frame.
+  # render_timer: false
 
-# Keep the log file after quitting Alacritty.
-# persistent_logging: false
+  # Keep the log file after quitting Alacritty.
+  # persistent_logging: false
 
-# Log level
-#
-# Values for `log_level`:
-#   - Off
-#   - Error
-#   - Warn
-#   - Info
-#   - Debug
-#   - Trace
-# log_level: Warn
+  # Log level
+  #
+  # Values for `log_level`:
+  #   - Off
+  #   - Error
+  #   - Warn
+  #   - Info
+  #   - Debug
+  #   - Trace
+  # log_level: Warn
 
-# Print all received window events.
+  # Print all received window events.
