@@ -17,7 +17,7 @@
 
 [submodule "dots/macos/yabai/home/.config/sketchybar/plugins/dynamic-island"]
 	path = dots/macos/yabai/home/.config/sketchybar/plugins/dynamic-island
-	url = https://github.com/khaneliman/Dynamic-Island-Sketchybar
+	url = https://github.com/crissNb/Dynamic-Island-Sketchybar
 
 [submodule "dots/shared/home/.config/ranger/plugins/ranger_udisk_menu"]
 	path = dots/shared/home/.config/ranger/plugins/ranger_udisk_menu
