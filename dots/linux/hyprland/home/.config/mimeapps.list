@@ -28,6 +28,7 @@ application/x-extension-xhtml=firefoxdeveloperedition.desktop;
 application/x-extension-xht=firefoxdeveloperedition.desktop;
 
 [Default Applications]
+inode/directory=thunar.desktop;
 application/json=nvim.desktop;
 application/pdf=firefoxdeveloperedition.desktop;
 application/rss+xml=nvim.desktop
