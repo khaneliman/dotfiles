@@ -16,7 +16,7 @@
 	url = https://github.com/intrntbrn/smart_borders
 
 [submodule "dots/macos/yabai/home/.config/sketchybar/plugins/dynamic-island"]
-	path = dots/macos/yabai/home/.config/sketchybar/plugins/dynamic-island
+	path = dots/macos/yabai/home/.config/dynamic-island-sketchybar
 	url = https://github.com/crissNb/Dynamic-Island-Sketchybar
 
 [submodule "dots/shared/home/.config/ranger/plugins/ranger_udisk_menu"]
