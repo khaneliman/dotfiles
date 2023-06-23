@@ -294,10 +294,6 @@ scrollbar {
   position: relative !important;
 }
 
-:root[sizemode="maximized"][tabsintitlebar="true"] #navigator-toolbox {
-  margin-top: 8px;
-}
-
 #toolbar-menubar,
 #TabsToolbar
   > :not(.titlebar-buttonbox-container):not(.private-browsing-indicator) {
