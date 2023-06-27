@@ -45,4 +45,4 @@
 
 [submodule "dots/nixos"]
 	path = dots/nixos
-	url = https://github.com/khaneliman/nixos-config
+	url = https://github.com/khaneliman/khanelinix
