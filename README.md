@@ -39,6 +39,12 @@ Each environment might require further steps that will be detailed in their resp
 
 The script will detect what OS you are running the script from and perform the installation for that OS. You will need to select what environment you would like to install the dots for if there are multiple for that given OS.
 
+## NixOS
+
+[![NixOS](https://img.shields.io/badge/NixOS-cad3f5?style=for-the-badge&logo=nixos&logoColor=black)](https://github.com/khaneliman/dotfiles/blob/main/dots/nixos/)
+
+NixOS config is managed in a separate repository. Currently linked as a submodule so it's easy to look at or use. I have been transitioning my legacy dotfiles style of management towards a Nix focused approach, since it seems to have more predictable results and can fully manage more parts of the system via configuration.
+
 ## Linux
 
 [![Linux](https://img.shields.io/badge/Linux-cad3f5?style=for-the-badge&logo=linux&logoColor=black)](https://github.com/khaneliman/dotfiles/blob/main/dots/linux/)
