@@ -84,7 +84,7 @@
         ]
       },
       "menu#powermode-buttons": {
-        "label": "",
+        "label": "",
         "position": "left",
         "actions": [
           {
@@ -105,7 +105,7 @@
         "position": "left",
         "actions": [
           {
-            "label": "",
+            "label": "",
             "command": "grim"
           }
         ]
@@ -114,11 +114,11 @@
     "buttons-grid": {
       "actions": [
         {
-          "label": "直",
+          "label": "",
           "command": "~/.config/rofi/rofi-wifi-menu.sh"
         },
         {
-          "label": "",
+          "label": "",
           "command": "~/.config/rofi/rofi-bluetooth"
         }
       ]
