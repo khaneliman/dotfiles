@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 NOTIFICATIONS="$(gh api notifications)"
 COUNT="$(echo "$NOTIFICATIONS" | jq 'length')"
