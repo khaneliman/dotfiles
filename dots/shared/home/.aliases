@@ -62,6 +62,17 @@ alias wlon='rfkill unblock wlan' # Unblock wlan, start wifi connection
 # MacOS aliases
 #
 [ $(uname) = 'Darwin' ] && alias neovide='neovide --frame buttonless'
+[ $(uname) = 'Darwin' ] && [ $(command -v act) ] && alias act='act --container-architecture linux/amd64'
+[ $(uname) = 'Darwin' ] && [ $(command -v brew) ] && alias brewup='brew update && brew outdated --greedy && brew upgrade --greedy && brew upgrade --cask $(brew list --cask) --greedy && brew cleanup'
+
+# #
+# Nix aliases
+# #
+[ $(command -v nix) ] && alias nixup="nix flake update"
+alias nixcfg="nvim ~/.config/.dotfiles/dots/nixos/flake.nix"
+[ $(command -v nix-collect-garbage) ] && alias nixgc="nix-collect-garbage -d"
+[ $(command -v darwin-rebuild) ] && alias nixre="darwin-rebuild switch --flake ~/.config/.dotfiles/dots/nixos"
+[ $(command -v nixos-rebuild) ] && alias nixre="nixos-rebuild switch --flake ~/.config/.dotfiles/dots/nixos"
 
 # #
 # Linux aliases
