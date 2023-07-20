@@ -188,7 +188,7 @@ brew "bramstein/webfonttools/sfnt2woff-zopfli"
 brew "felixkratz/formulae/sketchybar"
 brew "khanhas/tap/spicetify-cli"
 brew "koekeishiya/formulae/skhd"
-brew "koekeishiya/formulae/yabai", args: ["HEAD"]
+brew "koekeishiya/formulae/yabai"
 cask "1password-cli"
 cask "alacritty"
 cask "alfred"

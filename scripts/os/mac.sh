@@ -124,8 +124,8 @@ enable_brew_servies() {
 	# Start Services
 	if (command -v brew); then
 		message "Starting Services (grant permissions)..."
-		brew services start skhd
-		brew services start yabai
+		skhd --start-service
+		yabai --start-service
 		brew services start sketchybar
 	else
 		warning_message "Brew not installed! Skipping enabling services..."
