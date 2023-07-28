@@ -87,3 +87,4 @@ dots/linux/hyprland/home/.config/OpenRGB/logs
 # ░█░█░░█░░▄▀▄░█░█░▀▀█
 # ░▀░▀░▀▀▀░▀░▀░▀▀▀░▀▀▀
 dots/nixos/.direnv/*
+dots/shared/home/.config/github-copilot/versions.json

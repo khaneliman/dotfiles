@@ -70,7 +70,7 @@ render_popup() {
 
 update() {
 	BATT_COMMAND=$(pmset -g batt)
-	BATT_PERCENT=$(echo "$BATT_COMMAND" | grep -Eo "\d+%" | cut -d% -f1)
+	BATT_PERCENT=$(echo "$BATT_COMMAND" | grep -oE '[0-9]+%' | cut -d% -f1)
 	CHARGING=$(echo "$BATT_COMMAND" | grep 'AC Power')
 
 	render_bar_item
