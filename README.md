@@ -13,6 +13,8 @@
 
 Personal dotfiles for each of the platforms I own or have customized. Personal information is either redacted or encrypted with [Git-Crypt](https://github.com/AGWA/git-crypt). Recommend pairing my SDDM theme with this setup. It can be found [here](https://github.com/khaneliman/sddm-catppuccin) or directly from the AUR [here](https://aur.archlinux.org/packages/sddm-catppuccin-git).
 
+## I've migrated all my personal machines to use my new Nix based repo config [KhaneliNix](https://github.com/khaneliman/khanelinix) since it can manage the installation location and dependencies easier than custom scripts to manage for everything. This repo is basically frozen in time with the occasional submodule update and might just archive the main branch and replace the nix config in this repo. 
+
 ## Install
 
 ### Clone repo
