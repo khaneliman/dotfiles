@@ -1,0 +1,22 @@
+name: "Update submodules"
+on:
+  repository_dispatch:
+  workflow_dispatch:
+  schedule:
+    - cron:  '0 0 * * *'
+jobs:
+  update-submodules:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+      - name: Update submodules
+        run: |
+          git submodule update --init --recursive
+          git submodule update --recursive --remote
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          title: Update submodules
+          labels: merge-queue
