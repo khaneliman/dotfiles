@@ -26,7 +26,7 @@ if (Test-CommandExists scoop)
     
     # buckets
     $scoop_buckets = @(
-        'main', 'extras', 'versions'
+        'main', 'extras', 'versions', 'nerd-fonts'
     )
 
     foreach ($bucket in $scoop_buckets)
@@ -37,7 +37,7 @@ if (Test-CommandExists scoop)
     # scoops
     $scoop_apps = @(
         'sudo', 'bat', 'btop', 'fastfetch', 'pshazz', 'git-crypt', 'vcredist', '1password-cli',
-        'secureuxtheme', '7tsp', 'archwsl', 'spicetify-cli', 'topgrade'
+        'secureuxtheme', '7tsp', 'archwsl', 'spicetify-cli', 'topgrade', 'Monaspace-NF'
     )
 
     foreach ($app in $scoop_apps)
