@@ -1,6 +1,6 @@
 {
   "$help": "https://aka.ms/terminal-documentation",
-  "$schema": "https://aka.ms/terminal-profiles-schema",
+  "$schema": "https://aka.ms/terminal-profiles-schema-preview",
   "actions": [
     {
       "command": "paste",
@@ -14,16 +14,16 @@
       "keys": "ctrl+c"
     },
     {
-      "command": "find",
-      "keys": "ctrl+shift+f"
-    },
-    {
       "command": {
         "action": "splitPane",
         "split": "auto",
         "splitMode": "duplicate"
       },
       "keys": "alt+shift+d"
+    },
+    {
+      "command": "find",
+      "keys": "ctrl+shift+f"
     }
   ],
   "copyFormatting": "none",
@@ -50,16 +50,10 @@
         "source": "Windows.Terminal.PowershellCore"
       },
       {
-        "guid": "{a5a97cb8-8961-5535-816d-772efe0c6a3f}",
+        "guid": "{c397f356-5e7b-55bc-956b-8cb4b9762c26}",
         "hidden": false,
-        "name": "Arch",
+        "name": "NixOS",
         "source": "Windows.Terminal.Wsl"
-      },
-      {
-        "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
-        "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
-        "hidden": false,
-        "name": "Windows PowerShell"
       },
       {
         "commandline": "%SystemRoot%\\System32\\cmd.exe",
@@ -68,16 +62,34 @@
         "name": "Command Prompt"
       },
       {
+        "guid": "{2595cd9c-8f05-55ff-a1d4-93f3041ca67f}",
+        "hidden": false,
+        "name": "PowerShell Preview (msix)",
+        "source": "Windows.Terminal.PowershellCore"
+      },
+      {
         "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
         "hidden": false,
         "name": "Azure Cloud Shell",
         "source": "Windows.Terminal.Azure"
       },
       {
-        "guid": "{51855cb2-8cce-5362-8f54-464b92b32386}",
+        "guid": "{ea61b9b4-00a8-5054-8ac5-3547cb17bd03}",
         "hidden": false,
-        "name": "Ubuntu",
-        "source": "CanonicalGroupLimited.Ubuntu_79rhkp1fndgsc"
+        "name": "Developer Command Prompt for VS 2022",
+        "source": "Windows.Terminal.VisualStudio"
+      },
+      {
+        "guid": "{803e1e8a-525c-56a7-b080-98c44286c42b}",
+        "hidden": false,
+        "name": "Developer PowerShell for VS 2022",
+        "source": "Windows.Terminal.VisualStudio"
+      },
+      {
+        "guid": "{2ece5bfe-50ed-5f3a-ab87-5cd4baafed2b}",
+        "hidden": false,
+        "name": "Git Bash",
+        "source": "Git"
       }
     ]
   },
@@ -342,6 +354,7 @@
       "name": "Catppuccin Machiatto",
       "tab": {
         "background": "#363A4FFF",
+        "iconStyle": "default",
         "showCloseButton": "always",
         "unfocusedBackground": null
       },
@@ -351,6 +364,9 @@
       },
       "window": {
         "applicationTheme": "dark",
+        "experimental.rainbowFrame": false,
+        "frame": null,
+        "unfocusedFrame": null,
         "useMica": true
       }
     }
