@@ -1,0 +1,10 @@
+[credential "https://github.com"]
+	helper = 
+	helper = !'C:\\Program Files\\GitHub CLI\\gh.exe' auth git-credential
+	
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !'C:\\Program Files\\GitHub CLI\\gh.exe' auth git-credential
+	
+[gpg "ssh"]
+  program = "C:/Users/Austin.Horstman/AppData/Local/1Password/app/8/op-ssh-sign.exe"
