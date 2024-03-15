@@ -18,5 +18,6 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5
         with:
-          title: Update submodules
+          title: 'chore: update submodules'
           labels: merge-queue
+          commit-message: 'chore: update submodules'
